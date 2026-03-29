@@ -1,0 +1,34 @@
+/* ─── 공통 디자인 토큰 ─── */
+
+:root {
+  /* 색상 */
+  --color-bg-primary: #0a0a0f;
+  --color-bg-secondary: #12121a;
+  --color-text-primary: #f0f0f5;
+  --color-text-secondary: #a0a0b0;
+  --color-accent: #6366f1;
+  --color-accent-glow: rgba(99, 102, 241, 0.3);
+
+  /* 타이포그래피 */
+  --font-heading: "Inter", "Pretendard", sans-serif;
+  --font-body: "Inter", "Pretendard", sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+
+  /* 크기 */
+  --font-size-xs: 16px;
+  --font-size-sm: 20px;
+  --font-size-md: 28px;
+  --font-size-lg: 40px;
+  --font-size-xl: 56px;
+  --font-size-2xl: 72px;
+
+  /* 간격 */
+  --spacing-xs: 8px;
+  --spacing-sm: 16px;
+  --spacing-md: 32px;
+  --spacing-lg: 48px;
+  --spacing-xl: 64px;
+
+  /* 전환 */
+  --transition-default-frames: 15;
+}
