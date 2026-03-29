@@ -68,7 +68,7 @@ script.txt 파일이 없다면, 사용자에게 파일을 요청하고 대기합
 TTS 함수를 사용하여 대본에서 WAV를 생성합니다:
 
 ```bash
-npx tsx scripts/generate-audio.ts <project-id>
+python3 scripts/generate-audio.py <project-id>
 ```
 
 생성된 WAV는 `public/projects/{id}/audio/`에 저장됩니다.
