@@ -47,45 +47,21 @@ public/projects/{project-id}/
 
 ### 2. 대본 파일 구조화 (`script.ts`)
 
+구조화 방법
+
+```bash
+./scripts/parse-script.ts <project-id>
+# 예: ./scripts/parse-script.ts ai-future
+```
+
 `src/sources/{project-id}/script.txt`를 바탕으로
 `src/projects/{project-id}/script.ts`에 Scene별 대본을 구조화합니다.
-이 때 내용이 바뀌지 않도록 유의합니다.
 
-script.txt 파일의 구조는 다음과 같습니다.
+script.txt 파일이 없다면, 사용자에게 파일을 요청하고 대기합니다.
+스크립트 실행 이후 script.ts 파일이 정상적으로 생성되었는지 확인합니다.
+실행 과정 중 오류가 나면 세션을 종료합니다.
 
-```
-[Scene1 start]
-    <텍스트>
-[Scene1 end]
-
-[Scene2 start]
-    <텍스트>
-[Scene2 end]
-...
-
-```
-
-script.ts의 구조 예시는 다음과 같습니다.
-
-```ts
-import type { SceneScript } from "../../shared/types/project";
-
-export const script: SceneScript[] = [
-  {
-    sceneId: "scene1",
-    audioFile: "projects/ai-future/audio/scene1.wav",
-    text: "안녕하세요. 오늘은 AI가 바꿀 미래에 대해 이야기합니다.",
-  },
-  {
-    sceneId: "scene2",
-    audioFile: "projects/ai-future/audio/scene2.wav",
-    text: "첫 번째 주제는 자율주행입니다.",
-  },
-  ...
-];
-```
-
-**주의**: `durationInSeconds`는 작성하지 않습니다. WAV 파일에서 자동 계산됩니다.
+**주의**: `durationInSeconds`는 작성하지 않으며, WAV 파일에서 자동 계산됩니다.
 
 ### 3. WAV 생성
 
