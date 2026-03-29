@@ -73,49 +73,35 @@ python3 scripts/generate-audio.py <project-id>
 
 생성된 WAV는 `public/projects/{id}/audio/`에 저장됩니다.
 
-### 4. Scene 컴포넌트 구성
+### 4. Scene 컴포넌트 구성 (Scene별 반복)
 
-각 Scene은 독립적인 React 컴포넌트입니다.
+각 Scene은 독립적인 React 컴포넌트이며, **한 번에 하나씩** 개별 요청하여 개발합니다.
 
-**핵심 규칙:**
+**개발 절차:**
+
+1. `script.ts`에서 Scene 개수를 확인합니다.
+2. Scene 1부터 순서대로, 각 Scene을 **별도의 대화**에서 요청합니다.
+3. 각 요청 시 `scene-development` 스킬을 참조합니다.
+
+**Scene 요청 예시:**
+
+> "Scene 2 만들어줘"  
+> (컨텍스트: `@script.ts`, `@scene-development.md`)
+
+**Scene 개발 스킬:** `src/custom-skills/scene-development.md`에 아래 내용이 정리되어 있습니다:
+
+- 대본 확인 → 오디오 길이 확인 → 컴포넌트 작성 → index.tsx 등록 → 미리보기
+- 프레임/타이밍 규칙, 애니메이션 규칙, 디자인 토큰, 컴포넌트 템플릿
+- 추가 Remotion 규칙 참조 경로
+
+**핵심 규칙 요약:**
 
 - `useCurrentFrame()`은 Scene 내부의 **로컬 프레임** (0부터 시작)을 반환
 - Scene 컴포넌트 안에서 오디오 duration을 알 필요 없음 — `TransitionSeries`가 처리
 - 새 Scene을 추가하면 `index.tsx`의 `SCENES` 배열에 등록
+- `script.ts`의 scene 순서와 `SCENES` 배열의 순서가 반드시 일치해야 함
 
-```tsx
-// scenes/scene2/Scene2.tsx
-import React from "react";
-import { AbsoluteFill, useCurrentFrame, useVideoConfig } from "remotion";
-import { interpolate } from "remotion";
-
-export const Scene2: React.FC = () => {
-  const frame = useCurrentFrame();
-  const { fps } = useVideoConfig();
-
-  const opacity = interpolate(frame, [0, fps * 0.5], [0, 1], {
-    extrapolateRight: "clamp",
-  });
-
-  return <AbsoluteFill style={{ opacity }}>{/* Scene 내용 */}</AbsoluteFill>;
-};
-```
-
-### 5. Composition 등록 (`index.tsx`)
-
-새 Scene을 추가할 때:
-
-```tsx
-// index.tsx의 SCENES 배열에 추가
-import { Scene2 } from "./scenes/scene2/Scene2";
-...
-
-const SCENES: React.FC[] = [Scene1, Scene2, ...];
-```
-
-`script.ts`의 scene 순서와 `SCENES` 배열의 순서가 반드시 일치해야 합니다.
-
-### 6. Root.tsx에 프로젝트 등록
+### 5. Root.tsx에 프로젝트 등록
 
 ```tsx
 // src/Root.tsx
@@ -138,7 +124,7 @@ import { config as aiFutureConfig } from "./projects/ai-future/config";
 />;
 ```
 
-### 7. 미리보기 및 렌더링
+### 6. 미리보기 및 렌더링
 
 ```bash
 # Remotion Studio에서 미리보기
