@@ -32,9 +32,11 @@ public/projects/{project-id}/
 
 ## 워크플로우 단계
 
-### 1. 프로젝트 생성
+1~3단계는 사용자가 직접 실행하는 내용입니다. 따라서 내용만 이해하고 따로 실행할 필요는 없습니다.
 
-사용자 입력: 프로젝트 id를 사용자로부터 입력받는다.
+---
+
+### 1. 프로젝트 생성
 
 프로젝트 생성 방법
 
@@ -50,16 +52,12 @@ public/projects/{project-id}/
 구조화 방법
 
 ```bash
-./scripts/parse-script.ts <project-id>
-# 예: ./scripts/parse-script.ts ai-future
+npx tsx scripts/parse-script.ts <project-id>
+# 예: npx tsx scripts/parse-script.ts ai-future
 ```
 
 `src/sources/{project-id}/script.txt`를 바탕으로
 `src/projects/{project-id}/script.ts`에 Scene별 대본을 구조화합니다.
-
-script.txt 파일이 없다면, 사용자에게 파일을 요청하고 대기합니다.
-스크립트 실행 이후 script.ts 파일이 정상적으로 생성되었는지 확인합니다.
-실행 과정 중 오류가 나면 세션을 종료합니다.
 
 **주의**: `durationInSeconds`는 작성하지 않으며, WAV 파일에서 자동 계산됩니다.
 
@@ -68,10 +66,18 @@ script.txt 파일이 없다면, 사용자에게 파일을 요청하고 대기합
 TTS 함수를 사용하여 대본에서 WAV를 생성합니다:
 
 ```bash
+conda activate qwen3-tts
 python3 scripts/generate-audio.py <project-id>
 ```
 
 생성된 WAV는 `public/projects/{id}/audio/`에 저장됩니다.
+
+---
+
+`src/projects/{project-id}/script.ts`
+`public/projects/{project-id}/audio/`
+
+두 파일이 잘 생성되었는지 확인합니다. 문제가 있다면 사용자에게 요청하고 대기합니다.
 
 ### 4. Scene 컴포넌트 구성 (Scene별 반복)
 
@@ -86,7 +92,7 @@ python3 scripts/generate-audio.py <project-id>
 **Scene 요청 예시:**
 
 > "Scene 2 만들어줘"  
-> (컨텍스트: `@script.ts`, `@scene-development.md`)
+> (컨텍스트: `@src/projects/{project-id}/script.ts`, `@src/custom-skills/scene-development.md`)
 
 **Scene 개발 스킬:** `src/custom-skills/scene-development.md`에 아래 내용이 정리되어 있습니다:
 
