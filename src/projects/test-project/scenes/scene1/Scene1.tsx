@@ -1,8 +1,11 @@
 import React from "react";
-import { Audio, staticFile, useVideoConfig } from "remotion";
-import { TransitionSeries, linearTiming } from "@remotion/transitions";
-import { fade } from "@remotion/transitions/fade";
-import { SceneBackground } from "../../../../shared/components";
+import { 
+  Audio, 
+  staticFile, 
+  useVideoConfig, 
+  Series
+} from "remotion";
+import { SceneBackground, FadeWrapper } from "../../../../shared/components";
 import { TIMING } from "../../../../shared/constants/animations";
 import type { SegmentScript } from "../../../../shared/types/project";
 import { script } from "../../script";
@@ -18,10 +21,10 @@ export const Scene1: React.FC<{ segmentDurations: number[] }> = ({
   const { fps } = useVideoConfig();
   const sceneData = script.find((s) => s.sceneId === "scene1");
   const segments = sceneData?.segments || [];
+  
+  // 페이드 효과에 사용할 프레임 수
   const transitionFrames = Math.round(fps * TIMING.SEGMENT_TRANSITION);
 
-  // Segment 렌더러 배열 — 순서가 segments 배열과 1:1 대응
-  // 첫 번째 렌더러에만 sectionTitle을 전달합니다.
   const SEGMENT_RENDERERS = [
     (seg: SegmentScript, dur: number) => (
       <Seg1 text={seg.text} duration={dur} sectionTitle={sceneData?.sectionTitle} />
@@ -34,29 +37,32 @@ export const Scene1: React.FC<{ segmentDurations: number[] }> = ({
 
   return (
     <SceneBackground variant="gradient">
-      <TransitionSeries>
+      {/* TransitionSeries 대신 일반 Series 사용 */}
+      <Series>
         {segments.map((seg, i) => {
           const render = SEGMENT_RENDERERS[i];
+          const durationInFrames = Math.ceil(segmentDurations[i] * fps);
+
           return (
-            <React.Fragment key={seg.segmentId}>
-              {i > 0 && (
-                <TransitionSeries.Transition
-                  presentation={fade()}
-                  timing={linearTiming({
-                    durationInFrames: transitionFrames,
-                  })}
-                />
-              )}
-              <TransitionSeries.Sequence
-                durationInFrames={Math.ceil(segmentDurations[i] * fps)}
+            <Series.Sequence 
+              key={seg.segmentId} 
+              durationInFrames={durationInFrames}
+            >
+              {/* FadeWrapper로 감싸서 개별적인 페이드 인/아웃 적용 */}
+              <FadeWrapper 
+                durationInFrames={durationInFrames} 
+                transitionFrames={transitionFrames}
               >
+                {/* 📌 버그 픽스: durationInFrames 대신 원래대로 초 단위의 segmentDurations[i]를 전달해야 usePhase가 정상 동작합니다! */}
                 {render(seg, segmentDurations[i])}
-                <Audio src={staticFile(seg.audioFile)} />
-              </TransitionSeries.Sequence>
-            </React.Fragment>
+              </FadeWrapper>
+              
+              {/* 오디오도 해당 시퀀스 안에서만 재생되므로 겹치지 않음 */}
+              <Audio src={staticFile(seg.audioFile)} />
+            </Series.Sequence>
           );
         })}
-      </TransitionSeries>
+      </Series>
     </SceneBackground>
   );
 };

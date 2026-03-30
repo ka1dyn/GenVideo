@@ -34,12 +34,9 @@ export const calculateMetadata: CalculateMetadataFunction<
     ),
   );
 
-  // Scene별 total duration (내부 Segment 트랜지션 겹침 차감)
+  // Scene별 total duration (Series 사용하므로 겹침 없음)
   const sceneDurations = segmentDurations.map((segDurs) => {
-    const total = segDurs.reduce((sum, d) => sum + d, 0);
-    const internalOverlap =
-      Math.max(0, segDurs.length - 1) * TIMING.SEGMENT_TRANSITION;
-    return total - internalOverlap;
+    return segDurs.reduce((sum, d) => sum + d, 0);
   });
 
   // 전체 duration (Scene 간 트랜지션 겹침 차감)
@@ -65,10 +62,7 @@ export const Composition: React.FC<ProjectProps> = ({ segmentDurations }) => {
       <TransitionSeries>
         {SCENES.map((SceneComponent, i) => {
           const segDurs = segmentDurations[i];
-          const internalOverlap =
-            Math.max(0, segDurs.length - 1) * TIMING.SEGMENT_TRANSITION;
-          const sceneDurationSec =
-            segDurs.reduce((sum, d) => sum + d, 0) - internalOverlap;
+          const sceneDurationSec = segDurs.reduce((sum, d) => sum + d, 0);
 
           return (
             <React.Fragment key={script[i].sceneId}>

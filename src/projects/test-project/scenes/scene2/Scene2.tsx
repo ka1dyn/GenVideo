@@ -1,8 +1,6 @@
 import React from "react";
-import { Audio, staticFile, useVideoConfig } from "remotion";
-import { TransitionSeries, linearTiming } from "@remotion/transitions";
-import { fade } from "@remotion/transitions/fade";
-import { SceneBackground } from "../../../../shared/components";
+import { Audio, staticFile, useVideoConfig, Series } from "remotion";
+import { SceneBackground, FadeWrapper } from "../../../../shared/components";
 import { TIMING } from "../../../../shared/constants/animations";
 import type { SegmentScript } from "../../../../shared/types/project";
 import { script } from "../../script";
@@ -20,8 +18,6 @@ export const Scene2: React.FC<{ segmentDurations: number[] }> = ({
   const segments = sceneData?.segments || [];
   const transitionFrames = Math.round(fps * TIMING.SEGMENT_TRANSITION);
 
-  // Segment 렌더러 배열 — 순서가 segments 배열과 1:1 대응
-  // 첫 번째 렌더러에만 sectionTitle을 전달합니다.
   const SEGMENT_RENDERERS = [
     (seg: SegmentScript, dur: number) => (
       <Seg1 text={seg.text} duration={dur} sectionTitle={sceneData?.sectionTitle} />
@@ -34,29 +30,27 @@ export const Scene2: React.FC<{ segmentDurations: number[] }> = ({
 
   return (
     <SceneBackground variant="gradient">
-      <TransitionSeries>
+      <Series>
         {segments.map((seg, i) => {
           const render = SEGMENT_RENDERERS[i];
+          const durationInFrames = Math.ceil(segmentDurations[i] * fps);
+
           return (
-            <React.Fragment key={seg.segmentId}>
-              {i > 0 && (
-                <TransitionSeries.Transition
-                  presentation={fade()}
-                  timing={linearTiming({
-                    durationInFrames: transitionFrames,
-                  })}
-                />
-              )}
-              <TransitionSeries.Sequence
-                durationInFrames={Math.ceil(segmentDurations[i] * fps)}
+            <Series.Sequence 
+              key={seg.segmentId} 
+              durationInFrames={durationInFrames}
+            >
+              <FadeWrapper 
+                durationInFrames={durationInFrames} 
+                transitionFrames={transitionFrames}
               >
                 {render(seg, segmentDurations[i])}
-                <Audio src={staticFile(seg.audioFile)} />
-              </TransitionSeries.Sequence>
-            </React.Fragment>
+              </FadeWrapper>
+              <Audio src={staticFile(seg.audioFile)} />
+            </Series.Sequence>
           );
         })}
-      </TransitionSeries>
+      </Series>
     </SceneBackground>
   );
 };

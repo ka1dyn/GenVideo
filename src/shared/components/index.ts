@@ -10,6 +10,8 @@ export { BulletList } from "./BulletList";
 // ── Surfaces ──
 export { SceneBackground } from "./SceneBackground";
 export { ContentBox } from "./ContentBox";
+export { SectionLabel } from "../layouts/SectionLabel";
+export { FadeWrapper } from "./FadeWrapper";
 export { GlassPanel } from "./GlassPanel";
 export { ProgressBar } from "./ProgressBar";
 
