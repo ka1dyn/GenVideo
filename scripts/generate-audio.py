@@ -7,7 +7,7 @@ from gradio_client import Client
 from pydub import AudioSegment
 
 LANGUAGE = "Korean"
-GRADIO_URL = "https://1212d27696b10cd22e.gradio.live"
+GRADIO_URL = "http://localhost:8000"
 
 try:
     print("🔌 TTS 서버에 연결 중...")
@@ -33,7 +33,7 @@ async def generate_tts(text: str, output_path: str):
         return client.predict(
             text=f"{processed_text} -=",
             lang=LANGUAGE,
-            api_name="/predict"
+            api_name="/generate_audio"
         )
     
     try:
