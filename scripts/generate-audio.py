@@ -10,7 +10,7 @@ LANGUAGE = "Korean"
 GRADIO_URL = "https://1212d27696b10cd22e.gradio.live"
 
 try:
-    print("🔌 코랩 TTS 서버에 연결 중...")
+    print("🔌 TTS 서버에 연결 중...")
     client = Client(GRADIO_URL)
     print("✅ 서버 연결 성공!\n")
 except Exception as e:
@@ -28,7 +28,7 @@ async def generate_tts(text: str, output_path: str):
     else:
         processed_text = clean_text
     
-    # 코랩 서버로 API 요청 (블로킹 함수이므로 스레드에서 실행)
+    # 서버로 API 요청 (블로킹 함수이므로 스레드에서 실행)
     def call_gradio():
         return client.predict(
             text=f"{processed_text} -=",
@@ -78,30 +78,54 @@ async def main():
         print(f"❌ script.ts를 찾을 수 없습니다: {script_path}")
         sys.exit(1)
 
-    # script.ts 파싱
+    # script.ts 파싱 — Segment 단위로 추출
     with open(script_path, 'r', encoding='utf-8') as f:
         content = f.read()
     
-    # 정규표현식으로 sceneId와 text 추출
-    scene_pattern = re.compile(r'sceneId:\s*"([^"]+)"[\s\S]*?text:\s*"((?:[^"\\]|\\.)*)"', re.DOTALL)
-    scenes = scene_pattern.findall(content)
+    # Scene 블록 파싱 (sceneId + segments 배열)
+    scene_pattern = re.compile(
+        r'sceneId:\s*"([^"]+)"[\s\S]*?segments:\s*\[([\s\S]*?)\]',
+        re.DOTALL
+    )
+    scene_matches = scene_pattern.findall(content)
 
-    if not scenes:
+    if not scene_matches:
         print("⚠️  파싱된 Scene이 없습니다. script.ts 형식을 확인하세요.")
         sys.exit(0)
 
-    # 오디오 디렉토리 생성
-    if not audio_dir.exists():
-        audio_dir.mkdir(parents=True, exist_ok=True)
+    # 각 Scene의 Segment 추출
+    segment_pattern = re.compile(
+        r'segmentId:\s*"([^"]+)"[\s\S]*?text:\s*"((?:[^"\\]|\\.)*)"',
+        re.DOTALL
+    )
 
-    print(f"🎙️ {len(scenes)}개 Scene의 오디오를 생성합니다...\n")
+    all_segments = []  # (scene_id, segment_id, text) 튜플 리스트
 
-    for scene_id, text in scenes:
+    for scene_id, segments_block in scene_matches:
+        seg_matches = segment_pattern.findall(segments_block)
+        for segment_id, text in seg_matches:
+            all_segments.append((scene_id, segment_id, text))
+
+    if not all_segments:
+        print("⚠️  파싱된 Segment가 없습니다. script.ts 형식을 확인하세요.")
+        sys.exit(0)
+
+    print(f"🎙️ {len(all_segments)}개 Segment의 오디오를 생성합니다...\n")
+
+    for scene_id, segment_id, text in all_segments:
         # 이스케이프 문자 복구
         clean_text = text.replace('\\"', '"').replace('\\n', ' ')
+
+        # Scene별 서브 디렉토리 생성 (audio/scene1/, audio/scene2/, ...)
+        scene_audio_dir = audio_dir / scene_id
+        if not scene_audio_dir.exists():
+            scene_audio_dir.mkdir(parents=True, exist_ok=True)
         
-        output_path = audio_dir / f"{scene_id}.wav"
-        print(f"▶️ [{scene_id}] 변환 중: \"{clean_text[:30]}...\"")
+        # seg_id에서 "scene1-seg1" → "seg1" 추출
+        seg_short = segment_id.split("-")[-1] if "-" in segment_id else segment_id
+        output_path = scene_audio_dir / f"{seg_short}.wav"
+        
+        print(f"▶️ [{segment_id}] 변환 중: \"{clean_text[:40]}...\"")
         
         # 순차적 실행 (코랩 GPU OOM 방지 및 안전성 확보)
         await generate_tts(clean_text, str(output_path))

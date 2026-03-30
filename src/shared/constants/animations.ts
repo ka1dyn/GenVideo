@@ -34,6 +34,10 @@ export const TIMING = {
   STAGGER_FAST: 0.06,
   ENTRANCE_DELAY: 0.3,
   SECTION_GAP: 1.0,
+  /** Scene 간 트랜지션 (초) — fade */
+  SCENE_TRANSITION: 0.5,
+  /** Segment 간 트랜지션 (초) — fade */
+  SEGMENT_TRANSITION: 0.3,
 } as const;
 
 /** interpolate 기본 옵션 */

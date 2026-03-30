@@ -23,7 +23,7 @@ import { Folder } from "remotion";
  *     fps={myTopicConfig.fps}
  *     width={myTopicConfig.width}
  *     height={myTopicConfig.height}
- *     defaultProps={{ sceneDurations: [] } satisfies ProjectProps}
+ *     defaultProps={{ segmentDurations: [] } satisfies ProjectProps}
  *   />
  */
 
