@@ -1,6 +1,4 @@
 /* ─── Geist 폰트 로드 ─── */
-@import "geist/font/sans.css";
-@import "geist/font/mono.css";
 
 /* ─── 공통 디자인 토큰 — Vercel Geist Dark Theme ─── */
 
@@ -40,4 +38,13 @@
 
   /* 전환 */
   --transition-default-frames: 15;
+}
+
+@theme {
+  /* rest of your theme config */
+
+  --font-sans: var(--font-sans);
+  --font-mono: var(--font-mono);
+
+  /* rest of your theme config */
 }

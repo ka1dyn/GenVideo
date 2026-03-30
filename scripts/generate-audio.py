@@ -31,7 +31,7 @@ async def generate_tts(text: str, output_path: str):
     # 서버로 API 요청 (블로킹 함수이므로 스레드에서 실행)
     def call_gradio():
         return client.predict(
-            text=f"{processed_text} -=",
+            text=f"{processed_text} ...",
             lang=LANGUAGE,
             api_name="/generate_audio"
         )

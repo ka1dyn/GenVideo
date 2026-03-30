@@ -41,67 +41,17 @@ public/projects/{project-id}/
 
 ## 워크플로우 단계
 
-1~3단계는 사용자가 직접 실행하는 내용입니다. 따라서 내용만 이해하고 따로 실행할 필요는 없습니다.
+### 1-3. 준비 단계 (사용자 직접 수행)
+AI는 다음 파일들이 생성되었는지 확인하여 프로젝트 구조를 파악합니다. 직접 실행할 필요는 없습니다.
 
----
+1.  **프로젝트 생성**: `src/projects/{project-id}/` 폴더가 생성됨.
+2.  **대본 구조화**: `src/projects/{project-id}/script.ts` 파일 확인.
+    - AI는 이 파일의 `SCENE_SCRIPTS` 구조를 읽어 Scene과 Segment 구성을 파악합니다.
+    - `sectionTitle`은 AI가 직접 적절한 제목으로 수정/추가해야 합니다.
+3.  **오디오 생성**: `public/projects/{project-id}/audio/scene{N}/seg{M}.wav` 파일 존재 확인.
+    - 모든 Segment에 대응하는 WAV 파일이 있어야 `calculateMetadata`가 정상 작동합니다.
 
-### 1. 프로젝트 생성
-
-```bash
-./scripts/new-project.sh <project-id>
-# 예: ./scripts/new-project.sh ai-future
-```
-
-이 스크립트는 `_template`을 복사하고 placeholder를 치환합니다.
-
-### 2. 대본 파일 구조화 (`script.ts`)
-
-```bash
-npx tsx scripts/parse-script.ts <project-id>
-# 예: npx tsx scripts/parse-script.ts ai-future
-```
-
-`src/sources/{project-id}/script.txt`를 바탕으로
-`src/projects/{project-id}/script.ts`에 Scene·Segment별 대본을 구조화합니다.
-
-**`script.txt` 형식:**
-
-```
-[Scene1 start]
-첫 번째 세그먼트 대본 텍스트
----
-두 번째 세그먼트 대본 텍스트
----
-세 번째 세그먼트 대본 텍스트
-[Scene1 end]
-
-[Scene2 start]
-첫 번째 세그먼트
----
-두 번째 세그먼트
-[Scene2 end]
-```
-
-- `[SceneN start]`/`[SceneN end]`로 Scene 구분
-- Scene 내부에서 `---`로 Segment 구분
-- `sectionTitle`은 파서가 자동 추출하지 않으며, 이후 AI가 `script.ts`에서 직접 추가
-
-### 3. WAV 생성
-
-```bash
-conda activate qwen3-tts
-python3 scripts/generate-audio.py <project-id>
-```
-
-생성된 WAV는 `public/projects/{id}/audio/scene{N}/seg{M}.wav`에 저장됩니다.
-
----
-
-**확인 사항:**
-- `src/projects/{project-id}/script.ts` — Segment 구조가 올바른지
-- `public/projects/{project-id}/audio/scene{N}/` — 모든 WAV 파일 존재하는지
-
-문제가 있다면 사용자에게 요청하고 대기합니다.
+> **AI 확인 사항**: 위 파일들이 없거나 `script.ts` 구조가 오디오 파일과 매칭되지 않으면 사용자에게 보완을 요청하세요.
 
 ### 4. Root.tsx에 프로젝트 등록
 
