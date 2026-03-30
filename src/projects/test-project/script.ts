@@ -1,0 +1,124 @@
+import type { SceneScript } from "../../shared/types/project";
+
+export const script: SceneScript[] = [
+  {
+    sceneId: "scene1",
+    segments: [
+      {
+        segmentId: "scene1-seg1",
+        audioFile: "projects/test-project/audio/scene1/seg1.wav",
+        text: "웹 개발의 패러다임이 완전히 바뀌고 있습니다. 과거에는 모든 컴포넌트를 바닥부터 직접 작성해야 했지만, 이제는 AI가 우리의 가장 든든한 페어 프로그래머가 되었습니다.",
+      },
+      {
+        segmentId: "scene1-seg2",
+        audioFile: "projects/test-project/audio/scene1/seg2.wav",
+        text: "디자인에서 개발로 넘어가는 과정의 병목현상도 눈에 띄게 사라졌습니다. 이제는 스케치 한 장이나 간단한 프롬프트만으로도 곧바로 작동하는 프로토타입이 생성되는 마법 같은 일이 일어납니다.",
+      },
+      {
+        segmentId: "scene1-seg3",
+        audioFile: "projects/test-project/audio/scene1/seg3.wav",
+        text: "단순히 코드를 짜주는 것을 넘어, 시스템 아키텍처를 설계하고 최적화 포인트까지 제안합니다. 마치 수십 년 경력의 시니어 개발자가 항상 내 옆에 앉아 코드를 리뷰해 주는 것과 같죠.",
+      },
+      {
+        segmentId: "scene1-seg4",
+        audioFile: "projects/test-project/audio/scene1/seg4.wav",
+        text: "이러한 변화는 단순히 개인의 코딩 속도를 높이는 것을 넘어, 팀 전체의 애자일한 협업 방식을 근본적으로 재정의하고 있습니다. 우리는 더 빠르게 실패하고, 더 빨리 혁신할 수 있게 되었습니다.",
+      },
+      {
+        segmentId: "scene1-seg5",
+        audioFile: "projects/test-project/audio/scene1/seg5.wav",
+        text: "유명한 개발자는 이렇게 말했습니다. \"미래의 코딩은 타이핑이 아니라 대화가 될 것이다.\" 결국 우리에게 가장 필요한 역량은 타건 속도가 아니라, 문제를 정의하고 AI를 지휘하는 기획력이 될 것입니다.",
+      },
+    ],
+  },
+  {
+    sceneId: "scene2",
+    segments: [
+      {
+        segmentId: "scene2-seg1",
+        audioFile: "projects/test-project/audio/scene2/seg1.wav",
+        text: "그렇다면 실제 현장에서는 어떤 변화가 일어나고 있을까요? 막연한 기대감이 아닌, 실제 데이터를 바탕으로 AI 도입의 극적인 효과를 살펴보겠습니다.",
+      },
+      {
+        segmentId: "scene2-seg2",
+        audioFile: "projects/test-project/audio/scene2/seg2.wav",
+        text: "실제로 최근 한 연구에 따르면, AI 코딩 어시스턴트를 도입한 조직의 개발 생산성은 무려 55%나 향상되었습니다. 반복적인 보일러플레이트 작성 시간이 획기적으로 줄어든 덕분이죠.",
+      },
+      {
+        segmentId: "scene2-seg3",
+        audioFile: "projects/test-project/audio/scene2/seg3.wav",
+        text: "개발자들의 업무 시간 분배도 완전히 달라졌습니다. 단순 반복 작업에 쏟는 시간은 80% 감소한 반면, 창의적인 아키텍처 설계와 비즈니스 로직 고민에 쏟는 시간은 3배 이상 늘어났습니다.",
+      },
+      {
+        segmentId: "scene2-seg4",
+        audioFile: "projects/test-project/audio/scene2/seg4.wav",
+        text: "AI 도입 전과 후를 비교해 볼까요? 예전에는 공식 문서를 뒤지며 수동으로 타이핑하며 밤을 새우던 작업들이, 이제는 AI의 똑똑한 제안을 검토하고 승인하는 효율적인 프로세스로 전환되었습니다.",
+      },
+      {
+        segmentId: "scene2-seg5",
+        audioFile: "projects/test-project/audio/scene2/seg5.wav",
+        text: "버그 발생률 또한 눈에 띄게 줄었습니다. 실시간 정적 분석과 코드 리뷰를 통해 배포 전 치명적인 오류의 90% 이상을 사전에 차단하며 서비스의 안정성을 크게 높여주고 있습니다.",
+      },
+    ],
+  },
+  {
+    sceneId: "scene3",
+    segments: [
+      {
+        segmentId: "scene3-seg1",
+        audioFile: "projects/test-project/audio/scene3/seg1.wav",
+        text: "이렇게 강력한 AI 툴을 우리 팀에 성공적으로 도입하려면 어떻게 해야 할까요? 체계적이고 효율적인 3단계 실전 워크플로우를 제안합니다.",
+      },
+      {
+        segmentId: "scene3-seg2",
+        audioFile: "projects/test-project/audio/scene3/seg2.wav",
+        text: "AI와 함께하는 개발 워크플로우는 보통 다음 세 단계로 진행됩니다. 첫째, 전체적인 아키텍처 설계. 둘째, AI를 활용한 빠른 초안 작성. 셋째, 개발자의 디테일한 리팩토링 및 최적화입니다.",
+      },
+      {
+        segmentId: "scene3-seg3",
+        audioFile: "projects/test-project/audio/scene3/seg3.wav",
+        text: "단순한 마크업을 넘어 복잡한 로직도 문제없습니다. 프롬프트 몇 줄만 입력하면, API 연동부터 상태 관리까지 갖춘 완벽한 Next.js 컴포넌트 코드가 순식간에 작성됩니다.",
+      },
+      {
+        segmentId: "scene3-seg4",
+        audioFile: "projects/test-project/audio/scene3/seg4.wav",
+        text: "이때 가장 중요한 핵심 기술은 바로 '프롬프트 엔지니어링'입니다. 명확한 컨텍스트와 엄격한 제약 조건을 제공할수록, AI는 우리가 정확히 원하는 형태의 코드를 오차 없이 생성해 냅니다.",
+      },
+      {
+        segmentId: "scene3-seg5",
+        audioFile: "projects/test-project/audio/scene3/seg5.wav",
+        text: "까다로웠던 테스트 코드 작성도 더 이상 고통스러운 작업이 아닙니다. 핵심 비즈니스 로직만 주어지면 엣지 케이스까지 꼼꼼하게 고려한 완벽한 테스트 스위트를 자동으로 구성해 줍니다.",
+      },
+    ],
+  },
+  {
+    sceneId: "scene4",
+    segments: [
+      {
+        segmentId: "scene4-seg1",
+        audioFile: "projects/test-project/audio/scene4/seg1.wav",
+        text: "기술의 발전 속도는 우리의 예상을 뛰어넘을 정도로 점점 더 빨라지고 있습니다. 당장 내년에는 또 어떤 혁신적인 도구가 등장하여 우리의 일하는 방식을 바꿀까요?",
+      },
+      {
+        segmentId: "scene4-seg2",
+        audioFile: "projects/test-project/audio/scene4/seg2.wav",
+        text: "일각에서는 AI가 개발자의 일자리를 대체할 것이라는 막연한 우려도 있습니다. 하지만 역사가 증명하듯, 강력한 새로운 도구는 항상 인간의 잠재력과 한계를 더욱 확장시켜 왔습니다.",
+      },
+      {
+        segmentId: "scene4-seg3",
+        audioFile: "projects/test-project/audio/scene4/seg3.wav",
+        text: "AI는 우리를 밀어내는 경쟁자가 아닙니다. 오히려 우리가 단순 작업에서 벗어나 더 가치 있고 창의적인 문제 해결에 집중할 수 있도록 돕는 가장 강력한 지렛대입니다.",
+      },
+      {
+        segmentId: "scene4-seg4",
+        audioFile: "projects/test-project/audio/scene4/seg4.wav",
+        text: "개발의 기술적 진입 장벽이 낮아짐에 따라, 앞으로는 기술의 숙련도보다 '무엇을, 왜 만들 것인가'를 치열하게 고민하는 프로덕트 마인드가 가장 중요한 무기가 될 것입니다.",
+      },
+      {
+        segmentId: "scene4-seg5",
+        audioFile: "projects/test-project/audio/scene4/seg5.wav",
+        text: "망설일 필요가 없습니다. 지금 바로 AI와 함께 완전히 새로운 개발 여정을 시작해 보세요. 한계 없는 여러분의 상상력을 완벽한 코드로 현실화할 시간입니다.",
+      },
+    ],
+  },
+];
