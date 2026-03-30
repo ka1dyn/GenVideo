@@ -21,7 +21,7 @@ if [ -d "$PROJECT_DIR" ]; then
   exit 1
 fi
 
-echo "📁 프로젝트 생성 중: $PROJECT_ID"
+echo "📁 폴더 생성 중: $PROJECT_ID"
 
 # src/projects/{id} 복사
 cp -r "$TEMPLATE_DIR" "$PROJECT_DIR"
@@ -46,14 +46,8 @@ else
 fi
 
 echo ""
-echo "✅ 프로젝트 생성 완료!"
+echo "✅ 폴더 생성 완료!"
 echo ""
 echo "   📂 소스:   src/projects/$PROJECT_ID/"
 echo "   📂 에셋:   public/projects/$PROJECT_ID/"
-echo ""
-echo "다음 단계:"
-echo "  1. src/projects/$PROJECT_ID/script.ts 에 대본 작성"
-echo "  2. TTS로 WAV 생성 → public/projects/$PROJECT_ID/audio/ 에 저장"
-echo "  3. src/projects/$PROJECT_ID/scenes/ 에 Scene 컴포넌트 구성"
-echo "  4. src/Root.tsx 에 프로젝트 Composition 등록"
 echo ""

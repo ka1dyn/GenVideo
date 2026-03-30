@@ -33,6 +33,12 @@ const scene2Script = script.find((s) => s.sceneId === "scene2");
 
 해당 Scene의 WAV 파일 길이를 확인하여, 애니메이션 타이밍의 기준으로 삼습니다.
 
+반드시 conda 환경으로 진입한 뒤 ffprobe 명령어를 실행한다.
+
+```bash
+conda activate qwen3-tts
+```
+
 ```bash
 # WAV 파일 길이 확인 (초)
 ffprobe -v error -show_entries format=duration -of csv=p=0 public/projects/{project-id}/audio/scene{N}.wav
@@ -43,6 +49,7 @@ ffprobe -v error -show_entries format=duration -of csv=p=0 public/projects/{proj
 파일 위치: `src/projects/{project-id}/scenes/scene{N}/Scene{N}.tsx`
 
 필요에 따라 서브컴포넌트를 같은 디렉토리에 생성합니다:
+
 ```
 scenes/scene{N}/
 ├── Scene{N}.tsx          ← 메인 컴포넌트
@@ -103,17 +110,17 @@ const scale = spring({
 
 `src/shared/styles/global.css`에 정의된 디자인 토큰을 사용합니다:
 
-| 토큰 | 값 | 용도 |
-|------|----|------|
-| `--color-bg-primary` | `#0a0a0f` | 배경 |
-| `--color-bg-secondary` | `#12121a` | 보조 배경 |
-| `--color-text-primary` | `#f0f0f5` | 주요 텍스트 |
-| `--color-text-secondary` | `#a0a0b0` | 보조 텍스트 |
-| `--color-accent` | `#6366f1` | 강조색 |
-| `--color-accent-glow` | `rgba(99,102,241,0.3)` | 강조 글로우 |
-| `--font-heading` | `Inter, Pretendard, sans-serif` | 제목 |
-| `--font-body` | `Inter, Pretendard, sans-serif` | 본문 |
-| `--font-mono` | `JetBrains Mono, monospace` | 코드 |
+| 토큰                     | 값                              | 용도        |
+| ------------------------ | ------------------------------- | ----------- |
+| `--color-bg-primary`     | `#0a0a0f`                       | 배경        |
+| `--color-bg-secondary`   | `#12121a`                       | 보조 배경   |
+| `--color-text-primary`   | `#f0f0f5`                       | 주요 텍스트 |
+| `--color-text-secondary` | `#a0a0b0`                       | 보조 텍스트 |
+| `--color-accent`         | `#6366f1`                       | 강조색      |
+| `--color-accent-glow`    | `rgba(99,102,241,0.3)`          | 강조 글로우 |
+| `--font-heading`         | `Inter, Pretendard, sans-serif` | 제목        |
+| `--font-body`            | `Inter, Pretendard, sans-serif` | 본문        |
+| `--font-mono`            | `JetBrains Mono, monospace`     | 코드        |
 
 > Remotion에서는 CSS 변수를 `var()`로 사용하기보다 **값을 직접 인라인 스타일에 넣는 방식**이 안정적입니다.
 
@@ -150,13 +157,13 @@ export const SceneN: React.FC = () => {
 
 ### 자주 사용하는 Remotion API
 
-| API | 용도 |
-|-----|------|
-| `<AbsoluteFill>` | 전체 화면 레이어 |
-| `<Sequence from={frame}>` | Scene 내 타이밍 시퀀스 |
-| `<Img src={staticFile("...")} />` | 이미지 표시 |
-| `interpolate()` | 선형 보간 애니메이션 |
-| `spring()` | 물리 기반 애니메이션 |
+| API                               | 용도                   |
+| --------------------------------- | ---------------------- |
+| `<AbsoluteFill>`                  | 전체 화면 레이어       |
+| `<Sequence from={frame}>`         | Scene 내 타이밍 시퀀스 |
+| `<Img src={staticFile("...")} />` | 이미지 표시            |
+| `interpolate()`                   | 선형 보간 애니메이션   |
+| `spring()`                        | 물리 기반 애니메이션   |
 
 ### 추가 규칙 참조
 

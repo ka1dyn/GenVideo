@@ -79,9 +79,38 @@ python3 scripts/generate-audio.py <project-id>
 
 두 파일이 잘 생성되었는지 확인합니다. 문제가 있다면 사용자에게 요청하고 대기합니다.
 
-### 4. Scene 컴포넌트 구성 (Scene별 반복)
+### 4. Root.tsx에 프로젝트 등록
+
+> **Scene을 만들기 전에 먼저 등록합니다.** Root.tsx에 프로젝트가 등록되어 있어야
+> 이후 각 Scene을 `index.tsx`에 추가하는 것만으로 Remotion Studio에서 바로 테스트할 수 있습니다.
+
+```tsx
+// src/Root.tsx
+import {
+  Composition as AiFuture,
+  calculateMetadata as aiFutureMeta,
+} from "./projects/ai-future";
+import { config as aiFutureConfig } from "./projects/ai-future/config";
+
+// <Folder name="Projects"> 안에 추가:
+<Composition
+  id={aiFutureConfig.id}
+  component={AiFuture}
+  calculateMetadata={aiFutureMeta}
+  durationInFrames={300}
+  fps={aiFutureConfig.fps}
+  width={aiFutureConfig.width}
+  height={aiFutureConfig.height}
+  defaultProps={{ sceneDurations: [] } satisfies ProjectProps}
+/>;
+```
+
+등록 후 `npm run dev`로 Remotion Studio에서 프로젝트가 보이는지 확인합니다.
+
+### 5. Scene 컴포넌트 구성 (Scene별 반복)
 
 각 Scene은 독립적인 React 컴포넌트이며, **한 번에 하나씩** 개별 요청하여 개발합니다.
+Root.tsx에 프로젝트가 이미 등록되어 있으므로, 각 Scene은 `index.tsx`의 `SCENES` 배열에 추가하는 것만으로 **즉시 미리보기가 가능**합니다.
 
 **개발 절차:**
 
@@ -106,29 +135,6 @@ python3 scripts/generate-audio.py <project-id>
 - Scene 컴포넌트 안에서 오디오 duration을 알 필요 없음 — `TransitionSeries`가 처리
 - 새 Scene을 추가하면 `index.tsx`의 `SCENES` 배열에 등록
 - `script.ts`의 scene 순서와 `SCENES` 배열의 순서가 반드시 일치해야 함
-
-### 5. Root.tsx에 프로젝트 등록
-
-```tsx
-// src/Root.tsx
-import {
-  Composition as AiFuture,
-  calculateMetadata as aiFutureMeta,
-} from "./projects/ai-future";
-import { config as aiFutureConfig } from "./projects/ai-future/config";
-
-// <Folder name="Projects"> 안에 추가:
-<Composition
-  id={aiFutureConfig.id}
-  component={AiFuture}
-  calculateMetadata={aiFutureMeta}
-  durationInFrames={300}
-  fps={aiFutureConfig.fps}
-  width={aiFutureConfig.width}
-  height={aiFutureConfig.height}
-  defaultProps={{ sceneDurations: [] } satisfies ProjectProps}
-/>;
-```
 
 ### 6. 미리보기 및 렌더링
 
