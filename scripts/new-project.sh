@@ -26,9 +26,13 @@ echo "📁 폴더 생성 중: $PROJECT_ID"
 # src/projects/{id} 복사
 cp -r "$TEMPLATE_DIR" "$PROJECT_DIR"
 
-# public/projects/{id}/audio 디렉토리 생성
-mkdir -p "$PUBLIC_DIR/audio"
-mkdir -p "$PUBLIC_DIR/images"
+if [ ! -d "$PUBLIC_DIR" ]; then
+  # public/projects/{id}/audio 디렉토리 생성
+  mkdir -p "$PUBLIC_DIR/audio"
+  mkdir -p "$PUBLIC_DIR/images"
+else
+  echo "⚠️ 이미 존재하는 애셋 디렉토리입니다: $PUBLIC_DIR (에셋 생성 건너뜀)"
+fi
 
 # placeholder 치환
 if [[ "$OSTYPE" == "darwin"* ]]; then

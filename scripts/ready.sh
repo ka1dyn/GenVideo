@@ -16,6 +16,14 @@ SOURCE_FILE="$ROOT_DIR/src/sources/$PROJECT_ID/script.txt"
 
 echo "🚀 프로젝트 준비 시작: $PROJECT_ID"
 
+PUBLIC_DIR="$ROOT_DIR/public/projects/$PROJECT_ID"
+SKIP_TTS=false
+
+if [ -d "$PUBLIC_DIR" ]; then
+  SKIP_TTS=true
+  echo "⚠️ 기존 public 에셋이 존재하여 TTS 오디오 생성 부분을 건너뛸 예정입니다."
+fi
+
 # 2. 사전 체크
 if [ -d "$PROJECT_DIR" ]; then
   echo "❌ 이미 존재하는 프로젝트 디렉토리입니다: $PROJECT_DIR"
@@ -38,13 +46,17 @@ echo "📝 [2/3] 대본 파싱 중 (script.txt -> script.ts)..."
 npx tsx "$SCRIPT_DIR/parse-script.ts" "$PROJECT_ID"
 
 # 5. 오디오 생성 (TTS)
-echo "🎙️ [3/3] TTS 오디오 생성 중..."
-# conda activate 대신 conda run을 사용하여 서브쉘 이슈 방지
-if command -v conda &> /dev/null; then
-  conda run -n qwen3-tts --no-capture-output python3 "$SCRIPT_DIR/generate-audio.py" "$PROJECT_ID"
+if [ "$SKIP_TTS" = true ]; then
+  echo "🎙️ [3/3] 기존 애셋이 존재하여 TTS 오디오 생성을 건너뜁니다."
 else
-  echo "⚠️  conda 명령어를 찾을 수 없습니다. 기본 python3로 시도합니다."
-  python3 "$SCRIPT_DIR/generate-audio.py" "$PROJECT_ID"
+  echo "🎙️ [3/3] TTS 오디오 생성 중..."
+  # conda activate 대신 conda run을 사용하여 서브쉘 이슈 방지
+  if command -v conda &> /dev/null; then
+    conda run -n qwen3-tts --no-capture-output python3 "$SCRIPT_DIR/generate-audio.py" "$PROJECT_ID"
+  else
+    echo "⚠️  conda 명령어를 찾을 수 없습니다. 기본 python3로 시도합니다."
+    python3 "$SCRIPT_DIR/generate-audio.py" "$PROJECT_ID"
+  fi
 fi
 
 echo ""
