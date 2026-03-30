@@ -4,34 +4,49 @@ import { COLORS, FONT_SIZES, TYPOGRAPHY, SPACING, BORDER_RADIUS } from "../const
 import { CLAMP } from "../constants/animations";
 
 type ProgressBarProps = {
-  progress: number;
+  /** 목표 채움 비율 (0~1) — 바가 최종적으로 도달할 위치 */
+  value: number;
   variant?: "accent" | "gradient" | "success";
   label?: string;
   delay?: number;
   height?: number;
+  /** Phase 진행률 (0~1). 제공 시 delay 무시, progress가 바 채움을 구동.
+   *  progress 0→1이 0%→value*100%로 매핑. */
+  progress?: number;
 };
 
 export const ProgressBar: React.FC<ProgressBarProps> = ({
-  progress,
+  value,
   variant = "accent",
   label,
   delay = 0,
   height = 8,
+  progress,
 }) => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
 
-  const delayFrames = Math.round(delay * fps);
-  const adjustedFrame = Math.max(0, frame - delayFrames);
+  let width: number;
+  let opacity: number;
 
-  const width = interpolate(
-    adjustedFrame,
-    [0, fps * 0.8],
-    [0, progress * 100],
-    CLAMP,
-  );
+  if (progress !== undefined) {
+    // ── Progress-driven ──
+    const p = Math.min(1, Math.max(0, progress));
+    width = p * value * 100;
+    opacity = Math.min(1, p * 5);
+  } else {
+    // ── Frame-driven (original) ──
+    const delayFrames = Math.round(delay * fps);
+    const adjustedFrame = Math.max(0, frame - delayFrames);
 
-  const opacity = interpolate(adjustedFrame, [0, fps * 0.3], [0, 1], CLAMP);
+    width = interpolate(
+      adjustedFrame,
+      [0, fps * 0.8],
+      [0, value * 100],
+      CLAMP,
+    );
+    opacity = interpolate(adjustedFrame, [0, fps * 0.3], [0, 1], CLAMP);
+  }
 
   const barColor =
     variant === "gradient"

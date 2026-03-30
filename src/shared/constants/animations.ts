@@ -62,3 +62,18 @@ export const EASING_PRESET = {
   /** 가속 전용 — 퇴장 애니메이션 */
   ACCELERATE: Easing.in(Easing.cubic),
 } as const;
+
+/**
+ * Phase 내부의 세부 타이밍 (비율 기반, 0~1)
+ *
+ * Phase 시스템에서 각 Phase 내 요소들의 등장·정지 타이밍을 제어합니다.
+ * 절대 시간이 아닌 **Phase 길이 대비 비율**이므로 duration과 무관합니다.
+ */
+export const PHASE_TIMING = {
+  /** Phase 시작 후 첫 요소가 나타나기까지 (Phase 길이의 비율) */
+  ELEMENT_ENTRANCE: 0.1,
+  /** Phase 내 요소 간 stagger (Phase 길이의 비율) */
+  ELEMENT_STAGGER: 0.15,
+  /** Phase 종료 직전 hold 구간 (Phase 길이의 비율) */
+  HOLD_BEFORE_NEXT: 0.1,
+} as const;

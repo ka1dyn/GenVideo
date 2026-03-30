@@ -28,3 +28,8 @@ export { GlowOrb } from "./GlowOrb";
 // ── Media ──
 export { ImageFrame } from "./ImageFrame";
 export { CodeSnippet } from "./CodeSnippet";
+
+// ── Phase-Aware ──
+export { PhasedReveal } from "./PhasedReveal";
+export { PhasedNumberCounter } from "./PhasedNumberCounter";
+export { PhasedHighlight } from "./PhasedHighlight";
