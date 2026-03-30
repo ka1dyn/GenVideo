@@ -10,9 +10,12 @@ metadata:
 ## Segment 설계 필수 규칙
 
 1. 모든 Seg 파일은 **`duration` prop 필수**.
-2. 모든 Seg는 **`usePhase`로 최소 3 Phase** 구성.
+2. **[필수] 다중 Phase 구성**: Segment 하나당 13~25초의 긴 호흡을 가집니다. 따라서 기본 3 Phase(`PHASE_3_STANDARD`)에만 얽매이지 말고, 내용이 길거나 열거형인 경우 **반드시 4~5개의 Phase 단위로 쪼개어** 3~5초 간격으로 요소들이 순차적으로 시각화되게 설계하세요 (`phase-system.md` 참조).
 3. Phase 2 이후 요소는 **`phase.isPhaseActive()` 가드** 사용.
 4. 연속 애니메이션에는 **Phase-Aware 컴포넌트** (`PhasedReveal`, `PhasedNumberCounter`, `PhasedHighlight`) 사용.
+5. **[중요] 템플릿 복붙 금지**: Layout 템플릿 예시 코드는 오로지 골격(Structure)일 뿐입니다. 내부에 들어갈 컴포넌트는 대본 맥락을 분석하여 `shared/components`에서 독창적으로 선택해 교체하세요.
+6. **[필수] 시각적 다채로움 확보**: 전체 Scene을 통틀어 일반 텍스트 외의 **특수 시각 컴포넌트(`StatCard`, `Quote`, `BarChart`, `CodeSnippet`, `TimelineItem` 등)가 최소 1개 이상** 반드시 포함되어야 합니다.
+7. **[엄격] 텍스트 길이 제한 및 요약**: `text={text}` 처럼 대본 전체를 절대 그대로 넣지 마세요! 컴포넌트에 들어갈 텍스트는 **반드시 화면당 15~20자 내외의 아주 짧은 키워드나 명사형 문구로 직접 요약 및 발췌**해야만 합니다. 영상은 읽는 것이 아니라 보는 것입니다.
 
 ## Phase Preset 선택
 

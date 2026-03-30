@@ -21,7 +21,7 @@ export const PHASE_3_STANDARD: PhaseConfig[] = [
 /**
  * 4-Phase 확장 (등장 → 전개A → 전개B → 강조)
  *
- * 긴 Segment(20초+)에서 전개를 2단계로 나누고 싶을 때
+ * 긴 Segment(15+)에서 전개를 2단계로 나누고 싶을 때
  */
 export const PHASE_4_EXTENDED: PhaseConfig[] = [
   { name: "entrance", start: 0, end: 0.20 },

@@ -32,6 +32,29 @@ Segment duration을 **비율로 분할**하여 전체 구간에 걸쳐 연속적
 | `PHASE_3_STEPS`      | entrance → steps → summary                 | 단계별 설명                         |
 | `PHASE_4_EXTENDED`   | entrance → developA → developB → emphasize | 20초+ 긴 Segment                    |
 
+### 🌟 4단계 이상의 다중 Phase 수동 생성 (권장)
+Segment 길이는 대부분 13~25초로 깁니다. 3-Phase 구조를 넘어서서, 여러 요소(Timeline, List, Cards 등)가 하나씩 차례로 등장해야 한다면 직접 프리셋 객체를 만들어 주입하세요:
+
+> [!CAUTION]
+> Phase 사이의 시간차(비율)가 현실의 '1초 단위'보다 짧으면 안 됩니다. 전체 길이를 고려하여 적당히 분할하세요.
+
+```ts
+// 例: Segment 길이가 20초인 경우 5개의 요소가 약 3.5초~4초 간격으로 등장
+const phase = usePhase({
+  name: "CUSTOM_5_STEPS",
+  phases: {
+    entrance: [0, 0.15],      // 0 ~ 3초 구간
+    item1: [0.15, 0.35],      // 3 ~ 7초 구간
+    item2: [0.35, 0.55],      // 7 ~ 11초 구간
+    item3: [0.55, 0.75],      // 11 ~ 15초 구간
+    summary: [0.75, 1.0],     // 15 ~ 20초 구간
+  }
+}, duration);
+
+// 사용
+{phase.isPhaseActive("item2") && <StatCard ... />}
+```
+
 ### 대본 유형별 추천 조합
 
 | 대본 내용      | 프리셋               | Phase별 컴포넌트                                                                        |

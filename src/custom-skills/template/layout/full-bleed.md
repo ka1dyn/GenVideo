@@ -1,3 +1,7 @@
+> [!WARNING]
+> 🚨 AI 주의: 아래 코드는 **FullBleedLayout 구조**의 예시일 뿐입니다!
+> 내부에 렌더링된 컴포넌트(`AnimatedText` 등)를 아무 생각 없이 그대로 복사하지 마세요. 대본 테마(코드, 통계, 인용 등)를 분석하여 `shared/components` 내의 적합한 특수 컴포넌트로 교체해야 영상이 지루하지 않습니다.
+
 ```tsx
 import React from "react";
 import {
@@ -35,7 +39,9 @@ export const SegX: React.FC<SegProps> = ({ text, duration, sectionTitle }) => {
         {/* Phase 2: 대본 내용 */}
         {phase.isPhaseActive("develop") && (
           <PhasedReveal progress={phase.getPhaseProgress("develop")} animation="slideUp">
-            <AnimatedText text={text} variant="body" color="rgba(255,255,255,0.8)" />
+            {/* 🚨 (AI 창의 영역) 여기서도 AnimatedText만 쓰기보다는 강렬한 Quote나 중앙집중형 통계(NumberCounter) 고려! */}
+            {/* 🚨 (엄격) text={text} 처럼 원문을 그대로 쓰지 말고 15자 내외로 직접 요약하세요! */}
+            <AnimatedText text="AI가 요약한 짧은 문구" variant="body" color="rgba(255,255,255,0.8)" />
           </PhasedReveal>
         )}
       </div>
