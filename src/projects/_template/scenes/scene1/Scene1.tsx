@@ -1,47 +1,40 @@
 import React from "react";
-import { AbsoluteFill, useCurrentFrame, useVideoConfig } from "remotion";
-import { interpolate, spring } from "remotion";
+import { SceneBackground, AnimatedTitle, AnimatedText } from "../../../../shared/components";
+import { CenteredLayout } from "../../../../shared/layouts";
+import { SPACING } from "../../../../shared/constants/design";
 
 /**
  * Scene 1 — 기본 템플릿
  *
- * useCurrentFrame()은 이 Scene 내부의 로컬 프레임(0부터 시작)을 반환합니다.
- * 전체 Composition 프레임이 아닌 Scene 단위로 애니메이션하세요.
+ * 이 템플릿은 새 아키텍처의 사용법을 보여줍니다.
+ *
+ * 핵심 규칙:
+ * 1. 원시 HTML 대신 shared/components 사용
+ * 2. 매직 넘버 대신 shared/constants 상수 사용
+ * 3. 자유 배치 대신 shared/layouts 사용
+ * 4. useCurrentFrame() + fps + clamp로 애니메이션
+ *
+ * SectionLabel 규칙:
+ * - 소제목의 첫 번째 씬: sectionTitle 필수
+ * - 소제목의 후속 씬: sectionTitle 생략 가능
+ * - intro/outro: sectionTitle 생략
  */
 export const Scene1: React.FC = () => {
-  const frame = useCurrentFrame();
-  const { fps } = useVideoConfig();
-
-  const titleOpacity = interpolate(frame, [0, fps * 0.5], [0, 1], {
-    extrapolateRight: "clamp",
-  });
-
-  const titleY = spring({
-    frame,
-    fps,
-    config: { damping: 20, stiffness: 100 },
-  });
-
   return (
-    <AbsoluteFill
-      style={{
-        backgroundColor: "#0a0a0f",
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
-      <h1
-        style={{
-          color: "#f0f0f5",
-          fontSize: 56,
-          fontFamily: "Inter, Pretendard, sans-serif",
-          fontWeight: 700,
-          opacity: titleOpacity,
-          transform: `translateY(${interpolate(titleY, [0, 1], [40, 0])}px)`,
-        }}
-      >
-        Scene 1 Title
-      </h1>
-    </AbsoluteFill>
+    <SceneBackground variant="gradient">
+      <CenteredLayout gap={SPACING.LG}>
+        <AnimatedTitle
+          text="Scene 1 Title"
+          size="hero"
+          animation="slideUp"
+        />
+        <AnimatedText
+          text="여기에 설명 텍스트가 들어갑니다."
+          variant="body"
+          animation="fadeIn"
+          delay={0.3}
+        />
+      </CenteredLayout>
+    </SceneBackground>
   );
 };

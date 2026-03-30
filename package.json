@@ -10,6 +10,7 @@
     "@remotion/media": "^4.0.441",
     "@remotion/tailwind-v4": "4.0.441",
     "@remotion/transitions": "^4.0.441",
+    "geist": "^1.7.0",
     "mediabunny": "^1.40.1",
     "react": "19.2.3",
     "react-dom": "19.2.3",

@@ -45,7 +45,7 @@ export const Composition: React.FC<ProjectProps> = ({ sceneDurations }) => {
   const transitionFrames = Math.round(fps * 0.5);
 
   return (
-    <AbsoluteFill style={{ backgroundColor: "#0a0a0f" }}>
+    <AbsoluteFill style={{ backgroundColor: "#000000" }}>
       <TransitionSeries>
         {SCENES.map((SceneComponent, i) => (
           <React.Fragment key={script[i].sceneId}>
