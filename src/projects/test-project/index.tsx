@@ -9,12 +9,15 @@ import { TIMING } from "../../shared/constants/animations";
 import { config } from "./config";
 import { script } from "./script";
 import { Scene1 } from "./scenes/scene1/Scene1";
+import { Scene2 } from "./scenes/scene2/Scene2";
+import { Scene3 } from "./scenes/scene3/Scene3";
+import { Scene4 } from "./scenes/scene4/Scene4";
 
 /**
  * Scene 컴포넌트 배열 — 새 Scene을 추가하면 여기에 등록
  * 각 Scene은 segmentDurations를 prop으로 받습니다.
  */
-const SCENES: React.FC<{ segmentDurations: number[] }>[] = [Scene1];
+const SCENES: React.FC<{ segmentDurations: number[] }>[] = [Scene1, Scene2, Scene3, Scene4];
 
 /**
  * WAV 파일에서 각 Segment의 duration을 동적으로 계산합니다.

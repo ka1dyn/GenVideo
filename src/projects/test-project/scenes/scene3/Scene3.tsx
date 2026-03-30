@@ -12,16 +12,15 @@ import { Seg3 } from "./Seg3";
 import { Seg4 } from "./Seg4";
 import { Seg5 } from "./Seg5";
 
-export const Scene1: React.FC<{ segmentDurations: number[] }> = ({
+export const Scene3: React.FC<{ segmentDurations: number[] }> = ({
   segmentDurations,
 }) => {
   const { fps } = useVideoConfig();
-  const sceneData = script.find((s) => s.sceneId === "scene1");
+  const sceneData = script.find((s) => s.sceneId === "scene3");
   const segments = sceneData?.segments || [];
   const transitionFrames = Math.round(fps * TIMING.SEGMENT_TRANSITION);
 
   // Segment 렌더러 배열 — 순서가 segments 배열과 1:1 대응
-  // 첫 번째 렌더러에만 sectionTitle을 전달합니다.
   const SEGMENT_RENDERERS = [
     (seg: SegmentScript, dur: number) => (
       <Seg1 text={seg.text} duration={dur} sectionTitle={sceneData?.sectionTitle} />

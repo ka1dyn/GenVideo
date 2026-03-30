@@ -2,7 +2,14 @@ import "./index.css";
 import "./shared/styles/global.css";
 
 import React from "react";
-import { Folder } from "remotion";
+import { Folder, Composition } from "remotion";
+import type { ProjectProps } from "./shared/types/project";
+
+import {
+  Composition as TestProject,
+  calculateMetadata as testProjectMeta,
+} from "./projects/test-project";
+import { config as testProjectConfig } from "./projects/test-project/config";
 
 /*
  * ─── 프로젝트 등록 ───
@@ -31,7 +38,16 @@ export const RemotionRoot: React.FC = () => {
   return (
     <Folder name="Projects">
       {/* 여기에 프로젝트 Composition을 등록하세요 */}
-      <></>
+      <Composition
+        id={testProjectConfig.id}
+        component={TestProject}
+        calculateMetadata={testProjectMeta}
+        durationInFrames={300}
+        fps={testProjectConfig.fps}
+        width={testProjectConfig.width}
+        height={testProjectConfig.height}
+        defaultProps={{ segmentDurations: [] } satisfies ProjectProps}
+      />
     </Folder>
   );
 };

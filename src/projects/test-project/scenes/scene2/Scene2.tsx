@@ -12,11 +12,11 @@ import { Seg3 } from "./Seg3";
 import { Seg4 } from "./Seg4";
 import { Seg5 } from "./Seg5";
 
-export const Scene1: React.FC<{ segmentDurations: number[] }> = ({
+export const Scene2: React.FC<{ segmentDurations: number[] }> = ({
   segmentDurations,
 }) => {
   const { fps } = useVideoConfig();
-  const sceneData = script.find((s) => s.sceneId === "scene1");
+  const sceneData = script.find((s) => s.sceneId === "scene2");
   const segments = sceneData?.segments || [];
   const transitionFrames = Math.round(fps * TIMING.SEGMENT_TRANSITION);
 
