@@ -57,6 +57,7 @@ export const Seq1: React.FC = () => {
 
   // 애니메이션 로직 (기획서에 따라 동적 구성)
   const opacity = interpolate(frame, [0, 15], [0, 1], {
+    extrapolateLeft: 'clamp',
     extrapolateRight: 'clamp',
   });
 
@@ -75,12 +76,18 @@ export const Seq1: React.FC = () => {
 - 작성했던 모든 시퀀스를 `Series` 객체로 합성합니다.
 - **Audio 컴포넌트는 섹션 루트에서 한 번만** 배치합니다.
 - 단일 `Series.Sequence`의 `durationInFrames` 수치를 기획서에 명시된 기간으로 맞춰 설정합니다.
+- **[중요] 프레임 패딩**: 오디오 파일에는 마지막 대사 이후 묵음 여백(Tail)이 존재하므로, 내부 시퀀스 합계가 마스터 할당 프레임보다 부족할 수 있습니다. 모든 시퀀스를 배치한 뒤 합계를 계산하고, 부족분은 **마지막 시퀀스의 `durationInFrames`에 추가**하여 마스터 할당 프레임과 정확히 일치시키세요. 이를 누락하면 섹션 전환 시 검은 화면(공백)이 발생합니다.
+- **[중요] 자막 처리 방식**: Whisper가 생성한 Timestamp JSON의 텍스트는 환각이 섞여 있어 신뢰할 수 없으므로, 기획서(`{section}_plan.md`)의 원본 대본을 기준으로 작업합니다.
+  - **데이터 분리**: 개발자가 자막 시점과 텍스트를 고치기 편하도록, 각 섹션 폴더에 `{section}_subtitles.ts` 파일을 만들어 자막 배열(Subtitle[])을 하드코딩하세요. 이때 **대본을 절대로 요약하지 말고 기획서의 원본 대본을 100% 그대로** 옮겨야 합니다.
+  - **공용 컴포넌트**: `src/projects/{project_id}/components/CaptionOverlay.tsx`에 자막 렌더링 로직을 분리하고, 각 섹션 루트에서는 이 컴포넌트에 배열만 주입하여 사용합니다.
+  - **스타일**: 기획서의 강제 줄바꿈(`\n`)이 반영되도록 `whiteSpace: 'pre-line'`을 적용하세요.
 
 ### 3. 필수 준수 규칙 (중요)
 
 - **에셋 참조:** 오디오/이미지 등은 반드시 `staticFile()` 함수로 래핑하여 사용하세요. (예: `staticFile('{project_id}/{section}/{section}.wav')`)
 - **타이밍:** durationInFrames 계산이 필요할 경우 `Math.ceil((endMs - startMs) / 1000 * 프로젝트FPS)` 규칙을 따릅니다.
 - **애니메이션:** 시간 기반 계산은 `useCurrentFrame()`과 `interpolate()`를 이용하며 튀어오르는 효과는 `spring({ frame, fps, config: { damping: 200 } })` 를 사용합니다.
+- **보간(Interpolate) 안전 장치:** `interpolate()` 함수 사용 시, 예상치 못한 음수값이나 시작 전 움직임을 방지하기 위해 반드시 `{ extrapolateLeft: 'clamp', extrapolateRight: 'clamp' }` 옵션을 모두 부여하세요.
 - **오디오 스코프:** 절대 개별 시퀀스 파일(`seq{N}.tsx`)에 `Audio`를 임포트 하지 않습니다. 오디오는 `{section}.tsx`가 단독으로 재생하며 시퀀스는 화면만 전환되게 해 자동 싱크가 맞게 합니다.
 - **언어 및 텍스트 (현지화):**
   - 화면에 노출되는 UI 텍스트는 고유명사나 특정 약어를 제외하고는 대본과 같은 언어(예: 한국어)로 작성하세요.
