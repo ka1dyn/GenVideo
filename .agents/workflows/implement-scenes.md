@@ -38,6 +38,7 @@ description: 기획서를 바탕으로 Remotion 씬을 순차적으로 구현하
 
 - 먼저 `public/{project_id}/{section}/{section}_plan.md`를 읽으세요.
 - 이후 `public/{project_id}/{section}/{section}_context.md` 를 읽어 원본 대본과 타임스탬프 타이밍을 더블체크합니다.
+- `public/{project_id}/design-system.md`가 존재하면 읽고, 구현 시 브랜드 규약(색상 톤, 폰트, 자막 규격, 캐릭터 등)을 반영합니다.
 
 #### 2-2. 시퀀스 파일 생성
 
