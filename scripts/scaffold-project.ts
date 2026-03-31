@@ -31,7 +31,7 @@ async function main() {
 
     let sectionName = "";
     if (i === 0) sectionName = "intro";
-    else if (i === chunks.length - 1) sectionName = "outtro";
+    else if (i === chunks.length - 1) sectionName = "outro";
     else sectionName = `body${i}`;
 
     sections.push({ name: sectionName, text });
