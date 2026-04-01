@@ -1,86 +1,90 @@
-# [TEMPLATE] Design System
-
-> **⚠️ 이 파일은 템플릿입니다. `design-system.md`로 저장하기 전에 아래 지시를 반드시 따르세요.**
->
-> ### AI 작성 지시문
->
-> 1. 이 파일을 복사하여 `public/{project_id}/design-system.md`로 저장한다.
-> 2. `{FILL: ...}` 형태의 플레이스홀더를 **모두 실제 값으로 교체**한다. 하나라도 남기면 안 된다.
-> 3. `## [FIXED]` 마킹된 섹션은 **절대 수정하지 않는다.** 값 그대로 복사한다.
-> 4. `## [FILL]` 마킹된 섹션만 프로젝트 무드·대본·사용자 요구사항에 맞게 채운다.
-> 5. 이 안내 블록(`> ⚠️ ...`)은 최종 파일에서 **삭제**한다.
-> 6. 파일 제목의 `[TEMPLATE]`을 `{project_id}`로 교체한다.
+# nvidia-tech-channel — Design System
 
 ---
 
-## [FILL] 1. Brand Identity & Mood
+## 1. Brand Identity & Mood
 
 ```ts
 export const BRAND = {
-  PROJECT_ID: "{FILL: 프로젝트 ID (예: nvidia-blackwell-launch)}",
-  MOOD: "{FILL: 전체 무드 키워드 3~5개 (예: 다크 테크, 네온 엣지, 시네마틱, 압도적)}",
+  PROJECT_ID: "nvidia-tech-channel",
+  MOOD: "다크 테크, 네온 엣지, 시네마틱 충격, 압도적 성능, 냉혹한 지배",
   CONCEPT:
-    "{FILL: 한 줄 컨셉 (예: 엔비디아 블랙웰 아키텍처의 압도적 성능을 극적으로 전달)}",
+    "NVIDIA의 압도적 GPU 아키텍처를 넷플릭스급 극적 연출로 — 숫자 하나하나가 관객을 강타한다",
   FORBIDDEN:
-    "{FILL: 절대 금지 무드 (예: 귀엽고 캐주얼한 느낌, 파스텔, 느린 페이드)}",
+    "파스텔, 귀엽고 캐주얼한 느낌, 느린 페이드, 밝은 배경, 미지근한 전환",
 };
 ```
 
 ---
 
-## [FILL] 2. Color Palette
-
-> 아래 모든 `{FILL: ...}` 값을 실제 HEX 또는 rgba 코드로 교체한다.
-> 배경 계열은 반드시 어두운 톤을 유지한다 (밝은 배경 금지).
+## 2. Color Palette
 
 ```ts
 export const COLORS = {
   // Background Layer
-  BG_VOID: "{FILL: 가장 어두운 배경 HEX (예: #030303)}",
-  BG_DEEP: "{FILL: 기본 배경 HEX (예: #0a0a0a)}",
-  BG_SURFACE: "{FILL: 카드/패널 배경 HEX (예: #111411)}",
-  BG_ELEVATED: "{FILL: 떠있는 UI 요소 배경 HEX (예: #1a1f1a)}",
+  BG_VOID: "#020302", // 극도로 어두운 배경 — 오프닝/클라이맥스 전용
+  BG_DEEP: "#080c08", // 기본 배경
+  BG_SURFACE: "#0f150f", // 카드·패널 배경
+  BG_ELEVATED: "#192119", // 떠있는 UI 요소 배경
 
-  // Brand Core
-  PRIMARY: "{FILL: 메인 강조 앵커 HEX (예: #76B900)}",
-  PRIMARY_DIM: "{FILL: PRIMARY의 15~25% 투명도 rgba (예: rgba(118,185,0,0.2))}",
-  PRIMARY_GLOW:
-    "{FILL: 글로우 확산용 45% 투명도 rgba (예: rgba(118,185,0,0.45))}",
-  SECONDARY: "{FILL: 보조 강조 HEX (예: #A8E000)}",
-  ACCENT: "{FILL: 반전 포인트 HEX — 씬당 1회만 사용 (예: #FF4444)}",
+  // Brand Core — NVIDIA 시그니처 그린 계열
+  PRIMARY: "#76B900", // NVIDIA 공식 그린
+  PRIMARY_DIM: "rgba(118,185,0,0.18)", // PRIMARY 15~20% 투명도 — 배경 강조
+  PRIMARY_GLOW: "rgba(118,185,0,0.45)", // 글로우 확산용 45% 투명도
+  SECONDARY: "#A8E000", // 밝은 라임그린 — 서브 강조
+  ACCENT: "#FF4400", // 냉혹한 오렌지레드 — 씬당 1회, 충격 포인트
 
   // Text
-  TEXT_MAIN: "{FILL: 본문/헤드라인 (예: #F0F0F0)}",
-  TEXT_MUTED: "{FILL: 캡션/보조 (예: #A0A8A0)}",
-  TEXT_INVERSE: "{FILL: 밝은 요소 위 대비용 (예: #0a0a0a)}",
+  TEXT_MAIN: "#EEEEE8", // 본문·헤드라인 — 순백보다 살짝 따뜻하게
+  TEXT_MUTED: "#8A9A82", // 캡션·보조 텍스트
+  TEXT_INVERSE: "#080c08", // 밝은 요소(PRIMARY 버튼 등) 위 대비용
 
-  // Status
-  POSITIVE: "{FILL: 상승/긍정 데이터 (예: #76B900)}",
-  NEGATIVE: "{FILL: 하락/경고 데이터 (예: #FF4444)}",
-  HIGHLIGHT: "{FILL: 형광펜 강조 (예: rgba(118,185,0,0.3))}",
+  // Status — 성능 데이터·차트 전용
+  POSITIVE: "#76B900", // 상승·우위 데이터
+  NEGATIVE: "#FF4400", // 하락·경쟁사 열세 데이터
+  HIGHLIGHT: "rgba(118,185,0,0.28)", // 형광펜 강조 — 수치 언더라인
 
   // Border
-  BORDER: "{FILL: 일반 구분선 rgba (예: rgba(118,185,0,0.15))}",
-  BORDER_STRONG: "{FILL: 강조 구분선 rgba (예: rgba(118,185,0,0.5))}",
+  BORDER: "rgba(118,185,0,0.14)", // 일반 구분선
+  BORDER_STRONG: "rgba(118,185,0,0.52)", // 강조 구분선 — 카드 테두리·밑줄
 };
 ```
 
 ---
 
-## [FILL] 3. Brand-Specific Extras (선택)
+## 3. Brand-Specific Extras
 
-> 프로젝트 성격에 따라 자유롭게 추가한다. 필요 없으면 빈 객체(`{}`)로 남긴다.
-> 예시: 경쟁사 비교 차트용 컬러, 성능 등급 컬러, 특수 텍스처 컬러 등
+> NVIDIA 영상에서 자주 쓰이는 경쟁사 비교·성능 등급·GPU 제품라인 전용 컬러
 
 ```ts
 export const BRAND_EXTRAS = {
-  // {FILL: 프로젝트에 필요한 추가 컬러 토큰. 없으면 이 줄 삭제}
+  // 경쟁사 비교 차트
+  COMPETITOR_AMD: "#ED1C24", // AMD 레드
+  COMPETITOR_INTEL: "#0068B5", // Intel 블루
+  COMPETITOR_QUALCOMM: "#3253DC", // Qualcomm 인디고
+
+  // 성능 등급 배지 (티어별 희귀도 표현)
+  TIER_S: "#FFD700", // S티어 — 골드 (최상위 발표)
+  TIER_A: "#76B900", // A티어 — NVIDIA 그린
+  TIER_B: "#4A7A00", // B티어 — 다크 그린
+  TIER_C: "#8A9A82", // C티어 — 뮤트
+
+  // GPU 제품 라인 구분
+  PRODUCT_BLACKWELL: "#76B900", // Blackwell 세대 — 메인 그린
+  PRODUCT_HOPPER: "#5A8C00", // Hopper 세대 — 딥 그린
+  PRODUCT_GEFORCE: "#A8E000", // GeForce 소비자 라인 — 라임
+  PRODUCT_DATACENTER: "#3EB489", // Data Center / Tesla — 민트
+
+  // 데이터 시각화 보조 컬러 (차트 3번째 색 이후)
+  DATA_3: "rgba(168,224,0,0.7)",
+  DATA_4: "rgba(118,185,0,0.5)",
+  DATA_5: "rgba(62,180,137,0.6)",
 };
 ```
 
 ---
 
-## [FIXED] 4. Effects
+## 4. Effects
 
 ```ts
 export const EFFECTS = {
@@ -98,7 +102,7 @@ export const EFFECTS = {
 
 ---
 
-## [FIXED] 5. Typography
+## 5. Typography
 
 ```ts
 export const FONTS = {
@@ -136,7 +140,7 @@ export const LETTER_SPACING = {
 
 ---
 
-## [FIXED] 6. Spacing & Safe Zone
+## 6. Spacing & Safe Zone
 
 ```ts
 export const SPACING = {
@@ -160,7 +164,7 @@ export const SAFE_ZONE = {
 
 ---
 
-## [FIXED] 7. Animation & Motion System ★
+## 7. Animation & Motion System ★
 
 > **Remotion 철칙**: CSS 애니메이션(`@keyframes`, `transition`) 사용 불가.
 > 모든 모션은 반드시 `useCurrentFrame()` + `interpolate()` + `spring()`으로 구현하고 React 인라인 스타일로 주입한다.
@@ -223,7 +227,7 @@ export const STAGGER = {
 
 ---
 
-## [FIXED] 8. Z-Index Layers
+## 8. Z-Index Layers
 
 ```ts
 export const Z = {
@@ -238,14 +242,26 @@ export const Z = {
 
 ---
 
-## [FIXED] 9. AI Directing Rules
+## 9. AI Directing Rules
 
 구현 AI는 아래 규칙을 코드 생성 전에 반드시 숙지한다.
 
-1. **하드코딩 금지 및 통합 관리** — px, ms, HEX를 컴포넌트 코드에 직접 쓰지 않는다. 구현 전, 이 문서의 모든 상수(Constants) 블록들을 모아 `src/projects/{project_id}/theme.ts` 파일로 생성하여 통합 저장하고, 각 컴포넌트에서는 이를 `import`하여 사용한다.
+1. **하드코딩 금지 및 통합 관리** — px, ms, HEX를 컴포넌트 코드에 직접 쓰지 않는다. 구현 전, 이 문서의 모든 상수(Constants) 블록들을 모아 `src/projects/nvidia-tech-channel/theme.ts` 파일로 생성하여 통합 저장하고, 각 컴포넌트에서는 이를 `import`하여 사용한다.
 2. **CSS 금지** — `@keyframes`, `transition`, `animation` 속성 일절 사용 불가.
-3. **60fps 기준** — 모든 애니메이션은 상수에 정의된 VIDEO_FPS(60fps)에서 매끄럽게 동작해야 한다.
-4. **애니메이션 체류 4초 룰** — 내용이 많으면 세부 sequence를 분할한다.
-5. **HERO 룰** — `TEXT_SIZE.HERO`는 {Section}당 1회, 단어 1~2개 한정.
-6. **ACCENT 룰** — 같은 Seq에서 2번 이상 등장하면 임팩트가 사라진다.
-7. **레이아웃·트랜지션 자유** — 위 토큰 안에서 구도, 배치, 시퀀스는 창의적으로 결정한다.
+3. **애니메이션 체류 4초 룰** — 내용이 많으면 세부 sequence를 분할한다.
+4. **HERO 룰** — `TEXT_SIZE.HERO`는 Section당 1회, 단어 1~2개 한정.
+5. **ACCENT 룰** — 같은 Seq에서 2번 이상 등장하면 임팩트가 사라진다.
+6. **레이아웃·트랜지션 자유** — 위 토큰 안에서 구도, 배치, 시퀀스는 창의적으로 결정한다.
+
+---
+
+## 10. NVIDIA-Specific Directing Notes
+
+> 이 채널 고유의 연출 지침 — NVIDIA 콘텐츠 영상 제작 시 필수 참고
+
+- **오프닝 씬**: `BG_VOID` 위에 HERO 사이즈 숫자(성능 수치) 또는 제품명을 `Glitch Flash` + `Slam In` 조합으로 등장시킨다. 첫 3초 안에 관객을 쥔다.
+- **성능 비교 차트**: Y축 상승 애니메이션은 반드시 `Counter Punch`로 마무리. 경쟁사 바(AMD/Intel)는 `COMPETITOR_*` 컬러로 명확히 구분하되 항상 NVIDIA보다 낮게 배치.
+- **제품 등장 씬**: `PRIMARY_GLOW`를 GPU 실루엣 아래에 깔아 부유감을 연출. `GLOW_LG`로 씬 전체를 NVIDIA 그린으로 물들인다.
+- **수치 강조**: 핵심 수치(예: "2×", "192GB", "4,000W")는 반드시 `FONTS.MONO` + `TEXT_SIZE.XXL` + `COLORS.PRIMARY`. 그 다음 프레임에 `Scale Punch`.
+- **클라이맥스 전환**: `ACCENT(#FF4400)` Glitch Flash 1~2프레임 → 즉각 Smash Cut → 임팩트 수치 등장. 영상 전체에서 이 패턴은 최대 2회.
+- **엔딩 카드**: `BG_DEEP` 위 채널 로고 + 다음 영상 썸네일을 `BORDER_STRONG` 카드 안에 배치. `GLOW_SM`으로 마무리.
