@@ -82,11 +82,11 @@ export const Seq1: React.FC = () => {
 
 대신, `Sequence` 컴포넌트의 `from` 속성에 **타임스탬프 기반 절대 프레임 값**을 직접 지정하여 오디오와 정밀하게 동기화하세요.
 
-**프레임 계산 공식:**
+**프레임 산출 공식 (오차 방지):**
 
 ```
-fromFrame = Math.round(startMs / 1000 * fps)
-durationInFrames = Math.round((endMs - startMs) / 1000 * fps)
+from = Math.round(startMs / 1000 * fps)
+durationInFrames = (다음 시퀀스의 from) - (현재 시퀀스의 from)
 ```
 
 **구현 예시:**
@@ -114,39 +114,31 @@ export const Intro: React.FC = () => {
 };
 ```
 
-##### 타이밍 산출 절차
+##### 타이밍 산출 절차 (1프레임 틈새 방지)
 
-1. `{section}_context.md`의 타임스탬프 테이블에서 각 시퀀스에 매핑되는 `startMs`와 `endMs`를 확인합니다.
-2. 하나의 시퀀스가 여러 타임스탬프를 포함하는 경우, **첫 번째 타임스탬프의 startMs**와 **마지막 타임스탬프의 endMs**를 사용합니다.
-3. 타임스탬프 사이에 묵음 Gap이 있으면(예: #6 endMs=24980, #7 startMs=26220 → 1240ms 공백), 해당 Gap 구간은 **이전 시퀀스의 durationInFrames에 포함시켜 화면이 유지**되도록 합니다. 즉, 이전 시퀀스의 실제 duration은 `다음 시퀀스의 startMs - 현재 시퀀스의 startMs`로 계산합니다.
-4. **마지막 시퀀스의 durationInFrames**는 `섹션 총 프레임 수 - 마지막 시퀀스의 from`으로 계산하여 섹션 끝까지 빈틈없이 채웁니다. 이를 누락하면 섹션 전환 시 검은 화면(공백)이 발생합니다.
+1. `{section}_context.md`의 타임스탬프 테이블에서 각 시퀀스에 매핑되는 첫 번째 `startMs`만 확인합니다. (Whisper의 `endMs`는 오차를 다수 포함하므로 사용을 지양합니다.)
+2. 공식에 따라 시퀀스들의 절대 시작 위치(`from`)를 모두 구합니다.
+3. 시퀀스와 시퀀스 사이에 묵음 등 Gap이 존재하더라도, 영상이 끊기는 것을 막기 위해 각 시퀀스의 `durationInFrames`는 무조건 **`(다음 시퀀스의 from) - (현재 시퀀스의 from)`** 으로 산출합니다.
+4. **마지막 시퀀스의 durationInFrames**는 `(해당 섹션의 총 프레임 수) - (마지막 시퀀스의 from)`으로 계산하여 컷 전환 시 검은 공백이 발생하지 않도록 합니다.
 
-##### 자막 싱크
+##### 자막 처리 가이드
 
-- 자막(`{section}_subtitles.ts`)의 `startFrame`/`endFrame` 값도 위와 동일하게 **타임스탬프 기반 절대 프레임 값**으로 산출합니다.
-- 자막의 `startFrame`과 해당 시퀀스의 `from` 값이 반드시 일치해야 합니다.
+- **원본 대본 100% 준수**: Whisper 타임스탬프에서 추출된 텍스트(환각 오류 방지)는 무시하고, 필수적으로 기획서(`{section}_plan.md`)의 원본 대본을 요약/생략 없이 그대로 사용하세요.
+- **절대 프레임 싱크**: 타임스탬프 타이밍을 기준으로 파일(`{section}_subtitles.ts`)에 자막 배열(`Subtitle[]`)을 하드코딩합니다. 자막의 `startFrame`/`endFrame`은 절대 프레임 값이며, 해당 시퀀스의 `from` 값과 **반드시 일치**해야 합니다.
+- **렌더링 및 스타일**: `src/projects/{project_id}/components/CaptionOverlay.tsx` 공용 컴포넌트에 배열을 주입하여 렌더링하며, 강제 줄바꿈(`\n`)이 잘 반영되도록 `whiteSpace: 'pre-line'`을 적용합니다.
 
-##### 자막 처리 방식
+### 3. 필수 준수 규칙 (프로젝트 고유 제약사항)
 
-- **[중요]** Whisper가 생성한 Timestamp JSON의 텍스트는 환각이 섞여 있어 신뢰할 수 없으므로, 기획서(`{section}_plan.md`)의 원본 대본을 기준으로 작업합니다.
-  - **데이터 분리**: 개발자가 자막 시점과 텍스트를 고치기 편하도록, 각 섹션 폴더에 `{section}_subtitles.ts` 파일을 만들어 자막 배열(Subtitle[])을 하드코딩하세요. 이때 **대본을 절대로 요약하지 말고 기획서의 원본 대본을 100% 그대로** 옮겨야 합니다.
-  - **공용 컴포넌트**: `src/projects/{project_id}/components/CaptionOverlay.tsx`에 자막 렌더링 로직을 분리하고, 각 섹션 루트에서는 이 컴포넌트에 배열만 주입하여 사용합니다.
-  - **스타일**: 기획서의 강제 줄바꿈(`\n`)이 반영되도록 `whiteSpace: 'pre-line'`을 적용하세요.
+> 💡 Remotion 기초 문법(`interpolate`, `spring`, `staticFile`, `extrapolate: 'clamp'` 등)은 반복 명시하지 않으며 `remotion-best-practices` 스킬을 따릅니다. 워크플로우 실행 시 다음의 프로젝트 핵심 원칙을 우선 준수합니다.
 
-### 3. 필수 준수 규칙 (중요)
-
-- **에셋 참조:** 오디오/이미지 등은 반드시 `staticFile()` 함수로 래핑하여 사용하세요. (예: `staticFile('{project_id}/{section}/{section}.wav')`)
-- **다채로운 레이아웃과 CSS 기법 (중요):** 뻔한 중앙 정렬(Center align)과 단순 페이드 인을 남발하지 마세요. 매 씬마다 기획서를 바탕으로 **단순하지 않은 창의적인 구도**를 구현해야 합니다.
+- **오디오 스코프 격리 (중요):** 절대 개별 시퀀스 파일(`seq{N}.tsx`) 내부에 `<Audio>` 컴포넌트를 배치하거나 렌더링하지 마세요. 오디오는 오직 최상위 `{section}.tsx` 컴포넌트에서만 단일 재생되며, 개별 시퀀스는 화면 요소만 시점에 맞게 렌더링해 오디오 드리프트를 방지합니다.
+- **다채로운 레이아웃과 CSS 기법 (의무):** 뻔한 중앙 정렬(Center align)과 단순 페이드 인을 남발하는 것을 금지합니다. 매 씬마다 기획서를 바탕으로 **단순하지 않은 창의적인 구도**를 구현해야 합니다.
   - 다양한 화면 분할(Flexbox, Grid), 비대칭 배치, 대각선 구도를 적극 활용하세요.
-  - 3D 효과(`perspective`, `rotateX`, `rotateY`), 클리핑 마스크(`clipPath`), SVG 패스 애니메이션, 엇박자 타이밍(Staggered timing) 등 **고급 CSS/Remotion 기법**을 최소 하나 이상 적용하여 역동성을 부여하세요.
-- **타이밍:** durationInFrames 계산이 필요할 경우 `Math.ceil((endMs - startMs) / 1000 * 프로젝트FPS)` 규칙을 따릅니다.
-- **애니메이션:** 시간 기반 계산은 `useCurrentFrame()`과 `interpolate()`를 이용하며 튀어오르는 효과는 `spring({ frame, fps, config: { damping: 200 } })` 를 사용합니다.
-- **보간(Interpolate) 안전 장치:** `interpolate()` 함수 사용 시, 예상치 못한 음수값이나 시작 전 움직임을 방지하기 위해 반드시 `{ extrapolateLeft: 'clamp', extrapolateRight: 'clamp' }` 옵션을 모두 부여하세요.
-- **오디오 스코프:** 절대 개별 시퀀스 파일(`seq{N}.tsx`)에 `Audio`를 임포트 하지 않습니다. 오디오는 `{section}.tsx`가 단독으로 재생하며 시퀀스는 화면만 전환되게 해 자동 싱크가 맞게 합니다.
+  - 3D 효과(`perspective`), 클리핑 마스크(`clipPath`), SVG 패스 애니메이션, 엇박자 타이밍 등 **고급 CSS/Remotion 기법**을 최소 하나 이상 적용하여 역동성을 부여하세요.
+- **디자인 시스템 및 색상 활용:** `design-system.md`에 명시된 기본 색상을 우선적으로 준수하되, 영상의 **전체적인 톤앤매너(무드)**를 해치지 않는 범위 내에서는 텍스트 강조, 타이포그래피 모션, 그라데이션 등을 위해 팔레트 외의 다채로운 색상을 자유롭게 활용하세요. 단조로운 색상 배합보다는 시각적 풍부함을 우선시합니다.
 - **언어 및 텍스트 (현지화):**
-  - 화면에 노출되는 UI 텍스트는 고유명사나 특정 약어를 제외하고는 대본과 같은 언어(예: 한국어)로 작성하세요.
-  - 렌더링되는 자막(Subtitle)은 기획서의 원본 대본과 오차 없이 100% 일치해야 합니다. 마음대로 요약하거나 생략하지 마세요.
-  - 자막이 길 경우(약 30자 이상), 가독성을 위해 의미가 자연스럽게 나뉘는 곳에서 `\n`과 `whiteSpace: 'pre-line'` 속성을 이용해 **반드시 두 줄로 분할**하세요.
+  - 화면에 노출되는 UI 텍스트는 고유명사나 영어 약어를 제외하고 대본과 동일한 언어(예: 한국어)로 작성하세요.
+  - 하단 자막(Subtitle)은 원본 대본과 100% 일치해야 합니다. 30자 이상으로 길 경우 가독성을 고려해 의미 단위로 `\n`과 `whiteSpace: 'pre-line'`을 적용해 **반드시 두 줄로 분할** 처리하세요.
 
 ### 4. 린트 (결함 점검)
 
