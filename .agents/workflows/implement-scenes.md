@@ -41,7 +41,38 @@ description: 기획서를 바탕으로 Remotion 씬을 순차적으로 구현하
 - 이후 `public/{project_id}/{section}/{section}_context.md` 를 읽어 원본 대본과 타임스탬프 타이밍을 더블체크합니다.
 - `public/{project_id}/design-system.md`가 존재하면 읽고, 구현 시 브랜드 규약(색상 톤, 폰트, 하단 자막 규격, 캐릭터 등)을 반영합니다.
 
-#### 2-2. 시퀀스 파일 생성
+#### 2-2. 자막 배열 생성
+
+**매우 중요한 부분이므로 집중하세요**
+
+- 정확한 타임스탬프 타이밍을 기준으로 파일(`{section}_subtitles.ts`)에 자막 배열(`Subtitle[]`)을 하드코딩합니다. 자막의 `startFrame`/`endFrame`은 절대 프레임 값이며, 음성파일과 정확히 일치해야합니다.
+- **원본 대본 100% 준수**: Whisper 타임스탬프에서 추출된 텍스트(환각 오류 방지)는 무시하고, 필수적으로 기획서(`{section}_plan.md`)의 원본 대본을 요약/생략 없이 그대로 사용하세요.
+
+```typescript
+
+export interface Subtitle {
+  text: string;
+  startMs: number;
+  endMs: number;
+}
+
+export const introSubtitles: Subtitle[] = [
+  {
+    startMs: 0,
+    endMs: 2260,
+    text: {원본과 완전히 동일한 텍스트를 입력하세요},
+  },
+  {
+    startMs: 2260,
+    endMs: 4520,
+    text: "문장이 30자 이상으로 길다면 가독성을 고려해 의미 단위로\n줄바꿈 문자를 추가해 2줄로 표시되도록 하세요",
+  },
+
+  // ... 이하 동일 구조
+];
+```
+
+#### 2-3. 시퀀스 파일 생성
 
 기획서의 각 시퀀스(Seq)에 대응하는 `seq{N}.tsx` 파일을 생성합니다.
 (배치 경로: `src/projects/{project_id}/{section}/seq{N}.tsx`)
@@ -70,19 +101,18 @@ export const Seq1: React.FC = () => {
 };
 ```
 
-#### 2-3. 섹션 루트 컴포넌트 업데이트
+#### 2-4. 섹션 루트 컴포넌트 업데이트
 
 최상위 섹션 루트 파일인 `src/projects/{project_id}/{section}/{section}.tsx`를 수정합니다.
 
 - 작성했던 모든 시퀀스를 `Series` 객체로 합성합니다.
 - **Audio 컴포넌트는 섹션 루트에서 한 번만** 배치합니다.
 - 단일 `Series.Sequence`의 `durationInFrames` 수치를 기획서에 명시된 기간으로 맞춰 설정합니다.
-- [중요] 프레임 패딩: 오디오 파일에는 마지막 대사 이후 묵음 여백(Tail)이 존재하므로, 내부 시퀀스 합계가 마스터 할당 프레임보다 부족할 수 있습니다. 모든 시퀀스를 배치한 뒤 합계를 계산하고, 부족분은 마지막 시퀀스의 durationInFrames에 추가하여 마스터 할당 프레임과 정확히 일치시키세요. 이를 누락하면 섹션 전환 시 검은 화면(공백)이 발생합니다.
+- [중요] 프레임 패딩: 오디오 파일에는 마지막 대사 이후 묵음 여백(Tail)이 존재하므로, 다음 seq의 startFrame과 이전 seq의 endFrame 사이에 공백이 있다면 이전 seq의 durationInFrames에 추가하여 마스터 할당 프레임과 정확히 일치시키세요. 이를 누락하면 자막이 공백 시간만큼 뒤로 밀려나게 됩니다.
 
 ##### 자막 처리 가이드
 
-- **원본 대본 100% 준수**: Whisper 타임스탬프에서 추출된 텍스트(환각 오류 방지)는 무시하고, 필수적으로 기획서(`{section}_plan.md`)의 원본 대본을 요약/생략 없이 그대로 사용하세요.
-- **렌더링 및 스타일**: `src/projects/{project_id}/components/CaptionOverlay.tsx` 공용 컴포넌트에 배열을 주입하여 렌더링하며, 강제 줄바꿈(`\n`)이 잘 반영되도록 `whiteSpace: 'pre-line'`을 적용합니다.
+- 섹션 루트 컴포넌트 하단에 `src/shared-components/CaptionOverlay.tsx`를 임포트하여 `{section}_subtitles` 자막 배열을 주입하여 렌더링하며, 강제 줄바꿈(`\n`)이 잘 반영되도록 `whiteSpace: 'pre-line'`을 적용합니다.
 
 ### 3. 필수 준수 규칙 (프로젝트 고유 제약사항)
 
@@ -95,7 +125,6 @@ export const Seq1: React.FC = () => {
 - **디자인 시스템 및 색상 활용:** `design-system.md`에 명시된 기본 색상을 우선적으로 준수하되, 영상의 **전체적인 톤앤매너(무드)**를 해치지 않는 범위 내에서는 텍스트 강조, 타이포그래피 모션, 그라데이션 등을 위해 팔레트 외의 다채로운 색상을 자유롭게 활용하세요. 단조로운 색상 배합보다는 시각적 풍부함을 우선시합니다.
 - **언어 및 텍스트 (현지화):**
   - 화면에 노출되는 UI 텍스트는 고유명사나 영어 약어를 제외하고 대본과 동일한 언어(예: 한국어)로 작성하세요.
-  - 하단 자막(Subtitle)은 원본 대본과 100% 일치해야 합니다. 30자 이상으로 길 경우 가독성을 고려해 의미 단위로 `\n`과 `whiteSpace: 'pre-line'`을 적용해 **반드시 두 줄로 분할** 처리하세요.
 
 ### 4. 린트 (결함 점검)
 
