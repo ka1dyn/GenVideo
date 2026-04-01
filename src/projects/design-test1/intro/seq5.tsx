@@ -1,57 +1,107 @@
 import React from 'react';
-import { AbsoluteFill, useCurrentFrame, useVideoConfig, interpolate, spring } from 'remotion';
+import { AbsoluteFill, interpolate, useCurrentFrame, useVideoConfig } from 'remotion';
+import { Subtitle } from '../components/Subtitle';
+import { CinematicLayout } from '../components/CinematicLayout';
+
+const THEME = {
+  Primary: '#F59E0B', // Gold
+  Accent: '#0D9488', // Teal
+  Text: '#F8FAFC',
+};
 
 export const Seq5: React.FC = () => {
   const frame = useCurrentFrame();
-  const { fps } = useVideoConfig();
+  const { width, height } = useVideoConfig();
 
-  // 중앙에서 뻗어나가는 라인 모션 (아키텍처 스케치 느낌)
-  const drawProgress = spring({
-    frame,
-    fps,
-    config: { damping: 100 },
-  });
+  // 1. Continuous Drift
+  const scale = interpolate(frame, [0, 458], [1.2, 1.0], { extrapolateRight: 'clamp' });
+  const cameraZ = interpolate(frame, [0, 458], [0, -100]);
 
-  const scale = interpolate(frame, [0, 100], [0.95, 1.05], {
-    extrapolateRight: 'clamp',
+  // 2. Glowing Cursor Animation
+  const cursorOpacity = interpolate(frame % 30, [0, 15, 30], [0.1, 1, 0.1]);
+  const dialogueOpacity = interpolate(frame, [20, 60, 400, 458], [0, 1, 1, 0], { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' });
+
+  // 3. Bokeh Particles (Out of focus circles)
+  const bokehNodes = Array.from({ length: 12 }).map((_, i) => {
+    const startX = (i * 247) % width;
+    const startY = (i * 531) % height;
+    const bScale = interpolate(frame, [0, 458], [1, 2], { extrapolateRight: 'clamp' });
+    const bOpacity = interpolate(frame, [0, 100, 400, 458], [0, 0.2, 0.2, 0]);
+    
+    return (
+      <div
+        key={i}
+        style={{
+          position: 'absolute',
+          left: startX,
+          top: startY,
+          width: 200,
+          height: 200,
+          background: i % 2 === 0 ? THEME.Primary : THEME.Accent,
+          borderRadius: '50%',
+          filter: 'blur(80px)',
+          opacity: bOpacity,
+          transform: `scale(${bScale})`,
+        }}
+      />
+    );
   });
 
   return (
-    <AbsoluteFill style={{ backgroundColor: '#000000', justifyContent: 'center', alignItems: 'center', overflow: 'hidden' }}>
-      {/* Background Grid Lines rendering logic (simulated with SVG) */}
-      <svg width="100%" height="100%" style={{ position: 'absolute', opacity: 0.3 }}>
-        <pattern id="grid" width="100" height="100" patternUnits="userSpaceOnUse">
-          <path d="M 100 0 L 0 0 0 100" fill="none" stroke="#333336" strokeWidth="2" />
-        </pattern>
-        <rect width="100%" height="100%" fill="url(#grid)" />
-        
-        {/* Draw a giant connection line to signify Architecture */}
-        <path
-          d="M 500,500 L 1000,200 L 1500,800"
-          stroke="#0071E3"
-          strokeWidth="6"
-          fill="none"
-          strokeDasharray="2000"
-          strokeDashoffset={interpolate(drawProgress, [0, 1], [2000, 0])}
-        />
-      </svg>
-
-      <div
+    <CinematicLayout>
+      <AbsoluteFill
         style={{
-          transform: `scale(${scale})`,
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          gap: '20px',
+          transform: `scale(${scale}) translateZ(${cameraZ}px)`,
+          opacity: dialogueOpacity,
         }}
       >
-        <div style={{ color: '#FFFFFF', fontSize: '90px', fontWeight: 900, fontFamily: 'Inter, sans-serif' }}>
-          ARCHITECTURE
-        </div>
-        <div style={{ color: '#86868B', fontSize: '70px', fontWeight: 300, fontFamily: 'Inter, sans-serif' }}>
-          & OPTIMIZE
-        </div>
-      </div>
-    </AbsoluteFill>
+        {/* Background Bokeh */}
+        {bokehNodes}
+
+        {/* Central Dialog Title */}
+        <AbsoluteFill style={{ justifyContent: 'center', alignItems: 'center' }}>
+          <div
+            style={{
+              fontSize: 60,
+              fontWeight: 300,
+              color: THEME.Text,
+              letterSpacing: '0.8em',
+              textAlign: 'center',
+              textShadow: `0 0 40px rgba(0,0,0,1)`,
+            }}
+          >
+            FUTURE OF CODING IS
+          </div>
+          <div
+            style={{
+              fontSize: 120,
+              fontWeight: 900,
+              color: THEME.Primary,
+              letterSpacing: '0.2em',
+              textAlign: 'center',
+              textShadow: `0 0 50px rgba(245, 158, 11, 0.4)`,
+              marginTop: 20,
+            }}
+          >
+            DIALOGUE
+          </div>
+
+          {/* Glowing Cursor */}
+          <div
+            style={{
+              marginTop: 60,
+              width: 100,
+              height: 4,
+              backgroundColor: THEME.Primary,
+              opacity: cursorOpacity,
+              boxShadow: `0 0 20px ${THEME.Primary}`,
+            }}
+          />
+        </AbsoluteFill>
+      </AbsoluteFill>
+
+      {/* Subtitles */}
+      <Subtitle text="우리는 더 빠르게 실패하고, 더 빨리 혁신할 수 있게 되었습니다.\n미래의 코딩은 타이핑이 아니라 대화가 될 것입니다." />
+    </CinematicLayout>
   );
 };

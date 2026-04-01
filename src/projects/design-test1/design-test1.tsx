@@ -11,13 +11,13 @@ export const DesignTest1: React.FC = () => {
       <Series.Sequence durationInFrames={1990} name="Intro">
         <Intro />
       </Series.Sequence>
-      <Series.Sequence durationInFrames={2014} name="Body1">
+      <Series.Sequence durationInFrames={1368} name="Body1">
         <Body1 />
       </Series.Sequence>
-      <Series.Sequence durationInFrames={1978} name="Body2">
+      <Series.Sequence durationInFrames={1368} name="Body2">
         <Body2 />
       </Series.Sequence>
-      <Series.Sequence durationInFrames={2024} name="Outro">
+      <Series.Sequence durationInFrames={1998} name="Outro">
         <Outro />
       </Series.Sequence>
     </Series>

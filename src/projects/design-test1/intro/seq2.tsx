@@ -1,62 +1,133 @@
 import React from 'react';
-import { AbsoluteFill, useCurrentFrame, useVideoConfig, interpolate, spring } from 'remotion';
+import { AbsoluteFill, interpolate, useCurrentFrame, useVideoConfig } from 'remotion';
+import { Subtitle } from '../components/Subtitle';
+import { CinematicLayout } from '../components/CinematicLayout';
+
+const THEME = {
+  Primary: '#F59E0B', // Gold
+  Accent: '#0D9488', // Teal
+  Text: '#F8FAFC',
+};
 
 export const Seq2: React.FC = () => {
   const frame = useCurrentFrame();
-  const { fps } = useVideoConfig();
+  useVideoConfig();
 
-  // 대각선 트랜지션 로직: 0~30프레임에서 블랙 배경(과거)에서 화이트로 전환
-  const maskProgress = spring({
-    frame,
-    fps,
-    config: { damping: 100, stiffness: 100 },
-  });
+  // 1. Continuous Drift
+  const scale = interpolate(frame, [0, 426], [1.08, 1.0], { extrapolateRight: 'clamp' });
+  const cameraRotate = interpolate(frame, [0, 426], [1, -1]);
 
-  // 자간 모션 (AI PAIR PROGRAMMER)
-  const letterSpacing = interpolate(frame, [30, 250], [20, -2], {
-    extrapolateLeft: 'clamp',
-    extrapolateRight: 'clamp',
-  });
+  // 2. Split Screen Animation
+  const splitOpacity = interpolate(frame, [0, 20], [0, 1], { extrapolateRight: 'clamp' });
 
-  const opacityOut = interpolate(frame, [230, 256], [1, 0], {
-    extrapolateLeft: 'clamp',
-    extrapolateRight: 'clamp',
-  });
+  // 3. Scanline Animation
+  const scanLineY = interpolate(frame % 100, [0, 100], [-100, 1180]);
 
   return (
-    <AbsoluteFill style={{ overflow: 'hidden', opacity: opacityOut }}>
-      {/* 바닥 베이스 (블랙) */}
-      <AbsoluteFill style={{ backgroundColor: '#000000', justifyContent: 'center', alignItems: 'center' }}>
-        <div style={{ color: '#333336', fontSize: '100px', fontWeight: 700, fontFamily: 'monospace' }}>
-          MANUAL BUILD
-        </div>
-      </AbsoluteFill>
-
-      {/* 덮어씌워지는 화이트 영역 (대각선 마스킹) */}
+    <CinematicLayout>
       <AbsoluteFill
         style={{
-          backgroundColor: '#FFFFFF',
-          justifyContent: 'center',
-          alignItems: 'center',
-          clipPath: `polygon(0 0, ${maskProgress * 150}% 0, ${maskProgress * 150 - 50}% 100%, 0 100%)`,
+          transform: `scale(${scale}) rotate(${cameraRotate}deg)`,
+          opacity: splitOpacity,
         }}
       >
+        {/* Left Side: Design (Conceptual) */}
         <div
           style={{
-            color: '#0071E3',
-            fontSize: '110px',
-            fontWeight: 900,
-            fontFamily: 'Inter, Pretendard, sans-serif',
-            letterSpacing: `${letterSpacing}px`,
-            textAlign: 'center',
-            lineHeight: 1.1,
+            position: 'absolute',
+            left: 0,
+            top: 0,
+            width: '50%',
+            height: '100%',
+            borderRight: `2px solid ${THEME.Accent}`,
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            backgroundColor: 'rgba(13, 148, 136, 0.05)',
           }}
         >
-          AI PAIR
-          <br />
-          <span style={{ color: '#000000' }}>PROGRAMMER</span>
+          <div style={{ textAlign: 'center' }}>
+            <div style={{ color: THEME.Text, opacity: 0.5, fontSize: 30, letterSpacing: '0.4em' }}>DESIGN</div>
+            <div style={{ 
+              fontSize: 80, 
+              color: THEME.Accent, 
+              fontWeight: 800, 
+              marginTop: 20,
+              filter: `blur(${interpolate(frame, [0, 100], [10, 0])}px)`,
+            }}>
+              SKETCH
+            </div>
+            {/* Conceptual UI lines */}
+            <div style={{ width: 200, height: 4, backgroundColor: THEME.Accent, marginTop: 40, opacity: 0.3 }} />
+            <div style={{ width: 150, height: 4, backgroundColor: THEME.Accent, marginTop: 10, opacity: 0.2 }} />
+          </div>
         </div>
+
+        {/* Right Side: Development */}
+        <div
+          style={{
+            position: 'absolute',
+            right: 0,
+            top: 0,
+            width: '50%',
+            height: '100%',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            backgroundColor: 'rgba(2, 6, 23, 0.5)',
+          }}
+        >
+          <div style={{ textAlign: 'center' }}>
+            <div style={{ color: THEME.Text, opacity: 0.5, fontSize: 30, letterSpacing: '0.4em' }}>DEVELOPMENT</div>
+            <div style={{ fontSize: 80, color: THEME.Primary, fontWeight: 800, marginTop: 20 }}>
+              CODE
+            </div>
+            {/* Conceptual Code lines */}
+            <div style={{ 
+              width: 250, 
+              height: 2, 
+              backgroundColor: THEME.Primary, 
+              marginTop: 40, 
+              opacity: interpolate(frame % 20, [0, 10, 20], [0.1, 0.8, 0.1]) 
+            }} />
+            <div style={{ width: 180, height: 2, backgroundColor: THEME.Primary, marginTop: 15, opacity: 0.3 }} />
+          </div>
+        </div>
+
+        {/* Scanline Overlay */}
+        <div
+          style={{
+            position: 'absolute',
+            top: scanLineY,
+            left: 0,
+            right: 0,
+            height: 4,
+            background: `linear-gradient(to right, transparent, ${THEME.Accent}, transparent)`,
+            opacity: 0.4,
+            boxShadow: `0 0 20px ${THEME.Accent}`,
+          }}
+        />
+
+        {/* Center Text: Bottleneck Dissolving */}
+        <AbsoluteFill style={{ justifyContent: 'center', alignItems: 'center' }}>
+          <div
+            style={{
+              fontSize: 60,
+              fontWeight: 900,
+              color: THEME.Text,
+              letterSpacing: '0.8em',
+              textShadow: '0 0 30px rgba(0,0,0,1)',
+              opacity: interpolate(frame, [100, 150, 300, 350], [0, 1, 1, 0], { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' }),
+              transform: `translateY(${interpolate(frame, [100, 350], [20, -20])}px)`,
+            }}
+          >
+            BOTTLE NECK
+          </div>
+        </AbsoluteFill>
       </AbsoluteFill>
-    </AbsoluteFill>
+
+      {/* Subtitles */}
+      <Subtitle text="이제는 AI가 우리의 가장 든든한 페어 프로그래머가 되었습니다.\n디자인에서 개발로 넘어가는 과정의 병목현상도 눈에 띄게 사라졌습니다." />
+    </CinematicLayout>
   );
 };

@@ -74,57 +74,14 @@ export const Seq1: React.FC = () => {
 
 최상위 섹션 루트 파일인 `src/projects/{project_id}/{section}/{section}.tsx`를 수정합니다.
 
+- 작성했던 모든 시퀀스를 `Series` 객체로 합성합니다.
 - **Audio 컴포넌트는 섹션 루트에서 한 번만** 배치합니다.
-
-##### ⚠️ 절대 좌표 배치 (Series 사용 금지)
-
-> **`Series`를 사용하면 안 됩니다.** `Series`는 시퀀스를 빈틈없이 연이어 붙이기 때문에, 타임스탬프 사이에 묵음(Silent Gap)이 존재할 경우 뒤로 갈수록 영상이 음성보다 점점 빨라지는 **누적 싱크 드리프트**가 발생합니다.
-
-대신, `Sequence` 컴포넌트의 `from` 속성에 **타임스탬프 기반 절대 프레임 값**을 직접 지정하여 오디오와 정밀하게 동기화하세요.
-
-**프레임 산출 공식 (오차 방지):**
-
-```
-from = Math.round(startMs / 1000 * fps)
-durationInFrames = (다음 시퀀스의 from) - (현재 시퀀스의 from)
-```
-
-**구현 예시:**
-
-```tsx
-import { AbsoluteFill, Audio, Sequence, staticFile } from "remotion";
-
-export const Intro: React.FC = () => {
-  return (
-    <AbsoluteFill>
-      <Audio src={staticFile("{project_id}/{section}/{section}.wav")} />
-
-      {/* ✅ 각 시퀀스에 절대 from 값을 지정 — 타임스탬프 startMs 기반 */}
-      <Sequence from={0} durationInFrames={68} name="Seq1">
-        <Seq1 />
-      </Sequence>
-      <Sequence from={68} durationInFrames={256} name="Seq2">
-        <Seq2 />
-      </Sequence>
-      {/* ... 이하 동일 패턴 */}
-
-      <CaptionOverlay subtitles={subtitles} />
-    </AbsoluteFill>
-  );
-};
-```
-
-##### 타이밍 산출 절차 (1프레임 틈새 방지)
-
-1. `{section}_context.md`의 타임스탬프 테이블에서 각 시퀀스에 매핑되는 첫 번째 `startMs`만 확인합니다. (Whisper의 `endMs`는 오차를 다수 포함하므로 사용을 지양합니다.)
-2. 공식에 따라 시퀀스들의 절대 시작 위치(`from`)를 모두 구합니다.
-3. 시퀀스와 시퀀스 사이에 묵음 등 Gap이 존재하더라도, 영상이 끊기는 것을 막기 위해 각 시퀀스의 `durationInFrames`는 무조건 **`(다음 시퀀스의 from) - (현재 시퀀스의 from)`** 으로 산출합니다.
-4. **마지막 시퀀스의 durationInFrames**는 `(해당 섹션의 총 프레임 수) - (마지막 시퀀스의 from)`으로 계산하여 컷 전환 시 검은 공백이 발생하지 않도록 합니다.
+- 단일 `Series.Sequence`의 `durationInFrames` 수치를 기획서에 명시된 기간으로 맞춰 설정합니다.
+- **매우 중요**: 만약 Seq간에 묵음으로 인해 endFrame이 다음 시퀀스의 startFrame과 일치하지 않는다면, 앞 시퀀스의 durationInFrames를 늘려서 묵음 구간을 포함하도록 합니다.
 
 ##### 자막 처리 가이드
 
 - **원본 대본 100% 준수**: Whisper 타임스탬프에서 추출된 텍스트(환각 오류 방지)는 무시하고, 필수적으로 기획서(`{section}_plan.md`)의 원본 대본을 요약/생략 없이 그대로 사용하세요.
-- **절대 프레임 싱크**: 타임스탬프 타이밍을 기준으로 파일(`{section}_subtitles.ts`)에 자막 배열(`Subtitle[]`)을 하드코딩합니다. 자막의 `startFrame`/`endFrame`은 절대 프레임 값이며, 해당 시퀀스의 `from` 값과 **반드시 일치**해야 합니다.
 - **렌더링 및 스타일**: `src/projects/{project_id}/components/CaptionOverlay.tsx` 공용 컴포넌트에 배열을 주입하여 렌더링하며, 강제 줄바꿈(`\n`)이 잘 반영되도록 `whiteSpace: 'pre-line'`을 적용합니다.
 
 ### 3. 필수 준수 규칙 (프로젝트 고유 제약사항)

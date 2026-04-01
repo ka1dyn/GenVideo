@@ -5,53 +5,36 @@ import { Seq2 } from './seq2';
 import { Seq3 } from './seq3';
 import { Seq4 } from './seq4';
 import { Seq5 } from './seq5';
-import { Seq6 } from './seq6';
-import { Seq7 } from './seq7';
-import { Seq8 } from './seq8';
-import { Seq9 } from './seq9';
-import { Seq10 } from './seq10';
-import { CaptionOverlay } from '../components/CaptionOverlay';
-import { introSubtitles } from './intro_subtitles';
 
+/**
+ * Section: intro
+ * Audio Duration: 66320ms (1990 frames @30fps)
+ */
 export const Intro: React.FC = () => {
   return (
-    <AbsoluteFill style={{ backgroundColor: '#000000' }}>
+    <AbsoluteFill style={{ backgroundColor: '#020617' }}>
+      {/* Audio Layer - Individual section TTS */}
       <Audio src={staticFile('design-test1/intro/intro.wav')} />
-      
+
+      {/* Cinematic Sequences */}
       <Series>
-        <Series.Sequence durationInFrames={68}>
+        <Series.Sequence durationInFrames={323}>
           <Seq1 />
         </Series.Sequence>
-        <Series.Sequence durationInFrames={256}>
+        <Series.Sequence durationInFrames={426}>
           <Seq2 />
         </Series.Sequence>
-        <Series.Sequence durationInFrames={179}>
+        <Series.Sequence durationInFrames={370}>
           <Seq3 />
         </Series.Sequence>
-        <Series.Sequence durationInFrames={248}>
+        <Series.Sequence durationInFrames={374}>
           <Seq4 />
         </Series.Sequence>
-        <Series.Sequence durationInFrames={174}>
+        <Series.Sequence durationInFrames={497}> 
+          {/* Note: Adjusting last duration to match total frames (1990) exactly */}
           <Seq5 />
         </Series.Sequence>
-        <Series.Sequence durationInFrames={197}>
-          <Seq6 />
-        </Series.Sequence>
-        <Series.Sequence durationInFrames={240}>
-          <Seq7 />
-        </Series.Sequence>
-        <Series.Sequence durationInFrames={135}>
-          <Seq8 />
-        </Series.Sequence>
-        <Series.Sequence durationInFrames={83}>
-          <Seq9 />
-        </Series.Sequence>
-        <Series.Sequence durationInFrames={410}>
-          <Seq10 />
-        </Series.Sequence>
       </Series>
-      
-      <CaptionOverlay subtitles={introSubtitles} />
     </AbsoluteFill>
   );
 };
