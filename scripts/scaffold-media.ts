@@ -8,7 +8,7 @@ import {
 } from "@remotion/install-whisper-cpp";
 import { Section, SectionMeta, TimestampEntry } from "./scaffold-types";
 
-const FPS = 30;
+import { VIDEO_FPS as FPS } from "../src/constants/video-config";
 
 function getAudioDurationMs(wavPath: string): number {
   try {

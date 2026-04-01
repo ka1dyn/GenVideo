@@ -4,7 +4,7 @@ import { Section, SectionMeta } from "./scaffold-types";
 import { processMediaForSections } from "./scaffold-media";
 import { generateComponents } from "./scaffold-components";
 
-const FPS = 30;
+import { VIDEO_FPS as FPS } from "../src/constants/video-config";
 
 function generateContextFile(projectId: string, meta: SectionMeta) {
   const publicDir = path.join(

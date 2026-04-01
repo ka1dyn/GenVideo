@@ -2,7 +2,7 @@ import fs from "fs";
 import path from "path";
 import { SectionMeta } from "./scaffold-types";
 
-const FPS = 30;
+import { VIDEO_FPS as FPS } from "../src/constants/video-config";
 
 function capitalize(s: string) {
   if (!s) return "";
@@ -112,7 +112,7 @@ function updateRootTsx(
     );
   }
 
-  const compositionComponent = `      <Composition\n        id="${projectId}"\n        component={${componentName}}\n        durationInFrames={${totalDuration}}\n        fps={30}\n        width={1920}\n        height={1080}\n      />\n`;
+  const compositionComponent = `      <Composition\n        id="${projectId}"\n        component={${componentName}}\n        durationInFrames={${totalDuration}}\n        fps={VIDEO_FPS}\n        width={VIDEO_WIDTH}\n        height={VIDEO_HEIGHT}\n      />\n`;
 
   if (content.includes('<Folder name="Projects">')) {
     const parts = content.split('<Folder name="Projects">');
