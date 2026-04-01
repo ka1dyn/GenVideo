@@ -148,5 +148,4 @@ export const Z = {
 
 구현 AI는 아래 규칙을 코드 생성 전에 반드시 숙지한다.
 
-1. **색상 통합 관리** — Phase 3단계에서 구현 전, 이 문서의 모든 색상(Constants) 블록들을 모아 `src/projects/{project_id}/colors.ts` 파일로 생성하여 통합 저장하고, 각 컴포넌트에서는 이를 `import`하여 사용한다.
-2. **CSS 금지** — `@keyframes`, `transition`, `animation` 속성 일절 사용 불가.
+1. **CSS 금지** — `@keyframes`, `transition`, `animation` 속성 일절 사용 불가.
