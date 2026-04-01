@@ -2,19 +2,45 @@
 
 ## 섹션 개요
 
-- 총 길이: {duration}ms ({frames} frames @30fps)
+- 총 길이: {duration}ms ({frames} frames)
 - 원본 대본 문장 수: N
 - 시퀀스 수: M
+
+## 자막 구성
+
+- 각 seq별로 자막을 구성할 때, 원본 대본을 기반으로 자막을 구성한다.
+- seq에 포함된 자막 길이가 길다면, 최소 타임프레임 단위로 나눠서 타이밍을 분할한다.
+- [중요] 이전 seq의 endMs와 다음 seq의 startMs가 다르다면, 이전 seq의 endMs를 다음 seq의 startMs로 설정하고 프레임을 재계산한다. 또한 마지막 seq의 endMs는 섹션의 전체 '총 길이(duration)'와 일치시켜 영상 끝부분의 묵음 여백(Tail)까지 포함시킨다. 만약 seq 사이나 끝에 공백 프레임이 생기면 시각 시퀀스와 오디오/자막 재생 시점이 어긋나게 됩니다.
+
+**반드시 계획에 표기해야 할 사항**
+자막 타임라인 구성은 다음과 같으며, 모든 영상, 자막 타이밍은 이 내용을 기반으로 한다.
+
+```
+Seq 1: {startMs}ms ~ {endMs}ms ({frames} frames) <--- 새로 계산된 값
+    - **타이밍 근거**: 타임스탬프 #X ~ #Y 구간 기반 추정 (startMs ~ endMs)
+    - 자막 1:
+        원본 텍스트: {추출된 실제 타겟 기준 원본 문장}
+        타임스탬프: {startMs}ms ~ {endMs}ms ({frames} frames) <--- 이 부분은 오디오 타임스탬프를 기반으로 계산된 값과 일치해야함
+    - 자막 2:
+        원본 텍스트: ...
+        타임스탬프: ...
+    ...
+Seq 2: {startMs}ms ~ {endMs}ms ({frames} frames)
+    - 자막 1:
+        원본 텍스트: ...
+
+    ...
+```
+
+seq1의 endMs와 seq2의 startMs의 정합성을 검토하고, frame 수가 잘 맞는지 확인합니다.
 
 ## 시퀀스 구성
 
 **핵심 가치**
 시청자가 지루하지 않도록 영상에 다채로움, 리듬감, 재미를 부여하세요.
 
-### Seq 1: seq1.tsx ({startMs}ms ~ {endMs}ms, {frames} frames)
+### Seq 1: seq1.tsx ({startMs}ms ~ {endMs}ms, {frames} frames) <-- 상단에서 작성한 구조와 타이밍이 일치해야함.
 
-- **원본 대본**: "추출된 실제 타겟 기준 원본 문장"
-- **타이밍 근거**: 타임스탬프 #X ~ #Y 구간 기반 추정 (startMs ~ endMs)
 - **비주얼 컨셉 기획**:
   - 어떤 그래픽을 사용해서 묘사할 지
   - 어떤 텍스트를 배치하고, 어떤 색상, 폰트를 사용할 지
