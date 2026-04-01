@@ -1,120 +1,82 @@
-import React from 'react';
-import { AbsoluteFill, interpolate, useCurrentFrame, useVideoConfig } from 'remotion';
-import { Subtitle } from '../components/Subtitle';
-import { CinematicLayout } from '../components/CinematicLayout';
-
-const THEME = {
-  Primary: '#F59E0B', // Gold
-  Accent: '#0D9488', // Teal
-  Text: '#F8FAFC',
-};
+import React from "react";
+import { AbsoluteFill, Sequence, useCurrentFrame, useVideoConfig, spring, interpolate } from "remotion";
+import { COLORS, FONTS, TEXT_SIZE, Z, SPRINGS, STAGGER } from "../theme";
 
 export const Seq4: React.FC = () => {
   const frame = useCurrentFrame();
-  const { width, height } = useVideoConfig();
+  const { fps } = useVideoConfig();
 
-  // 1. Continuous Drift
-  const scale = interpolate(frame, [0, 374], [1.0, 1.2], { extrapolateRight: 'clamp' });
-  const cameraX = interpolate(frame, [0, 374], [0, 50]);
-
-  // 2. Collaborative Network Visuals
-  const nodes = Array.from({ length: 8 }).map((_, i) => {
-    const angle = (i / 8) * Math.PI * 2 + frame / 150;
-    const x = width / 2 + Math.cos(angle) * 300;
-    const y = height / 2 + Math.sin(angle) * 300;
-    
-    return (
-      <div
-        key={i}
-        style={{
-          position: 'absolute',
-          left: x,
-          top: y,
-          width: 20,
-          height: 20,
-          background: THEME.Accent,
-          borderRadius: '50%',
-          boxShadow: `0 0 15px ${THEME.Accent}`,
-          opacity: 0.6,
-        }}
-      />
-    );
-  });
-
-  // 3. Central Title Animation
-  const agileOpacity = interpolate(frame, [20, 50, 320, 374], [0, 1, 1, 0], { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' });
-  const agileY = interpolate(frame, [20, 374], [20, -20]);
-
-  // 4. Highlight Phrases
-  const failOpacity = interpolate(frame, [100, 130, 200, 230], [0, 1, 1, 0], { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' });
-  const innovateOpacity = interpolate(frame, [230, 260, 330, 360], [0, 1, 1, 0], { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' });
+  // SubSeq 1 (0 ~ 479 frames): 팀 네트워크(Floating panels)
+  
+  
+  // SubSeq 2 (479 ~ 749 frames): "빠른 실패, 빠른 혁신" 
+  const sub2Frame = Math.max(0, frame - 479);
+  const words = ["빠른 실패,", "빠른 혁신"];
+  const wordAnims = words.map((_, i) =>
+    spring({
+      frame: Math.max(0, sub2Frame - i * STAGGER.NORMAL),
+      fps,
+      config: SPRINGS.PUNCH,
+    })
+  );
 
   return (
-    <CinematicLayout>
-      <AbsoluteFill
-        style={{
-          transform: `scale(${scale}) translateX(${cameraX}px)`,
-          opacity: agileOpacity,
-        }}
-      >
-        {/* Network Circles */}
-        {nodes}
-
-        {/* Central Title */}
-        <AbsoluteFill style={{ justifyContent: 'center', alignItems: 'center' }}>
-          <div
-            style={{
-              fontSize: 70,
-              fontWeight: 900,
-              color: THEME.Text,
-              letterSpacing: '1.2em',
-              textAlign: 'center',
-              textShadow: `0 0 40px rgba(0,0,0,1)`,
-              transform: `translateY(${agileY}px)`,
-            }}
-          >
-            AGILE<br />
-            REVOLUTION
+    <AbsoluteFill style={{ backgroundColor: COLORS.BG_DEEP, zIndex: Z.BG, perspective: 1200 }}>
+      
+      {/* SubSeq 1 */}
+      <Sequence durationInFrames={479}>
+        <AbsoluteFill style={{ justifyContent: "center", alignItems: "center" }}>
+          
+          <div style={{ position: "relative", width: "800px", height: "600px", transformStyle: "preserve-3d", transform: `rotateX(45deg) rotateZ(30deg) translateZ(${interpolate(frame, [0, 479], [0, 800])}px)` }}>
+            {/* 연결된 다중 플로팅 노드들 */}
+            {[0, 1, 2, 3].map((idx) => {
+              const panelOp = interpolate(frame, [0, 30], [0, 1]);
+              const pX = idx % 2 === 0 ? "10%" : "70%";
+              const pY = idx < 2 ? "10%" : "70%";
+              return (
+                <div key={idx} style={{
+                  position: "absolute",
+                  left: pX, top: pY,
+                  width: "150px", height: "150px",
+                  backgroundColor: COLORS.BG_ELEVATED,
+                  opacity: panelOp,
+                  border: `2px solid ${COLORS.PRIMARY_DIM}`,
+                  boxShadow: `0 0 48px ${COLORS.PRIMARY_GLOW}`,
+                  transform: `translateY(${Math.sin((frame * Math.PI) / 60 + idx) * 20}px)`,
+                  display: "flex", justifyContent: "center", alignItems: "center",
+                }}>
+                  <div style={{ width: "40%", height: "40%", backgroundColor: COLORS.PRIMARY, borderRadius: "50%", boxShadow: `0 0 24px ${COLORS.PRIMARY}` }} />
+                </div>
+              );
+            })}
           </div>
 
-          {/* Fail Fast Highlight */}
-          <div
-            style={{
-              marginTop: 60,
-              fontSize: 36,
-              color: THEME.Primary,
-              fontWeight: 800,
-              letterSpacing: '0.5em',
-              opacity: failOpacity,
-              background: 'rgba(245, 158, 11, 0.1)',
-              padding: '10px 40px',
-              border: `2px solid ${THEME.Primary}`,
-            }}
-          >
-            FAIL FAST
-          </div>
+        </AbsoluteFill>
+      </Sequence>
 
-          {/* Innovate Faster Highlight */}
-          <div
-            style={{
-              marginTop: 20,
-              fontSize: 36,
-              color: THEME.Accent,
-              fontWeight: 800,
-              letterSpacing: '0.4em',
-              opacity: innovateOpacity,
-              background: 'rgba(13, 148, 136, 0.1)',
-              padding: '10px 30px',
-              border: `2px solid ${THEME.Accent}`,
-            }}
-          >
-            INNOVATE FASTER
+      {/* SubSeq 2 */}
+      <Sequence from={479} durationInFrames={270}>
+        <AbsoluteFill style={{ justifyContent: "center", alignItems: "center", backgroundColor: COLORS.BG_VOID }}>
+          <div style={{ 
+            display: "flex", flexDirection: "column", gap: "24px", 
+            textAlign: "center"
+          }}>
+            {words.map((word, i) => (
+              <h2 key={i} style={{
+                fontFamily: FONTS.DISPLAY,
+                fontSize: TEXT_SIZE.XL,
+                color: i === 0 ? COLORS.TEXT_MAIN : COLORS.PRIMARY,
+                margin: 0,
+                textShadow: i === 1 ? `0 0 64px ${COLORS.PRIMARY_GLOW}` : "none",
+                transform: `scale(${wordAnims[i]})`
+              }}>
+                {word}
+              </h2>
+            ))}
           </div>
         </AbsoluteFill>
-      </AbsoluteFill>
+      </Sequence>
 
-      {/* Subtitles */}
-      <Subtitle text="마치 수십 년 경력의 시니어 개발자가 항상 내 옆에 앉아 코드를 리뷰해 주는 것과 같죠.\n이러한 변화는 팀 전체의 애자일한 협업 방식을 근본적으로 재정의하고 있습니다." />
-    </CinematicLayout>
+    </AbsoluteFill>
   );
 };

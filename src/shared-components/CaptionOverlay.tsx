@@ -44,6 +44,7 @@ export const CaptionOverlay: React.FC<Props> = ({ captions }) => {
   return (
     <AbsoluteFill
       style={{
+        zIndex: 9999,
         justifyContent: 'flex-end',
         alignItems: 'center',
         paddingBottom: '110px', // Roughly 10% from bottom

@@ -49,12 +49,7 @@ description: 기획서를 바탕으로 Remotion 씬을 순차적으로 구현하
 - **원본 대본 100% 준수**: Whisper 타임스탬프에서 추출된 텍스트(환각 오류 방지)는 무시하고, 필수적으로 기획서(`{section}_plan.md`)의 원본 대본을 요약/생략 없이 그대로 사용하세요.
 
 ```typescript
-
-export interface Subtitle {
-  text: string;
-  startMs: number;
-  endMs: number;
-}
+import { Subtitle } from "../../../types/subtitle";
 
 export const introSubtitles: Subtitle[] = [
   {

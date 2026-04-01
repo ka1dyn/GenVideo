@@ -8,16 +8,16 @@ import { Outro } from './outro/outro';
 export const DesignTest1: React.FC = () => {
   return (
     <Series>
-      <Series.Sequence durationInFrames={1990} name="Intro">
+      <Series.Sequence durationInFrames={3980} name="Intro">
         <Intro />
       </Series.Sequence>
-      <Series.Sequence durationInFrames={1368} name="Body1">
+      <Series.Sequence durationInFrames={4028} name="Body1">
         <Body1 />
       </Series.Sequence>
-      <Series.Sequence durationInFrames={1368} name="Body2">
+      <Series.Sequence durationInFrames={3956} name="Body2">
         <Body2 />
       </Series.Sequence>
-      <Series.Sequence durationInFrames={1998} name="Outro">
+      <Series.Sequence durationInFrames={4047} name="Outro">
         <Outro />
       </Series.Sequence>
     </Series>

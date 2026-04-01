@@ -1,90 +1,110 @@
-import React from 'react';
-import { AbsoluteFill, interpolate, useCurrentFrame, useVideoConfig } from 'remotion';
-import { Subtitle } from '../components/Subtitle';
-import { CinematicLayout } from '../components/CinematicLayout';
-
-const THEME = {
-  Primary: '#F59E0B', // Gold
-  Accent: '#0D9488', // Teal
-  Text: '#F8FAFC',
-};
+import React from "react";
+import { AbsoluteFill, Sequence, useCurrentFrame, useVideoConfig, spring, interpolate } from "remotion";
+import { COLORS, FONTS, TEXT_SIZE, Z, SPRINGS, EASINGS } from "../theme";
 
 export const Seq1: React.FC = () => {
   const frame = useCurrentFrame();
-  useVideoConfig();
+  const { fps } = useVideoConfig();
 
-  // 1. Continuous Drift - Slow Ken Burns
-  const cameraRotateY = interpolate(frame, [0, 435], [-5, 5]);
-  const cameraZ = interpolate(frame, [0, 435], [1.1, 1.2]);
+  // SubSeq 1 (0 ~ 299 frames): 연도 카운트업
+  const speedCount = Math.floor(interpolate(frame, [0, 200], [2022, 2026]));
+  const textScale = spring({
+    frame,
+    fps,
+    config: SPRINGS.PUNCH,
+  });
 
-  // 2. Step Animation
-  const stepOpacity = interpolate(frame, [0, 20, 415, 435], [0, 1, 1, 0]);
+  // SubSeq 2 (299 ~ 685 frames): 미래 도구 상징 박스
+  const sub2Frame = Math.max(0, frame - 299);
+  const cubeScale = spring({
+    frame: sub2Frame,
+    fps,
+    config: SPRINGS.SNAPPY,
+  });
+  const cubeRotate = interpolate(sub2Frame, [0, 386], [0, 360]);
+
+  // SubSeq 3 (685 ~ 1075 frames): 어둠 침식 (일자리 대체 우려)
+  const sub3Frame = Math.max(0, frame - 685);
+  const shadowY = interpolate(sub3Frame, [0, 100], [100, 50], { extrapolateRight: "clamp", easing: EASINGS.CINEMATIC });
+
+  const glitchError = frame % 6 < 3 ? COLORS.NEGATIVE : COLORS.TEXT_MAIN;
+
+  // 전체 암전 Smash Cut
+  const smashCutDrop = interpolate(frame, [1055, 1075], [1, 0]);
 
   return (
-    <CinematicLayout>
-      <AbsoluteFill
-        style={{
-          transform: `perspective(1000px) rotateY(${cameraRotateY}deg) scale(${cameraZ})`,
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-        }}
-      >
-        {/* Step Title Overlay */}
-        <div
-          style={{
-            position: 'absolute',
-            top: '20%',
-            fontSize: 60,
-            fontWeight: 800,
-            color: THEME.Text,
-            letterSpacing: '0.8em',
-            opacity: 0.15,
-          }}
-        >
-          DEVELOPMENT FLOW
-        </div>
+    <AbsoluteFill style={{ backgroundColor: COLORS.BG_VOID, zIndex: Z.BG, overflow: "hidden", opacity: smashCutDrop }}>
+      
+      {/* 상승하는 빛의 궤적 애니메이션 */}
+      <div style={{
+        position: "absolute",
+        left: "-50%", right: "-50%", bottom: "0", height: "800px",
+        background: `radial-gradient(ellipse at bottom, ${COLORS.PRIMARY_DIM} 0%, transparent 70%)`,
+        opacity: interpolate(frame, [0, 100], [0, 1]),
+        transform: `translateY(${Math.sin((frame * Math.PI) / 120) * 50}px)`
+      }} />
 
-        {/* 3 Steps Visualization */}
-        <div
-          style={{
-            display: 'flex',
-            gap: 100,
-            alignItems: 'center',
-            opacity: stepOpacity,
-          }}
-        >
-          {/* Step 1: Architecture */}
-          <div style={{ textAlign: 'center' }}>
-             <div style={{ fontSize: 24, fontWeight: 800, color: THEME.Accent, marginBottom: 10 }}>ARCHITECTURE</div>
-             <div style={{ width: 150, height: 150, border: `2px solid ${THEME.Accent}`, background: 'rgba(13, 148, 136, 0.1)', flexShrink: 0 }} />
+      {/* SubSeq 1: 연도 타이머 */}
+      <Sequence durationInFrames={299}>
+        <AbsoluteFill style={{ justifyContent: "center", alignItems: "center" }}>
+          <div style={{
+            fontFamily: FONTS.MONO, fontSize: TEXT_SIZE.HERO,
+            color: frame > 250 ? COLORS.ACCENT : COLORS.TEXT_MAIN, // 250프레임 넘어가면 오렌지 섬광
+            transform: `scale(${interpolate(textScale, [0, 1], [0.8, 1])})`,
+            textShadow: frame > 250 ? `0 0 64px ${COLORS.ACCENT}` : `0 0 24px ${COLORS.PRIMARY_GLOW}`
+          }}>
+            {speedCount}
           </div>
-          {/* Connector */}
-          <div style={{ width: 50, height: 2, background: THEME.Accent }} />
-          {/* Step 2: AI Draft */}
-          <div style={{ textAlign: 'center' }}>
-             <div style={{ fontSize: 24, fontWeight: 900, color: THEME.Primary, marginBottom: 10 }}>AI DRAFT</div>
-             <div style={{ 
-               width: 200, 
-               height: 200, 
-               border: `4px solid ${THEME.Primary}`, 
-               background: 'rgba(245, 158, 11, 0.1)',
-               boxShadow: `0 0 40px rgba(245, 158, 11, 0.2)`,
-               transform: `scale(${interpolate(frame % 50, [0, 25, 50], [1, 1.05, 1])})`,
-             }} />
-          </div>
-          {/* Connector */}
-          <div style={{ width: 50, height: 2, background: THEME.Accent }} />
-          {/* Step 3: Refactor */}
-          <div style={{ textAlign: 'center' }}>
-             <div style={{ fontSize: 24, fontWeight: 800, color: THEME.Accent, marginBottom: 10 }}>REFACTOR</div>
-             <div style={{ width: 150, height: 150, border: `2px solid ${THEME.Accent}`, background: 'rgba(13, 148, 136, 0.1)' }} />
-          </div>
-        </div>
-      </AbsoluteFill>
+        </AbsoluteFill>
+      </Sequence>
 
-      {/* Subtitles */}
-      <Subtitle text="AI 개발 워크플로우는 설계, 빠른 초안 작성,\n그리고 디테일한 리팩토링 및 최적화의 3단계로 진행됩니다." />
-    </CinematicLayout>
+      {/* SubSeq 2: 미지의 큐브 상자 가속 회전 */}
+      <Sequence from={299} durationInFrames={386}>
+        <AbsoluteFill style={{ justifyContent: "center", alignItems: "center" }}>
+          <div style={{
+            width: "300px", height: "300px",
+            border: `6px solid ${COLORS.PRIMARY}`,
+            boxShadow: `0 0 96px ${COLORS.PRIMARY_GLOW}`,
+            transform: `scale(${cubeScale}) rotateZ(${cubeRotate}deg)`,
+            display: "flex", justifyContent: "center", alignItems: "center"
+          }}>
+            <div style={{
+              width: "150px", height: "150px",
+              backgroundColor: COLORS.PRIMARY,
+              transform: `rotateZ(-${cubeRotate * 2}deg)` // 반대로 회전
+            }} />
+          </div>
+        </AbsoluteFill>
+      </Sequence>
+
+      {/* SubSeq 3: 검은 그림자의 침식과 인간 상징 실루엣 안절부절 */}
+      <Sequence from={685} durationInFrames={390}>
+        <AbsoluteFill style={{ justifyContent: "center", alignItems: "center" }}>
+          {/* 어둠이 밑에서 위로 차오름 */}
+          <div style={{
+            position: "absolute", bottom: 0, left: 0, right: 0, height: `${100 - shadowY}%`,
+            backgroundColor: COLORS.BG_DEEP, opacity: 0.9, zIndex: 2
+          }} />
+
+          {/* 중앙의 에러 점멸 아이콘 (안면 실루엣 느낌) */}
+          <div style={{
+            fontFamily: FONTS.MONO, fontSize: TEXT_SIZE.XXL,
+            color: sub3Frame > 200 ? glitchError : COLORS.TEXT_MAIN,
+            zIndex: 3,
+            transform: `scale(${spring({ frame: sub3Frame, fps, config: SPRINGS.PUNCH })})`
+          }}>
+            인간_개발자
+          </div>
+
+          <div style={{
+            position: "absolute", top: "20%", fontFamily: FONTS.DISPLAY, fontSize: TEXT_SIZE.LG,
+            color: COLORS.NEGATIVE, zIndex: 3, opacity: sub3Frame > 150 ? 1 : 0
+          }}>
+            경고: 대체 위험
+          </div>
+        </AbsoluteFill>
+      </Sequence>
+
+    </AbsoluteFill>
   );
 };

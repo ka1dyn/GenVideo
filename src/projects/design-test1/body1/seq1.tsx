@@ -1,100 +1,92 @@
-import React from 'react';
-import { AbsoluteFill, interpolate, useCurrentFrame, useVideoConfig } from 'remotion';
-import { Subtitle } from '../components/Subtitle';
-import { CinematicLayout } from '../components/CinematicLayout';
-
-const THEME = {
-  Primary: '#F59E0B', // Gold
-  Accent: '#0D9488', // Teal
-  Text: '#F8FAFC',
-};
+import React from "react";
+import { AbsoluteFill, useCurrentFrame, useVideoConfig, spring, interpolate } from "remotion";
+import { COLORS, FONTS, TEXT_SIZE, Z, SPRINGS, EASINGS } from "../theme";
 
 export const Seq1: React.FC = () => {
   const frame = useCurrentFrame();
-  const { width, height } = useVideoConfig();
+  const { fps } = useVideoConfig();
 
-  // 1. Continuous Drift - Fast Camera Flight
-  const cameraZ = interpolate(frame, [0, 373], [1, 2.5], { extrapolateRight: 'clamp' });
-  const cameraRotateY = interpolate(frame, [0, 373], [0, 15]);
-
-  // 2. 'REAL DATA' Sliding Title
-  const titleX = interpolate(frame, [0, 40], [-width, 0], { extrapolateRight: 'clamp' });
-  const titleOpacity = interpolate(frame, [0, 20, 350, 373], [0, 1, 1, 0]);
-
-  // 3. Grid Visualization
-  const gridCells = Array.from({ length: 40 }).map((_, i) => {
-    const x = (i * 150) % width;
-    const y = (i * 120) % height;
-    const gScale = interpolate(frame, [i * 5, i * 5 + 30], [0, 1], { extrapolateRight: 'clamp', extrapolateLeft: 'clamp' });
-    
-    return (
-      <div
-        key={i}
-        style={{
-          position: 'absolute',
-          left: x,
-          top: y,
-          width: 80,
-          height: 1,
-          backgroundColor: THEME.Accent,
-          opacity: 0.1 * gScale,
-          transform: `scaleX(${gScale})`,
-        }}
-      />
-    );
+  // SubSeq 1 (0 ~ 587 frames): 거대한 파티클 및 차트 윤곽선
+  const boxIn = spring({
+    frame,
+    fps,
+    config: SPRINGS.SNAPPY,
   });
 
+  const chartLineOp = interpolate(frame, [100, 150], [0, 1], { extrapolateRight: "clamp" });
+
+  // SubSeq 2 (587 ~ 1133 frames): 55% 카운트업과 바 차트 상승
+  const sub2Frame = Math.max(0, frame - 587);
+  
+  const percentValue = Math.floor(interpolate(sub2Frame, [0, 120], [0, 55], { extrapolateRight: "clamp", easing: EASINGS.DRAMATIC }));
+  const numberScale = spring({
+    frame: sub2Frame - 120,
+    fps,
+    config: SPRINGS.PUNCH,
+  });
+
+  const barHeight = spring({
+    frame: sub2Frame,
+    fps,
+    config: SPRINGS.PUNCH,
+    durationInFrames: 60,
+  });
+
+  // Smash Cut 전환(Z-축 스케일)을 위해 마지막 프레임에 확대
+  const zTransition = spring({
+    frame: Math.max(0, frame - 1100),
+    fps,
+    config: { damping: 10, stiffness: 50 },
+  });
+  const cameraZ = interpolate(zTransition, [0, 1], [1, 5]);
+
   return (
-    <CinematicLayout>
-      <AbsoluteFill
-        style={{
-          transform: `perspective(1200px) translateZ(${interpolate(frame, [0, 373], [0, 500])}px) rotateY(${cameraRotateY}deg)`,
-          opacity: titleOpacity,
-        }}
-      >
-        {/* Background Grid */}
-        <div style={{ position: 'absolute', width: '200%', height: '200%', top: '-50%', left: '-50%', transform: 'rotateX(70deg)' }}>
-          {gridCells}
-        </div>
+    <AbsoluteFill style={{ backgroundColor: COLORS.BG_DEEP, zIndex: Z.BG, overflow: "hidden" }}>
+      <div style={{ transform: `scale(${cameraZ})`, width: "100%", height: "100%", position: "absolute", display: "flex", justifyContent: "center", alignItems: "center" }}>
+        
+        {/* 전체 컨테이너 */}
+        <div style={{
+          width: "800px", height: "500px",
+          display: "flex", flexDirection: "column", justifyContent: "flex-end",
+          borderBottom: `4px solid ${COLORS.BORDER_STRONG}`,
+          borderLeft: `4px solid ${COLORS.BORDER_STRONG}`,
+          padding: "40px",
+          opacity: chartLineOp,
+          transform: `scale(${boxIn})`
+        }}>
+          
+          {/* 바 차트 렌더링 컨테이너 */}
+          <div style={{ position: "relative", width: "100%", height: "100%", display: "flex", alignItems: "flex-end", justifyContent: "center" }}>
+            
+            {/* 상승 바 */}
+            {frame >= 587 && (
+              <div style={{
+                width: "40%",
+                height: `${interpolate(barHeight, [0, 1], [0, 100])}%`,
+                background: `linear-gradient(to top, ${COLORS.PRIMARY_GLOW}, ${COLORS.POSITIVE})`,
+                boxShadow: `0 0 64px ${COLORS.PRIMARY_GLOW}`,
+                borderRadius: "12px 12px 0 0",
+              }} />
+            )}
+            
+            {/* 55 카운트업 (타격 연출 포함) */}
+            <div style={{
+              position: "absolute",
+              bottom: "40%",
+              fontFamily: FONTS.MONO,
+              fontSize: TEXT_SIZE.HERO,
+              color: percentValue === 55 ? COLORS.PRIMARY : COLORS.TEXT_MAIN,
+              transform: percentValue === 55 ? `scale(${interpolate(numberScale, [0, 1], [1.5, 1])})` : "none",
+              textShadow: percentValue === 55 ? `0 0 48px ${COLORS.PRIMARY_GLOW}` : "none",
+              zIndex: 2,
+            }}>
+              +{percentValue}%
+            </div>
 
-        {/* Sliding Title */}
-        <div
-          style={{
-            position: 'absolute',
-            top: '35%',
-            left: '10%',
-            transform: `translateX(${titleX}px)`,
-            display: 'flex',
-            flexDirection: 'column',
-          }}
-        >
-          <div
-            style={{
-              fontSize: 120,
-              fontWeight: 900,
-              color: THEME.Text,
-              letterSpacing: '0.4em',
-              textShadow: `0 0 20px ${THEME.Accent}`,
-            }}
-          >
-            REAL DATA
-          </div>
-          <div
-            style={{
-              fontSize: 30,
-              color: THEME.Accent,
-              letterSpacing: '1em',
-              marginTop: -10,
-              opacity: 0.6,
-            }}
-          >
-            GLOBAL RESEARCH
           </div>
         </div>
-      </AbsoluteFill>
 
-      {/* Subtitles */}
-      <Subtitle text="그렇다면 실제 현장에서는 어떤 변화가 일어나고 있을까요?\n막연한 기대감이 아닌, 실제 데이터를 바탕으로 AI 도입의 효과를 살펴보겠습니다." />
-    </CinematicLayout>
+      </div>
+    </AbsoluteFill>
   );
 };

@@ -1,7 +1,7 @@
 # Section Context: body1
 
 - **Project**: design-test1
-- **Audio Duration**: 67120ms (2014 frames @30fps)
+- **Audio Duration**: 67120ms (4028 frames @60fps)
 - **Assets**:
   - Audio: `design-test1/body1/body1.wav`
   - Script: `design-test1/body1/body1.txt`

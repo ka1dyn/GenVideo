@@ -1,107 +1,97 @@
-import React from 'react';
-import { AbsoluteFill, interpolate, useCurrentFrame, useVideoConfig } from 'remotion';
-import { Subtitle } from '../components/Subtitle';
-import { CinematicLayout } from '../components/CinematicLayout';
-
-const THEME = {
-  Primary: '#F59E0B', // Gold
-  Accent: '#0D9488', // Teal
-  Text: '#F8FAFC',
-};
+import React from "react";
+import { AbsoluteFill, Sequence, useCurrentFrame, useVideoConfig, spring, interpolate } from "remotion";
+import { COLORS, FONTS, TEXT_SIZE, Z, SPRINGS } from "../theme";
 
 export const Seq5: React.FC = () => {
   const frame = useCurrentFrame();
-  const { width, height } = useVideoConfig();
+  const { fps } = useVideoConfig();
 
-  // 1. Continuous Drift
-  const scale = interpolate(frame, [0, 458], [1.2, 1.0], { extrapolateRight: 'clamp' });
-  const cameraZ = interpolate(frame, [0, 458], [0, -100]);
+  // SubSeq 1 (0 ~ 385 frames): 타이핑 이펙트 -> 채팅 텍스트 슬램 인
+  const textToType = "미래의 코딩은 대화";
+  const charsToShow = Math.floor(interpolate(frame, [0, 60], [0, textToType.length], { extrapolateRight: "clamp" }));
+  const typedText = textToType.slice(0, charsToShow);
 
-  // 2. Glowing Cursor Animation
-  const cursorOpacity = interpolate(frame % 30, [0, 15, 30], [0.1, 1, 0.1]);
-  const dialogueOpacity = interpolate(frame, [20, 60, 400, 458], [0, 1, 1, 0], { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' });
-
-  // 3. Bokeh Particles (Out of focus circles)
-  const bokehNodes = Array.from({ length: 12 }).map((_, i) => {
-    const startX = (i * 247) % width;
-    const startY = (i * 531) % height;
-    const bScale = interpolate(frame, [0, 458], [1, 2], { extrapolateRight: 'clamp' });
-    const bOpacity = interpolate(frame, [0, 100, 400, 458], [0, 0.2, 0.2, 0]);
-    
-    return (
-      <div
-        key={i}
-        style={{
-          position: 'absolute',
-          left: startX,
-          top: startY,
-          width: 200,
-          height: 200,
-          background: i % 2 === 0 ? THEME.Primary : THEME.Accent,
-          borderRadius: '50%',
-          filter: 'blur(80px)',
-          opacity: bOpacity,
-          transform: `scale(${bScale})`,
-        }}
-      />
-    );
+  const chatSlam = spring({
+    frame: Math.max(0, frame - 180),
+    fps,
+    config: SPRINGS.PUNCH,
+    durationInFrames: 30,
   });
 
+  // SubSeq 2 (385 ~ 917 frames): AI 디렉터 문구 
+  const sub2Frame = Math.max(0, frame - 385);
+  const directorScale = spring({
+    frame: sub2Frame,
+    fps,
+    config: SPRINGS.PUNCH,
+  });
+
+  // 화면 암전/종료 페이드 아웃 효과
+  const finalFadeOut = interpolate(sub2Frame, [400, 532], [1, 0], { extrapolateRight: "clamp" });
+
   return (
-    <CinematicLayout>
-      <AbsoluteFill
-        style={{
-          transform: `scale(${scale}) translateZ(${cameraZ}px)`,
-          opacity: dialogueOpacity,
-        }}
-      >
-        {/* Background Bokeh */}
-        {bokehNodes}
-
-        {/* Central Dialog Title */}
-        <AbsoluteFill style={{ justifyContent: 'center', alignItems: 'center' }}>
-          <div
-            style={{
-              fontSize: 60,
-              fontWeight: 300,
-              color: THEME.Text,
-              letterSpacing: '0.8em',
-              textAlign: 'center',
-              textShadow: `0 0 40px rgba(0,0,0,1)`,
-            }}
-          >
-            FUTURE OF CODING IS
-          </div>
-          <div
-            style={{
-              fontSize: 120,
-              fontWeight: 900,
-              color: THEME.Primary,
-              letterSpacing: '0.2em',
-              textAlign: 'center',
-              textShadow: `0 0 50px rgba(245, 158, 11, 0.4)`,
-              marginTop: 20,
-            }}
-          >
-            DIALOGUE
+    <AbsoluteFill style={{ backgroundColor: COLORS.BG_VOID, zIndex: Z.BG }}>
+      
+      {/* SubSeq 1 */}
+      <Sequence durationInFrames={385}>
+        <AbsoluteFill style={{ justifyContent: "center", alignItems: "center" }}>
+          
+          {/* 타이핑 효과 */}
+          <div style={{
+            fontFamily: FONTS.MONO,
+            fontSize: TEXT_SIZE.MD,
+            color: COLORS.TEXT_MUTED,
+            opacity: interpolate(frame, [150, 180], [1, 0], { extrapolateRight: "clamp" }) // 채팅 등장 시 페이드 아웃
+          }}>
+            &gt; {typedText}_
           </div>
 
-          {/* Glowing Cursor */}
-          <div
-            style={{
-              marginTop: 60,
-              width: 100,
-              height: 4,
-              backgroundColor: THEME.Primary,
-              opacity: cursorOpacity,
-              boxShadow: `0 0 20px ${THEME.Primary}`,
-            }}
-          />
+          {/* 채팅 강렬한 슬램 인 */}
+          {frame >= 180 && (
+            <div style={{
+              position: "absolute",
+              fontFamily: FONTS.DISPLAY,
+              fontSize: TEXT_SIZE.HERO,
+              color: COLORS.PRIMARY,
+              transform: `scale(${interpolate(chatSlam, [0, 1], [3, 1])})`, // 3배에서 시작하여 터지듯 작아짐
+              opacity: interpolate(chatSlam, [0, 1], [0, 1]),
+              textShadow: `0 0 120px ${COLORS.PRIMARY_GLOW}`,
+            }}>
+              채팅
+            </div>
+          )}
         </AbsoluteFill>
-      </AbsoluteFill>
+      </Sequence>
 
-      {/* Subtitles */}
-      <Subtitle text="우리는 더 빠르게 실패하고, 더 빨리 혁신할 수 있게 되었습니다.\n미래의 코딩은 타이핑이 아니라 대화가 될 것입니다." />
-    </CinematicLayout>
+      {/* SubSeq 2 */}
+      <Sequence from={385} durationInFrames={532}>
+        <AbsoluteFill style={{ justifyContent: "center", alignItems: "center", opacity: finalFadeOut }}>
+          
+          {/* 등불/아우라 배경 */}
+          <div style={{
+            position: "absolute", width: "100%", height: "100%",
+            background: `radial-gradient(circle, ${COLORS.PRIMARY_GLOW} 0%, transparent 60%)`,
+            opacity: interpolate(sub2Frame, [0, 60], [0, 1])
+          }} />
+
+          {/* AI 디렉터 */}
+          <h2 style={{
+            fontFamily: FONTS.DISPLAY,
+            fontSize: TEXT_SIZE.XXL,
+            color: COLORS.TEXT_MAIN,
+            transform: `scale(${directorScale})`,
+            margin: 0,
+            textAlign: "center",
+            textShadow: `0 0 32px ${COLORS.PRIMARY_GLOW}`,
+            zIndex: 1
+          }}>
+            AI<br />
+            <span style={{ color: COLORS.SECONDARY }}>디렉터</span>
+          </h2>
+
+        </AbsoluteFill>
+      </Sequence>
+
+    </AbsoluteFill>
   );
 };

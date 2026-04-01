@@ -1,126 +1,98 @@
-import React from 'react';
-import { AbsoluteFill, interpolate, random, useCurrentFrame, useVideoConfig } from 'remotion';
-import { Subtitle } from '../components/Subtitle';
-import { CinematicLayout } from '../components/CinematicLayout';
-
-const THEME = {
-  Primary: '#F59E0B', // Gold
-  Accent: '#0D9488', // Teal
-  Text: '#F8FAFC',
-};
+import React from "react";
+import { AbsoluteFill, Sequence, useCurrentFrame, useVideoConfig, spring, interpolate } from "remotion";
+import { COLORS, FONTS, TEXT_SIZE, Z, SPRINGS, EASINGS } from "../theme";
 
 export const Seq2: React.FC = () => {
   const frame = useCurrentFrame();
-  useVideoConfig();
+  const { fps } = useVideoConfig();
 
-  // 1. Continuous Drift - Slow Ken Burns
-  const cameraZ = interpolate(frame, [0, 619], [1, 1.2]);
-  const cameraRotateY = interpolate(frame, [0, 619], [5, -5]);
-
-  // 2. Prompt Engineering Title
-  const promptOpacity = interpolate(frame, [20, 50, 569, 619], [0, 1, 1, 0]);
-
-  // 3. Code Generation Visuals
-  const codeLines = Array.from({ length: 10 }).map((_, i) => {
-    const lineX = interpolate(frame, [i * 10, i * 10 + 60], [-500, 0], { extrapolateRight: 'clamp', extrapolateLeft: 'clamp' });
-    const lineOpacity = interpolate(frame, [i * 10, i * 10 + 30], [0, 0.2], { extrapolateRight: 'clamp' });
-    
-    return (
-      <div
-        key={i}
-        style={{
-          position: 'absolute',
-          left: 100,
-          top: 100 + i * 40,
-          width: 400 + random(i) * 200,
-          height: 15,
-          background: THEME.Accent,
-          opacity: lineOpacity,
-          transform: `translateX(${lineX}px)`,
-        }}
-      />
-    );
+  // SubSeq 1 (0 ~ 626 frames): 확장 (확장) 빛줄기 및 결합
+  const introOp = interpolate(frame, [0, 30], [0, 1]);
+  
+  const textScale = spring({
+    frame: Math.max(0, frame - 30),
+    fps,
+    config: SPRINGS.PUNCH,
   });
 
+  const expandX = interpolate(frame, [100, 300], [0, 300], { extrapolateRight: "clamp", easing: EASINGS.CINEMATIC });
+
+  // SubSeq 2 (626 ~ 780 frames): 대비되는 색에서 하나로 융화
+  const sub2Frame = Math.max(0, frame - 626);
+  // 양 사이드가 중앙으로 결속됨
+  const converge = spring({
+    frame: sub2Frame,
+    fps,
+    config: SPRINGS.PUNCH,
+  });
+
+  // Cinematic Fade 전환
+  const fadeOut = interpolate(sub2Frame, [100, 154], [1, 0], { extrapolateRight: "clamp" });
+
   return (
-    <CinematicLayout>
-      <AbsoluteFill
-        style={{
-          transform: `perspective(1000px) rotateY(${cameraRotateY}deg) scale(${cameraZ})`,
-          opacity: promptOpacity,
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-        }}
-      >
-        {/* Prompt Engineering Title */}
-        <div
-          style={{
-            position: 'absolute',
-            top: '20%',
-            fontSize: 70,
-            fontWeight: 800,
-            color: THEME.Text,
-            letterSpacing: '0.6em',
-            textAlign: 'center',
-            textShadow: `0 0 40px rgba(0,0,0,1)`,
-          }}
-        >
-          PROMPT<br />
-          <span style={{ fontSize: 30, color: THEME.Primary, letterSpacing: '0.4em' }}>ENGINEERING</span>
-        </div>
+    <AbsoluteFill style={{ backgroundColor: COLORS.BG_DEEP, zIndex: Z.BG, opacity: fadeOut }}>
+      {/* 뿜어져 나오는 빛 효과 */}
+      <div style={{
+        position: "absolute", left: "50%", top: "50%",
+        width: "100%", height: "100%",
+        marginLeft: "-50%", marginTop: "-50%",
+        background: `radial-gradient(circle, ${COLORS.PRIMARY_GLOW} 0%, transparent 60%)`,
+        opacity: introOp,
+      }} />
 
-        {/* Code Block Container */}
-        <div
-          style={{
-            width: 800,
-            height: 400,
-            borderLeft: `4px solid ${THEME.Primary}`,
-            background: 'rgba(0,0,0,0.5)',
-            position: 'relative',
-            marginTop: '10%',
-            padding: '20px',
-            overflow: 'hidden',
-          }}
-        >
-           {/* 'TEST SUITE' Highlight */}
-           <div
-            style={{
-               position: 'absolute',
-               top: 20,
-               right: 20,
-               padding: '10px 30px',
-               border: `2px solid ${THEME.Primary}`,
-               color: THEME.Primary,
-               fontWeight: 900,
-               letterSpacing: '0.3em',
-               opacity: interpolate(frame, [150, 180], [0, 1], { extrapolateRight: 'clamp' }),
-               boxShadow: `0 0 20px ${THEME.Primary}`,
-            }}
-           >
-             PERFECT TEST SUITE
-           </div>
-           {/* Animated Code lines */}
-           {codeLines}
+      {/* SubSeq 1: 확장 확장 텍스트 중앙 -> 상단 */}
+      <Sequence durationInFrames={780}>
+        <div style={{
+          position: "absolute", width: "100%", top: "15%", textAlign: "center",
+          fontFamily: FONTS.DISPLAY, fontSize: TEXT_SIZE.XL, color: COLORS.PRIMARY,
+          letterSpacing: "8px", transform: `scale(${interpolate(textScale, [0, 1], [1.5, 1])})`,
+          opacity: introOp, textShadow: `0 0 32px ${COLORS.PRIMARY_GLOW}`
+        }}>
+          확장
         </div>
+      </Sequence>
 
-        {/* Cinematic Particles */}
-        <div
-          style={{
-            position: 'absolute',
-            bottom: '20%',
-            fontSize: 18,
-            color: THEME.Accent,
-            letterSpacing: '0.4em',
-            opacity: 0.4,
-          }}
-        >
-          CONSTRUCTING ARCHITECTURE...
+      {/* 실루엣 두 개의 확장 ও 결속 */}
+      <AbsoluteFill style={{ justifyContent: "center", alignItems: "center" }}>
+        <div style={{ position: "relative", width: "800px", display: "flex", justifyContent: "center", alignItems: "center" }}>
+          
+          {/* Human 아이콘 (좌) */}
+          <div style={{
+            position: "absolute",
+            width: "160px", height: "160px", borderRadius: "50%",
+            backgroundColor: frame < 626 ? COLORS.TEXT_MAIN : COLORS.PRIMARY,
+            transform: `translateX(-${expandX - (converge * expandX * 0.5)}px)`,
+            display: "flex", justifyContent: "center", alignItems: "center", zIndex: 2,
+            boxShadow: `0 0 24px ${frame < 626 ? "rgba(255,255,255,0.2)" : COLORS.PRIMARY_GLOW}`,
+            
+          }}>
+            <div style={{ fontFamily: FONTS.MONO, fontSize: TEXT_SIZE.SM, color: COLORS.BG_DEEP, fontWeight: "bold" }}>인간</div>
+          </div>
+
+          {/* 중앙 연결선 띠 */}
+          <div style={{
+            position: "absolute",
+            width: `${(expandX - (converge * expandX * 0.5)) * 2}px`,
+            height: "8px", backgroundColor: COLORS.PRIMARY,
+            opacity: interpolate(frame, [200, 250], [0, 1]), // 띠는 중반부터 등장
+            boxShadow: `0 0 16px ${COLORS.PRIMARY_GLOW}`
+          }} />
+
+          {/* AI 아이콘 (우) */}
+          <div style={{
+            position: "absolute",
+            width: "160px", height: "160px", borderRadius: "50%",
+            backgroundColor: COLORS.PRIMARY,
+            transform: `translateX(${expandX - (converge * expandX * 0.5)}px)`,
+            display: "flex", justifyContent: "center", alignItems: "center", zIndex: 2,
+            boxShadow: `0 0 48px ${COLORS.PRIMARY_GLOW}`
+          }}>
+             <div style={{ fontFamily: FONTS.MONO, fontSize: TEXT_SIZE.SM, color: COLORS.BG_DEEP, fontWeight: "bold" }}>AI</div>
+          </div>
+
         </div>
       </AbsoluteFill>
 
-      {/* Subtitles */}
-      <Subtitle text="단순 마크업을 넘어 복잡한 로직도 제약 조건을 명확히 제공하면\nAI가 원하는 형태의 코드를 오차 없이 생성해 냅니다." />
-    </CinematicLayout>
+    </AbsoluteFill>
   );
 };

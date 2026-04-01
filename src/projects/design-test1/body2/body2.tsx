@@ -1,29 +1,39 @@
-import React from 'react';
-import { AbsoluteFill, Audio, Series, staticFile } from 'remotion';
-import { Seq1 } from './seq1';
-import { Seq2 } from './seq2';
-import { Seq3 } from './seq3';
+import React from "react";
+import { AbsoluteFill, Series, Audio, staticFile } from "remotion";
+import { CaptionOverlay } from "../../../shared-components/CaptionOverlay";
+import { body2Subtitles } from "./body2_subtitles";
+import { COLORS } from "../theme";
 
-/**
- * Section: body2
- * Audio Duration: 45600ms (1368 frames @30fps)
- */
+import { Seq1 } from "./seq1";
+import { Seq2 } from "./seq2";
+import { Seq3 } from "./seq3";
+import { Seq4 } from "./seq4";
+import { Seq5 } from "./seq5";
+
 export const Body2: React.FC = () => {
   return (
-    <AbsoluteFill style={{ backgroundColor: '#020617' }}>
-      <Audio src={staticFile('design-test1/body2/body2.wav')} />
+    <AbsoluteFill style={{ backgroundColor: COLORS.BG_DEEP }}>
+      <Audio src={staticFile("design-test1/body2/body2.wav")} />
 
       <Series>
-        <Series.Sequence durationInFrames={436}>
+        <Series.Sequence durationInFrames={888}>
           <Seq1 />
         </Series.Sequence>
-        <Series.Sequence durationInFrames={430}>
+        <Series.Sequence durationInFrames={677}>
           <Seq2 />
         </Series.Sequence>
-        <Series.Sequence durationInFrames={502}>
+        <Series.Sequence durationInFrames={766}>
           <Seq3 />
         </Series.Sequence>
+        <Series.Sequence durationInFrames={820}>
+          <Seq4 />
+        </Series.Sequence>
+        <Series.Sequence durationInFrames={806}>
+          <Seq5 />
+        </Series.Sequence>
       </Series>
+
+      <CaptionOverlay captions={body2Subtitles} />
     </AbsoluteFill>
   );
 };

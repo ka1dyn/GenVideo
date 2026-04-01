@@ -1,95 +1,98 @@
-import React from 'react';
-import { AbsoluteFill, interpolate, spring, useCurrentFrame, useVideoConfig } from 'remotion';
-import { Subtitle } from '../components/Subtitle';
-import { CinematicLayout } from '../components/CinematicLayout';
-
-const THEME = {
-  Primary: '#F59E0B', // Gold
-  Accent: '#0D9488', // Teal
-  Text: '#F8FAFC',
-};
+import React from "react";
+import { AbsoluteFill, useCurrentFrame, useVideoConfig, spring, interpolate } from "remotion";
+import { COLORS, FONTS, TEXT_SIZE, Z, SPRINGS } from "../theme";
 
 export const Seq2: React.FC = () => {
   const frame = useCurrentFrame();
-  const { fps, width } = useVideoConfig();
+  const { fps } = useVideoConfig();
 
-  // 1. Continuous Drift - Slow Ken Burns
-  const cameraRotateY = interpolate(frame, [0, 430], [5, -5]);
-  const cameraZ = interpolate(frame, [0, 430], [1.1, 1.2]);
+  // 트리 뷰 단계 활성화 프레임
+  const step1Start = 0;
+  const step2Start = 196;
+  const step3Start = 436;
 
-  // 2. Laser Scanner Animation
-  const scannerX = interpolate(frame % 100, [0, 100], [-300, width + 300]);
-  
-  // 3. 90% Counter Animation
-  const countSpring = spring({ frame: frame - 40, fps, config: { damping: 12 } });
-  const count = interpolate(countSpring, [0, 1], [0, 90]);
+  // 각 단계별 모션
+  const step1Anim = spring({ frame: Math.max(0, frame - step1Start), fps, config: SPRINGS.SNAPPY });
+  const step2Anim = spring({ frame: Math.max(0, frame - step2Start), fps, config: SPRINGS.SNAPPY });
+  const step3Anim = spring({ frame: Math.max(0, frame - step3Start), fps, config: SPRINGS.SNAPPY });
+
+  // 마지막 Zoom In
+  const zoomIn = spring({
+    frame: Math.max(0, frame - 640),
+    fps,
+    config: { damping: 16, stiffness: 120 },
+  });
 
   return (
-    <CinematicLayout>
-      <AbsoluteFill
-        style={{
-          transform: `perspective(1000px) rotateY(${cameraRotateY}deg) scale(${cameraZ})`,
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-        }}
-      >
-        {/* Stability Title */}
-        <div
-          style={{
-            position: 'absolute',
-            top: '15%',
-            fontSize: 70,
-            fontWeight: 800,
-            color: THEME.Text,
-            letterSpacing: '0.6em',
-            textAlign: 'center',
-          }}
-        >
-          SERVICE<br />
-          <span style={{ fontSize: 30, color: THEME.Primary, letterSpacing: '0.4em' }}>STABILITY</span>
-        </div>
-
-        {/* Bug Scanning Visualization */}
-        <div style={{ position: 'relative', width: 800, height: 400, border: '1px solid rgba(255,255,255,0.05)', background: 'rgba(255,255,255,0.02)' }}>
-           {/* 'BUG' text being scanned */}
-           <div style={{ position: 'absolute', top: 50, left: 100, color: '#f00', fontSize: 20, opacity: scannerX > 100 ? 0 : 0.5 }}>[ERROR: NULL_POINTER]</div>
-           <div style={{ position: 'absolute', top: 150, left: 200, color: THEME.Accent, fontSize: 24, fontWeight: 800, opacity: scannerX > 200 ? 1 : 0 }}>FIXED: TYPE_SAFE_AUTO</div>
-           <div style={{ position: 'absolute', top: 250, left: 150, color: '#f00', fontSize: 20, opacity: scannerX > 150 ? 0 : 0.5 }}>[BUG: MEMORY_LEAK]</div>
-
-           {/* Laser Line */}
-           <div
-            style={{
-              position: 'absolute',
-              top: 0,
-              bottom: 0,
-              left: scannerX,
-              width: 2,
-              background: THEME.Accent,
-              boxShadow: `0 0 20px ${THEME.Accent}`,
-            }}
-           />
-        </div>
-
-        {/* Big 90% Stat */}
-        <div
-          style={{
-             marginTop: 50,
-             display: 'flex',
-             flexDirection: 'column',
-             alignItems: 'center',
-             opacity: interpolate(frame, [0, 20, 400, 430], [0, 1, 1, 0]),
-          }}
-        >
-          <div style={{ fontSize: 120, fontWeight: 900, color: THEME.Primary, textShadow: `0 0 30px rgba(245, 158, 11, 0.3)` }}>
-            {Math.floor(count)}%
+    <AbsoluteFill style={{ 
+      backgroundColor: COLORS.BG_DEEP, zIndex: Z.BG, 
+      display: "flex", justifyContent: "center", alignItems: "center",
+      transform: `scale(${interpolate(zoomIn, [0, 1], [1, 4])})` // 마지막 스매시 컷 줌 인
+    }}>
+      
+      <div style={{ display: "flex", flexDirection: "column", gap: "24px", width: "800px" }}>
+        
+        {/* Step 1: Architecture */}
+        <div style={{
+          display: "flex", alignItems: "center", gap: "32px",
+          padding: "24px", borderRadius: "12px",
+          backgroundColor: frame >= step1Start ? COLORS.BG_SURFACE : "transparent",
+          border: `2px solid ${frame >= step1Start ? COLORS.SECONDARY : COLORS.BORDER}`,
+          opacity: interpolate(step1Anim, [0, 1], [0.3, 1]),
+          transform: `translateX(${interpolate(step1Anim, [0, 1], [-100, 0])}px)`
+        }}>
+          <div style={{ width: "64px", height: "64px", borderRadius: "50%", backgroundColor: COLORS.SECONDARY, display: "flex", justifyContent: "center", alignItems: "center", fontFamily: FONTS.MONO, fontSize: TEXT_SIZE.MD, color: COLORS.BG_DEEP }}>
+            1
           </div>
-          <div style={{ color: THEME.Text, fontSize: 24, letterSpacing: '0.4em', opacity: 0.6 }}>ERROR REDUCTION</div>
+          <div style={{ flex: 1 }}>
+            <div style={{ fontFamily: FONTS.DISPLAY, fontSize: TEXT_SIZE.LG, color: COLORS.TEXT_MAIN }}>아키텍처</div>
+            <div style={{ height: "4px", width: "100%", backgroundColor: COLORS.BORDER, marginTop: "8px" }}>
+              <div style={{ height: "100%", width: "100%", backgroundColor: COLORS.SECONDARY, transformOrigin: "left", transform: `scaleX(${step1Anim})` }} />
+            </div>
+          </div>
         </div>
-      </AbsoluteFill>
 
-      {/* Subtitles */}
-      <Subtitle text="버그 발생률도 눈에 띄게 줄었습니다. 배포 전 오류의 90% 이상을 차단하여\n서비스 안정성을 크게 높여주고 있습니다." />
-    </CinematicLayout>
+        {/* Step 2: AI Draft */}
+        <div style={{
+          display: "flex", alignItems: "center", gap: "32px",
+          padding: "24px", borderRadius: "12px",
+          backgroundColor: frame >= step2Start ? COLORS.BG_SURFACE : "transparent",
+          border: `2px solid ${frame >= step2Start ? COLORS.PRIMARY : COLORS.BORDER}`,
+          opacity: interpolate(step2Anim, [0, 1], [0.3, 1]),
+          transform: `translateX(${interpolate(step2Anim, [0, 1], [-100, 0])}px)`
+        }}>
+          <div style={{ width: "64px", height: "64px", borderRadius: "50%", backgroundColor: COLORS.PRIMARY, display: "flex", justifyContent: "center", alignItems: "center", fontFamily: FONTS.MONO, fontSize: TEXT_SIZE.MD, color: COLORS.BG_DEEP, boxShadow: `0 0 24px ${COLORS.PRIMARY_GLOW}` }}>
+            2
+          </div>
+          <div style={{ flex: 1 }}>
+            <div style={{ fontFamily: FONTS.DISPLAY, fontSize: TEXT_SIZE.LG, color: COLORS.PRIMARY, textShadow: `0 0 16px ${COLORS.PRIMARY_GLOW}` }}>AI 초안</div>
+            <div style={{ height: "4px", width: "100%", backgroundColor: COLORS.BORDER, marginTop: "8px" }}>
+              <div style={{ height: "100%", width: "100%", backgroundColor: COLORS.PRIMARY, transformOrigin: "left", transform: `scaleX(${step2Anim})` }} />
+            </div>
+          </div>
+        </div>
+
+        {/* Step 3: Refactoring (마지막 타겟) */}
+        <div style={{
+          display: "flex", alignItems: "center", gap: "32px",
+          padding: "24px", borderRadius: "12px",
+          backgroundColor: frame >= step3Start ? COLORS.BG_ELEVATED : "transparent",
+          border: `2px solid ${frame >= step3Start ? COLORS.HIGHLIGHT : COLORS.BORDER}`,
+          opacity: interpolate(step3Anim, [0, 1], [0.3, 1]),
+          transform: `translateX(${interpolate(step3Anim, [0, 1], [-100, 0])}px)`
+        }}>
+          <div style={{ width: "64px", height: "64px", borderRadius: "50%", backgroundColor: COLORS.POSITIVE, display: "flex", justifyContent: "center", alignItems: "center", fontFamily: FONTS.MONO, fontSize: TEXT_SIZE.MD, color: COLORS.BG_DEEP }}>
+            3
+          </div>
+          <div style={{ flex: 1 }}>
+            <div style={{ fontFamily: FONTS.DISPLAY, fontSize: TEXT_SIZE.LG, color: COLORS.TEXT_MAIN }}>리팩토링</div>
+            <div style={{ height: "4px", width: "100%", backgroundColor: COLORS.BORDER, marginTop: "8px" }}>
+              <div style={{ height: "100%", width: "100%", backgroundColor: COLORS.POSITIVE, transformOrigin: "left", transform: `scaleX(${step3Anim})` }} />
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </AbsoluteFill>
   );
 };

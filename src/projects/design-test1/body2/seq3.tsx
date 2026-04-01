@@ -1,107 +1,105 @@
-import React from 'react';
-import { AbsoluteFill, interpolate, useCurrentFrame, useVideoConfig } from 'remotion';
-import { Subtitle } from '../components/Subtitle';
-import { CinematicLayout } from '../components/CinematicLayout';
-
-const THEME = {
-  Primary: '#F59E0B', // Gold
-  Accent: '#0D9488', // Teal
-  Text: '#F8FAFC',
-};
+import React from "react";
+import { AbsoluteFill, Sequence, useCurrentFrame, useVideoConfig, spring, interpolate } from "remotion";
+import { COLORS, FONTS, TEXT_SIZE, Z, SPRINGS, STAGGER } from "../theme";
 
 export const Seq3: React.FC = () => {
   const frame = useCurrentFrame();
-  useVideoConfig();
+  const { fps } = useVideoConfig();
 
-  // 1. Continuous Drift - Slow Ken Burns
-  const cameraZ = interpolate(frame, [0, 502], [1, 1.2]);
-  const cameraRotateX = interpolate(frame, [0, 502], [0, 10]);
+  // SubSeq 1 (0 ~ 233 frames): HTML 뼈대 -> 더 굳건한 컴포넌트
+  const htmlOut = interpolate(frame, [150, 200], [1, 0]);
+  
 
-  // 2. Step Animation
-  const step1Opacity = interpolate(frame, [20, 50, 450, 502], [0, 1, 1, 0]);
-  const step2Opacity = interpolate(frame, [60, 90, 450, 502], [0, 1, 1, 0]);
-  const step3Opacity = interpolate(frame, [100, 130, 450, 502], [0, 1, 1, 0]);
+  // SubSeq 2 (233 ~ 766 frames): 프롬프트 -> 다이어그램 확장
+  const sub2Frame = Math.max(0, frame - 233);
+  const promptText = "Create Next.js Component...";
+  const charsToShow = Math.floor(interpolate(sub2Frame, [0, 90], [0, promptText.length], { extrapolateRight: "clamp" }));
+  const typedPrompt = promptText.slice(0, charsToShow);
+
+  // 트리 다이어그램 Slam In (프롬프트 입력 직후)
+  const treeSlam = spring({
+    frame: Math.max(0, sub2Frame - 100),
+    fps,
+    config: SPRINGS.PUNCH,
+  });
+
+  const nodes = ["API 연동", "상태 관리", "UI 렌더링"];
+  const nodeAnims = nodes.map((_, i) =>
+    spring({
+      frame: Math.max(0, sub2Frame - 120 - i * STAGGER.NORMAL),
+      fps,
+      config: SPRINGS.SNAPPY,
+    })
+  );
 
   return (
-    <CinematicLayout>
-      <AbsoluteFill
-        style={{
-          transform: `perspective(1200px) scale(${cameraZ}) rotateX(${cameraRotateX}deg)`,
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-        }}
-      >
-        {/* Workflow Title */}
-        <div
-          style={{
-            position: 'absolute',
-            top: '15%',
-            fontSize: 70,
-            fontWeight: 800,
-            color: THEME.Text,
-            letterSpacing: '0.6em',
-            textAlign: 'center',
-          }}
-        >
-          PRACTICAL<br />
-          <span style={{ fontSize: 30, color: THEME.Primary, letterSpacing: '0.4em' }}>WORKFLOW</span>
-        </div>
-
-        {/* 3-Step Component Visualization */}
-        <div
-          style={{
-            display: 'flex',
-            gap: 60,
-            alignItems: 'center',
-            marginTop: '5%',
-          }}
-        >
-          {/* Step 1 */}
-          <div style={{ textAlign: 'center', opacity: step1Opacity, transform: `translateY(${interpolate(frame, [20, 50], [40, 0], { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' })}px)` }}>
-             <div style={{ fontSize: 100, fontWeight: 900, color: THEME.Accent, marginBottom: 10 }}>01</div>
-             <div style={{ fontSize: 24, letterSpacing: '0.4em', color: THEME.Text }}>PLAN</div>
-             <div style={{ width: 150, height: 2, background: THEME.Accent, marginTop: 20 }} />
+    <AbsoluteFill style={{ backgroundColor: COLORS.BG_DEEP, zIndex: Z.BG, flexDirection: "row", padding: "80px", gap: "60px" }}>
+      
+      {/* 왼쪽: 프롬프트 패널 / HTML 뼈대 모델 */}
+      <div style={{ flex: 1, display: "flex", flexDirection: "column", gap: "40px" }}>
+        
+        {/* 구형 마크업 */}
+        <Sequence durationInFrames={233}>
+          <div style={{
+            flex: 1, border: `4px dashed ${COLORS.TEXT_MUTED}`, borderRadius: "16px",
+            display: "flex", justifyContent: "center", alignItems: "center",
+            opacity: htmlOut, color: COLORS.TEXT_MUTED, fontFamily: FONTS.MONO, fontSize: TEXT_SIZE.MD
+          }}>
+            &lt;div&gt; 정적 HTML &lt;/div&gt;
           </div>
+        </Sequence>
 
-          {/* Arrow */}
-          <div style={{ color: THEME.Accent, fontSize: 30, opacity: 0.3 }}>&gt;</div>
-
-          {/* Step 2 */}
-          <div style={{ textAlign: 'center', opacity: step2Opacity, transform: `translateY(${interpolate(frame, [60, 90], [40, 0], { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' })}px)` }}>
-             <div style={{ fontSize: 100, fontWeight: 900, color: THEME.Primary, marginBottom: 10 }}>02</div>
-             <div style={{ fontSize: 24, letterSpacing: '0.4em', color: THEME.Text }}>DRAFT</div>
-             <div style={{ width: 150, height: 2, background: THEME.Primary, marginTop: 20 }} />
+        {/* 터미널 프롬프트 (233프레임부터 활성화) */}
+        {frame >= 233 && (
+          <div style={{
+            height: "120px", backgroundColor: COLORS.BG_VOID, border: `2px solid ${COLORS.BORDER_STRONG}`,
+            borderRadius: "12px", padding: "32px",
+            fontFamily: FONTS.MONO, fontSize: TEXT_SIZE.MD, color: COLORS.TEXT_MAIN,
+            boxShadow: `0 0 32px ${COLORS.PRIMARY_GLOW}`
+          }}>
+            <span style={{ color: COLORS.PRIMARY }}>$</span> {typedPrompt}
+            <span style={{ opacity: Math.floor(frame / 10) % 2 === 0 ? 1 : 0 }}>_</span>
           </div>
+        )}
 
-          {/* Arrow */}
-          <div style={{ color: THEME.Accent, fontSize: 30, opacity: 0.3 }}>&gt;</div>
+      </div>
 
-          {/* Step 3 */}
-          <div style={{ textAlign: 'center', opacity: step3Opacity, transform: `translateY(${interpolate(frame, [100, 130], [40, 0], { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' })}px)` }}>
-             <div style={{ fontSize: 100, fontWeight: 900, color: THEME.Accent, marginBottom: 10 }}>03</div>
-             <div style={{ fontSize: 24, letterSpacing: '0.4em', color: THEME.Text }}>OPTIMIZE</div>
-             <div style={{ width: 150, height: 2, background: THEME.Accent, marginTop: 20 }} />
+      {/* 오른쪽: 결과물 (Next.js 로고 & 트리) */}
+      <div style={{ flex: 1, position: "relative", display: "flex", justifyContent: "center", alignItems: "center" }}>
+        {frame >= 233 + 100 && (
+          <div style={{
+            position: "absolute", top: 0, bottom: 0, left: 0, right: 0,
+            transform: `scale(${treeSlam})`,
+            display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: "48px"
+          }}>
+            {/* 메인 노드 */}
+            <div style={{
+              width: "200px", height: "200px",
+              backgroundColor: "transparent", border: `6px solid ${COLORS.PRIMARY}`,
+              transform: "rotate(45deg)", // 마름모
+              display: "flex", justifyContent: "center", alignItems: "center",
+              boxShadow: `0 0 64px ${COLORS.PRIMARY_GLOW}`
+            }}>
+              <div style={{ transform: "rotate(-45deg)", fontFamily: FONTS.DISPLAY, fontSize: TEXT_SIZE.LG, color: COLORS.PRIMARY }}>NEXT.JS</div>
+            </div>
+
+            {/* 서브 노드들 */}
+            <div style={{ display: "flex", gap: "32px" }}>
+              {nodes.map((txt, i) => (
+                <div key={i} style={{
+                  padding: "16px 24px", backgroundColor: COLORS.BG_ELEVATED, border: `2px solid ${COLORS.SECONDARY}`,
+                  borderRadius: "8px", fontFamily: FONTS.MONO, fontSize: TEXT_SIZE.SM, color: COLORS.TEXT_MAIN,
+                  transform: `scale(${nodeAnims[i]})`,
+                  boxShadow: `0 8px 16px rgba(0,0,0,0.5)`
+                }}>
+                  {txt}
+                </div>
+              ))}
+            </div>
           </div>
-        </div>
+        )}
+      </div>
 
-        {/* Global Insight Highlight */}
-        <div
-          style={{
-            position: 'absolute',
-            bottom: '20%',
-            color: THEME.Text,
-            fontSize: 20,
-            letterSpacing: '0.4em',
-            opacity: 0.5,
-          }}
-        >
-          REDEFINING TEAM COLLABORATION
-        </div>
-      </AbsoluteFill>
-
-      {/* Subtitles */}
-      <Subtitle text="이렇게 강력한 AI 툴을 성공적으로 도입하려면 어떻게 해야 할까요?\n체계적인 3단계 실전 워크플로우를 제안합니다." />
-    </CinematicLayout>
+    </AbsoluteFill>
   );
 };

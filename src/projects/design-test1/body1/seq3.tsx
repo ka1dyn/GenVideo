@@ -1,118 +1,124 @@
-import React from 'react';
-import { AbsoluteFill, interpolate, spring, useCurrentFrame, useVideoConfig } from 'remotion';
-import { Subtitle } from '../components/Subtitle';
-import { CinematicLayout } from '../components/CinematicLayout';
-
-const THEME = {
-  Primary: '#F59E0B', // Gold
-  Accent: '#0D9488', // Teal
-  Text: '#F8FAFC',
-};
+import React from "react";
+import { AbsoluteFill, Sequence, useCurrentFrame, useVideoConfig, spring, interpolate , random } from "remotion";
+import { COLORS, FONTS, TEXT_SIZE, Z, SPRINGS, EASINGS } from "../theme";
 
 export const Seq3: React.FC = () => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
 
-  // 1. Continuous Drift - Slow Ken Burns
-  const cameraRotateY = interpolate(frame, [0, 511], [-5, 5]);
-  const cameraZ = interpolate(frame, [0, 511], [1.1, 1.0]);
+  // SubSeq 1 (0 ~ 180 frames): 좌우 스플릿 Slam In
+  const slamLeft = spring({
+    frame,
+    fps,
+    config: SPRINGS.PUNCH,
+  });
+  const slamRight = spring({
+    frame: Math.max(0, frame - 5), // 약간의 엇박자
+    fps,
+    config: SPRINGS.PUNCH,
+  });
 
-  // 2. Donut Chart Animations
-  const chartSpring = spring({ frame: frame - 20, fps, config: { damping: 14 } });
-  
-  // Repetitive (80% reduction)
+  // SubSeq 2 (180 ~ 840 frames): 암전 & [TAB] 승인
+  const sub2Frame = Math.max(0, frame - 180);
+  const leftDim = interpolate(sub2Frame, [0, 60], [1, 0.2], { extrapolateRight: "clamp" });
+  const rightExpand = interpolate(sub2Frame, [120, 180], [50, 100], { extrapolateRight: "clamp", easing: EASINGS.CINEMATIC }); // width % 확대
+
+  const tabAcceptSpring = spring({
+    frame: Math.max(0, sub2Frame - 150),
+    fps,
+    config: SPRINGS.SNAPPY,
+  });
+  const checkSpring = spring({
+    frame: Math.max(0, sub2Frame - 210), // TAB 누르고 1초(60) 후 체크
+    fps,
+    config: SPRINGS.PUNCH,
+  });
 
   return (
-    <CinematicLayout>
-      <AbsoluteFill
-        style={{
-          transform: `perspective(1000px) rotateY(${cameraRotateY}deg) scale(${cameraZ})`,
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-        }}
-      >
-        {/* Workload Title */}
-        <div
-          style={{
-            position: 'absolute',
-            top: '15%',
-            fontSize: 70,
-            fontWeight: 800,
-            color: THEME.Text,
-            letterSpacing: '0.6em',
-            textAlign: 'center',
-          }}
-        >
-          WORKLOAD<br />
-          <span style={{ fontSize: 30, color: THEME.Accent, letterSpacing: '0.4em' }}>DISTRIBUTION</span>
+    <AbsoluteFill style={{ 
+      backgroundColor: COLORS.BG_DEEP, zIndex: Z.BG,
+      flexDirection: "row" // 스플릿 레이아웃
+    }}>
+      
+      {/* Before 화면 (좌측) */}
+      <Sequence durationInFrames={840}>
+        <div style={{
+          position: "absolute", left: 0, top: 0, bottom: 0,
+          width: `${100 - rightExpand}%`,
+          backgroundColor: COLORS.BG_SURFACE,
+          borderRight: `4px solid ${COLORS.BORDER_STRONG}`,
+          transform: `translateX(${interpolate(slamLeft, [0, 1], [-200, 0])}px)`,
+          opacity: leftDim,
+          display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center",
+          overflow: "hidden"
+        }}>
+          <div style={{ color: COLORS.TEXT_MUTED, fontFamily: FONTS.DISPLAY, fontSize: TEXT_SIZE.MD, marginBottom: "40px" }}>수동 타이핑</div>
+          {/* 가상의 잡다한 코드 / 문서 */}
+          {Array.from({ length: 15 }).map((_, i) => (
+            <div key={i} style={{
+              width: `${random(null) * 40 + 20}%`, height: "12px",
+              backgroundColor: COLORS.BORDER, marginBottom: "12px",
+              alignSelf: "flex-start", marginLeft: "20%"
+            }} />
+          ))}
         </div>
+      </Sequence>
 
-        {/* 2-Column Insight Visualization */}
-        <div
-          style={{
-            display: 'flex',
-            gap: 120,
-            alignItems: 'center',
-            marginTop: '5%',
-          }}
-        >
-          {/* Repetitive Task Column */}
-          <div style={{ textAlign: 'center', opacity: interpolate(frame, [0, 20], [0, 1]) }}>
-             <div style={{ fontSize: 24, color: '#94a3b8', marginBottom: 20 }}>REPETITIVE</div>
-             <div style={{ 
-               width: 250, 
-               height: 250, 
-               borderRadius: '50%', 
-               border: '10px solid rgba(255,255,255,0.1)',
-               display: 'flex',
-               justifyContent: 'center',
-               alignItems: 'center',
-               position: 'relative'
-             }}>
-               <div style={{ fontSize: 60, fontWeight: 800, color: '#94a3b8' }}>-80%</div>
-               <div style={{ position: 'absolute', top: -10, left: -10, right: -10, bottom: -10, border: '10px solid #94a3b8', borderRadius: '50%', clipPath: `inset(0 ${interpolate(chartSpring, [0, 1], [0, 80])}% 0 0)` }} />
-             </div>
+      {/* After 화면 (우측) */}
+      <Sequence durationInFrames={840}>
+        <div style={{
+          position: "absolute", right: 0, top: 0, bottom: 0,
+          width: `${rightExpand}%`,
+          backgroundColor: COLORS.BG_ELEVATED,
+          transform: `translateX(${interpolate(slamRight, [0, 1], [200, 0])}px)`,
+          opacity: slamRight,
+          display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center",
+          overflow: "hidden"
+        }}>
+          
+          <div style={{ 
+            color: COLORS.PRIMARY, fontFamily: FONTS.DISPLAY, fontSize: TEXT_SIZE.LG, 
+            marginBottom: "40px", textShadow: `0 0 24px ${COLORS.PRIMARY_GLOW}`
+          }}>
+            AI 제안
           </div>
 
-          {/* Creative Work Column */}
-          <div style={{ textAlign: 'center', opacity: interpolate(frame, [40, 60], [0, 1]) }}>
-             <div style={{ fontSize: 24, color: THEME.Primary, marginBottom: 20 }}>CREATIVE</div>
-             <div style={{ 
-               width: 250, 
-               height: 250, 
-               borderRadius: '50%', 
-               border: `10px solid rgba(245, 158, 11, 0.1)`,
-               display: 'flex',
-               justifyContent: 'center',
-               alignItems: 'center',
-               position: 'relative',
-               boxShadow: `0 0 30px rgba(245, 158, 11, 0.1)`,
-               transform: `scale(${interpolate(chartSpring, [0, 1], [0.8, 1.2])})`,
-             }}>
-               <div style={{ fontSize: 60, fontWeight: 900, color: THEME.Primary }}>3X UP</div>
-               <div style={{ position: 'absolute', top: -10, left: -10, right: -10, bottom: -10, border: `10px solid ${THEME.Primary}`, borderRadius: '50%' }} />
-             </div>
+          <div style={{ position: "relative" }}>
+            {/* 코드 자동완성 블록 */}
+            <div style={{
+              padding: "32px", border: `2px dashed ${COLORS.PRIMARY_GLOW}`, borderRadius: "16px",
+              backgroundColor: COLORS.BG_SURFACE, color: COLORS.TEXT_MAIN, fontFamily: FONTS.MONO,
+              display: "flex", flexDirection: "column", gap: "16px"
+            }}>
+              <div>function implementAI() {'{'}</div>
+              <div style={{ paddingLeft: "32px", color: COLORS.SECONDARY }}>return <span style={{ opacity: 0.8 }}>...awesome code;</span></div>
+              <div>{'}'}</div>
+            </div>
+
+            {/* TAB Accept 패널 */}
+            <div style={{
+              position: "absolute", bottom: "-30px", right: "-40px",
+              padding: "16px 24px", backgroundColor: COLORS.TEXT_MAIN, borderRadius: "8px",
+              fontFamily: FONTS.MONO, fontSize: TEXT_SIZE.SM, color: COLORS.TEXT_INVERSE,
+              boxShadow: `0 12px 24px rgba(0,0,0,0.5)`,
+              transform: `scale(${tabAcceptSpring})`,
+              display: "flex", alignItems: "center", gap: "12px"
+            }}>
+              <span>[TAB] 승인</span>
+              {checkSpring > 0 && (
+                <div style={{
+                  width: "24px", height: "24px", borderRadius: "50%",
+                  backgroundColor: COLORS.PRIMARY, display: "flex", justifyContent: "center", alignItems: "center",
+                  color: COLORS.TEXT_INVERSE, fontSize: "16px", fontWeight: "bold",
+                  transform: `scale(${checkSpring})`
+                }}>✔</div>
+              )}
+            </div>
           </div>
-        </div>
 
-        {/* Global Insight Highlight */}
-        <div
-          style={{
-            position: 'absolute',
-            bottom: '20%',
-            color: THEME.Text,
-            fontSize: 20,
-            letterSpacing: '0.4em',
-            opacity: interpolate(frame, [450, 511], [0.6, 0]),
-          }}
-        >
-          FROM TYPING TO ARCHITECTURE
         </div>
-      </AbsoluteFill>
+      </Sequence>
 
-      {/* Subtitles */}
-      <Subtitle text="단순 반복 작업은 80% 감소한 반면,\n창의적인 설계와 로직 고민 시간은 3배 이상 늘어났습니다." />
-    </CinematicLayout>
+    </AbsoluteFill>
   );
 };
