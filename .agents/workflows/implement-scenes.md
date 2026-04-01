@@ -83,23 +83,46 @@ export const introSubtitles: Subtitle[] = [
 기획서의 각 시퀀스들을 나열할 시퀀스 컴포넌트 파일을 생성합니다.
 (배치 경로: `src/projects/{project_id}/{section}/sequences.tsx`)
 
-```typescript
+```tsx
+import React from "react";
+import { AbsoluteFill, Series } from "remotion";
 
-const seq1 = () => {
+// 하위 시퀀스(씬)들을 단일 파일 내에 컴포넌트로 분리하여 정의합니다.
+const Scene1: React.FC = () => {
   return (
-    <Sequence durationInFrames={120}>
-    </Sequence>
+    <AbsoluteFill style={{ justifyContent: "center", alignItems: "center" }}>
+      {/* 씬 1 구현 내용 */}
+    </AbsoluteFill>
+  );
+};
+
+const Scene2: React.FC = () => {
+  return (
+    <AbsoluteFill
+      style={{
+        justifyContent: "center",
+        alignItems: "center",
+        backgroundColor: "white",
+      }}
+    >
+      {/* 씬 2 구현 내용 */}
+    </AbsoluteFill>
   );
 };
 
 export const Sequences: React.FC = () => {
-
   return (
     <Series>
-        <seq1>
-        <seq2>
-      </Series>
-  );
+      {/* Series 내부에 Series.Sequence를 사용하여 각 씬을 타임라인에 순차적으로 배치합니다. */}
+      {/* durationInFrames는 기획서에 명시된 해당 씬의 프레임 길이에 맞게 설정합니다. */}
+      <Series.Sequence durationInFrames={120}>
+        <Scene1 />
+      </Series.Sequence>
+      <Series.Sequence durationInFrames={150}>
+        <Scene2 />
+      </Series.Sequence>
+    </Series>
+  ); // return
 };
 ```
 
@@ -114,7 +137,7 @@ export const Sequences: React.FC = () => {
 
 ```tsx
 import React from "react";
-import { AbsoluteFill, Series, Audio, staticFile } from "remotion";
+import { AbsoluteFill, Audio, staticFile } from "remotion";
 import { CaptionOverlay } from "../../../shared-components/CaptionOverlay";
 import { introSubtitles } from "./intro_subtitles";
 import { Sequences } from "./sequences";
@@ -125,6 +148,7 @@ export const Intro: React.FC = () => {
       {/* 1. 오디오는 루트 컴포넌트에서만 단 한 번 선언 및 렌더링 */}
       <Audio src={staticFile("project_id/intro/intro.wav")} />
 
+      {/* 2. 하위 씬들의 묶음인 Sequences 렌더링 (단일 파일에서 모든 자식 씬 조립됨) */}
       <Sequences />
 
       {/* 3. 화면 최상단에 렌더링되도록 문서 제일 마지막에 자막 오버레이 컴포넌트 배치 */}
@@ -134,7 +158,7 @@ export const Intro: React.FC = () => {
 };
 ```
 
-### 4. 린트 (결함 점검)
+### 3. 린트 (결함 점검)
 
 // turbo
 

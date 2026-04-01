@@ -6,7 +6,7 @@
 
 ## 자막 개요
 
-- 각 seq별로 자막을 구성할 때, `public/{project_id}/{section}/{section}_final_timeline.json` 파일의 **sentences 배열 내 문장들을 기반**으로 자막을 구성한다.
+- 자막을 구성할 때, `public/{project_id}/{section}/{section}_final_timeline.json` 파일의 **sentences 배열 내 문장들을 기반**으로 자막을 구성한다.
 - 문장 하나가 너무 길다면 적절하게 분할한다.
 - 자막의 startMs와 endMs는 `final_timeline.json` 파일의 `sentences` 배열 내 문장, 혹은 단어의 startMs와 endMs와 100% 일치해야합니다.
 
@@ -45,11 +45,11 @@
 시퀀스 구성은 다음과 같다.
 
 ```
-- seq1:
+- Scene1:
     words_combined: {포함되는 단어들을 묶어서 표시}
     timeline: {startMs}ms ~ {endMs}ms ({frames} frames)
     visual_concept: {어떤 그래픽을 사용할 지 간단히 묘사}
-- seq2:
+- Scene2:
     words_combined: {포함되는 단어들을 묶어서 표시}
     timeline: {startMs}ms ~ {endMs}ms ({frames} frames)
     visual_concept: {어떤 그래픽을 사용할 지 간단히 묘사}

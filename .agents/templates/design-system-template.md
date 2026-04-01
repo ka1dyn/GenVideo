@@ -15,6 +15,15 @@
 
 ## [FILL] 1. Brand Identity & Mood
 
+[역할]
+너는 독자들의 시선을 사로잡는 영상을 만드는 200만 유튜버야.
+
+[카테고리]
+{FILL: project 대본에 맞는 카테고리}
+
+[디자인컨셉]
+{FILL: project 대본에 맞는 디자인컨셉}
+
 ```ts
 export const BRAND = {
   PROJECT_ID: "{FILL: 프로젝트 ID (예: nvidia-blackwell-launch)}",
@@ -40,6 +49,7 @@ export const COLORS = {
   BG_DEEP: "{FILL: 기본 배경 HEX (예: #0a0a0a)}",
   BG_SURFACE: "{FILL: 카드/패널 배경 HEX (예: #111411)}",
   BG_ELEVATED: "{FILL: 떠있는 UI 요소 배경 HEX (예: #1a1f1a)}",
+  // 더 필요한 배경색이 있다면 추가 ex)반전, 대비용 배경색 등
 
   // Brand Core
   PRIMARY: "{FILL: 메인 강조 앵커 HEX (예: #76B900)}",
@@ -48,16 +58,19 @@ export const COLORS = {
     "{FILL: 글로우 확산용 45% 투명도 rgba (예: rgba(118,185,0,0.45))}",
   SECONDARY: "{FILL: 보조 강조 HEX (예: #A8E000)}",
   ACCENT: "{FILL: 반전 포인트 HEX — 씬당 1회만 사용 (예: #FF4444)}",
+  // 더 필요한 브랜드 색상이 있다면 추가
 
   // Text
   TEXT_MAIN: "{FILL: 본문/헤드라인 (예: #F0F0F0)}",
   TEXT_MUTED: "{FILL: 캡션/보조 (예: #A0A8A0)}",
   TEXT_INVERSE: "{FILL: 밝은 요소 위 대비용 (예: #0a0a0a)}",
+  // 더 필요한 텍스트 색상이 있다면 추가
 
   // Status
   POSITIVE: "{FILL: 상승/긍정 데이터 (예: #76B900)}",
   NEGATIVE: "{FILL: 하락/경고 데이터 (예: #FF4444)}",
   HIGHLIGHT: "{FILL: 형광펜 강조 (예: rgba(118,185,0,0.3))}",
+  // 더 필요한 상태 색상이 있다면 추가
 
   // Border
   BORDER: "{FILL: 일반 구분선 rgba (예: rgba(118,185,0,0.15))}",
@@ -90,6 +103,7 @@ export const EFFECTS = {
   GLOW_MD: `0 0 48px ${COLORS.PRIMARY_GLOW}`,
   GLOW_LG: `0 0 96px ${COLORS.PRIMARY_GLOW}`,
   GLOW_TEXT: `0 0 32px ${COLORS.PRIMARY_GLOW}`,
+  // 더 필요한 이펙트가 있다면 추가
 };
 
 // 노이즈 레이어: opacity 0.035, mixBlendMode 'overlay'
@@ -106,124 +120,16 @@ export const FONTS = {
   PRIMARY: "'Pretendard Variable', 'Pretendard', sans-serif", // 한글+영문 본문
   MONO: "'JetBrains Mono', 'Fira Code', monospace", // 숫자/데이터 수치 전용
 };
-
-export const TEXT_SIZE = {
-  XS: 24, // 캡션, 출처
-  SM: 32, // 보조 텍스트
-  BASE: 42, // 본문
-  MD: 56, // 서브 헤드라인
-  LG: 72, // 헤드라인
-  XL: 96, // 섹션 타이틀
-  XXL: 140, // 임팩트 디스플레이
-  HERO: 200, // 오프닝 전용 — 씬당 1회, 단어 1~2개 한정
-};
-
-export const FONT_WEIGHT = {
-  REGULAR: 400,
-  MEDIUM: 500,
-  BOLD: 700,
-  BLACK: 900, // 헤드라인 기본값
-};
-
-export const LETTER_SPACING = {
-  TIGHT: -0.04, // XXL, HERO 전용
-  NORMAL: -0.02, // LG, XL
-  WIDE: 0.02, // XS, 캡션
-};
 ```
 
-> **헤드라인** → 반드시 `FONTS.DISPLAY` / **숫자 데이터** → 반드시 `FONTS.MONO` / **HERO** → Section당 1회이하, 오프닝·클라이맥스 외 사용 금지
-
----
-
-## [FIXED] 6. Spacing & Safe Zone
-
-```ts
-export const SPACING = {
-  S1: 8,
-  S2: 16,
-  S3: 24,
-  S4: 32,
-  S5: 48,
-  S6: 64,
-  S7: 96,
-  S8: 128,
-  S9: 192,
-  S10: 256,
-};
-
-export const SAFE_ZONE = {
-  X: 96, // 좌우 — 텍스트/UI가 이 경계를 넘으면 안 됨
-  Y: 72, // 상하
-};
-```
-
----
-
-## [FIXED] 7. Animation & Motion System ★
+## [FIXED] 6. Animation & Motion System ★
 
 > **Remotion 철칙**: CSS 애니메이션(`@keyframes`, `transition`) 사용 불가.
 > 모든 모션은 반드시 `useCurrentFrame()` + `interpolate()` + `spring()`으로 구현하고 React 인라인 스타일로 주입한다.
 
-```ts
-import { Easing, spring } from "remotion";
-
-// Duration (초 단위 → 컴포넌트에서 fps 곱해 프레임으로 변환)
-export const DURATIONS = {
-  INSTANT: 0.08, // 깜빡임, Glitch Flash (현재 fps 기준으로 프레임 계산)
-  SNAP: 0.25, // 기본 전환 단위 (현재 fps 기준으로 프레임 계산)
-  FAST: 0.4, // 일반 객체 등장 (현재 fps 기준으로 프레임 계산)
-  NORMAL: 0.6, // 컨텐츠 전환 (현재 fps 기준으로 프레임 계산)
-  SLOW: 1.2, // 배경/무드 전환 (현재 fps 기준으로 프레임 계산)
-  DRAMATIC: 2.0, // 오프닝, 클라이맥스 (현재 fps 기준으로 프레임 계산)
-};
-
-// Easing — 이 4개 외의 커브 사용 금지
-export const EASINGS = {
-  SNAP: Easing.bezier(0.25, 0, 0, 1), // 탁! 멈춤 — 기본값
-  SPRING: Easing.bezier(0.34, 1.56, 0.64, 1), // 오버슈트 바운스 — 활기찬 등장
-  DRAMATIC: Easing.bezier(0.76, 0, 0.24, 1), // 느리게 시작 → 팍! 꽂힘
-  CINEMATIC: Easing.bezier(0.4, 0, 0.2, 1), // 서서히 — 배경/무드 전환 전용
-};
-
-// Spring Configs
-export const SPRINGS = {
-  SMOOTH: { damping: 200 }, // 바운스 없는 부드러운 전환
-  SNAPPY: { damping: 20, stiffness: 200 }, // 빠릿한 UI 요소 등장
-  PUNCH: { damping: 12, stiffness: 150 }, // 타격감 (Scale Punch 최적)
-};
-
-// Stagger (프레임 단위 — 연속 요소 딜레이)
-export const STAGGER = {
-  TIGHT: 2, // 따다닥 빠른 연속
-  NORMAL: 4, // 일반 그룹 등장
-  LOOSE: 8, // 강조하고 싶은 연속 등장
-};
-```
-
-### 3-1-3 Rhythm Rule (필수 준수)
-
-```
-애니메이션 체류 시간:        최대 4.0초 (현재 fps 기준으로 프레임 계산)
-전환 자체 시간:              최대 1.0초 (현재 fps 기준으로 프레임 계산)
-전환 사이 블랙/플래시:        0 ~ 0.5초 (현재 fps 기준으로 프레임 계산)
-```
-
-### Signature Impact Patterns (매 씬 최소 1개 적용 / 동일 패턴 3씬 연속 금지)
-
-| 패턴               | 구현 방법                                        | 권장 토큰                          |
-| ------------------ | ------------------------------------------------ | ---------------------------------- |
-| **Smash Cut**      | `frame >= targetFrame` 조건으로 즉각 전환        | `DURATIONS.INSTANT`                |
-| **Slam In**        | 화면 밖 → 중앙으로 날아와 묵직하게 멈춤          | `interpolate` + `EASINGS.DRAMATIC` |
-| **Glitch Flash**   | 1~3프레임 PRIMARY 또는 흰색 플래시               | `DURATIONS.INSTANT`                |
-| **Scale Punch**    | `scale(1.08) → scale(1.0)` 타격감                | `spring` + `SPRINGS.PUNCH`         |
-| **Text Stagger**   | 단어 단위 분리 후 `index * STAGGER.TIGHT` 딜레이 | `EASINGS.SNAP` + `STAGGER.TIGHT`   |
-| **Counter Punch**  | 숫자 카운트업 후 최종값에서 Scale Punch          | `FONTS.MONO` + `SPRINGS.PUNCH`     |
-| **Cinematic Fade** | 배경만 `CINEMATIC`, 텍스트는 `SNAP`              | `DURATIONS.SLOW`                   |
-
 ---
 
-## [FIXED] 8. Z-Index Layers
+## [FIXED] 7. Z-Index Layers
 
 ```ts
 export const Z = {
@@ -238,14 +144,9 @@ export const Z = {
 
 ---
 
-## [FIXED] 9. AI Directing Rules
+## [FIXED] 8. AI Directing Rules
 
 구현 AI는 아래 규칙을 코드 생성 전에 반드시 숙지한다.
 
-1. **하드코딩 금지 및 통합 관리** — px, ms, HEX를 컴포넌트 코드에 직접 쓰지 않는다. 구현 전, 이 문서의 모든 상수(Constants) 블록들을 모아 `src/projects/{project_id}/theme.ts` 파일로 생성하여 통합 저장하고, 각 컴포넌트에서는 이를 `import`하여 사용한다.
+1. **색상 통합 관리** — Phase 3단계에서 구현 전, 이 문서의 모든 색상(Constants) 블록들을 모아 `src/projects/{project_id}/colors.ts` 파일로 생성하여 통합 저장하고, 각 컴포넌트에서는 이를 `import`하여 사용한다.
 2. **CSS 금지** — `@keyframes`, `transition`, `animation` 속성 일절 사용 불가.
-3. **60fps 기준** — 모든 애니메이션은 상수에 정의된 VIDEO_FPS(60fps)에서 매끄럽게 동작해야 한다.
-4. **애니메이션 체류 4초 룰** — 내용이 많으면 세부 sequence를 분할한다.
-5. **HERO 룰** — `TEXT_SIZE.HERO`는 {Section}당 1회, 단어 1~2개 한정.
-6. **ACCENT 룰** — 같은 Seq에서 2번 이상 등장하면 임팩트가 사라진다.
-7. **레이아웃·트랜지션 자유** — 위 토큰 안에서 구도, 배치, 시퀀스는 창의적으로 결정한다.
