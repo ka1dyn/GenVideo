@@ -5,12 +5,7 @@ import {
   useVideoConfig,
   interpolate,
 } from 'remotion';
-
-export interface Subtitle {
-  text: string;
-  startMs: number;
-  endMs: number;
-}
+import { Subtitle } from '../types/Subtitle';
 
 interface Props {
   captions: Subtitle[];
@@ -31,7 +26,7 @@ export const CaptionOverlay: React.FC<Props> = ({ captions }) => {
     return null;
   }
 
-  
+
   // Animation: subtle fade in when a new caption starts
   const entryFrame = (activeSubtitle.startMs / 1000) * fps;
   const opacity = interpolate(

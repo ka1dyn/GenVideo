@@ -1,4 +1,4 @@
-import { Subtitle } from "../../../types/subtitle";
+import { Subtitle } from "../../../types/Subtitle";
 
 export const introSubtitles: Subtitle[] = [
   {
