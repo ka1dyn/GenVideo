@@ -1,74 +1,58 @@
 import React from 'react';
-import {
-  AbsoluteFill,
-  useCurrentFrame,
-  useVideoConfig,
-  interpolate,
-  spring,
-} from 'remotion';
+import { AbsoluteFill, useCurrentFrame, interpolate } from 'remotion';
 
 export const Seq6: React.FC = () => {
   const frame = useCurrentFrame();
-  const { fps, width } = useVideoConfig();
 
-  // Entrance for final message
-  const entrance = spring({
-    frame,
-    fps,
-    config: {
-      stiffness: 100,
-      damping: 10,
-    },
-  });
-
-  // Glitch Effect for the word PLANNING
-  const glitch = Math.sin(frame) * 5 * (frame % 10 < 2 ? 1 : 0);
+  // 아래에서 위로 올라가는 코드블록 배경
+  const scrollY = interpolate(frame, [0, 197], [1000, -1000]);
+  
+  // 가짜 코드 스니펫
+  const fakeCodeLines = Array(50).fill("const pairProgrammer = new AIHelper({ autoReview: true, quality: 'premium' });");
 
   return (
-    <AbsoluteFill style={{ backgroundColor: '#FFFFFF', justifyContent: 'center', alignItems: 'center' }}>
-      {/* Background Text Repeating */}
-      <AbsoluteFill style={{ opacity: 0.05, overflow: 'hidden' }}>
-          {[...Array(10)].map((_, i) => (
-              <div
-                  key={i}
-                  style={{
-                      fontSize: '150px',
-                      fontFamily: 'JetBrains Mono',
-                      fontWeight: 900,
-                      color: '#000000',
-                      whiteSpace: 'nowrap',
-                      transform: `translateX(${interpolate(frame, [0, 422], [0, width / 2])}px)`,
-                  }}
-              >
-                  CONVERSATION CONVERSATION CONVERSATION
-              </div>
-          ))}
-      </AbsoluteFill>
-
-      <div style={{ zIndex: 10, textAlign: 'center', padding: '0 10%', transform: `scale(${interpolate(entrance, [0, 1], [0.8, 1])})` }}>
-          <div style={{ color: '#3B82F6', fontSize: '32px', fontWeight: 800, fontFamily: 'JetBrains Mono', marginBottom: '20px' }}>
-            THE FUTURE ARRIVED
-          </div>
-          <h1 style={{ color: '#000000', fontSize: '64px', fontFamily: 'Pretendard', fontWeight: 900, lineHeight: 1.2 }}>
-            "미래의 코딩은 <br />타이핑이 아니라 <span style={{ color: '#3B82F6' }}>대화</span>가 될 것이다."
-          </h1>
-          
-          <div
-              style={{
-                  marginTop: '40px',
-                  backgroundColor: '#000000',
-                  color: '#FFFFFF',
-                  padding: '20px 40px',
-                  fontSize: '48px',
-                  fontFamily: 'Pretendard',
-                  fontWeight: 900,
-                  boxShadow: '0 10px 40px rgba(59, 130, 246, 0.4)',
-                  transform: `translateX(${glitch}px)`,
-              }}
-          >
-            기획력의 시대
-          </div>
+    <AbsoluteFill style={{ backgroundColor: '#000000', justifyContent: 'center', alignItems: 'center', overflow: 'hidden' }}>
+      
+      {/* Code Background Scroll */}
+      <div
+        style={{
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          right: 0,
+          opacity: 0.1,
+          transform: `translateY(${scrollY}px)`,
+          color: '#0071E3',
+          fontFamily: 'SF Pro Display, JetBrains Mono, monospace',
+          fontSize: '24px',
+          lineHeight: 1.5,
+          padding: '40px',
+        }}
+      >
+        {fakeCodeLines.map((line, i) => (
+          <div key={i}>{i + 1} &nbsp; {line}</div>
+        ))}
       </div>
+
+      <div
+        style={{
+          color: '#FFFFFF',
+          fontSize: '100px',
+          fontWeight: 800,
+          fontFamily: 'Pretendard, sf pro display, sans-serif',
+          textAlign: 'center',
+          textShadow: '0px 10px 40px rgba(0,0,0,0.8)',
+          opacity: interpolate(frame, [0, 20], [0, 1]),
+          transform: `scale(${interpolate(frame, [0, 40], [0.9, 1])})`,
+        }}
+      >
+        SENIOR
+        <br />
+        DEVELOPER
+        <br />
+        <span style={{ fontSize: '40px', color: '#86868B', letterSpacing: '10px' }}>ON BOARD</span>
+      </div>
+
     </AbsoluteFill>
   );
 };

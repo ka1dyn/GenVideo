@@ -19,6 +19,7 @@ description: 기획서를 바탕으로 Remotion 씬을 순차적으로 구현하
 (과거 대화 맥락에서 이미 규칙을 숙지했다면 다시 읽지 않아도 됩니다. 기억이 안날 때만 재참조하세요.)
 
 특히 구현 전에 다음 문서 내용이 필요한 경우 적절히 읽어보세요:
+
 - `rules/animations.md` — 애니메이션 패턴
 - `rules/sequencing.md` — 시퀀스 패턴
 - `rules/timing.md` — 보간 및 이징
@@ -38,7 +39,7 @@ description: 기획서를 바탕으로 Remotion 씬을 순차적으로 구현하
 
 - 먼저 `public/{project_id}/{section}/{section}_plan.md`를 읽으세요.
 - 이후 `public/{project_id}/{section}/{section}_context.md` 를 읽어 원본 대본과 타임스탬프 타이밍을 더블체크합니다.
-- `public/{project_id}/design-system.md`가 존재하면 읽고, 구현 시 브랜드 규약(색상 톤, 폰트, 자막 규격, 캐릭터 등)을 반영합니다.
+- `public/{project_id}/design-system.md`가 존재하면 읽고, 구현 시 브랜드 규약(색상 톤, 폰트, 하단 자막 규격, 캐릭터 등)을 반영합니다.
 
 #### 2-2. 시퀀스 파일 생성
 
@@ -73,11 +74,61 @@ export const Seq1: React.FC = () => {
 
 최상위 섹션 루트 파일인 `src/projects/{project_id}/{section}/{section}.tsx`를 수정합니다.
 
-- 작성했던 모든 시퀀스를 `Series` 객체로 합성합니다.
 - **Audio 컴포넌트는 섹션 루트에서 한 번만** 배치합니다.
-- 단일 `Series.Sequence`의 `durationInFrames` 수치를 기획서에 명시된 기간으로 맞춰 설정합니다.
-- **[중요] 프레임 패딩**: 오디오 파일에는 마지막 대사 이후 묵음 여백(Tail)이 존재하므로, 내부 시퀀스 합계가 마스터 할당 프레임보다 부족할 수 있습니다. 모든 시퀀스를 배치한 뒤 합계를 계산하고, 부족분은 **마지막 시퀀스의 `durationInFrames`에 추가**하여 마스터 할당 프레임과 정확히 일치시키세요. 이를 누락하면 섹션 전환 시 검은 화면(공백)이 발생합니다.
-- **[중요] 자막 처리 방식**: Whisper가 생성한 Timestamp JSON의 텍스트는 환각이 섞여 있어 신뢰할 수 없으므로, 기획서(`{section}_plan.md`)의 원본 대본을 기준으로 작업합니다.
+
+##### ⚠️ 절대 좌표 배치 (Series 사용 금지)
+
+> **`Series`를 사용하면 안 됩니다.** `Series`는 시퀀스를 빈틈없이 연이어 붙이기 때문에, 타임스탬프 사이에 묵음(Silent Gap)이 존재할 경우 뒤로 갈수록 영상이 음성보다 점점 빨라지는 **누적 싱크 드리프트**가 발생합니다.
+
+대신, `Sequence` 컴포넌트의 `from` 속성에 **타임스탬프 기반 절대 프레임 값**을 직접 지정하여 오디오와 정밀하게 동기화하세요.
+
+**프레임 계산 공식:**
+
+```
+fromFrame = Math.round(startMs / 1000 * fps)
+durationInFrames = Math.round((endMs - startMs) / 1000 * fps)
+```
+
+**구현 예시:**
+
+```tsx
+import { AbsoluteFill, Audio, Sequence, staticFile } from "remotion";
+
+export const Intro: React.FC = () => {
+  return (
+    <AbsoluteFill>
+      <Audio src={staticFile("{project_id}/{section}/{section}.wav")} />
+
+      {/* ✅ 각 시퀀스에 절대 from 값을 지정 — 타임스탬프 startMs 기반 */}
+      <Sequence from={0} durationInFrames={68} name="Seq1">
+        <Seq1 />
+      </Sequence>
+      <Sequence from={68} durationInFrames={256} name="Seq2">
+        <Seq2 />
+      </Sequence>
+      {/* ... 이하 동일 패턴 */}
+
+      <CaptionOverlay subtitles={subtitles} />
+    </AbsoluteFill>
+  );
+};
+```
+
+##### 타이밍 산출 절차
+
+1. `{section}_context.md`의 타임스탬프 테이블에서 각 시퀀스에 매핑되는 `startMs`와 `endMs`를 확인합니다.
+2. 하나의 시퀀스가 여러 타임스탬프를 포함하는 경우, **첫 번째 타임스탬프의 startMs**와 **마지막 타임스탬프의 endMs**를 사용합니다.
+3. 타임스탬프 사이에 묵음 Gap이 있으면(예: #6 endMs=24980, #7 startMs=26220 → 1240ms 공백), 해당 Gap 구간은 **이전 시퀀스의 durationInFrames에 포함시켜 화면이 유지**되도록 합니다. 즉, 이전 시퀀스의 실제 duration은 `다음 시퀀스의 startMs - 현재 시퀀스의 startMs`로 계산합니다.
+4. **마지막 시퀀스의 durationInFrames**는 `섹션 총 프레임 수 - 마지막 시퀀스의 from`으로 계산하여 섹션 끝까지 빈틈없이 채웁니다. 이를 누락하면 섹션 전환 시 검은 화면(공백)이 발생합니다.
+
+##### 자막 싱크
+
+- 자막(`{section}_subtitles.ts`)의 `startFrame`/`endFrame` 값도 위와 동일하게 **타임스탬프 기반 절대 프레임 값**으로 산출합니다.
+- 자막의 `startFrame`과 해당 시퀀스의 `from` 값이 반드시 일치해야 합니다.
+
+##### 자막 처리 방식
+
+- **[중요]** Whisper가 생성한 Timestamp JSON의 텍스트는 환각이 섞여 있어 신뢰할 수 없으므로, 기획서(`{section}_plan.md`)의 원본 대본을 기준으로 작업합니다.
   - **데이터 분리**: 개발자가 자막 시점과 텍스트를 고치기 편하도록, 각 섹션 폴더에 `{section}_subtitles.ts` 파일을 만들어 자막 배열(Subtitle[])을 하드코딩하세요. 이때 **대본을 절대로 요약하지 말고 기획서의 원본 대본을 100% 그대로** 옮겨야 합니다.
   - **공용 컴포넌트**: `src/projects/{project_id}/components/CaptionOverlay.tsx`에 자막 렌더링 로직을 분리하고, 각 섹션 루트에서는 이 컴포넌트에 배열만 주입하여 사용합니다.
   - **스타일**: 기획서의 강제 줄바꿈(`\n`)이 반영되도록 `whiteSpace: 'pre-line'`을 적용하세요.
@@ -85,6 +136,9 @@ export const Seq1: React.FC = () => {
 ### 3. 필수 준수 규칙 (중요)
 
 - **에셋 참조:** 오디오/이미지 등은 반드시 `staticFile()` 함수로 래핑하여 사용하세요. (예: `staticFile('{project_id}/{section}/{section}.wav')`)
+- **다채로운 레이아웃과 CSS 기법 (중요):** 뻔한 중앙 정렬(Center align)과 단순 페이드 인을 남발하지 마세요. 매 씬마다 기획서를 바탕으로 **단순하지 않은 창의적인 구도**를 구현해야 합니다.
+  - 다양한 화면 분할(Flexbox, Grid), 비대칭 배치, 대각선 구도를 적극 활용하세요.
+  - 3D 효과(`perspective`, `rotateX`, `rotateY`), 클리핑 마스크(`clipPath`), SVG 패스 애니메이션, 엇박자 타이밍(Staggered timing) 등 **고급 CSS/Remotion 기법**을 최소 하나 이상 적용하여 역동성을 부여하세요.
 - **타이밍:** durationInFrames 계산이 필요할 경우 `Math.ceil((endMs - startMs) / 1000 * 프로젝트FPS)` 규칙을 따릅니다.
 - **애니메이션:** 시간 기반 계산은 `useCurrentFrame()`과 `interpolate()`를 이용하며 튀어오르는 효과는 `spring({ frame, fps, config: { damping: 200 } })` 를 사용합니다.
 - **보간(Interpolate) 안전 장치:** `interpolate()` 함수 사용 시, 예상치 못한 음수값이나 시작 전 움직임을 방지하기 위해 반드시 `{ extrapolateLeft: 'clamp', extrapolateRight: 'clamp' }` 옵션을 모두 부여하세요.

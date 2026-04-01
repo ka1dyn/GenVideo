@@ -1,73 +1,53 @@
 import React from 'react';
-import {
-  AbsoluteFill,
-  useCurrentFrame,
-  useVideoConfig,
-  interpolate,
-  interpolateColors,
-  spring,
-} from 'remotion';
+import { AbsoluteFill, useCurrentFrame, useVideoConfig, spring, interpolate } from 'remotion';
 
 export const Seq5: React.FC = () => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
 
-  // Entrance for the shield
-  const entrance = spring({
+  // Activity 링 스타일 그리기
+  const draw = spring({
     frame,
     fps,
-    config: { stiffness: 100, damping: 10 },
+    config: { damping: 100, mass: 2 },
   });
 
-  // Bug particles flying in
-  const bugs = [...Array(12)].map((_, i) => {
-      const bugEntrance = (frame - (i * 10)) % 100;
-      const x = interpolate(bugEntrance, [0, 80], [1200, 600]);
-      const opacity = interpolate(bugEntrance, [70, 85], [1, 0]);
-      return { x, opacity, y: (i * 80) % 600 - 300 };
-  });
+  const circleLength = 2 * Math.PI * 200; // r=200
 
   return (
     <AbsoluteFill style={{ backgroundColor: '#000000', justifyContent: 'center', alignItems: 'center' }}>
-      {/* Central Shield UI */}
-      <div
-          style={{
-              position: 'relative',
-              width: '500px',
-              height: '600px',
-              border: `4px solid ${interpolateColors(entrance, [0, 1], ['#000000', '#3B82F6'])}`,
-              borderRadius: '24px',
-              display: 'flex',
-              flexDirection: 'column',
-              justifyContent: 'center',
-              alignItems: 'center',
-              boxShadow: `0 0 ${interpolate(entrance, [0, 1], [0, 50])}px rgba(59, 130, 246, 0.4)`,
-              backgroundColor: 'rgba(59, 130, 246, 0.05)',
-              transform: `scale(${entrance})`,
-          } as React.CSSProperties}
-      >
-          <div style={{ color: '#3B82F6', fontSize: '24px', fontWeight: 800, marginBottom: '10px' }}>ANTIVIRUS & SCAN</div>
-          <div style={{ fontSize: '120px', fontWeight: 900, color: '#FFFFFF' }}>90%</div>
-          <div style={{ fontSize: '32px', fontWeight: 700, color: '#3B82F6' }}>BUG BLOCKED</div>
-      </div>
+      
+      {/* 백그라운드 링 */}
+      <svg width="600" height="600" style={{ position: 'absolute' }}>
+        <circle cx="300" cy="300" r="200" stroke="#333336" strokeWidth="40" fill="none" />
+      </svg>
+      
+      {/* 포그라운드 링 (Accent Blue) */}
+      <svg width="600" height="600" style={{ position: 'absolute', transform: 'rotate(-90deg)' }}>
+        <circle
+          cx="300"
+          cy="300"
+          r="200"
+          stroke="#0071E3"
+          strokeWidth="40"
+          strokeLinecap="round"
+          fill="none"
+          strokeDasharray={circleLength}
+          strokeDashoffset={interpolate(draw, [0, 1], [circleLength, circleLength * 0.2])} // 80% 채우기
+        />
+      </svg>
 
-      {/* Bug Particles (Small gray squares) */}
-      <AbsoluteFill style={{ pointerEvents: 'none' }}>
-          {bugs.map((bug, i) => (
-              <div
-                  key={i}
-                  style={{
-                      position: 'absolute',
-                      top: `calc(50% + ${bug.y}px)`,
-                      left: bug.x,
-                      width: '20px',
-                      height: '2px',
-                      backgroundColor: '#454545',
-                      opacity: bug.opacity,
-                  }}
-              />
-          ))}
-      </AbsoluteFill>
+      <div
+        style={{
+          color: '#FFFFFF',
+          fontSize: '60px',
+          fontWeight: 800,
+          fontFamily: 'Inter',
+          opacity: interpolate(frame, [20, 30], [0, 1], { extrapolateLeft: 'clamp' }),
+        }}
+      >
+        SHIFT
+      </div>
     </AbsoluteFill>
   );
 };

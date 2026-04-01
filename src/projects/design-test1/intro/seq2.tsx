@@ -1,86 +1,62 @@
 import React from 'react';
-import {
-  AbsoluteFill,
-  useCurrentFrame,
-  useVideoConfig,
-  interpolate,
-  spring,
-} from 'remotion';
+import { AbsoluteFill, useCurrentFrame, useVideoConfig, interpolate, spring } from 'remotion';
 
 export const Seq2: React.FC = () => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
 
-  // Entrance spring for the split line
-  const entrance = spring({
+  // 대각선 트랜지션 로직: 0~30프레임에서 블랙 배경(과거)에서 화이트로 전환
+  const maskProgress = spring({
     frame,
     fps,
-    config: { damping: 15, stiffness: 80 },
+    config: { damping: 100, stiffness: 100 },
   });
 
-  // Split position: 0 -> 0.5 (center)
-  const splitPos = entrance * 0.5;
+  // 자간 모션 (AI PAIR PROGRAMMER)
+  const letterSpacing = interpolate(frame, [30, 250], [20, -2], {
+    extrapolateLeft: 'clamp',
+    extrapolateRight: 'clamp',
+  });
 
-  // AI Content Opacity
-  const aiOpacity = interpolate(frame, [15, 30], [0, 1]);
+  const opacityOut = interpolate(frame, [230, 256], [1, 0], {
+    extrapolateLeft: 'clamp',
+    extrapolateRight: 'clamp',
+  });
 
   return (
-    <AbsoluteFill style={{ backgroundColor: '#000000', flexDirection: 'row' }}>
-      {/* Left Pane (Manual/Past) */}
-      <div
-        style={{
-          width: `${splitPos * 100}%`,
-          height: '100%',
-          backgroundColor: '#1A1A1A',
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          borderRight: '4px solid #3B82F6',
-          overflow: 'hidden',
-        }}
-      >
-        <div style={{ color: '#454545', fontFamily: 'JetBrains Mono', fontSize: '24px', opacity: 0.5 }}>
-          {`<div className="manual">\n  <h1>Manual Code</h1>\n  <button onClick={() => {}}>\n    Click Me\n  </button>\n</div>`}
+    <AbsoluteFill style={{ overflow: 'hidden', opacity: opacityOut }}>
+      {/* 바닥 베이스 (블랙) */}
+      <AbsoluteFill style={{ backgroundColor: '#000000', justifyContent: 'center', alignItems: 'center' }}>
+        <div style={{ color: '#333336', fontSize: '100px', fontWeight: 700, fontFamily: 'monospace' }}>
+          MANUAL BUILD
         </div>
-      </div>
+      </AbsoluteFill>
 
-      {/* Right Pane (AI/Future) */}
-      <div
+      {/* 덮어씌워지는 화이트 영역 (대각선 마스킹) */}
+      <AbsoluteFill
         style={{
-          flex: 1,
-          height: '100%',
-          display: 'flex',
-          flexDirection: 'column',
+          backgroundColor: '#FFFFFF',
           justifyContent: 'center',
           alignItems: 'center',
-          padding: '0 5%',
-          opacity: aiOpacity,
+          clipPath: `polygon(0 0, ${maskProgress * 150}% 0, ${maskProgress * 150 - 50}% 100%, 0 100%)`,
         }}
       >
-          <div
-            style={{
-              color: '#3B82F6',
-              fontSize: '32px',
-              fontWeight: 800,
-              fontFamily: 'JetBrains Mono',
-              marginBottom: '10px',
-            }}
-          >
-            AI PAIR PROGRAMMER
-          </div>
-          <h1
-            style={{
-              color: '#FFFFFF',
-              fontSize: '56px',
-              fontFamily: 'Pretendard',
-              fontWeight: 900,
-              textAlign: 'center',
-              lineHeight: 1.3,
-            }}
-          >
-            우리의 가장 든든한<br />페어 프로그래머
-          </h1>
-      </div>
+        <div
+          style={{
+            color: '#0071E3',
+            fontSize: '110px',
+            fontWeight: 900,
+            fontFamily: 'Inter, Pretendard, sans-serif',
+            letterSpacing: `${letterSpacing}px`,
+            textAlign: 'center',
+            lineHeight: 1.1,
+          }}
+        >
+          AI PAIR
+          <br />
+          <span style={{ color: '#000000' }}>PROGRAMMER</span>
+        </div>
+      </AbsoluteFill>
     </AbsoluteFill>
   );
 };

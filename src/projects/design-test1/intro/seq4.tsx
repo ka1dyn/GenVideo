@@ -1,96 +1,86 @@
 import React from 'react';
-import {
-  AbsoluteFill,
-  useCurrentFrame,
-  useVideoConfig,
-  interpolate,
-  spring,
-} from 'remotion';
+import { AbsoluteFill, useCurrentFrame, interpolate, spring, useVideoConfig } from 'remotion';
 
 export const Seq4: React.FC = () => {
   const frame = useCurrentFrame();
-  const { fps, height } = useVideoConfig();
+  const { fps } = useVideoConfig();
 
-  // Entrance for review bubbles
-  const entrance = spring({
+  // 좌우 스플릿 화면.
+  // 왼쪽에서 오른쪽으로 슬라이드 인
+  const slideIn = spring({
     frame,
     fps,
-    config: {
-      stiffness: 80,
-      damping: 10,
-    },
+    config: { damping: 14 },
   });
 
-  // Vertical scan line position
-  const scanPos = interpolate(frame % 90, [0, 90], [0, height]);
-  const scanOpacity = interpolate(frame % 90, [0, 10, 80, 90], [0, 0.5, 0.5, 0]);
+  const translateX = interpolate(slideIn, [0, 1], [100, 0]);
 
   return (
-    <AbsoluteFill style={{ backgroundColor: '#000000', overflow: 'hidden' }}>
-      {/* Code Background Layer */}
+    <AbsoluteFill
+      style={{
+        backgroundColor: '#FFFFFF',
+        transform: `translateX(${translateX}%)`,
+        flexDirection: 'row',
+      }}
+    >
+      {/* Left: SKETCH / PROMPT */}
       <div
         style={{
-          position: 'absolute',
-          top: 0,
-          left: 0,
-          width: '100%',
-          height: '100%',
-          opacity: 0.1,
-          fontFamily: 'JetBrains Mono',
-          fontSize: '20px',
-          color: '#FFFFFF',
+          flex: 1,
+          backgroundColor: '#000000',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
           padding: '40px',
-          whiteSpace: 'pre-wrap',
         }}
       >
-        {`function optimize(architecture) {\n  const AI = new Developer();\n  const efficiency = AI.analyze(architecture);\n  if (efficiency < 1.0) {\n    return AI.suggestOptimizations();\n  }\n  return architecture;\n}`}
+        <div
+          style={{
+            color: '#FFFFFF',
+            fontSize: '70px',
+            fontFamily: 'SF Pro Display, sans-serif',
+            fontWeight: 800,
+            lineHeight: 1.2,
+          }}
+        >
+          <span style={{ color: '#86868B' }}>from </span>SKETCH
+          <br />
+          <span style={{ color: '#86868B' }}>or </span>PROMPT
+        </div>
       </div>
 
-      {/* Horizontal Scan Line (Electric Blue) */}
+      {/* Right: PROTOTYPE */}
       <div
-          style={{
-            position: 'absolute',
-            top: scanPos,
-            left: 0,
-            width: '100%',
-            height: '2px',
-            backgroundColor: '#3B82F6',
-            boxShadow: '0 0 20px #3B82F6',
-            opacity: scanOpacity,
-          }}
-      />
-
-      <AbsoluteFill style={{ justifyContent: 'center', alignItems: 'center', padding: '0 10%' }}>
-        <div style={{ transform: `scale(${interpolate(entrance, [0, 1], [0.95, 1])})` }}>
-          <div style={{ color: '#3B82F6', fontSize: '32px', fontWeight: 800, fontFamily: 'JetBrains Mono', marginBottom: '10px' }}>
-            SENIOR CODE REVIEW
-          </div>
-          <h1 style={{ color: '#FFFFFF', fontSize: '56px', fontFamily: 'Pretendard', fontWeight: 900, textAlign: 'center' }}>
-            시니어 개발자가 <br />내 옆에 있는 것처럼
-          </h1>
-        </div>
-      </AbsoluteFill>
-
-      {/* Suggestion Bubble (Bottom Right) */}
-      <div
-          style={{
-              position: 'absolute',
-              bottom: '15%',
-              right: '15%',
-              width: '320px',
-              backgroundColor: '#1A1A1A',
-              borderLeft: '8px solid #3B82F6',
-              padding: '20px',
-              borderRadius: '8px',
-              opacity: interpolate(frame, [20, 35], [0, 1]),
-              transform: `translateX(${interpolate(frame, [20, 35], [50, 0])}px)`,
-              boxShadow: '0 10px 30px rgba(0,0,0,0.5)',
-          }}
+        style={{
+          flex: 1,
+          backgroundColor: '#FFFFFF',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          padding: '40px',
+        }}
       >
-          <div style={{ color: '#3B82F6', fontSize: '16px', fontWeight: 700, marginBottom: '5px' }}>OPTIMIZATION TIP</div>
-          <div style={{ color: '#FFFFFF', fontSize: '20px', fontFamily: 'Pretendard' }}>
-            "아키텍처 구조를 개선하여 성능을 2배 높일 수 있습니다."
+        <div
+          style={{
+            width: '80%',
+            height: '60%',
+            border: '8px solid #000000',
+            borderRadius: '40px',
+            display: 'flex',
+            flexDirection: 'column',
+            overflow: 'hidden',
+            boxShadow: '0 30px 60px rgba(0,0,0,0.1)',
+            transform: `scale(${interpolate(frame, [30, 45], [0.8, 1], { extrapolateRight: 'clamp' })})`,
+            opacity: interpolate(frame, [30, 45], [0, 1], { extrapolateLeft: 'clamp' }),
+          }}
+        >
+          <div style={{ height: '60px', borderBottom: '4px solid #000', padding: '0 20px', display: 'flex', alignItems: 'center' }}>
+            <div style={{ width: '15px', height: '15px', borderRadius: '50%', backgroundColor: '#000' }} />
           </div>
+          <div style={{ flex: 1, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+            <span style={{ fontSize: '50px', fontWeight: 900, color: '#0071E3' }}>PROTOTYPE</span>
+          </div>
+        </div>
       </div>
     </AbsoluteFill>
   );

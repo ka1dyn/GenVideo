@@ -1,56 +1,36 @@
 import React from 'react';
-import {
-  AbsoluteFill,
-  useCurrentFrame,
-  interpolate,
-} from 'remotion';
+import { AbsoluteFill, useCurrentFrame, useVideoConfig, spring, interpolate } from 'remotion';
 
 export const Seq1: React.FC = () => {
   const frame = useCurrentFrame();
+  const { fps } = useVideoConfig();
 
-  // Speed line animation
-  const speed = interpolate(frame, [0, 343], [10, 50]);
-  const dashOffset = -frame * speed;
+  // 스피드감 강조 (모션 블러 느낌의 슬라이드 인)
+  const slide = spring({
+    frame,
+    fps,
+    config: { damping: 12 },
+  });
+
+  const translateX = interpolate(slide, [0, 1], [-1000, 0]);
+  const skewX = interpolate(slide, [0, 1], [-30, -10]);
 
   return (
-    <AbsoluteFill style={{ backgroundColor: '#000000', overflow: 'hidden' }}>
-      {/* Perspective Grid Road */}
+    <AbsoluteFill style={{ backgroundColor: '#000000', justifyContent: 'center', alignItems: 'center', overflow: 'hidden' }}>
       <div
-          style={{
-              position: 'absolute',
-              width: '100%',
-              height: '100%',
-              perspective: '800px',
-              perspectiveOrigin: '50% 50%',
-          }}
+        style={{
+          transform: `translateX(${translateX}px) skewX(${skewX}deg)`,
+          color: '#0071E3',
+          fontSize: '120px',
+          fontWeight: 900,
+          fontFamily: 'SF Pro Display, Inter',
+          fontStyle: 'italic',
+          letterSpacing: '5px',
+          filter: `blur(${interpolate(slide, [0, 1], [20, 0])}px)`,
+        }}
       >
-          <div
-              style={{
-                  position: 'absolute',
-                  width: '200%',
-                  height: '200%',
-                  top: '-50%',
-                  left: '-50%',
-                  backgroundImage: `
-                      linear-gradient(#3B82F6 2px, transparent 2px),
-                      linear-gradient(90deg, #3B82F6 2px, transparent 2px)
-                  `,
-                  backgroundSize: '100px 100px',
-                  backgroundPosition: `0px ${dashOffset}px`,
-                  transform: 'rotateX(60deg)',
-                  opacity: 0.2,
-              }}
-          />
+        ACCELERATION
       </div>
-
-      <AbsoluteFill style={{ justifyContent: 'center', alignItems: 'center' }}>
-          <div style={{ color: '#3B82F6', fontSize: '32px', fontWeight: 800, fontFamily: 'JetBrains Mono', letterSpacing: '0.5em', marginBottom: '10px' }}>
-            SPEED OF LIGHT
-          </div>
-          <h1 style={{ color: '#FFFFFF', fontSize: '72px', fontFamily: 'Pretendard', fontWeight: 900, textAlign: 'center' }}>
-            우리의 상상을 초월하는 <br />폭발적인 기술의 속도
-          </h1>
-      </AbsoluteFill>
     </AbsoluteFill>
   );
 };

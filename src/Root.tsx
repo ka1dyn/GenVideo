@@ -17,6 +17,7 @@ export const RemotionRoot: React.FC = () => {
         height={1080}
       />
 
+
       <Composition
         id="web-paradiam"
         component={WebParadiam}
