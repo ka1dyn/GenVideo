@@ -77,25 +77,29 @@ export const introSubtitles: Subtitle[] = [
 기획서의 각 시퀀스(Seq)에 대응하는 `seq{N}.tsx` 파일을 생성합니다.
 (배치 경로: `src/projects/{project_id}/{section}/seq{N}.tsx`)
 
-**각 시퀀스 파일 구현 예시:**
+**세부 시퀀스 분할을 적용한 시퀀스 파일 구현 예시:**
+
+기획서에 `세부 시퀀스 (Sub-sequences) 분할 계획`이 명시되어 있거나, 구현 시 시퀀스 내부 애니메이션이 복잡해질 경우 `seq{N}.tsx` 내부에서 Remotion의 `<Sequence>` 컴포넌트를 활용하여 구간별로 장면을 촘촘하게 나누어 구현하세요.
+**[주의]** 내부 `<Sequence>`들의 `from`과 `durationInFrames`의 합산 프레임이 상위 루트 컴포넌트(`{section}.tsx`)에서 할당해 준 Seq{N} 전체 시퀀스 길이를 절대 초과하지 않아야 합니다. 프레임이 초과하면 애니메이션이 중간에 잘리게 됩니다.
 
 ```typescript
 import React from 'react';
-import { AbsoluteFill, useCurrentFrame, useVideoConfig, interpolate, spring } from 'remotion';
+import { AbsoluteFill, Sequence, useCurrentFrame, useVideoConfig, interpolate, spring } from 'remotion';
 
 export const Seq1: React.FC = () => {
-  const frame = useCurrentFrame();
-  const { fps } = useVideoConfig();
-
-  // 애니메이션 로직 (기획서에 따라 동적 구성)
-  const opacity = interpolate(frame, [0, 15], [0, 1], {
-    extrapolateLeft: 'clamp',
-    extrapolateRight: 'clamp',
-  });
+  // 전체 컴포넌트에서 공통으로 쓰이는 컨텍스트나 변수 선언
 
   return (
-    <AbsoluteFill style={{ /* design-system 등 스타일 적용 */ }}>
-      {/* 기획서에 명시된 시각 요소 */}
+    <AbsoluteFill style={{ /* design-system 공통 배경 등 스타일 적용 */ }}>
+      {/* SubSeq 1: 0~60 프레임 구간 */}
+      <Sequence from={0} durationInFrames={60}>
+         {/* 해당 구간만의 시각 요소 및 애니메이션 (예: 텍스트 등장) */}
+      </Sequence>
+
+      {/* SubSeq 2: 60~180 프레임 구간 */}
+      <Sequence from={60} durationInFrames={120}>
+         {/* 다음 구간만의 시각 요소 및 애니메이션 (예: 메인 그래픽 연출) */}
+      </Sequence>
     </AbsoluteFill>
   );
 };
@@ -108,11 +112,40 @@ export const Seq1: React.FC = () => {
 - 작성했던 모든 시퀀스를 `Series` 객체로 합성합니다.
 - **Audio 컴포넌트는 섹션 루트에서 한 번만** 배치합니다.
 - 단일 `Series.Sequence`의 `durationInFrames` 수치를 기획서에 명시된 기간으로 맞춰 설정합니다.
-- [중요] 프레임 패딩: 오디오 파일에는 마지막 대사 이후 묵음 여백(Tail)이 존재하므로, 각 seq의 `durationInFrames`를 합산했을 때 해당 섹션의 전체 오디오/자막 재생 시간(프레임 환산)과 정확히 일치해야 합니다. 최종적으로 검토해서 이전 seq와 다음 seq 사이에 빈틈이 있다면 이전 seq의 `durationInFrames`에 그 여백을 더해서 채워주세요.
+- [중요] 프레임 패딩: 오디오 파일에는 마지막 대사 이후 묵음 여백(Tail)이 존재하므로, 각 seq의 `durationInFrames`를 합산했을 때 해당 섹션의 전체 오디오/자막 재생 시간(프레임 환산)과 정확히 일치해야 합니다. 계획 단계에서 한번 수정하긴 했지만, 최종적으로 검토해서 이전 seq와 다음 seq 사이에 빈틈이 있다면 이전 seq의 `durationInFrames`에 그 여백을 더해서 채워주세요.
 
 ##### 자막 처리 가이드
 
-- 섹션 루트 컴포넌트 하단에 `src/shared-components/CaptionOverlay.tsx`를 임포트하여 `{section}_subtitles` 자막 배열을 주입하여 렌더링하며, 강제 줄바꿈(`\n`)이 잘 반영되도록 `whiteSpace: 'pre-line'`을 적용합니다.
+- 섹션 루트 컴포넌트(`{section}.tsx`)의 최상위 `AbsoluteFill` 가장 하단에 `src/shared-components/CaptionOverlay.tsx`를 배치하여 자막이 모든 영상 시각 요소 위에 오버레이 되도록 합니다.
+- 위에서 생성한 `{section}_subtitles` 배열을 `captions` props로 전달합니다. (`CaptionOverlay`가 내부적으로 `whiteSpace: 'pre-line'` 기법 및 애니메이션을 모두 처리하므로 별도의 스타일링은 불필요합니다.)
+
+```tsx
+import React from "react";
+import { AbsoluteFill, Series, Audio, staticFile } from "remotion";
+import { CaptionOverlay } from "../../../shared-components/CaptionOverlay";
+import { introSubtitles } from "./intro_subtitles";
+import { Seq1 } from "./seq1";
+
+export const Intro: React.FC = () => {
+  return (
+    <AbsoluteFill style={{ backgroundColor: "#000" }}>
+      {/* 1. 오디오는 루트 컴포넌트에서만 단 한 번 선언 및 렌더링 */}
+      <Audio src={staticFile("project_id/intro/intro.wav")} />
+
+      {/* 2. 각 시퀀스(화면)들을 Series로 연결 */}
+      <Series>
+        <Series.Sequence durationInFrames={120}>
+          <Seq1 />
+        </Series.Sequence>
+        {/* ... 추가 시퀀스들 */}
+      </Series>
+
+      {/* 3. 화면 최상단에 렌더링되도록 문서 제일 마지막에 자막 오버레이 컴포넌트 배치 */}
+      <CaptionOverlay captions={introSubtitles} />
+    </AbsoluteFill>
+  );
+};
+```
 
 ### 3. 필수 준수 규칙 (프로젝트 고유 제약사항)
 
@@ -132,14 +165,4 @@ export const Seq1: React.FC = () => {
 
 ```bash
 npm run lint
-```
-
-### 5. 프리뷰 시연
-
-모든 구현 과정이 끝나고 린트가 통과되면 프리뷰를 제공합니다.
-
-// turbo
-
-```bash
-npm run dev
 ```

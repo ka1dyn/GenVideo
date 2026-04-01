@@ -39,7 +39,7 @@ src/projects/{project-id}/
     {section}/                      <--- {section}_plan.md를 기반으로 Phase 3(Implement) 단계에서 구현할 영역
         {section}_subtitles.ts      <--- (Phase 3에서 생성 예정) 해당 섹션의 자막 타이밍 배열
         {section}.tsx               <--- 해당 섹션의 최상위 Series 래퍼 및 Audio 컴포넌트
-        seq1.tsx                    <--- (Phase 3에서 생성 예정) 기획서에 명시된 시퀀스 단위 컴포넌트
+        seq1.tsx                    <--- (Phase 3에서 생성 예정) 시퀀스 컴포넌트 (내부에서 <Sequence>로 세부 구간 분할 권장)
         seq2.tsx                    <--- ...
 
 src/shared-components/
@@ -85,6 +85,7 @@ src/shared-components/
 해당 워크플로우에서는 다음과 같은 동작을 합니다:
 
 - 순차적으로 기획서에 따라 `{section}_subtitles.ts` 및 `seq{N}.tsx` 파일을 생성합니다.
+  (복잡도를 낮추기 위해 `seq{N}.tsx` 내부를 `<Sequence>`로 세부 분할하는 것을 권장합니다.)
 - `{section}.tsx` 내부를 수정하여 합성합니다.
 
 ## Phase 4: Preview
