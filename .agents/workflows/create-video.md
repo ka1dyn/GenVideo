@@ -27,7 +27,8 @@ public/{project-id}/
     {section}/
         {section}.txt               <--- 대본에서 추출된 해당 섹션 원본 텍스트
         {section}.wav               <--- 원본 텍스트를 바탕으로 생성된 TTS 오디오
-        {section}_timestamp.json    <--- 오디오를 기반으로 생성된 타임스탬프 (Whisper AI)
+        {section}_timestamp.json    <--- 오디오를 기반으로 생성된 단어 타임스탬프 (Whisper AI)
+        {section}_final_timeline.json  <--- (Phase 2에서 생성 예정) 최종 단어 타임스탬프 (비교검증)
         {section}_context.md        <--- 원본 대본과 타임스탬프 간 매핑 가이드가 포함된 종합 컨텍스트 요약본
         {section}_plan.md           <--- (Phase 2에서 생성 예정) 애니메이션 및 시퀀스 기획서
 
@@ -35,12 +36,11 @@ src/constants/
     video-config.ts                 <--- 60fps 해상도 등 전체 프로젝트의 기준이 되는 동적 상수 설정 (읽기 전용 참조)
 
 src/projects/{project-id}/
-    theme.ts                        <--- (Phase 3 진입 시 최우선 생성) 디자인 시스템의 상수 모음
+    colors.ts                       <--- (Phase 3 진입 시 최우선 생성) 디자인 시스템의 상수 모음
     {section}/                      <--- {section}_plan.md를 기반으로 Phase 3(Implement) 단계에서 구현할 영역
         {section}_subtitles.ts      <--- (Phase 3에서 생성 예정) 해당 섹션의 자막 타이밍 배열
         {section}.tsx               <--- 해당 섹션의 최상위 Series 래퍼 및 Audio 컴포넌트
-        seq1.tsx                    <--- (Phase 3에서 생성 예정) 시퀀스 컴포넌트 (내부에서 <Sequence>로 세부 구간 분할 권장)
-        seq2.tsx                    <--- ...
+        sequences.tsx               <--- (Phase 3에서 생성 예정) 각 section의 시퀀스 컴포넌트 모음
 
 src/shared-components/
     CaptionOverlay.tsx          <--- 미리 주어진 자막 렌더링용 컴포넌트
@@ -78,7 +78,7 @@ src/shared-components/
 
 사용자가 기획안 (Phase 2) 을 승인했다면, 본격적인 프로젝트 구현을 시작합니다.
 
-**가장 먼저**, `public/{project_id}/design-system.md` 문서의 모든 상수(Constants) 블록을 추출하여 `src/projects/{project_id}/theme.ts` 파일로 통합 저장하세요. (이후 모든 시퀀스 컴포넌트는 이 테마 파일을 `import` 하여 색상/폰트/애니메이션 등을 참조해야 합니다.)
+**가장 먼저**, `public/{project_id}/design-system.md` 문서의 모든 상수(Constants) 블록을 추출하여 `src/projects/{project_id}/colors.ts` 파일로 통합 저장하세요. (이후 모든 시퀀스 컴포넌트는 이 테마 파일을 `import` 하여 색상/폰트/애니메이션 등을 참조해야 합니다.)
 
 이후 `.agents/workflows/implement-scenes.md` 경로의 워크플로우를 읽고 지시에 따라 나머지 씬 구현을 순차 진행합니다.
 

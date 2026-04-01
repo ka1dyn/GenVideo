@@ -152,20 +152,19 @@ export async function processMediaForSections(
           whisperPath,
           whisperCppVersion: "1.5.5",
           inputPath: processed16kWavPath,
-          tokenLevelTimestamps: false,
+          tokenLevelTimestamps: true,
+          splitOnWord: true,
           // @ts-ignore
           language: "ko",
           // @ts-ignore
           prompt: doc.text,
-          // @ts-ignore
-          tokensPerItem: 0,
         });
 
         timestamps = whisperOutput.transcription.map((segment) => ({
           text: segment.text.trim(),
           startMs: segment.offsets.from,
           endMs: segment.offsets.to,
-        }));
+        })).filter((t: any) => t.text.length > 0);
 
         fs.writeFileSync(jsonPath, JSON.stringify(timestamps, null, 2));
         console.log(`💾 Saved captions to ${jsonPath}`);

@@ -1,0 +1,597 @@
+[
+  {
+    "text": "이렇게",
+    "startMs": 10,
+    "endMs": 680
+  },
+  {
+    "text": "강력한",
+    "startMs": 680,
+    "endMs": 1400
+  },
+  {
+    "text": "AI",
+    "startMs": 1400,
+    "endMs": 1490
+  },
+  {
+    "text": "툴을",
+    "startMs": 1490,
+    "endMs": 2030
+  },
+  {
+    "text": "우리",
+    "startMs": 2030,
+    "endMs": 2320
+  },
+  {
+    "text": "팀에",
+    "startMs": 2320,
+    "endMs": 2460
+  },
+  {
+    "text": "성공적으로",
+    "startMs": 2460,
+    "endMs": 3100
+  },
+  {
+    "text": "도입하려면",
+    "startMs": 3100,
+    "endMs": 3710
+  },
+  {
+    "text": "어떻게",
+    "startMs": 3710,
+    "endMs": 4090
+  },
+  {
+    "text": "해야",
+    "startMs": 4090,
+    "endMs": 4230
+  },
+  {
+    "text": "할까요?",
+    "startMs": 4230,
+    "endMs": 4660
+  },
+  {
+    "text": "체계적이고",
+    "startMs": 4660,
+    "endMs": 5520
+  },
+  {
+    "text": "효율적인",
+    "startMs": 5520,
+    "endMs": 6210
+  },
+  {
+    "text": "3단계",
+    "startMs": 6210,
+    "endMs": 6720
+  },
+  {
+    "text": "실전",
+    "startMs": 6720,
+    "endMs": 7080
+  },
+  {
+    "text": "워크플로우를",
+    "startMs": 7080,
+    "endMs": 8060
+  },
+  {
+    "text": "제안합니다.",
+    "startMs": 8060,
+    "endMs": 9300
+  },
+  {
+    "text": "AI와",
+    "startMs": 9300,
+    "endMs": 9610
+  },
+  {
+    "text": "함께하는",
+    "startMs": 9610,
+    "endMs": 10400
+  },
+  {
+    "text": "개발",
+    "startMs": 10400,
+    "endMs": 10790
+  },
+  {
+    "text": "워크플로우는",
+    "startMs": 10790,
+    "endMs": 11940
+  },
+  {
+    "text": "보통",
+    "startMs": 11940,
+    "endMs": 12330
+  },
+  {
+    "text": "다음",
+    "startMs": 12330,
+    "endMs": 12910
+  },
+  {
+    "text": "3단계로",
+    "startMs": 12910,
+    "endMs": 13490
+  },
+  {
+    "text": "진행됩니다.",
+    "startMs": 13490,
+    "endMs": 14800
+  },
+  {
+    "text": "첫째,",
+    "startMs": 14800,
+    "endMs": 15660
+  },
+  {
+    "text": "전체적인",
+    "startMs": 15660,
+    "endMs": 16550
+  },
+  {
+    "text": "아키텍처",
+    "startMs": 16550,
+    "endMs": 17530
+  },
+  {
+    "text": "설계",
+    "startMs": 17530,
+    "endMs": 18060
+  },
+  {
+    "text": "둘째,",
+    "startMs": 18060,
+    "endMs": 19000
+  },
+  {
+    "text": "AI를",
+    "startMs": 19000,
+    "endMs": 19330
+  },
+  {
+    "text": "활용한",
+    "startMs": 19330,
+    "endMs": 20210
+  },
+  {
+    "text": "빠른",
+    "startMs": 20210,
+    "endMs": 20800
+  },
+  {
+    "text": "초안",
+    "startMs": 20800,
+    "endMs": 21420
+  },
+  {
+    "text": "작성",
+    "startMs": 21420,
+    "endMs": 22060
+  },
+  {
+    "text": "셋째,",
+    "startMs": 22060,
+    "endMs": 22590
+  },
+  {
+    "text": "개발자의",
+    "startMs": 22590,
+    "endMs": 23190
+  },
+  {
+    "text": "디테일한",
+    "startMs": 23190,
+    "endMs": 23870
+  },
+  {
+    "text": "리팩토링",
+    "startMs": 23870,
+    "endMs": 24520
+  },
+  {
+    "text": "및",
+    "startMs": 24520,
+    "endMs": 24750
+  },
+  {
+    "text": "최적화입니다.",
+    "startMs": 24750,
+    "endMs": 26080
+  },
+  {
+    "text": "단순한",
+    "startMs": 26080,
+    "endMs": 26750
+  },
+  {
+    "text": "마크업을",
+    "startMs": 26750,
+    "endMs": 27380
+  },
+  {
+    "text": "넘어",
+    "startMs": 27380,
+    "endMs": 27610
+  },
+  {
+    "text": "복잡한",
+    "startMs": 27610,
+    "endMs": 28290
+  },
+  {
+    "text": "로직도",
+    "startMs": 28290,
+    "endMs": 28650
+  },
+  {
+    "text": "문제없습니다.",
+    "startMs": 28650,
+    "endMs": 29960
+  },
+  {
+    "text": "프롬프트",
+    "startMs": 30860,
+    "endMs": 30900
+  },
+  {
+    "text": "몇",
+    "startMs": 30900,
+    "endMs": 30950
+  },
+  {
+    "text": "줄만",
+    "startMs": 30950,
+    "endMs": 31340
+  },
+  {
+    "text": "입력하면",
+    "startMs": 31340,
+    "endMs": 32260
+  },
+  {
+    "text": "API",
+    "startMs": 32260,
+    "endMs": 32680
+  },
+  {
+    "text": "연동부터",
+    "startMs": 32680,
+    "endMs": 33160
+  },
+  {
+    "text": "상태",
+    "startMs": 33160,
+    "endMs": 33520
+  },
+  {
+    "text": "관리까지",
+    "startMs": 33520,
+    "endMs": 34240
+  },
+  {
+    "text": "갖춘",
+    "startMs": 34240,
+    "endMs": 34600
+  },
+  {
+    "text": "완벽한",
+    "startMs": 34600,
+    "endMs": 35140
+  },
+  {
+    "text": "Next.js",
+    "startMs": 35140,
+    "endMs": 35680
+  },
+  {
+    "text": "컴포넌트",
+    "startMs": 35680,
+    "endMs": 36400
+  },
+  {
+    "text": "코드가",
+    "startMs": 36400,
+    "endMs": 36940
+  },
+  {
+    "text": "순식간에",
+    "startMs": 36940,
+    "endMs": 37730
+  },
+  {
+    "text": "작성됩니다.",
+    "startMs": 37730,
+    "endMs": 38840
+  },
+  {
+    "text": "이때",
+    "startMs": 38840,
+    "endMs": 39210
+  },
+  {
+    "text": "가장",
+    "startMs": 39210,
+    "endMs": 39640
+  },
+  {
+    "text": "중요한",
+    "startMs": 39640,
+    "endMs": 40170
+  },
+  {
+    "text": "핵심",
+    "startMs": 40170,
+    "endMs": 40550
+  },
+  {
+    "text": "기술은",
+    "startMs": 40550,
+    "endMs": 41110
+  },
+  {
+    "text": "바로",
+    "startMs": 41110,
+    "endMs": 41480
+  },
+  {
+    "text": "프롬프트",
+    "startMs": 41480,
+    "endMs": 42360
+  },
+  {
+    "text": "엔지니어링입니다.",
+    "startMs": 42360,
+    "endMs": 44080
+  },
+  {
+    "text": "명확한",
+    "startMs": 44080,
+    "endMs": 44840
+  },
+  {
+    "text": "컨텍스트와",
+    "startMs": 44840,
+    "endMs": 45590
+  },
+  {
+    "text": "엄격한",
+    "startMs": 45590,
+    "endMs": 46160
+  },
+  {
+    "text": "제약",
+    "startMs": 46160,
+    "endMs": 46540
+  },
+  {
+    "text": "조건을",
+    "startMs": 46540,
+    "endMs": 47110
+  },
+  {
+    "text": "제공할수록",
+    "startMs": 47110,
+    "endMs": 48140
+  },
+  {
+    "text": "AI는",
+    "startMs": 48140,
+    "endMs": 48610
+  },
+  {
+    "text": "우리가",
+    "startMs": 48610,
+    "endMs": 48860
+  },
+  {
+    "text": "정확히",
+    "startMs": 48860,
+    "endMs": 49320
+  },
+  {
+    "text": "원하는",
+    "startMs": 49320,
+    "endMs": 49860
+  },
+  {
+    "text": "형태의",
+    "startMs": 49860,
+    "endMs": 50230
+  },
+  {
+    "text": "코드를",
+    "startMs": 50230,
+    "endMs": 50720
+  },
+  {
+    "text": "오차",
+    "startMs": 50720,
+    "endMs": 51000
+  },
+  {
+    "text": "없이",
+    "startMs": 51000,
+    "endMs": 51320
+  },
+  {
+    "text": "생성해냅니다.",
+    "startMs": 51320,
+    "endMs": 52500
+  },
+  {
+    "text": "까다로웠던",
+    "startMs": 52500,
+    "endMs": 53270
+  },
+  {
+    "text": "테스트",
+    "startMs": 53270,
+    "endMs": 53750
+  },
+  {
+    "text": "코드",
+    "startMs": 53750,
+    "endMs": 54100
+  },
+  {
+    "text": "작성도",
+    "startMs": 54100,
+    "endMs": 54560
+  },
+  {
+    "text": "더",
+    "startMs": 54560,
+    "endMs": 54720
+  },
+  {
+    "text": "이상",
+    "startMs": 54720,
+    "endMs": 55090
+  },
+  {
+    "text": "고통스러운",
+    "startMs": 55090,
+    "endMs": 55860
+  },
+  {
+    "text": "작업이",
+    "startMs": 55860,
+    "endMs": 56300
+  },
+  {
+    "text": "아닙니다.",
+    "startMs": 56300,
+    "endMs": 57220
+  },
+  {
+    "text": "핵심",
+    "startMs": 57220,
+    "endMs": 57600
+  },
+  {
+    "text": "비즈니스",
+    "startMs": 57600,
+    "endMs": 58410
+  },
+  {
+    "text": "로직만",
+    "startMs": 58410,
+    "endMs": 59040
+  },
+  {
+    "text": "주어지면",
+    "startMs": 59040,
+    "endMs": 59840
+  },
+  {
+    "text": "엣지",
+    "startMs": 59840,
+    "endMs": 60160
+  },
+  {
+    "text": "케이스까지",
+    "startMs": 60160,
+    "endMs": 60980
+  },
+  {
+    "text": "꼼꼼하게",
+    "startMs": 60980,
+    "endMs": 61570
+  },
+  {
+    "text": "고려한",
+    "startMs": 61570,
+    "endMs": 62100
+  },
+  {
+    "text": "완벽한",
+    "startMs": 62100,
+    "endMs": 62560
+  },
+  {
+    "text": "테스트",
+    "startMs": 62560,
+    "endMs": 62840
+  },
+  {
+    "text": "스위트를",
+    "startMs": 62840,
+    "endMs": 63450
+  },
+  {
+    "text": "자동으로",
+    "startMs": 63450,
+    "endMs": 63820
+  },
+  {
+    "text": "구성해줍니다.",
+    "startMs": 63820,
+    "endMs": 64800
+  },
+  {
+    "text": "영상편집",
+    "startMs": 64800,
+    "endMs": 64810
+  },
+  {
+    "text": "및",
+    "startMs": 64810,
+    "endMs": 64810
+  },
+  {
+    "text": "자막",
+    "startMs": 64810,
+    "endMs": 64810
+  },
+  {
+    "text": "제공",
+    "startMs": 64810,
+    "endMs": 64810
+  },
+  {
+    "text": "및",
+    "startMs": 64810,
+    "endMs": 64810
+  },
+  {
+    "text": "광고는",
+    "startMs": 64810,
+    "endMs": 64810
+  },
+  {
+    "text": "kakaotalk",
+    "startMs": 64810,
+    "endMs": 64810
+  },
+  {
+    "text": "플러스친구의",
+    "startMs": 64810,
+    "endMs": 64810
+  },
+  {
+    "text": "홈페이지에서",
+    "startMs": 64810,
+    "endMs": 64830
+  },
+  {
+    "text": "확인하실",
+    "startMs": 64830,
+    "endMs": 64840
+  },
+  {
+    "text": "수",
+    "startMs": 64840,
+    "endMs": 64840
+  },
+  {
+    "text": "있습니다.",
+    "startMs": 64840,
+    "endMs": 65080
+  }
+]

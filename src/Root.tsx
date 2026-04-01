@@ -2,6 +2,7 @@ import "./index.css";
 
 import React from "react";
 import { Folder, Composition } from "remotion";
+import { DesignTest2 } from "./projects/design-test2/design-test2";
 import { DesignTest1 } from "./projects/design-test1/design-test1";
 import { WebParadiam } from "./projects/web-paradiam/web-paradiam";
 
@@ -10,6 +11,15 @@ import { VIDEO_FPS, VIDEO_WIDTH, VIDEO_HEIGHT } from "./constants/video-config";
 export const RemotionRoot: React.FC = () => {
   return (
     <Folder name="Projects">
+      <Composition
+        id="design-test2"
+        component={DesignTest2}
+        durationInFrames={0}
+        fps={VIDEO_FPS}
+        width={VIDEO_WIDTH}
+        height={VIDEO_HEIGHT}
+      />
+
       <Composition
         id="design-test1"
         component={DesignTest1}
