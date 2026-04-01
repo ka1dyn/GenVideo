@@ -1,0 +1,189 @@
+{
+  "totalDuration": 67120,
+  "totalFrames": 4028,
+  "sentences": [
+    {
+      "sentence": "그렇다면 실제 현장에서는 어떤 변화가 일어나고 있을까요?",
+      "startMs": 20,
+      "endMs": 3140,
+      "words": [
+        { "text": "그렇다면", "startMs": 20, "endMs": 540 },
+        { "text": "실제", "startMs": 540, "endMs": 740 },
+        { "text": "현장에서는", "startMs": 740, "endMs": 1350 },
+        { "text": "어떤", "startMs": 1350, "endMs": 1620 },
+        { "text": "변화가", "startMs": 1620, "endMs": 1960 },
+        { "text": "일어나고", "startMs": 1960, "endMs": 2450 },
+        { "text": "있을까요?", "startMs": 2450, "endMs": 3140 }
+      ]
+    },
+    {
+      "sentence": "막연한 기대감이 아닌, 실제 데이터를 바탕으로 AI 도입의 극적인 효과를 살펴보겠습니다.",
+      "startMs": 3140,
+      "endMs": 9780,
+      "words": [
+        { "text": "막연한", "startMs": 3140, "endMs": 4090 },
+        { "text": "기대감이", "startMs": 4090, "endMs": 4770 },
+        { "text": "아닌,", "startMs": 4770, "endMs": 5280 },
+        { "text": "실제", "startMs": 5280, "endMs": 5810 },
+        { "text": "데이터를", "startMs": 5810, "endMs": 6410 },
+        { "text": "바탕으로", "startMs": 6410, "endMs": 7250 },
+        { "text": "AI", "startMs": 7250, "endMs": 7380 },
+        { "text": "도입의", "startMs": 7380, "endMs": 7670 },
+        { "text": "극적인", "startMs": 7670, "endMs": 8090 },
+        { "text": "효과를", "startMs": 8090, "endMs": 8510 },
+        { "text": "살펴보겠습니다.", "startMs": 8510, "endMs": 9780 }
+      ]
+    },
+    {
+      "sentence": "실제로 최근 한 연구에 따르면, AI 코딩 어시스턴트를 도입한 조직의 개발 생산성은 무려 55%나 향상되었습니다.",
+      "startMs": 9780,
+      "endMs": 18880,
+      "words": [
+        { "text": "실제로", "startMs": 9780, "endMs": 10560 },
+        { "text": "최근", "startMs": 10560, "endMs": 11260 },
+        { "text": "한", "startMs": 11260, "endMs": 11340 },
+        { "text": "연구에", "startMs": 11340, "endMs": 12120 },
+        { "text": "따르면,", "startMs": 12120, "endMs": 12930 },
+        { "text": "AI", "startMs": 12930, "endMs": 13040 },
+        { "text": "코딩", "startMs": 13040, "endMs": 13390 },
+        { "text": "어시스턴트를", "startMs": 13390, "endMs": 14390 },
+        { "text": "도입한", "startMs": 14390, "endMs": 14900 },
+        { "text": "조직의", "startMs": 14900, "endMs": 15410 },
+        { "text": "개발", "startMs": 15410, "endMs": 15750 },
+        { "text": "생산성은", "startMs": 15750, "endMs": 16430 },
+        { "text": "무려", "startMs": 16430, "endMs": 16770 },
+        { "text": "55%나", "startMs": 16770, "endMs": 17330 },
+        { "text": "향상되었습니다.", "startMs": 17330, "endMs": 18880 }
+      ]
+    },
+    {
+      "sentence": "반복적인 보일러플레이트 작성 시간이 획기적으로 줄어든 덕분이죠.",
+      "startMs": 18880,
+      "endMs": 23840,
+      "words": [
+        { "text": "반복적인", "startMs": 18880, "endMs": 19720 },
+        { "text": "보일러플레이트", "startMs": 19720, "endMs": 20770 },
+        { "text": "작성", "startMs": 20770, "endMs": 21060 },
+        { "text": "시간이", "startMs": 21060, "endMs": 21570 },
+        { "text": "획기적으로", "startMs": 21570, "endMs": 22440 },
+        { "text": "줄어든", "startMs": 22440, "endMs": 22960 },
+        { "text": "덕분이죠.", "startMs": 22960, "endMs": 23840 }
+      ]
+    },
+    {
+      "sentence": "개발자들의 업무 시간 분배도 완전히 달라졌습니다.",
+      "startMs": 23840,
+      "endMs": 26780,
+      "words": [
+        { "text": "개발자들의", "startMs": 23840, "endMs": 24590 },
+        { "text": "업무", "startMs": 24590, "endMs": 24730 },
+        { "text": "시간", "startMs": 24730, "endMs": 24990 },
+        { "text": "분배도", "startMs": 24990, "endMs": 25370 },
+        { "text": "완전히", "startMs": 25370, "endMs": 25830 },
+        { "text": "달라졌습니다.", "startMs": 25830, "endMs": 26780 }
+      ]
+    },
+    {
+      "sentence": "단순 반복 작업에 쏟는 시간은 80% 감소한 반면, 창의적인 아키텍처 설계와 비즈니스 로직 고민에 쏟는 시간은 3배 이상 늘어났습니다.",
+      "startMs": 28790,
+      "endMs": 38300,
+      "words": [
+        { "text": "단순", "startMs": 28790, "endMs": 29140 },
+        { "text": "반복", "startMs": 29140, "endMs": 29510 },
+        { "text": "작업에", "startMs": 29510, "endMs": 30130 },
+        { "text": "쏟는", "startMs": 30130, "endMs": 30420 },
+        { "text": "시간은", "startMs": 30420, "endMs": 30980 },
+        { "text": "80%", "startMs": 30980, "endMs": 31400 },
+        { "text": "감소한", "startMs": 31400, "endMs": 31940 },
+        { "text": "반면,", "startMs": 31940, "endMs": 32590 },
+        { "text": "창의적인", "startMs": 32590, "endMs": 33160 },
+        { "text": "아키텍처", "startMs": 33160, "endMs": 33850 },
+        { "text": "설계와", "startMs": 33850, "endMs": 34260 },
+        { "text": "비즈니스", "startMs": 34260, "endMs": 34940 },
+        { "text": "로직", "startMs": 34940, "endMs": 35220 },
+        { "text": "고민에", "startMs": 35220, "endMs": 35700 },
+        { "text": "쏟는", "startMs": 35700, "endMs": 36060 },
+        { "text": "시간은", "startMs": 36060, "endMs": 36490 },
+        { "text": "3배", "startMs": 36490, "endMs": 37070 },
+        { "text": "이상", "startMs": 37070, "endMs": 37150 },
+        { "text": "늘어났습니다.", "startMs": 37150, "endMs": 38300 }
+      ]
+    },
+    {
+      "sentence": "AI 도입 전과 후를 비교해 볼까요?",
+      "startMs": 38300,
+      "endMs": 41300,
+      "words": [
+        { "text": "AI", "startMs": 38300, "endMs": 38440 },
+        { "text": "도입", "startMs": 38440, "endMs": 38860 },
+        { "text": "전과", "startMs": 38860, "endMs": 39280 },
+        { "text": "후를", "startMs": 39280, "endMs": 39910 },
+        { "text": "비교해볼까요?", "startMs": 39910, "endMs": 41300 }
+      ]
+    },
+    {
+      "sentence": "예전에는 공식 문서를 뒤지며 수동으로 타이핑하며 밤을 새우던 작업들이, 이제는 AI의 똑똑한 제안을 검토하고 승인하는 효율적인 프로세스로 전환되었습니다.",
+      "startMs": 41300,
+      "endMs": 52300,
+      "words": [
+        { "text": "예전에는", "startMs": 41300, "endMs": 41950 },
+        { "text": "공식", "startMs": 41950, "endMs": 42250 },
+        { "text": "문서를", "startMs": 42250, "endMs": 42760 },
+        { "text": "뒤지며", "startMs": 42760, "endMs": 43270 },
+        { "text": "수동으로", "startMs": 43270, "endMs": 43910 },
+        { "text": "타이핑하며", "startMs": 43910, "endMs": 44730 },
+        { "text": "밤을", "startMs": 44730, "endMs": 45050 },
+        { "text": "새우던", "startMs": 45050, "endMs": 45540 },
+        { "text": "작업들이,", "startMs": 45540, "endMs": 46310 },
+        { "text": "이제는", "startMs": 46310, "endMs": 46690 },
+        { "text": "AI의", "startMs": 46690, "endMs": 46960 },
+        { "text": "똑똑한", "startMs": 46960, "endMs": 47440 },
+        { "text": "제안을", "startMs": 47440, "endMs": 47920 },
+        { "text": "검토하고", "startMs": 47920, "endMs": 48570 },
+        { "text": "승인하는", "startMs": 48570, "endMs": 49220 },
+        { "text": "효율적인", "startMs": 49220, "endMs": 49870 },
+        { "text": "프로세스로", "startMs": 49870, "endMs": 50690 },
+        { "text": "전환되었습니다.", "startMs": 50690, "endMs": 52300 }
+      ]
+    },
+    {
+      "sentence": "버그 발생률 또한 눈에 띄게 줄었습니다.",
+      "startMs": 52300,
+      "endMs": 56100,
+      "words": [
+        { "text": "버그", "startMs": 52300, "endMs": 52720 },
+        { "text": "발생률", "startMs": 52720, "endMs": 53380 },
+        { "text": "또한", "startMs": 53380, "endMs": 53900 },
+        { "text": "눈에", "startMs": 53900, "endMs": 54340 },
+        { "text": "띄게", "startMs": 54340, "endMs": 54690 },
+        { "text": "줄었습니다.", "startMs": 54690, "endMs": 56100 }
+      ]
+    },
+    {
+      "sentence": "실시간 정적 분석과 코드 리뷰를 통해 배포 전 치명적인 오류의 90% 이상을 사전에 차단하며 서비스의 안정성을 크게 높여주고 있습니다.",
+      "startMs": 56100,
+      "endMs": 65940,
+      "words": [
+        { "text": "실시간", "startMs": 56100, "endMs": 56640 },
+        { "text": "정적", "startMs": 56640, "endMs": 57250 },
+        { "text": "분석과", "startMs": 57250, "endMs": 57700 },
+        { "text": "코드", "startMs": 57700, "endMs": 58100 },
+        { "text": "리뷰를", "startMs": 58100, "endMs": 59600 },
+        { "text": "통해", "startMs": 59600, "endMs": 59880 },
+        { "text": "배포", "startMs": 59880, "endMs": 60150 },
+        { "text": "전", "startMs": 60150, "endMs": 60490 },
+        { "text": "치명적인", "startMs": 60490, "endMs": 60870 },
+        { "text": "오류의", "startMs": 60870, "endMs": 61290 },
+        { "text": "90%", "startMs": 61290, "endMs": 61620 },
+        { "text": "이상을", "startMs": 61620, "endMs": 62050 },
+        { "text": "사전에", "startMs": 62050, "endMs": 62510 },
+        { "text": "차단하며", "startMs": 62510, "endMs": 63040 },
+        { "text": "서비스의", "startMs": 63040, "endMs": 63600 },
+        { "text": "안정성을", "startMs": 63600, "endMs": 64170 },
+        { "text": "크게", "startMs": 64170, "endMs": 64460 },
+        { "text": "높여주고", "startMs": 64460, "endMs": 65030 },
+        { "text": "있습니다.", "startMs": 65030, "endMs": 65940 }
+      ]
+    }
+  ]
+}

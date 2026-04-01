@@ -17,7 +17,7 @@
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_remotion_bundler_css_loader_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default()((_node_modules_remotion_bundler_css_loader_runtime_cssWithMappingToString_js__WEBPACK_IMPORTED_MODULE_0___default()));
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "/*! tailwindcss v4.2.0 | MIT License | https://tailwindcss.com */\n@layer properties;\n@layer theme, base, components, utilities;\n@layer theme {\n  :root, :host {\n    --font-sans: ui-sans-serif, system-ui, sans-serif, \"Apple Color Emoji\",\n      \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\";\n    --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,\n      \"Liberation Mono\", \"Courier New\", monospace;\n    --spacing: 0.25rem;\n    --default-transition-duration: 150ms;\n    --default-transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);\n    --default-font-family: var(--font-sans);\n    --default-font-feature-settings: var(--font-sans--font-feature-settings);\n    --default-font-variation-settings: var(\n      --font-sans--font-variation-settings\n    );\n    --default-mono-font-family: var(--font-mono);\n    --default-mono-font-feature-settings: var(\n      --font-mono--font-feature-settings\n    );\n    --default-mono-font-variation-settings: var(\n      --font-mono--font-variation-settings\n    );\n  }\n}\n@layer base {\n  *, ::after, ::before, ::backdrop, ::file-selector-button {\n    box-sizing: border-box;\n    margin: 0;\n    padding: 0;\n    border: 0 solid;\n  }\n  html, :host {\n    line-height: 1.5;\n    -webkit-text-size-adjust: 100%;\n    tab-size: 4;\n    font-family: var( --default-font-family, ui-sans-serif, system-ui, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\" );\n    font-feature-settings: var(--default-font-feature-settings, normal);\n    font-variation-settings: var( --default-font-variation-settings, normal );\n    -webkit-tap-highlight-color: transparent;\n  }\n  body {\n    line-height: inherit;\n  }\n  hr {\n    height: 0;\n    color: inherit;\n    border-top-width: 1px;\n  }\n  abbr:where([title]) {\n    -webkit-text-decoration: underline dotted;\n    text-decoration: underline dotted;\n  }\n  h1, h2, h3, h4, h5, h6 {\n    font-size: inherit;\n    font-weight: inherit;\n  }\n  a {\n    color: inherit;\n    -webkit-text-decoration: inherit;\n    text-decoration: inherit;\n  }\n  b, strong {\n    font-weight: bolder;\n  }\n  code, kbd, samp, pre {\n    font-family: var( --default-mono-font-family, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, \"Liberation Mono\", \"Courier New\", monospace );\n    font-feature-settings: var( --default-mono-font-feature-settings, normal );\n    font-variation-settings: var( --default-mono-font-variation-settings, normal );\n    font-size: 1em;\n  }\n  small {\n    font-size: 80%;\n  }\n  sub, sup {\n    font-size: 75%;\n    line-height: 0;\n    position: relative;\n    vertical-align: baseline;\n  }\n  sub {\n    bottom: -0.25em;\n  }\n  sup {\n    top: -0.5em;\n  }\n  table {\n    text-indent: 0;\n    border-color: inherit;\n    border-collapse: collapse;\n  }\n  :-moz-focusring {\n    outline: auto;\n  }\n  progress {\n    vertical-align: baseline;\n  }\n  summary {\n    display: list-item;\n  }\n  ol, ul, menu {\n    list-style: none;\n  }\n  img, svg, video, canvas, audio, iframe, embed, object {\n    display: block;\n    vertical-align: middle;\n  }\n  img, video {\n    max-width: 100%;\n    height: auto;\n  }\n  button, input, select, optgroup, textarea, ::file-selector-button {\n    font: inherit;\n    font-feature-settings: inherit;\n    font-variation-settings: inherit;\n    letter-spacing: inherit;\n    color: inherit;\n    border-radius: 0;\n    background-color: transparent;\n    opacity: 1;\n  }\n  :where(select:is([multiple], [size])) optgroup {\n    font-weight: bolder;\n  }\n  :where(select:is([multiple], [size])) optgroup option {\n    padding-inline-start: 20px;\n  }\n  ::file-selector-button {\n    margin-inline-end: 4px;\n  }\n  ::placeholder {\n    opacity: 1;\n    color: currentColor;\n    @supports (color: color-mix(in lab, red, red)) {\n      color: color-mix(in oklab, currentColor 50%, transparent);\n    }\n  }\n  textarea {\n    resize: vertical;\n  }\n  ::-webkit-search-decoration {\n    -webkit-appearance: none;\n  }\n  ::-webkit-date-and-time-value {\n    min-height: 1lh;\n    text-align: inherit;\n  }\n  ::-webkit-datetime-edit {\n    display: inline-flex;\n  }\n  ::-webkit-datetime-edit-fields-wrapper {\n    padding: 0;\n  }\n  ::-webkit-datetime-edit, ::-webkit-datetime-edit-year-field, ::-webkit-datetime-edit-month-field, ::-webkit-datetime-edit-day-field, ::-webkit-datetime-edit-hour-field, ::-webkit-datetime-edit-minute-field, ::-webkit-datetime-edit-second-field, ::-webkit-datetime-edit-millisecond-field, ::-webkit-datetime-edit-meridiem-field {\n    padding-block: 0;\n  }\n  :-moz-ui-invalid {\n    box-shadow: none;\n  }\n  button, input:where([type=\"button\"], [type=\"reset\"], [type=\"submit\"]), ::file-selector-button {\n    appearance: button;\n  }\n  ::-webkit-inner-spin-button, ::-webkit-outer-spin-button {\n    height: auto;\n  }\n  [hidden]:where(:not([hidden=\"until-found\"])) {\n    display: none !important;\n  }\n}\n@layer utilities {\n  .visible {\n    visibility: visible;\n  }\n  .absolute {\n    position: absolute;\n  }\n  .relative {\n    position: relative;\n  }\n  .static {\n    position: static;\n  }\n  .start {\n    inset-inline-start: var(--spacing);\n  }\n  .end {\n    inset-inline-end: var(--spacing);\n  }\n  .container {\n    width: 100%;\n    @media (width >= 40rem) {\n      max-width: 40rem;\n    }\n    @media (width >= 48rem) {\n      max-width: 48rem;\n    }\n    @media (width >= 64rem) {\n      max-width: 64rem;\n    }\n    @media (width >= 80rem) {\n      max-width: 80rem;\n    }\n    @media (width >= 96rem) {\n      max-width: 96rem;\n    }\n  }\n  .block {\n    display: block;\n  }\n  .flex {\n    display: flex;\n  }\n  .hidden {\n    display: none;\n  }\n  .inline-block {\n    display: inline-block;\n  }\n  .table {\n    display: table;\n  }\n  .transform {\n    transform: var(--tw-rotate-x,) var(--tw-rotate-y,) var(--tw-rotate-z,) var(--tw-skew-x,) var(--tw-skew-y,);\n  }\n  .border {\n    border-style: var(--tw-border-style);\n    border-width: 1px;\n  }\n  .italic {\n    font-style: italic;\n  }\n  .outline {\n    outline-style: var(--tw-outline-style);\n    outline-width: 1px;\n  }\n  .blur {\n    --tw-blur: blur(8px);\n    filter: var(--tw-blur,) var(--tw-brightness,) var(--tw-contrast,) var(--tw-grayscale,) var(--tw-hue-rotate,) var(--tw-invert,) var(--tw-saturate,) var(--tw-sepia,) var(--tw-drop-shadow,);\n  }\n  .filter {\n    filter: var(--tw-blur,) var(--tw-brightness,) var(--tw-contrast,) var(--tw-grayscale,) var(--tw-hue-rotate,) var(--tw-invert,) var(--tw-saturate,) var(--tw-sepia,) var(--tw-drop-shadow,);\n  }\n  .transition {\n    transition-property: color, background-color, border-color, outline-color, text-decoration-color, fill, stroke, --tw-gradient-from, --tw-gradient-via, --tw-gradient-to, opacity, box-shadow, transform, translate, scale, rotate, filter, -webkit-backdrop-filter, backdrop-filter, display, content-visibility, overlay, pointer-events;\n    transition-timing-function: var(--tw-ease, var(--default-transition-timing-function));\n    transition-duration: var(--tw-duration, var(--default-transition-duration));\n  }\n}\n@property --tw-rotate-x {\n  syntax: \"*\";\n  inherits: false;\n}\n@property --tw-rotate-y {\n  syntax: \"*\";\n  inherits: false;\n}\n@property --tw-rotate-z {\n  syntax: \"*\";\n  inherits: false;\n}\n@property --tw-skew-x {\n  syntax: \"*\";\n  inherits: false;\n}\n@property --tw-skew-y {\n  syntax: \"*\";\n  inherits: false;\n}\n@property --tw-border-style {\n  syntax: \"*\";\n  inherits: false;\n  initial-value: solid;\n}\n@property --tw-outline-style {\n  syntax: \"*\";\n  inherits: false;\n  initial-value: solid;\n}\n@property --tw-blur {\n  syntax: \"*\";\n  inherits: false;\n}\n@property --tw-brightness {\n  syntax: \"*\";\n  inherits: false;\n}\n@property --tw-contrast {\n  syntax: \"*\";\n  inherits: false;\n}\n@property --tw-grayscale {\n  syntax: \"*\";\n  inherits: false;\n}\n@property --tw-hue-rotate {\n  syntax: \"*\";\n  inherits: false;\n}\n@property --tw-invert {\n  syntax: \"*\";\n  inherits: false;\n}\n@property --tw-opacity {\n  syntax: \"*\";\n  inherits: false;\n}\n@property --tw-saturate {\n  syntax: \"*\";\n  inherits: false;\n}\n@property --tw-sepia {\n  syntax: \"*\";\n  inherits: false;\n}\n@property --tw-drop-shadow {\n  syntax: \"*\";\n  inherits: false;\n}\n@property --tw-drop-shadow-color {\n  syntax: \"*\";\n  inherits: false;\n}\n@property --tw-drop-shadow-alpha {\n  syntax: \"<percentage>\";\n  inherits: false;\n  initial-value: 100%;\n}\n@property --tw-drop-shadow-size {\n  syntax: \"*\";\n  inherits: false;\n}\n@layer properties {\n  @supports ((-webkit-hyphens: none) and (not (margin-trim: inline))) or ((-moz-orient: inline) and (not (color:rgb(from red r g b)))) {\n    *, ::before, ::after, ::backdrop {\n      --tw-rotate-x: initial;\n      --tw-rotate-y: initial;\n      --tw-rotate-z: initial;\n      --tw-skew-x: initial;\n      --tw-skew-y: initial;\n      --tw-border-style: solid;\n      --tw-outline-style: solid;\n      --tw-blur: initial;\n      --tw-brightness: initial;\n      --tw-contrast: initial;\n      --tw-grayscale: initial;\n      --tw-hue-rotate: initial;\n      --tw-invert: initial;\n      --tw-opacity: initial;\n      --tw-saturate: initial;\n      --tw-sepia: initial;\n      --tw-drop-shadow: initial;\n      --tw-drop-shadow-color: initial;\n      --tw-drop-shadow-alpha: 100%;\n      --tw-drop-shadow-size: initial;\n    }\n  }\n}\n", "",{"version":3,"sources":["webpack://./src/index.css"],"names":[],"mappings":"AAAA,gEAAgE;AAChE,iBAAiB;AACjB,yCAAyC;AACzC;EACE;IACE;6DACyD;IACzD;iDAC6C;IAC7C,kBAAkB;IAClB,oCAAoC;IACpC,kEAAkE;IAClE,uCAAuC;IACvC,wEAAwE;IACxE;;KAEC;IACD,4CAA4C;IAC5C;;KAEC;IACD;;KAEC;EACH;AACF;AACA;EACE;IACE,sBAAsB;IACtB,SAAS;IACT,UAAU;IACV,eAAe;EACjB;EACA;IACE,gBAAgB;IAChB,8BAA8B;IAC9B,WAAW;IACX,6JAA6J;IAC7J,mEAAmE;IACnE,yEAAyE;IACzE,wCAAwC;EAC1C;EACA;IACE,oBAAoB;EACtB;EACA;IACE,SAAS;IACT,cAAc;IACd,qBAAqB;EACvB;EACA;IACE,yCAAyC;IACzC,iCAAiC;EACnC;EACA;IACE,kBAAkB;IAClB,oBAAoB;EACtB;EACA;IACE,cAAc;IACd,gCAAgC;IAChC,wBAAwB;EAC1B;EACA;IACE,mBAAmB;EACrB;EACA;IACE,kJAAkJ;IAClJ,0EAA0E;IAC1E,8EAA8E;IAC9E,cAAc;EAChB;EACA;IACE,cAAc;EAChB;EACA;IACE,cAAc;IACd,cAAc;IACd,kBAAkB;IAClB,wBAAwB;EAC1B;EACA;IACE,eAAe;EACjB;EACA;IACE,WAAW;EACb;EACA;IACE,cAAc;IACd,qBAAqB;IACrB,yBAAyB;EAC3B;EACA;IACE,aAAa;EACf;EACA;IACE,wBAAwB;EAC1B;EACA;IACE,kBAAkB;EACpB;EACA;IACE,gBAAgB;EAClB;EACA;IACE,cAAc;IACd,sBAAsB;EACxB;EACA;IACE,eAAe;IACf,YAAY;EACd;EACA;IACE,aAAa;IACb,8BAA8B;IAC9B,gCAAgC;IAChC,uBAAuB;IACvB,cAAc;IACd,gBAAgB;IAChB,6BAA6B;IAC7B,UAAU;EACZ;EACA;IACE,mBAAmB;EACrB;EACA;IACE,0BAA0B;EAC5B;EACA;IACE,sBAAsB;EACxB;EACA;IACE,UAAU;IACV,mBAAmB;IACnB;MACE,yDAAyD;IAC3D;EACF;EACA;IACE,gBAAgB;EAClB;EACA;IACE,wBAAwB;EAC1B;EACA;IACE,eAAe;IACf,mBAAmB;EACrB;EACA;IACE,oBAAoB;EACtB;EACA;IACE,UAAU;EACZ;EACA;IACE,gBAAgB;EAClB;EACA;IACE,gBAAgB;EAClB;EACA;IACE,kBAAkB;EACpB;EACA;IACE,YAAY;EACd;EACA;IACE,wBAAwB;EAC1B;AACF;AACA;EACE;IACE,mBAAmB;EACrB;EACA;IACE,kBAAkB;EACpB;EACA;IACE,kBAAkB;EACpB;EACA;IACE,gBAAgB;EAClB;EACA;IACE,kCAAkC;EACpC;EACA;IACE,gCAAgC;EAClC;EACA;IACE,WAAW;IACX;MACE,gBAAgB;IAClB;IACA;MACE,gBAAgB;IAClB;IACA;MACE,gBAAgB;IAClB;IACA;MACE,gBAAgB;IAClB;IACA;MACE,gBAAgB;IAClB;EACF;EACA;IACE,cAAc;EAChB;EACA;IACE,aAAa;EACf;EACA;IACE,aAAa;EACf;EACA;IACE,qBAAqB;EACvB;EACA;IACE,cAAc;EAChB;EACA;IACE,0GAA0G;EAC5G;EACA;IACE,oCAAoC;IACpC,iBAAiB;EACnB;EACA;IACE,kBAAkB;EACpB;EACA;IACE,sCAAsC;IACtC,kBAAkB;EACpB;EACA;IACE,oBAAoB;IACpB,0LAA0L;EAC5L;EACA;IACE,0LAA0L;EAC5L;EACA;IACE,yUAAyU;IACzU,qFAAqF;IACrF,2EAA2E;EAC7E;AACF;AACA;EACE,WAAW;EACX,eAAe;AACjB;AACA;EACE,WAAW;EACX,eAAe;AACjB;AACA;EACE,WAAW;EACX,eAAe;AACjB;AACA;EACE,WAAW;EACX,eAAe;AACjB;AACA;EACE,WAAW;EACX,eAAe;AACjB;AACA;EACE,WAAW;EACX,eAAe;EACf,oBAAoB;AACtB;AACA;EACE,WAAW;EACX,eAAe;EACf,oBAAoB;AACtB;AACA;EACE,WAAW;EACX,eAAe;AACjB;AACA;EACE,WAAW;EACX,eAAe;AACjB;AACA;EACE,WAAW;EACX,eAAe;AACjB;AACA;EACE,WAAW;EACX,eAAe;AACjB;AACA;EACE,WAAW;EACX,eAAe;AACjB;AACA;EACE,WAAW;EACX,eAAe;AACjB;AACA;EACE,WAAW;EACX,eAAe;AACjB;AACA;EACE,WAAW;EACX,eAAe;AACjB;AACA;EACE,WAAW;EACX,eAAe;AACjB;AACA;EACE,WAAW;EACX,eAAe;AACjB;AACA;EACE,WAAW;EACX,eAAe;AACjB;AACA;EACE,sBAAsB;EACtB,eAAe;EACf,mBAAmB;AACrB;AACA;EACE,WAAW;EACX,eAAe;AACjB;AACA;EACE;IACE;MACE,sBAAsB;MACtB,sBAAsB;MACtB,sBAAsB;MACtB,oBAAoB;MACpB,oBAAoB;MACpB,wBAAwB;MACxB,yBAAyB;MACzB,kBAAkB;MAClB,wBAAwB;MACxB,sBAAsB;MACtB,uBAAuB;MACvB,wBAAwB;MACxB,oBAAoB;MACpB,qBAAqB;MACrB,sBAAsB;MACtB,mBAAmB;MACnB,yBAAyB;MACzB,+BAA+B;MAC/B,4BAA4B;MAC5B,8BAA8B;IAChC;EACF;AACF","sourcesContent":["/*! tailwindcss v4.2.0 | MIT License | https://tailwindcss.com */\n@layer properties;\n@layer theme, base, components, utilities;\n@layer theme {\n  :root, :host {\n    --font-sans: ui-sans-serif, system-ui, sans-serif, \"Apple Color Emoji\",\n      \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\";\n    --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,\n      \"Liberation Mono\", \"Courier New\", monospace;\n    --spacing: 0.25rem;\n    --default-transition-duration: 150ms;\n    --default-transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);\n    --default-font-family: var(--font-sans);\n    --default-font-feature-settings: var(--font-sans--font-feature-settings);\n    --default-font-variation-settings: var(\n      --font-sans--font-variation-settings\n    );\n    --default-mono-font-family: var(--font-mono);\n    --default-mono-font-feature-settings: var(\n      --font-mono--font-feature-settings\n    );\n    --default-mono-font-variation-settings: var(\n      --font-mono--font-variation-settings\n    );\n  }\n}\n@layer base {\n  *, ::after, ::before, ::backdrop, ::file-selector-button {\n    box-sizing: border-box;\n    margin: 0;\n    padding: 0;\n    border: 0 solid;\n  }\n  html, :host {\n    line-height: 1.5;\n    -webkit-text-size-adjust: 100%;\n    tab-size: 4;\n    font-family: var( --default-font-family, ui-sans-serif, system-ui, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\" );\n    font-feature-settings: var(--default-font-feature-settings, normal);\n    font-variation-settings: var( --default-font-variation-settings, normal );\n    -webkit-tap-highlight-color: transparent;\n  }\n  body {\n    line-height: inherit;\n  }\n  hr {\n    height: 0;\n    color: inherit;\n    border-top-width: 1px;\n  }\n  abbr:where([title]) {\n    -webkit-text-decoration: underline dotted;\n    text-decoration: underline dotted;\n  }\n  h1, h2, h3, h4, h5, h6 {\n    font-size: inherit;\n    font-weight: inherit;\n  }\n  a {\n    color: inherit;\n    -webkit-text-decoration: inherit;\n    text-decoration: inherit;\n  }\n  b, strong {\n    font-weight: bolder;\n  }\n  code, kbd, samp, pre {\n    font-family: var( --default-mono-font-family, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, \"Liberation Mono\", \"Courier New\", monospace );\n    font-feature-settings: var( --default-mono-font-feature-settings, normal );\n    font-variation-settings: var( --default-mono-font-variation-settings, normal );\n    font-size: 1em;\n  }\n  small {\n    font-size: 80%;\n  }\n  sub, sup {\n    font-size: 75%;\n    line-height: 0;\n    position: relative;\n    vertical-align: baseline;\n  }\n  sub {\n    bottom: -0.25em;\n  }\n  sup {\n    top: -0.5em;\n  }\n  table {\n    text-indent: 0;\n    border-color: inherit;\n    border-collapse: collapse;\n  }\n  :-moz-focusring {\n    outline: auto;\n  }\n  progress {\n    vertical-align: baseline;\n  }\n  summary {\n    display: list-item;\n  }\n  ol, ul, menu {\n    list-style: none;\n  }\n  img, svg, video, canvas, audio, iframe, embed, object {\n    display: block;\n    vertical-align: middle;\n  }\n  img, video {\n    max-width: 100%;\n    height: auto;\n  }\n  button, input, select, optgroup, textarea, ::file-selector-button {\n    font: inherit;\n    font-feature-settings: inherit;\n    font-variation-settings: inherit;\n    letter-spacing: inherit;\n    color: inherit;\n    border-radius: 0;\n    background-color: transparent;\n    opacity: 1;\n  }\n  :where(select:is([multiple], [size])) optgroup {\n    font-weight: bolder;\n  }\n  :where(select:is([multiple], [size])) optgroup option {\n    padding-inline-start: 20px;\n  }\n  ::file-selector-button {\n    margin-inline-end: 4px;\n  }\n  ::placeholder {\n    opacity: 1;\n    color: currentColor;\n    @supports (color: color-mix(in lab, red, red)) {\n      color: color-mix(in oklab, currentColor 50%, transparent);\n    }\n  }\n  textarea {\n    resize: vertical;\n  }\n  ::-webkit-search-decoration {\n    -webkit-appearance: none;\n  }\n  ::-webkit-date-and-time-value {\n    min-height: 1lh;\n    text-align: inherit;\n  }\n  ::-webkit-datetime-edit {\n    display: inline-flex;\n  }\n  ::-webkit-datetime-edit-fields-wrapper {\n    padding: 0;\n  }\n  ::-webkit-datetime-edit, ::-webkit-datetime-edit-year-field, ::-webkit-datetime-edit-month-field, ::-webkit-datetime-edit-day-field, ::-webkit-datetime-edit-hour-field, ::-webkit-datetime-edit-minute-field, ::-webkit-datetime-edit-second-field, ::-webkit-datetime-edit-millisecond-field, ::-webkit-datetime-edit-meridiem-field {\n    padding-block: 0;\n  }\n  :-moz-ui-invalid {\n    box-shadow: none;\n  }\n  button, input:where([type=\"button\"], [type=\"reset\"], [type=\"submit\"]), ::file-selector-button {\n    appearance: button;\n  }\n  ::-webkit-inner-spin-button, ::-webkit-outer-spin-button {\n    height: auto;\n  }\n  [hidden]:where(:not([hidden=\"until-found\"])) {\n    display: none !important;\n  }\n}\n@layer utilities {\n  .visible {\n    visibility: visible;\n  }\n  .absolute {\n    position: absolute;\n  }\n  .relative {\n    position: relative;\n  }\n  .static {\n    position: static;\n  }\n  .start {\n    inset-inline-start: var(--spacing);\n  }\n  .end {\n    inset-inline-end: var(--spacing);\n  }\n  .container {\n    width: 100%;\n    @media (width >= 40rem) {\n      max-width: 40rem;\n    }\n    @media (width >= 48rem) {\n      max-width: 48rem;\n    }\n    @media (width >= 64rem) {\n      max-width: 64rem;\n    }\n    @media (width >= 80rem) {\n      max-width: 80rem;\n    }\n    @media (width >= 96rem) {\n      max-width: 96rem;\n    }\n  }\n  .block {\n    display: block;\n  }\n  .flex {\n    display: flex;\n  }\n  .hidden {\n    display: none;\n  }\n  .inline-block {\n    display: inline-block;\n  }\n  .table {\n    display: table;\n  }\n  .transform {\n    transform: var(--tw-rotate-x,) var(--tw-rotate-y,) var(--tw-rotate-z,) var(--tw-skew-x,) var(--tw-skew-y,);\n  }\n  .border {\n    border-style: var(--tw-border-style);\n    border-width: 1px;\n  }\n  .italic {\n    font-style: italic;\n  }\n  .outline {\n    outline-style: var(--tw-outline-style);\n    outline-width: 1px;\n  }\n  .blur {\n    --tw-blur: blur(8px);\n    filter: var(--tw-blur,) var(--tw-brightness,) var(--tw-contrast,) var(--tw-grayscale,) var(--tw-hue-rotate,) var(--tw-invert,) var(--tw-saturate,) var(--tw-sepia,) var(--tw-drop-shadow,);\n  }\n  .filter {\n    filter: var(--tw-blur,) var(--tw-brightness,) var(--tw-contrast,) var(--tw-grayscale,) var(--tw-hue-rotate,) var(--tw-invert,) var(--tw-saturate,) var(--tw-sepia,) var(--tw-drop-shadow,);\n  }\n  .transition {\n    transition-property: color, background-color, border-color, outline-color, text-decoration-color, fill, stroke, --tw-gradient-from, --tw-gradient-via, --tw-gradient-to, opacity, box-shadow, transform, translate, scale, rotate, filter, -webkit-backdrop-filter, backdrop-filter, display, content-visibility, overlay, pointer-events;\n    transition-timing-function: var(--tw-ease, var(--default-transition-timing-function));\n    transition-duration: var(--tw-duration, var(--default-transition-duration));\n  }\n}\n@property --tw-rotate-x {\n  syntax: \"*\";\n  inherits: false;\n}\n@property --tw-rotate-y {\n  syntax: \"*\";\n  inherits: false;\n}\n@property --tw-rotate-z {\n  syntax: \"*\";\n  inherits: false;\n}\n@property --tw-skew-x {\n  syntax: \"*\";\n  inherits: false;\n}\n@property --tw-skew-y {\n  syntax: \"*\";\n  inherits: false;\n}\n@property --tw-border-style {\n  syntax: \"*\";\n  inherits: false;\n  initial-value: solid;\n}\n@property --tw-outline-style {\n  syntax: \"*\";\n  inherits: false;\n  initial-value: solid;\n}\n@property --tw-blur {\n  syntax: \"*\";\n  inherits: false;\n}\n@property --tw-brightness {\n  syntax: \"*\";\n  inherits: false;\n}\n@property --tw-contrast {\n  syntax: \"*\";\n  inherits: false;\n}\n@property --tw-grayscale {\n  syntax: \"*\";\n  inherits: false;\n}\n@property --tw-hue-rotate {\n  syntax: \"*\";\n  inherits: false;\n}\n@property --tw-invert {\n  syntax: \"*\";\n  inherits: false;\n}\n@property --tw-opacity {\n  syntax: \"*\";\n  inherits: false;\n}\n@property --tw-saturate {\n  syntax: \"*\";\n  inherits: false;\n}\n@property --tw-sepia {\n  syntax: \"*\";\n  inherits: false;\n}\n@property --tw-drop-shadow {\n  syntax: \"*\";\n  inherits: false;\n}\n@property --tw-drop-shadow-color {\n  syntax: \"*\";\n  inherits: false;\n}\n@property --tw-drop-shadow-alpha {\n  syntax: \"<percentage>\";\n  inherits: false;\n  initial-value: 100%;\n}\n@property --tw-drop-shadow-size {\n  syntax: \"*\";\n  inherits: false;\n}\n@layer properties {\n  @supports ((-webkit-hyphens: none) and (not (margin-trim: inline))) or ((-moz-orient: inline) and (not (color:rgb(from red r g b)))) {\n    *, ::before, ::after, ::backdrop {\n      --tw-rotate-x: initial;\n      --tw-rotate-y: initial;\n      --tw-rotate-z: initial;\n      --tw-skew-x: initial;\n      --tw-skew-y: initial;\n      --tw-border-style: solid;\n      --tw-outline-style: solid;\n      --tw-blur: initial;\n      --tw-brightness: initial;\n      --tw-contrast: initial;\n      --tw-grayscale: initial;\n      --tw-hue-rotate: initial;\n      --tw-invert: initial;\n      --tw-opacity: initial;\n      --tw-saturate: initial;\n      --tw-sepia: initial;\n      --tw-drop-shadow: initial;\n      --tw-drop-shadow-color: initial;\n      --tw-drop-shadow-alpha: 100%;\n      --tw-drop-shadow-size: initial;\n    }\n  }\n}\n"],"sourceRoot":""}]);
+___CSS_LOADER_EXPORT___.push([module.id, "/*! tailwindcss v4.2.0 | MIT License | https://tailwindcss.com */\n@layer properties;\n@layer theme, base, components, utilities;\n@layer theme {\n  :root, :host {\n    --font-sans: ui-sans-serif, system-ui, sans-serif, \"Apple Color Emoji\",\n      \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\";\n    --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,\n      \"Liberation Mono\", \"Courier New\", monospace;\n    --spacing: 0.25rem;\n    --default-transition-duration: 150ms;\n    --default-transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);\n    --default-font-family: var(--font-sans);\n    --default-font-feature-settings: var(--font-sans--font-feature-settings);\n    --default-font-variation-settings: var(\n      --font-sans--font-variation-settings\n    );\n    --default-mono-font-family: var(--font-mono);\n    --default-mono-font-feature-settings: var(\n      --font-mono--font-feature-settings\n    );\n    --default-mono-font-variation-settings: var(\n      --font-mono--font-variation-settings\n    );\n  }\n}\n@layer base {\n  *, ::after, ::before, ::backdrop, ::file-selector-button {\n    box-sizing: border-box;\n    margin: 0;\n    padding: 0;\n    border: 0 solid;\n  }\n  html, :host {\n    line-height: 1.5;\n    -webkit-text-size-adjust: 100%;\n    tab-size: 4;\n    font-family: var( --default-font-family, ui-sans-serif, system-ui, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\" );\n    font-feature-settings: var(--default-font-feature-settings, normal);\n    font-variation-settings: var( --default-font-variation-settings, normal );\n    -webkit-tap-highlight-color: transparent;\n  }\n  body {\n    line-height: inherit;\n  }\n  hr {\n    height: 0;\n    color: inherit;\n    border-top-width: 1px;\n  }\n  abbr:where([title]) {\n    -webkit-text-decoration: underline dotted;\n    text-decoration: underline dotted;\n  }\n  h1, h2, h3, h4, h5, h6 {\n    font-size: inherit;\n    font-weight: inherit;\n  }\n  a {\n    color: inherit;\n    -webkit-text-decoration: inherit;\n    text-decoration: inherit;\n  }\n  b, strong {\n    font-weight: bolder;\n  }\n  code, kbd, samp, pre {\n    font-family: var( --default-mono-font-family, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, \"Liberation Mono\", \"Courier New\", monospace );\n    font-feature-settings: var( --default-mono-font-feature-settings, normal );\n    font-variation-settings: var( --default-mono-font-variation-settings, normal );\n    font-size: 1em;\n  }\n  small {\n    font-size: 80%;\n  }\n  sub, sup {\n    font-size: 75%;\n    line-height: 0;\n    position: relative;\n    vertical-align: baseline;\n  }\n  sub {\n    bottom: -0.25em;\n  }\n  sup {\n    top: -0.5em;\n  }\n  table {\n    text-indent: 0;\n    border-color: inherit;\n    border-collapse: collapse;\n  }\n  :-moz-focusring {\n    outline: auto;\n  }\n  progress {\n    vertical-align: baseline;\n  }\n  summary {\n    display: list-item;\n  }\n  ol, ul, menu {\n    list-style: none;\n  }\n  img, svg, video, canvas, audio, iframe, embed, object {\n    display: block;\n    vertical-align: middle;\n  }\n  img, video {\n    max-width: 100%;\n    height: auto;\n  }\n  button, input, select, optgroup, textarea, ::file-selector-button {\n    font: inherit;\n    font-feature-settings: inherit;\n    font-variation-settings: inherit;\n    letter-spacing: inherit;\n    color: inherit;\n    border-radius: 0;\n    background-color: transparent;\n    opacity: 1;\n  }\n  :where(select:is([multiple], [size])) optgroup {\n    font-weight: bolder;\n  }\n  :where(select:is([multiple], [size])) optgroup option {\n    padding-inline-start: 20px;\n  }\n  ::file-selector-button {\n    margin-inline-end: 4px;\n  }\n  ::placeholder {\n    opacity: 1;\n    color: currentColor;\n    @supports (color: color-mix(in lab, red, red)) {\n      color: color-mix(in oklab, currentColor 50%, transparent);\n    }\n  }\n  textarea {\n    resize: vertical;\n  }\n  ::-webkit-search-decoration {\n    -webkit-appearance: none;\n  }\n  ::-webkit-date-and-time-value {\n    min-height: 1lh;\n    text-align: inherit;\n  }\n  ::-webkit-datetime-edit {\n    display: inline-flex;\n  }\n  ::-webkit-datetime-edit-fields-wrapper {\n    padding: 0;\n  }\n  ::-webkit-datetime-edit, ::-webkit-datetime-edit-year-field, ::-webkit-datetime-edit-month-field, ::-webkit-datetime-edit-day-field, ::-webkit-datetime-edit-hour-field, ::-webkit-datetime-edit-minute-field, ::-webkit-datetime-edit-second-field, ::-webkit-datetime-edit-millisecond-field, ::-webkit-datetime-edit-meridiem-field {\n    padding-block: 0;\n  }\n  :-moz-ui-invalid {\n    box-shadow: none;\n  }\n  button, input:where([type=\"button\"], [type=\"reset\"], [type=\"submit\"]), ::file-selector-button {\n    appearance: button;\n  }\n  ::-webkit-inner-spin-button, ::-webkit-outer-spin-button {\n    height: auto;\n  }\n  [hidden]:where(:not([hidden=\"until-found\"])) {\n    display: none !important;\n  }\n}\n@layer utilities {\n  .visible {\n    visibility: visible;\n  }\n  .absolute {\n    position: absolute;\n  }\n  .relative {\n    position: relative;\n  }\n  .static {\n    position: static;\n  }\n  .start {\n    inset-inline-start: var(--spacing);\n  }\n  .end {\n    inset-inline-end: var(--spacing);\n  }\n  .container {\n    width: 100%;\n    @media (width >= 40rem) {\n      max-width: 40rem;\n    }\n    @media (width >= 48rem) {\n      max-width: 48rem;\n    }\n    @media (width >= 64rem) {\n      max-width: 64rem;\n    }\n    @media (width >= 80rem) {\n      max-width: 80rem;\n    }\n    @media (width >= 96rem) {\n      max-width: 96rem;\n    }\n  }\n  .block {\n    display: block;\n  }\n  .flex {\n    display: flex;\n  }\n  .grid {\n    display: grid;\n  }\n  .hidden {\n    display: none;\n  }\n  .inline-block {\n    display: inline-block;\n  }\n  .table {\n    display: table;\n  }\n  .transform {\n    transform: var(--tw-rotate-x,) var(--tw-rotate-y,) var(--tw-rotate-z,) var(--tw-skew-x,) var(--tw-skew-y,);\n  }\n  .border {\n    border-style: var(--tw-border-style);\n    border-width: 1px;\n  }\n  .italic {\n    font-style: italic;\n  }\n  .outline {\n    outline-style: var(--tw-outline-style);\n    outline-width: 1px;\n  }\n  .blur {\n    --tw-blur: blur(8px);\n    filter: var(--tw-blur,) var(--tw-brightness,) var(--tw-contrast,) var(--tw-grayscale,) var(--tw-hue-rotate,) var(--tw-invert,) var(--tw-saturate,) var(--tw-sepia,) var(--tw-drop-shadow,);\n  }\n  .filter {\n    filter: var(--tw-blur,) var(--tw-brightness,) var(--tw-contrast,) var(--tw-grayscale,) var(--tw-hue-rotate,) var(--tw-invert,) var(--tw-saturate,) var(--tw-sepia,) var(--tw-drop-shadow,);\n  }\n  .transition {\n    transition-property: color, background-color, border-color, outline-color, text-decoration-color, fill, stroke, --tw-gradient-from, --tw-gradient-via, --tw-gradient-to, opacity, box-shadow, transform, translate, scale, rotate, filter, -webkit-backdrop-filter, backdrop-filter, display, content-visibility, overlay, pointer-events;\n    transition-timing-function: var(--tw-ease, var(--default-transition-timing-function));\n    transition-duration: var(--tw-duration, var(--default-transition-duration));\n  }\n}\n@property --tw-rotate-x {\n  syntax: \"*\";\n  inherits: false;\n}\n@property --tw-rotate-y {\n  syntax: \"*\";\n  inherits: false;\n}\n@property --tw-rotate-z {\n  syntax: \"*\";\n  inherits: false;\n}\n@property --tw-skew-x {\n  syntax: \"*\";\n  inherits: false;\n}\n@property --tw-skew-y {\n  syntax: \"*\";\n  inherits: false;\n}\n@property --tw-border-style {\n  syntax: \"*\";\n  inherits: false;\n  initial-value: solid;\n}\n@property --tw-outline-style {\n  syntax: \"*\";\n  inherits: false;\n  initial-value: solid;\n}\n@property --tw-blur {\n  syntax: \"*\";\n  inherits: false;\n}\n@property --tw-brightness {\n  syntax: \"*\";\n  inherits: false;\n}\n@property --tw-contrast {\n  syntax: \"*\";\n  inherits: false;\n}\n@property --tw-grayscale {\n  syntax: \"*\";\n  inherits: false;\n}\n@property --tw-hue-rotate {\n  syntax: \"*\";\n  inherits: false;\n}\n@property --tw-invert {\n  syntax: \"*\";\n  inherits: false;\n}\n@property --tw-opacity {\n  syntax: \"*\";\n  inherits: false;\n}\n@property --tw-saturate {\n  syntax: \"*\";\n  inherits: false;\n}\n@property --tw-sepia {\n  syntax: \"*\";\n  inherits: false;\n}\n@property --tw-drop-shadow {\n  syntax: \"*\";\n  inherits: false;\n}\n@property --tw-drop-shadow-color {\n  syntax: \"*\";\n  inherits: false;\n}\n@property --tw-drop-shadow-alpha {\n  syntax: \"<percentage>\";\n  inherits: false;\n  initial-value: 100%;\n}\n@property --tw-drop-shadow-size {\n  syntax: \"*\";\n  inherits: false;\n}\n@layer properties {\n  @supports ((-webkit-hyphens: none) and (not (margin-trim: inline))) or ((-moz-orient: inline) and (not (color:rgb(from red r g b)))) {\n    *, ::before, ::after, ::backdrop {\n      --tw-rotate-x: initial;\n      --tw-rotate-y: initial;\n      --tw-rotate-z: initial;\n      --tw-skew-x: initial;\n      --tw-skew-y: initial;\n      --tw-border-style: solid;\n      --tw-outline-style: solid;\n      --tw-blur: initial;\n      --tw-brightness: initial;\n      --tw-contrast: initial;\n      --tw-grayscale: initial;\n      --tw-hue-rotate: initial;\n      --tw-invert: initial;\n      --tw-opacity: initial;\n      --tw-saturate: initial;\n      --tw-sepia: initial;\n      --tw-drop-shadow: initial;\n      --tw-drop-shadow-color: initial;\n      --tw-drop-shadow-alpha: 100%;\n      --tw-drop-shadow-size: initial;\n    }\n  }\n}\n", "",{"version":3,"sources":["webpack://./src/index.css"],"names":[],"mappings":"AAAA,gEAAgE;AAChE,iBAAiB;AACjB,yCAAyC;AACzC;EACE;IACE;6DACyD;IACzD;iDAC6C;IAC7C,kBAAkB;IAClB,oCAAoC;IACpC,kEAAkE;IAClE,uCAAuC;IACvC,wEAAwE;IACxE;;KAEC;IACD,4CAA4C;IAC5C;;KAEC;IACD;;KAEC;EACH;AACF;AACA;EACE;IACE,sBAAsB;IACtB,SAAS;IACT,UAAU;IACV,eAAe;EACjB;EACA;IACE,gBAAgB;IAChB,8BAA8B;IAC9B,WAAW;IACX,6JAA6J;IAC7J,mEAAmE;IACnE,yEAAyE;IACzE,wCAAwC;EAC1C;EACA;IACE,oBAAoB;EACtB;EACA;IACE,SAAS;IACT,cAAc;IACd,qBAAqB;EACvB;EACA;IACE,yCAAyC;IACzC,iCAAiC;EACnC;EACA;IACE,kBAAkB;IAClB,oBAAoB;EACtB;EACA;IACE,cAAc;IACd,gCAAgC;IAChC,wBAAwB;EAC1B;EACA;IACE,mBAAmB;EACrB;EACA;IACE,kJAAkJ;IAClJ,0EAA0E;IAC1E,8EAA8E;IAC9E,cAAc;EAChB;EACA;IACE,cAAc;EAChB;EACA;IACE,cAAc;IACd,cAAc;IACd,kBAAkB;IAClB,wBAAwB;EAC1B;EACA;IACE,eAAe;EACjB;EACA;IACE,WAAW;EACb;EACA;IACE,cAAc;IACd,qBAAqB;IACrB,yBAAyB;EAC3B;EACA;IACE,aAAa;EACf;EACA;IACE,wBAAwB;EAC1B;EACA;IACE,kBAAkB;EACpB;EACA;IACE,gBAAgB;EAClB;EACA;IACE,cAAc;IACd,sBAAsB;EACxB;EACA;IACE,eAAe;IACf,YAAY;EACd;EACA;IACE,aAAa;IACb,8BAA8B;IAC9B,gCAAgC;IAChC,uBAAuB;IACvB,cAAc;IACd,gBAAgB;IAChB,6BAA6B;IAC7B,UAAU;EACZ;EACA;IACE,mBAAmB;EACrB;EACA;IACE,0BAA0B;EAC5B;EACA;IACE,sBAAsB;EACxB;EACA;IACE,UAAU;IACV,mBAAmB;IACnB;MACE,yDAAyD;IAC3D;EACF;EACA;IACE,gBAAgB;EAClB;EACA;IACE,wBAAwB;EAC1B;EACA;IACE,eAAe;IACf,mBAAmB;EACrB;EACA;IACE,oBAAoB;EACtB;EACA;IACE,UAAU;EACZ;EACA;IACE,gBAAgB;EAClB;EACA;IACE,gBAAgB;EAClB;EACA;IACE,kBAAkB;EACpB;EACA;IACE,YAAY;EACd;EACA;IACE,wBAAwB;EAC1B;AACF;AACA;EACE;IACE,mBAAmB;EACrB;EACA;IACE,kBAAkB;EACpB;EACA;IACE,kBAAkB;EACpB;EACA;IACE,gBAAgB;EAClB;EACA;IACE,kCAAkC;EACpC;EACA;IACE,gCAAgC;EAClC;EACA;IACE,WAAW;IACX;MACE,gBAAgB;IAClB;IACA;MACE,gBAAgB;IAClB;IACA;MACE,gBAAgB;IAClB;IACA;MACE,gBAAgB;IAClB;IACA;MACE,gBAAgB;IAClB;EACF;EACA;IACE,cAAc;EAChB;EACA;IACE,aAAa;EACf;EACA;IACE,aAAa;EACf;EACA;IACE,aAAa;EACf;EACA;IACE,qBAAqB;EACvB;EACA;IACE,cAAc;EAChB;EACA;IACE,0GAA0G;EAC5G;EACA;IACE,oCAAoC;IACpC,iBAAiB;EACnB;EACA;IACE,kBAAkB;EACpB;EACA;IACE,sCAAsC;IACtC,kBAAkB;EACpB;EACA;IACE,oBAAoB;IACpB,0LAA0L;EAC5L;EACA;IACE,0LAA0L;EAC5L;EACA;IACE,yUAAyU;IACzU,qFAAqF;IACrF,2EAA2E;EAC7E;AACF;AACA;EACE,WAAW;EACX,eAAe;AACjB;AACA;EACE,WAAW;EACX,eAAe;AACjB;AACA;EACE,WAAW;EACX,eAAe;AACjB;AACA;EACE,WAAW;EACX,eAAe;AACjB;AACA;EACE,WAAW;EACX,eAAe;AACjB;AACA;EACE,WAAW;EACX,eAAe;EACf,oBAAoB;AACtB;AACA;EACE,WAAW;EACX,eAAe;EACf,oBAAoB;AACtB;AACA;EACE,WAAW;EACX,eAAe;AACjB;AACA;EACE,WAAW;EACX,eAAe;AACjB;AACA;EACE,WAAW;EACX,eAAe;AACjB;AACA;EACE,WAAW;EACX,eAAe;AACjB;AACA;EACE,WAAW;EACX,eAAe;AACjB;AACA;EACE,WAAW;EACX,eAAe;AACjB;AACA;EACE,WAAW;EACX,eAAe;AACjB;AACA;EACE,WAAW;EACX,eAAe;AACjB;AACA;EACE,WAAW;EACX,eAAe;AACjB;AACA;EACE,WAAW;EACX,eAAe;AACjB;AACA;EACE,WAAW;EACX,eAAe;AACjB;AACA;EACE,sBAAsB;EACtB,eAAe;EACf,mBAAmB;AACrB;AACA;EACE,WAAW;EACX,eAAe;AACjB;AACA;EACE;IACE;MACE,sBAAsB;MACtB,sBAAsB;MACtB,sBAAsB;MACtB,oBAAoB;MACpB,oBAAoB;MACpB,wBAAwB;MACxB,yBAAyB;MACzB,kBAAkB;MAClB,wBAAwB;MACxB,sBAAsB;MACtB,uBAAuB;MACvB,wBAAwB;MACxB,oBAAoB;MACpB,qBAAqB;MACrB,sBAAsB;MACtB,mBAAmB;MACnB,yBAAyB;MACzB,+BAA+B;MAC/B,4BAA4B;MAC5B,8BAA8B;IAChC;EACF;AACF","sourcesContent":["/*! tailwindcss v4.2.0 | MIT License | https://tailwindcss.com */\n@layer properties;\n@layer theme, base, components, utilities;\n@layer theme {\n  :root, :host {\n    --font-sans: ui-sans-serif, system-ui, sans-serif, \"Apple Color Emoji\",\n      \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\";\n    --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,\n      \"Liberation Mono\", \"Courier New\", monospace;\n    --spacing: 0.25rem;\n    --default-transition-duration: 150ms;\n    --default-transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);\n    --default-font-family: var(--font-sans);\n    --default-font-feature-settings: var(--font-sans--font-feature-settings);\n    --default-font-variation-settings: var(\n      --font-sans--font-variation-settings\n    );\n    --default-mono-font-family: var(--font-mono);\n    --default-mono-font-feature-settings: var(\n      --font-mono--font-feature-settings\n    );\n    --default-mono-font-variation-settings: var(\n      --font-mono--font-variation-settings\n    );\n  }\n}\n@layer base {\n  *, ::after, ::before, ::backdrop, ::file-selector-button {\n    box-sizing: border-box;\n    margin: 0;\n    padding: 0;\n    border: 0 solid;\n  }\n  html, :host {\n    line-height: 1.5;\n    -webkit-text-size-adjust: 100%;\n    tab-size: 4;\n    font-family: var( --default-font-family, ui-sans-serif, system-ui, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\" );\n    font-feature-settings: var(--default-font-feature-settings, normal);\n    font-variation-settings: var( --default-font-variation-settings, normal );\n    -webkit-tap-highlight-color: transparent;\n  }\n  body {\n    line-height: inherit;\n  }\n  hr {\n    height: 0;\n    color: inherit;\n    border-top-width: 1px;\n  }\n  abbr:where([title]) {\n    -webkit-text-decoration: underline dotted;\n    text-decoration: underline dotted;\n  }\n  h1, h2, h3, h4, h5, h6 {\n    font-size: inherit;\n    font-weight: inherit;\n  }\n  a {\n    color: inherit;\n    -webkit-text-decoration: inherit;\n    text-decoration: inherit;\n  }\n  b, strong {\n    font-weight: bolder;\n  }\n  code, kbd, samp, pre {\n    font-family: var( --default-mono-font-family, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, \"Liberation Mono\", \"Courier New\", monospace );\n    font-feature-settings: var( --default-mono-font-feature-settings, normal );\n    font-variation-settings: var( --default-mono-font-variation-settings, normal );\n    font-size: 1em;\n  }\n  small {\n    font-size: 80%;\n  }\n  sub, sup {\n    font-size: 75%;\n    line-height: 0;\n    position: relative;\n    vertical-align: baseline;\n  }\n  sub {\n    bottom: -0.25em;\n  }\n  sup {\n    top: -0.5em;\n  }\n  table {\n    text-indent: 0;\n    border-color: inherit;\n    border-collapse: collapse;\n  }\n  :-moz-focusring {\n    outline: auto;\n  }\n  progress {\n    vertical-align: baseline;\n  }\n  summary {\n    display: list-item;\n  }\n  ol, ul, menu {\n    list-style: none;\n  }\n  img, svg, video, canvas, audio, iframe, embed, object {\n    display: block;\n    vertical-align: middle;\n  }\n  img, video {\n    max-width: 100%;\n    height: auto;\n  }\n  button, input, select, optgroup, textarea, ::file-selector-button {\n    font: inherit;\n    font-feature-settings: inherit;\n    font-variation-settings: inherit;\n    letter-spacing: inherit;\n    color: inherit;\n    border-radius: 0;\n    background-color: transparent;\n    opacity: 1;\n  }\n  :where(select:is([multiple], [size])) optgroup {\n    font-weight: bolder;\n  }\n  :where(select:is([multiple], [size])) optgroup option {\n    padding-inline-start: 20px;\n  }\n  ::file-selector-button {\n    margin-inline-end: 4px;\n  }\n  ::placeholder {\n    opacity: 1;\n    color: currentColor;\n    @supports (color: color-mix(in lab, red, red)) {\n      color: color-mix(in oklab, currentColor 50%, transparent);\n    }\n  }\n  textarea {\n    resize: vertical;\n  }\n  ::-webkit-search-decoration {\n    -webkit-appearance: none;\n  }\n  ::-webkit-date-and-time-value {\n    min-height: 1lh;\n    text-align: inherit;\n  }\n  ::-webkit-datetime-edit {\n    display: inline-flex;\n  }\n  ::-webkit-datetime-edit-fields-wrapper {\n    padding: 0;\n  }\n  ::-webkit-datetime-edit, ::-webkit-datetime-edit-year-field, ::-webkit-datetime-edit-month-field, ::-webkit-datetime-edit-day-field, ::-webkit-datetime-edit-hour-field, ::-webkit-datetime-edit-minute-field, ::-webkit-datetime-edit-second-field, ::-webkit-datetime-edit-millisecond-field, ::-webkit-datetime-edit-meridiem-field {\n    padding-block: 0;\n  }\n  :-moz-ui-invalid {\n    box-shadow: none;\n  }\n  button, input:where([type=\"button\"], [type=\"reset\"], [type=\"submit\"]), ::file-selector-button {\n    appearance: button;\n  }\n  ::-webkit-inner-spin-button, ::-webkit-outer-spin-button {\n    height: auto;\n  }\n  [hidden]:where(:not([hidden=\"until-found\"])) {\n    display: none !important;\n  }\n}\n@layer utilities {\n  .visible {\n    visibility: visible;\n  }\n  .absolute {\n    position: absolute;\n  }\n  .relative {\n    position: relative;\n  }\n  .static {\n    position: static;\n  }\n  .start {\n    inset-inline-start: var(--spacing);\n  }\n  .end {\n    inset-inline-end: var(--spacing);\n  }\n  .container {\n    width: 100%;\n    @media (width >= 40rem) {\n      max-width: 40rem;\n    }\n    @media (width >= 48rem) {\n      max-width: 48rem;\n    }\n    @media (width >= 64rem) {\n      max-width: 64rem;\n    }\n    @media (width >= 80rem) {\n      max-width: 80rem;\n    }\n    @media (width >= 96rem) {\n      max-width: 96rem;\n    }\n  }\n  .block {\n    display: block;\n  }\n  .flex {\n    display: flex;\n  }\n  .grid {\n    display: grid;\n  }\n  .hidden {\n    display: none;\n  }\n  .inline-block {\n    display: inline-block;\n  }\n  .table {\n    display: table;\n  }\n  .transform {\n    transform: var(--tw-rotate-x,) var(--tw-rotate-y,) var(--tw-rotate-z,) var(--tw-skew-x,) var(--tw-skew-y,);\n  }\n  .border {\n    border-style: var(--tw-border-style);\n    border-width: 1px;\n  }\n  .italic {\n    font-style: italic;\n  }\n  .outline {\n    outline-style: var(--tw-outline-style);\n    outline-width: 1px;\n  }\n  .blur {\n    --tw-blur: blur(8px);\n    filter: var(--tw-blur,) var(--tw-brightness,) var(--tw-contrast,) var(--tw-grayscale,) var(--tw-hue-rotate,) var(--tw-invert,) var(--tw-saturate,) var(--tw-sepia,) var(--tw-drop-shadow,);\n  }\n  .filter {\n    filter: var(--tw-blur,) var(--tw-brightness,) var(--tw-contrast,) var(--tw-grayscale,) var(--tw-hue-rotate,) var(--tw-invert,) var(--tw-saturate,) var(--tw-sepia,) var(--tw-drop-shadow,);\n  }\n  .transition {\n    transition-property: color, background-color, border-color, outline-color, text-decoration-color, fill, stroke, --tw-gradient-from, --tw-gradient-via, --tw-gradient-to, opacity, box-shadow, transform, translate, scale, rotate, filter, -webkit-backdrop-filter, backdrop-filter, display, content-visibility, overlay, pointer-events;\n    transition-timing-function: var(--tw-ease, var(--default-transition-timing-function));\n    transition-duration: var(--tw-duration, var(--default-transition-duration));\n  }\n}\n@property --tw-rotate-x {\n  syntax: \"*\";\n  inherits: false;\n}\n@property --tw-rotate-y {\n  syntax: \"*\";\n  inherits: false;\n}\n@property --tw-rotate-z {\n  syntax: \"*\";\n  inherits: false;\n}\n@property --tw-skew-x {\n  syntax: \"*\";\n  inherits: false;\n}\n@property --tw-skew-y {\n  syntax: \"*\";\n  inherits: false;\n}\n@property --tw-border-style {\n  syntax: \"*\";\n  inherits: false;\n  initial-value: solid;\n}\n@property --tw-outline-style {\n  syntax: \"*\";\n  inherits: false;\n  initial-value: solid;\n}\n@property --tw-blur {\n  syntax: \"*\";\n  inherits: false;\n}\n@property --tw-brightness {\n  syntax: \"*\";\n  inherits: false;\n}\n@property --tw-contrast {\n  syntax: \"*\";\n  inherits: false;\n}\n@property --tw-grayscale {\n  syntax: \"*\";\n  inherits: false;\n}\n@property --tw-hue-rotate {\n  syntax: \"*\";\n  inherits: false;\n}\n@property --tw-invert {\n  syntax: \"*\";\n  inherits: false;\n}\n@property --tw-opacity {\n  syntax: \"*\";\n  inherits: false;\n}\n@property --tw-saturate {\n  syntax: \"*\";\n  inherits: false;\n}\n@property --tw-sepia {\n  syntax: \"*\";\n  inherits: false;\n}\n@property --tw-drop-shadow {\n  syntax: \"*\";\n  inherits: false;\n}\n@property --tw-drop-shadow-color {\n  syntax: \"*\";\n  inherits: false;\n}\n@property --tw-drop-shadow-alpha {\n  syntax: \"<percentage>\";\n  inherits: false;\n  initial-value: 100%;\n}\n@property --tw-drop-shadow-size {\n  syntax: \"*\";\n  inherits: false;\n}\n@layer properties {\n  @supports ((-webkit-hyphens: none) and (not (margin-trim: inline))) or ((-moz-orient: inline) and (not (color:rgb(from red r g b)))) {\n    *, ::before, ::after, ::backdrop {\n      --tw-rotate-x: initial;\n      --tw-rotate-y: initial;\n      --tw-rotate-z: initial;\n      --tw-skew-x: initial;\n      --tw-skew-y: initial;\n      --tw-border-style: solid;\n      --tw-outline-style: solid;\n      --tw-blur: initial;\n      --tw-brightness: initial;\n      --tw-contrast: initial;\n      --tw-grayscale: initial;\n      --tw-hue-rotate: initial;\n      --tw-invert: initial;\n      --tw-opacity: initial;\n      --tw-saturate: initial;\n      --tw-sepia: initial;\n      --tw-drop-shadow: initial;\n      --tw-drop-shadow-color: initial;\n      --tw-drop-shadow-alpha: 100%;\n      --tw-drop-shadow-size: initial;\n    }\n  }\n}\n"],"sourceRoot":""}]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -134,7 +134,7 @@ module.exports = function cssWithMappingToString(item) {
 
 /***/ },
 
-/***/ 2226
+/***/ 7926
 (__unused_webpack_module, __unused_webpack___webpack_exports__, __webpack_require__) {
 
 
@@ -189,104 +189,1727 @@ var update = injectStylesIntoStyleTag_default()(index_js_src/* default */.A, opt
 
        /* harmony default export */ const src = (index_js_src/* default */.A && index_js_src/* default */.A.locals ? index_js_src/* default */.A.locals : undefined);
 
-;// ./src/projects/design-test1/components/Subtitle.tsx
+;// ./src/shared-components/CaptionOverlay.tsx
 
 
 
-const Subtitle = ({ text }) => {
+const CaptionOverlay = ({ captions }) => {
   const frame = (0,esm.useCurrentFrame)();
-  const opacity = (0,esm.interpolate)(frame, [0, 5, 10], [0, 1, 1], { extrapolateRight: "clamp" });
-  const lines = text.split("\n");
+  const { fps } = (0,esm.useVideoConfig)();
+  const currentTimeMs = frame / fps * 1e3;
+  const activeSubtitle = captions.find(
+    (cap) => currentTimeMs >= cap.startMs && currentTimeMs < cap.endMs
+  );
+  if (!activeSubtitle) {
+    return null;
+  }
+  const entryFrame = activeSubtitle.startMs / 1e3 * fps;
+  const opacity = (0,esm.interpolate)(
+    frame,
+    [entryFrame, entryFrame + 5],
+    [0, 1],
+    { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
+  );
   return /* @__PURE__ */ (0,jsx_runtime.jsx)(
     esm.AbsoluteFill,
     {
       style: {
+        zIndex: 9999,
         justifyContent: "flex-end",
         alignItems: "center",
-        paddingBottom: "14%",
-        // Positioned within or near the bottom letterbox
+        paddingBottom: "110px",
+        // Roughly 10% from bottom
         pointerEvents: "none"
       },
       children: /* @__PURE__ */ (0,jsx_runtime.jsx)(
         "div",
         {
           style: {
-            opacity,
-            color: "#F8FAFC",
-            // Off-white/slate
-            fontSize: 34,
-            fontWeight: 600,
+            color: "#FFFFFF",
+            fontSize: "40px",
+            fontWeight: 700,
+            fontFamily: "Pretendard",
             textAlign: "center",
+            whiteSpace: "pre-line",
+            textShadow: "0 2px 10px rgba(0, 0, 0, 0.8), 0 0 20px rgba(59, 130, 246, 0.3)",
+            opacity,
             lineHeight: 1.4,
-            textShadow: "0 4px 12px rgba(0,0,0,0.9), 0 2px 4px rgba(0,0,0,0.9)",
-            maxWidth: "85%",
-            fontFamily: "Pretendard, sans-serif"
+            padding: "0 80px"
           },
-          children: lines.map((line, i) => /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { children: line }, i))
+          children: activeSubtitle.text
         }
       )
     }
   );
 };
 
-;// ./src/projects/design-test1/components/CinematicLayout.tsx
+;// ./src/projects/design-test2/intro/intro_subtitles.ts
+
+const introSubtitles = [
+  {
+    text: "\uC6F9 \uAC1C\uBC1C\uC758 \uD328\uB7EC\uB2E4\uC784\uC774 \uC644\uC804\uD788 \uBC14\uB00C\uACE0 \uC788\uC2B5\uB2C8\uB2E4.",
+    startMs: 10,
+    endMs: 2260
+  },
+  {
+    text: "\uACFC\uAC70\uC5D0\uB294 \uBAA8\uB4E0 \uCEF4\uD3EC\uB10C\uD2B8\uB97C \uBC14\uB2E5\uBD80\uD130 \uC9C1\uC811 \uC791\uC131\uD574\uC57C \uD588\uC9C0\uB9CC,",
+    startMs: 2260,
+    endMs: 6540
+  },
+  {
+    text: "\uC774\uC81C\uB294 AI\uAC00 \uC6B0\uB9AC\uC758 \uAC00\uC7A5 \uB4E0\uB4E0\uD55C \uD398\uC5B4 \uD504\uB85C\uADF8\uB798\uBA38\uAC00 \uB418\uC5C8\uC2B5\uB2C8\uB2E4.",
+    startMs: 6540,
+    endMs: 10780
+  },
+  {
+    text: "\uB514\uC790\uC778\uC5D0\uC11C \uAC1C\uBC1C\uB85C \uB118\uC5B4\uAC00\uB294 \uACFC\uC815\uC758 \uBCD1\uBAA9\uD604\uC0C1\uB3C4 \uB208\uC5D0 \uB744\uAC8C \uC0AC\uB77C\uC84C\uC2B5\uB2C8\uB2E4.",
+    startMs: 10780,
+    endMs: 16720
+  },
+  {
+    text: "\uC774\uC81C\uB294 \uC2A4\uCF00\uCE58 \uD55C \uC7A5\uC774\uB098 \uAC04\uB2E8\uD55C \uD504\uB86C\uD504\uD2B8\uB9CC\uC73C\uB85C\uB3C4",
+    startMs: 16720,
+    endMs: 19580
+  },
+  {
+    text: "\uACE7\uBC14\uB85C \uC791\uB3D9\uD558\uB294 \uD504\uB85C\uD1A0\uD0C0\uC785\uC774 \uC0DD\uC131\uB418\uB294 \uB9C8\uBC95 \uAC19\uC740 \uC77C\uC774 \uC77C\uC5B4\uB0A9\uB2C8\uB2E4.",
+    startMs: 19580,
+    endMs: 24980
+  },
+  {
+    text: "\uB2E8\uC21C\uD788 \uCF54\uB4DC\uB97C \uC9DC\uC8FC\uB294 \uAC83\uC744 \uB118\uC5B4, \uC2DC\uC2A4\uD15C \uC544\uD0A4\uD14D\uCC98\uB97C \uC124\uACC4\uD558\uACE0",
+    startMs: 26220,
+    endMs: 29570
+  },
+  {
+    text: "\uCD5C\uC801\uD654 \uD3EC\uC778\uD2B8\uAE4C\uC9C0 \uC81C\uC548\uD569\uB2C8\uB2E4.",
+    startMs: 29570,
+    endMs: 32020
+  },
+  {
+    text: "\uB9C8\uCE58 \uC218\uC2ED \uB144 \uACBD\uB825\uC758 \uC2DC\uB2C8\uC5B4 \uAC1C\uBC1C\uC790\uAC00 \uD56D\uC0C1 \uB0B4 \uC606\uC5D0 \uC549\uC544",
+    startMs: 32020,
+    endMs: 36010
+  },
+  {
+    text: "\uCF54\uB4DC\uB97C \uB9AC\uBDF0\uD574 \uC8FC\uB294 \uAC83\uACFC \uAC19\uC8E0.",
+    startMs: 36010,
+    endMs: 38560
+  },
+  {
+    text: "\uC774\uB7EC\uD55C \uBCC0\uD654\uB294 \uB2E8\uC21C\uD788 \uAC1C\uC778\uC758 \uCF54\uB529 \uC18D\uB3C4\uB97C \uB192\uC774\uB294 \uAC83\uC744 \uB118\uC5B4,",
+    startMs: 38560,
+    endMs: 42980
+  },
+  {
+    text: "\uD300 \uC804\uCCB4\uC758 \uC560\uC790\uC77C\uD55C \uD611\uC5C5 \uBC29\uC2DD\uC744 \uADFC\uBCF8\uC801\uC73C\uB85C \uC7AC\uC815\uC758\uD558\uACE0 \uC788\uC2B5\uB2C8\uB2E4.",
+    startMs: 42980,
+    endMs: 46540
+  },
+  {
+    text: "\uC6B0\uB9AC\uB294 \uB354 \uBE60\uB974\uAC8C \uC2E4\uD328\uD558\uACE0, \uB354 \uBE68\uB9AC \uD601\uC2E0\uD560 \uC218 \uC788\uAC8C \uB418\uC5C8\uC2B5\uB2C8\uB2E4.",
+    startMs: 46540,
+    endMs: 51040
+  },
+  {
+    text: "\uC720\uBA85\uD55C \uAC1C\uBC1C\uC790\uB294 \uC774\uB807\uAC8C \uB9D0\uD588\uC2B5\uB2C8\uB2E4.",
+    startMs: 51040,
+    endMs: 53800
+  },
+  {
+    text: '"\uBBF8\uB798\uC758 \uCF54\uB529\uC740 \uD0C0\uC774\uD551\uC774 \uC544\uB2C8\uB77C \uB300\uD654\uAC00 \uB420 \uAC83\uC774\uB2E4."',
+    startMs: 53800,
+    endMs: 57460
+  },
+  {
+    text: "\uACB0\uAD6D \uC6B0\uB9AC\uC5D0\uAC8C \uAC00\uC7A5 \uD544\uC694\uD55C \uC5ED\uB7C9\uC740 \uD0C0\uAC74 \uC18D\uB3C4\uAC00 \uC544\uB2C8\uB77C,",
+    startMs: 57460,
+    endMs: 61260
+  },
+  {
+    text: "\uBB38\uC81C\uB97C \uC815\uC758\uD558\uACE0 AI\uB97C \uC9C0\uD718\uD558\uB294 \uAE30\uD68D\uB825\uC774 \uB420 \uAC83\uC785\uB2C8\uB2E4.",
+    startMs: 61260,
+    endMs: 65100
+  }
+];
+
+;// ./src/projects/design-test2/theme.ts
+
+const BRAND = {
+  PROJECT_ID: "nvidia",
+  MOOD: "\uB2E4\uD06C \uD14C\uD06C, \uB124\uC628 \uC5E3\uC9C0, \uC2DC\uB124\uB9C8\uD2F1, \uC555\uB3C4\uC801, \uC0E4\uD504",
+  CONCEPT: "NVIDIA \uAE30\uC220\uC758 \uC555\uB3C4\uC801 \uC131\uB2A5\uACFC \uBBF8\uB798\uAC10\uC744 \uADF9\uC801\uC774\uACE0 \uB0A0\uCE74\uB86D\uAC8C \uC804\uB2EC",
+  FORBIDDEN: "\uADC0\uC5FD\uACE0 \uCE90\uC8FC\uC5BC\uD55C \uB290\uB08C, \uD30C\uC2A4\uD154, \uB465\uADFC \uBAA8\uC11C\uB9AC, \uB290\uB9B0 \uD398\uC774\uB4DC, \uBC1D\uC740 \uBC30\uACBD, \uCD0C\uC2A4\uB7EC\uC6B4 \uADF8\uB77C\uB514\uC5B8\uD2B8"
+};
+const COLORS = {
+  // Background Layer
+  BG_VOID: "#020202",
+  // 가장 어두운 배경 — 비네팅 외곽
+  BG_DEEP: "#080808",
+  // 기본 씬 배경
+  BG_SURFACE: "#0f1210",
+  // 카드·패널 배경 (살짝 녹끼)
+  BG_ELEVATED: "#171e17",
+  // 팝업·떠있는 UI 요소 배경
+  BG_INVERSE: "#76B900",
+  // 반전 강조 배경 (헤드라인 하이라이트 블록)
+  // Brand Core
+  PRIMARY: "#76B900",
+  // NVIDIA 시그니처 그린
+  PRIMARY_DIM: "rgba(118,185,0,0.18)",
+  // PRIMARY 18% — 배경 틴트·선택 영역
+  PRIMARY_GLOW: "rgba(118,185,0,0.45)",
+  // PRIMARY 45% — 글로우 확산
+  SECONDARY: "#A8E000",
+  // 라이트 그린 — 서브 강조·숫자 하이라이트
+  ACCENT: "#00E5FF",
+  // 사이언 포인트 — 씬당 1회 최대 사용
+  ACCENT_DIM: "rgba(0,229,255,0.15)",
+  // ACCENT 배경 틴트
+  // Text
+  TEXT_MAIN: "#EDEDED",
+  // 본문·헤드라인
+  TEXT_MUTED: "#8A9490",
+  // 캡션·보조 텍스트
+  TEXT_INVERSE: "#060606",
+  // 밝은 배경(BG_INVERSE) 위 텍스트
+  // Status / Data
+  POSITIVE: "#76B900",
+  // 상승·긍정 수치
+  NEGATIVE: "#FF3B3B",
+  // 하락·경고 수치
+  NEUTRAL: "#A0A8A0",
+  // 변동 없음
+  HIGHLIGHT: "rgba(118,185,0,0.28)",
+  // 형광펜 강조 (텍스트 bg)
+  // Border
+  BORDER: "rgba(118,185,0,0.12)",
+  // 일반 구분선
+  BORDER_STRONG: "rgba(118,185,0,0.50)",
+  // 강조 구분선·액티브 프레임
+  BORDER_ACCENT: "rgba(0,229,255,0.35)"
+  // ACCENT 계열 구분선
+};
+const BRAND_EXTRAS = {
+  // 경쟁사 비교 차트용 컬러
+  COMPETITOR_AMD: "#ED1C24",
+  // AMD 레드
+  COMPETITOR_INTEL: "#0071C5",
+  // 인텔 블루
+  COMPETITOR_QUALCOMM: "#3253DC",
+  // GPU 등급 컬러 (벤치마크 바 차트 등)
+  TIER_S: "#76B900",
+  // NVIDIA 자사 — 최상위
+  TIER_A: "#A8E000",
+  TIER_B: "#FFD000",
+  TIER_C: "#FF7A00",
+  TIER_D: "#FF3B3B",
+  // 아키텍처 계열 강조
+  BLACKWELL_EDGE: "#00E5FF",
+  // 블랙웰 세대 전용 사이언 엣지
+  HOPPER_EDGE: "#76B900"
+  // 이전 세대 그린 유지
+};
+const EFFECTS = {
+  SHADOW_SM: `0 4px 12px rgba(0,0,0,0.5)`,
+  SHADOW_LG: `0 20px 40px rgba(0,0,0,0.8)`,
+  GLOW_SM: `0 0 16px ${COLORS.PRIMARY_GLOW}`,
+  GLOW_MD: `0 0 48px ${COLORS.PRIMARY_GLOW}`,
+  GLOW_LG: `0 0 96px ${COLORS.PRIMARY_GLOW}`,
+  GLOW_TEXT: `0 0 32px ${COLORS.PRIMARY_GLOW}`,
+  GLOW_ACCENT_SM: `0 0 16px rgba(0,229,255,0.40)`,
+  GLOW_ACCENT_MD: `0 0 48px rgba(0,229,255,0.40)`
+};
+const FONTS = {
+  DISPLAY: "'Bebas Neue', 'Pretendard Variable', sans-serif",
+  // 임팩트 헤드라인 전용
+  PRIMARY: "'Pretendard Variable', 'Pretendard', sans-serif",
+  // 한글+영문 본문
+  MONO: "'JetBrains Mono', 'Fira Code', monospace"
+  // 숫자/데이터 수치 전용
+};
+const Z = {
+  BG: 0,
+  CONTENT: 10,
+  OVERLAY: 20,
+  UI: 30,
+  CAPTION: 40,
+  TOP: 50
+  // 로고, 워터마크
+};
+
+;// ./src/projects/design-test2/intro/sequences.tsx
 
 
 
-const CinematicLayout = ({ children }) => {
+
+const GFX_Grid = () => {
   const frame = (0,esm.useCurrentFrame)();
-  const grainOpacity = 0.03;
-  return /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.AbsoluteFill, { style: { backgroundColor: "#020617", overflow: "hidden" }, children: [
-    children,
-    /* @__PURE__ */ (0,jsx_runtime.jsx)(
-      esm.AbsoluteFill,
-      {
-        style: {
-          background: "radial-gradient(circle, transparent 40%, rgba(0,0,0,0.7) 100%)",
-          pointerEvents: "none"
-        }
-      }
-    ),
-    /* @__PURE__ */ (0,jsx_runtime.jsx)(
-      esm.AbsoluteFill,
-      {
-        style: {
-          opacity: grainOpacity,
-          backgroundColor: "#ffffff",
-          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
-          pointerEvents: "none"
-        }
-      }
-    ),
-    /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.AbsoluteFill, { style: { pointerEvents: "none" }, children: [
-      /* @__PURE__ */ (0,jsx_runtime.jsx)(
+  const move = (0,esm.interpolate)(frame, [0, 300], [0, -100], {
+    extrapolateRight: "clamp"
+  });
+  return /* @__PURE__ */ (0,jsx_runtime.jsx)(
+    esm.AbsoluteFill,
+    {
+      style: {
+        zIndex: Z.BG,
+        background: `radial-gradient(circle at center, ${COLORS.BG_DEEP} 0%, ${COLORS.BG_VOID} 100%)`
+      },
+      children: /* @__PURE__ */ (0,jsx_runtime.jsx)(
         "div",
         {
           style: {
             position: "absolute",
-            top: 0,
-            left: 0,
-            right: 0,
-            height: "12%",
-            backgroundColor: "black"
-          }
-        }
-      ),
-      /* @__PURE__ */ (0,jsx_runtime.jsx)(
-        "div",
-        {
-          style: {
-            position: "absolute",
-            bottom: 0,
-            left: 0,
-            right: 0,
-            height: "12%",
-            backgroundColor: "black"
+            width: "200%",
+            height: "200%",
+            top: "-50%",
+            left: "-50%",
+            backgroundImage: `
+            linear-gradient(to right, ${COLORS.BORDER} 1px, transparent 1px),
+            linear-gradient(to bottom, ${COLORS.BORDER} 1px, transparent 1px)
+          `,
+            backgroundSize: "60px 60px",
+            transform: `perspective(1000px) rotateX(60deg) translateY(${move}px)`,
+            opacity: 0.3
           }
         }
       )
+    }
+  );
+};
+const Scene1 = () => {
+  const frame = (0,esm.useCurrentFrame)();
+  const opacity = (0,esm.spring)({ frame, fps: 60, config: { damping: 200 } });
+  const scale = (0,esm.interpolate)(frame, [0, 50], [0.8, 1], {
+    extrapolateRight: "clamp"
+  });
+  return /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.AbsoluteFill, { style: { justifyContent: "center", alignItems: "center" }, children: [
+    /* @__PURE__ */ (0,jsx_runtime.jsx)(GFX_Grid, {}),
+    /* @__PURE__ */ (0,jsx_runtime.jsxs)(
+      "div",
+      {
+        style: {
+          zIndex: Z.CONTENT,
+          opacity,
+          transform: `scale(${scale})`,
+          textAlign: "center"
+        },
+        children: [
+          /* @__PURE__ */ (0,jsx_runtime.jsx)(
+            "h1",
+            {
+              style: {
+                fontFamily: FONTS.DISPLAY,
+                fontSize: 120,
+                color: COLORS.TEXT_MAIN,
+                textShadow: EFFECTS.GLOW_MD,
+                margin: 0,
+                letterSpacing: "0.1em"
+              },
+              children: "WEB DEVELOPMENT"
+            }
+          ),
+          /* @__PURE__ */ (0,jsx_runtime.jsx)(
+            "div",
+            {
+              style: {
+                width: 400,
+                height: 4,
+                backgroundColor: COLORS.PRIMARY,
+                margin: "20px auto",
+                boxShadow: EFFECTS.GLOW_SM
+              }
+            }
+          ),
+          /* @__PURE__ */ (0,jsx_runtime.jsx)(
+            "h2",
+            {
+              style: {
+                fontFamily: FONTS.PRIMARY,
+                fontSize: 60,
+                color: COLORS.PRIMARY,
+                margin: 0
+              },
+              children: "PARADIGM SHIFT"
+            }
+          )
+        ]
+      }
+    )
+  ] });
+};
+const Scene2 = () => {
+  const frame = (0,esm.useCurrentFrame)();
+  const typing = Math.floor((0,esm.interpolate)(frame, [0, 100], [0, 40], { extrapolateRight: "clamp" }));
+  const codeLines = [
+    "function buildComponent() {",
+    "  const div = document.createElement('div');",
+    "  div.style.padding = '20px';",
+    "  // ... manual labor ...",
+    "}"
+  ];
+  const currentContent = codeLines.join("\n").slice(0, typing * 5);
+  return /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.AbsoluteFill, { style: { backgroundColor: COLORS.BG_DEEP, padding: 100 }, children: [
+    /* @__PURE__ */ (0,jsx_runtime.jsx)(
+      "div",
+      {
+        style: {
+          fontFamily: FONTS.MONO,
+          fontSize: 32,
+          color: COLORS.TEXT_MUTED,
+          whiteSpace: "pre-wrap",
+          opacity: (0,esm.interpolate)(frame, [150, 180], [1, 0.3], { extrapolateLeft: "clamp" })
+        },
+        children: currentContent
+      }
+    ),
+    frame > 120 && /* @__PURE__ */ (0,jsx_runtime.jsx)(
+      "div",
+      {
+        style: {
+          position: "absolute",
+          top: "50%",
+          left: "50%",
+          transform: "translate(-50%, -50%) rotate(-5deg)",
+          padding: "40px 80px",
+          border: `6px solid ${COLORS.NEGATIVE}`,
+          color: COLORS.NEGATIVE,
+          fontFamily: FONTS.DISPLAY,
+          fontSize: 140,
+          zIndex: Z.UI,
+          boxShadow: `0 0 40px ${COLORS.NEGATIVE}`
+        },
+        children: "MANUAL LABOR"
+      }
+    )
+  ] });
+};
+const Scene3 = () => {
+  const frame = (0,esm.useCurrentFrame)();
+  const glowIntensity = (0,esm.interpolate)(frame % 30, [0, 15, 30], [0.5, 1, 0.5]);
+  return /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.AbsoluteFill, { style: { justifyContent: "center", alignItems: "center" }, children: [
+    /* @__PURE__ */ (0,jsx_runtime.jsx)(GFX_Grid, {}),
+    /* @__PURE__ */ (0,jsx_runtime.jsxs)(
+      "div",
+      {
+        style: {
+          width: 800,
+          height: 300,
+          border: `2px solid ${COLORS.PRIMARY}`,
+          backgroundColor: COLORS.BG_SURFACE,
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          alignItems: "center",
+          boxShadow: `0 0 ${40 * glowIntensity}px ${COLORS.PRIMARY_GLOW}`
+        },
+        children: [
+          /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { color: COLORS.PRIMARY, fontFamily: FONTS.MONO, fontSize: 24, marginBottom: 10 }, children: "[ SYSTEM ACTIVE ]" }),
+          /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { color: COLORS.TEXT_MAIN, fontFamily: FONTS.PRIMARY, fontSize: 80, fontWeight: "bold" }, children: "AI PAIR PROGRAMMER" })
+        ]
+      }
+    )
+  ] });
+};
+const Scene4 = () => {
+  const frame = (0,esm.useCurrentFrame)();
+  const move = (0,esm.interpolate)(frame, [0, 150], [-200, 200]);
+  return /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.AbsoluteFill, { style: { justifyContent: "center", alignItems: "center" }, children: [
+    /* @__PURE__ */ (0,jsx_runtime.jsxs)("div", { style: { display: "flex", gap: 100, alignItems: "center" }, children: [
+      /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { border: `4px solid ${COLORS.TEXT_MAIN}`, padding: 40, fontSize: 50, color: COLORS.TEXT_MAIN }, children: "DESIGN" }),
+      /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { width: 100, height: 10, backgroundColor: COLORS.NEGATIVE, position: "relative" }, children: /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { position: "absolute", left: move, top: -20, color: COLORS.NEGATIVE, fontSize: 24 }, children: "WAITING..." }) }),
+      /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { border: `4px solid ${COLORS.TEXT_MAIN}`, padding: 40, fontSize: 50, color: COLORS.TEXT_MAIN, opacity: 0.3 }, children: "DEV" })
+    ] }),
+    /* @__PURE__ */ (0,jsx_runtime.jsx)("h2", { style: { position: "absolute", bottom: 100, color: COLORS.NEGATIVE, fontSize: 60, fontFamily: FONTS.DISPLAY }, children: "BOTTLENECK" })
+  ] });
+};
+const Scene5 = () => {
+  const frame = (0,esm.useCurrentFrame)();
+  const expand = (0,esm.spring)({ frame, fps: 60 });
+  const width = (0,esm.interpolate)(expand, [0, 1], [100, 800]);
+  return /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.AbsoluteFill, { style: { justifyContent: "center", alignItems: "center" }, children: [
+    /* @__PURE__ */ (0,jsx_runtime.jsxs)("div", { style: { display: "flex", gap: 40, alignItems: "center" }, children: [
+      /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { border: `4px solid ${COLORS.PRIMARY}`, padding: 40, fontSize: 50, color: COLORS.PRIMARY }, children: "DESIGN" }),
+      /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { width, height: 10, backgroundColor: COLORS.PRIMARY, boxShadow: EFFECTS.GLOW_SM } }),
+      /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { border: `4px solid ${COLORS.PRIMARY}`, padding: 40, fontSize: 50, color: COLORS.PRIMARY }, children: "DEV" })
+    ] }),
+    /* @__PURE__ */ (0,jsx_runtime.jsx)("h2", { style: { position: "absolute", bottom: 100, color: COLORS.PRIMARY, fontSize: 60, fontFamily: FONTS.DISPLAY }, children: "ACCELERATED" })
+  ] });
+};
+const Scene6 = () => {
+  const frame = (0,esm.useCurrentFrame)();
+  const cursorOpacity = frame % 30 < 15 ? 1 : 0;
+  const text = "A futuristic card UI with neon borders...".slice(0, Math.floor(frame / 2));
+  return /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.AbsoluteFill, { style: { backgroundColor: COLORS.BG_DEEP, padding: 80 }, children: /* @__PURE__ */ (0,jsx_runtime.jsxs)("div", { style: { border: `1px solid ${COLORS.BORDER_STRONG}`, height: "100%", padding: 40, position: "relative" }, children: [
+    /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { color: COLORS.PRIMARY, fontSize: 24, marginBottom: 20 }, children: "PROMPT:" }),
+    /* @__PURE__ */ (0,jsx_runtime.jsxs)("div", { style: { color: COLORS.TEXT_MAIN, fontSize: 40, fontFamily: FONTS.MONO }, children: [
+      text,
+      /* @__PURE__ */ (0,jsx_runtime.jsx)("span", { style: { opacity: cursorOpacity }, children: "|" })
+    ] })
+  ] }) });
+};
+const Scene7 = () => {
+  const frame = (0,esm.useCurrentFrame)();
+  const progress = (0,esm.spring)({ frame, fps: 60 });
+  return /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.AbsoluteFill, { style: { justifyContent: "center", alignItems: "center" }, children: [
+    /* @__PURE__ */ (0,jsx_runtime.jsx)(GFX_Grid, {}),
+    /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { transform: `scale(${0.5 + progress * 0.5})`, opacity: progress }, children: /* @__PURE__ */ (0,jsx_runtime.jsxs)("div", { style: { width: 600, height: 400, border: `2px solid ${COLORS.ACCENT}`, boxShadow: EFFECTS.GLOW_ACCENT_MD, backgroundColor: COLORS.BG_SURFACE }, children: [
+      /* @__PURE__ */ (0,jsx_runtime.jsxs)("div", { style: { height: 40, backgroundColor: COLORS.ACCENT_DIM, borderBottom: `1px solid ${COLORS.ACCENT}`, display: "flex", alignItems: "center", padding: "0 10px" }, children: [
+        /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { width: 10, height: 10, borderRadius: 5, backgroundColor: COLORS.ACCENT, marginRight: 5 } }),
+        /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { width: 10, height: 10, borderRadius: 5, backgroundColor: COLORS.ACCENT, marginRight: 5 } }),
+        /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { width: 10, height: 10, borderRadius: 5, backgroundColor: COLORS.ACCENT } })
+      ] }),
+      /* @__PURE__ */ (0,jsx_runtime.jsxs)("div", { style: { padding: 20 }, children: [
+        /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { width: "60%", height: 20, backgroundColor: COLORS.BORDER, marginBottom: 10 } }),
+        /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { width: "100%", height: 100, backgroundColor: COLORS.BORDER, marginBottom: 20 } }),
+        /* @__PURE__ */ (0,jsx_runtime.jsxs)("div", { style: { display: "flex", gap: 10 }, children: [
+          /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { width: 100, height: 40, backgroundColor: COLORS.ACCENT } }),
+          /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { width: 100, height: 40, border: `1px solid ${COLORS.ACCENT}` } })
+        ] })
+      ] })
+    ] }) }),
+    /* @__PURE__ */ (0,jsx_runtime.jsx)("h2", { style: { position: "absolute", top: 100, color: COLORS.ACCENT, fontSize: 50, fontFamily: FONTS.DISPLAY }, children: "INSTANT PROTOTYPE" })
+  ] });
+};
+const Scene8 = () => {
+  const frame = (0,esm.useCurrentFrame)();
+  const progress = (0,esm.interpolate)(frame, [0, 150], [0, 1]);
+  return /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.AbsoluteFill, { style: { padding: 100 }, children: [
+    /* @__PURE__ */ (0,jsx_runtime.jsx)("h1", { style: { color: COLORS.PRIMARY, fontSize: 60, fontFamily: FONTS.DISPLAY }, children: "SYSTEM ARCHITECTURE" }),
+    /* @__PURE__ */ (0,jsx_runtime.jsxs)("svg", { width: "1000", height: "600", style: { marginTop: 50 }, children: [
+      /* @__PURE__ */ (0,jsx_runtime.jsx)("circle", { cx: "100", cy: "300", r: "40", fill: "none", stroke: COLORS.PRIMARY, strokeWidth: "2" }),
+      /* @__PURE__ */ (0,jsx_runtime.jsx)("path", { d: "M 140 300 L 360 300", stroke: COLORS.PRIMARY, strokeWidth: "2", strokeDasharray: "1000", strokeDashoffset: 1e3 * (1 - progress) }),
+      /* @__PURE__ */ (0,jsx_runtime.jsx)("rect", { x: "360", y: "250", width: "120", height: "100", fill: "none", stroke: COLORS.PRIMARY, strokeWidth: "2" }),
+      /* @__PURE__ */ (0,jsx_runtime.jsx)("path", { d: "M 480 300 L 700 150 M 480 300 L 700 450", stroke: COLORS.PRIMARY, strokeWidth: "2", strokeDasharray: "1000", strokeDashoffset: 1e3 * (1 - progress) }),
+      /* @__PURE__ */ (0,jsx_runtime.jsx)("circle", { cx: "740", cy: "150", r: "40", fill: "none", stroke: COLORS.PRIMARY, strokeWidth: "2" }),
+      /* @__PURE__ */ (0,jsx_runtime.jsx)("circle", { cx: "740", cy: "450", r: "40", fill: "none", stroke: COLORS.PRIMARY, strokeWidth: "2" })
     ] })
   ] });
+};
+const Scene9 = () => {
+  const frame = (0,esm.useCurrentFrame)();
+  const count = Math.floor((0,esm.interpolate)(frame, [0, 100], [40, 99], { extrapolateRight: "clamp" }));
+  return /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.AbsoluteFill, { style: { justifyContent: "center", alignItems: "center", backgroundColor: COLORS.BG_VOID }, children: [
+    /* @__PURE__ */ (0,jsx_runtime.jsxs)("div", { style: { textAlign: "center" }, children: [
+      /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { fontSize: 40, color: COLORS.ACCENT, marginBottom: 20 }, children: "OPTIMIZATION POINT SCORE:" }),
+      /* @__PURE__ */ (0,jsx_runtime.jsxs)("div", { style: { fontSize: 240, fontFamily: FONTS.MONO, color: COLORS.ACCENT, WebkitTextStroke: `1px ${COLORS.ACCENT}` }, children: [
+        count,
+        "%"
+      ] })
+    ] }),
+    /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { position: "absolute", bottom: 100, width: "80%", height: 4, backgroundColor: COLORS.BORDER }, children: /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { width: `${count}%`, height: "100%", backgroundColor: COLORS.ACCENT, boxShadow: EFFECTS.GLOW_ACCENT_SM } }) })
+  ] });
+};
+const Scene10 = () => {
+  const frame = (0,esm.useCurrentFrame)();
+  const reviewOpacity = (0,esm.spring)({ frame, fps: 60 });
+  return /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.AbsoluteFill, { style: { padding: 50 }, children: [
+    /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { fontFamily: FONTS.MONO, fontSize: 24, color: COLORS.TEXT_MUTED }, children: `const UserProfile = ({ user }) => {
+  return (
+    <div className="profile-card">
+      <h2>{user.name}</h2>
+      <p>{user.email}</p>
+    </div>
+  );
+};` }),
+    /* @__PURE__ */ (0,jsx_runtime.jsxs)("div", { style: {
+      position: "absolute",
+      top: 200,
+      right: 200,
+      width: 400,
+      padding: 30,
+      backgroundColor: COLORS.BG_ELEVATED,
+      border: `1px solid ${COLORS.ACCENT}`,
+      boxShadow: EFFECTS.GLOW_ACCENT_SM,
+      opacity: reviewOpacity,
+      transform: `translateX(${(1 - reviewOpacity) * 50}px)`
+    }, children: [
+      /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { color: COLORS.ACCENT, fontSize: 20, marginBottom: 10 }, children: "SENIOR AI REVIEW:" }),
+      /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { color: COLORS.TEXT_MAIN, fontSize: 18 }, children: '"Consider memoizing this component to prevent unnecessary re-renders in heavy lists."' }),
+      /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { marginTop: 20, color: COLORS.ACCENT, fontSize: 16 }, children: "[ APPLY CHANGE ]" })
+    ] })
+  ] });
+};
+const Scene11 = () => {
+  const frame = (0,esm.useCurrentFrame)();
+  const pieces = Array.from({ length: 8 });
+  return /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.AbsoluteFill, { style: { justifyContent: "center", alignItems: "center" }, children: [
+    /* @__PURE__ */ (0,jsx_runtime.jsx)(GFX_Grid, {}),
+    /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { position: "relative", width: 400, height: 400 }, children: pieces.map((_, i) => {
+      const angle = i / pieces.length * Math.PI * 2;
+      const radius = (0,esm.interpolate)(frame, [0, 150], [400, 100]);
+      const x = Math.cos(angle) * radius;
+      const y = Math.sin(angle) * radius;
+      return /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: {
+        position: "absolute",
+        width: 60,
+        height: 60,
+        backgroundColor: COLORS.PRIMARY,
+        left: 170 + x,
+        top: 170 + y,
+        boxShadow: EFFECTS.GLOW_SM
+      } }, i);
+    }) }),
+    /* @__PURE__ */ (0,jsx_runtime.jsx)("h1", { style: { position: "absolute", bottom: 150, color: COLORS.TEXT_MAIN, fontSize: 60, fontFamily: FONTS.DISPLAY }, children: "TEAM COLLABORATION" })
+  ] });
+};
+const Scene12 = () => {
+  const frame = (0,esm.useCurrentFrame)();
+  const scale = (0,esm.interpolate)(frame, [0, 300], [1, 2]);
+  const blur = (0,esm.interpolate)(frame, [250, 436], [0, 20]);
+  return /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.AbsoluteFill, { style: { justifyContent: "center", alignItems: "center", backgroundColor: COLORS.BG_VOID }, children: /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { transform: `scale(${scale})`, filter: `blur(${blur}px)`, textAlign: "center" }, children: /* @__PURE__ */ (0,jsx_runtime.jsx)("h1", { style: { color: COLORS.PRIMARY, fontSize: 150, fontFamily: FONTS.DISPLAY, textShadow: EFFECTS.GLOW_LG }, children: "INNOVATION" }) }) });
+};
+const Scene13 = () => {
+  const frame = (0,esm.useCurrentFrame)();
+  const opacity = (0,esm.spring)({ frame, fps: 60 });
+  return /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.AbsoluteFill, { style: { justifyContent: "center", alignItems: "center" }, children: /* @__PURE__ */ (0,jsx_runtime.jsxs)("div", { style: { textAlign: "center", padding: 100, opacity }, children: [
+    /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { fontSize: 100, color: COLORS.PRIMARY, marginBottom: 40 }, children: '"' }),
+    /* @__PURE__ */ (0,jsx_runtime.jsxs)("p", { style: { fontSize: 60, color: COLORS.TEXT_MAIN, lineHeight: 1.5 }, children: [
+      "\uBBF8\uB798\uC758 \uCF54\uB529\uC740 \uD0C0\uC774\uD551\uC774 \uC544\uB2C8\uB77C",
+      /* @__PURE__ */ (0,jsx_runtime.jsx)("br", {}),
+      /* @__PURE__ */ (0,jsx_runtime.jsx)("span", { style: { color: COLORS.PRIMARY, textShadow: EFFECTS.GLOW_MD }, children: "\uB300\uD654\uAC00 \uB420 \uAC83\uC774\uB2E4." })
+    ] }),
+    /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { fontSize: 100, color: COLORS.PRIMARY, marginTop: 40 }, children: '"' })
+  ] }) });
+};
+const Sequences = () => {
+  return /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.Series, { children: [
+    /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.Series.Sequence, { durationInFrames: 189, name: "Paradigm Shift", children: /* @__PURE__ */ (0,jsx_runtime.jsx)(Scene1, {}) }),
+    /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.Series.Sequence, { durationInFrames: 203, name: "Manual Labor", children: /* @__PURE__ */ (0,jsx_runtime.jsx)(Scene2, {}) }),
+    /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.Series.Sequence, { durationInFrames: 254, name: "AI Partner", children: /* @__PURE__ */ (0,jsx_runtime.jsx)(Scene3, {}) }),
+    /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.Series.Sequence, { durationInFrames: 200, name: "Bottleneck", children: /* @__PURE__ */ (0,jsx_runtime.jsx)(Scene4, {}) }),
+    /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.Series.Sequence, { durationInFrames: 156, name: "Expansion", children: /* @__PURE__ */ (0,jsx_runtime.jsx)(Scene5, {}) }),
+    /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.Series.Sequence, { durationInFrames: 172, name: "Prompt", children: /* @__PURE__ */ (0,jsx_runtime.jsx)(Scene6, {}) }),
+    /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.Series.Sequence, { durationInFrames: 324, name: "Prototype", children: /* @__PURE__ */ (0,jsx_runtime.jsx)(Scene7, {}) }),
+    /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.Series.Sequence, { durationInFrames: 201, name: "Architecture", children: /* @__PURE__ */ (0,jsx_runtime.jsx)(Scene8, {}) }),
+    /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.Series.Sequence, { durationInFrames: 147, name: "Optimization", children: /* @__PURE__ */ (0,jsx_runtime.jsx)(Scene9, {}) }),
+    /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.Series.Sequence, { durationInFrames: 392, name: "Senior Review", children: /* @__PURE__ */ (0,jsx_runtime.jsx)(Scene10, {}) }),
+    /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.Series.Sequence, { durationInFrames: 479, name: "Collaboration", children: /* @__PURE__ */ (0,jsx_runtime.jsx)(Scene11, {}) }),
+    /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.Series.Sequence, { durationInFrames: 436, name: "Innovation", children: /* @__PURE__ */ (0,jsx_runtime.jsx)(Scene12, {}) }),
+    /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.Series.Sequence, { durationInFrames: 678, name: "Vision", children: /* @__PURE__ */ (0,jsx_runtime.jsx)(Scene13, {}) })
+  ] });
+};
+
+;// ./src/projects/design-test2/intro/intro.tsx
+
+
+
+
+
+
+
+const Intro = () => {
+  return /* @__PURE__ */ (0,jsx_runtime.jsxs)(
+    esm.AbsoluteFill,
+    {
+      style: {
+        backgroundColor: COLORS.BG_VOID
+      },
+      children: [
+        /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.Audio, { src: (0,esm.staticFile)("design-test2/intro/intro.wav") }),
+        /* @__PURE__ */ (0,jsx_runtime.jsx)(Sequences, {}),
+        /* @__PURE__ */ (0,jsx_runtime.jsx)(CaptionOverlay, { captions: introSubtitles })
+      ]
+    }
+  );
+};
+
+;// ./src/projects/design-test2/body1/body1_subtitles.ts
+
+const body1Subtitles = [
+  {
+    text: "\uADF8\uB807\uB2E4\uBA74 \uC2E4\uC81C \uD604\uC7A5\uC5D0\uC11C\uB294 \uC5B4\uB5A4 \uBCC0\uD654\uAC00 \uC77C\uC5B4\uB098\uACE0 \uC788\uC744\uAE4C\uC694?",
+    startMs: 20,
+    endMs: 3140
+  },
+  {
+    text: "\uB9C9\uC5F0\uD55C \uAE30\uB300\uAC10\uC774 \uC544\uB2CC, \uC2E4\uC81C \uB370\uC774\uD130\uB97C \uBC14\uD0D5\uC73C\uB85C",
+    startMs: 3140,
+    endMs: 6410
+  },
+  {
+    text: "AI \uB3C4\uC785\uC758 \uADF9\uC801\uC778 \uD6A8\uACFC\uB97C \uC0B4\uD3B4\uBCF4\uACA0\uC2B5\uB2C8\uB2E4.",
+    startMs: 6410,
+    endMs: 9780
+  },
+  {
+    text: "\uC2E4\uC81C\uB85C \uCD5C\uADFC \uD55C \uC5F0\uAD6C\uC5D0 \uB530\uB974\uBA74,",
+    startMs: 9780,
+    endMs: 12930
+  },
+  {
+    text: "AI \uCF54\uB529 \uC5B4\uC2DC\uC2A4\uD134\uD2B8\uB97C \uB3C4\uC785\uD55C \uC870\uC9C1\uC758 \uAC1C\uBC1C \uC0DD\uC0B0\uC131\uC740",
+    startMs: 12930,
+    endMs: 16430
+  },
+  {
+    text: "\uBB34\uB824 55%\uB098 \uD5A5\uC0C1\uB418\uC5C8\uC2B5\uB2C8\uB2E4.",
+    startMs: 16430,
+    endMs: 18880
+  },
+  {
+    text: "\uBC18\uBCF5\uC801\uC778 \uBCF4\uC77C\uB7EC\uD50C\uB808\uC774\uD2B8 \uC791\uC131 \uC2DC\uAC04\uC774 \uD68D\uAE30\uC801\uC73C\uB85C \uC904\uC5B4\uB4E0 \uB355\uBD84\uC774\uC8E0.",
+    startMs: 18880,
+    endMs: 23840
+  },
+  {
+    text: "\uAC1C\uBC1C\uC790\uB4E4\uC758 \uC5C5\uBB34 \uC2DC\uAC04 \uBD84\uBC30\uB3C4 \uC644\uC804\uD788 \uB2EC\uB77C\uC84C\uC2B5\uB2C8\uB2E4.",
+    startMs: 23840,
+    endMs: 26780
+  },
+  {
+    text: "\uB2E8\uC21C \uBC18\uBCF5 \uC791\uC5C5\uC5D0 \uC3DF\uB294 \uC2DC\uAC04\uC740 80% \uAC10\uC18C\uD55C \uBC18\uBA74,",
+    startMs: 28790,
+    endMs: 32590
+  },
+  {
+    text: "\uCC3D\uC758\uC801\uC778 \uC544\uD0A4\uD14D\uCC98 \uC124\uACC4\uC640 \uBE44\uC988\uB2C8\uC2A4 \uB85C\uC9C1 \uACE0\uBBFC\uC5D0 \uC3DF\uB294 \uC2DC\uAC04\uC740\n3\uBC30 \uC774\uC0C1 \uB298\uC5B4\uB0AC\uC2B5\uB2C8\uB2E4.",
+    startMs: 32590,
+    endMs: 38300
+  },
+  {
+    text: "AI \uB3C4\uC785 \uC804\uACFC \uD6C4\uB97C \uBE44\uAD50\uD574 \uBCFC\uAE4C\uC694?",
+    startMs: 38300,
+    endMs: 41300
+  },
+  {
+    text: "\uC608\uC804\uC5D0\uB294 \uACF5\uC2DD \uBB38\uC11C\uB97C \uB4A4\uC9C0\uBA70 \uC218\uB3D9\uC73C\uB85C \uD0C0\uC774\uD551\uD558\uBA70 \uBC24\uC744 \uC0C8\uC6B0\uB358 \uC791\uC5C5\uB4E4\uC774,",
+    startMs: 41300,
+    endMs: 46310
+  },
+  {
+    text: "\uC774\uC81C\uB294 AI\uC758 \uB611\uB611\uD55C \uC81C\uC548\uC744 \uAC80\uD1A0\uD558\uACE0 \uC2B9\uC778\uD558\uB294 \uD6A8\uC728\uC801\uC778 \uD504\uB85C\uC138\uC2A4\uB85C \uC804\uD658\uB418\uC5C8\uC2B5\uB2C8\uB2E4.",
+    startMs: 46310,
+    endMs: 52300
+  },
+  {
+    text: "\uBC84\uADF8 \uBC1C\uC0DD\uB960 \uB610\uD55C \uB208\uC5D0 \uB744\uAC8C \uC904\uC5C8\uC2B5\uB2C8\uB2E4.",
+    startMs: 52300,
+    endMs: 56100
+  },
+  {
+    text: "\uC2E4\uC2DC\uAC04 \uC815\uC801 \uBD84\uC11D\uACFC \uCF54\uB4DC \uB9AC\uBDF0\uB97C \uD1B5\uD574 \uBC30\uD3EC \uC804 \uCE58\uBA85\uC801\uC778 \uC624\uB958\uC758 90% \uC774\uC0C1\uC744",
+    startMs: 56100,
+    endMs: 61290
+  },
+  {
+    text: "\uC0AC\uC804\uC5D0 \uCC28\uB2E8\uD558\uBA70 \uC11C\uBE44\uC2A4\uC758 \uC548\uC815\uC131\uC744 \uD06C\uAC8C \uB192\uC5EC\uC8FC\uACE0 \uC788\uC2B5\uB2C8\uB2E4.",
+    startMs: 61290,
+    endMs: 65940
+  }
+];
+
+;// ./src/projects/design-test2/body1/sequences.tsx
+
+
+
+
+const sequences_GFX_Grid = () => {
+  const frame = (0,esm.useCurrentFrame)();
+  const move = (0,esm.interpolate)(frame, [0, 300], [0, -100], { extrapolateRight: "clamp" });
+  return /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.AbsoluteFill, { style: { zIndex: Z.BG, background: COLORS.BG_VOID }, children: /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: {
+    position: "absolute",
+    width: "200%",
+    height: "200%",
+    top: "-50%",
+    left: "-50%",
+    backgroundImage: `linear-gradient(to right, ${COLORS.BORDER} 1px, transparent 1px), linear-gradient(to bottom, ${COLORS.BORDER} 1px, transparent 1px)`,
+    backgroundSize: "60px 60px",
+    transform: `perspective(1000px) rotateX(60deg) translateY(${move}px)`,
+    opacity: 0.2
+  } }) });
+};
+const sequences_Scene1 = () => {
+  const frame = (0,esm.useCurrentFrame)();
+  const slide = (0,esm.spring)({ frame, fps: 60 });
+  return /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.AbsoluteFill, { style: { justifyContent: "center", alignItems: "center" }, children: [
+    /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { height: 4, width: (0,esm.interpolate)(slide, [0, 1], [0, 1200]), backgroundColor: COLORS.PRIMARY, boxShadow: EFFECTS.GLOW_SM } }),
+    /* @__PURE__ */ (0,jsx_runtime.jsx)("h1", { style: { position: "absolute", fontFamily: FONTS.DISPLAY, fontSize: 100, color: COLORS.TEXT_MAIN, opacity: slide, letterSpacing: 10 }, children: "REAL-WORLD IMPACT" })
+  ] });
+};
+const sequences_Scene2 = () => {
+  const frame = (0,esm.useCurrentFrame)();
+  const particles = Array.from({ length: 50 });
+  return /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.AbsoluteFill, { style: { justifyContent: "center", alignItems: "center" }, children: [
+    /* @__PURE__ */ (0,jsx_runtime.jsx)(sequences_GFX_Grid, {}),
+    particles.map((_, i) => /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: {
+      position: "absolute",
+      width: 2,
+      height: 20,
+      backgroundColor: COLORS.PRIMARY,
+      left: `${i * 7.7 % 100}%`,
+      top: `${(frame * 10 + i * 20) % 120 - 10}%`,
+      opacity: 0.4
+    } }, i)),
+    /* @__PURE__ */ (0,jsx_runtime.jsx)("h1", { style: { color: COLORS.PRIMARY, fontSize: 120, fontFamily: FONTS.DISPLAY, textShadow: EFFECTS.GLOW_MD }, children: "DATA-DRIVEN" })
+  ] });
+};
+const sequences_Scene3 = () => {
+  const frame = (0,esm.useCurrentFrame)();
+  const scale = (0,esm.interpolate)(frame, [0, 200], [1.5, 1]);
+  return /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.AbsoluteFill, { style: { justifyContent: "center", alignItems: "center", transform: `scale(${scale})` }, children: /* @__PURE__ */ (0,jsx_runtime.jsxs)("div", { style: { width: 1400, height: 800, border: `1px solid ${COLORS.BORDER_STRONG}`, padding: 40, position: "relative" }, children: [
+    /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { color: COLORS.PRIMARY, fontFamily: FONTS.MONO }, children: "[ SECURE DATA ACCESS ]" }),
+    /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { position: "absolute", right: 40, top: 40, width: 200, height: 10, backgroundColor: COLORS.BORDER } }),
+    /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 20, marginTop: 100 }, children: [1, 2, 3, 4, 5, 6].map((i) => /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { height: 150, border: `1px solid ${COLORS.BORDER}`, backgroundColor: COLORS.BG_SURFACE } }, i)) })
+  ] }) });
+};
+const sequences_Scene4 = () => {
+  const frame = (0,esm.useCurrentFrame)();
+  const scroll = (0,esm.interpolate)(frame, [0, 189], [0, -400]);
+  return /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.AbsoluteFill, { style: { padding: 100 }, children: [
+    /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { fontSize: 40, color: COLORS.PRIMARY, fontFamily: FONTS.DISPLAY, marginBottom: 40 }, children: "RESEARCH REPORT" }),
+    /* @__PURE__ */ (0,jsx_runtime.jsxs)("div", { style: { transform: `translateY(${scroll}px)`, color: COLORS.TEXT_MUTED, fontSize: 24, lineHeight: 2 }, children: [
+      "RESEARCH PAPER ID: NV-2024-AI",
+      /* @__PURE__ */ (0,jsx_runtime.jsx)("br", {}),
+      "SUBJECT: AI PRODUCTIVITY METRICS",
+      /* @__PURE__ */ (0,jsx_runtime.jsx)("br", {}),
+      "METHODOLOGY: CONTROLLED TEAM ANALYSIS",
+      /* @__PURE__ */ (0,jsx_runtime.jsx)("br", {}),
+      "SAMPLE SIZE: 500 ENTERPRISE TEAMS",
+      /* @__PURE__ */ (0,jsx_runtime.jsx)("br", {}),
+      "DURATION: 12 MONTHS",
+      /* @__PURE__ */ (0,jsx_runtime.jsx)("br", {}),
+      "SUMMARY: SIGNIFICANT UPTICK IN OUTPUT",
+      /* @__PURE__ */ (0,jsx_runtime.jsx)("br", {}),
+      "STABILITY: 99.9% CONFIDENCE",
+      /* @__PURE__ */ (0,jsx_runtime.jsx)("br", {}),
+      "..."
+    ] })
+  ] });
+};
+const sequences_Scene5 = () => {
+  const frame = (0,esm.useCurrentFrame)();
+  const count = Math.floor((0,esm.interpolate)(frame, [0, 100], [0, 55], { extrapolateRight: "clamp" }));
+  return /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.AbsoluteFill, { style: { justifyContent: "center", alignItems: "center" }, children: /* @__PURE__ */ (0,jsx_runtime.jsxs)("div", { style: { textAlign: "center" }, children: [
+    /* @__PURE__ */ (0,jsx_runtime.jsxs)("div", { style: { fontSize: 280, fontFamily: FONTS.MONO, color: COLORS.PRIMARY, textShadow: EFFECTS.GLOW_LG }, children: [
+      count,
+      "%"
+    ] }),
+    /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { fontSize: 60, color: COLORS.TEXT_MAIN, fontFamily: FONTS.DISPLAY }, children: "PRODUCTIVITY UP" })
+  ] }) });
+};
+const sequences_Scene6 = () => {
+  const frame = (0,esm.useCurrentFrame)();
+  const scanPos = (0,esm.interpolate)(frame, [0, 200], [-100, 1100]);
+  return /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.AbsoluteFill, { style: { padding: 100 }, children: [
+    /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { display: "flex", flexWrap: "wrap", gap: 20 }, children: Array.from({ length: 48 }).map((_, i) => /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: {
+      width: 150,
+      height: 60,
+      border: `1px solid ${COLORS.BORDER}`,
+      opacity: scanPos > i * 20 ? 0.1 : 0.6,
+      backgroundColor: COLORS.BG_SURFACE
+    } }, i)) }),
+    /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: {
+      position: "absolute",
+      top: 0,
+      left: `${scanPos}px`,
+      width: 100,
+      height: "100%",
+      background: `linear-gradient(to right, transparent, ${COLORS.PRIMARY_GLOW}, transparent)`
+    } }),
+    /* @__PURE__ */ (0,jsx_runtime.jsx)("h1", { style: {
+      position: "absolute",
+      top: "50%",
+      left: "50%",
+      transform: "translate(-50%, -50%)",
+      fontSize: 100,
+      color: COLORS.TEXT_MAIN,
+      fontFamily: FONTS.DISPLAY
+    }, children: "TIME SAVED" })
+  ] });
+};
+const sequences_Scene7 = () => {
+  const frame = (0,esm.useCurrentFrame)();
+  const pie = (0,esm.interpolate)(frame, [0, 100], [0, 270]);
+  return /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.AbsoluteFill, { style: { justifyContent: "center", alignItems: "center" }, children: [
+    /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: {
+      position: "relative",
+      width: 400,
+      height: 400,
+      borderRadius: 200,
+      border: `10px solid ${COLORS.BORDER}`,
+      background: `conic-gradient(${COLORS.PRIMARY} 0deg, ${COLORS.PRIMARY} ${pie}deg, transparent ${pie}deg)`
+    } }),
+    /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { position: "absolute", padding: 20, backgroundColor: COLORS.BG_VOID, border: `1px solid ${COLORS.PRIMARY}`, color: COLORS.PRIMARY }, children: "WORK DISTRIBUTION SHIFT" })
+  ] });
+};
+const sequences_Scene8 = () => {
+  const frame = (0,esm.useCurrentFrame)();
+  const count = Math.floor((0,esm.interpolate)(frame, [0, 100], [0, 80], { extrapolateRight: "clamp" }));
+  return /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.AbsoluteFill, { style: { justifyContent: "center", alignItems: "center" }, children: /* @__PURE__ */ (0,jsx_runtime.jsxs)("div", { style: { textAlign: "center" }, children: [
+    /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { fontSize: 60, color: COLORS.TEXT_MAIN }, children: "REPETITIVE TASKS" }),
+    /* @__PURE__ */ (0,jsx_runtime.jsxs)("div", { style: { fontSize: 200, color: COLORS.NEGATIVE, fontFamily: FONTS.MONO }, children: [
+      "-",
+      count,
+      "%"
+    ] })
+  ] }) });
+};
+const sequences_Scene9 = () => {
+  const frame = (0,esm.useCurrentFrame)();
+  const h1 = (0,esm.spring)({ frame, fps: 60, delay: 0 });
+  const h2 = (0,esm.spring)({ frame, fps: 60, delay: 20 });
+  const h3 = (0,esm.spring)({ frame, fps: 60, delay: 40 });
+  return /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.AbsoluteFill, { style: { padding: 100, justifyContent: "flex-end" }, children: [
+    /* @__PURE__ */ (0,jsx_runtime.jsxs)("div", { style: { display: "flex", alignItems: "flex-end", gap: 50, height: "60%" }, children: [
+      /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { width: 100, height: `${h1 * 30}%`, backgroundColor: COLORS.PRIMARY } }),
+      /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { width: 100, height: `${h2 * 60}%`, backgroundColor: COLORS.PRIMARY } }),
+      /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { width: 100, height: `${h3 * 100}%`, backgroundColor: COLORS.PRIMARY, boxShadow: EFFECTS.GLOW_SM } })
+    ] }),
+    /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { position: "absolute", top: 100, color: COLORS.PRIMARY, fontSize: 80, fontFamily: FONTS.DISPLAY }, children: "CREATIVE PLANNING 3X" })
+  ] });
+};
+const sequences_Scene10 = () => {
+  const frame = (0,esm.useCurrentFrame)();
+  const split = (0,esm.spring)({ frame, fps: 60 });
+  return /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.AbsoluteFill, { children: [
+    /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { position: "absolute", left: 0, width: `${50 * split}%`, height: "100%", backgroundColor: COLORS.BG_VOID, borderRight: `2px solid ${COLORS.BORDER}`, display: "flex", justifyContent: "center", alignItems: "center" }, children: /* @__PURE__ */ (0,jsx_runtime.jsx)("h1", { style: { color: COLORS.TEXT_MUTED, fontSize: 60, fontFamily: FONTS.DISPLAY }, children: "BEFORE" }) }),
+    /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { position: "absolute", right: 0, width: `${50 * split}%`, height: "100%", backgroundColor: COLORS.BG_VOID, display: "flex", justifyContent: "center", alignItems: "center" }, children: /* @__PURE__ */ (0,jsx_runtime.jsx)("h1", { style: { color: COLORS.PRIMARY, fontSize: 60, fontFamily: FONTS.DISPLAY }, children: "AFTER" }) })
+  ] });
+};
+const sequences_Scene11 = () => {
+  return /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.AbsoluteFill, { style: { backgroundColor: "#100000", justifyContent: "center", alignItems: "center" }, children: [
+    /* @__PURE__ */ (0,jsx_runtime.jsxs)("div", { style: { fontSize: 32, fontFamily: FONTS.MONO, color: "#aa3333" }, children: [
+      "SEARCHING DOCUMENTATION...",
+      /* @__PURE__ */ (0,jsx_runtime.jsx)("br", {}),
+      "TYPING... TYPING...",
+      /* @__PURE__ */ (0,jsx_runtime.jsx)("br", {}),
+      "ERROR: SEMICOLON MISSING",
+      /* @__PURE__ */ (0,jsx_runtime.jsx)("br", {}),
+      "RE-TYPING...",
+      /* @__PURE__ */ (0,jsx_runtime.jsx)("br", {}),
+      "DEBUGGING... (3 HOURS LATER)"
+    ] }),
+    /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { position: "absolute", top: 40, left: 40, color: "#ff3b3b", fontSize: 30 }, children: "BEFORE: MANUAL & SLOW" })
+  ] });
+};
+const sequences_Scene12 = () => {
+  const frame = (0,esm.useCurrentFrame)();
+  const glow = (0,esm.interpolate)(frame % 30, [0, 15, 30], [1, 1.5, 1]);
+  return /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.AbsoluteFill, { style: { backgroundColor: COLORS.BG_VOID, justifyContent: "center", alignItems: "center" }, children: /* @__PURE__ */ (0,jsx_runtime.jsxs)("div", { style: { padding: 60, border: `4px solid ${COLORS.PRIMARY}`, boxShadow: `0 0 30px ${COLORS.PRIMARY_GLOW}`, textAlign: "center" }, children: [
+    /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { color: COLORS.PRIMARY, fontSize: 40, marginBottom: 20 }, children: "AI SUGGESTION" }),
+    /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { color: COLORS.TEXT_MAIN, fontSize: 24, fontFamily: FONTS.MONO, marginBottom: 40 }, children: '"Optimized data fetch logic with React Query"' }),
+    /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { padding: "20px 40px", backgroundColor: COLORS.PRIMARY, color: COLORS.TEXT_INVERSE, fontSize: 32, fontFamily: FONTS.DISPLAY, transform: `scale(${glow})` }, children: "APPROVE" })
+  ] }) });
+};
+const sequences_Scene13 = () => {
+  const frame = (0,esm.useCurrentFrame)();
+  const bugs = Math.floor((0,esm.interpolate)(frame, [0, 100], [100, 0], { extrapolateRight: "clamp" }));
+  return /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.AbsoluteFill, { style: { justifyContent: "center", alignItems: "center" }, children: [
+    /* @__PURE__ */ (0,jsx_runtime.jsxs)("div", { style: { textAlign: "center" }, children: [
+      /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { fontSize: 40, color: COLORS.TEXT_MUTED }, children: "BUGS DETECTED" }),
+      /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { fontSize: 260, color: bugs > 0 ? COLORS.NEGATIVE : COLORS.PRIMARY, fontFamily: FONTS.MONO }, children: bugs })
+    ] }),
+    bugs === 0 && /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { fontSize: 80, color: COLORS.PRIMARY, fontFamily: FONTS.DISPLAY }, children: "STABLE SYSTEM" })
+  ] });
+};
+const Scene14 = () => {
+  const frame = (0,esm.useCurrentFrame)();
+  const shield = (0,esm.spring)({ frame, fps: 60 });
+  return /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.AbsoluteFill, { style: { justifyContent: "center", alignItems: "center" }, children: [
+    /* @__PURE__ */ (0,jsx_runtime.jsx)(sequences_GFX_Grid, {}),
+    /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { position: "relative", width: 600, height: 600, border: `${10 * shield}px solid ${COLORS.PRIMARY}`, borderRadius: 300, boxShadow: EFFECTS.GLOW_LG, perspective: 1e3 }, children: /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)", fontSize: 100, color: COLORS.PRIMARY, fontFamily: FONTS.DISPLAY }, children: "SHIELD" }) }),
+    /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { position: "absolute", bottom: 100, fontSize: 50, color: COLORS.TEXT_MAIN, fontFamily: FONTS.DISPLAY }, children: "90% ERRORS PREVENTED" })
+  ] });
+};
+const sequences_Sequences = () => {
+  return /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.Series, { children: [
+    /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.Series.Sequence, { durationInFrames: 187, name: "Impact", children: /* @__PURE__ */ (0,jsx_runtime.jsx)(sequences_Scene1, {}) }),
+    /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.Series.Sequence, { durationInFrames: 196, name: "Data", children: /* @__PURE__ */ (0,jsx_runtime.jsx)(sequences_Scene2, {}) }),
+    /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.Series.Sequence, { durationInFrames: 202, name: "Dashboard", children: /* @__PURE__ */ (0,jsx_runtime.jsx)(sequences_Scene3, {}) }),
+    /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.Series.Sequence, { durationInFrames: 189, name: "Report", children: /* @__PURE__ */ (0,jsx_runtime.jsx)(sequences_Scene4, {}) }),
+    /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.Series.Sequence, { durationInFrames: 357, name: "Productivity", children: /* @__PURE__ */ (0,jsx_runtime.jsx)(sequences_Scene5, {}) }),
+    /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.Series.Sequence, { durationInFrames: 298, name: "TimeSaved", children: /* @__PURE__ */ (0,jsx_runtime.jsx)(sequences_Scene6, {}) }),
+    /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.Series.Sequence, { durationInFrames: 176, name: "Distribution", children: /* @__PURE__ */ (0,jsx_runtime.jsx)(sequences_Scene7, {}) }),
+    /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.Series.Sequence, { durationInFrames: 228, name: "Reduction", children: /* @__PURE__ */ (0,jsx_runtime.jsx)(sequences_Scene8, {}) }),
+    /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.Series.Sequence, { durationInFrames: 343, name: "Growth", children: /* @__PURE__ */ (0,jsx_runtime.jsx)(sequences_Scene9, {}) }),
+    /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.Series.Sequence, { durationInFrames: 180, name: "Comparison", children: /* @__PURE__ */ (0,jsx_runtime.jsx)(sequences_Scene10, {}) }),
+    /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.Series.Sequence, { durationInFrames: 301, name: "Before", children: /* @__PURE__ */ (0,jsx_runtime.jsx)(sequences_Scene11, {}) }),
+    /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.Series.Sequence, { durationInFrames: 359, name: "After", children: /* @__PURE__ */ (0,jsx_runtime.jsx)(sequences_Scene12, {}) }),
+    /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.Series.Sequence, { durationInFrames: 228, name: "Bugs", children: /* @__PURE__ */ (0,jsx_runtime.jsx)(sequences_Scene13, {}) }),
+    /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.Series.Sequence, { durationInFrames: 590, name: "Shield", children: /* @__PURE__ */ (0,jsx_runtime.jsx)(Scene14, {}) })
+  ] });
+};
+
+;// ./src/projects/design-test2/body1/body1.tsx
+
+
+
+
+
+
+
+const Body1 = () => {
+  return /* @__PURE__ */ (0,jsx_runtime.jsxs)(
+    esm.AbsoluteFill,
+    {
+      style: {
+        backgroundColor: COLORS.BG_VOID
+      },
+      children: [
+        /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.Audio, { src: (0,esm.staticFile)("design-test2/body1/body1.wav") }),
+        /* @__PURE__ */ (0,jsx_runtime.jsx)(sequences_Sequences, {}),
+        /* @__PURE__ */ (0,jsx_runtime.jsx)(CaptionOverlay, { captions: body1Subtitles })
+      ]
+    }
+  );
+};
+
+;// ./src/projects/design-test2/body2/body2_subtitles.ts
+
+const body2Subtitles = [
+  {
+    text: "\uC774\uB807\uAC8C \uAC15\uB825\uD55C AI \uD234\uC744 \uC6B0\uB9AC \uD300\uC5D0 \uC131\uACF5\uC801\uC73C\uB85C \uB3C4\uC785\uD558\uB824\uBA74\n\uC5B4\uB5BB\uAC8C \uD574\uC57C \uD560\uAE4C\uC694?",
+    startMs: 10,
+    endMs: 4660
+  },
+  {
+    text: "\uCCB4\uACC4\uC801\uC774\uACE0 \uD6A8\uC728\uC801\uC778 3\uB2E8\uACC4 \uC2E4\uC804 \uC6CC\uD06C\uD50C\uB85C\uC6B0\uB97C \uC81C\uC548\uD569\uB2C8\uB2E4.",
+    startMs: 4660,
+    endMs: 9300
+  },
+  {
+    text: "AI\uC640 \uD568\uAED8\uD558\uB294 \uAC1C\uBC1C \uC6CC\uD06C\uD50C\uB85C\uC6B0\uB294 \uBCF4\uD1B5 \uB2E4\uC74C \uC138 \uB2E8\uACC4\uB85C \uC9C4\uD589\uB429\uB2C8\uB2E4.",
+    startMs: 9300,
+    endMs: 14800
+  },
+  {
+    text: "\uCCAB\uC9F8, \uC804\uCCB4\uC801\uC778 \uC544\uD0A4\uD14D\uCC98 \uC124\uACC4.",
+    startMs: 14800,
+    endMs: 18060
+  },
+  {
+    text: "\uB458\uC9F8, AI\uB97C \uD65C\uC6A9\uD55C \uBE60\uB978 \uCD08\uC548 \uC791\uC131.",
+    startMs: 18060,
+    endMs: 22060
+  },
+  {
+    text: "\uC14B\uC9F8, \uAC1C\uBC1C\uC790\uC758 \uB514\uD14C\uC77C\uD55C \uB9AC\uD329\uD1A0\uB9C1 \uBC0F \uCD5C\uC801\uD654\uC785\uB2C8\uB2E4.",
+    startMs: 22060,
+    endMs: 26080
+  },
+  {
+    text: "\uB2E8\uC21C\uD55C \uB9C8\uD06C\uC5C5\uC744 \uB118\uC5B4 \uBCF5\uC7A1\uD55C \uB85C\uC9C1\uB3C4 \uBB38\uC81C\uC5C6\uC2B5\uB2C8\uB2E4.",
+    startMs: 26080,
+    endMs: 29960
+  },
+  {
+    text: "\uD504\uB86C\uD504\uD2B8 \uBA87 \uC904\uB9CC \uC785\uB825\uD558\uBA74, API \uC5F0\uB3D9\uBD80\uD130 \uC0C1\uD0DC \uAD00\uB9AC\uAE4C\uC9C0 \uAC16\uCD98\n\uC644\uBCBD\uD55C Next.js \uCEF4\uD3EC\uB10C\uD2B8 \uCF54\uB4DC\uAC00 \uC21C\uC2DD\uAC04\uC5D0 \uC791\uC131\uB429\uB2C8\uB2E4.",
+    startMs: 30860,
+    endMs: 38840
+  },
+  {
+    text: "\uC774\uB54C \uAC00\uC7A5 \uC911\uC694\uD55C \uD575\uC2EC \uAE30\uC220\uC740 \uBC14\uB85C '\uD504\uB86C\uD504\uD2B8 \uC5D4\uC9C0\uB2C8\uC5B4\uB9C1'\uC785\uB2C8\uB2E4.",
+    startMs: 38840,
+    endMs: 44080
+  },
+  {
+    text: "\uBA85\uD655\uD55C \uCEE8\uD14D\uC2A4\uD2B8\uC640 \uC5C4\uACA9\uD55C \uC81C\uC57D \uC870\uAC74\uC744 \uC81C\uACF5\uD560\uC218\uB85D,",
+    startMs: 44080,
+    endMs: 48140
+  },
+  {
+    text: "AI\uB294 \uC6B0\uB9AC\uAC00 \uC815\uD655\uD788 \uC6D0\uD558\uB294 \uD615\uD0DC\uC758 \uCF54\uB4DC\uB97C \uC624\uCC28 \uC5C6\uC774 \uC0DD\uC131\uD574 \uB0C5\uB2C8\uB2E4.",
+    startMs: 48140,
+    endMs: 52500
+  },
+  {
+    text: "\uAE4C\uB2E4\uB85C\uC6E0\uB358 \uD14C\uC2A4\uD2B8 \uCF54\uB4DC \uC791\uC131\uB3C4 \uB354 \uC774\uC0C1 \uACE0\uD1B5\uC2A4\uB7EC\uC6B4 \uC791\uC5C5\uC774 \uC544\uB2D9\uB2C8\uB2E4.",
+    startMs: 52500,
+    endMs: 57220
+  },
+  {
+    text: "\uD575\uC2EC \uBE44\uC988\uB2C8\uC2A4 \uB85C\uC9C1\uB9CC \uC8FC\uC5B4\uC9C0\uBA74 \uC5E3\uC9C0 \uCF00\uC774\uC2A4\uAE4C\uC9C0 \uAF3C\uAF3C\uD558\uAC8C \uACE0\uB824\uD55C\n\uC644\uBCBD\uD55C \uD14C\uC2A4\uD2B8 \uC2A4\uC704\uD2B8\uB97C \uC790\uB3D9\uC73C\uB85C \uAD6C\uC131\uD574 \uC90D\uB2C8\uB2E4.",
+    startMs: 57220,
+    endMs: 64800
+  }
+];
+
+;// ./src/projects/design-test2/body2/sequences.tsx
+
+
+
+
+const body2_sequences_GFX_Grid = () => {
+  const frame = (0,esm.useCurrentFrame)();
+  const move = (0,esm.interpolate)(frame, [0, 300], [0, -100], { extrapolateRight: "clamp" });
+  return /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.AbsoluteFill, { style: { zIndex: Z.BG, background: COLORS.BG_VOID }, children: /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: {
+    position: "absolute",
+    width: "200%",
+    height: "200%",
+    top: "-50%",
+    left: "-50%",
+    backgroundImage: `linear-gradient(to right, ${COLORS.BORDER} 1px, transparent 1px), linear-gradient(to bottom, ${COLORS.BORDER} 1px, transparent 1px)`,
+    backgroundSize: "60px 60px",
+    transform: `perspective(1000px) rotateX(60deg) translateY(${move}px)`,
+    opacity: 0.15
+  } }) });
+};
+const body2_sequences_Scene1 = () => {
+  const frame = (0,esm.useCurrentFrame)();
+  const glitch = frame % 10 < 2 ? (0,esm.interpolate)(frame % 10, [0, 1, 2], [0, 5, 0]) : 0;
+  return /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.AbsoluteFill, { style: { justifyContent: "center", alignItems: "center" }, children: [
+    /* @__PURE__ */ (0,jsx_runtime.jsx)(body2_sequences_GFX_Grid, {}),
+    /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { border: `2px solid ${COLORS.PRIMARY}`, padding: "40px 80px", transform: `translateX(${glitch}px)`, boxShadow: EFFECTS.GLOW_SM }, children: /* @__PURE__ */ (0,jsx_runtime.jsx)("h1", { style: { color: COLORS.TEXT_MAIN, fontFamily: FONTS.DISPLAY, fontSize: 80, margin: 0 }, children: "AI ADOPTION GUIDE" }) })
+  ] });
+};
+const body2_sequences_Scene2 = () => {
+  const frame = (0,esm.useCurrentFrame)();
+  return /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.AbsoluteFill, { style: { justifyContent: "center", alignItems: "center", flexDirection: "column", gap: 40 }, children: [1, 2, 3].map((i) => /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: {
+    width: 100,
+    height: 100,
+    borderRadius: 50,
+    border: `4px solid ${COLORS.PRIMARY}`,
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    fontSize: 60,
+    color: COLORS.PRIMARY,
+    boxShadow: EFFECTS.GLOW_SM,
+    opacity: (0,esm.spring)({ frame, fps: 60, delay: i * 15 })
+  }, children: i }, i)) });
+};
+const body2_sequences_Scene3 = () => {
+  const frame = (0,esm.useCurrentFrame)();
+  return /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.AbsoluteFill, { style: { justifyContent: "center", alignItems: "center" }, children: /* @__PURE__ */ (0,jsx_runtime.jsxs)("div", { style: { width: 1200, height: 4, backgroundColor: COLORS.BORDER, position: "relative" }, children: [
+    /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { position: "absolute", left: 0, width: (0,esm.interpolate)(frame, [0, 100], [0, 100]) + "%", height: "100%", backgroundColor: COLORS.PRIMARY, boxShadow: EFFECTS.GLOW_SM } }),
+    [0, 50, 100].map((p) => /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { position: "absolute", left: p + "%", top: -10, width: 24, height: 24, borderRadius: 12, backgroundColor: COLORS.PRIMARY, transform: "translateX(-50%)" } }, p))
+  ] }) });
+};
+const body2_sequences_Scene4 = () => {
+  const frame = (0,esm.useCurrentFrame)();
+  const op = (0,esm.spring)({ frame, fps: 60 });
+  return /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.AbsoluteFill, { style: { justifyContent: "center", alignItems: "center" }, children: [
+    /* @__PURE__ */ (0,jsx_runtime.jsx)("h2", { style: { position: "absolute", top: 100, color: COLORS.PRIMARY, fontSize: 40, fontFamily: FONTS.DISPLAY }, children: "01 ARCHITECTURE" }),
+    /* @__PURE__ */ (0,jsx_runtime.jsxs)("svg", { width: "600", height: "400", viewBox: "0 0 600 400", style: { opacity: op }, children: [
+      /* @__PURE__ */ (0,jsx_runtime.jsx)("rect", { x: "50", y: "150", width: "100", height: "100", fill: "none", stroke: COLORS.PRIMARY, strokeWidth: "2" }),
+      /* @__PURE__ */ (0,jsx_runtime.jsx)("rect", { x: "450", y: "150", width: "100", height: "100", fill: "none", stroke: COLORS.PRIMARY, strokeWidth: "2" }),
+      /* @__PURE__ */ (0,jsx_runtime.jsx)("path", { d: "M 150 200 L 450 200", stroke: COLORS.PRIMARY, strokeWidth: "2", strokeDasharray: "10 10" })
+    ] })
+  ] });
+};
+const body2_sequences_Scene5 = () => {
+  const frame = (0,esm.useCurrentFrame)();
+  return /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.AbsoluteFill, { style: { justifyContent: "center", alignItems: "center" }, children: [
+    /* @__PURE__ */ (0,jsx_runtime.jsx)("h2", { style: { position: "absolute", top: 100, color: COLORS.PRIMARY, fontSize: 40, fontFamily: FONTS.DISPLAY }, children: "02 AI DRAFT" }),
+    /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { display: "grid", gridTemplateColumns: "repeat(3, 100px)", gap: 20 }, children: Array.from({ length: 9 }).map((_, i) => /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { height: 100, backgroundColor: COLORS.PRIMARY, opacity: (0,esm.spring)({ frame, fps: 60, delay: i * 5 }), boxShadow: EFFECTS.GLOW_SM } }, i)) })
+  ] });
+};
+const body2_sequences_Scene6 = () => {
+  const frame = (0,esm.useCurrentFrame)();
+  const straighten = (0,esm.interpolate)(frame, [0, 100], [20, 0], { extrapolateRight: "clamp" });
+  return /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.AbsoluteFill, { style: { justifyContent: "center", alignItems: "center" }, children: [
+    /* @__PURE__ */ (0,jsx_runtime.jsx)("h2", { style: { position: "absolute", top: 100, color: COLORS.PRIMARY, fontSize: 40, fontFamily: FONTS.DISPLAY }, children: "03 OPTIMIZATION" }),
+    /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { width: 600, height: 300, border: `2px solid ${COLORS.PRIMARY}`, borderRadius: straighten, display: "flex", justifyContent: "center", alignItems: "center" }, children: /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { width: "80%", height: 10, backgroundColor: COLORS.PRIMARY, boxShadow: EFFECTS.GLOW_SM } }) })
+  ] });
+};
+const body2_sequences_Scene7 = () => {
+  const frame = (0,esm.useCurrentFrame)();
+  const cycle = frame % 30 < 15;
+  return /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.AbsoluteFill, { style: { justifyContent: "center", alignItems: "center" }, children: /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { fontSize: 120, fontFamily: FONTS.DISPLAY, color: cycle ? COLORS.TEXT_MAIN : COLORS.ACCENT, textShadow: cycle ? "none" : EFFECTS.GLOW_ACCENT_MD }, children: cycle ? "MARKUP" : "COMPLEX LOGIC" }) });
+};
+const body2_sequences_Scene8 = () => {
+  const frame = (0,esm.useCurrentFrame)();
+  return /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.AbsoluteFill, { style: { padding: 60, display: "flex", flexDirection: "row", gap: 40 }, children: [
+    /* @__PURE__ */ (0,jsx_runtime.jsxs)("div", { style: { flex: 1, border: `1px solid ${COLORS.BORDER}`, padding: 20, backgroundColor: COLORS.BG_SURFACE }, children: [
+      /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { color: COLORS.PRIMARY, marginBottom: 10 }, children: "PROMPT:" }),
+      /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { color: COLORS.TEXT_MAIN, fontSize: 24, fontFamily: FONTS.MONO }, children: '"Create a Next.js component for user dashboard with real-time API integration..."' })
+    ] }),
+    /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { flex: 1, border: `1px solid ${COLORS.PRIMARY}`, padding: 20, backgroundColor: COLORS.BG_VOID, boxShadow: EFFECTS.GLOW_SM }, children: /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { color: COLORS.TEXT_MUTED, fontSize: 16, fontFamily: FONTS.MONO }, children: `import { useEffect, useState } from 'react';
+
+export const Dashboard = () => {
+  const [data, setData] = useState(null);
+  useEffect(() => {
+    fetch('/api/user').then(res => res.json()).then(setData);
+  }, []);
+  return <div>{data?.name}</div>;
+};`.slice(0, frame * 2) }) })
+  ] });
+};
+const body2_sequences_Scene10 = () => {
+  const frame = (0,esm.useCurrentFrame)();
+  const move = (0,esm.interpolate)(frame, [0, 314], [-100, 100]);
+  return /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.AbsoluteFill, { style: { backgroundColor: COLORS.PRIMARY, justifyContent: "center", alignItems: "center", overflow: "hidden" }, children: /* @__PURE__ */ (0,jsx_runtime.jsx)("h1", { style: { color: COLORS.TEXT_INVERSE, fontSize: 150, fontFamily: FONTS.DISPLAY, transform: `translateX(${move}%)`, whiteSpace: "nowrap" }, children: "PROMPT ENGINEERING PROMPT ENGINEERING PROMPT ENGINEERING" }) });
+};
+const body2_sequences_Scene11 = () => {
+  const frame = (0,esm.useCurrentFrame)();
+  const merge = (0,esm.spring)({ frame, fps: 60 });
+  return /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.AbsoluteFill, { style: { justifyContent: "center", alignItems: "center" }, children: [
+    /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { position: "absolute", top: (0,esm.interpolate)(merge, [0, 1], [0, 450]), fontSize: 80, color: COLORS.PRIMARY, fontFamily: FONTS.DISPLAY }, children: "CONTEXT" }),
+    /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { position: "absolute", bottom: (0,esm.interpolate)(merge, [0, 1], [0, 450]), fontSize: 80, color: COLORS.PRIMARY, fontFamily: FONTS.DISPLAY }, children: "CONSTRAINTS" }),
+    merge > 0.8 && /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { border: `4px solid ${COLORS.ACCENT}`, width: 300, height: 300, borderRadius: 150, boxShadow: EFFECTS.GLOW_ACCENT_MD } })
+  ] });
+};
+const body2_sequences_Scene12 = () => {
+  return /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.AbsoluteFill, { style: { justifyContent: "center", alignItems: "center" }, children: /* @__PURE__ */ (0,jsx_runtime.jsxs)("div", { style: { width: 800, height: 200, border: `4px solid ${COLORS.PRIMARY}`, display: "flex", alignItems: "center", padding: "0 40px", gap: 40, boxShadow: EFFECTS.GLOW_SM }, children: [
+    /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { fontSize: 100, color: COLORS.PRIMARY }, children: "\u2713" }),
+    /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { fontSize: 60, color: COLORS.TEXT_MAIN, fontFamily: FONTS.DISPLAY }, children: "TEST CASE PASSED" })
+  ] }) });
+};
+const body2_sequences_Scene13 = () => {
+  const frame = (0,esm.useCurrentFrame)();
+  return /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.AbsoluteFill, { style: { display: "grid", gridTemplateColumns: "repeat(10, 1fr)", gridTemplateRows: "repeat(10, 1fr)" }, children: [
+    Array.from({ length: 100 }).map((_, i) => /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { border: `0.5px solid ${COLORS.BORDER}`, backgroundColor: i < frame ? COLORS.PRIMARY : "transparent", opacity: i < frame ? 0.8 : 0.2 } }, i)),
+    /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)", padding: "20px 40px", backgroundColor: COLORS.BG_VOID, border: `2px solid ${COLORS.PRIMARY}`, color: COLORS.PRIMARY, fontSize: 40, fontFamily: FONTS.DISPLAY }, children: "AUTOGEN TEST SUITE" })
+  ] });
+};
+const body2_sequences_Sequences = () => {
+  return /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.Series, { children: [
+    /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.Series.Sequence, { durationInFrames: 279, name: "Guide", children: /* @__PURE__ */ (0,jsx_runtime.jsx)(body2_sequences_Scene1, {}) }),
+    /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.Series.Sequence, { durationInFrames: 278, name: "Steps", children: /* @__PURE__ */ (0,jsx_runtime.jsx)(body2_sequences_Scene2, {}) }),
+    /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.Series.Sequence, { durationInFrames: 330, name: "Timeline", children: /* @__PURE__ */ (0,jsx_runtime.jsx)(body2_sequences_Scene3, {}) }),
+    /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.Series.Sequence, { durationInFrames: 196, name: "Arch", children: /* @__PURE__ */ (0,jsx_runtime.jsx)(body2_sequences_Scene4, {}) }),
+    /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.Series.Sequence, { durationInFrames: 240, name: "Draft", children: /* @__PURE__ */ (0,jsx_runtime.jsx)(body2_sequences_Scene5, {}) }),
+    /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.Series.Sequence, { durationInFrames: 241, name: "Opt", children: /* @__PURE__ */ (0,jsx_runtime.jsx)(body2_sequences_Scene6, {}) }),
+    /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.Series.Sequence, { durationInFrames: 233, name: "Markup", children: /* @__PURE__ */ (0,jsx_runtime.jsx)(body2_sequences_Scene7, {}) }),
+    /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.Series.Sequence, { durationInFrames: 479, name: "Nextjs", children: /* @__PURE__ */ (0,jsx_runtime.jsx)(body2_sequences_Scene8, {}) }),
+    /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.Series.Sequence, { durationInFrames: 314, name: "Engineering", children: /* @__PURE__ */ (0,jsx_runtime.jsx)(body2_sequences_Scene10, {}) }),
+    /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.Series.Sequence, { durationInFrames: 505, name: "Context", children: /* @__PURE__ */ (0,jsx_runtime.jsx)(body2_sequences_Scene11, {}) }),
+    /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.Series.Sequence, { durationInFrames: 283, name: "TestPass", children: /* @__PURE__ */ (0,jsx_runtime.jsx)(body2_sequences_Scene12, {}) }),
+    /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.Series.Sequence, { durationInFrames: 455, name: "TestMatrix", children: /* @__PURE__ */ (0,jsx_runtime.jsx)(body2_sequences_Scene13, {}) })
+  ] });
+};
+
+;// ./src/projects/design-test2/body2/body2.tsx
+
+
+
+
+
+
+
+const Body2 = () => {
+  return /* @__PURE__ */ (0,jsx_runtime.jsxs)(
+    esm.AbsoluteFill,
+    {
+      style: {
+        backgroundColor: COLORS.BG_VOID
+      },
+      children: [
+        /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.Audio, { src: (0,esm.staticFile)("design-test2/body2/body2.wav") }),
+        /* @__PURE__ */ (0,jsx_runtime.jsx)(body2_sequences_Sequences, {}),
+        /* @__PURE__ */ (0,jsx_runtime.jsx)(CaptionOverlay, { captions: body2Subtitles })
+      ]
+    }
+  );
+};
+
+;// ./src/projects/design-test2/outro/outro_subtitles.ts
+
+const outroSubtitles = [
+  {
+    text: "\uAE30\uC220\uC758 \uBC1C\uC804 \uC18D\uB3C4\uB294 \uC6B0\uB9AC\uC758 \uC608\uC0C1\uC744 \uB6F0\uC5B4\uB118\uC744 \uC815\uB3C4\uB85C\n\uC810\uC810 \uB354 \uBE68\uB77C\uC9C0\uACE0 \uC788\uC2B5\uB2C8\uB2E4.",
+    startMs: 0,
+    endMs: 4980
+  },
+  {
+    text: "\uB2F9\uC7A5 \uB0B4\uB144\uC5D0\uB294 \uB610 \uC5B4\uB5A4 \uD601\uC2E0\uC801\uC778 \uB3C4\uAD6C\uAC00 \uB4F1\uC7A5\uD558\uC5EC\n\uC6B0\uB9AC\uC758 \uC77C\uD558\uB294 \uBC29\uC2DD\uC744 \uBC14\uAFC0\uAE4C\uC694?",
+    startMs: 4980,
+    endMs: 11420
+  },
+  {
+    text: "\uC77C\uAC01\uC5D0\uC11C\uB294 AI\uAC00 \uAC1C\uBC1C\uC790\uC758 \uC77C\uC790\uB9AC\uB97C \uB300\uCCB4\uD560 \uAC83\uC774\uB77C\uB294\n\uB9C9\uC5F0\uD55C \uC6B0\uB824\uB3C4 \uC788\uC2B5\uB2C8\uB2E4.",
+    startMs: 11420,
+    endMs: 17920
+  },
+  {
+    text: "\uD558\uC9C0\uB9CC \uC5ED\uC0AC\uAC00 \uC99D\uBA85\uD558\uB4EF, \uAC15\uB825\uD55C \uC0C8\uB85C\uC6B4 \uB3C4\uAD6C\uB294\n\uD56D\uC0C1 \uC778\uAC04\uC758 \uC7A0\uC7AC\uB825\uACFC \uD55C\uACC4\uB97C \uB354\uC6B1 \uD655\uC7A5\uC2DC\uCF1C \uC654\uC2B5\uB2C8\uB2E4.",
+    startMs: 17920,
+    endMs: 27160
+  },
+  {
+    text: "AI\uB294 \uC6B0\uB9AC\uB97C \uBC00\uC5B4\uB0B4\uB294 \uACBD\uC7C1\uC790\uAC00 \uC544\uB2D9\uB2C8\uB2E4.",
+    startMs: 28360,
+    endMs: 30920
+  },
+  {
+    text: "\uC624\uD788\uB824 \uC6B0\uB9AC\uAC00 \uB2E8\uC21C \uC791\uC5C5\uC5D0\uC11C \uBC97\uC5B4\uB098 \uB354 \uAC00\uCE58 \uC788\uACE0\n\uCC3D\uC758\uC801\uC778 \uBB38\uC81C \uD574\uACB0\uC5D0 \uC9D1\uC911\uD560 \uC218 \uC788\uB3C4\uB85D \uB3D5\uB294 \uAC00\uC7A5 \uAC15\uB825\uD55C \uC9C0\uB81B\uB300\uC785\uB2C8\uB2E4.",
+    startMs: 30920,
+    endMs: 40300
+  },
+  {
+    text: "\uAC1C\uBC1C\uC758 \uAE30\uC220\uC801 \uC9C4\uC785 \uC7A5\uBCBD\uC774 \uB0AE\uC544\uC9D0\uC5D0 \uB530\uB77C, \uC55E\uC73C\uB85C\uB294 \uAE30\uC220\uC758 \uC219\uB828\uB3C4\uBCF4\uB2E4\n'\uBB34\uC5C7\uC744, \uC65C \uB9CC\uB4E4 \uAC83\uC778\uAC00'\uB97C \uACE0\uBBFC\uD558\uB294 \uD504\uB85C\uB355\uD2B8 \uB9C8\uC778\uB4DC\uAC00 \uAC00\uC7A5 \uC911\uC694\uD55C \uBB34\uAE30\uAC00 \uB420 \uAC83\uC785\uB2C8\uB2E4.",
+    startMs: 40300,
+    endMs: 52420
+  },
+  {
+    text: "\uB9DD\uC124\uC77C \uD544\uC694\uAC00 \uC5C6\uC2B5\uB2C8\uB2E4.",
+    startMs: 52420,
+    endMs: 54840
+  },
+  {
+    text: "\uC9C0\uAE08 \uBC14\uB85C AI\uC640 \uD568\uAED8 \uC644\uC804\uD788 \uC0C8\uB85C\uC6B4 \uAC1C\uBC1C \uC5EC\uC815\uC744 \uC2DC\uC791\uD574 \uBCF4\uC138\uC694.",
+    startMs: 54840,
+    endMs: 60240
+  },
+  {
+    text: "\uD55C\uACC4 \uC5C6\uB294 \uC5EC\uB7EC\uBD84\uC758 \uC0C1\uC0C1\uB825\uC744 \uC644\uBCBD\uD55C \uCF54\uB4DC\uB85C \uD604\uC2E4\uD654\uD560 \uC2DC\uAC04\uC785\uB2C8\uB2E4.",
+    startMs: 60240,
+    endMs: 66360
+  }
+];
+
+;// ./src/projects/design-test2/outro/sequences.tsx
+
+
+
+
+const outro_sequences_GFX_Grid = () => {
+  const frame = (0,esm.useCurrentFrame)();
+  const move = (0,esm.interpolate)(frame, [0, 300], [0, -100], { extrapolateRight: "clamp" });
+  return /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.AbsoluteFill, { style: { zIndex: Z.BG, background: COLORS.BG_VOID }, children: /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: {
+    position: "absolute",
+    width: "200%",
+    height: "200%",
+    top: "-50%",
+    left: "-50%",
+    backgroundImage: `linear-gradient(to right, ${COLORS.BORDER} 1px, transparent 1px), linear-gradient(to bottom, ${COLORS.BORDER} 1px, transparent 1px)`,
+    backgroundSize: "60px 60px",
+    transform: `perspective(1000px) rotateX(60deg) translateY(${move}px)`,
+    opacity: 0.1
+  } }) });
+};
+const outro_sequences_Scene1 = () => {
+  const frame = (0,esm.useCurrentFrame)();
+  const speed = (0,esm.interpolate)(frame, [0, 300], [0, 5e3]);
+  return /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.AbsoluteFill, { style: { justifyContent: "center", alignItems: "center" }, children: [
+    /* @__PURE__ */ (0,jsx_runtime.jsx)(outro_sequences_GFX_Grid, {}),
+    /* @__PURE__ */ (0,jsx_runtime.jsxs)("div", { style: { position: "absolute", right: 100, top: 100, color: COLORS.PRIMARY, fontFamily: FONTS.MONO, fontSize: 40 }, children: [
+      "VELOCITY: ",
+      speed.toFixed(0),
+      " km/h"
+    ] }),
+    /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { display: "flex", flexDirection: "column", gap: 10 }, children: Array.from({ length: 10 }).map((_, i) => /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { width: (0,esm.interpolate)(frame, [0, 50], [0, 1e3]), height: 2, backgroundColor: COLORS.PRIMARY, opacity: 0.3 } }, i)) })
+  ] });
+};
+const outro_sequences_Scene2 = () => {
+  const frame = (0,esm.useCurrentFrame)();
+  const rotate = (0,esm.interpolate)(frame, [0, 203], [0, 360]);
+  const glow = (0,esm.interpolate)(frame % 20, [0, 10, 20], [0.5, 1, 0.5]);
+  return /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.AbsoluteFill, { style: { justifyContent: "center", alignItems: "center" }, children: /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: {
+    width: 300,
+    height: 300,
+    border: `2px solid ${COLORS.PRIMARY}`,
+    transform: `rotateX(${rotate}deg) rotateY(${rotate}deg)`,
+    boxShadow: `0 0 ${40 * glow}px ${COLORS.PRIMARY_GLOW}`,
+    backgroundColor: COLORS.BG_SURFACE
+  } }) });
+};
+const outro_sequences_Scene3 = () => {
+  const frame = (0,esm.useCurrentFrame)();
+  const scatter = (0,esm.interpolate)(frame, [0, 183], [1, 5]);
+  return /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.AbsoluteFill, { style: { justifyContent: "center", alignItems: "center" }, children: Array.from({ length: 40 }).map((_, i) => {
+    const angle = i / 40 * Math.PI * 2;
+    return /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: {
+      position: "absolute",
+      width: 20,
+      height: 20,
+      backgroundColor: COLORS.PRIMARY,
+      left: 960 + Math.cos(angle) * (100 * scatter),
+      top: 540 + Math.sin(angle) * (100 * scatter),
+      opacity: 1 / scatter
+    } }, i);
+  }) });
+};
+const outro_sequences_Scene4 = () => {
+  const frame = (0,esm.useCurrentFrame)();
+  const noiseX = ((0,esm.random)(`x-${frame}`) - 0.5) * 10;
+  const noiseY = ((0,esm.random)(`y-${frame}`) - 0.5) * 10;
+  return /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.AbsoluteFill, { style: { justifyContent: "center", alignItems: "center", backgroundColor: "#110000" }, children: /* @__PURE__ */ (0,jsx_runtime.jsx)("h1", { style: { color: COLORS.NEGATIVE, fontSize: 100, fontFamily: FONTS.DISPLAY, transform: `translate(${noiseX}px, ${noiseY}px)` }, children: "JOB DISPLACEMENT?" }) });
+};
+const outro_sequences_Scene5 = () => {
+  const frame = (0,esm.useCurrentFrame)();
+  const beamWidth = (0,esm.interpolate)(frame, [0, 20], [0, 1920]);
+  return /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.AbsoluteFill, { style: { justifyContent: "center", alignItems: "center" }, children: /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { width: beamWidth, height: "100%", backgroundColor: COLORS.PRIMARY, opacity: 0.8, boxShadow: EFFECTS.GLOW_LG } }) });
+};
+const outro_sequences_Scene6 = () => {
+  const frame = (0,esm.useCurrentFrame)();
+  const scale = (0,esm.interpolate)(frame, [0, 344], [1, 4]);
+  return /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.AbsoluteFill, { style: { justifyContent: "center", alignItems: "center" }, children: [
+    /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { width: 400, height: 400, border: `4px solid ${COLORS.PRIMARY}`, transform: `scale(${scale})`, opacity: 2 - scale / 2 } }),
+    /* @__PURE__ */ (0,jsx_runtime.jsx)("h1", { style: { color: COLORS.TEXT_MAIN, fontSize: 80, fontFamily: FONTS.DISPLAY }, children: "EXPAND POTENTIAL" })
+  ] });
+};
+const outro_sequences_Scene7 = () => {
+  const frame = (0,esm.useCurrentFrame)();
+  return /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.AbsoluteFill, { style: { justifyContent: "center", alignItems: "center" }, children: /* @__PURE__ */ (0,jsx_runtime.jsxs)("div", { style: { position: "relative" }, children: [
+    /* @__PURE__ */ (0,jsx_runtime.jsx)("h1", { style: { color: COLORS.TEXT_MUTED, fontSize: 120, fontFamily: FONTS.DISPLAY }, children: "COMPETITOR" }),
+    frame > 60 && /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { position: "absolute", top: "50%", left: 0, width: "100%", height: 10, backgroundColor: COLORS.NEGATIVE, transform: "rotate(-15deg)" } })
+  ] }) });
+};
+const outro_sequences_Scene8 = () => {
+  const frame = (0,esm.useCurrentFrame)();
+  return /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.AbsoluteFill, { style: { justifyContent: "center", alignItems: "center" }, children: [
+    Array.from({ length: 5 }).map((_, i) => /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: {
+      position: "absolute",
+      width: (i + 1) * 200,
+      height: (i + 1) * 200,
+      borderRadius: "50%",
+      border: `1px solid ${COLORS.ACCENT}`,
+      opacity: (0,esm.interpolate)(frame % 60, [0, 60], [1, 0])
+    } }, i)),
+    /* @__PURE__ */ (0,jsx_runtime.jsx)("h1", { style: { color: COLORS.ACCENT, fontSize: 60, fontFamily: FONTS.DISPLAY }, children: "CREATIVITY" })
+  ] });
+};
+const outro_sequences_Scene9 = () => {
+  const frame = (0,esm.useCurrentFrame)();
+  const lift = (0,esm.interpolate)(frame, [0, 100], [0, -30]);
+  return /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.AbsoluteFill, { style: { justifyContent: "center", alignItems: "center" }, children: [
+    /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { width: 800, height: 10, backgroundColor: COLORS.PRIMARY, transform: `rotate(${lift}deg)`, position: "relative" }, children: /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { position: "absolute", right: 0, top: -100, width: 100, height: 100, border: `2px solid ${COLORS.PRIMARY}`, backgroundColor: COLORS.BG_SURFACE } }) }),
+    /* @__PURE__ */ (0,jsx_runtime.jsx)("h1", { style: { position: "absolute", bottom: 100, color: COLORS.PRIMARY, fontSize: 80, fontFamily: FONTS.DISPLAY }, children: "LEVERAGE" })
+  ] });
+};
+const outro_sequences_Scene10 = () => {
+  const frame = (0,esm.useCurrentFrame)();
+  const sink = (0,esm.interpolate)(frame, [0, 100], [0, 1080]);
+  return /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.AbsoluteFill, { style: { justifyContent: "center", alignItems: "center" }, children: [
+    /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { position: "absolute", top: sink, width: "100%", height: "100%", border: `100px solid ${COLORS.BORDER}`, boxSizing: "border-box" } }),
+    /* @__PURE__ */ (0,jsx_runtime.jsx)("h1", { style: { color: COLORS.PRIMARY, fontSize: 80, fontFamily: FONTS.DISPLAY }, children: "OPEN PATH" })
+  ] });
+};
+const outro_sequences_Scene11 = () => {
+  const frame = (0,esm.useCurrentFrame)();
+  const op = (0,esm.spring)({ frame, fps: 60 });
+  return /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.AbsoluteFill, { style: { justifyContent: "center", alignItems: "center" }, children: /* @__PURE__ */ (0,jsx_runtime.jsxs)("div", { style: { textAlign: "center", opacity: op }, children: [
+    /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { color: COLORS.PRIMARY, fontSize: 40, marginBottom: 20 }, children: "THE NEW WEAPON:" }),
+    /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { color: COLORS.TEXT_MAIN, fontSize: 120, fontFamily: FONTS.DISPLAY, textShadow: EFFECTS.GLOW_MD }, children: "PRODUCT MINDSET" })
+  ] }) });
+};
+const outro_sequences_Scene12 = () => {
+  const frame = (0,esm.useCurrentFrame)();
+  const roadMove = frame * 20 % 100;
+  return /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.AbsoluteFill, { style: { justifyContent: "center", alignItems: "center" }, children: [
+    /* @__PURE__ */ (0,jsx_runtime.jsx)(outro_sequences_GFX_Grid, {}),
+    /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { position: "absolute", bottom: 0, width: 200, height: "100%", background: `repeating-linear-gradient(to bottom, ${COLORS.PRIMARY} 0, ${COLORS.PRIMARY} 50px, transparent 50px, transparent 100px)`, opacity: 0.5, transform: `perspective(1000px) rotateX(80deg) translateY(${roadMove}px)` } }),
+    /* @__PURE__ */ (0,jsx_runtime.jsx)("h1", { style: { color: COLORS.TEXT_MAIN, fontSize: 60, fontFamily: FONTS.DISPLAY }, children: "NEW JOURNEY" })
+  ] });
+};
+const outro_sequences_Scene13 = () => {
+  const frame = (0,esm.useCurrentFrame)();
+  const op = (0,esm.interpolate)(frame, [0, 50, 380, 432], [0, 1, 1, 0]);
+  return /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.AbsoluteFill, { style: { justifyContent: "center", alignItems: "center", opacity: op }, children: /* @__PURE__ */ (0,jsx_runtime.jsxs)("div", { style: { textAlign: "center" }, children: [
+    /* @__PURE__ */ (0,jsx_runtime.jsx)("h1", { style: { color: COLORS.PRIMARY, fontSize: 80, fontFamily: FONTS.DISPLAY, textShadow: EFFECTS.GLOW_LG }, children: "IMAGINATION" }),
+    /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { fontSize: 40, color: COLORS.TEXT_MUTED, margin: "20px 0" }, children: "TO" }),
+    /* @__PURE__ */ (0,jsx_runtime.jsx)("h1", { style: { color: COLORS.TEXT_MAIN, fontSize: 100, fontFamily: FONTS.DISPLAY }, children: "REALITY" })
+  ] }) });
+};
+const outro_sequences_Sequences = () => {
+  return /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.Series, { children: [
+    /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.Series.Sequence, { durationInFrames: 299, name: "Velocity", children: /* @__PURE__ */ (0,jsx_runtime.jsx)(outro_sequences_Scene1, {}) }),
+    /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.Series.Sequence, { durationInFrames: 203, name: "Object", children: /* @__PURE__ */ (0,jsx_runtime.jsx)(outro_sequences_Scene2, {}) }),
+    /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.Series.Sequence, { durationInFrames: 183, name: "Particles", children: /* @__PURE__ */ (0,jsx_runtime.jsx)(outro_sequences_Scene3, {}) }),
+    /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.Series.Sequence, { durationInFrames: 390, name: "Fear", children: /* @__PURE__ */ (0,jsx_runtime.jsx)(outro_sequences_Scene4, {}) }),
+    /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.Series.Sequence, { durationInFrames: 210, name: "Beam", children: /* @__PURE__ */ (0,jsx_runtime.jsx)(outro_sequences_Scene5, {}) }),
+    /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.Series.Sequence, { durationInFrames: 344, name: "Limit", children: /* @__PURE__ */ (0,jsx_runtime.jsx)(outro_sequences_Scene6, {}) }),
+    /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.Series.Sequence, { durationInFrames: 154, name: "StrikeOut", children: /* @__PURE__ */ (0,jsx_runtime.jsx)(outro_sequences_Scene7, {}) }),
+    /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.Series.Sequence, { durationInFrames: 264, name: "Creative", children: /* @__PURE__ */ (0,jsx_runtime.jsx)(outro_sequences_Scene8, {}) }),
+    /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.Series.Sequence, { durationInFrames: 299, name: "Leverage", children: /* @__PURE__ */ (0,jsx_runtime.jsx)(outro_sequences_Scene9, {}) }),
+    /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.Series.Sequence, { durationInFrames: 220, name: "Wall", children: /* @__PURE__ */ (0,jsx_runtime.jsx)(outro_sequences_Scene10, {}) }),
+    /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.Series.Sequence, { durationInFrames: 507, name: "Mindset", children: /* @__PURE__ */ (0,jsx_runtime.jsx)(outro_sequences_Scene11, {}) }),
+    /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.Series.Sequence, { durationInFrames: 469, name: "Road", children: /* @__PURE__ */ (0,jsx_runtime.jsx)(outro_sequences_Scene12, {}) }),
+    /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.Series.Sequence, { durationInFrames: 432, name: "Final", children: /* @__PURE__ */ (0,jsx_runtime.jsx)(outro_sequences_Scene13, {}) })
+  ] });
+};
+
+;// ./src/projects/design-test2/outro/outro.tsx
+
+
+
+
+
+
+
+const Outro = () => {
+  return /* @__PURE__ */ (0,jsx_runtime.jsxs)(
+    esm.AbsoluteFill,
+    {
+      style: {
+        backgroundColor: COLORS.BG_VOID
+      },
+      children: [
+        /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.Audio, { src: (0,esm.staticFile)("design-test2/outro/outro.wav") }),
+        /* @__PURE__ */ (0,jsx_runtime.jsx)(outro_sequences_Sequences, {}),
+        /* @__PURE__ */ (0,jsx_runtime.jsx)(CaptionOverlay, { captions: outroSubtitles })
+      ]
+    }
+  );
+};
+
+;// ./src/projects/design-test2/design-test2.tsx
+
+
+
+
+
+
+
+const DesignTest2 = () => {
+  return /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.Series, { children: [
+    /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.Series.Sequence, { durationInFrames: 3980, name: "Intro", children: /* @__PURE__ */ (0,jsx_runtime.jsx)(Intro, {}) }),
+    /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.Series.Sequence, { durationInFrames: 4028, name: "Body1", children: /* @__PURE__ */ (0,jsx_runtime.jsx)(Body1, {}) }),
+    /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.Series.Sequence, { durationInFrames: 3956, name: "Body2", children: /* @__PURE__ */ (0,jsx_runtime.jsx)(Body2, {}) }),
+    /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.Series.Sequence, { durationInFrames: 4047, name: "Outro", children: /* @__PURE__ */ (0,jsx_runtime.jsx)(Outro, {}) })
+  ] });
+};
+
+;// ./src/projects/design-test1/intro/intro_subtitles.ts
+
+const intro_subtitles_introSubtitles = [
+  {
+    startMs: 0,
+    endMs: 2260,
+    text: "\uC6F9 \uAC1C\uBC1C\uC758 \uD328\uB7EC\uB2E4\uC784\uC774\n\uC644\uC804\uD788 \uBC14\uB00C\uACE0 \uC788\uC2B5\uB2C8\uB2E4."
+  },
+  {
+    startMs: 2260,
+    endMs: 6540,
+    text: "\uACFC\uAC70\uC5D0\uB294 \uBAA8\uB4E0 \uCEF4\uD3EC\uB10C\uD2B8\uB97C\n\uBC14\uB2E5\uBD80\uD130 \uC9C1\uC811 \uC791\uC131\uD574\uC57C \uD588\uC9C0\uB9CC,"
+  },
+  {
+    startMs: 6540,
+    endMs: 10780,
+    text: "\uC774\uC81C\uB294 AI\uAC00 \uC6B0\uB9AC\uC758 \uAC00\uC7A5 \uB4E0\uB4E0\uD55C\n\uD398\uC5B4 \uD504\uB85C\uADF8\uB798\uBA38\uAC00 \uB418\uC5C8\uC2B5\uB2C8\uB2E4."
+  },
+  {
+    startMs: 10780,
+    endMs: 16720,
+    text: "\uB514\uC790\uC778\uC5D0\uC11C \uAC1C\uBC1C\uB85C \uB118\uC5B4\uAC00\uB294 \uACFC\uC815\uC758\n\uBCD1\uBAA9\uD604\uC0C1\uB3C4 \uB208\uC5D0 \uB744\uAC8C \uC0AC\uB77C\uC84C\uC2B5\uB2C8\uB2E4."
+  },
+  {
+    startMs: 16720,
+    endMs: 24980,
+    text: "\uC774\uC81C\uB294 \uC2A4\uCF00\uCE58 \uD55C \uC7A5\uC774\uB098 \uAC04\uB2E8\uD55C \uD504\uB86C\uD504\uD2B8\uB9CC\uC73C\uB85C\uB3C4\n\uACE7\uBC14\uB85C \uC791\uB3D9\uD558\uB294 \uD504\uB85C\uD1A0\uD0C0\uC785\uC774 \uC0DD\uC131\uB418\uB294 \uB9C8\uBC95 \uAC19\uC740 \uC77C\uC774 \uC77C\uC5B4\uB0A9\uB2C8\uB2E4."
+  },
+  {
+    startMs: 24980,
+    endMs: 32020,
+    text: "\uB2E8\uC21C\uD788 \uCF54\uB4DC\uB97C \uC9DC\uC8FC\uB294 \uAC83\uC744 \uB118\uC5B4,\n\uC2DC\uC2A4\uD15C \uC544\uD0A4\uD14D\uCC98\uB97C \uC124\uACC4\uD558\uACE0 \uCD5C\uC801\uD654 \uD3EC\uC778\uD2B8\uAE4C\uC9C0 \uC81C\uC548\uD569\uB2C8\uB2E4."
+  },
+  {
+    startMs: 32020,
+    endMs: 38560,
+    text: "\uB9C8\uCE58 \uC218\uC2ED \uB144 \uACBD\uB825\uC758 \uC2DC\uB2C8\uC5B4 \uAC1C\uBC1C\uC790\uAC00\n\uD56D\uC0C1 \uB0B4 \uC606\uC5D0 \uC549\uC544 \uCF54\uB4DC\uB97C \uB9AC\uBDF0\uD574 \uC8FC\uB294 \uAC83\uACFC \uAC19\uC8E0."
+  },
+  {
+    startMs: 38560,
+    endMs: 46540,
+    text: "\uC774\uB7EC\uD55C \uBCC0\uD654\uB294 \uB2E8\uC21C\uD788 \uAC1C\uC778\uC758 \uCF54\uB529 \uC18D\uB3C4\uB97C \uB192\uC774\uB294 \uAC83\uC744 \uB118\uC5B4,\n\uD300 \uC804\uCCB4\uC758 \uC560\uC790\uC77C\uD55C \uD611\uC5C5 \uBC29\uC2DD\uC744 \uADFC\uBCF8\uC801\uC73C\uB85C \uC7AC\uC815\uC758\uD558\uACE0 \uC788\uC2B5\uB2C8\uB2E4."
+  },
+  {
+    startMs: 46540,
+    endMs: 51040,
+    text: "\uC6B0\uB9AC\uB294 \uB354 \uBE60\uB974\uAC8C \uC2E4\uD328\uD558\uACE0,\n\uB354 \uBE68\uB9AC \uD601\uC2E0\uD560 \uC218 \uC788\uAC8C \uB418\uC5C8\uC2B5\uB2C8\uB2E4."
+  },
+  {
+    startMs: 51040,
+    endMs: 57460,
+    text: '\uC720\uBA85\uD55C \uAC1C\uBC1C\uC790\uB294 \uC774\uB807\uAC8C \uB9D0\uD588\uC2B5\uB2C8\uB2E4.\n"\uBBF8\uB798\uC758 \uCF54\uB529\uC740 \uD0C0\uC774\uD551\uC774 \uC544\uB2C8\uB77C \uB300\uD654\uAC00 \uB420 \uAC83\uC774\uB2E4."'
+  },
+  {
+    startMs: 57460,
+    endMs: 66320,
+    text: "\uACB0\uAD6D \uC6B0\uB9AC\uC5D0\uAC8C \uAC00\uC7A5 \uD544\uC694\uD55C \uC5ED\uB7C9\uC740 \uD0C0\uAC74 \uC18D\uB3C4\uAC00 \uC544\uB2C8\uB77C,\n\uBB38\uC81C\uB97C \uC815\uC758\uD558\uACE0 AI\uB97C \uC9C0\uD718\uD558\uB294 \uAE30\uD68D\uB825\uC774 \uB420 \uAC83\uC785\uB2C8\uB2E4."
+  }
+];
+
+;// ./src/projects/design-test1/theme.ts
+
+const theme_BRAND = {
+  PROJECT_ID: "nvidia-tech-channel",
+  MOOD: "\uB2E4\uD06C \uD14C\uD06C, \uB124\uC628 \uC5E3\uC9C0, \uC2DC\uB124\uB9C8\uD2F1 \uCDA9\uACA9, \uC555\uB3C4\uC801 \uC131\uB2A5, \uB0C9\uD639\uD55C \uC9C0\uBC30",
+  CONCEPT: "NVIDIA\uC758 \uC555\uB3C4\uC801 GPU \uC544\uD0A4\uD14D\uCC98\uB97C \uB137\uD50C\uB9AD\uC2A4\uAE09 \uADF9\uC801 \uC5F0\uCD9C\uB85C \u2014 \uC22B\uC790 \uD558\uB098\uD558\uB098\uAC00 \uAD00\uAC1D\uC744 \uAC15\uD0C0\uD55C\uB2E4",
+  FORBIDDEN: "\uD30C\uC2A4\uD154, \uADC0\uC5FD\uACE0 \uCE90\uC8FC\uC5BC\uD55C \uB290\uB08C, \uB290\uB9B0 \uD398\uC774\uB4DC, \uBC1D\uC740 \uBC30\uACBD, \uBBF8\uC9C0\uADFC\uD55C \uC804\uD658"
+};
+const theme_COLORS = {
+  // Background Layer
+  BG_VOID: "#020302",
+  // 극도로 어두운 배경 — 오프닝/클라이맥스 전용
+  BG_DEEP: "#080c08",
+  // 기본 배경
+  BG_SURFACE: "#0f150f",
+  // 카드·패널 배경
+  BG_ELEVATED: "#192119",
+  // 떠있는 UI 요소 배경
+  // Brand Core — NVIDIA 시그니처 그린 계열
+  PRIMARY: "#76B900",
+  // NVIDIA 공식 그린
+  PRIMARY_DIM: "rgba(118,185,0,0.18)",
+  // PRIMARY 15~20% 투명도 — 배경 강조
+  PRIMARY_GLOW: "rgba(118,185,0,0.45)",
+  // 글로우 확산용 45% 투명도
+  SECONDARY: "#A8E000",
+  // 밝은 라임그린 — 서브 강조
+  ACCENT: "#FF4400",
+  // 냉혹한 오렌지레드 — 씬당 1회, 충격 포인트
+  // Text
+  TEXT_MAIN: "#EEEEE8",
+  // 본문·헤드라인 — 순백보다 살짝 따뜻하게
+  TEXT_MUTED: "#8A9A82",
+  // 캡션·보조 텍스트
+  TEXT_INVERSE: "#080c08",
+  // 밝은 요소(PRIMARY 버튼 등) 위 대비용
+  // Status — 성능 데이터·차트 전용
+  POSITIVE: "#76B900",
+  // 상승·우위 데이터
+  NEGATIVE: "#FF4400",
+  // 하락·경쟁사 열세 데이터
+  HIGHLIGHT: "rgba(118,185,0,0.28)",
+  // 형광펜 강조 — 수치 언더라인
+  // Border
+  BORDER: "rgba(118,185,0,0.14)",
+  // 일반 구분선
+  BORDER_STRONG: "rgba(118,185,0,0.52)"
+  // 강조 구분선 — 카드 테두리·밑줄
+};
+const theme_BRAND_EXTRAS = {
+  // 경쟁사 비교 차트
+  COMPETITOR_AMD: "#ED1C24",
+  // AMD 레드
+  COMPETITOR_INTEL: "#0068B5",
+  // Intel 블루
+  COMPETITOR_QUALCOMM: "#3253DC",
+  // Qualcomm 인디고
+  // 성능 등급 배지 (티어별 희귀도 표현)
+  TIER_S: "#FFD700",
+  // S티어 — 골드 (최상위 발표)
+  TIER_A: "#76B900",
+  // A티어 — NVIDIA 그린
+  TIER_B: "#4A7A00",
+  // B티어 — 다크 그린
+  TIER_C: "#8A9A82",
+  // C티어 — 뮤트
+  // GPU 제품 라인 구분
+  PRODUCT_BLACKWELL: "#76B900",
+  // Blackwell 세대 — 메인 그린
+  PRODUCT_HOPPER: "#5A8C00",
+  // Hopper 세대 — 딥 그린
+  PRODUCT_GEFORCE: "#A8E000",
+  // GeForce 소비자 라인 — 라임
+  PRODUCT_DATACENTER: "#3EB489",
+  // Data Center / Tesla — 민트
+  // 데이터 시각화 보조 컬러 (차트 3번째 색 이후)
+  DATA_3: "rgba(168,224,0,0.7)",
+  DATA_4: "rgba(118,185,0,0.5)",
+  DATA_5: "rgba(62,180,137,0.6)"
+};
+const theme_EFFECTS = {
+  SHADOW_SM: `0 4px 12px rgba(0,0,0,0.5)`,
+  SHADOW_LG: `0 20px 40px rgba(0,0,0,0.8)`,
+  GLOW_SM: `0 0 16px ${theme_COLORS.PRIMARY_GLOW}`,
+  GLOW_MD: `0 0 48px ${theme_COLORS.PRIMARY_GLOW}`,
+  GLOW_LG: `0 0 96px ${theme_COLORS.PRIMARY_GLOW}`,
+  GLOW_TEXT: `0 0 32px ${theme_COLORS.PRIMARY_GLOW}`
+};
+const theme_FONTS = {
+  DISPLAY: "'Bebas Neue', 'Pretendard Variable', sans-serif",
+  // 임팩트 헤드라인 전용
+  PRIMARY: "'Pretendard Variable', 'Pretendard', sans-serif",
+  // 한글+영문 본문
+  MONO: "'JetBrains Mono', 'Fira Code', monospace"
+  // 숫자/데이터 수치 전용
+};
+const TEXT_SIZE = {
+  XS: 24,
+  // 캡션, 출처
+  SM: 32,
+  // 보조 텍스트
+  BASE: 42,
+  // 본문
+  MD: 56,
+  // 서브 헤드라인
+  LG: 72,
+  // 헤드라인
+  XL: 96,
+  // 섹션 타이틀
+  XXL: 140,
+  // 임팩트 디스플레이
+  HERO: 200
+  // 오프닝 전용 — 씬당 1회, 단어 1~2개 한정
+};
+const FONT_WEIGHT = {
+  REGULAR: 400,
+  MEDIUM: 500,
+  BOLD: 700,
+  BLACK: 900
+  // 헤드라인 기본값
+};
+const LETTER_SPACING = {
+  TIGHT: -0.04,
+  // XXL, HERO 전용
+  NORMAL: -0.02,
+  // LG, XL
+  WIDE: 0.02
+  // XS, 캡션
+};
+const SPACING = {
+  S1: 8,
+  S2: 16,
+  S3: 24,
+  S4: 32,
+  S5: 48,
+  S6: 64,
+  S7: 96,
+  S8: 128,
+  S9: 192,
+  S10: 256
+};
+const SAFE_ZONE = {
+  X: 96,
+  // 좌우 — 텍스트/UI가 이 경계를 넘으면 안 됨
+  Y: 72
+  // 상하
+};
+
+const DURATIONS = {
+  INSTANT: 0.08,
+  // 깜빡임, Glitch Flash (현재 fps 기준으로 프레임 계산)
+  SNAP: 0.25,
+  // 기본 전환 단위 (현재 fps 기준으로 프레임 계산)
+  FAST: 0.4,
+  // 일반 객체 등장 (현재 fps 기준으로 프레임 계산)
+  NORMAL: 0.6,
+  // 컨텐츠 전환 (현재 fps 기준으로 프레임 계산)
+  SLOW: 1.2,
+  // 배경/무드 전환 (현재 fps 기준으로 프레임 계산)
+  DRAMATIC: 2
+  // 오프닝, 클라이맥스 (현재 fps 기준으로 프레임 계산)
+};
+const EASINGS = {
+  SNAP: esm.Easing.bezier(0.25, 0, 0, 1),
+  // 탁! 멈춤 — 기본값
+  SPRING: esm.Easing.bezier(0.34, 1.56, 0.64, 1),
+  // 오버슈트 바운스 — 활기찬 등장
+  DRAMATIC: esm.Easing.bezier(0.76, 0, 0.24, 1),
+  // 느리게 시작 → 팍! 꽂힘
+  CINEMATIC: esm.Easing.bezier(0.4, 0, 0.2, 1)
+  // 서서히 — 배경/무드 전환 전용
+};
+const SPRINGS = {
+  SMOOTH: { damping: 200 },
+  // 바운스 없는 부드러운 전환
+  SNAPPY: { damping: 20, stiffness: 200 },
+  // 빠릿한 UI 요소 등장
+  PUNCH: { damping: 12, stiffness: 150 },
+  // 타격감 (Scale Punch 최적)
+  DRAMATIC: { damping: 25, stiffness: 400 }
+  // 강렬한 등장을 위한 고강성 스프링
+};
+const STAGGER = {
+  TIGHT: 2,
+  // 따다닥 빠른 연속
+  NORMAL: 4,
+  // 일반 그룹 등장
+  LOOSE: 8
+  // 강조하고 싶은 연속 등장
+};
+const theme_Z = {
+  BG: 0,
+  CONTENT: 10,
+  OVERLAY: 20,
+  UI: 30,
+  CAPTION: 40,
+  TOP: 50
+  // 로고, 워터마크
 };
 
 ;// ./src/projects/design-test1/intro/seq1.tsx
@@ -294,109 +1917,95 @@ const CinematicLayout = ({ children }) => {
 
 
 
-
-const THEME = {
-  Primary: "#F59E0B",
-  // Gold
-  Accent: "#0D9488",
-  // Teal
-  Text: "#F8FAFC"
-};
 const Seq1 = () => {
   const frame = (0,esm.useCurrentFrame)();
-  const { fps, width, height } = (0,esm.useVideoConfig)();
-  const scale = (0,esm.interpolate)(frame, [0, 323], [1, 1.08], { extrapolateRight: "clamp" });
-  const cameraX = (0,esm.interpolate)(frame, [0, 323], [0, -20]);
-  const titleSpring = (0,esm.spring)({
+  const { fps } = (0,esm.useVideoConfig)();
+  const shiftSlam = (0,esm.spring)({
     frame,
     fps,
-    config: { damping: 12 }
+    config: SPRINGS.PUNCH,
+    durationInFrames: 30
+    // 0.5초
   });
-  const titleOpacity = (0,esm.interpolate)(frame, [0, 20], [0, 1], { extrapolateRight: "clamp" });
-  const titleY = (0,esm.interpolate)(titleSpring, [0, 1], [40, 0]);
-  const particles = Array.from({ length: 15 }).map((_, i) => {
-    const startX = i * 137 % width;
-    const startY = i * 241 % height;
-    const pScale = (0,esm.interpolate)(frame, [0, 323], [0.5, 1.2], { extrapolateRight: "clamp" });
-    const pOpacity = (0,esm.interpolate)(frame, [0, 50, 280, 323], [0, 0.4, 0.4, 0]);
-    const pX = startX + Math.sin(frame / 60 + i) * 30;
-    const pY = startY - frame * 0.5;
-    return /* @__PURE__ */ (0,jsx_runtime.jsx)(
-      "div",
-      {
-        style: {
-          position: "absolute",
-          left: pX,
-          top: pY,
-          width: 2,
-          height: 15,
-          backgroundColor: THEME.Accent,
-          opacity: pOpacity,
-          transform: `scale(${pScale})`,
-          boxShadow: `0 0 8px ${THEME.Accent}`
-        }
-      },
-      i
-    );
+  const glitchOpacity = frame % 4 < 2 && frame < 15 ? 1 : 0;
+  const ideFrame = Math.max(0, frame - 136);
+  const ideFadeIn = (0,esm.interpolate)(ideFrame, [0, 20], [0, 1], { extrapolateRight: "clamp" });
+  const codeLines = [
+    '<Component id="legacy" />',
+    "function build() {",
+    '  return "Manual process"',
+    "}"
+  ];
+  const aiFrame = Math.max(0, frame - 393);
+  const glowScale = (0,esm.spring)({
+    frame: aiFrame,
+    fps,
+    config: SPRINGS.PUNCH,
+    from: 0.1,
+    to: 1,
+    durationInFrames: 45
   });
-  return /* @__PURE__ */ (0,jsx_runtime.jsxs)(CinematicLayout, { children: [
-    /* @__PURE__ */ (0,jsx_runtime.jsxs)(
-      esm.AbsoluteFill,
-      {
-        style: {
-          transform: `scale(${scale}) translate(${cameraX}px, 0)`
-        },
-        children: [
-          particles,
-          /* @__PURE__ */ (0,jsx_runtime.jsxs)(
-            esm.AbsoluteFill,
-            {
-              style: {
-                justifyContent: "center",
-                alignItems: "center",
-                transform: `translateY(${titleY}px)`,
-                opacity: titleOpacity
-              },
-              children: [
-                /* @__PURE__ */ (0,jsx_runtime.jsxs)(
-                  "div",
-                  {
-                    style: {
-                      fontSize: 100,
-                      fontWeight: 800,
-                      color: THEME.Primary,
-                      letterSpacing: "0.2em",
-                      textAlign: "center",
-                      textShadow: `0 0 20px rgba(245, 158, 11, 0.3)`,
-                      fontFamily: "Pretendard, sans-serif"
-                    },
-                    children: [
-                      "THE NEW",
-                      /* @__PURE__ */ (0,jsx_runtime.jsx)("br", {}),
-                      "PARADIGM"
-                    ]
-                  }
-                ),
-                /* @__PURE__ */ (0,jsx_runtime.jsx)(
-                  "div",
-                  {
-                    style: {
-                      marginTop: 40,
-                      fontSize: 24,
-                      color: THEME.Text,
-                      letterSpacing: "0.4em",
-                      opacity: 0.8
-                    },
-                    children: "WEB DEVELOPMENT REVOLUTION"
-                  }
-                )
-              ]
-            }
-          )
-        ]
-      }
-    ),
-    /* @__PURE__ */ (0,jsx_runtime.jsx)(Subtitle, { text: "\uC6F9 \uAC1C\uBC1C\uC758 \uD328\uB7EC\uB2E4\uC784\uC774 \uC644\uC804\uD788 \uBC14\uB00C\uACE0 \uC788\uC2B5\uB2C8\uB2E4.\\n\uACFC\uAC70\uC5D0\uB294 \uBAA8\uB4E0 \uCEF4\uD3EC\uB10C\uD2B8\uB97C \uBC14\uB2E5\uBD80\uD130 \uC9C1\uC811 \uC791\uC131\uD574\uC57C \uD588\uC9C0\uB9CC," })
+  const textScale = (0,esm.spring)({
+    frame: aiFrame,
+    fps,
+    config: SPRINGS.PUNCH,
+    from: 0.8,
+    to: 1
+  });
+  return /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.AbsoluteFill, { style: { backgroundColor: theme_COLORS.BG_VOID, zIndex: theme_Z.BG }, children: [
+    /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.Sequence, { durationInFrames: 136, children: /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.AbsoluteFill, { style: {
+      justifyContent: "center",
+      alignItems: "center",
+      opacity: frame < 10 ? glitchOpacity : 1,
+      transform: `scale(${(0,esm.interpolate)(shiftSlam, [0, 1], [1.5, 1])})`
+    }, children: /* @__PURE__ */ (0,jsx_runtime.jsxs)("h1", { style: {
+      fontFamily: theme_FONTS.DISPLAY,
+      fontSize: TEXT_SIZE.HERO,
+      color: theme_COLORS.TEXT_MAIN,
+      textAlign: "center",
+      textShadow: `0 0 32px ${theme_COLORS.PRIMARY_GLOW}`,
+      margin: 0,
+      lineHeight: 0.9
+    }, children: [
+      "\uD328\uB7EC\uB2E4\uC784",
+      /* @__PURE__ */ (0,jsx_runtime.jsx)("br", {}),
+      /* @__PURE__ */ (0,jsx_runtime.jsx)("span", { style: { color: theme_COLORS.PRIMARY }, children: "\uC804\uD658" })
+    ] }) }) }),
+    /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.Sequence, { from: 136, durationInFrames: 257, children: /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.AbsoluteFill, { style: { opacity: ideFadeIn, justifyContent: "center", paddingLeft: "15%", backgroundColor: theme_COLORS.BG_DEEP }, children: /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: {
+      display: "flex",
+      flexDirection: "column",
+      gap: "24px",
+      fontFamily: theme_FONTS.MONO,
+      fontSize: TEXT_SIZE.MD,
+      color: theme_COLORS.TEXT_MUTED
+    }, children: codeLines.map((line, idx) => {
+      const lineOp = (0,esm.interpolate)(ideFrame - idx * 10, [0, 5], [0, 1], { extrapolateRight: "clamp", extrapolateLeft: "clamp" });
+      return /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { opacity: lineOp }, children: line }, idx);
+    }) }) }) }),
+    /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.Sequence, { from: 393, durationInFrames: 254, children: /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.AbsoluteFill, { style: { justifyContent: "center", alignItems: "center", backgroundColor: theme_COLORS.BG_VOID }, children: [
+      /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: {
+        position: "absolute",
+        width: "120vh",
+        height: "120vh",
+        borderRadius: "50%",
+        background: `radial-gradient(circle, ${theme_COLORS.PRIMARY_GLOW} 0%, transparent 70%)`,
+        transform: `scale(${glowScale})`,
+        opacity: (0,esm.interpolate)(aiFrame, [200, 254], [1, 0])
+        // Fade out at the end
+      } }),
+      /* @__PURE__ */ (0,jsx_runtime.jsxs)("div", { style: {
+        fontFamily: theme_FONTS.DISPLAY,
+        fontSize: TEXT_SIZE.XXL,
+        lineHeight: 1.1,
+        color: theme_COLORS.TEXT_MAIN,
+        textAlign: "center",
+        transform: `scale(${textScale})`
+      }, children: [
+        "AI \uD398\uC5B4",
+        /* @__PURE__ */ (0,jsx_runtime.jsx)("br", {}),
+        /* @__PURE__ */ (0,jsx_runtime.jsx)("span", { style: { color: theme_COLORS.PRIMARY }, children: "\uD504\uB85C\uADF8\uB798\uBA38" })
+      ] })
+    ] }) })
   ] });
 };
 
@@ -405,122 +2014,117 @@ const Seq1 = () => {
 
 
 
-
-const seq2_THEME = {
-  Primary: "#F59E0B",
-  // Gold
-  Accent: "#0D9488",
-  // Teal
-  Text: "#F8FAFC"
-};
 const Seq2 = () => {
   const frame = (0,esm.useCurrentFrame)();
-  const { fps, width } = (0,esm.useVideoConfig)();
-  const scale = (0,esm.interpolate)(frame, [0, 426], [1.08, 1], { extrapolateRight: "clamp" });
-  const cameraRotate = (0,esm.interpolate)(frame, [0, 426], [1, -1]);
-  const splitOpacity = (0,esm.interpolate)(frame, [0, 20], [0, 1], { extrapolateRight: "clamp" });
-  const splitX = (0,esm.interpolate)(frame, [20, 60], [width / 2, 0], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
-  const scanLineY = (0,esm.interpolate)(frame % 100, [0, 100], [-100, 1180]);
-  return /* @__PURE__ */ (0,jsx_runtime.jsxs)(CinematicLayout, { children: [
-    /* @__PURE__ */ (0,jsx_runtime.jsxs)(
-      esm.AbsoluteFill,
-      {
-        style: {
-          transform: `scale(${scale}) rotate(${cameraRotate}deg)`,
-          opacity: splitOpacity
-        },
-        children: [
-          /* @__PURE__ */ (0,jsx_runtime.jsx)(
-            "div",
-            {
-              style: {
-                position: "absolute",
-                left: 0,
-                top: 0,
-                width: "50%",
-                height: "100%",
-                borderRight: `2px solid ${seq2_THEME.Accent}`,
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                backgroundColor: "rgba(13, 148, 136, 0.05)"
-              },
-              children: /* @__PURE__ */ (0,jsx_runtime.jsxs)("div", { style: { textAlign: "center" }, children: [
-                /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { color: seq2_THEME.Text, opacity: 0.5, fontSize: 30, letterSpacing: "0.4em" }, children: "DESIGN" }),
-                /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: {
-                  fontSize: 80,
-                  color: seq2_THEME.Accent,
-                  fontWeight: 800,
-                  marginTop: 20,
-                  filter: `blur(${(0,esm.interpolate)(frame, [0, 100], [10, 0])}px)`
-                }, children: "SKETCH" }),
-                /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { width: 200, height: 4, backgroundColor: seq2_THEME.Accent, marginTop: 40, opacity: 0.3 } }),
-                /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { width: 150, height: 4, backgroundColor: seq2_THEME.Accent, marginTop: 10, opacity: 0.2 } })
-              ] })
-            }
-          ),
-          /* @__PURE__ */ (0,jsx_runtime.jsx)(
-            "div",
-            {
-              style: {
-                position: "absolute",
-                right: 0,
-                top: 0,
-                width: "50%",
-                height: "100%",
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                backgroundColor: "rgba(2, 6, 23, 0.5)"
-              },
-              children: /* @__PURE__ */ (0,jsx_runtime.jsxs)("div", { style: { textAlign: "center" }, children: [
-                /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { color: seq2_THEME.Text, opacity: 0.5, fontSize: 30, letterSpacing: "0.4em" }, children: "DEVELOPMENT" }),
-                /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { fontSize: 80, color: seq2_THEME.Primary, fontWeight: 800, marginTop: 20 }, children: "CODE" }),
-                /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: {
-                  width: 250,
-                  height: 2,
-                  backgroundColor: seq2_THEME.Primary,
-                  marginTop: 40,
-                  opacity: (0,esm.interpolate)(frame % 20, [0, 10, 20], [0.1, 0.8, 0.1])
-                } }),
-                /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { width: 180, height: 2, backgroundColor: seq2_THEME.Primary, marginTop: 15, opacity: 0.3 } })
-              ] })
-            }
-          ),
-          /* @__PURE__ */ (0,jsx_runtime.jsx)(
-            "div",
-            {
-              style: {
-                position: "absolute",
-                top: scanLineY,
-                left: 0,
-                right: 0,
-                height: 4,
-                background: `linear-gradient(to right, transparent, ${seq2_THEME.Accent}, transparent)`,
-                opacity: 0.4,
-                boxShadow: `0 0 20px ${seq2_THEME.Accent}`
-              }
-            }
-          ),
-          /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.AbsoluteFill, { style: { justifyContent: "center", alignItems: "center" }, children: /* @__PURE__ */ (0,jsx_runtime.jsx)(
-            "div",
-            {
-              style: {
-                fontSize: 60,
-                fontWeight: 900,
-                color: seq2_THEME.Text,
-                letterSpacing: "0.8em",
-                textShadow: "0 0 30px rgba(0,0,0,1)",
-                opacity: (0,esm.interpolate)(frame, [100, 150, 300, 350], [0, 1, 1, 0], { extrapolateLeft: "clamp", extrapolateRight: "clamp" }),
-                transform: `translateY(${(0,esm.interpolate)(frame, [100, 350], [20, -20])}px)`
-              },
-              children: "BOTTLE NECK"
-            }
-          ) })
-        ]
-      }
-    ),
-    /* @__PURE__ */ (0,jsx_runtime.jsx)(Subtitle, { text: "\uC774\uC81C\uB294 AI\uAC00 \uC6B0\uB9AC\uC758 \uAC00\uC7A5 \uB4E0\uB4E0\uD55C \uD398\uC5B4 \uD504\uB85C\uADF8\uB798\uBA38\uAC00 \uB418\uC5C8\uC2B5\uB2C8\uB2E4.\\n\uB514\uC790\uC778\uC5D0\uC11C \uAC1C\uBC1C\uB85C \uB118\uC5B4\uAC00\uB294 \uACFC\uC815\uC758 \uBCD1\uBAA9\uD604\uC0C1\uB3C4 \uB208\uC5D0 \uB744\uAC8C \uC0AC\uB77C\uC84C\uC2B5\uB2C8\uB2E4." })
+  const { fps } = (0,esm.useVideoConfig)();
+  const sub1Progress = (0,esm.spring)({
+    frame,
+    fps,
+    config: SPRINGS.SMOOTH,
+    from: 0,
+    to: 1,
+    durationInFrames: 60
+  });
+  const bottleneckExpand = (0,esm.spring)({
+    frame: Math.max(0, frame - 150),
+    fps,
+    config: SPRINGS.PUNCH,
+    from: 0,
+    to: 1,
+    durationInFrames: 30
+  });
+  const sub2Frame = Math.max(0, frame - 356);
+  const drawWireframe = (0,esm.interpolate)(sub2Frame, [0, 60], [0, 100], { extrapolateRight: "clamp" });
+  const magicSpring = (0,esm.spring)({
+    frame: Math.max(0, sub2Frame - 100),
+    fps,
+    config: { damping: 14, stiffness: 180 },
+    from: 0,
+    to: 1
+  });
+  return /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.AbsoluteFill, { style: { backgroundColor: theme_COLORS.BG_DEEP, zIndex: theme_Z.BG }, children: [
+    /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.Sequence, { durationInFrames: 356, children: /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.AbsoluteFill, { style: { justifyContent: "center", alignItems: "center" }, children: /* @__PURE__ */ (0,jsx_runtime.jsxs)("div", { style: {
+      width: "800px",
+      height: "400px",
+      backgroundColor: theme_COLORS.BG_SURFACE,
+      borderRadius: "24px",
+      display: "flex",
+      flexDirection: "column",
+      justifyContent: "center",
+      alignItems: "center",
+      boxShadow: `0 20px 40px rgba(0,0,0,0.8)`,
+      transform: `translateY(${(0,esm.interpolate)(sub1Progress, [0, 1], [50, 0])}px)`,
+      opacity: sub1Progress,
+      position: "relative",
+      overflow: "hidden"
+    }, children: [
+      /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { fontSize: TEXT_SIZE.MD, fontFamily: theme_FONTS.PRIMARY, color: theme_COLORS.TEXT_MUTED, marginBottom: "40px" }, children: "\uAC1C\uBC1C \uBCD1\uBAA9 \uD604\uC0C1" }),
+      /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { width: "80%", height: "24px", backgroundColor: theme_COLORS.BG_ELEVATED, borderRadius: "12px", overflow: "hidden" }, children: /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: {
+        width: `${(0,esm.interpolate)(frame, [60, 150], [10, 100], { extrapolateRight: "clamp" })}%`,
+        height: "100%",
+        backgroundColor: theme_COLORS.ACCENT
+      } }) }),
+      frame > 150 && /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: {
+        position: "absolute",
+        width: "100%",
+        height: "100%",
+        backgroundColor: theme_COLORS.ACCENT,
+        opacity: (0,esm.interpolate)(bottleneckExpand, [0, 1], [0.8, 0]),
+        transform: `scale(${(0,esm.interpolate)(bottleneckExpand, [0, 1], [1, 1.5])})`
+      } })
+    ] }) }) }),
+    /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.Sequence, { from: 356, durationInFrames: 496, children: /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.AbsoluteFill, { style: {
+      opacity: (0,esm.interpolate)(sub2Frame, [0, 20], [0, 1]),
+      // Fade In
+      flexDirection: "row",
+      justifyContent: "center",
+      alignItems: "center",
+      gap: "80px"
+    }, children: [
+      /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: {
+        width: "500px",
+        height: "600px",
+        border: `4px dashed ${theme_COLORS.TEXT_MUTED}`,
+        borderRadius: "16px",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center",
+        opacity: (0,esm.interpolate)(magicSpring, [0, 0.5], [1, 0]),
+        // 프로토타입 등장 시 사라짐
+        clipPath: `inset(0 ${100 - drawWireframe}% 0 0)`
+        // 좌에서 우로 그려지는 효과
+      }, children: /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { color: theme_COLORS.TEXT_MUTED, fontFamily: theme_FONTS.DISPLAY, fontSize: TEXT_SIZE.LG }, children: "\uC2A4\uCF00\uCE58" }) }),
+      /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: {
+        fontFamily: theme_FONTS.DISPLAY,
+        fontSize: TEXT_SIZE.XL,
+        color: theme_COLORS.PRIMARY,
+        textShadow: `0 0 32px ${theme_COLORS.PRIMARY_GLOW}`,
+        transform: `scale(${magicSpring})`,
+        opacity: magicSpring
+      }, children: "\u2192" }),
+      /* @__PURE__ */ (0,jsx_runtime.jsxs)("div", { style: {
+        width: "500px",
+        height: "600px",
+        backgroundColor: theme_COLORS.BG_ELEVATED,
+        borderRadius: "16px",
+        border: `1px solid ${theme_COLORS.BORDER_STRONG}`,
+        boxShadow: `0 0 48px ${theme_COLORS.PRIMARY_GLOW}`,
+        transform: `scale(${(0,esm.interpolate)(magicSpring, [0, 1], [0.8, 1])})`,
+        opacity: magicSpring,
+        display: "flex",
+        flexDirection: "column",
+        overflow: "hidden"
+      }, children: [
+        /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { height: "60px", backgroundColor: theme_COLORS.PRIMARY_DIM, borderBottom: `1px solid ${theme_COLORS.BORDER_STRONG}` } }),
+        /* @__PURE__ */ (0,jsx_runtime.jsxs)("div", { style: { flex: 1, padding: "32px", display: "flex", flexDirection: "column", gap: "24px" }, children: [
+          /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { width: "60%", height: "32px", backgroundColor: theme_COLORS.PRIMARY, borderRadius: "4px" } }),
+          /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { width: "100%", height: "16px", backgroundColor: theme_COLORS.TEXT_MUTED, borderRadius: "2px", opacity: 0.3 } }),
+          /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { width: "80%", height: "16px", backgroundColor: theme_COLORS.TEXT_MUTED, borderRadius: "2px", opacity: 0.3 } }),
+          /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { marginTop: "auto", width: "100%", height: "200px", backgroundColor: theme_COLORS.BG_SURFACE, borderRadius: "8px" } })
+        ] })
+      ] })
+    ] }) })
   ] });
 };
 
@@ -529,114 +2133,102 @@ const Seq2 = () => {
 
 
 
-
-const seq3_THEME = {
-  Primary: "#F59E0B",
-  // Gold
-  Accent: "#0D9488",
-  // Teal
-  Text: "#F8FAFC"
-};
 const Seq3 = () => {
   const frame = (0,esm.useCurrentFrame)();
-  const { fps, width, height } = (0,esm.useVideoConfig)();
-  const cameraZ = (0,esm.interpolate)(frame, [0, 370], [1, 1.15], { extrapolateRight: "clamp" });
-  const diagramRotation = (0,esm.interpolate)(frame, [0, 370], [5, -5]);
-  const boxSpring = (0,esm.spring)({ frame, fps, config: { damping: 12 } });
-  const boxOpacity = (0,esm.interpolate)(frame, [0, 20], [0, 1], { extrapolateRight: "clamp" });
-  const boxY = (0,esm.interpolate)(boxSpring, [0, 1], [60, 0]);
-  const optOpacity = (0,esm.interpolate)(frame, [150, 180, 300, 350], [0, 1, 1, 0], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
-  const optScale = (0,esm.interpolate)(frame, [150, 180], [0.8, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
-  return /* @__PURE__ */ (0,jsx_runtime.jsxs)(CinematicLayout, { children: [
-    /* @__PURE__ */ (0,jsx_runtime.jsxs)(
-      esm.AbsoluteFill,
-      {
-        style: {
-          transform: `perspective(1000px) scale(${cameraZ})`,
-          opacity: boxOpacity,
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center"
-        },
-        children: [
-          /* @__PURE__ */ (0,jsx_runtime.jsx)(
-            "div",
-            {
-              style: {
-                position: "absolute",
-                top: "20%",
-                fontSize: 80,
-                fontWeight: 800,
-                color: seq3_THEME.Text,
-                letterSpacing: "0.6em",
-                opacity: 0.2,
-                fontFamily: "JetBrains Mono, monospace"
-              },
-              children: "ARCHITECTURE"
-            }
-          ),
-          /* @__PURE__ */ (0,jsx_runtime.jsxs)(
-            "div",
-            {
-              style: {
-                width: 800,
-                height: 400,
-                display: "flex",
-                justifyContent: "space-around",
-                alignItems: "center",
-                transform: `rotateX(40deg) rotateY(${diagramRotation}deg) translateY(${boxY}px)`
-              },
-              children: [
-                /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { width: 150, height: 100, border: `2px solid ${seq3_THEME.Accent}`, background: "rgba(13, 148, 136, 0.1)", display: "flex", justifyContent: "center", alignItems: "center" }, children: /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { color: seq3_THEME.Accent, fontSize: 16 }, children: "DATABASE" }) }),
-                /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { width: 100, height: 2, background: seq3_THEME.Accent } }),
-                /* @__PURE__ */ (0,jsx_runtime.jsxs)("div", { style: { width: 250, height: 150, border: `3px solid ${seq3_THEME.Primary}`, background: "rgba(245, 158, 11, 0.1)", display: "flex", justifyContent: "center", alignItems: "center", position: "relative" }, children: [
-                  /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { color: seq3_THEME.Primary, fontSize: 18, fontWeight: 700 }, children: "CORE ENGINE" }),
-                  /* @__PURE__ */ (0,jsx_runtime.jsx)(
-                    "div",
-                    {
-                      style: {
-                        position: "absolute",
-                        top: -10,
-                        right: -10,
-                        padding: "4px 8px",
-                        background: seq3_THEME.Primary,
-                        color: "#000",
-                        fontSize: 14,
-                        fontWeight: 800,
-                        opacity: optOpacity,
-                        transform: `scale(${optScale})`
-                      },
-                      children: "OPTIMIZED"
-                    }
-                  )
-                ] }),
-                /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { width: 100, height: 2, background: seq3_THEME.Accent } }),
-                /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { width: 150, height: 100, border: `2px solid ${seq3_THEME.Accent}`, background: "rgba(13, 148, 136, 0.1)", display: "flex", justifyContent: "center", alignItems: "center" }, children: /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { color: seq3_THEME.Accent, fontSize: 16 }, children: "CLIENT UI" }) })
-              ]
-            }
-          ),
-          /* @__PURE__ */ (0,jsx_runtime.jsx)(
-            "div",
-            {
-              style: {
-                position: "absolute",
-                bottom: "25%",
-                left: "15%",
-                color: seq3_THEME.Accent,
-                fontFamily: "JetBrains Mono",
-                fontSize: 14,
-                opacity: 0.3,
-                transform: "rotate(-5deg)"
-              },
-              children: `{ architecture: "Distributed",
-  loadBalancer: true,
-  cache: "Redis" }`
-            }
-          )
-        ]
-      }
-    ),
-    /* @__PURE__ */ (0,jsx_runtime.jsx)(Subtitle, { text: "\uB2E8\uC21C\uD788 \uCF54\uB4DC\uB97C \uC9DC\uC8FC\uB294 \uAC83\uC744 \uB118\uC5B4,\\n\uC2DC\uC2A4\uD15C \uC544\uD0A4\uD14D\uCC98\uB97C \uC124\uACC4\uD558\uACE0 \uCD5C\uC801\uD654 \uD3EC\uC778\uD2B8\uAE4C\uC9C0 \uC81C\uC548\uD569\uB2C8\uB2E4." })
+  const { fps } = (0,esm.useVideoConfig)();
+  const nodeCount = 5;
+  const nodeAnimations = Array.from({ length: nodeCount }).map(
+    (_, i) => (0,esm.spring)({
+      frame: Math.max(0, frame - i * STAGGER.LOOSE),
+      fps,
+      config: SPRINGS.SNAPPY
+    })
+  );
+  const sub2Frame = Math.max(0, frame - 422);
+  const heroScale = (0,esm.spring)({
+    frame: sub2Frame,
+    fps,
+    config: SPRINGS.PUNCH
+  });
+  const radarRotation = sub2Frame * 4 % 360;
+  return /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.AbsoluteFill, { style: { backgroundColor: theme_COLORS.BG_DEEP, zIndex: theme_Z.BG }, children: [
+    /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.Sequence, { durationInFrames: 422, children: /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.AbsoluteFill, { style: { justifyContent: "center", alignItems: "center", opacity: (0,esm.interpolate)(frame, [400, 422], [1, 0]) }, children: /* @__PURE__ */ (0,jsx_runtime.jsxs)("div", { style: {
+      display: "flex",
+      justifyContent: "space-between",
+      alignItems: "center",
+      width: "1200px",
+      height: "100%",
+      position: "relative"
+    }, children: [
+      /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: {
+        position: "absolute",
+        top: "50%",
+        left: "100px",
+        right: "100px",
+        height: "4px",
+        backgroundColor: theme_COLORS.BORDER_STRONG,
+        transform: "translateY(-50%)",
+        zIndex: 0,
+        transformOrigin: "left",
+        transformStyle: "preserve-3d",
+        // 선이 그려지는 애니메이션
+        clipPath: `inset(0 ${100 - (0,esm.interpolate)(frame, [10, 60], [0, 100], { extrapolateRight: "clamp" })}% 0 0)`
+      } }),
+      nodeAnimations.map((anim, i) => /* @__PURE__ */ (0,jsx_runtime.jsxs)("div", { style: {
+        width: "140px",
+        height: "140px",
+        backgroundColor: theme_COLORS.BG_ELEVATED,
+        border: `2px solid ${theme_COLORS.PRIMARY}`,
+        borderRadius: "50%",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        zIndex: 1,
+        transform: `scale(${anim})`,
+        boxShadow: `0 0 24px ${theme_COLORS.PRIMARY_GLOW}`,
+        fontFamily: theme_FONTS.MONO,
+        fontSize: TEXT_SIZE.SM,
+        color: theme_COLORS.PRIMARY
+      }, children: [
+        "\uB178\uB4DC ",
+        i + 1
+      ] }, i))
+    ] }) }) }),
+    /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.Sequence, { from: 422, durationInFrames: 393, children: /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.AbsoluteFill, { style: { justifyContent: "center", alignItems: "center" }, children: /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { position: "relative", transform: `scale(${heroScale})` }, children: /* @__PURE__ */ (0,jsx_runtime.jsxs)("div", { style: {
+      width: "400px",
+      height: "400px",
+      borderRadius: "50%",
+      border: `8px solid ${theme_COLORS.PRIMARY}`,
+      boxShadow: `0 0 96px ${theme_COLORS.PRIMARY_GLOW}`,
+      position: "relative",
+      overflow: "hidden"
+    }, children: [
+      /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: {
+        position: "absolute",
+        top: 0,
+        left: "50%",
+        width: "50%",
+        height: "50%",
+        backgroundColor: theme_COLORS.PRIMARY_GLOW,
+        transformOrigin: "bottom left",
+        transform: `rotate(${radarRotation}deg)`
+      } }),
+      /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: {
+        position: "absolute",
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        backgroundColor: "transparent",
+        zIndex: 2
+      }, children: /* @__PURE__ */ (0,jsx_runtime.jsxs)("div", { style: { textAlign: "center" }, children: [
+        /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { fontFamily: theme_FONTS.DISPLAY, fontSize: TEXT_SIZE.LG, color: theme_COLORS.TEXT_MAIN, textShadow: "0 4px 12px rgba(0,0,0,0.8)" }, children: "\uC2DC\uB2C8\uC5B4" }),
+        /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { fontFamily: theme_FONTS.DISPLAY, fontSize: TEXT_SIZE.LG, color: theme_COLORS.PRIMARY, textShadow: "0 4px 12px rgba(0,0,0,0.8)" }, children: "\uAC1C\uBC1C\uC790" })
+      ] }) })
+    ] }) }) }) })
   ] });
 };
 
@@ -645,114 +2237,52 @@ const Seq3 = () => {
 
 
 
-
-const seq4_THEME = {
-  Primary: "#F59E0B",
-  // Gold
-  Accent: "#0D9488",
-  // Teal
-  Text: "#F8FAFC"
-};
 const Seq4 = () => {
   const frame = (0,esm.useCurrentFrame)();
-  const { fps, width, height } = (0,esm.useVideoConfig)();
-  const scale = (0,esm.interpolate)(frame, [0, 374], [1, 1.2], { extrapolateRight: "clamp" });
-  const cameraX = (0,esm.interpolate)(frame, [0, 374], [0, 50]);
-  const nodes = Array.from({ length: 8 }).map((_, i) => {
-    const angle = i / 8 * Math.PI * 2 + frame / 150;
-    const x = width / 2 + Math.cos(angle) * 300;
-    const y = height / 2 + Math.sin(angle) * 300;
-    return /* @__PURE__ */ (0,jsx_runtime.jsx)(
-      "div",
-      {
-        style: {
-          position: "absolute",
-          left: x,
-          top: y,
-          width: 20,
-          height: 20,
-          background: seq4_THEME.Accent,
-          borderRadius: "50%",
-          boxShadow: `0 0 15px ${seq4_THEME.Accent}`,
-          opacity: 0.6
-        }
-      },
-      i
-    );
-  });
-  const agileOpacity = (0,esm.interpolate)(frame, [20, 50, 320, 374], [0, 1, 1, 0], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
-  const agileY = (0,esm.interpolate)(frame, [20, 374], [20, -20]);
-  const failOpacity = (0,esm.interpolate)(frame, [100, 130, 200, 230], [0, 1, 1, 0], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
-  const innovateOpacity = (0,esm.interpolate)(frame, [230, 260, 330, 360], [0, 1, 1, 0], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
-  return /* @__PURE__ */ (0,jsx_runtime.jsxs)(CinematicLayout, { children: [
-    /* @__PURE__ */ (0,jsx_runtime.jsxs)(
-      esm.AbsoluteFill,
-      {
-        style: {
-          transform: `scale(${scale}) translateX(${cameraX}px)`,
-          opacity: agileOpacity
-        },
-        children: [
-          nodes,
-          /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.AbsoluteFill, { style: { justifyContent: "center", alignItems: "center" }, children: [
-            /* @__PURE__ */ (0,jsx_runtime.jsxs)(
-              "div",
-              {
-                style: {
-                  fontSize: 70,
-                  fontWeight: 900,
-                  color: seq4_THEME.Text,
-                  letterSpacing: "1.2em",
-                  textAlign: "center",
-                  textShadow: `0 0 40px rgba(0,0,0,1)`,
-                  transform: `translateY(${agileY}px)`
-                },
-                children: [
-                  "AGILE",
-                  /* @__PURE__ */ (0,jsx_runtime.jsx)("br", {}),
-                  "REVOLUTION"
-                ]
-              }
-            ),
-            /* @__PURE__ */ (0,jsx_runtime.jsx)(
-              "div",
-              {
-                style: {
-                  marginTop: 60,
-                  fontSize: 36,
-                  color: seq4_THEME.Primary,
-                  fontWeight: 800,
-                  letterSpacing: "0.5em",
-                  opacity: failOpacity,
-                  background: "rgba(245, 158, 11, 0.1)",
-                  padding: "10px 40px",
-                  border: `2px solid ${seq4_THEME.Primary}`
-                },
-                children: "FAIL FAST"
-              }
-            ),
-            /* @__PURE__ */ (0,jsx_runtime.jsx)(
-              "div",
-              {
-                style: {
-                  marginTop: 20,
-                  fontSize: 36,
-                  color: seq4_THEME.Accent,
-                  fontWeight: 800,
-                  letterSpacing: "0.4em",
-                  opacity: innovateOpacity,
-                  background: "rgba(13, 148, 136, 0.1)",
-                  padding: "10px 30px",
-                  border: `2px solid ${seq4_THEME.Accent}`
-                },
-                children: "INNOVATE FASTER"
-              }
-            )
-          ] })
-        ]
-      }
-    ),
-    /* @__PURE__ */ (0,jsx_runtime.jsx)(Subtitle, { text: "\uB9C8\uCE58 \uC218\uC2ED \uB144 \uACBD\uB825\uC758 \uC2DC\uB2C8\uC5B4 \uAC1C\uBC1C\uC790\uAC00 \uD56D\uC0C1 \uB0B4 \uC606\uC5D0 \uC549\uC544 \uCF54\uB4DC\uB97C \uB9AC\uBDF0\uD574 \uC8FC\uB294 \uAC83\uACFC \uAC19\uC8E0.\\n\uC774\uB7EC\uD55C \uBCC0\uD654\uB294 \uD300 \uC804\uCCB4\uC758 \uC560\uC790\uC77C\uD55C \uD611\uC5C5 \uBC29\uC2DD\uC744 \uADFC\uBCF8\uC801\uC73C\uB85C \uC7AC\uC815\uC758\uD558\uACE0 \uC788\uC2B5\uB2C8\uB2E4." })
+  const { fps } = (0,esm.useVideoConfig)();
+  const sub2Frame = Math.max(0, frame - 479);
+  const words = ["\uBE60\uB978 \uC2E4\uD328,", "\uBE60\uB978 \uD601\uC2E0"];
+  const wordAnims = words.map(
+    (_, i) => (0,esm.spring)({
+      frame: Math.max(0, sub2Frame - i * STAGGER.NORMAL),
+      fps,
+      config: SPRINGS.PUNCH
+    })
+  );
+  return /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.AbsoluteFill, { style: { backgroundColor: theme_COLORS.BG_DEEP, zIndex: theme_Z.BG, perspective: 1200 }, children: [
+    /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.Sequence, { durationInFrames: 479, children: /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.AbsoluteFill, { style: { justifyContent: "center", alignItems: "center" }, children: /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { position: "relative", width: "800px", height: "600px", transformStyle: "preserve-3d", transform: `rotateX(45deg) rotateZ(30deg) translateZ(${(0,esm.interpolate)(frame, [0, 479], [0, 800])}px)` }, children: [0, 1, 2, 3].map((idx) => {
+      const panelOp = (0,esm.interpolate)(frame, [0, 30], [0, 1]);
+      const pX = idx % 2 === 0 ? "10%" : "70%";
+      const pY = idx < 2 ? "10%" : "70%";
+      return /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: {
+        position: "absolute",
+        left: pX,
+        top: pY,
+        width: "150px",
+        height: "150px",
+        backgroundColor: theme_COLORS.BG_ELEVATED,
+        opacity: panelOp,
+        border: `2px solid ${theme_COLORS.PRIMARY_DIM}`,
+        boxShadow: `0 0 48px ${theme_COLORS.PRIMARY_GLOW}`,
+        transform: `translateY(${Math.sin(frame * Math.PI / 60 + idx) * 20}px)`,
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center"
+      }, children: /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { width: "40%", height: "40%", backgroundColor: theme_COLORS.PRIMARY, borderRadius: "50%", boxShadow: `0 0 24px ${theme_COLORS.PRIMARY}` } }) }, idx);
+    }) }) }) }),
+    /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.Sequence, { from: 479, durationInFrames: 270, children: /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.AbsoluteFill, { style: { justifyContent: "center", alignItems: "center", backgroundColor: theme_COLORS.BG_VOID }, children: /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: {
+      display: "flex",
+      flexDirection: "column",
+      gap: "24px",
+      textAlign: "center"
+    }, children: words.map((word, i) => /* @__PURE__ */ (0,jsx_runtime.jsx)("h2", { style: {
+      fontFamily: theme_FONTS.DISPLAY,
+      fontSize: TEXT_SIZE.XL,
+      color: i === 0 ? theme_COLORS.TEXT_MAIN : theme_COLORS.PRIMARY,
+      margin: 0,
+      textShadow: i === 1 ? `0 0 64px ${theme_COLORS.PRIMARY_GLOW}` : "none",
+      transform: `scale(${wordAnims[i]})`
+    }, children: word }, i)) }) }) })
   ] });
 };
 
@@ -761,103 +2291,72 @@ const Seq4 = () => {
 
 
 
-
-const seq5_THEME = {
-  Primary: "#F59E0B",
-  // Gold
-  Accent: "#0D9488",
-  // Teal
-  Text: "#F8FAFC"
-};
 const Seq5 = () => {
   const frame = (0,esm.useCurrentFrame)();
-  const { fps, width, height } = (0,esm.useVideoConfig)();
-  const scale = (0,esm.interpolate)(frame, [0, 458], [1.2, 1], { extrapolateRight: "clamp" });
-  const cameraZ = (0,esm.interpolate)(frame, [0, 458], [0, -100]);
-  const cursorOpacity = (0,esm.interpolate)(frame % 30, [0, 15, 30], [0.1, 1, 0.1]);
-  const dialogueOpacity = (0,esm.interpolate)(frame, [20, 60, 400, 458], [0, 1, 1, 0], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
-  const bokehNodes = Array.from({ length: 12 }).map((_, i) => {
-    const startX = i * 247 % width;
-    const startY = i * 531 % height;
-    const bScale = (0,esm.interpolate)(frame, [0, 458], [1, 2], { extrapolateRight: "clamp" });
-    const bOpacity = (0,esm.interpolate)(frame, [0, 100, 400, 458], [0, 0.2, 0.2, 0]);
-    return /* @__PURE__ */ (0,jsx_runtime.jsx)(
-      "div",
-      {
-        style: {
-          position: "absolute",
-          left: startX,
-          top: startY,
-          width: 200,
-          height: 200,
-          background: i % 2 === 0 ? seq5_THEME.Primary : seq5_THEME.Accent,
-          borderRadius: "50%",
-          filter: "blur(80px)",
-          opacity: bOpacity,
-          transform: `scale(${bScale})`
-        }
-      },
-      i
-    );
+  const { fps } = (0,esm.useVideoConfig)();
+  const textToType = "\uBBF8\uB798\uC758 \uCF54\uB529\uC740 \uB300\uD654";
+  const charsToShow = Math.floor((0,esm.interpolate)(frame, [0, 60], [0, textToType.length], { extrapolateRight: "clamp" }));
+  const typedText = textToType.slice(0, charsToShow);
+  const chatSlam = (0,esm.spring)({
+    frame: Math.max(0, frame - 180),
+    fps,
+    config: SPRINGS.PUNCH,
+    durationInFrames: 30
   });
-  return /* @__PURE__ */ (0,jsx_runtime.jsxs)(CinematicLayout, { children: [
-    /* @__PURE__ */ (0,jsx_runtime.jsxs)(
-      esm.AbsoluteFill,
-      {
-        style: {
-          transform: `scale(${scale}) translateZ(${cameraZ}px)`,
-          opacity: dialogueOpacity
-        },
-        children: [
-          bokehNodes,
-          /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.AbsoluteFill, { style: { justifyContent: "center", alignItems: "center" }, children: [
-            /* @__PURE__ */ (0,jsx_runtime.jsx)(
-              "div",
-              {
-                style: {
-                  fontSize: 60,
-                  fontWeight: 300,
-                  color: seq5_THEME.Text,
-                  letterSpacing: "0.8em",
-                  textAlign: "center",
-                  textShadow: `0 0 40px rgba(0,0,0,1)`
-                },
-                children: "FUTURE OF CODING IS"
-              }
-            ),
-            /* @__PURE__ */ (0,jsx_runtime.jsx)(
-              "div",
-              {
-                style: {
-                  fontSize: 120,
-                  fontWeight: 900,
-                  color: seq5_THEME.Primary,
-                  letterSpacing: "0.2em",
-                  textAlign: "center",
-                  textShadow: `0 0 50px rgba(245, 158, 11, 0.4)`,
-                  marginTop: 20
-                },
-                children: "DIALOGUE"
-              }
-            ),
-            /* @__PURE__ */ (0,jsx_runtime.jsx)(
-              "div",
-              {
-                style: {
-                  marginTop: 60,
-                  width: 100,
-                  height: 4,
-                  backgroundColor: seq5_THEME.Primary,
-                  opacity: cursorOpacity,
-                  boxShadow: `0 0 20px ${seq5_THEME.Primary}`
-                }
-              }
-            )
-          ] })
-        ]
-      }
-    ),
-    /* @__PURE__ */ (0,jsx_runtime.jsx)(Subtitle, { text: "\uC6B0\uB9AC\uB294 \uB354 \uBE60\uB974\uAC8C \uC2E4\uD328\uD558\uACE0, \uB354 \uBE68\uB9AC \uD601\uC2E0\uD560 \uC218 \uC788\uAC8C \uB418\uC5C8\uC2B5\uB2C8\uB2E4.\\n\uBBF8\uB798\uC758 \uCF54\uB529\uC740 \uD0C0\uC774\uD551\uC774 \uC544\uB2C8\uB77C \uB300\uD654\uAC00 \uB420 \uAC83\uC785\uB2C8\uB2E4." })
+  const sub2Frame = Math.max(0, frame - 385);
+  const directorScale = (0,esm.spring)({
+    frame: sub2Frame,
+    fps,
+    config: SPRINGS.PUNCH
+  });
+  const finalFadeOut = (0,esm.interpolate)(sub2Frame, [400, 532], [1, 0], { extrapolateRight: "clamp" });
+  return /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.AbsoluteFill, { style: { backgroundColor: theme_COLORS.BG_VOID, zIndex: theme_Z.BG }, children: [
+    /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.Sequence, { durationInFrames: 385, children: /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.AbsoluteFill, { style: { justifyContent: "center", alignItems: "center" }, children: [
+      /* @__PURE__ */ (0,jsx_runtime.jsxs)("div", { style: {
+        fontFamily: theme_FONTS.MONO,
+        fontSize: TEXT_SIZE.MD,
+        color: theme_COLORS.TEXT_MUTED,
+        opacity: (0,esm.interpolate)(frame, [150, 180], [1, 0], { extrapolateRight: "clamp" })
+        // 채팅 등장 시 페이드 아웃
+      }, children: [
+        "> ",
+        typedText,
+        "_"
+      ] }),
+      frame >= 180 && /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: {
+        position: "absolute",
+        fontFamily: theme_FONTS.DISPLAY,
+        fontSize: TEXT_SIZE.HERO,
+        color: theme_COLORS.PRIMARY,
+        transform: `scale(${(0,esm.interpolate)(chatSlam, [0, 1], [3, 1])})`,
+        // 3배에서 시작하여 터지듯 작아짐
+        opacity: (0,esm.interpolate)(chatSlam, [0, 1], [0, 1]),
+        textShadow: `0 0 120px ${theme_COLORS.PRIMARY_GLOW}`
+      }, children: "\uCC44\uD305" })
+    ] }) }),
+    /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.Sequence, { from: 385, durationInFrames: 532, children: /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.AbsoluteFill, { style: { justifyContent: "center", alignItems: "center", opacity: finalFadeOut }, children: [
+      /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: {
+        position: "absolute",
+        width: "100%",
+        height: "100%",
+        background: `radial-gradient(circle, ${theme_COLORS.PRIMARY_GLOW} 0%, transparent 60%)`,
+        opacity: (0,esm.interpolate)(sub2Frame, [0, 60], [0, 1])
+      } }),
+      /* @__PURE__ */ (0,jsx_runtime.jsxs)("h2", { style: {
+        fontFamily: theme_FONTS.DISPLAY,
+        fontSize: TEXT_SIZE.XXL,
+        color: theme_COLORS.TEXT_MAIN,
+        transform: `scale(${directorScale})`,
+        margin: 0,
+        textAlign: "center",
+        textShadow: `0 0 32px ${theme_COLORS.PRIMARY_GLOW}`,
+        zIndex: 1
+      }, children: [
+        "AI",
+        /* @__PURE__ */ (0,jsx_runtime.jsx)("br", {}),
+        /* @__PURE__ */ (0,jsx_runtime.jsx)("span", { style: { color: theme_COLORS.SECONDARY }, children: "\uB514\uB809\uD130" })
+      ] })
+    ] }) })
   ] });
 };
 
@@ -870,116 +2369,145 @@ const Seq5 = () => {
 
 
 
-const Intro = () => {
-  return /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.AbsoluteFill, { style: { backgroundColor: "#020617" }, children: [
+
+
+
+const intro_Intro = () => {
+  return /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.AbsoluteFill, { style: { backgroundColor: theme_COLORS.BG_DEEP }, children: [
     /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.Audio, { src: (0,esm.staticFile)("design-test1/intro/intro.wav") }),
     /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.Series, { children: [
-      /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.Series.Sequence, { durationInFrames: 323, children: /* @__PURE__ */ (0,jsx_runtime.jsx)(Seq1, {}) }),
-      /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.Series.Sequence, { durationInFrames: 426, children: /* @__PURE__ */ (0,jsx_runtime.jsx)(Seq2, {}) }),
-      /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.Series.Sequence, { durationInFrames: 370, children: /* @__PURE__ */ (0,jsx_runtime.jsx)(Seq3, {}) }),
-      /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.Series.Sequence, { durationInFrames: 374, children: /* @__PURE__ */ (0,jsx_runtime.jsx)(Seq4, {}) }),
-      /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.Series.Sequence, { durationInFrames: 497, children: /* @__PURE__ */ (0,jsx_runtime.jsx)(Seq5, {}) })
-    ] })
+      /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.Series.Sequence, { durationInFrames: 647, children: /* @__PURE__ */ (0,jsx_runtime.jsx)(Seq1, {}) }),
+      /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.Series.Sequence, { durationInFrames: 852, children: /* @__PURE__ */ (0,jsx_runtime.jsx)(Seq2, {}) }),
+      /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.Series.Sequence, { durationInFrames: 815, children: /* @__PURE__ */ (0,jsx_runtime.jsx)(Seq3, {}) }),
+      /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.Series.Sequence, { durationInFrames: 749, children: /* @__PURE__ */ (0,jsx_runtime.jsx)(Seq4, {}) }),
+      /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.Series.Sequence, { durationInFrames: 917, children: /* @__PURE__ */ (0,jsx_runtime.jsx)(Seq5, {}) })
+    ] }),
+    /* @__PURE__ */ (0,jsx_runtime.jsx)(CaptionOverlay, { captions: intro_subtitles_introSubtitles })
   ] });
 };
+
+;// ./src/projects/design-test1/body1/body1_subtitles.ts
+
+const body1_subtitles_body1Subtitles = [
+  {
+    startMs: 0,
+    endMs: 3140,
+    text: "\uADF8\uB807\uB2E4\uBA74 \uC2E4\uC81C \uD604\uC7A5\uC5D0\uC11C\uB294\n\uC5B4\uB5A4 \uBCC0\uD654\uAC00 \uC77C\uC5B4\uB098\uACE0 \uC788\uC744\uAE4C\uC694?"
+  },
+  {
+    startMs: 3140,
+    endMs: 9780,
+    text: "\uB9C9\uC5F0\uD55C \uAE30\uB300\uAC10\uC774 \uC544\uB2CC, \uC2E4\uC81C \uB370\uC774\uD130\uB97C \uBC14\uD0D5\uC73C\uB85C\nAI \uB3C4\uC785\uC758 \uADF9\uC801\uC778 \uD6A8\uACFC\uB97C \uC0B4\uD3B4\uBCF4\uACA0\uC2B5\uB2C8\uB2E4."
+  },
+  {
+    startMs: 9780,
+    endMs: 18880,
+    text: "\uC2E4\uC81C\uB85C \uCD5C\uADFC \uD55C \uC5F0\uAD6C\uC5D0 \uB530\uB974\uBA74, AI \uCF54\uB529 \uC5B4\uC2DC\uC2A4\uD134\uD2B8\uB97C \uB3C4\uC785\uD55C \uC870\uC9C1\uC758\n\uAC1C\uBC1C \uC0DD\uC0B0\uC131\uC740 \uBB34\uB824 55%\uB098 \uD5A5\uC0C1\uB418\uC5C8\uC2B5\uB2C8\uB2E4."
+  },
+  {
+    startMs: 18880,
+    endMs: 23840,
+    text: "\uBC18\uBCF5\uC801\uC778 \uBCF4\uC77C\uB7EC\uD50C\uB808\uC774\uD2B8 \uC791\uC131 \uC2DC\uAC04\uC774\n\uD68D\uAE30\uC801\uC73C\uB85C \uC904\uC5B4\uB4E0 \uB355\uBD84\uC774\uC8E0."
+  },
+  {
+    startMs: 23840,
+    endMs: 28780,
+    text: "\uAC1C\uBC1C\uC790\uB4E4\uC758 \uC5C5\uBB34 \uC2DC\uAC04 \uBD84\uBC30\uB3C4\n\uC644\uC804\uD788 \uB2EC\uB77C\uC84C\uC2B5\uB2C8\uB2E4."
+  },
+  {
+    startMs: 28780,
+    endMs: 38300,
+    text: "\uB2E8\uC21C \uBC18\uBCF5 \uC791\uC5C5\uC5D0 \uC3DF\uB294 \uC2DC\uAC04\uC740 80% \uAC10\uC18C\uD55C \uBC18\uBA74,\n\uCC3D\uC758\uC801\uC778 \uC544\uD0A4\uD14D\uCC98 \uC124\uACC4\uC640 \uBE44\uC988\uB2C8\uC2A4 \uB85C\uC9C1 \uACE0\uBBFC\uC5D0 \uC3DF\uB294 \uC2DC\uAC04\uC740 3\uBC30 \uC774\uC0C1 \uB298\uC5B4\uB0AC\uC2B5\uB2C8\uB2E4."
+  },
+  {
+    startMs: 38300,
+    endMs: 41300,
+    text: "AI \uB3C4\uC785 \uC804\uACFC \uD6C4\uB97C \uBE44\uAD50\uD574 \uBCFC\uAE4C\uC694?"
+  },
+  {
+    startMs: 41300,
+    endMs: 52300,
+    text: "\uC608\uC804\uC5D0\uB294 \uACF5\uC2DD \uBB38\uC11C\uB97C \uB4A4\uC9C0\uBA70 \uC218\uB3D9\uC73C\uB85C \uD0C0\uC774\uD551\uD558\uBA70 \uBC24\uC744 \uC0C8\uC6B0\uB358 \uC791\uC5C5\uB4E4\uC774,\n\uC774\uC81C\uB294 AI\uC758 \uB611\uB611\uD55C \uC81C\uC548\uC744 \uAC80\uD1A0\uD558\uACE0 \uC2B9\uC778\uD558\uB294 \uD6A8\uC728\uC801\uC778 \uD504\uB85C\uC138\uC2A4\uB85C \uC804\uD658\uB418\uC5C8\uC2B5\uB2C8\uB2E4."
+  },
+  {
+    startMs: 52300,
+    endMs: 56100,
+    text: "\uBC84\uADF8 \uBC1C\uC0DD\uB960 \uB610\uD55C \uB208\uC5D0 \uB744\uAC8C \uC904\uC5C8\uC2B5\uB2C8\uB2E4."
+  },
+  {
+    startMs: 56100,
+    endMs: 67120,
+    text: "\uC2E4\uC2DC\uAC04 \uC815\uC801 \uBD84\uC11D\uACFC \uCF54\uB4DC \uB9AC\uBDF0\uB97C \uD1B5\uD574 \uBC30\uD3EC \uC804 \uCE58\uBA85\uC801\uC778 \uC624\uB958\uC758 90% \uC774\uC0C1\uC744\n\uC0AC\uC804\uC5D0 \uCC28\uB2E8\uD558\uBA70 \uC11C\uBE44\uC2A4\uC758 \uC548\uC815\uC131\uC744 \uD06C\uAC8C \uB192\uC5EC\uC8FC\uACE0 \uC788\uC2B5\uB2C8\uB2E4."
+  }
+];
 
 ;// ./src/projects/design-test1/body1/seq1.tsx
 
 
 
 
-
-const seq1_THEME = {
-  Primary: "#F59E0B",
-  // Gold
-  Accent: "#0D9488",
-  // Teal
-  Text: "#F8FAFC"
-};
 const seq1_Seq1 = () => {
   const frame = (0,esm.useCurrentFrame)();
-  const { fps, width, height } = (0,esm.useVideoConfig)();
-  const cameraZ = (0,esm.interpolate)(frame, [0, 373], [1, 2.5], { extrapolateRight: "clamp" });
-  const cameraRotateY = (0,esm.interpolate)(frame, [0, 373], [0, 15]);
-  const titleX = (0,esm.interpolate)(frame, [0, 40], [-width, 0], { extrapolateRight: "clamp" });
-  const titleOpacity = (0,esm.interpolate)(frame, [0, 20, 350, 373], [0, 1, 1, 0]);
-  const gridCells = Array.from({ length: 40 }).map((_, i) => {
-    const x = i * 150 % width;
-    const y = i * 120 % height;
-    const gScale = (0,esm.interpolate)(frame, [i * 5, i * 5 + 30], [0, 1], { extrapolateRight: "clamp", extrapolateLeft: "clamp" });
-    return /* @__PURE__ */ (0,jsx_runtime.jsx)(
-      "div",
-      {
-        style: {
-          position: "absolute",
-          left: x,
-          top: y,
-          width: 80,
-          height: 1,
-          backgroundColor: seq1_THEME.Accent,
-          opacity: 0.1 * gScale,
-          transform: `scaleX(${gScale})`
-        }
-      },
-      i
-    );
+  const { fps } = (0,esm.useVideoConfig)();
+  const boxIn = (0,esm.spring)({
+    frame,
+    fps,
+    config: SPRINGS.SNAPPY
   });
-  return /* @__PURE__ */ (0,jsx_runtime.jsxs)(CinematicLayout, { children: [
-    /* @__PURE__ */ (0,jsx_runtime.jsxs)(
-      esm.AbsoluteFill,
-      {
-        style: {
-          transform: `perspective(1200px) translateZ(${(0,esm.interpolate)(frame, [0, 373], [0, 500])}px) rotateY(${cameraRotateY}deg)`,
-          opacity: titleOpacity
-        },
-        children: [
-          /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { position: "absolute", width: "200%", height: "200%", top: "-50%", left: "-50%", transform: "rotateX(70deg)" }, children: gridCells }),
-          /* @__PURE__ */ (0,jsx_runtime.jsxs)(
-            "div",
-            {
-              style: {
-                position: "absolute",
-                top: "35%",
-                left: "10%",
-                transform: `translateX(${titleX}px)`,
-                display: "flex",
-                flexDirection: "column"
-              },
-              children: [
-                /* @__PURE__ */ (0,jsx_runtime.jsx)(
-                  "div",
-                  {
-                    style: {
-                      fontSize: 120,
-                      fontWeight: 900,
-                      color: seq1_THEME.Text,
-                      letterSpacing: "0.4em",
-                      textShadow: `0 0 20px ${seq1_THEME.Accent}`
-                    },
-                    children: "REAL DATA"
-                  }
-                ),
-                /* @__PURE__ */ (0,jsx_runtime.jsx)(
-                  "div",
-                  {
-                    style: {
-                      fontSize: 30,
-                      color: seq1_THEME.Accent,
-                      letterSpacing: "1em",
-                      marginTop: -10,
-                      opacity: 0.6
-                    },
-                    children: "GLOBAL RESEARCH"
-                  }
-                )
-              ]
-            }
-          )
-        ]
-      }
-    ),
-    /* @__PURE__ */ (0,jsx_runtime.jsx)(Subtitle, { text: "\uADF8\uB807\uB2E4\uBA74 \uC2E4\uC81C \uD604\uC7A5\uC5D0\uC11C\uB294 \uC5B4\uB5A4 \uBCC0\uD654\uAC00 \uC77C\uC5B4\uB098\uACE0 \uC788\uC744\uAE4C\uC694?\\n\uB9C9\uC5F0\uD55C \uAE30\uB300\uAC10\uC774 \uC544\uB2CC, \uC2E4\uC81C \uB370\uC774\uD130\uB97C \uBC14\uD0D5\uC73C\uB85C AI \uB3C4\uC785\uC758 \uD6A8\uACFC\uB97C \uC0B4\uD3B4\uBCF4\uACA0\uC2B5\uB2C8\uB2E4." })
-  ] });
+  const chartLineOp = (0,esm.interpolate)(frame, [100, 150], [0, 1], { extrapolateRight: "clamp" });
+  const sub2Frame = Math.max(0, frame - 587);
+  const percentValue = Math.floor((0,esm.interpolate)(sub2Frame, [0, 120], [0, 55], { extrapolateRight: "clamp", easing: EASINGS.DRAMATIC }));
+  const numberScale = (0,esm.spring)({
+    frame: sub2Frame - 120,
+    fps,
+    config: SPRINGS.PUNCH
+  });
+  const barHeight = (0,esm.spring)({
+    frame: sub2Frame,
+    fps,
+    config: SPRINGS.PUNCH,
+    durationInFrames: 60
+  });
+  const zTransition = (0,esm.spring)({
+    frame: Math.max(0, frame - 1100),
+    fps,
+    config: { damping: 10, stiffness: 50 }
+  });
+  const cameraZ = (0,esm.interpolate)(zTransition, [0, 1], [1, 5]);
+  return /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.AbsoluteFill, { style: { backgroundColor: theme_COLORS.BG_DEEP, zIndex: theme_Z.BG, overflow: "hidden" }, children: /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { transform: `scale(${cameraZ})`, width: "100%", height: "100%", position: "absolute", display: "flex", justifyContent: "center", alignItems: "center" }, children: /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: {
+    width: "800px",
+    height: "500px",
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "flex-end",
+    borderBottom: `4px solid ${theme_COLORS.BORDER_STRONG}`,
+    borderLeft: `4px solid ${theme_COLORS.BORDER_STRONG}`,
+    padding: "40px",
+    opacity: chartLineOp,
+    transform: `scale(${boxIn})`
+  }, children: /* @__PURE__ */ (0,jsx_runtime.jsxs)("div", { style: { position: "relative", width: "100%", height: "100%", display: "flex", alignItems: "flex-end", justifyContent: "center" }, children: [
+    frame >= 587 && /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: {
+      width: "40%",
+      height: `${(0,esm.interpolate)(barHeight, [0, 1], [0, 100])}%`,
+      background: `linear-gradient(to top, ${theme_COLORS.PRIMARY_GLOW}, ${theme_COLORS.POSITIVE})`,
+      boxShadow: `0 0 64px ${theme_COLORS.PRIMARY_GLOW}`,
+      borderRadius: "12px 12px 0 0"
+    } }),
+    /* @__PURE__ */ (0,jsx_runtime.jsxs)("div", { style: {
+      position: "absolute",
+      bottom: "40%",
+      fontFamily: theme_FONTS.MONO,
+      fontSize: TEXT_SIZE.HERO,
+      color: percentValue === 55 ? theme_COLORS.PRIMARY : theme_COLORS.TEXT_MAIN,
+      transform: percentValue === 55 ? `scale(${(0,esm.interpolate)(numberScale, [0, 1], [1.5, 1])})` : "none",
+      textShadow: percentValue === 55 ? `0 0 48px ${theme_COLORS.PRIMARY_GLOW}` : "none",
+      zIndex: 2
+    }, children: [
+      "+",
+      percentValue,
+      "%"
+    ] })
+  ] }) }) }) });
 };
 
 ;// ./src/projects/design-test1/body1/seq2.tsx
@@ -987,108 +2515,95 @@ const seq1_Seq1 = () => {
 
 
 
-
-const body1_seq2_THEME = {
-  Primary: "#F59E0B",
-  // Gold
-  Accent: "#0D9488",
-  // Teal
-  Text: "#F8FAFC"
-};
 const seq2_Seq2 = () => {
   const frame = (0,esm.useCurrentFrame)();
-  const { fps, width, height } = (0,esm.useVideoConfig)();
-  const cameraRotateX = (0,esm.interpolate)(frame, [0, 484], [10, 0]);
-  const cameraZ = (0,esm.interpolate)(frame, [0, 484], [1, 1.1]);
-  const barSpring = (0,esm.spring)({ frame: frame - 20, fps, config: { damping: 12 } });
-  const countSpring = (0,esm.spring)({ frame: frame - 40, fps, config: { stiffness: 60 } });
-  const count = (0,esm.interpolate)(countSpring, [0, 1], [0, 55]);
-  const barAfterHeight = (0,esm.interpolate)(countSpring, [0, 1], [300, 465]);
-  return /* @__PURE__ */ (0,jsx_runtime.jsxs)(CinematicLayout, { children: [
-    /* @__PURE__ */ (0,jsx_runtime.jsxs)(
-      esm.AbsoluteFill,
-      {
-        style: {
-          transform: `perspective(1000px) rotateX(${cameraRotateX}deg) scale(${cameraZ})`,
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center"
-        },
-        children: [
-          /* @__PURE__ */ (0,jsx_runtime.jsxs)(
-            "div",
-            {
-              style: {
-                position: "absolute",
-                top: "15%",
-                fontSize: 70,
-                fontWeight: 800,
-                color: body1_seq2_THEME.Text,
-                letterSpacing: "0.6em",
-                textAlign: "center",
-                textShadow: `0 0 40px rgba(0,0,0,1)`
-              },
-              children: [
-                "PRODUCTIVITY",
-                /* @__PURE__ */ (0,jsx_runtime.jsx)("br", {}),
-                /* @__PURE__ */ (0,jsx_runtime.jsx)("span", { style: { fontSize: 30, color: body1_seq2_THEME.Accent, letterSpacing: "0.4em", opacity: 0.8 }, children: "EVOLUTION" })
-              ]
-            }
-          ),
-          /* @__PURE__ */ (0,jsx_runtime.jsxs)(
-            "div",
-            {
-              style: {
-                display: "flex",
-                gap: 100,
-                alignItems: "flex-end",
-                marginBottom: "10%"
-              },
-              children: [
-                /* @__PURE__ */ (0,jsx_runtime.jsxs)("div", { style: { textAlign: "center" }, children: [
-                  /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { height: 300, width: 120, background: "rgba(255,255,255,0.1)", border: "1px solid rgba(255,255,255,0.2)", position: "relative" }, children: /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { position: "absolute", bottom: -40, left: 0, right: 0, color: "#fff", fontSize: 16 }, children: "BEFORE AI" }) }),
-                  /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { color: "#fff", fontSize: 24, marginTop: 10 }, children: "100%" })
-                ] }),
-                /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { textAlign: "center" }, children: /* @__PURE__ */ (0,jsx_runtime.jsxs)("div", { style: {
-                  height: barAfterHeight,
-                  width: 120,
-                  background: `linear-gradient(to top, rgba(245, 158, 11, 0.4), ${body1_seq2_THEME.Primary})`,
-                  boxShadow: `0 0 30px rgba(245, 158, 11, 0.3)`,
-                  position: "relative"
-                }, children: [
-                  /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { position: "absolute", bottom: -40, left: 0, right: 0, color: body1_seq2_THEME.Primary, fontSize: 16, fontWeight: 800 }, children: "AFTER AI" }),
-                  /* @__PURE__ */ (0,jsx_runtime.jsxs)("div", { style: { position: "absolute", top: -60, left: -40, right: -40, fontSize: 60, fontWeight: 900, color: body1_seq2_THEME.Primary }, children: [
-                    "+",
-                    Math.floor(count),
-                    "%"
-                  ] })
-                ] }) })
-              ]
-            }
-          ),
-          /* @__PURE__ */ (0,jsx_runtime.jsxs)(
-            "div",
-            {
-              style: {
-                position: "absolute",
-                right: "10%",
-                bottom: "20%",
-                padding: "20px",
-                borderRight: `4px solid ${body1_seq2_THEME.Primary}`,
-                textAlign: "right",
-                opacity: (0,esm.interpolate)(frame, [100, 130, 450, 484], [0, 1, 1, 0])
-              },
-              children: [
-                /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { color: body1_seq2_THEME.Primary, fontSize: 40, fontWeight: 800 }, children: "55% UP" }),
-                /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { color: body1_seq2_THEME.Text, fontSize: 16, letterSpacing: "0.2em" }, children: "AVERAGE PRODUCTIVITY GAIN" })
-              ]
-            }
-          )
-        ]
-      }
-    ),
-    /* @__PURE__ */ (0,jsx_runtime.jsx)(Subtitle, { text: "\uCD5C\uADFC \uC5F0\uAD6C\uC5D0 \uB530\uB974\uBA74, AI \uC5B4\uC2DC\uC2A4\uD134\uD2B8\uB97C \uB3C4\uC785\uD55C \uC870\uC9C1\uC758 \uC0DD\uC0B0\uC131\uC740\\n\uBB34\uB824 55%\uB098 \uD5A5\uC0C1\uB418\uC5C8\uC2B5\uB2C8\uB2E4." })
-  ] });
+  const { fps } = (0,esm.useVideoConfig)();
+  const collapseOp = (0,esm.interpolate)(frame, [0, 60], [0, 1]);
+  const boilerplateScale = (0,esm.spring)({
+    frame: Math.max(0, frame - 150),
+    fps,
+    config: SPRINGS.PUNCH,
+    from: 1,
+    to: 0.2
+    // 축소 (80% 감소 반영)
+  });
+  const sub2Frame = Math.max(0, frame - 594);
+  const archScale = (0,esm.spring)({
+    frame: sub2Frame,
+    fps,
+    config: SPRINGS.SNAPPY,
+    from: 0,
+    to: 1
+  });
+  const numberPunch = (0,esm.spring)({
+    frame: Math.max(0, sub2Frame - 150),
+    fps,
+    config: SPRINGS.PUNCH
+  });
+  const swipeOut = (0,esm.interpolate)(Math.max(0, frame - 1100), [0, 30], [0, 100], { extrapolateRight: "clamp" });
+  return /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.AbsoluteFill, { style: {
+    backgroundColor: theme_COLORS.BG_DEEP,
+    zIndex: theme_Z.BG,
+    clipPath: `inset(0 0 0 ${swipeOut}%)`
+    // 오른쪽으로 화면 열리며 새 씬 준비
+  }, children: /* @__PURE__ */ (0,jsx_runtime.jsxs)("div", { style: { display: "flex", width: "100%", height: "100%" }, children: [
+    /* @__PURE__ */ (0,jsx_runtime.jsxs)("div", { style: {
+      flex: 1,
+      backgroundColor: theme_COLORS.BG_SURFACE,
+      display: "flex",
+      flexDirection: "column",
+      justifyContent: "center",
+      alignItems: "center",
+      borderRight: `2px solid ${theme_COLORS.BORDER}`
+    }, children: [
+      /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { fontFamily: theme_FONTS.PRIMARY, fontSize: TEXT_SIZE.MD, color: theme_COLORS.TEXT_MUTED, marginBottom: "40px" }, children: "\uBCF4\uC77C\uB7EC\uD50C\uB808\uC774\uD2B8" }),
+      /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: {
+        width: "300px",
+        height: "400px",
+        backgroundColor: theme_COLORS.BG_ELEVATED,
+        border: `2px dashed ${theme_COLORS.TEXT_MUTED}`,
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        opacity: collapseOp,
+        transform: `scale(${boilerplateScale})`,
+        transformOrigin: "bottom center"
+      }, children: /* @__PURE__ */ (0,jsx_runtime.jsx)("span", { style: { color: theme_COLORS.NEGATIVE, fontSize: TEXT_SIZE.LG, fontFamily: theme_FONTS.MONO }, children: "-80%" }) })
+    ] }),
+    /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: {
+      flex: 1,
+      backgroundColor: theme_COLORS.BG_DEEP,
+      display: "flex",
+      flexDirection: "column",
+      justifyContent: "center",
+      alignItems: "center",
+      position: "relative"
+    }, children: frame > 594 && /* @__PURE__ */ (0,jsx_runtime.jsxs)(jsx_runtime.Fragment, { children: [
+      /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { fontFamily: theme_FONTS.DISPLAY, fontSize: TEXT_SIZE.MD, color: theme_COLORS.TEXT_MAIN, marginBottom: "40px", transform: `scale(${archScale})` }, children: "\uCC3D\uC758\uC801 \uC544\uD0A4\uD14D\uCC98" }),
+      /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: {
+        width: "400px",
+        height: "500px",
+        backgroundColor: theme_COLORS.PRIMARY_DIM,
+        border: `4px solid ${theme_COLORS.PRIMARY}`,
+        boxShadow: `0 0 48px ${theme_COLORS.PRIMARY_GLOW}`,
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        transform: `scale(${archScale})`,
+        // 등장
+        transformOrigin: "bottom center"
+      }, children: sub2Frame > 150 && /* @__PURE__ */ (0,jsx_runtime.jsxs)("div", { style: {
+        fontFamily: theme_FONTS.MONO,
+        fontSize: TEXT_SIZE.HERO,
+        color: theme_COLORS.TEXT_MAIN,
+        textShadow: `0 0 24px ${theme_COLORS.PRIMARY_GLOW}`,
+        transform: `scale(${(0,esm.interpolate)(numberPunch, [0, 1], [0.5, 1])})`
+      }, children: [
+        /* @__PURE__ */ (0,jsx_runtime.jsx)("span", { style: { color: theme_COLORS.PRIMARY }, children: "3" }),
+        "X"
+      ] }) })
+    ] }) })
+  ] }) });
 };
 
 ;// ./src/projects/design-test1/body1/seq3.tsx
@@ -1096,117 +2611,269 @@ const seq2_Seq2 = () => {
 
 
 
-
-const body1_seq3_THEME = {
-  Primary: "#F59E0B",
-  // Gold
-  Accent: "#0D9488",
-  // Teal
-  Text: "#F8FAFC"
-};
 const seq3_Seq3 = () => {
   const frame = (0,esm.useCurrentFrame)();
-  const { fps, width, height } = (0,esm.useVideoConfig)();
-  const cameraRotateY = (0,esm.interpolate)(frame, [0, 511], [-5, 5]);
-  const cameraZ = (0,esm.interpolate)(frame, [0, 511], [1.1, 1]);
-  const chartSpring = (0,esm.spring)({ frame: frame - 20, fps, config: { damping: 14 } });
-  const repetitiveAngle = (0,esm.interpolate)(chartSpring, [0, 1], [360, 72]);
-  const creativeIncrease = (0,esm.interpolate)(chartSpring, [0, 1], [1, 3]);
-  return /* @__PURE__ */ (0,jsx_runtime.jsxs)(CinematicLayout, { children: [
-    /* @__PURE__ */ (0,jsx_runtime.jsxs)(
-      esm.AbsoluteFill,
-      {
-        style: {
-          transform: `perspective(1000px) rotateY(${cameraRotateY}deg) scale(${cameraZ})`,
+  const { fps } = (0,esm.useVideoConfig)();
+  const slamLeft = (0,esm.spring)({
+    frame,
+    fps,
+    config: SPRINGS.PUNCH
+  });
+  const slamRight = (0,esm.spring)({
+    frame: Math.max(0, frame - 5),
+    // 약간의 엇박자
+    fps,
+    config: SPRINGS.PUNCH
+  });
+  const sub2Frame = Math.max(0, frame - 180);
+  const leftDim = (0,esm.interpolate)(sub2Frame, [0, 60], [1, 0.2], { extrapolateRight: "clamp" });
+  const rightExpand = (0,esm.interpolate)(sub2Frame, [120, 180], [50, 100], { extrapolateRight: "clamp", easing: EASINGS.CINEMATIC });
+  const tabAcceptSpring = (0,esm.spring)({
+    frame: Math.max(0, sub2Frame - 150),
+    fps,
+    config: SPRINGS.SNAPPY
+  });
+  const checkSpring = (0,esm.spring)({
+    frame: Math.max(0, sub2Frame - 210),
+    // TAB 누르고 1초(60) 후 체크
+    fps,
+    config: SPRINGS.PUNCH
+  });
+  return /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.AbsoluteFill, { style: {
+    backgroundColor: theme_COLORS.BG_DEEP,
+    zIndex: theme_Z.BG,
+    flexDirection: "row"
+    // 스플릿 레이아웃
+  }, children: [
+    /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.Sequence, { durationInFrames: 840, children: /* @__PURE__ */ (0,jsx_runtime.jsxs)("div", { style: {
+      position: "absolute",
+      left: 0,
+      top: 0,
+      bottom: 0,
+      width: `${100 - rightExpand}%`,
+      backgroundColor: theme_COLORS.BG_SURFACE,
+      borderRight: `4px solid ${theme_COLORS.BORDER_STRONG}`,
+      transform: `translateX(${(0,esm.interpolate)(slamLeft, [0, 1], [-200, 0])}px)`,
+      opacity: leftDim,
+      display: "flex",
+      flexDirection: "column",
+      justifyContent: "center",
+      alignItems: "center",
+      overflow: "hidden"
+    }, children: [
+      /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { color: theme_COLORS.TEXT_MUTED, fontFamily: theme_FONTS.DISPLAY, fontSize: TEXT_SIZE.MD, marginBottom: "40px" }, children: "\uC218\uB3D9 \uD0C0\uC774\uD551" }),
+      Array.from({ length: 15 }).map((_, i) => /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: {
+        width: `${(0,esm.random)(null) * 40 + 20}%`,
+        height: "12px",
+        backgroundColor: theme_COLORS.BORDER,
+        marginBottom: "12px",
+        alignSelf: "flex-start",
+        marginLeft: "20%"
+      } }, i))
+    ] }) }),
+    /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.Sequence, { durationInFrames: 840, children: /* @__PURE__ */ (0,jsx_runtime.jsxs)("div", { style: {
+      position: "absolute",
+      right: 0,
+      top: 0,
+      bottom: 0,
+      width: `${rightExpand}%`,
+      backgroundColor: theme_COLORS.BG_ELEVATED,
+      transform: `translateX(${(0,esm.interpolate)(slamRight, [0, 1], [200, 0])}px)`,
+      opacity: slamRight,
+      display: "flex",
+      flexDirection: "column",
+      justifyContent: "center",
+      alignItems: "center",
+      overflow: "hidden"
+    }, children: [
+      /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: {
+        color: theme_COLORS.PRIMARY,
+        fontFamily: theme_FONTS.DISPLAY,
+        fontSize: TEXT_SIZE.LG,
+        marginBottom: "40px",
+        textShadow: `0 0 24px ${theme_COLORS.PRIMARY_GLOW}`
+      }, children: "AI \uC81C\uC548" }),
+      /* @__PURE__ */ (0,jsx_runtime.jsxs)("div", { style: { position: "relative" }, children: [
+        /* @__PURE__ */ (0,jsx_runtime.jsxs)("div", { style: {
+          padding: "32px",
+          border: `2px dashed ${theme_COLORS.PRIMARY_GLOW}`,
+          borderRadius: "16px",
+          backgroundColor: theme_COLORS.BG_SURFACE,
+          color: theme_COLORS.TEXT_MAIN,
+          fontFamily: theme_FONTS.MONO,
+          display: "flex",
+          flexDirection: "column",
+          gap: "16px"
+        }, children: [
+          /* @__PURE__ */ (0,jsx_runtime.jsxs)("div", { children: [
+            "function implementAI() ",
+            "{"
+          ] }),
+          /* @__PURE__ */ (0,jsx_runtime.jsxs)("div", { style: { paddingLeft: "32px", color: theme_COLORS.SECONDARY }, children: [
+            "return ",
+            /* @__PURE__ */ (0,jsx_runtime.jsx)("span", { style: { opacity: 0.8 }, children: "...awesome code;" })
+          ] }),
+          /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { children: "}" })
+        ] }),
+        /* @__PURE__ */ (0,jsx_runtime.jsxs)("div", { style: {
+          position: "absolute",
+          bottom: "-30px",
+          right: "-40px",
+          padding: "16px 24px",
+          backgroundColor: theme_COLORS.TEXT_MAIN,
+          borderRadius: "8px",
+          fontFamily: theme_FONTS.MONO,
+          fontSize: TEXT_SIZE.SM,
+          color: theme_COLORS.TEXT_INVERSE,
+          boxShadow: `0 12px 24px rgba(0,0,0,0.5)`,
+          transform: `scale(${tabAcceptSpring})`,
+          display: "flex",
+          alignItems: "center",
+          gap: "12px"
+        }, children: [
+          /* @__PURE__ */ (0,jsx_runtime.jsx)("span", { children: "[TAB] \uC2B9\uC778" }),
+          checkSpring > 0 && /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: {
+            width: "24px",
+            height: "24px",
+            borderRadius: "50%",
+            backgroundColor: theme_COLORS.PRIMARY,
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            color: theme_COLORS.TEXT_INVERSE,
+            fontSize: "16px",
+            fontWeight: "bold",
+            transform: `scale(${checkSpring})`
+          }, children: "\u2714" })
+        ] })
+      ] })
+    ] }) })
+  ] });
+};
+
+;// ./src/projects/design-test1/body1/seq4.tsx
+
+
+
+
+const seq4_Seq4 = () => {
+  const frame = (0,esm.useCurrentFrame)();
+  const { fps } = (0,esm.useVideoConfig)();
+  const bugCount = 5;
+  const bugAnims = Array.from({ length: bugCount }).map(
+    (_, i) => (0,esm.spring)({
+      frame: Math.max(0, frame - i * 5),
+      fps,
+      config: SPRINGS.SNAPPY
+    })
+  );
+  const shieldActiveFrame = 100;
+  const shieldScale = (0,esm.spring)({
+    frame: Math.max(0, frame - shieldActiveFrame),
+    fps,
+    config: SPRINGS.PUNCH
+  });
+  const bugBounce = (0,esm.interpolate)(Math.max(0, frame - shieldActiveFrame), [0, 30], [0, 200], { extrapolateRight: "clamp" });
+  const sub2Frame = Math.max(0, frame - 228);
+  const ninetyScale = (0,esm.spring)({
+    frame: Math.max(0, sub2Frame - 30),
+    fps,
+    config: SPRINGS.DRAMATIC
+  });
+  const stableSpring = (0,esm.spring)({
+    frame: Math.max(0, sub2Frame - 150),
+    fps,
+    config: SPRINGS.PUNCH
+  });
+  const finalDim = (0,esm.interpolate)(frame, [800, 890], [1, 0.1], { extrapolateRight: "clamp" });
+  return /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.AbsoluteFill, { style: { backgroundColor: theme_COLORS.BG_DEEP, zIndex: theme_Z.BG, opacity: finalDim }, children: [
+    /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.Sequence, { durationInFrames: 228, children: /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.AbsoluteFill, { style: { justifyContent: "center", alignItems: "center" }, children: /* @__PURE__ */ (0,jsx_runtime.jsxs)("div", { style: { position: "relative", width: "100%", height: "100%" }, children: [
+      bugAnims.map((anim, i) => {
+        const sign = i % 2 === 0 ? 1 : -1;
+        const yOffset = frame > shieldActiveFrame ? bugBounce * sign : 0;
+        return /* @__PURE__ */ (0,jsx_runtime.jsxs)("div", { style: {
+          position: "absolute",
+          left: `${20 + i * 15}%`,
+          top: "30%",
+          width: "120px",
+          height: "60px",
+          backgroundColor: theme_COLORS.NEGATIVE,
+          borderRadius: "8px",
           display: "flex",
           justifyContent: "center",
-          alignItems: "center"
-        },
-        children: [
-          /* @__PURE__ */ (0,jsx_runtime.jsxs)(
-            "div",
-            {
-              style: {
-                position: "absolute",
-                top: "15%",
-                fontSize: 70,
-                fontWeight: 800,
-                color: body1_seq3_THEME.Text,
-                letterSpacing: "0.6em",
-                textAlign: "center"
-              },
-              children: [
-                "WORKLOAD",
-                /* @__PURE__ */ (0,jsx_runtime.jsx)("br", {}),
-                /* @__PURE__ */ (0,jsx_runtime.jsx)("span", { style: { fontSize: 30, color: body1_seq3_THEME.Accent, letterSpacing: "0.4em" }, children: "DISTRIBUTION" })
-              ]
-            }
-          ),
-          /* @__PURE__ */ (0,jsx_runtime.jsxs)(
-            "div",
-            {
-              style: {
-                display: "flex",
-                gap: 120,
-                alignItems: "center",
-                marginTop: "5%"
-              },
-              children: [
-                /* @__PURE__ */ (0,jsx_runtime.jsxs)("div", { style: { textAlign: "center", opacity: (0,esm.interpolate)(frame, [0, 20], [0, 1]) }, children: [
-                  /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { fontSize: 24, color: "#94a3b8", marginBottom: 20 }, children: "REPETITIVE" }),
-                  /* @__PURE__ */ (0,jsx_runtime.jsxs)("div", { style: {
-                    width: 250,
-                    height: 250,
-                    borderRadius: "50%",
-                    border: "10px solid rgba(255,255,255,0.1)",
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    position: "relative"
-                  }, children: [
-                    /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { fontSize: 60, fontWeight: 800, color: "#94a3b8" }, children: "-80%" }),
-                    /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { position: "absolute", top: -10, left: -10, right: -10, bottom: -10, border: "10px solid #94a3b8", borderRadius: "50%", clipPath: `inset(0 ${(0,esm.interpolate)(chartSpring, [0, 1], [0, 80])}% 0 0)` } })
-                  ] })
-                ] }),
-                /* @__PURE__ */ (0,jsx_runtime.jsxs)("div", { style: { textAlign: "center", opacity: (0,esm.interpolate)(frame, [40, 60], [0, 1]) }, children: [
-                  /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { fontSize: 24, color: body1_seq3_THEME.Primary, marginBottom: 20 }, children: "CREATIVE" }),
-                  /* @__PURE__ */ (0,jsx_runtime.jsxs)("div", { style: {
-                    width: 250,
-                    height: 250,
-                    borderRadius: "50%",
-                    border: `10px solid rgba(245, 158, 11, 0.1)`,
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    position: "relative",
-                    boxShadow: `0 0 30px rgba(245, 158, 11, 0.1)`,
-                    transform: `scale(${(0,esm.interpolate)(chartSpring, [0, 1], [0.8, 1.2])})`
-                  }, children: [
-                    /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { fontSize: 60, fontWeight: 900, color: body1_seq3_THEME.Primary }, children: "3X UP" }),
-                    /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { position: "absolute", top: -10, left: -10, right: -10, bottom: -10, border: `10px solid ${body1_seq3_THEME.Primary}`, borderRadius: "50%" } })
-                  ] })
-                ] })
-              ]
-            }
-          ),
-          /* @__PURE__ */ (0,jsx_runtime.jsx)(
-            "div",
-            {
-              style: {
-                position: "absolute",
-                bottom: "20%",
-                color: body1_seq3_THEME.Text,
-                fontSize: 20,
-                letterSpacing: "0.4em",
-                opacity: (0,esm.interpolate)(frame, [450, 511], [0.6, 0])
-              },
-              children: "FROM TYPING TO ARCHITECTURE"
-            }
-          )
-        ]
-      }
-    ),
-    /* @__PURE__ */ (0,jsx_runtime.jsx)(Subtitle, { text: "\uB2E8\uC21C \uBC18\uBCF5 \uC791\uC5C5\uC740 80% \uAC10\uC18C\uD55C \uBC18\uBA74,\\n\uCC3D\uC758\uC801\uC778 \uC124\uACC4\uC640 \uB85C\uC9C1 \uACE0\uBBFC \uC2DC\uAC04\uC740 3\uBC30 \uC774\uC0C1 \uB298\uC5B4\uB0AC\uC2B5\uB2C8\uB2E4." })
+          alignItems: "center",
+          fontFamily: theme_FONTS.MONO,
+          color: theme_COLORS.TEXT_INVERSE,
+          fontWeight: "bold",
+          transform: `scale(${anim}) translateY(${yOffset}px)`,
+          opacity: frame > shieldActiveFrame + 30 ? 0 : 1,
+          // 튕겨나간 후 사라짐
+          boxShadow: `0 4px 12px ${theme_COLORS.NEGATIVE}`
+        }, children: [
+          "\uBC84\uADF8 ",
+          i + 1
+        ] }, i);
+      }),
+      frame > shieldActiveFrame && /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: {
+        position: "absolute",
+        left: "10%",
+        right: "10%",
+        top: "45%",
+        height: "12px",
+        backgroundColor: theme_COLORS.POSITIVE,
+        borderRadius: "6px",
+        boxShadow: `0 0 48px ${theme_COLORS.POSITIVE}`,
+        transform: `scaleX(${shieldScale})`,
+        transformOrigin: "center"
+      } }),
+      frame > shieldActiveFrame + 10 && /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: {
+        position: "absolute",
+        left: "50%",
+        top: "50%",
+        width: "800px",
+        height: "800px",
+        marginLeft: "-400px",
+        marginTop: "-400px",
+        borderRadius: "50%",
+        border: `4px solid ${theme_COLORS.PRIMARY_GLOW}`,
+        transform: `scale(${(0,esm.spring)({ frame: Math.max(0, frame - shieldActiveFrame - 10), fps, config: { damping: 100 } })})`
+      } })
+    ] }) }) }),
+    /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.Sequence, { from: 228, durationInFrames: 662, children: /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.AbsoluteFill, { style: { justifyContent: "center", alignItems: "center" }, children: /* @__PURE__ */ (0,jsx_runtime.jsxs)("div", { style: {
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "center",
+      gap: "24px"
+    }, children: [
+      /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: {
+        fontFamily: theme_FONTS.DISPLAY,
+        fontSize: TEXT_SIZE.HERO,
+        color: theme_COLORS.ACCENT,
+        textShadow: `0 0 48px ${theme_COLORS.ACCENT}`,
+        transform: `scale(${(0,esm.interpolate)(ninetyScale, [0, 1], [3, 1])})`,
+        // 3배에서 슬램 인
+        opacity: ninetyScale,
+        lineHeight: 1
+      }, children: "-90%" }),
+      /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: {
+        fontFamily: theme_FONTS.PRIMARY,
+        fontSize: TEXT_SIZE.MD,
+        color: theme_COLORS.TEXT_MAIN,
+        opacity: ninetyScale
+      }, children: "\uCE58\uBA85\uC801 \uC624\uB958 \uC81C\uAC70" }),
+      /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: {
+        marginTop: "40px",
+        padding: "8px 24px",
+        backgroundColor: theme_COLORS.HIGHLIGHT,
+        border: `2px solid ${theme_COLORS.POSITIVE}`,
+        borderRadius: "8px",
+        fontFamily: theme_FONTS.MONO,
+        fontSize: TEXT_SIZE.LG,
+        color: theme_COLORS.POSITIVE,
+        transform: `scale(${stableSpring})`,
+        boxShadow: `0 0 32px ${theme_COLORS.POSITIVE}`
+      }, children: "\uC2DC\uC2A4\uD15C \uC548\uC815\uD654" })
+    ] }) }) })
   ] });
 };
 
@@ -1217,139 +2884,151 @@ const seq3_Seq3 = () => {
 
 
 
-const Body1 = () => {
-  return /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.AbsoluteFill, { style: { backgroundColor: "#020617" }, children: [
+
+
+
+
+const body1_Body1 = () => {
+  return /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.AbsoluteFill, { style: { backgroundColor: theme_COLORS.BG_DEEP }, children: [
     /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.Audio, { src: (0,esm.staticFile)("design-test1/body1/body1.wav") }),
     /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.Series, { children: [
-      /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.Series.Sequence, { durationInFrames: 373, children: /* @__PURE__ */ (0,jsx_runtime.jsx)(seq1_Seq1, {}) }),
-      /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.Series.Sequence, { durationInFrames: 484, children: /* @__PURE__ */ (0,jsx_runtime.jsx)(seq2_Seq2, {}) }),
-      /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.Series.Sequence, { durationInFrames: 511, children: /* @__PURE__ */ (0,jsx_runtime.jsx)(seq3_Seq3, {}) })
-    ] })
+      /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.Series.Sequence, { durationInFrames: 1133, children: /* @__PURE__ */ (0,jsx_runtime.jsx)(seq1_Seq1, {}) }),
+      /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.Series.Sequence, { durationInFrames: 1165, children: /* @__PURE__ */ (0,jsx_runtime.jsx)(seq2_Seq2, {}) }),
+      /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.Series.Sequence, { durationInFrames: 840, children: /* @__PURE__ */ (0,jsx_runtime.jsx)(seq3_Seq3, {}) }),
+      /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.Series.Sequence, { durationInFrames: 890, children: /* @__PURE__ */ (0,jsx_runtime.jsx)(seq4_Seq4, {}) })
+    ] }),
+    /* @__PURE__ */ (0,jsx_runtime.jsx)(CaptionOverlay, { captions: body1_subtitles_body1Subtitles })
   ] });
 };
+
+;// ./src/projects/design-test1/body2/body2_subtitles.ts
+
+const body2_subtitles_body2Subtitles = [
+  {
+    startMs: 0,
+    endMs: 4660,
+    text: "\uC774\uB807\uAC8C \uAC15\uB825\uD55C AI \uD234\uC744 \uC6B0\uB9AC \uD300\uC5D0\n\uC131\uACF5\uC801\uC73C\uB85C \uB3C4\uC785\uD558\uB824\uBA74 \uC5B4\uB5BB\uAC8C \uD574\uC57C \uD560\uAE4C\uC694?"
+  },
+  {
+    startMs: 4660,
+    endMs: 9300,
+    text: "\uCCB4\uACC4\uC801\uC774\uACE0 \uD6A8\uC728\uC801\uC778 3\uB2E8\uACC4\n\uC2E4\uC804 \uC6CC\uD06C\uD50C\uB85C\uC6B0\uB97C \uC81C\uC548\uD569\uB2C8\uB2E4."
+  },
+  {
+    startMs: 9300,
+    endMs: 14800,
+    text: "AI\uC640 \uD568\uAED8\uD558\uB294 \uAC1C\uBC1C \uC6CC\uD06C\uD50C\uB85C\uC6B0\uB294\n\uBCF4\uD1B5 \uB2E4\uC74C \uC138 \uB2E8\uACC4\uB85C \uC9C4\uD589\uB429\uB2C8\uB2E4."
+  },
+  {
+    startMs: 14800,
+    endMs: 18060,
+    text: "\uCCAB\uC9F8, \uC804\uCCB4\uC801\uC778 \uC544\uD0A4\uD14D\uCC98 \uC124\uACC4."
+  },
+  {
+    startMs: 18060,
+    endMs: 22060,
+    text: "\uB458\uC9F8, AI\uB97C \uD65C\uC6A9\uD55C \uBE60\uB978 \uCD08\uC548 \uC791\uC131."
+  },
+  {
+    startMs: 22060,
+    endMs: 26080,
+    text: "\uC14B\uC9F8, \uAC1C\uBC1C\uC790\uC758 \uB514\uD14C\uC77C\uD55C \uB9AC\uD329\uD1A0\uB9C1 \uBC0F \uCD5C\uC801\uD654\uC785\uB2C8\uB2E4."
+  },
+  {
+    startMs: 26080,
+    endMs: 29960,
+    text: "\uB2E8\uC21C\uD55C \uB9C8\uD06C\uC5C5\uC744 \uB118\uC5B4 \uBCF5\uC7A1\uD55C \uB85C\uC9C1\uB3C4 \uBB38\uC81C\uC5C6\uC2B5\uB2C8\uB2E4."
+  },
+  {
+    startMs: 29960,
+    endMs: 38840,
+    text: "\uD504\uB86C\uD504\uD2B8 \uBA87 \uC904\uB9CC \uC785\uB825\uD558\uBA74, API \uC5F0\uB3D9\uBD80\uD130 \uC0C1\uD0DC \uAD00\uB9AC\uAE4C\uC9C0 \uAC16\uCD98\n\uC644\uBCBD\uD55C Next.js \uCEF4\uD3EC\uB10C\uD2B8 \uCF54\uB4DC\uAC00 \uC21C\uC2DD\uAC04\uC5D0 \uC791\uC131\uB429\uB2C8\uB2E4."
+  },
+  {
+    startMs: 38840,
+    endMs: 44080,
+    text: "\uC774\uB54C \uAC00\uC7A5 \uC911\uC694\uD55C \uD575\uC2EC \uAE30\uC220\uC740 \uBC14\uB85C\n'\uD504\uB86C\uD504\uD2B8 \uC5D4\uC9C0\uB2C8\uC5B4\uB9C1'\uC785\uB2C8\uB2E4."
+  },
+  {
+    startMs: 44080,
+    endMs: 52500,
+    text: "\uBA85\uD655\uD55C \uCEE8\uD14D\uC2A4\uD2B8\uC640 \uC5C4\uACA9\uD55C \uC81C\uC57D \uC870\uAC74\uC744 \uC81C\uACF5\uD560\uC218\uB85D,\nAI\uB294 \uC6B0\uB9AC\uAC00 \uC815\uD655\uD788 \uC6D0\uD558\uB294 \uD615\uD0DC\uC758 \uCF54\uB4DC\uB97C \uC624\uCC28 \uC5C6\uC774 \uC0DD\uC131\uD574 \uB0C5\uB2C8\uB2E4."
+  },
+  {
+    startMs: 52500,
+    endMs: 57220,
+    text: "\uAE4C\uB2E4\uB85C\uC6E0\uB358 \uD14C\uC2A4\uD2B8 \uCF54\uB4DC \uC791\uC131\uB3C4\n\uB354 \uC774\uC0C1 \uACE0\uD1B5\uC2A4\uB7EC\uC6B4 \uC791\uC5C5\uC774 \uC544\uB2D9\uB2C8\uB2E4."
+  },
+  {
+    startMs: 57220,
+    endMs: 65920,
+    text: "\uD575\uC2EC \uBE44\uC988\uB2C8\uC2A4 \uB85C\uC9C1\uB9CC \uC8FC\uC5B4\uC9C0\uBA74 \uC5E3\uC9C0 \uCF00\uC774\uC2A4\uAE4C\uC9C0 \uAF3C\uAF3C\uD558\uAC8C \uACE0\uB824\uD55C\n\uC644\uBCBD\uD55C \uD14C\uC2A4\uD2B8 \uC2A4\uC704\uD2B8\uB97C \uC790\uB3D9\uC73C\uB85C \uAD6C\uC131\uD574 \uC90D\uB2C8\uB2E4."
+  }
+];
 
 ;// ./src/projects/design-test1/body2/seq1.tsx
 
 
 
 
-
-const body2_seq1_THEME = {
-  Primary: "#F59E0B",
-  // Gold
-  Accent: "#0D9488",
-  // Teal
-  Text: "#F8FAFC"
-};
 const body2_seq1_Seq1 = () => {
   const frame = (0,esm.useCurrentFrame)();
-  const { fps, width, height } = (0,esm.useVideoConfig)();
-  const cameraRotateZ = (0,esm.interpolate)(frame, [0, 436], [-2, 2]);
-  const cameraZ = (0,esm.interpolate)(frame, [0, 436], [1, 1.1]);
-  const dividerX = (0,esm.interpolate)(frame, [0, 436], [0, width]);
-  const dividerOpacity = (0,esm.interpolate)(frame, [0, 20, 400, 436], [0, 1, 1, 0]);
-  return /* @__PURE__ */ (0,jsx_runtime.jsxs)(CinematicLayout, { children: [
-    /* @__PURE__ */ (0,jsx_runtime.jsxs)(
-      esm.AbsoluteFill,
-      {
-        style: {
-          transform: `scale(${cameraZ}) rotate(${cameraRotateZ}deg)`
-        },
-        children: [
-          /* @__PURE__ */ (0,jsx_runtime.jsx)(
-            "div",
-            {
-              style: {
-                position: "absolute",
-                left: 0,
-                top: 0,
-                width: "50%",
-                height: "100%",
-                backgroundColor: "rgba(0,0,0,0.8)",
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                filter: "grayscale(100%)"
-              },
-              children: /* @__PURE__ */ (0,jsx_runtime.jsxs)("div", { style: { textAlign: "center", opacity: 0.4 }, children: [
-                /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { fontSize: 30, letterSpacing: "0.6em", color: "#fff" }, children: "PAST" }),
-                /* @__PURE__ */ (0,jsx_runtime.jsxs)("div", { style: { fontSize: 60, fontWeight: 800, color: "#fff" }, children: [
-                  "MANUAL",
-                  /* @__PURE__ */ (0,jsx_runtime.jsx)("br", {}),
-                  "TYPING"
-                ] }),
-                /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { width: 100, height: 2, background: "#fff", marginTop: 30, margin: "30px auto" } })
-              ] })
-            }
-          ),
-          /* @__PURE__ */ (0,jsx_runtime.jsx)(
-            "div",
-            {
-              style: {
-                position: "absolute",
-                right: 0,
-                top: 0,
-                width: "50%",
-                height: "100%",
-                backgroundColor: "transparent",
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center"
-              },
-              children: /* @__PURE__ */ (0,jsx_runtime.jsxs)("div", { style: { textAlign: "center" }, children: [
-                /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { fontSize: 30, letterSpacing: "0.6em", color: body2_seq1_THEME.Primary }, children: "PRESENT" }),
-                /* @__PURE__ */ (0,jsx_runtime.jsxs)("div", { style: { fontSize: 60, fontWeight: 900, color: body2_seq1_THEME.Primary }, children: [
-                  "AI",
-                  /* @__PURE__ */ (0,jsx_runtime.jsx)("br", {}),
-                  "REVIEW"
-                ] }),
-                /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: {
-                  padding: "10px 20px",
-                  border: `2px solid ${body2_seq1_THEME.Accent}`,
-                  color: body2_seq1_THEME.Accent,
-                  fontSize: 20,
-                  fontWeight: 800,
-                  marginTop: 30,
-                  boxShadow: `0 0 20px ${body2_seq1_THEME.Accent}`,
-                  transform: `scale(${(0,esm.interpolate)(frame % 40, [0, 20, 40], [1, 1.1, 1])})`
-                }, children: "APPROVED" })
-              ] })
-            }
-          ),
-          /* @__PURE__ */ (0,jsx_runtime.jsx)(
-            "div",
-            {
-              style: {
-                position: "absolute",
-                left: "50%",
-                top: 0,
-                bottom: 0,
-                width: 4,
-                background: body2_seq1_THEME.Primary,
-                boxShadow: `0 0 30px ${body2_seq1_THEME.Primary}`,
-                opacity: dividerOpacity
-              }
-            }
-          ),
-          /* @__PURE__ */ (0,jsx_runtime.jsx)(
-            "div",
-            {
-              style: {
-                position: "absolute",
-                left: dividerX - 250,
-                top: "30%",
-                width: 500,
-                height: 500,
-                background: `radial-gradient(circle, ${body2_seq1_THEME.Primary}11 0%, transparent 70%)`,
-                filter: "blur(50px)",
-                opacity: (0,esm.interpolate)(frame, [0, 100, 300, 436], [0, 0.4, 0.4, 0])
-              }
-            }
-          )
-        ]
-      }
-    ),
-    /* @__PURE__ */ (0,jsx_runtime.jsx)(Subtitle, { text: "\uC218\uB3D9\uC73C\uB85C \uD0C0\uC774\uD551\uD558\uBA70 \uBC24\uC744 \uC0C8\uC6B0\uB358 \uC791\uC5C5\uB4E4\uC774,\\n\uC774\uC81C\uB294 AI \uC81C\uC548\uC744 \uAC80\uD1A0\uD558\uACE0 \uC2B9\uC778\uD558\uB294 \uD6A8\uC728\uC801\uC778 \uD504\uB85C\uC138\uC2A4\uB85C \uC804\uD658\uB418\uC5C8\uC2B5\uB2C8\uB2E4." })
+  const { fps } = (0,esm.useVideoConfig)();
+  const glitchHow = Math.floor(frame / 4) % 2 === 0 ? 1 : 0;
+  const howFadeOut = (0,esm.interpolate)(frame, [250, 280], [1, 0]);
+  const sub2Frame = Math.max(0, frame - 280);
+  const textSlam = (0,esm.spring)({
+    frame: sub2Frame,
+    fps,
+    config: SPRINGS.PUNCH
+  });
+  const gridTranslateZ = (0,esm.interpolate)(frame, [0, 888], [0, 1e3]);
+  const transformZ = Math.max(0, frame - 860);
+  const scaleOut = (0,esm.spring)({
+    frame: transformZ,
+    fps,
+    config: { damping: 12, stiffness: 200 }
+  });
+  return /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.AbsoluteFill, { style: { backgroundColor: theme_COLORS.BG_DEEP, zIndex: theme_Z.BG, perspective: "800px", overflow: "hidden" }, children: [
+    /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: {
+      position: "absolute",
+      left: "-50%",
+      right: "-50%",
+      top: "40%",
+      height: "200%",
+      backgroundImage: `linear-gradient(transparent 95%, ${theme_COLORS.PRIMARY_DIM} 100%), linear-gradient(90deg, transparent 95%, ${theme_COLORS.PRIMARY_DIM} 100%)`,
+      backgroundSize: "80px 80px",
+      transform: `rotateX(60deg) translateZ(${gridTranslateZ}px)`,
+      transformOrigin: "top"
+    } }),
+    /* @__PURE__ */ (0,jsx_runtime.jsxs)("div", { style: {
+      width: "100%",
+      height: "100%",
+      position: "absolute",
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+      transform: transformZ > 0 ? `scale(${(0,esm.interpolate)(scaleOut, [0, 1], [1, 5])})` : "none"
+    }, children: [
+      /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.Sequence, { durationInFrames: 280, children: /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: {
+        fontFamily: theme_FONTS.DISPLAY,
+        fontSize: TEXT_SIZE.HERO,
+        color: theme_COLORS.ACCENT,
+        textShadow: `0 0 48px ${theme_COLORS.ACCENT}`,
+        opacity: frame < 30 ? glitchHow : howFadeOut
+      }, children: "\uC5B4\uB5BB\uAC8C?" }) }),
+      /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.Sequence, { from: 280, durationInFrames: 608, children: /* @__PURE__ */ (0,jsx_runtime.jsxs)("div", { style: {
+        display: "flex",
+        flexDirection: "column",
+        transform: `scale(${(0,esm.interpolate)(textSlam, [0, 1], [2, 1])})`,
+        // 크게 시작해서 Slam!
+        opacity: (0,esm.interpolate)(textSlam, [0, 1], [0, 1]),
+        textAlign: "center"
+      }, children: [
+        /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { fontFamily: theme_FONTS.DISPLAY, fontSize: TEXT_SIZE.XXL, color: theme_COLORS.PRIMARY, textShadow: `0 0 64px ${theme_COLORS.PRIMARY_GLOW}`, lineHeight: 1 }, children: "3\uB2E8\uACC4" }),
+        /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { fontFamily: theme_FONTS.DISPLAY, fontSize: TEXT_SIZE.XL, color: theme_COLORS.TEXT_MAIN }, children: "\uC6CC\uD06C\uD50C\uB85C\uC6B0" })
+      ] }) })
+    ] })
   ] });
 };
 
@@ -1358,95 +3037,81 @@ const body2_seq1_Seq1 = () => {
 
 
 
-
-const body2_seq2_THEME = {
-  Primary: "#F59E0B",
-  // Gold
-  Accent: "#0D9488",
-  // Teal
-  Text: "#F8FAFC"
-};
 const body2_seq2_Seq2 = () => {
   const frame = (0,esm.useCurrentFrame)();
-  const { fps, width, height } = (0,esm.useVideoConfig)();
-  const cameraRotateY = (0,esm.interpolate)(frame, [0, 430], [5, -5]);
-  const cameraZ = (0,esm.interpolate)(frame, [0, 430], [1.1, 1.2]);
-  const scannerX = (0,esm.interpolate)(frame % 100, [0, 100], [-300, width + 300]);
-  const countSpring = (0,esm.spring)({ frame: frame - 40, fps, config: { damping: 12 } });
-  const count = (0,esm.interpolate)(countSpring, [0, 1], [0, 90]);
-  return /* @__PURE__ */ (0,jsx_runtime.jsxs)(CinematicLayout, { children: [
-    /* @__PURE__ */ (0,jsx_runtime.jsxs)(
-      esm.AbsoluteFill,
-      {
-        style: {
-          transform: `perspective(1000px) rotateY(${cameraRotateY}deg) scale(${cameraZ})`,
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center"
-        },
-        children: [
-          /* @__PURE__ */ (0,jsx_runtime.jsxs)(
-            "div",
-            {
-              style: {
-                position: "absolute",
-                top: "15%",
-                fontSize: 70,
-                fontWeight: 800,
-                color: body2_seq2_THEME.Text,
-                letterSpacing: "0.6em",
-                textAlign: "center"
-              },
-              children: [
-                "SERVICE",
-                /* @__PURE__ */ (0,jsx_runtime.jsx)("br", {}),
-                /* @__PURE__ */ (0,jsx_runtime.jsx)("span", { style: { fontSize: 30, color: body2_seq2_THEME.Primary, letterSpacing: "0.4em" }, children: "STABILITY" })
-              ]
-            }
-          ),
-          /* @__PURE__ */ (0,jsx_runtime.jsxs)("div", { style: { position: "relative", width: 800, height: 400, border: "1px solid rgba(255,255,255,0.05)", background: "rgba(255,255,255,0.02)" }, children: [
-            /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { position: "absolute", top: 50, left: 100, color: "#f00", fontSize: 20, opacity: scannerX > 100 ? 0 : 0.5 }, children: "[ERROR: NULL_POINTER]" }),
-            /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { position: "absolute", top: 150, left: 200, color: body2_seq2_THEME.Accent, fontSize: 24, fontWeight: 800, opacity: scannerX > 200 ? 1 : 0 }, children: "FIXED: TYPE_SAFE_AUTO" }),
-            /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { position: "absolute", top: 250, left: 150, color: "#f00", fontSize: 20, opacity: scannerX > 150 ? 0 : 0.5 }, children: "[BUG: MEMORY_LEAK]" }),
-            /* @__PURE__ */ (0,jsx_runtime.jsx)(
-              "div",
-              {
-                style: {
-                  position: "absolute",
-                  top: 0,
-                  bottom: 0,
-                  left: scannerX,
-                  width: 2,
-                  background: body2_seq2_THEME.Accent,
-                  boxShadow: `0 0 20px ${body2_seq2_THEME.Accent}`
-                }
-              }
-            )
-          ] }),
-          /* @__PURE__ */ (0,jsx_runtime.jsxs)(
-            "div",
-            {
-              style: {
-                marginTop: 50,
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                opacity: (0,esm.interpolate)(frame, [0, 20, 400, 430], [0, 1, 1, 0])
-              },
-              children: [
-                /* @__PURE__ */ (0,jsx_runtime.jsxs)("div", { style: { fontSize: 120, fontWeight: 900, color: body2_seq2_THEME.Primary, textShadow: `0 0 30px rgba(245, 158, 11, 0.3)` }, children: [
-                  Math.floor(count),
-                  "%"
-                ] }),
-                /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { color: body2_seq2_THEME.Text, fontSize: 24, letterSpacing: "0.4em", opacity: 0.6 }, children: "ERROR REDUCTION" })
-              ]
-            }
-          )
-        ]
-      }
-    ),
-    /* @__PURE__ */ (0,jsx_runtime.jsx)(Subtitle, { text: "\uBC84\uADF8 \uBC1C\uC0DD\uB960\uB3C4 \uB208\uC5D0 \uB744\uAC8C \uC904\uC5C8\uC2B5\uB2C8\uB2E4. \uBC30\uD3EC \uC804 \uC624\uB958\uC758 90% \uC774\uC0C1\uC744 \uCC28\uB2E8\uD558\uC5EC\\n\uC11C\uBE44\uC2A4 \uC548\uC815\uC131\uC744 \uD06C\uAC8C \uB192\uC5EC\uC8FC\uACE0 \uC788\uC2B5\uB2C8\uB2E4." })
-  ] });
+  const { fps } = (0,esm.useVideoConfig)();
+  const step1Start = 0;
+  const step2Start = 196;
+  const step3Start = 436;
+  const step1Anim = (0,esm.spring)({ frame: Math.max(0, frame - step1Start), fps, config: SPRINGS.SNAPPY });
+  const step2Anim = (0,esm.spring)({ frame: Math.max(0, frame - step2Start), fps, config: SPRINGS.SNAPPY });
+  const step3Anim = (0,esm.spring)({ frame: Math.max(0, frame - step3Start), fps, config: SPRINGS.SNAPPY });
+  const zoomIn = (0,esm.spring)({
+    frame: Math.max(0, frame - 640),
+    fps,
+    config: { damping: 16, stiffness: 120 }
+  });
+  return /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.AbsoluteFill, { style: {
+    backgroundColor: theme_COLORS.BG_DEEP,
+    zIndex: theme_Z.BG,
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    transform: `scale(${(0,esm.interpolate)(zoomIn, [0, 1], [1, 4])})`
+    // 마지막 스매시 컷 줌 인
+  }, children: /* @__PURE__ */ (0,jsx_runtime.jsxs)("div", { style: { display: "flex", flexDirection: "column", gap: "24px", width: "800px" }, children: [
+    /* @__PURE__ */ (0,jsx_runtime.jsxs)("div", { style: {
+      display: "flex",
+      alignItems: "center",
+      gap: "32px",
+      padding: "24px",
+      borderRadius: "12px",
+      backgroundColor: frame >= step1Start ? theme_COLORS.BG_SURFACE : "transparent",
+      border: `2px solid ${frame >= step1Start ? theme_COLORS.SECONDARY : theme_COLORS.BORDER}`,
+      opacity: (0,esm.interpolate)(step1Anim, [0, 1], [0.3, 1]),
+      transform: `translateX(${(0,esm.interpolate)(step1Anim, [0, 1], [-100, 0])}px)`
+    }, children: [
+      /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { width: "64px", height: "64px", borderRadius: "50%", backgroundColor: theme_COLORS.SECONDARY, display: "flex", justifyContent: "center", alignItems: "center", fontFamily: theme_FONTS.MONO, fontSize: TEXT_SIZE.MD, color: theme_COLORS.BG_DEEP }, children: "1" }),
+      /* @__PURE__ */ (0,jsx_runtime.jsxs)("div", { style: { flex: 1 }, children: [
+        /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { fontFamily: theme_FONTS.DISPLAY, fontSize: TEXT_SIZE.LG, color: theme_COLORS.TEXT_MAIN }, children: "\uC544\uD0A4\uD14D\uCC98" }),
+        /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { height: "4px", width: "100%", backgroundColor: theme_COLORS.BORDER, marginTop: "8px" }, children: /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { height: "100%", width: "100%", backgroundColor: theme_COLORS.SECONDARY, transformOrigin: "left", transform: `scaleX(${step1Anim})` } }) })
+      ] })
+    ] }),
+    /* @__PURE__ */ (0,jsx_runtime.jsxs)("div", { style: {
+      display: "flex",
+      alignItems: "center",
+      gap: "32px",
+      padding: "24px",
+      borderRadius: "12px",
+      backgroundColor: frame >= step2Start ? theme_COLORS.BG_SURFACE : "transparent",
+      border: `2px solid ${frame >= step2Start ? theme_COLORS.PRIMARY : theme_COLORS.BORDER}`,
+      opacity: (0,esm.interpolate)(step2Anim, [0, 1], [0.3, 1]),
+      transform: `translateX(${(0,esm.interpolate)(step2Anim, [0, 1], [-100, 0])}px)`
+    }, children: [
+      /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { width: "64px", height: "64px", borderRadius: "50%", backgroundColor: theme_COLORS.PRIMARY, display: "flex", justifyContent: "center", alignItems: "center", fontFamily: theme_FONTS.MONO, fontSize: TEXT_SIZE.MD, color: theme_COLORS.BG_DEEP, boxShadow: `0 0 24px ${theme_COLORS.PRIMARY_GLOW}` }, children: "2" }),
+      /* @__PURE__ */ (0,jsx_runtime.jsxs)("div", { style: { flex: 1 }, children: [
+        /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { fontFamily: theme_FONTS.DISPLAY, fontSize: TEXT_SIZE.LG, color: theme_COLORS.PRIMARY, textShadow: `0 0 16px ${theme_COLORS.PRIMARY_GLOW}` }, children: "AI \uCD08\uC548" }),
+        /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { height: "4px", width: "100%", backgroundColor: theme_COLORS.BORDER, marginTop: "8px" }, children: /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { height: "100%", width: "100%", backgroundColor: theme_COLORS.PRIMARY, transformOrigin: "left", transform: `scaleX(${step2Anim})` } }) })
+      ] })
+    ] }),
+    /* @__PURE__ */ (0,jsx_runtime.jsxs)("div", { style: {
+      display: "flex",
+      alignItems: "center",
+      gap: "32px",
+      padding: "24px",
+      borderRadius: "12px",
+      backgroundColor: frame >= step3Start ? theme_COLORS.BG_ELEVATED : "transparent",
+      border: `2px solid ${frame >= step3Start ? theme_COLORS.HIGHLIGHT : theme_COLORS.BORDER}`,
+      opacity: (0,esm.interpolate)(step3Anim, [0, 1], [0.3, 1]),
+      transform: `translateX(${(0,esm.interpolate)(step3Anim, [0, 1], [-100, 0])}px)`
+    }, children: [
+      /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { width: "64px", height: "64px", borderRadius: "50%", backgroundColor: theme_COLORS.POSITIVE, display: "flex", justifyContent: "center", alignItems: "center", fontFamily: theme_FONTS.MONO, fontSize: TEXT_SIZE.MD, color: theme_COLORS.BG_DEEP }, children: "3" }),
+      /* @__PURE__ */ (0,jsx_runtime.jsxs)("div", { style: { flex: 1 }, children: [
+        /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { fontFamily: theme_FONTS.DISPLAY, fontSize: TEXT_SIZE.LG, color: theme_COLORS.TEXT_MAIN }, children: "\uB9AC\uD329\uD1A0\uB9C1" }),
+        /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { height: "4px", width: "100%", backgroundColor: theme_COLORS.BORDER, marginTop: "8px" }, children: /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { height: "100%", width: "100%", backgroundColor: theme_COLORS.POSITIVE, transformOrigin: "left", transform: `scaleX(${step3Anim})` } }) })
+      ] })
+    ] })
+  ] }) });
 };
 
 ;// ./src/projects/design-test1/body2/seq3.tsx
@@ -1454,100 +3119,345 @@ const body2_seq2_Seq2 = () => {
 
 
 
-
-const body2_seq3_THEME = {
-  Primary: "#F59E0B",
-  // Gold
-  Accent: "#0D9488",
-  // Teal
-  Text: "#F8FAFC"
-};
 const body2_seq3_Seq3 = () => {
   const frame = (0,esm.useCurrentFrame)();
-  const { fps, width, height } = (0,esm.useVideoConfig)();
-  const cameraZ = (0,esm.interpolate)(frame, [0, 502], [1, 1.2]);
-  const cameraRotateX = (0,esm.interpolate)(frame, [0, 502], [0, 10]);
-  const step1Opacity = (0,esm.interpolate)(frame, [20, 50, 450, 502], [0, 1, 1, 0]);
-  const step2Opacity = (0,esm.interpolate)(frame, [60, 90, 450, 502], [0, 1, 1, 0]);
-  const step3Opacity = (0,esm.interpolate)(frame, [100, 130, 450, 502], [0, 1, 1, 0]);
-  return /* @__PURE__ */ (0,jsx_runtime.jsxs)(CinematicLayout, { children: [
-    /* @__PURE__ */ (0,jsx_runtime.jsxs)(
-      esm.AbsoluteFill,
-      {
-        style: {
-          transform: `perspective(1200px) scale(${cameraZ}) rotateX(${cameraRotateX}deg)`,
+  const { fps } = (0,esm.useVideoConfig)();
+  const htmlOut = (0,esm.interpolate)(frame, [150, 200], [1, 0]);
+  const sub2Frame = Math.max(0, frame - 233);
+  const promptText = "Create Next.js Component...";
+  const charsToShow = Math.floor((0,esm.interpolate)(sub2Frame, [0, 90], [0, promptText.length], { extrapolateRight: "clamp" }));
+  const typedPrompt = promptText.slice(0, charsToShow);
+  const treeSlam = (0,esm.spring)({
+    frame: Math.max(0, sub2Frame - 100),
+    fps,
+    config: SPRINGS.PUNCH
+  });
+  const nodes = ["API \uC5F0\uB3D9", "\uC0C1\uD0DC \uAD00\uB9AC", "UI \uB80C\uB354\uB9C1"];
+  const nodeAnims = nodes.map(
+    (_, i) => (0,esm.spring)({
+      frame: Math.max(0, sub2Frame - 120 - i * STAGGER.NORMAL),
+      fps,
+      config: SPRINGS.SNAPPY
+    })
+  );
+  return /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.AbsoluteFill, { style: { backgroundColor: theme_COLORS.BG_DEEP, zIndex: theme_Z.BG, flexDirection: "row", padding: "80px", gap: "60px" }, children: [
+    /* @__PURE__ */ (0,jsx_runtime.jsxs)("div", { style: { flex: 1, display: "flex", flexDirection: "column", gap: "40px" }, children: [
+      /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.Sequence, { durationInFrames: 233, children: /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: {
+        flex: 1,
+        border: `4px dashed ${theme_COLORS.TEXT_MUTED}`,
+        borderRadius: "16px",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        opacity: htmlOut,
+        color: theme_COLORS.TEXT_MUTED,
+        fontFamily: theme_FONTS.MONO,
+        fontSize: TEXT_SIZE.MD
+      }, children: "<div> \uC815\uC801 HTML </div>" }) }),
+      frame >= 233 && /* @__PURE__ */ (0,jsx_runtime.jsxs)("div", { style: {
+        height: "120px",
+        backgroundColor: theme_COLORS.BG_VOID,
+        border: `2px solid ${theme_COLORS.BORDER_STRONG}`,
+        borderRadius: "12px",
+        padding: "32px",
+        fontFamily: theme_FONTS.MONO,
+        fontSize: TEXT_SIZE.MD,
+        color: theme_COLORS.TEXT_MAIN,
+        boxShadow: `0 0 32px ${theme_COLORS.PRIMARY_GLOW}`
+      }, children: [
+        /* @__PURE__ */ (0,jsx_runtime.jsx)("span", { style: { color: theme_COLORS.PRIMARY }, children: "$" }),
+        " ",
+        typedPrompt,
+        /* @__PURE__ */ (0,jsx_runtime.jsx)("span", { style: { opacity: Math.floor(frame / 10) % 2 === 0 ? 1 : 0 }, children: "_" })
+      ] })
+    ] }),
+    /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { flex: 1, position: "relative", display: "flex", justifyContent: "center", alignItems: "center" }, children: frame >= 233 + 100 && /* @__PURE__ */ (0,jsx_runtime.jsxs)("div", { style: {
+      position: "absolute",
+      top: 0,
+      bottom: 0,
+      left: 0,
+      right: 0,
+      transform: `scale(${treeSlam})`,
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "center",
+      justifyContent: "center",
+      gap: "48px"
+    }, children: [
+      /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: {
+        width: "200px",
+        height: "200px",
+        backgroundColor: "transparent",
+        border: `6px solid ${theme_COLORS.PRIMARY}`,
+        transform: "rotate(45deg)",
+        // 마름모
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        boxShadow: `0 0 64px ${theme_COLORS.PRIMARY_GLOW}`
+      }, children: /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { transform: "rotate(-45deg)", fontFamily: theme_FONTS.DISPLAY, fontSize: TEXT_SIZE.LG, color: theme_COLORS.PRIMARY }, children: "NEXT.JS" }) }),
+      /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { display: "flex", gap: "32px" }, children: nodes.map((txt, i) => /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: {
+        padding: "16px 24px",
+        backgroundColor: theme_COLORS.BG_ELEVATED,
+        border: `2px solid ${theme_COLORS.SECONDARY}`,
+        borderRadius: "8px",
+        fontFamily: theme_FONTS.MONO,
+        fontSize: TEXT_SIZE.SM,
+        color: theme_COLORS.TEXT_MAIN,
+        transform: `scale(${nodeAnims[i]})`,
+        boxShadow: `0 8px 16px rgba(0,0,0,0.5)`
+      }, children: txt }, i)) })
+    ] }) })
+  ] });
+};
+
+;// ./src/projects/design-test1/body2/seq4.tsx
+
+
+
+
+const body2_seq4_Seq4 = () => {
+  const frame = (0,esm.useCurrentFrame)();
+  const { fps } = (0,esm.useVideoConfig)();
+  const textPunch = (0,esm.spring)({
+    frame: Math.max(0, frame - 30),
+    fps,
+    config: SPRINGS.PUNCH
+  });
+  const radarScale = (0,esm.interpolate)(frame, [0, 60], [3, 1], { extrapolateRight: "clamp", easing: EASINGS.DRAMATIC });
+  const radarRotate = (0,esm.interpolate)(frame, [0, 314], [0, 90]);
+  const sub2Frame = Math.max(0, frame - 314);
+  const boxIn = (0,esm.spring)({
+    frame: sub2Frame,
+    fps,
+    config: SPRINGS.SNAPPY
+  });
+  const ErrorRate = Math.max(0, Math.floor((0,esm.interpolate)(sub2Frame, [60, 180], [100, 0])));
+  return /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.AbsoluteFill, { style: { backgroundColor: theme_COLORS.BG_VOID, zIndex: theme_Z.BG }, children: [
+    /* @__PURE__ */ (0,jsx_runtime.jsxs)("div", { style: {
+      position: "absolute",
+      left: "50%",
+      top: "50%",
+      width: "1000px",
+      height: "1000px",
+      marginLeft: "-500px",
+      marginTop: "-500px",
+      border: `2px dashed ${theme_COLORS.BORDER_STRONG}`,
+      borderRadius: "50%",
+      transform: `scale(${radarScale}) rotate(${radarRotate}deg)`,
+      opacity: (0,esm.interpolate)(frame, [0, 20], [0, 0.4])
+    }, children: [
+      /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { position: "absolute", top: "50%", left: 0, right: 0, height: "1px", backgroundColor: theme_COLORS.BORDER_STRONG } }),
+      /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { position: "absolute", left: "50%", top: 0, bottom: 0, width: "1px", backgroundColor: theme_COLORS.BORDER_STRONG } })
+    ] }),
+    /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.AbsoluteFill, { style: { justifyContent: "center", alignItems: "center" }, children: [
+      /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.Sequence, { durationInFrames: 820, children: /* @__PURE__ */ (0,jsx_runtime.jsxs)("div", { style: {
+        fontFamily: theme_FONTS.DISPLAY,
+        fontSize: TEXT_SIZE.HERO,
+        color: theme_COLORS.TEXT_MAIN,
+        textAlign: "center",
+        lineHeight: 0.9,
+        transform: `scale(${(0,esm.interpolate)(textPunch, [0, 1], [0.8, 1])})`,
+        textShadow: `0 0 32px ${theme_COLORS.PRIMARY_GLOW}`,
+        zIndex: 2,
+        opacity: (0,esm.interpolate)(sub2Frame, [200, 250], [1, 0])
+        // SubSeq 2 중반 이후 Fade Out
+      }, children: [
+        "\uD504\uB86C\uD504\uD2B8",
+        /* @__PURE__ */ (0,jsx_runtime.jsx)("br", {}),
+        /* @__PURE__ */ (0,jsx_runtime.jsx)("span", { style: { color: theme_COLORS.PRIMARY }, children: "\uC5D4\uC9C0\uB2C8\uC5B4\uB9C1" })
+      ] }) }),
+      frame >= 314 && /* @__PURE__ */ (0,jsx_runtime.jsxs)("div", { style: {
+        position: "absolute",
+        width: "100%",
+        height: "100%",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        zIndex: 3
+      }, children: [
+        /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: {
+          position: "absolute",
+          top: `${(0,esm.interpolate)(boxIn, [0, 1], [0, 25])}%`,
+          left: "20%",
+          right: "20%",
+          height: "4px",
+          backgroundColor: theme_COLORS.SECONDARY,
+          opacity: boxIn
+        } }),
+        /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: {
+          position: "absolute",
+          bottom: `${(0,esm.interpolate)(boxIn, [0, 1], [0, 25])}%`,
+          left: "20%",
+          right: "20%",
+          height: "4px",
+          backgroundColor: theme_COLORS.SECONDARY,
+          opacity: boxIn
+        } }),
+        /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: {
+          position: "absolute",
+          left: `${(0,esm.interpolate)(boxIn, [0, 1], [0, 30])}%`,
+          top: "20%",
+          bottom: "20%",
+          width: "4px",
+          backgroundColor: theme_COLORS.SECONDARY,
+          opacity: boxIn
+        } }),
+        /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: {
+          position: "absolute",
+          right: `${(0,esm.interpolate)(boxIn, [0, 1], [0, 30])}%`,
+          top: "20%",
+          bottom: "20%",
+          width: "4px",
+          backgroundColor: theme_COLORS.SECONDARY,
+          opacity: boxIn
+        } }),
+        sub2Frame > 250 && /* @__PURE__ */ (0,jsx_runtime.jsxs)("div", { style: {
+          fontFamily: theme_FONTS.MONO,
+          fontSize: TEXT_SIZE.HERO,
+          color: ErrorRate === 0 ? theme_COLORS.POSITIVE : theme_COLORS.ACCENT,
+          transform: `scale(${(0,esm.spring)({ frame: Math.max(0, sub2Frame - 250), fps, config: SPRINGS.PUNCH })})`,
+          textShadow: `0 0 48px ${ErrorRate === 0 ? theme_COLORS.POSITIVE : theme_COLORS.ACCENT}`
+        }, children: [
+          ErrorRate,
+          "% \uC624\uCC28\uC728"
+        ] })
+      ] })
+    ] })
+  ] });
+};
+
+;// ./src/projects/design-test1/body2/seq5.tsx
+
+
+
+
+const seq5_Seq5 = () => {
+  const frame = (0,esm.useCurrentFrame)();
+  const { fps } = (0,esm.useVideoConfig)();
+  const capsuleScale = (0,esm.spring)({
+    frame,
+    fps,
+    config: SPRINGS.SMOOTH
+  });
+  const bugCount = 8;
+  const destroyAnims = Array.from({ length: bugCount }).map(
+    (_, i) => (0,esm.interpolate)(Math.max(0, frame - 30 - i * 10), [0, 20], [1, 0], { extrapolateRight: "clamp" })
+  );
+  const sub2Frame = Math.max(0, frame - 283);
+  const shieldAura = (0,esm.spring)({
+    frame: sub2Frame,
+    fps,
+    config: SPRINGS.PUNCH
+  });
+  const percentValue = Math.floor((0,esm.interpolate)(sub2Frame, [30, 150], [0, 100], { extrapolateRight: "clamp", easing: EASINGS.DRAMATIC }));
+  const vChecks = 12;
+  const checkAnims = Array.from({ length: vChecks }).map(
+    (_, i) => (0,esm.spring)({
+      frame: Math.max(0, sub2Frame - 150 - i * STAGGER.TIGHT),
+      fps,
+      config: SPRINGS.SNAPPY
+    })
+  );
+  const fadeOut = (0,esm.interpolate)(frame, [746, 806], [1, 0], { extrapolateRight: "clamp" });
+  return /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.AbsoluteFill, { style: { backgroundColor: theme_COLORS.BG_DEEP, zIndex: theme_Z.BG, opacity: fadeOut }, children: [
+    /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.Sequence, { durationInFrames: 283, children: /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.AbsoluteFill, { style: { justifyContent: "center", alignItems: "center" }, children: /* @__PURE__ */ (0,jsx_runtime.jsxs)("div", { style: {
+      width: "600px",
+      height: "400px",
+      border: `6px solid ${theme_COLORS.BORDER_STRONG}`,
+      borderRadius: "40px",
+      backgroundColor: theme_COLORS.BG_SURFACE,
+      transform: `scale(${capsuleScale})`,
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+      position: "relative",
+      overflow: "hidden"
+    }, children: [
+      /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { position: "absolute", top: "24px", fontFamily: theme_FONTS.MONO, fontSize: TEXT_SIZE.MD, color: theme_COLORS.TEXT_MUTED }, children: "\uD14C\uC2A4\uD2B8 \uD658\uACBD \uACA9\uB9AC" }),
+      /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { display: "flex", flexWrap: "wrap", gap: "24px", justifyContent: "center", padding: "60px" }, children: destroyAnims.map((opacity, i) => /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: {
+        width: "48px",
+        height: "48px",
+        backgroundColor: theme_COLORS.ACCENT,
+        borderRadius: "8px",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        opacity,
+        transform: `scale(${(0,esm.interpolate)(opacity, [0, 1], [0.5, 1])})`,
+        boxShadow: `0 0 24px ${theme_COLORS.ACCENT}`
+      }, children: /* @__PURE__ */ (0,jsx_runtime.jsx)("span", { style: { color: theme_COLORS.TEXT_INVERSE, fontFamily: theme_FONTS.MONO, fontWeight: "bold" }, children: "!" }) }, i)) }),
+      /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: {
+        position: "absolute",
+        top: 0,
+        bottom: 0,
+        width: "10px",
+        backgroundColor: theme_COLORS.PRIMARY,
+        boxShadow: `0 0 48px ${theme_COLORS.PRIMARY_GLOW}`,
+        left: `${(0,esm.interpolate)(frame, [30, 200], [0, 100], { extrapolateRight: "clamp" })}%`
+      } })
+    ] }) }) }),
+    /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.Sequence, { from: 283, durationInFrames: 523, children: /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.AbsoluteFill, { style: { justifyContent: "center", alignItems: "center" }, children: /* @__PURE__ */ (0,jsx_runtime.jsxs)("div", { style: { position: "relative", width: "100%", height: "100%", display: "flex", justifyContent: "center", alignItems: "center" }, children: [
+      /* @__PURE__ */ (0,jsx_runtime.jsxs)("div", { style: {
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        zIndex: 2
+      }, children: [
+        /* @__PURE__ */ (0,jsx_runtime.jsxs)("div", { style: {
+          fontFamily: theme_FONTS.MONO,
+          fontSize: TEXT_SIZE.HERO,
+          color: percentValue === 100 ? theme_COLORS.POSITIVE : theme_COLORS.TEXT_MAIN,
+          textShadow: percentValue === 100 ? `0 0 48px ${theme_COLORS.PRIMARY_GLOW}` : "none",
+          transform: percentValue === 100 ? `scale(${(0,esm.spring)({ frame: Math.max(0, sub2Frame - 150), fps, config: SPRINGS.PUNCH })})` : "none"
+        }, children: [
+          percentValue,
+          "%"
+        ] }),
+        /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { fontFamily: theme_FONTS.DISPLAY, fontSize: TEXT_SIZE.LG, color: theme_COLORS.TEXT_MUTED }, children: "\uCEE4\uBC84\uB9AC\uC9C0" })
+      ] }),
+      /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: {
+        position: "absolute",
+        top: "50%",
+        left: "50%",
+        width: "800px",
+        height: "800px",
+        marginLeft: "-400px",
+        marginTop: "-400px",
+        borderRadius: "50%",
+        border: `8px solid ${theme_COLORS.POSITIVE}`,
+        boxShadow: `inset 0 0 120px ${theme_COLORS.POSITIVE}, 0 0 120px ${theme_COLORS.POSITIVE}`,
+        opacity: (0,esm.interpolate)(shieldAura, [0, 1], [0, 0.6]),
+        transform: `scale(${(0,esm.interpolate)(shieldAura, [0, 1], [0.5, 1.2])})`,
+        zIndex: 1
+      } }),
+      checkAnims.map((anim, i) => {
+        const angle = i * 360 / vChecks;
+        const radius = 500;
+        const rX = Math.cos(angle * Math.PI / 180) * radius;
+        const rY = Math.sin(angle * Math.PI / 180) * radius;
+        return /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: {
+          position: "absolute",
+          left: "50%",
+          top: "50%",
+          marginLeft: rX - 32,
+          marginTop: rY - 32,
+          width: "64px",
+          height: "64px",
+          borderRadius: "50%",
+          backgroundColor: theme_COLORS.POSITIVE,
           display: "flex",
           justifyContent: "center",
-          alignItems: "center"
-        },
-        children: [
-          /* @__PURE__ */ (0,jsx_runtime.jsxs)(
-            "div",
-            {
-              style: {
-                position: "absolute",
-                top: "15%",
-                fontSize: 70,
-                fontWeight: 800,
-                color: body2_seq3_THEME.Text,
-                letterSpacing: "0.6em",
-                textAlign: "center"
-              },
-              children: [
-                "PRACTICAL",
-                /* @__PURE__ */ (0,jsx_runtime.jsx)("br", {}),
-                /* @__PURE__ */ (0,jsx_runtime.jsx)("span", { style: { fontSize: 30, color: body2_seq3_THEME.Primary, letterSpacing: "0.4em" }, children: "WORKFLOW" })
-              ]
-            }
-          ),
-          /* @__PURE__ */ (0,jsx_runtime.jsxs)(
-            "div",
-            {
-              style: {
-                display: "flex",
-                gap: 60,
-                alignItems: "center",
-                marginTop: "5%"
-              },
-              children: [
-                /* @__PURE__ */ (0,jsx_runtime.jsxs)("div", { style: { textAlign: "center", opacity: step1Opacity, transform: `translateY(${(0,esm.interpolate)(frame, [20, 50], [40, 0], { extrapolateLeft: "clamp", extrapolateRight: "clamp" })}px)` }, children: [
-                  /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { fontSize: 100, fontWeight: 900, color: body2_seq3_THEME.Accent, marginBottom: 10 }, children: "01" }),
-                  /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { fontSize: 24, letterSpacing: "0.4em", color: body2_seq3_THEME.Text }, children: "PLAN" }),
-                  /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { width: 150, height: 2, background: body2_seq3_THEME.Accent, marginTop: 20 } })
-                ] }),
-                /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { color: body2_seq3_THEME.Accent, fontSize: 30, opacity: 0.3 }, children: ">" }),
-                /* @__PURE__ */ (0,jsx_runtime.jsxs)("div", { style: { textAlign: "center", opacity: step2Opacity, transform: `translateY(${(0,esm.interpolate)(frame, [60, 90], [40, 0], { extrapolateLeft: "clamp", extrapolateRight: "clamp" })}px)` }, children: [
-                  /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { fontSize: 100, fontWeight: 900, color: body2_seq3_THEME.Primary, marginBottom: 10 }, children: "02" }),
-                  /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { fontSize: 24, letterSpacing: "0.4em", color: body2_seq3_THEME.Text }, children: "DRAFT" }),
-                  /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { width: 150, height: 2, background: body2_seq3_THEME.Primary, marginTop: 20 } })
-                ] }),
-                /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { color: body2_seq3_THEME.Accent, fontSize: 30, opacity: 0.3 }, children: ">" }),
-                /* @__PURE__ */ (0,jsx_runtime.jsxs)("div", { style: { textAlign: "center", opacity: step3Opacity, transform: `translateY(${(0,esm.interpolate)(frame, [100, 130], [40, 0], { extrapolateLeft: "clamp", extrapolateRight: "clamp" })}px)` }, children: [
-                  /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { fontSize: 100, fontWeight: 900, color: body2_seq3_THEME.Accent, marginBottom: 10 }, children: "03" }),
-                  /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { fontSize: 24, letterSpacing: "0.4em", color: body2_seq3_THEME.Text }, children: "OPTIMIZE" }),
-                  /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { width: 150, height: 2, background: body2_seq3_THEME.Accent, marginTop: 20 } })
-                ] })
-              ]
-            }
-          ),
-          /* @__PURE__ */ (0,jsx_runtime.jsx)(
-            "div",
-            {
-              style: {
-                position: "absolute",
-                bottom: "20%",
-                color: body2_seq3_THEME.Text,
-                fontSize: 20,
-                letterSpacing: "0.4em",
-                opacity: 0.5
-              },
-              children: "REDEFINING TEAM COLLABORATION"
-            }
-          )
-        ]
-      }
-    ),
-    /* @__PURE__ */ (0,jsx_runtime.jsx)(Subtitle, { text: "\uC774\uB807\uAC8C \uAC15\uB825\uD55C AI \uD234\uC744 \uC131\uACF5\uC801\uC73C\uB85C \uB3C4\uC785\uD558\uB824\uBA74 \uC5B4\uB5BB\uAC8C \uD574\uC57C \uD560\uAE4C\uC694?\\n\uCCB4\uACC4\uC801\uC778 3\uB2E8\uACC4 \uC2E4\uC804 \uC6CC\uD06C\uD50C\uB85C\uC6B0\uB97C \uC81C\uC548\uD569\uB2C8\uB2E4." })
+          alignItems: "center",
+          fontFamily: theme_FONTS.MONO,
+          fontSize: TEXT_SIZE.MD,
+          color: theme_COLORS.BG_DEEP,
+          fontWeight: "bold",
+          transform: `scale(${anim})`,
+          boxShadow: `0 0 24px ${theme_COLORS.POSITIVE}`
+        }, children: "\u2714" }, i);
+      })
+    ] }) }) })
   ] });
 };
 
@@ -1558,100 +3468,168 @@ const body2_seq3_Seq3 = () => {
 
 
 
-const Body2 = () => {
-  return /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.AbsoluteFill, { style: { backgroundColor: "#020617" }, children: [
+
+
+
+
+
+const body2_Body2 = () => {
+  return /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.AbsoluteFill, { style: { backgroundColor: theme_COLORS.BG_DEEP }, children: [
     /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.Audio, { src: (0,esm.staticFile)("design-test1/body2/body2.wav") }),
     /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.Series, { children: [
-      /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.Series.Sequence, { durationInFrames: 436, children: /* @__PURE__ */ (0,jsx_runtime.jsx)(body2_seq1_Seq1, {}) }),
-      /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.Series.Sequence, { durationInFrames: 430, children: /* @__PURE__ */ (0,jsx_runtime.jsx)(body2_seq2_Seq2, {}) }),
-      /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.Series.Sequence, { durationInFrames: 502, children: /* @__PURE__ */ (0,jsx_runtime.jsx)(body2_seq3_Seq3, {}) })
-    ] })
+      /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.Series.Sequence, { durationInFrames: 888, children: /* @__PURE__ */ (0,jsx_runtime.jsx)(body2_seq1_Seq1, {}) }),
+      /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.Series.Sequence, { durationInFrames: 677, children: /* @__PURE__ */ (0,jsx_runtime.jsx)(body2_seq2_Seq2, {}) }),
+      /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.Series.Sequence, { durationInFrames: 766, children: /* @__PURE__ */ (0,jsx_runtime.jsx)(body2_seq3_Seq3, {}) }),
+      /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.Series.Sequence, { durationInFrames: 820, children: /* @__PURE__ */ (0,jsx_runtime.jsx)(body2_seq4_Seq4, {}) }),
+      /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.Series.Sequence, { durationInFrames: 806, children: /* @__PURE__ */ (0,jsx_runtime.jsx)(seq5_Seq5, {}) })
+    ] }),
+    /* @__PURE__ */ (0,jsx_runtime.jsx)(CaptionOverlay, { captions: body2_subtitles_body2Subtitles })
   ] });
 };
+
+;// ./src/projects/design-test1/outro/outro_subtitles.ts
+
+const outro_subtitles_outroSubtitles = [
+  {
+    startMs: 0,
+    endMs: 4980,
+    text: "\uAE30\uC220\uC758 \uBC1C\uC804 \uC18D\uB3C4\uB294 \uC6B0\uB9AC\uC758 \uC608\uC0C1\uC744 \uB6F0\uC5B4\uB118\uC744 \uC815\uB3C4\uB85C\n\uC810\uC810 \uB354 \uBE68\uB77C\uC9C0\uACE0 \uC788\uC2B5\uB2C8\uB2E4."
+  },
+  {
+    startMs: 4980,
+    endMs: 11420,
+    text: "\uB2F9\uC7A5 \uB0B4\uB144\uC5D0\uB294 \uB610 \uC5B4\uB5A4 \uD601\uC2E0\uC801\uC778 \uB3C4\uAD6C\uAC00 \uB4F1\uC7A5\uD558\uC5EC\n\uC6B0\uB9AC\uC758 \uC77C\uD558\uB294 \uBC29\uC2DD\uC744 \uBC14\uAFC0\uAE4C\uC694?"
+  },
+  {
+    startMs: 11420,
+    endMs: 17920,
+    text: "\uC77C\uAC01\uC5D0\uC11C\uB294 AI\uAC00 \uAC1C\uBC1C\uC790\uC758 \uC77C\uC790\uB9AC\uB97C \uB300\uCCB4\uD560 \uAC83\uC774\uB77C\uB294\n\uB9C9\uC5F0\uD55C \uC6B0\uB824\uB3C4 \uC788\uC2B5\uB2C8\uB2E4."
+  },
+  {
+    startMs: 17920,
+    endMs: 28360,
+    text: "\uD558\uC9C0\uB9CC \uC5ED\uC0AC\uAC00 \uC99D\uBA85\uD558\uB4EF, \uAC15\uB825\uD55C \uC0C8\uB85C\uC6B4 \uB3C4\uAD6C\uB294 \uD56D\uC0C1\n\uC778\uAC04\uC758 \uC7A0\uC7AC\uB825\uACFC \uD55C\uACC4\uB97C \uB354\uC6B1 \uD655\uC7A5\uC2DC\uCF1C \uC654\uC2B5\uB2C8\uB2E4."
+  },
+  {
+    startMs: 28360,
+    endMs: 30920,
+    text: "AI\uB294 \uC6B0\uB9AC\uB97C \uBC00\uC5B4\uB0B4\uB294 \uACBD\uC7C1\uC790\uAC00 \uC544\uB2D9\uB2C8\uB2E4."
+  },
+  {
+    startMs: 30920,
+    endMs: 40300,
+    text: "\uC624\uD788\uB824 \uC6B0\uB9AC\uAC00 \uB2E8\uC21C \uC791\uC5C5\uC5D0\uC11C \uBC97\uC5B4\uB098 \uB354 \uAC00\uCE58 \uC788\uACE0 \uCC3D\uC758\uC801\uC778 \uBB38\uC81C \uD574\uACB0\uC5D0\n\uC9D1\uC911\uD560 \uC218 \uC788\uB3C4\uB85D \uB3D5\uB294 \uAC00\uC7A5 \uAC15\uB825\uD55C \uC9C0\uB81B\uB300\uC785\uB2C8\uB2E4."
+  },
+  {
+    startMs: 40300,
+    endMs: 52420,
+    text: "\uAC1C\uBC1C\uC758 \uAE30\uC220\uC801 \uC9C4\uC785 \uC7A5\uBCBD\uC774 \uB0AE\uC544\uC9D0\uC5D0 \uB530\uB77C,\n\uC55E\uB85C\uB294 \uAE30\uC220\uC758 \uC219\uB828\uB3C4\uBCF4\uB2E4 '\uBB34\uC5C7\uC744, \uC65C \uB9CC\uB4E4 \uAC83\uC778\uAC00'\uB97C \uCE58\uC5F4\uD558\uAC8C \uACE0\uBBFC\uD558\uB294\n\uD504\uB85C\uB355\uD2B8 \uB9C8\uC778\uB4DC\uAC00 \uAC00\uC7A5 \uC911\uC694\uD55C \uBB34\uAE30\uAC00 \uB420 \uAC83\uC785\uB2C8\uB2E4."
+  },
+  {
+    startMs: 52420,
+    endMs: 54840,
+    text: "\uB9DD\uC124\uC77C \uD544\uC694\uAC00 \uC5C6\uC2B5\uB2C8\uB2E4."
+  },
+  {
+    startMs: 54840,
+    endMs: 60240,
+    text: "\uC9C0\uAE08 \uBC14\uB85C AI\uC640 \uD568\uAED8\n\uC644\uC804\uD788 \uC0C8\uB85C\uC6B4 \uAC1C\uBC1C \uC5EC\uC815\uC744 \uC2DC\uC791\uD574 \uBCF4\uC138\uC694."
+  },
+  {
+    startMs: 60240,
+    endMs: 67440,
+    text: "\uD55C\uACC4 \uC5C6\uB294 \uC5EC\uB7EC\uBD84\uC758 \uC0C1\uC0C1\uB825\uC744\n\uC644\uBCBD\uD55C \uCF54\uB4DC\uB85C \uD604\uC2E4\uD654\uD560 \uC2DC\uAC04\uC785\uB2C8\uB2E4."
+  }
+];
 
 ;// ./src/projects/design-test1/outro/seq1.tsx
 
 
 
 
-
-const outro_seq1_THEME = {
-  Primary: "#F59E0B",
-  // Gold
-  Accent: "#0D9488",
-  // Teal
-  Text: "#F8FAFC"
-};
 const outro_seq1_Seq1 = () => {
   const frame = (0,esm.useCurrentFrame)();
-  const { fps, width, height } = (0,esm.useVideoConfig)();
-  const cameraRotateY = (0,esm.interpolate)(frame, [0, 435], [-5, 5]);
-  const cameraZ = (0,esm.interpolate)(frame, [0, 435], [1.1, 1.2]);
-  const stepOpacity = (0,esm.interpolate)(frame, [0, 20, 415, 435], [0, 1, 1, 0]);
-  return /* @__PURE__ */ (0,jsx_runtime.jsxs)(CinematicLayout, { children: [
-    /* @__PURE__ */ (0,jsx_runtime.jsxs)(
-      esm.AbsoluteFill,
-      {
-        style: {
-          transform: `perspective(1000px) rotateY(${cameraRotateY}deg) scale(${cameraZ})`,
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center"
-        },
-        children: [
-          /* @__PURE__ */ (0,jsx_runtime.jsx)(
-            "div",
-            {
-              style: {
-                position: "absolute",
-                top: "20%",
-                fontSize: 60,
-                fontWeight: 800,
-                color: outro_seq1_THEME.Text,
-                letterSpacing: "0.8em",
-                opacity: 0.15
-              },
-              children: "DEVELOPMENT FLOW"
-            }
-          ),
-          /* @__PURE__ */ (0,jsx_runtime.jsxs)(
-            "div",
-            {
-              style: {
-                display: "flex",
-                gap: 100,
-                alignItems: "center",
-                opacity: stepOpacity
-              },
-              children: [
-                /* @__PURE__ */ (0,jsx_runtime.jsxs)("div", { style: { textAlign: "center" }, children: [
-                  /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { fontSize: 24, fontWeight: 800, color: outro_seq1_THEME.Accent, marginBottom: 10 }, children: "ARCHITECTURE" }),
-                  /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { width: 150, height: 150, border: `2px solid ${outro_seq1_THEME.Accent}`, background: "rgba(13, 148, 136, 0.1)", flexShrink: 0 } })
-                ] }),
-                /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { width: 50, height: 2, background: outro_seq1_THEME.Accent } }),
-                /* @__PURE__ */ (0,jsx_runtime.jsxs)("div", { style: { textAlign: "center" }, children: [
-                  /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { fontSize: 24, fontWeight: 900, color: outro_seq1_THEME.Primary, marginBottom: 10 }, children: "AI DRAFT" }),
-                  /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: {
-                    width: 200,
-                    height: 200,
-                    border: `4px solid ${outro_seq1_THEME.Primary}`,
-                    background: "rgba(245, 158, 11, 0.1)",
-                    boxShadow: `0 0 40px rgba(245, 158, 11, 0.2)`,
-                    transform: `scale(${(0,esm.interpolate)(frame % 50, [0, 25, 50], [1, 1.05, 1])})`
-                  } })
-                ] }),
-                /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { width: 50, height: 2, background: outro_seq1_THEME.Accent } }),
-                /* @__PURE__ */ (0,jsx_runtime.jsxs)("div", { style: { textAlign: "center" }, children: [
-                  /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { fontSize: 24, fontWeight: 800, color: outro_seq1_THEME.Accent, marginBottom: 10 }, children: "REFACTOR" }),
-                  /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { width: 150, height: 150, border: `2px solid ${outro_seq1_THEME.Accent}`, background: "rgba(13, 148, 136, 0.1)" } })
-                ] })
-              ]
-            }
-          )
-        ]
-      }
-    ),
-    /* @__PURE__ */ (0,jsx_runtime.jsx)(Subtitle, { text: "AI \uAC1C\uBC1C \uC6CC\uD06C\uD50C\uB85C\uC6B0\uB294 \uC124\uACC4, \uBE60\uB978 \uCD08\uC548 \uC791\uC131,\\n\uADF8\uB9AC\uACE0 \uB514\uD14C\uC77C\uD55C \uB9AC\uD329\uD1A0\uB9C1 \uBC0F \uCD5C\uC801\uD654\uC758 3\uB2E8\uACC4\uB85C \uC9C4\uD589\uB429\uB2C8\uB2E4." })
+  const { fps } = (0,esm.useVideoConfig)();
+  const speedCount = Math.floor((0,esm.interpolate)(frame, [0, 200], [2022, 2026]));
+  const textScale = (0,esm.spring)({
+    frame,
+    fps,
+    config: SPRINGS.PUNCH
+  });
+  const sub2Frame = Math.max(0, frame - 299);
+  const cubeScale = (0,esm.spring)({
+    frame: sub2Frame,
+    fps,
+    config: SPRINGS.SNAPPY
+  });
+  const cubeRotate = (0,esm.interpolate)(sub2Frame, [0, 386], [0, 360]);
+  const sub3Frame = Math.max(0, frame - 685);
+  const shadowY = (0,esm.interpolate)(sub3Frame, [0, 100], [100, 50], { extrapolateRight: "clamp", easing: EASINGS.CINEMATIC });
+  const glitchError = frame % 6 < 3 ? theme_COLORS.NEGATIVE : theme_COLORS.TEXT_MAIN;
+  const smashCutDrop = (0,esm.interpolate)(frame, [1055, 1075], [1, 0]);
+  return /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.AbsoluteFill, { style: { backgroundColor: theme_COLORS.BG_VOID, zIndex: theme_Z.BG, overflow: "hidden", opacity: smashCutDrop }, children: [
+    /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: {
+      position: "absolute",
+      left: "-50%",
+      right: "-50%",
+      bottom: "0",
+      height: "800px",
+      background: `radial-gradient(ellipse at bottom, ${theme_COLORS.PRIMARY_DIM} 0%, transparent 70%)`,
+      opacity: (0,esm.interpolate)(frame, [0, 100], [0, 1]),
+      transform: `translateY(${Math.sin(frame * Math.PI / 120) * 50}px)`
+    } }),
+    /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.Sequence, { durationInFrames: 299, children: /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.AbsoluteFill, { style: { justifyContent: "center", alignItems: "center" }, children: /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: {
+      fontFamily: theme_FONTS.MONO,
+      fontSize: TEXT_SIZE.HERO,
+      color: frame > 250 ? theme_COLORS.ACCENT : theme_COLORS.TEXT_MAIN,
+      // 250프레임 넘어가면 오렌지 섬광
+      transform: `scale(${(0,esm.interpolate)(textScale, [0, 1], [0.8, 1])})`,
+      textShadow: frame > 250 ? `0 0 64px ${theme_COLORS.ACCENT}` : `0 0 24px ${theme_COLORS.PRIMARY_GLOW}`
+    }, children: speedCount }) }) }),
+    /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.Sequence, { from: 299, durationInFrames: 386, children: /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.AbsoluteFill, { style: { justifyContent: "center", alignItems: "center" }, children: /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: {
+      width: "300px",
+      height: "300px",
+      border: `6px solid ${theme_COLORS.PRIMARY}`,
+      boxShadow: `0 0 96px ${theme_COLORS.PRIMARY_GLOW}`,
+      transform: `scale(${cubeScale}) rotateZ(${cubeRotate}deg)`,
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center"
+    }, children: /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: {
+      width: "150px",
+      height: "150px",
+      backgroundColor: theme_COLORS.PRIMARY,
+      transform: `rotateZ(-${cubeRotate * 2}deg)`
+      // 반대로 회전
+    } }) }) }) }),
+    /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.Sequence, { from: 685, durationInFrames: 390, children: /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.AbsoluteFill, { style: { justifyContent: "center", alignItems: "center" }, children: [
+      /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: {
+        position: "absolute",
+        bottom: 0,
+        left: 0,
+        right: 0,
+        height: `${100 - shadowY}%`,
+        backgroundColor: theme_COLORS.BG_DEEP,
+        opacity: 0.9,
+        zIndex: 2
+      } }),
+      /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: {
+        fontFamily: theme_FONTS.MONO,
+        fontSize: TEXT_SIZE.XXL,
+        color: sub3Frame > 200 ? glitchError : theme_COLORS.TEXT_MAIN,
+        zIndex: 3,
+        transform: `scale(${(0,esm.spring)({ frame: sub3Frame, fps, config: SPRINGS.PUNCH })})`
+      }, children: "\uC778\uAC04_\uAC1C\uBC1C\uC790" }),
+      /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: {
+        position: "absolute",
+        top: "20%",
+        fontFamily: theme_FONTS.DISPLAY,
+        fontSize: TEXT_SIZE.LG,
+        color: theme_COLORS.NEGATIVE,
+        zIndex: 3,
+        opacity: sub3Frame > 150 ? 1 : 0
+      }, children: "\uACBD\uACE0: \uB300\uCCB4 \uC704\uD5D8" })
+    ] }) })
   ] });
 };
 
@@ -1660,128 +3638,85 @@ const outro_seq1_Seq1 = () => {
 
 
 
-
-const outro_seq2_THEME = {
-  Primary: "#F59E0B",
-  // Gold
-  Accent: "#0D9488",
-  // Teal
-  Text: "#F8FAFC"
-};
 const outro_seq2_Seq2 = () => {
   const frame = (0,esm.useCurrentFrame)();
-  const { fps, width, height } = (0,esm.useVideoConfig)();
-  const cameraZ = (0,esm.interpolate)(frame, [0, 619], [1, 1.2]);
-  const cameraRotateY = (0,esm.interpolate)(frame, [0, 619], [5, -5]);
-  const promptOpacity = (0,esm.interpolate)(frame, [20, 50, 569, 619], [0, 1, 1, 0]);
-  const codeLines = Array.from({ length: 10 }).map((_, i) => {
-    const startX = i * 123 % width;
-    const startY = i * 87 % height;
-    const lineX = (0,esm.interpolate)(frame, [i * 10, i * 10 + 60], [-500, 0], { extrapolateRight: "clamp", extrapolateLeft: "clamp" });
-    const lineOpacity = (0,esm.interpolate)(frame, [i * 10, i * 10 + 30], [0, 0.2], { extrapolateRight: "clamp" });
-    return /* @__PURE__ */ (0,jsx_runtime.jsx)(
-      "div",
-      {
-        style: {
-          position: "absolute",
-          left: 100,
-          top: 100 + i * 40,
-          width: 400 + Math.random() * 200,
-          height: 15,
-          background: outro_seq2_THEME.Accent,
-          opacity: lineOpacity,
-          transform: `translateX(${lineX}px)`
-        }
-      },
-      i
-    );
+  const { fps } = (0,esm.useVideoConfig)();
+  const introOp = (0,esm.interpolate)(frame, [0, 30], [0, 1]);
+  const textScale = (0,esm.spring)({
+    frame: Math.max(0, frame - 30),
+    fps,
+    config: SPRINGS.PUNCH
   });
-  return /* @__PURE__ */ (0,jsx_runtime.jsxs)(CinematicLayout, { children: [
-    /* @__PURE__ */ (0,jsx_runtime.jsxs)(
-      esm.AbsoluteFill,
-      {
-        style: {
-          transform: `perspective(1000px) rotateY(${cameraRotateY}deg) scale(${cameraZ})`,
-          opacity: promptOpacity,
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center"
-        },
-        children: [
-          /* @__PURE__ */ (0,jsx_runtime.jsxs)(
-            "div",
-            {
-              style: {
-                position: "absolute",
-                top: "20%",
-                fontSize: 70,
-                fontWeight: 800,
-                color: outro_seq2_THEME.Text,
-                letterSpacing: "0.6em",
-                textAlign: "center",
-                textShadow: `0 0 40px rgba(0,0,0,1)`
-              },
-              children: [
-                "PROMPT",
-                /* @__PURE__ */ (0,jsx_runtime.jsx)("br", {}),
-                /* @__PURE__ */ (0,jsx_runtime.jsx)("span", { style: { fontSize: 30, color: outro_seq2_THEME.Primary, letterSpacing: "0.4em" }, children: "ENGINEERING" })
-              ]
-            }
-          ),
-          /* @__PURE__ */ (0,jsx_runtime.jsxs)(
-            "div",
-            {
-              style: {
-                width: 800,
-                height: 400,
-                borderLeft: `4px solid ${outro_seq2_THEME.Primary}`,
-                background: "rgba(0,0,0,0.5)",
-                position: "relative",
-                marginTop: "10%",
-                padding: "20px",
-                overflow: "hidden"
-              },
-              children: [
-                /* @__PURE__ */ (0,jsx_runtime.jsx)(
-                  "div",
-                  {
-                    style: {
-                      position: "absolute",
-                      top: 20,
-                      right: 20,
-                      padding: "10px 30px",
-                      border: `2px solid ${outro_seq2_THEME.Primary}`,
-                      color: outro_seq2_THEME.Primary,
-                      fontWeight: 900,
-                      letterSpacing: "0.3em",
-                      opacity: (0,esm.interpolate)(frame, [150, 180], [0, 1], { extrapolateRight: "clamp" }),
-                      boxShadow: `0 0 20px ${outro_seq2_THEME.Primary}`
-                    },
-                    children: "PERFECT TEST SUITE"
-                  }
-                ),
-                codeLines
-              ]
-            }
-          ),
-          /* @__PURE__ */ (0,jsx_runtime.jsx)(
-            "div",
-            {
-              style: {
-                position: "absolute",
-                bottom: "20%",
-                fontSize: 18,
-                color: outro_seq2_THEME.Accent,
-                letterSpacing: "0.4em",
-                opacity: 0.4
-              },
-              children: "CONSTRUCTING ARCHITECTURE..."
-            }
-          )
-        ]
-      }
-    ),
-    /* @__PURE__ */ (0,jsx_runtime.jsx)(Subtitle, { text: "\uB2E8\uC21C \uB9C8\uD06C\uC5C5\uC744 \uB118\uC5B4 \uBCF5\uC7A1\uD55C \uB85C\uC9C1\uB3C4 \uC81C\uC57D \uC870\uAC74\uC744 \uBA85\uD655\uD788 \uC81C\uACF5\uD558\uBA74\\nAI\uAC00 \uC6D0\uD558\uB294 \uD615\uD0DC\uC758 \uCF54\uB4DC\uB97C \uC624\uCC28 \uC5C6\uC774 \uC0DD\uC131\uD574 \uB0C5\uB2C8\uB2E4." })
+  const expandX = (0,esm.interpolate)(frame, [100, 300], [0, 300], { extrapolateRight: "clamp", easing: EASINGS.CINEMATIC });
+  const sub2Frame = Math.max(0, frame - 626);
+  const converge = (0,esm.spring)({
+    frame: sub2Frame,
+    fps,
+    config: SPRINGS.PUNCH
+  });
+  const fadeOut = (0,esm.interpolate)(sub2Frame, [100, 154], [1, 0], { extrapolateRight: "clamp" });
+  return /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.AbsoluteFill, { style: { backgroundColor: theme_COLORS.BG_DEEP, zIndex: theme_Z.BG, opacity: fadeOut }, children: [
+    /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: {
+      position: "absolute",
+      left: "50%",
+      top: "50%",
+      width: "100%",
+      height: "100%",
+      marginLeft: "-50%",
+      marginTop: "-50%",
+      background: `radial-gradient(circle, ${theme_COLORS.PRIMARY_GLOW} 0%, transparent 60%)`,
+      opacity: introOp
+    } }),
+    /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.Sequence, { durationInFrames: 780, children: /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: {
+      position: "absolute",
+      width: "100%",
+      top: "15%",
+      textAlign: "center",
+      fontFamily: theme_FONTS.DISPLAY,
+      fontSize: TEXT_SIZE.XL,
+      color: theme_COLORS.PRIMARY,
+      letterSpacing: "8px",
+      transform: `scale(${(0,esm.interpolate)(textScale, [0, 1], [1.5, 1])})`,
+      opacity: introOp,
+      textShadow: `0 0 32px ${theme_COLORS.PRIMARY_GLOW}`
+    }, children: "\uD655\uC7A5" }) }),
+    /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.AbsoluteFill, { style: { justifyContent: "center", alignItems: "center" }, children: /* @__PURE__ */ (0,jsx_runtime.jsxs)("div", { style: { position: "relative", width: "800px", display: "flex", justifyContent: "center", alignItems: "center" }, children: [
+      /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: {
+        position: "absolute",
+        width: "160px",
+        height: "160px",
+        borderRadius: "50%",
+        backgroundColor: frame < 626 ? theme_COLORS.TEXT_MAIN : theme_COLORS.PRIMARY,
+        transform: `translateX(-${expandX - converge * expandX * 0.5}px)`,
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        zIndex: 2,
+        boxShadow: `0 0 24px ${frame < 626 ? "rgba(255,255,255,0.2)" : theme_COLORS.PRIMARY_GLOW}`
+      }, children: /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { fontFamily: theme_FONTS.MONO, fontSize: TEXT_SIZE.SM, color: theme_COLORS.BG_DEEP, fontWeight: "bold" }, children: "\uC778\uAC04" }) }),
+      /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: {
+        position: "absolute",
+        width: `${(expandX - converge * expandX * 0.5) * 2}px`,
+        height: "8px",
+        backgroundColor: theme_COLORS.PRIMARY,
+        opacity: (0,esm.interpolate)(frame, [200, 250], [0, 1]),
+        // 띠는 중반부터 등장
+        boxShadow: `0 0 16px ${theme_COLORS.PRIMARY_GLOW}`
+      } }),
+      /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: {
+        position: "absolute",
+        width: "160px",
+        height: "160px",
+        borderRadius: "50%",
+        backgroundColor: theme_COLORS.PRIMARY,
+        transform: `translateX(${expandX - converge * expandX * 0.5}px)`,
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        zIndex: 2,
+        boxShadow: `0 0 48px ${theme_COLORS.PRIMARY_GLOW}`
+      }, children: /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { fontFamily: theme_FONTS.MONO, fontSize: TEXT_SIZE.SM, color: theme_COLORS.BG_DEEP, fontWeight: "bold" }, children: "AI" }) })
+    ] }) })
   ] });
 };
 
@@ -1790,77 +3725,105 @@ const outro_seq2_Seq2 = () => {
 
 
 
-
-const outro_seq3_THEME = {
-  Primary: "#F59E0B",
-  // Gold
-  Accent: "#0D9488",
-  // Teal
-  Text: "#F8FAFC"
-};
 const outro_seq3_Seq3 = () => {
   const frame = (0,esm.useCurrentFrame)();
-  const { fps, width, height } = (0,esm.useVideoConfig)();
-  const cameraZ = (0,esm.interpolate)(frame, [0, 518], [1.2, 1]);
-  const cameraRotateX = (0,esm.interpolate)(frame, [0, 518], [-5, 5]);
-  const circleOpacity = (0,esm.interpolate)(frame, [20, 50, 468, 518], [0, 0.4, 0.4, 0]);
-  const circleScale = (0,esm.interpolate)(frame, [20, 518], [0.8, 1.5]);
-  return /* @__PURE__ */ (0,jsx_runtime.jsxs)(CinematicLayout, { children: [
-    /* @__PURE__ */ (0,jsx_runtime.jsxs)(
-      esm.AbsoluteFill,
-      {
-        style: {
-          transform: `perspective(1000px) rotateX(${cameraRotateX}deg) scale(${cameraZ})`,
+  const { fps } = (0,esm.useVideoConfig)();
+  const pivotSub = Math.max(0, frame - 60);
+  const pivotIn = (0,esm.spring)({
+    frame: pivotSub,
+    fps,
+    config: SPRINGS.PUNCH
+  });
+  const leverAction = (0,esm.spring)({
+    frame: Math.max(0, pivotSub - 120),
+    fps,
+    config: { damping: 10, stiffness: 200 }
+    // 퉁~ 튕기는 효과
+  });
+  const creatorSpring = (0,esm.spring)({
+    frame: Math.max(0, pivotSub - 180),
+    fps,
+    config: SPRINGS.PUNCH
+  });
+  const flashOp = frame > 550 ? (0,esm.interpolate)(frame, [550, 562], [0, 1]) : 0;
+  return /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.AbsoluteFill, { style: { backgroundColor: theme_COLORS.BG_DEEP, zIndex: theme_Z.BG, overflow: "hidden" }, children: [
+    /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.AbsoluteFill, { style: { justifyContent: "center", alignItems: "center" }, children: [
+      /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: {
+        position: "absolute",
+        bottom: "30%",
+        width: 0,
+        height: 0,
+        borderLeft: "60px solid transparent",
+        borderRight: "60px solid transparent",
+        borderBottom: `100px solid ${theme_COLORS.SECONDARY}`,
+        // 라임 색상
+        transform: `scale(${(0,esm.interpolate)(pivotIn, [0, 1], [0.1, 1])}) translateY(${(0,esm.interpolate)(pivotIn, [0, 1], [300, 0])}px)`,
+        zIndex: 2
+      } }),
+      pivotSub > 30 && /* @__PURE__ */ (0,jsx_runtime.jsxs)("div", { style: {
+        position: "absolute",
+        bottom: "30%",
+        // 받침점 위
+        width: "800px",
+        height: "16px",
+        backgroundColor: theme_COLORS.BORDER_STRONG,
+        borderRadius: "8px",
+        transformOrigin: "center",
+        transform: `translateY(-90px) rotate(${(0,esm.interpolate)(leverAction, [0, 1], [-15, 15])}deg)`,
+        // 왼쪽 내려감 -> 오른쪽 내려가면서 튕김
+        zIndex: 1
+      }, children: [
+        /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: {
+          position: "absolute",
+          left: "20px",
+          bottom: "16px",
+          width: "120px",
+          height: "120px",
+          backgroundColor: theme_COLORS.BG_SURFACE,
+          border: `4px solid ${theme_COLORS.TEXT_MUTED}`,
+          borderRadius: "12px",
           display: "flex",
           justifyContent: "center",
-          alignItems: "center"
-        },
-        children: [
-          /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { position: "absolute", width: 600, height: 600, border: `2px solid ${outro_seq3_THEME.Primary}`, borderRadius: "50%", opacity: circleOpacity, transform: `scale(${circleScale})` } }),
-          /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { position: "absolute", width: 400, height: 400, border: `2px solid ${outro_seq3_THEME.Accent}`, borderRadius: "50%", opacity: circleOpacity * 0.5, transform: `scale(${circleScale * 1.2})` } }),
-          /* @__PURE__ */ (0,jsx_runtime.jsxs)(
-            "div",
-            {
-              style: {
-                fontSize: 80,
-                fontWeight: 800,
-                color: outro_seq3_THEME.Text,
-                letterSpacing: "0.6em",
-                textAlign: "center",
-                textShadow: `0 0 50px rgba(0,0,0,1)`,
-                zIndex: 1,
-                opacity: (0,esm.interpolate)(frame, [0, 20, 468, 518], [0, 1, 1, 0])
-              },
-              children: [
-                "HUMAN",
-                /* @__PURE__ */ (0,jsx_runtime.jsx)("br", {}),
-                /* @__PURE__ */ (0,jsx_runtime.jsx)("span", { style: { fontSize: 36, color: outro_seq3_THEME.Primary, letterSpacing: "0.4em" }, children: "POTENTIAL" })
-              ]
-            }
-          ),
-          /* @__PURE__ */ (0,jsx_runtime.jsx)(
-            "div",
-            {
-              style: {
-                position: "absolute",
-                bottom: "25%",
-                padding: "15px 40px",
-                background: "rgba(245, 158, 11, 0.1)",
-                border: `2px solid ${outro_seq3_THEME.Primary}`,
-                color: outro_seq3_THEME.Primary,
-                fontSize: 30,
-                fontWeight: 800,
-                letterSpacing: "0.5em",
-                opacity: (0,esm.interpolate)(frame, [100, 130, 440, 470], [0, 1, 1, 0]),
-                boxShadow: `0 0 30px ${outro_seq3_THEME.Primary}`
-              },
-              children: "AI AS A LEVERAGE"
-            }
-          )
-        ]
-      }
-    ),
-    /* @__PURE__ */ (0,jsx_runtime.jsx)(Subtitle, { text: "\uAC15\uB825\uD55C \uC0C8\uB85C\uC6B4 \uB3C4\uAD6C\uB294 \uD56D\uC0C1 \uC778\uAC04\uC758 \uC7A0\uC7AC\uB825\uACFC \uD55C\uACC4\uB97C \uD655\uC7A5\uC2DC\uCF1C \uC654\uC2B5\uB2C8\uB2E4.\\nAI\uB294 \uC6B0\uB9AC\uB97C \uBC00\uC5B4\uB0B4\uB294 \uACBD\uC7C1\uC790\uAC00 \uC544\uB2CC \uC9C0\uB81B\uB300\uC785\uB2C8\uB2E4." })
+          alignItems: "center",
+          transformOrigin: "bottom center",
+          transform: `translateY(${leverAction > 0.5 ? (0,esm.interpolate)(leverAction, [0.5, 1], [0, -1e3], { easing: EASINGS.DRAMATIC }) : 0}px) rotate(${(0,esm.interpolate)(leverAction, [0.5, 1], [0, -90])}deg)`
+        }, children: /* @__PURE__ */ (0,jsx_runtime.jsxs)("span", { style: { fontFamily: theme_FONTS.MONO, fontSize: TEXT_SIZE.XS, color: theme_COLORS.TEXT_MUTED }, children: [
+          "\uB2E8\uC21C",
+          /* @__PURE__ */ (0,jsx_runtime.jsx)("br", {}),
+          "\uC791\uC5C5"
+        ] }) }),
+        /* @__PURE__ */ (0,jsx_runtime.jsxs)("div", { style: {
+          position: "absolute",
+          right: "20px",
+          bottom: "16px",
+          width: "140px",
+          height: "140px",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          alignItems: "center",
+          transform: `scale(${(0,esm.interpolate)(creatorSpring, [0, 1], [0, 1])})`,
+          transformOrigin: "bottom center"
+        }, children: [
+          /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: {
+            width: "80px",
+            height: "80px",
+            borderRadius: "50%",
+            backgroundColor: theme_COLORS.PRIMARY,
+            boxShadow: `0 0 48px ${theme_COLORS.PRIMARY_GLOW}`
+          } }),
+          /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { fontFamily: theme_FONTS.DISPLAY, fontSize: TEXT_SIZE.MD, color: theme_COLORS.TEXT_MAIN, marginTop: "16px", textShadow: `0 0 16px ${theme_COLORS.PRIMARY_GLOW}` }, children: "\uD06C\uB9AC\uC5D0\uC774\uD130" })
+        ] })
+      ] })
+    ] }),
+    /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: {
+      position: "absolute",
+      width: "100%",
+      height: "100%",
+      backgroundColor: theme_COLORS.TEXT_MAIN,
+      opacity: flashOp,
+      zIndex: 10
+    } })
   ] });
 };
 
@@ -1869,110 +3832,164 @@ const outro_seq3_Seq3 = () => {
 
 
 
-
-const outro_seq4_THEME = {
-  Primary: "#F59E0B",
-  // Gold
-  Accent: "#0D9488",
-  // Teal
-  Text: "#F8FAFC"
-};
-const seq4_Seq4 = () => {
+const outro_seq4_Seq4 = () => {
   const frame = (0,esm.useCurrentFrame)();
-  const { fps, width, height } = (0,esm.useVideoConfig)();
-  const cameraZ = (0,esm.interpolate)(frame, [0, 425], [1, 1.4]);
-  const cameraRotateY = (0,esm.interpolate)(frame, [0, 425], [0, 10]);
-  const messageOpacity = (0,esm.interpolate)(frame, [0, 50, 375, 425], [0, 1, 1, 0]);
-  const bokehCount = 20;
-  const bokehNodes = Array.from({ length: bokehCount }).map((_, i) => {
-    const x = i * 321 % width;
-    const y = i * 211 % height;
-    const bOpacity = (0,esm.interpolate)(frame, [0, 100, 350, 425], [0, 0.3, 0.3, 0]);
-    const bScale = (0,esm.interpolate)(frame, [0, 425], [1, 2]);
-    return /* @__PURE__ */ (0,jsx_runtime.jsx)(
-      "div",
-      {
-        style: {
-          position: "absolute",
-          left: x - 100,
-          top: y - 100,
-          width: 200,
-          height: 200,
-          background: i % 2 === 0 ? outro_seq4_THEME.Primary : outro_seq4_THEME.Accent,
-          borderRadius: "50%",
-          filter: "blur(60px)",
-          opacity: bOpacity,
-          transform: `scale(${bScale})`
-        }
-      },
-      i
-    );
+  const { fps } = (0,esm.useVideoConfig)();
+  const wallDrop = (0,esm.spring)({
+    frame: Math.max(0, frame - 30),
+    fps,
+    config: { damping: 14, stiffness: 100 }
   });
-  return /* @__PURE__ */ (0,jsx_runtime.jsxs)(CinematicLayout, { children: [
-    /* @__PURE__ */ (0,jsx_runtime.jsxs)(
-      esm.AbsoluteFill,
-      {
-        style: {
-          transform: `perspective(1000px) rotateY(${cameraRotateY}deg) scale(${cameraZ})`,
-          opacity: messageOpacity,
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center"
-        },
-        children: [
-          bokehNodes,
-          /* @__PURE__ */ (0,jsx_runtime.jsxs)(
-            "div",
-            {
-              style: {
-                fontSize: 60,
-                fontWeight: 800,
-                color: outro_seq4_THEME.Text,
-                letterSpacing: "0.4em",
-                textAlign: "center",
-                textShadow: `0 0 40px rgba(0,0,0,1)`
-              },
-              children: [
-                "THE POWER OF",
-                /* @__PURE__ */ (0,jsx_runtime.jsx)("br", {}),
-                /* @__PURE__ */ (0,jsx_runtime.jsx)("span", { style: { fontSize: 90, fontWeight: 900, color: outro_seq4_THEME.Primary, letterSpacing: "0.2em" }, children: "PRODUCT MINDSET" })
-              ]
-            }
-          ),
-          /* @__PURE__ */ (0,jsx_runtime.jsxs)(
-            "div",
-            {
-              style: {
-                marginTop: 60,
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                opacity: (0,esm.interpolate)(frame, [150, 180, 425], [0, 1, 1], { extrapolateRight: "clamp" })
-              },
-              children: [
-                /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { color: outro_seq4_THEME.Accent, fontSize: 32, letterSpacing: "0.8em", fontWeight: 300 }, children: "IMAGINE & CREATE" }),
-                /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { width: 300, height: 2, background: outro_seq4_THEME.Primary, marginTop: 20, boxShadow: `0 0 20px ${outro_seq4_THEME.Primary}` } })
-              ]
-            }
-          ),
-          /* @__PURE__ */ (0,jsx_runtime.jsx)(
-            "div",
-            {
-              style: {
-                position: "absolute",
-                bottom: "20%",
-                fontSize: 14,
-                color: outro_seq4_THEME.Text,
-                letterSpacing: "0.1em",
-                opacity: 0.3
-              },
-              children: "REDEFINING WEB DEVELOPMENT WITH AI"
-            }
-          )
-        ]
-      }
-    ),
-    /* @__PURE__ */ (0,jsx_runtime.jsx)(Subtitle, { text: "\uC55E\uC73C\uB85C\uB294 \uCC3D\uC758\uC801\uC778 \uBB38\uC81C \uD574\uACB0\uC5D0 \uC9D1\uC911\uD558\uB294 \uD504\uB85C\uB355\uD2B8 \uB9C8\uC778\uB4DC\uAC00 \uC911\uC694\uD574\uC9C8 \uAC83\uC785\uB2C8\uB2E4.\\n\uC5EC\uB7EC\uBD84\uC758 \uC0C1\uC0C1\uB825\uC744 \uCF54\uB4DC\uB85C \uD604\uC2E4\uD654\uD560 \uC2DC\uAC04\uC785\uB2C8\uB2E4." })
+  const typoDrop = (0,esm.spring)({
+    frame: Math.max(0, frame - 150),
+    fps,
+    config: SPRINGS.PUNCH
+  });
+  const horizonY = (0,esm.interpolate)(wallDrop, [0, 1], [100, 50], { extrapolateRight: "clamp" });
+  const sub2Frame = Math.max(0, frame - 727);
+  const hesitationAnim = (0,esm.spring)({
+    frame: sub2Frame,
+    fps,
+    config: SPRINGS.PUNCH
+  });
+  const zoomIn = (0,esm.interpolate)(sub2Frame, [100, 145], [1, 2], { extrapolateRight: "clamp" });
+  return /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.AbsoluteFill, { style: { backgroundColor: theme_COLORS.BG_DEEP, zIndex: theme_Z.BG, overflow: "hidden", transform: `scale(${zoomIn})` }, children: [
+    /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.Sequence, { durationInFrames: 727, children: /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.AbsoluteFill, { style: { justifyContent: "center", alignItems: "center" }, children: [
+      /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: {
+        position: "absolute",
+        left: 0,
+        right: 0,
+        top: 0,
+        bottom: "50%",
+        background: `linear-gradient(to top, ${theme_COLORS.PRIMARY_DIM}, transparent)`
+      } }),
+      /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: {
+        position: "absolute",
+        left: 0,
+        right: 0,
+        top: 0,
+        height: `${horizonY}%`,
+        backgroundColor: theme_COLORS.BG_SURFACE,
+        borderBottom: `8px solid ${theme_COLORS.BORDER_STRONG}`,
+        display: "flex",
+        flexWrap: "wrap"
+      }, children: Array.from({ length: 40 }).map((_, i) => /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { flex: 1, borderRight: `2px dashed ${theme_COLORS.BORDER}` } }, i)) }),
+      frame > 150 && /* @__PURE__ */ (0,jsx_runtime.jsxs)("div", { style: {
+        fontFamily: theme_FONTS.DISPLAY,
+        fontSize: TEXT_SIZE.HERO,
+        color: theme_COLORS.TEXT_MAIN,
+        textAlign: "center",
+        lineHeight: 0.9,
+        transform: `scale(${(0,esm.interpolate)(typoDrop, [0, 1], [2, 1])}) rotate(${(0,esm.interpolate)(typoDrop, [0, 1], [-10, 0])}deg)`,
+        textShadow: `0 20px 48px rgba(0,0,0,0.8)`,
+        zIndex: 3
+      }, children: [
+        "\uBB34\uC5C7\uC744?",
+        /* @__PURE__ */ (0,jsx_runtime.jsx)("br", {}),
+        /* @__PURE__ */ (0,jsx_runtime.jsx)("span", { style: { color: theme_COLORS.PRIMARY }, children: "\uC65C?" })
+      ] })
+    ] }) }),
+    frame >= 727 && /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.Sequence, { from: 727, durationInFrames: 145, children: /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.AbsoluteFill, { style: { justifyContent: "center", alignItems: "center", backgroundColor: theme_COLORS.BG_VOID, zIndex: 10 }, children: /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: {
+      fontFamily: theme_FONTS.DISPLAY,
+      fontSize: TEXT_SIZE.XL,
+      color: theme_COLORS.ACCENT,
+      // 경고/결단 컬러
+      textShadow: `0 0 64px ${theme_COLORS.ACCENT}`,
+      transform: `scale(${hesitationAnim})`,
+      opacity: hesitationAnim
+    }, children: "\uB9DD\uC124\uC784 \uC5C6\uC774" }) }) })
+  ] });
+};
+
+;// ./src/projects/design-test1/outro/seq5.tsx
+
+
+
+
+const outro_seq5_Seq5 = () => {
+  const frame = (0,esm.useCurrentFrame)();
+  const { fps } = (0,esm.useVideoConfig)();
+  const coreScale = (0,esm.spring)({
+    frame,
+    fps,
+    config: SPRINGS.PUNCH
+  });
+  const rayCount = 16;
+  const rayAnims = Array.from({ length: rayCount }).map(
+    (_, i) => (0,esm.spring)({
+      frame: Math.max(0, frame - 15 - i * STAGGER.TIGHT),
+      fps,
+      config: SPRINGS.SNAPPY
+    })
+  );
+  const sub2Frame = Math.max(0, frame - 324);
+  const cardOp = (0,esm.interpolate)(sub2Frame, [0, 60], [0, 1], { extrapolateRight: "clamp", easing: EASINGS.CINEMATIC });
+  const cardScale = (0,esm.spring)({
+    frame: sub2Frame,
+    fps,
+    config: SPRINGS.SMOOTH
+  });
+  return /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.AbsoluteFill, { style: { backgroundColor: theme_COLORS.BG_DEEP, zIndex: theme_Z.BG, overflow: "hidden" }, children: [
+    /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: {
+      position: "absolute",
+      left: "50%",
+      top: "50%",
+      width: "1500px",
+      height: "1500px",
+      marginLeft: "-750px",
+      marginTop: "-750px",
+      background: `radial-gradient(circle, ${theme_COLORS.PRIMARY_GLOW} 0%, transparent ${(0,esm.interpolate)(frame, [0, 756], [30, 80])}%)`,
+      opacity: (0,esm.interpolate)(frame, [600, 756], [1, 0.2])
+      // 끝으로 갈수록 빛이 약해짐
+    } }),
+    /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.Sequence, { durationInFrames: 324, children: /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.AbsoluteFill, { style: { justifyContent: "center", alignItems: "center", opacity: (0,esm.interpolate)(frame, [250, 324], [1, 0]) }, children: /* @__PURE__ */ (0,jsx_runtime.jsxs)("div", { style: { position: "relative" }, children: [
+      /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: {
+        width: "120px",
+        height: "120px",
+        borderRadius: "50%",
+        backgroundColor: theme_COLORS.TEXT_MAIN,
+        boxShadow: `0 0 64px ${theme_COLORS.PRIMARY_GLOW}`,
+        transform: `scale(${(0,esm.interpolate)(coreScale, [0, 1], [0.5, 1])})`,
+        zIndex: 2
+      } }),
+      rayAnims.map((anim, i) => {
+        const angle = i * 360 / rayCount;
+        return /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: {
+          position: "absolute",
+          left: "50%",
+          top: "50%",
+          width: `${(0,esm.interpolate)(anim, [0, 1], [0, 600])}px`,
+          // 선이 뻗어나감
+          height: "2px",
+          backgroundColor: i % 3 === 0 ? theme_COLORS.SECONDARY : theme_COLORS.PRIMARY,
+          transformOrigin: "left center",
+          transform: `rotate(${angle}deg)`,
+          zIndex: 1,
+          boxShadow: `0 0 16px ${theme_COLORS.PRIMARY_GLOW}`
+        } }, i);
+      })
+    ] }) }) }),
+    frame >= 324 && /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.Sequence, { from: 324, durationInFrames: 432, children: /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.AbsoluteFill, { style: { justifyContent: "center", alignItems: "center" }, children: /* @__PURE__ */ (0,jsx_runtime.jsxs)("div", { style: {
+      width: "800px",
+      height: "450px",
+      backgroundColor: theme_COLORS.BG_SURFACE,
+      border: `4px solid ${theme_COLORS.BORDER_STRONG}`,
+      boxShadow: `0 0 96px rgba(0,0,0,0.8)`,
+      borderRadius: "24px",
+      display: "flex",
+      flexDirection: "column",
+      justifyContent: "center",
+      alignItems: "center",
+      gap: "24px",
+      opacity: cardOp,
+      transform: `scale(${(0,esm.interpolate)(cardScale, [0, 1], [0.9, 1])})`
+    }, children: [
+      /* @__PURE__ */ (0,jsx_runtime.jsxs)("div", { style: { fontFamily: theme_FONTS.DISPLAY, fontSize: TEXT_SIZE.XL, color: theme_COLORS.TEXT_MAIN, letterSpacing: "4px" }, children: [
+        "NVIDIA ",
+        /* @__PURE__ */ (0,jsx_runtime.jsx)("span", { style: { color: theme_COLORS.PRIMARY }, children: "\uD14C\uD06C \uCC44\uB110" })
+      ] }),
+      /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { fontFamily: theme_FONTS.PRIMARY, fontSize: TEXT_SIZE.SM, color: theme_COLORS.TEXT_MUTED }, children: "\uC88B\uC544\uC694 & \uAD6C\uB3C5" })
+    ] }) }) })
   ] });
 };
 
@@ -1984,15 +4001,21 @@ const seq4_Seq4 = () => {
 
 
 
-const Outro = () => {
-  return /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.AbsoluteFill, { style: { backgroundColor: "#020617" }, children: [
+
+
+
+
+const outro_Outro = () => {
+  return /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.AbsoluteFill, { style: { backgroundColor: theme_COLORS.BG_DEEP }, children: [
     /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.Audio, { src: (0,esm.staticFile)("design-test1/outro/outro.wav") }),
     /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.Series, { children: [
-      /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.Series.Sequence, { durationInFrames: 435, children: /* @__PURE__ */ (0,jsx_runtime.jsx)(outro_seq1_Seq1, {}) }),
-      /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.Series.Sequence, { durationInFrames: 619, children: /* @__PURE__ */ (0,jsx_runtime.jsx)(outro_seq2_Seq2, {}) }),
-      /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.Series.Sequence, { durationInFrames: 518, children: /* @__PURE__ */ (0,jsx_runtime.jsx)(outro_seq3_Seq3, {}) }),
-      /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.Series.Sequence, { durationInFrames: 426, children: /* @__PURE__ */ (0,jsx_runtime.jsx)(seq4_Seq4, {}) })
-    ] })
+      /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.Series.Sequence, { durationInFrames: 1075, children: /* @__PURE__ */ (0,jsx_runtime.jsx)(outro_seq1_Seq1, {}) }),
+      /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.Series.Sequence, { durationInFrames: 780, children: /* @__PURE__ */ (0,jsx_runtime.jsx)(outro_seq2_Seq2, {}) }),
+      /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.Series.Sequence, { durationInFrames: 563, children: /* @__PURE__ */ (0,jsx_runtime.jsx)(outro_seq3_Seq3, {}) }),
+      /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.Series.Sequence, { durationInFrames: 872, children: /* @__PURE__ */ (0,jsx_runtime.jsx)(outro_seq4_Seq4, {}) }),
+      /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.Series.Sequence, { durationInFrames: 756, children: /* @__PURE__ */ (0,jsx_runtime.jsx)(outro_seq5_Seq5, {}) })
+    ] }),
+    /* @__PURE__ */ (0,jsx_runtime.jsx)(CaptionOverlay, { captions: outro_subtitles_outroSubtitles })
   ] });
 };
 
@@ -2006,10 +4029,10 @@ const Outro = () => {
 
 const DesignTest1 = () => {
   return /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.Series, { children: [
-    /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.Series.Sequence, { durationInFrames: 1990, name: "Intro", children: /* @__PURE__ */ (0,jsx_runtime.jsx)(Intro, {}) }),
-    /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.Series.Sequence, { durationInFrames: 1368, name: "Body1", children: /* @__PURE__ */ (0,jsx_runtime.jsx)(Body1, {}) }),
-    /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.Series.Sequence, { durationInFrames: 1368, name: "Body2", children: /* @__PURE__ */ (0,jsx_runtime.jsx)(Body2, {}) }),
-    /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.Series.Sequence, { durationInFrames: 1998, name: "Outro", children: /* @__PURE__ */ (0,jsx_runtime.jsx)(Outro, {}) })
+    /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.Series.Sequence, { durationInFrames: 3980, name: "Intro", children: /* @__PURE__ */ (0,jsx_runtime.jsx)(intro_Intro, {}) }),
+    /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.Series.Sequence, { durationInFrames: 4028, name: "Body1", children: /* @__PURE__ */ (0,jsx_runtime.jsx)(body1_Body1, {}) }),
+    /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.Series.Sequence, { durationInFrames: 3956, name: "Body2", children: /* @__PURE__ */ (0,jsx_runtime.jsx)(body2_Body2, {}) }),
+    /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.Series.Sequence, { durationInFrames: 4047, name: "Outro", children: /* @__PURE__ */ (0,jsx_runtime.jsx)(outro_Outro, {}) })
   ] });
 };
 
@@ -2468,7 +4491,7 @@ const intro_seq4_Seq4 = () => {
 
 
 
-const seq5_Seq5 = () => {
+const intro_seq5_Seq5 = () => {
   const frame = (0,esm.useCurrentFrame)();
   const { fps } = (0,esm.useVideoConfig)();
   const zoom = (0,esm.spring)({
@@ -3221,7 +5244,7 @@ const Seq11 = () => {
 
 
 
-const intro_Intro = () => {
+const intro_intro_Intro = () => {
   return /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.AbsoluteFill, { style: { backgroundColor: "#0F172A" }, children: [
     /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.Audio, { src: (0,esm.staticFile)("web-paradiam/intro/intro.wav") }),
     /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.Series, { children: [
@@ -3230,7 +5253,7 @@ const intro_Intro = () => {
       /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.Series.Sequence, { durationInFrames: 179, children: /* @__PURE__ */ (0,jsx_runtime.jsx)(intro_seq3_Seq3, {}) }),
       /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.Series.Sequence, { durationInFrames: 248, children: /* @__PURE__ */ (0,jsx_runtime.jsx)(intro_seq4_Seq4, {}) }),
       /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.Series.Sequence, { durationInFrames: 37, children: /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.AbsoluteFill, { style: { backgroundColor: "#0F172A" } }) }),
-      /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.Series.Sequence, { durationInFrames: 174, children: /* @__PURE__ */ (0,jsx_runtime.jsx)(seq5_Seq5, {}) }),
+      /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.Series.Sequence, { durationInFrames: 174, children: /* @__PURE__ */ (0,jsx_runtime.jsx)(intro_seq5_Seq5, {}) }),
       /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.Series.Sequence, { durationInFrames: 197, children: /* @__PURE__ */ (0,jsx_runtime.jsx)(Seq6, {}) }),
       /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.Series.Sequence, { durationInFrames: 240, children: /* @__PURE__ */ (0,jsx_runtime.jsx)(Seq7, {}) }),
       /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.Series.Sequence, { durationInFrames: 135, children: /* @__PURE__ */ (0,jsx_runtime.jsx)(Seq8, {}) }),
@@ -4249,7 +6272,7 @@ const seq10_Seq10 = () => {
 
 
 
-const body1_Body1 = () => {
+const body1_body1_Body1 = () => {
   return /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.AbsoluteFill, { style: { backgroundColor: "#0F172A" }, children: [
     /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.Audio, { src: (0,esm.staticFile)("web-paradiam/body1/body1.wav") }),
     /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.Series, { children: [
@@ -4549,7 +6572,7 @@ const web_paradiam_body2_seq3_Seq3 = () => {
 
 
 
-const body2_seq4_Seq4 = () => {
+const web_paradiam_body2_seq4_Seq4 = () => {
   const frame = (0,esm.useCurrentFrame)();
   const { fps } = (0,esm.useVideoConfig)();
   const lineSpring = (0,esm.spring)({
@@ -5328,14 +7351,14 @@ const seq11_Seq11 = () => {
 
 
 
-const body2_Body2 = () => {
+const body2_body2_Body2 = () => {
   return /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.AbsoluteFill, { style: { backgroundColor: "#0F172A" }, children: [
     /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.Audio, { src: (0,esm.staticFile)("web-paradiam/body2/body2.wav") }),
     /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.Series, { children: [
       /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.Series.Sequence, { durationInFrames: 140, children: /* @__PURE__ */ (0,jsx_runtime.jsx)(web_paradiam_body2_seq1_Seq1, {}) }),
       /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.Series.Sequence, { durationInFrames: 139, children: /* @__PURE__ */ (0,jsx_runtime.jsx)(web_paradiam_body2_seq2_Seq2, {}) }),
       /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.Series.Sequence, { durationInFrames: 165, children: /* @__PURE__ */ (0,jsx_runtime.jsx)(web_paradiam_body2_seq3_Seq3, {}) }),
-      /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.Series.Sequence, { durationInFrames: 98, children: /* @__PURE__ */ (0,jsx_runtime.jsx)(body2_seq4_Seq4, {}) }),
+      /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.Series.Sequence, { durationInFrames: 98, children: /* @__PURE__ */ (0,jsx_runtime.jsx)(web_paradiam_body2_seq4_Seq4, {}) }),
       /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.Series.Sequence, { durationInFrames: 120, children: /* @__PURE__ */ (0,jsx_runtime.jsx)(body2_seq5_Seq5, {}) }),
       /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.Series.Sequence, { durationInFrames: 121, children: /* @__PURE__ */ (0,jsx_runtime.jsx)(body2_seq6_Seq6, {}) }),
       /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.Series.Sequence, { durationInFrames: 146, children: /* @__PURE__ */ (0,jsx_runtime.jsx)(body2_seq7_Seq7, {}) }),
@@ -5604,7 +7627,7 @@ const web_paradiam_outro_seq3_Seq3 = () => {
 
 
 
-const outro_seq4_Seq4 = () => {
+const web_paradiam_outro_seq4_Seq4 = () => {
   const frame = (0,esm.useCurrentFrame)();
   const { fps } = (0,esm.useVideoConfig)();
   const lightSpring = (0,esm.spring)({
@@ -5702,7 +7725,7 @@ const outro_seq4_Seq4 = () => {
 
 
 
-const outro_seq5_Seq5 = () => {
+const web_paradiam_outro_seq5_Seq5 = () => {
   const frame = (0,esm.useCurrentFrame)();
   const { fps } = (0,esm.useVideoConfig)();
   const leverSpring = (0,esm.spring)({
@@ -6154,15 +8177,15 @@ const outro_seq9_Seq9 = () => {
 
 
 
-const outro_Outro = () => {
+const outro_outro_Outro = () => {
   return /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.AbsoluteFill, { style: { backgroundColor: "#0F172A" }, children: [
     /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.Audio, { src: (0,esm.staticFile)("web-paradiam/outro/outro.wav") }),
     /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.Series, { children: [
       /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.Series.Sequence, { durationInFrames: 149, children: /* @__PURE__ */ (0,jsx_runtime.jsx)(web_paradiam_outro_seq1_Seq1, {}) }),
       /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.Series.Sequence, { durationInFrames: 193, children: /* @__PURE__ */ (0,jsx_runtime.jsx)(web_paradiam_outro_seq2_Seq2, {}) }),
       /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.Series.Sequence, { durationInFrames: 195, children: /* @__PURE__ */ (0,jsx_runtime.jsx)(web_paradiam_outro_seq3_Seq3, {}) }),
-      /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.Series.Sequence, { durationInFrames: 277, children: /* @__PURE__ */ (0,jsx_runtime.jsx)(outro_seq4_Seq4, {}) }),
-      /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.Series.Sequence, { durationInFrames: 394, children: /* @__PURE__ */ (0,jsx_runtime.jsx)(outro_seq5_Seq5, {}) }),
+      /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.Series.Sequence, { durationInFrames: 277, children: /* @__PURE__ */ (0,jsx_runtime.jsx)(web_paradiam_outro_seq4_Seq4, {}) }),
+      /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.Series.Sequence, { durationInFrames: 394, children: /* @__PURE__ */ (0,jsx_runtime.jsx)(web_paradiam_outro_seq5_Seq5, {}) }),
       /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.Series.Sequence, { durationInFrames: 363, children: /* @__PURE__ */ (0,jsx_runtime.jsx)(outro_seq6_Seq6, {}) }),
       /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.Series.Sequence, { durationInFrames: 72, children: /* @__PURE__ */ (0,jsx_runtime.jsx)(outro_seq7_Seq7, {}) }),
       /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.Series.Sequence, { durationInFrames: 162, children: /* @__PURE__ */ (0,jsx_runtime.jsx)(outro_seq8_Seq8, {}) }),
@@ -6182,14 +8205,22 @@ const outro_Outro = () => {
 
 const WebParadiam = () => {
   return /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.Series, { children: [
-    /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.Series.Sequence, { durationInFrames: 1990, name: "Intro", children: /* @__PURE__ */ (0,jsx_runtime.jsx)(intro_Intro, {}) }),
-    /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.Series.Sequence, { durationInFrames: 2014, name: "Body1", children: /* @__PURE__ */ (0,jsx_runtime.jsx)(body1_Body1, {}) }),
-    /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.Series.Sequence, { durationInFrames: 1978, name: "Body2", children: /* @__PURE__ */ (0,jsx_runtime.jsx)(body2_Body2, {}) }),
-    /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.Series.Sequence, { durationInFrames: 2024, name: "Outro", children: /* @__PURE__ */ (0,jsx_runtime.jsx)(outro_Outro, {}) })
+    /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.Series.Sequence, { durationInFrames: 1990, name: "Intro", children: /* @__PURE__ */ (0,jsx_runtime.jsx)(intro_intro_Intro, {}) }),
+    /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.Series.Sequence, { durationInFrames: 2014, name: "Body1", children: /* @__PURE__ */ (0,jsx_runtime.jsx)(body1_body1_Body1, {}) }),
+    /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.Series.Sequence, { durationInFrames: 1978, name: "Body2", children: /* @__PURE__ */ (0,jsx_runtime.jsx)(body2_body2_Body2, {}) }),
+    /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.Series.Sequence, { durationInFrames: 2024, name: "Outro", children: /* @__PURE__ */ (0,jsx_runtime.jsx)(outro_outro_Outro, {}) })
   ] });
 };
 
+;// ./src/constants/video-config.ts
+
+const VIDEO_FPS = 60;
+const VIDEO_WIDTH = 1920;
+const VIDEO_HEIGHT = 1080;
+
 ;// ./src/Root.tsx
+
+
 
 
 
@@ -6201,12 +8232,23 @@ const RemotionRoot = () => {
     /* @__PURE__ */ (0,jsx_runtime.jsx)(
       esm.Composition,
       {
+        id: "design-test2",
+        component: DesignTest2,
+        durationInFrames: 16011,
+        fps: VIDEO_FPS,
+        width: VIDEO_WIDTH,
+        height: VIDEO_HEIGHT
+      }
+    ),
+    /* @__PURE__ */ (0,jsx_runtime.jsx)(
+      esm.Composition,
+      {
         id: "design-test1",
         component: DesignTest1,
-        durationInFrames: 6724,
-        fps: 30,
-        width: 1920,
-        height: 1080
+        durationInFrames: 16011,
+        fps: VIDEO_FPS,
+        width: VIDEO_WIDTH,
+        height: VIDEO_HEIGHT
       }
     ),
     /* @__PURE__ */ (0,jsx_runtime.jsx)(
@@ -6214,10 +8256,10 @@ const RemotionRoot = () => {
       {
         id: "web-paradiam",
         component: WebParadiam,
-        durationInFrames: 8006,
-        fps: 30,
-        width: 1920,
-        height: 1080
+        durationInFrames: 8006 * 2,
+        fps: VIDEO_FPS,
+        width: VIDEO_WIDTH,
+        height: VIDEO_HEIGHT
       }
     ),
     /* @__PURE__ */ (0,jsx_runtime.jsx)(jsx_runtime.Fragment, {})
@@ -34271,7 +36313,7 @@ var NoReactInternals = {
 /******/ 	// Load entry module and return exports
 /******/ 	// This entry module is referenced by other modules so it can't be inlined
 /******/ 	__webpack_require__(6507);
-/******/ 	__webpack_require__(2226);
+/******/ 	__webpack_require__(7926);
 /******/ 	__webpack_require__(3610);
 /******/ 	var __webpack_exports__ = __webpack_require__(3482);
 /******/ 	

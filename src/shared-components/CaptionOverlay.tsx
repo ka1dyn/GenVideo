@@ -42,26 +42,24 @@ export const CaptionOverlay: React.FC<Props> = ({ captions }) => {
         zIndex: 9999,
         justifyContent: 'flex-end',
         alignItems: 'center',
-        paddingBottom: '110px', // Roughly 10% from bottom
+        paddingBottom: '80px',
         pointerEvents: 'none',
+        opacity,
       }}
     >
-      <div
-        style={{
-          color: '#FFFFFF',
-          fontSize: '40px',
-          fontWeight: 700,
-          fontFamily: 'Pretendard',
-          textAlign: 'center',
-          whiteSpace: 'pre-line',
-          textShadow: '0 2px 10px rgba(0, 0, 0, 0.8), 0 0 20px rgba(59, 130, 246, 0.3)',
-          opacity,
-          lineHeight: 1.4,
-          padding: '0 80px',
-        }}
-      >
-        {activeSubtitle.text}
-      </div>
+        <div
+          style={{
+            fontSize: 32,
+            fontWeight: 600,
+            color: '#FFFFFF',
+            backgroundColor: 'rgba(0,0,0,0.8)',
+            padding: '10px 20px',
+            borderRadius: 10,
+            display: 'inline-block',
+          }}
+        >
+          {activeSubtitle.text}
+        </div>
     </AbsoluteFill>
   );
 };

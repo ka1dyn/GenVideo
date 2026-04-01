@@ -1,7 +1,7 @@
 # Section Context: intro
 
 - **Project**: design-test1
-- **Audio Duration**: 66320ms (1990 frames @30fps)
+- **Audio Duration**: 66320ms (3980 frames @60fps)
 - **Assets**:
   - Audio: `design-test1/intro/intro.wav`
   - Script: `design-test1/intro/intro.txt`

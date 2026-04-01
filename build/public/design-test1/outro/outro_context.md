@@ -1,7 +1,7 @@
 # Section Context: outro
 
 - **Project**: design-test1
-- **Audio Duration**: 67440ms (2024 frames @30fps)
+- **Audio Duration**: 67440ms (4047 frames @60fps)
 - **Assets**:
   - Audio: `design-test1/outro/outro.wav`
   - Script: `design-test1/outro/outro.txt`

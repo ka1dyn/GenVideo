@@ -1,29 +1,25 @@
 import React from 'react';
 import { AbsoluteFill, Audio, staticFile } from 'remotion';
+import { CaptionOverlay } from '../../../shared-components/CaptionOverlay';
+import { body2Subtitles } from './body2_subtitles';
+import { Sequences } from './sequences';
+import { COLORS } from '../theme';
 
 /**
  * Section: body2
  * Audio Duration: 65920ms (3956 frames @60fps)
- *
- * Assets (use with staticFile):
- *   Audio:      staticFile('design-test2/body2/body2.wav')
- *   Timestamps: staticFile('design-test2/body2/body2_timestamp.json')
- *
- * Plan: public/design-test2/body2/body2_plan.md
  */
 export const Body2: React.FC = () => {
   return (
     <AbsoluteFill
       style={{
-        backgroundColor: '#0a0a0a',
-        justifyContent: 'center',
-        alignItems: 'center',
+        backgroundColor: COLORS.BG_VOID,
       }}
     >
       <Audio src={staticFile('design-test2/body2/body2.wav')} />
-      <h1 style={{ color: '#ffffff', fontSize: 48 }}>
-        BODY2 Scene
-      </h1>
+      <Sequences />
+      <CaptionOverlay captions={body2Subtitles} />
     </AbsoluteFill>
   );
 };
+

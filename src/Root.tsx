@@ -14,7 +14,7 @@ export const RemotionRoot: React.FC = () => {
       <Composition
         id="design-test2"
         component={DesignTest2}
-        durationInFrames={0}
+        durationInFrames={16011}
         fps={VIDEO_FPS}
         width={VIDEO_WIDTH}
         height={VIDEO_HEIGHT}
@@ -32,8 +32,8 @@ export const RemotionRoot: React.FC = () => {
       <Composition
         id="web-paradiam"
         component={WebParadiam}
-        durationInFrames={8006 * 2}
-        fps={VIDEO_FPS}
+        durationInFrames={8006}
+        fps={30}
         width={VIDEO_WIDTH}
         height={VIDEO_HEIGHT}
       />
