@@ -3,16 +3,23 @@
   "totalFrames": 3956,
   "sentences": [
     {
-      "sentence": "이렇게 강력한 AI 툴을 우리 팀에 성공적으로 도입하려면 어떻게 해야 할까요?",
+      "sentence": "이렇게 강력한 AI 툴을 우리 팀에",
       "startMs": 10,
-      "endMs": 4660,
+      "endMs": 2460,
       "words": [
         { "text": "이렇게", "startMs": 10, "endMs": 680 },
         { "text": "강력한", "startMs": 680, "endMs": 1400 },
         { "text": "AI", "startMs": 1400, "endMs": 1490 },
         { "text": "툴을", "startMs": 1490, "endMs": 2030 },
         { "text": "우리", "startMs": 2030, "endMs": 2320 },
-        { "text": "팀에", "startMs": 2320, "endMs": 2460 },
+        { "text": "팀에", "startMs": 2320, "endMs": 2460 }
+      ]
+    },
+    {
+      "sentence": "성공적으로 도입하려면 어떻게 해야 할까요?",
+      "startMs": 2460,
+      "endMs": 4660,
+      "words": [
         { "text": "성공적으로", "startMs": 2460, "endMs": 3100 },
         { "text": "도입하려면", "startMs": 3100, "endMs": 3710 },
         { "text": "어떻게", "startMs": 3710, "endMs": 4090 },
@@ -21,32 +28,45 @@
       ]
     },
     {
-      "sentence": "체계적이고 효율적인 3단계 실전 워크플로우를 제안합니다.",
+      "sentence": "체계적이고 효율적인 3단계",
       "startMs": 4660,
-      "endMs": 9300,
+      "endMs": 6720,
       "words": [
         { "text": "체계적이고", "startMs": 4660, "endMs": 5520 },
         { "text": "효율적인", "startMs": 5520, "endMs": 6210 },
-        { "text": "3단계", "startMs": 6210, "endMs": 6720 },
+        { "text": "3단계", "startMs": 6210, "endMs": 6720 }
+      ]
+    },
+    {
+      "sentence": "실전 워크플로우를 제안합니다.",
+      "startMs": 6720,
+      "endMs": 9300,
+      "words": [
         { "text": "실전", "startMs": 6720, "endMs": 7080 },
         { "text": "워크플로우를", "startMs": 7080, "endMs": 8060 },
         { "text": "제안합니다.", "startMs": 8060, "endMs": 9300 }
       ]
     },
     {
-      "sentence": "AI와 함께하는 개발 워크플로우는 보통 다음 세 단계로 진행됩니다.",
+      "sentence": "AI와 함께하는 개발 워크플로우는",
       "startMs": 9300,
-      "endMs": 14800,
+      "endMs": 11940,
       "words": [
         { "text": "AI와", "startMs": 9300, "endMs": 9610 },
         { "text": "함께하는", "startMs": 9610, "endMs": 10400 },
         { "text": "개발", "startMs": 10400, "endMs": 10790 },
-        { "text": "워크플로우는", "startMs": 10790, "endMs": 11940 },
+        { "text": "워크플로우는", "startMs": 10790, "endMs": 11940 }
+      ]
+    },
+    {
+      "sentence": "보통 다음 3단계로 진행됩니다.",
+      "startMs": 11940,
+      "endMs": 14800,
+      "words": [
         { "text": "보통", "startMs": 11940, "endMs": 12330 },
         { "text": "다음", "startMs": 12330, "endMs": 12910 },
-        { "text": "세", "startMs": 12910, "endMs": 13490 },
-        { "text": "단계로", "startMs": 13490, "endMs": 14200 },
-        { "text": "진행됩니다.", "startMs": 14200, "endMs": 14800 }
+        { "text": "3단계로", "startMs": 12910, "endMs": 13490 },
+        { "text": "진행됩니다.", "startMs": 13490, "endMs": 14800 }
       ]
     },
     {
@@ -89,7 +109,7 @@
     {
       "sentence": "단순한 마크업을 넘어 복잡한 로직도 문제없습니다.",
       "startMs": 26080,
-      "endMs": 29960,
+      "endMs": 30860,
       "words": [
         { "text": "단순한", "startMs": 26080, "endMs": 26750 },
         { "text": "마크업을", "startMs": 26750, "endMs": 27380 },
@@ -100,74 +120,130 @@
       ]
     },
     {
-      "sentence": "프롬프트 몇 줄만 입력하면, API 연동부터 상태 관리까지 갖춘 완벽한 Next.js 컴포넌트 코드가 순식간에 작성됩니다.",
+      "sentence": "프롬프트 몇 줄만 입력하면,",
       "startMs": 30860,
-      "endMs": 38840,
+      "endMs": 32260,
       "words": [
         { "text": "프롬프트", "startMs": 30860, "endMs": 30900 },
         { "text": "몇", "startMs": 30900, "endMs": 30950 },
         { "text": "줄만", "startMs": 30950, "endMs": 31340 },
-        { "text": "입력하면,", "startMs": 31340, "endMs": 32260 },
+        { "text": "입력하면,", "startMs": 31340, "endMs": 32260 }
+      ]
+    },
+    {
+      "sentence": "API 연동부터 상태 관리까지 갖춘",
+      "startMs": 32260,
+      "endMs": 34600,
+      "words": [
         { "text": "API", "startMs": 32260, "endMs": 32680 },
         { "text": "연동부터", "startMs": 32680, "endMs": 33160 },
         { "text": "상태", "startMs": 33160, "endMs": 33520 },
         { "text": "관리까지", "startMs": 33520, "endMs": 34240 },
-        { "text": "갖춘", "startMs": 34240, "endMs": 34600 },
+        { "text": "갖춘", "startMs": 34240, "endMs": 34600 }
+      ]
+    },
+    {
+      "sentence": "완벽한 Next.js 컴포넌트 코드가",
+      "startMs": 34600,
+      "endMs": 36940,
+      "words": [
         { "text": "완벽한", "startMs": 34600, "endMs": 35140 },
         { "text": "Next.js", "startMs": 35140, "endMs": 35680 },
         { "text": "컴포넌트", "startMs": 35680, "endMs": 36400 },
-        { "text": "코드가", "startMs": 36400, "endMs": 36940 },
+        { "text": "코드가", "startMs": 36400, "endMs": 36940 }
+      ]
+    },
+    {
+      "sentence": "순식간에 작성됩니다.",
+      "startMs": 36940,
+      "endMs": 38840,
+      "words": [
         { "text": "순식간에", "startMs": 36940, "endMs": 37730 },
         { "text": "작성됩니다.", "startMs": 37730, "endMs": 38840 }
       ]
     },
     {
-      "sentence": "이때 가장 중요한 핵심 기술은 바로 '프롬프트 엔지니어령'입니다.",
+      "sentence": "이때 가장 중요한 핵심 기술은",
       "startMs": 38840,
-      "endMs": 44080,
+      "endMs": 41110,
       "words": [
         { "text": "이때", "startMs": 38840, "endMs": 39210 },
         { "text": "가장", "startMs": 39210, "endMs": 39640 },
         { "text": "중요한", "startMs": 39640, "endMs": 40170 },
         { "text": "핵심", "startMs": 40170, "endMs": 40550 },
-        { "text": "기술은", "startMs": 40550, "endMs": 41110 },
-        { "text": "바로", "startMs": 41110, "endMs": 41480 },
-        { "text": "프롬프트", "startMs": 41480, "endMs": 42360 },
-        { "text": "엔지니어링입니다.", "startMs": 42360, "endMs": 44080 }
+        { "text": "기술은", "startMs": 40550, "endMs": 41110 }
       ]
     },
     {
-      "sentence": "명확한 컨텍스트와 엄격한 제약 조건을 제공할수록, AI는 우리가 정확히 원하는 형태의 코드를 오차 없이 생성해 냅니다.",
+      "sentence": "바로 '프롬프트 엔지니어링'입니다.",
+      "startMs": 41110,
+      "endMs": 44080,
+      "words": [
+        { "text": "바로", "startMs": 41110, "endMs": 41480 },
+        { "text": "'프롬프트", "startMs": 41480, "endMs": 42360 },
+        { "text": "엔지니어링'입니다.", "startMs": 42360, "endMs": 44080 }
+      ]
+    },
+    {
+      "sentence": "명확한 컨텍스트와 엄격한 제약 조건을",
       "startMs": 44080,
-      "endMs": 52500,
+      "endMs": 47110,
       "words": [
         { "text": "명확한", "startMs": 44080, "endMs": 44840 },
         { "text": "컨텍스트와", "startMs": 44840, "endMs": 45590 },
         { "text": "엄격한", "startMs": 45590, "endMs": 46160 },
         { "text": "제약", "startMs": 46160, "endMs": 46540 },
-        { "text": "조건을", "startMs": 46540, "endMs": 47110 },
+        { "text": "조건을", "startMs": 46540, "endMs": 47110 }
+      ]
+    },
+    {
+      "sentence": "제공할수록, AI는 우리가 정확히",
+      "startMs": 47110,
+      "endMs": 49320,
+      "words": [
         { "text": "제공할수록,", "startMs": 47110, "endMs": 48140 },
         { "text": "AI는", "startMs": 48140, "endMs": 48610 },
         { "text": "우리가", "startMs": 48610, "endMs": 48860 },
-        { "text": "정확히", "startMs": 48860, "endMs": 49320 },
+        { "text": "정확히", "startMs": 48860, "endMs": 49320 }
+      ]
+    },
+    {
+      "sentence": "원하는 형태의 코드를 오차 없이",
+      "startMs": 49320,
+      "endMs": 51320,
+      "words": [
         { "text": "원하는", "startMs": 49320, "endMs": 49860 },
         { "text": "형태의", "startMs": 49860, "endMs": 50230 },
         { "text": "코드를", "startMs": 50230, "endMs": 50720 },
         { "text": "오차", "startMs": 50720, "endMs": 51000 },
-        { "text": "없이", "startMs": 51000, "endMs": 51320 },
-        { "text": "생성해", "startMs": 51320, "endMs": 51800 },
-        { "text": "냅니다.", "startMs": 51800, "endMs": 52500 }
+        { "text": "없이", "startMs": 51000, "endMs": 51320 }
       ]
     },
     {
-      "sentence": "까다로웠던 테스트 코드 작성도 더 이상 고통스러운 작업이 아닙니다.",
+      "sentence": "생성해 냅니다.",
+      "startMs": 51320,
+      "endMs": 52500,
+      "words": [
+        { "text": "생성해", "startMs": 51320, "endMs": 51910 },
+        { "text": "냅니다.", "startMs": 51910, "endMs": 52500 }
+      ]
+    },
+    {
+      "sentence": "까다로웠던 테스트 코드 작성도",
       "startMs": 52500,
-      "endMs": 57220,
+      "endMs": 54560,
       "words": [
         { "text": "까다로웠던", "startMs": 52500, "endMs": 53270 },
         { "text": "테스트", "startMs": 53270, "endMs": 53750 },
         { "text": "코드", "startMs": 53750, "endMs": 54100 },
-        { "text": "작성도", "startMs": 54100, "endMs": 54560 },
+        { "text": "작성도", "startMs": 54100, "endMs": 54560 }
+      ]
+    },
+    {
+      "sentence": "더 이상 고통스러운 작업이 아닙니다.",
+      "startMs": 54560,
+      "endMs": 57220,
+      "words": [
         { "text": "더", "startMs": 54560, "endMs": 54720 },
         { "text": "이상", "startMs": 54720, "endMs": 55090 },
         { "text": "고통스러운", "startMs": 55090, "endMs": 55860 },
@@ -176,24 +252,45 @@
       ]
     },
     {
-      "sentence": "핵심 비즈니스 로직만 주어지면 엣지 케이스까지 꼼꼼하게 고려한 완벽한 테스트 스위트를 자동으로 구성해 줍니다.",
+      "sentence": "핵심 비즈니스 로직만 주어지면",
       "startMs": 57220,
-      "endMs": 64800,
+      "endMs": 59840,
       "words": [
         { "text": "핵심", "startMs": 57220, "endMs": 57600 },
         { "text": "비즈니스", "startMs": 57600, "endMs": 58410 },
         { "text": "로직만", "startMs": 58410, "endMs": 59040 },
-        { "text": "주어지면", "startMs": 59040, "endMs": 59840 },
+        { "text": "주어지면", "startMs": 59040, "endMs": 59840 }
+      ]
+    },
+    {
+      "sentence": "엣지 케이스까지 꼼꼼하게 고려한",
+      "startMs": 59840,
+      "endMs": 62100,
+      "words": [
         { "text": "엣지", "startMs": 59840, "endMs": 60160 },
         { "text": "케이스까지", "startMs": 60160, "endMs": 60980 },
         { "text": "꼼꼼하게", "startMs": 60980, "endMs": 61570 },
-        { "text": "고려한", "startMs": 61570, "endMs": 62100 },
+        { "text": "고려한", "startMs": 61570, "endMs": 62100 }
+      ]
+    },
+    {
+      "sentence": "완벽한 테스트 스위트를 자동으로",
+      "startMs": 62100,
+      "endMs": 63820,
+      "words": [
         { "text": "완벽한", "startMs": 62100, "endMs": 62560 },
         { "text": "테스트", "startMs": 62560, "endMs": 62840 },
         { "text": "스위트를", "startMs": 62840, "endMs": 63450 },
-        { "text": "자동으로", "startMs": 63450, "endMs": 63820 },
-        { "text": "구성해", "startMs": 63820, "endMs": 64200 },
-        { "text": "줍니다.", "startMs": 64200, "endMs": 64800 }
+        { "text": "자동으로", "startMs": 63450, "endMs": 63820 }
+      ]
+    },
+    {
+      "sentence": "구성해 줍니다.",
+      "startMs": 63820,
+      "endMs": 65920,
+      "words": [
+        { "text": "구성해", "startMs": 63820, "endMs": 64310 },
+        { "text": "줍니다.", "startMs": 64310, "endMs": 64800 }
       ]
     }
   ]

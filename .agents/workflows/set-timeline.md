@@ -30,12 +30,33 @@ description: TTS와 whisper를 통해 얻은 타임스탬프 데이터를 기반
 
 **중요**
 
-- sentences 배열의 각 sentence는 자막으로 변환될 예정이기 때문에 `endMs - startMs`로 계산한 길이가 4초를 넘어간다면
-  분할하는 것을 강력하게 권장합니다. sentences라고 해서 반드시 마침표로 끝나야 하는 것은 아닙니다.
+### 진행 단계
+
+- 우선 마침표, 느낌표, 물음표를 기준으로 sentence를 나눕니다.
+- 각 sentence의 길이를 분석합니다. `마지막 단어의 endMs - 첫번째 단어의 startMs`로 계산 가능합니다.
+- 만약 sentence의 길이가 7초를 넘어간다면, 해당 sentence를 분할하는 것을 강력히 권장합니다. 하지만 자연스러운 호흡을 해치지 않는 선에서 분할해야합니다. 자막의 단위이므로, 읽을 때 어색하지 않도록 분할합니다.
+- 분할까지 완료된 최종 sentence는 마침표, 느낌표, 물음표로 끝나지 않아도 됩니다. 기본적으로는 원본 문장 단위가 맞지만, 문장이 길면 분할할 뿐입니다.
+
+### 반드시 지켜야 할 사항
+
 - 단어의 startMs와 endMs는 타임스탬프 데이터 값을 100% 반영해야하며, 임의로 변경이 불가합니다.
 - [프레임 가드] 각 문장 이후 오디오의 공백 때문에, 문장의 마지막 단어의 endMs가 다음 문장의 시작과 다를 수 있습니다. 이 경우
   문장의 endMs를 다음 문장의 startMs와 동일하게 설정합니다.(이 때에도 단어의 타임스탬프는 절대 변경하지 않습니다)
 - 마지막 문장의 endMs는 섹션의 전체 '총 길이(totalDuration)'와 일치시켜 영상 끝부분의 묵음 여백(Tail)까지 포함시켜 나타냅니다. 즉 마지막 문장의 endMs는 totalDuration과 같아야합니다.
+- 문장 분할 및 공백 메우기가 완료되었다면, 프레임을 계산해서 추가합니다. 프레임은 startFrame과 durationInFrames로 구성됩니다. (기준 FPS는 30으로 고정합니다.)
+
+프레임 계산 시 1프레임 밀림(Drift) 현상과 오차 누적을 방지하기 위해 반드시 아래의 절대 좌표 변환 공식을 따르세요:
+이 때 영상의 VIDEO_FPS는 `src/constants/video-config.ts`파일에 명시되어 있습니다.
+
+---
+
+startFrame = Math.round((startMs / 1000) \* VIDEO_FPS)
+
+임시 endFrame = Math.round((endMs / 1000) \* VIDEO_FPS)
+
+durationInFrames = 임시 endFrame - startFrame
+
+---
 
 최종 타임스탬프 파일은 다음 형태로 구성됩니다.
 
@@ -48,6 +69,8 @@ description: TTS와 whisper를 통해 얻은 타임스탬프 데이터를 기반
       "sentence": "단어를 조합한 원본과 일치하는 문장",
       "startMs": 0, // 첫 번째 단어의 startMs와 동일해야함.
       "endMs": 2900, // 다음 sentence의 startMs와 동일해야함. (마지막 단어의 endMs가 아닙니다)
+      "startFrame": 0, // Math.round((startMs / 1000) * VIDEO_FPS)
+      "durationInFrames": 174, // endFrame - startFrame
       "words": [
         {
           "text": "단어1", // 원본 대본의 단어와 100% 일치해야합니다.
@@ -71,6 +94,8 @@ description: TTS와 whisper를 통해 얻은 타임스탬프 데이터를 기반
       "sentence": "단어를 조합한 원본과 일치하는 문장",
       "startMs": 2900, // 첫 번째 단어의 startMs와 동일해야함.
       "endMs": 5860,
+      "startFrame": 174,
+      "durationInFrames": 178,
       "words": [
         {
           "text": "단어1",

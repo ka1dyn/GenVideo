@@ -7,45 +7,73 @@
       "startMs": 10,
       "endMs": 2260,
       "words": [
-        { "text": "웹", "startMs": 10, "endMs": 420 },
-        { "text": "개발의", "startMs": 420, "endMs": 950 },
-        { "text": "패러다임이", "startMs": 950, "endMs": 1290 },
-        { "text": "완전히", "startMs": 1290, "endMs": 1610 },
-        { "text": "바뀌고", "startMs": 1610, "endMs": 1900 },
-        { "text": "있습니다.", "startMs": 1900, "endMs": 2260 }
+        { "text": "웹", "startMs": 10, "endMs": 215 },
+        { "text": "개발의", "startMs": 215, "endMs": 420 },
+        { "text": "패러다임이", "startMs": 420, "endMs": 950 },
+        { "text": "완전히", "startMs": 950, "endMs": 1290 },
+        { "text": "바뀌고", "startMs": 1290, "endMs": 1610 },
+        { "text": "있습니다.", "startMs": 1610, "endMs": 2260 }
       ]
     },
     {
-      "sentence": "과거에는 모든 컴포넌트를 바닥부터 직접 작성해야 했지만, 이제는 AI가 우리의 가장 든든한 페어 프로그래머가 되었습니다.",
+      "sentence": "과거에는 모든 컴포넌트를",
       "startMs": 2260,
-      "endMs": 10780,
+      "endMs": 4320,
       "words": [
         { "text": "과거에는", "startMs": 2260, "endMs": 3160 },
         { "text": "모든", "startMs": 3160, "endMs": 3400 },
-        { "text": "컴포넌트를", "startMs": 3400, "endMs": 4320 },
+        { "text": "컴포넌트를", "startMs": 3400, "endMs": 4320 }
+      ]
+    },
+    {
+      "sentence": "바닥부터 직접 작성해야 했지만,",
+      "startMs": 4320,
+      "endMs": 6540,
+      "words": [
         { "text": "바닥부터", "startMs": 4320, "endMs": 5160 },
         { "text": "직접", "startMs": 5160, "endMs": 5460 },
         { "text": "작성해야", "startMs": 5460, "endMs": 6060 },
-        { "text": "했지만,", "startMs": 6060, "endMs": 6540 },
+        { "text": "했지만,", "startMs": 6060, "endMs": 6540 }
+      ]
+    },
+    {
+      "sentence": "이제는 AI가 우리의 가장 든든한",
+      "startMs": 6540,
+      "endMs": 8470,
+      "words": [
         { "text": "이제는", "startMs": 6540, "endMs": 7000 },
         { "text": "AI가", "startMs": 7000, "endMs": 7280 },
         { "text": "우리의", "startMs": 7280, "endMs": 7710 },
         { "text": "가장", "startMs": 7710, "endMs": 8020 },
-        { "text": "든든한", "startMs": 8020, "endMs": 8470 },
+        { "text": "든든한", "startMs": 8020, "endMs": 8470 }
+      ]
+    },
+    {
+      "sentence": "페어 프로그래머가 되었습니다.",
+      "startMs": 8470,
+      "endMs": 10780,
+      "words": [
         { "text": "페어", "startMs": 8470, "endMs": 8770 },
         { "text": "프로그래머가", "startMs": 8770, "endMs": 9750 },
         { "text": "되었습니다.", "startMs": 9750, "endMs": 10780 }
       ]
     },
     {
-      "sentence": "디자인에서 개발로 넘어가는 과정의 병목현상도 눈에 띄게 사라졌습니다.",
+      "sentence": "디자인에서 개발로 넘어가는 과정의",
       "startMs": 10780,
-      "endMs": 16720,
+      "endMs": 14120,
       "words": [
         { "text": "디자인에서", "startMs": 10780, "endMs": 11900 },
         { "text": "개발로", "startMs": 11900, "endMs": 12610 },
         { "text": "넘어가는", "startMs": 12610, "endMs": 13460 },
-        { "text": "과정의", "startMs": 13460, "endMs": 14120 },
+        { "text": "과정의", "startMs": 13460, "endMs": 14120 }
+      ]
+    },
+    {
+      "sentence": "병목현상도 눈에 띄게 사라졌습니다.",
+      "startMs": 14120,
+      "endMs": 16720,
+      "words": [
         { "text": "병목현상도", "startMs": 14120, "endMs": 15440 },
         { "text": "눈에", "startMs": 15440, "endMs": 15560 },
         { "text": "띄게", "startMs": 15560, "endMs": 15820 },
@@ -53,20 +81,41 @@
       ]
     },
     {
-      "sentence": "이제는 스케치 한 장이나 간단한 프롬프트만으로도 곧바로 작동하는 프로토타입이 생성되는 마법 같은 일이 일어납니다.",
+      "sentence": "이제는 스케치 한 장이나",
       "startMs": 16720,
-      "endMs": 24980,
+      "endMs": 18950,
       "words": [
         { "text": "이제는", "startMs": 16720, "endMs": 17380 },
         { "text": "스케치", "startMs": 17380, "endMs": 18180 },
         { "text": "한", "startMs": 18180, "endMs": 18260 },
-        { "text": "장이나", "startMs": 18260, "endMs": 18950 },
+        { "text": "장이나", "startMs": 18260, "endMs": 18950 }
+      ]
+    },
+    {
+      "sentence": "간단한 프롬프트만으로도",
+      "startMs": 18950,
+      "endMs": 21360,
+      "words": [
         { "text": "간단한", "startMs": 18950, "endMs": 19580 },
-        { "text": "프롬프트만으로도", "startMs": 19580, "endMs": 21360 },
+        { "text": "프롬프트만으로도", "startMs": 19580, "endMs": 21360 }
+      ]
+    },
+    {
+      "sentence": "곧바로 작동하는 프로토타입이 생성되는",
+      "startMs": 21360,
+      "endMs": 23400,
+      "words": [
         { "text": "곧바로", "startMs": 21360, "endMs": 21720 },
         { "text": "작동하는", "startMs": 21720, "endMs": 22200 },
         { "text": "프로토타입이", "startMs": 22200, "endMs": 22920 },
-        { "text": "생성되는", "startMs": 22920, "endMs": 23400 },
+        { "text": "생성되는", "startMs": 22920, "endMs": 23400 }
+      ]
+    },
+    {
+      "sentence": "마법 같은 일이 일어납니다.",
+      "startMs": 23400,
+      "endMs": 26220,
+      "words": [
         { "text": "마법", "startMs": 23400, "endMs": 23640 },
         { "text": "같은", "startMs": 23640, "endMs": 23880 },
         { "text": "일이", "startMs": 23880, "endMs": 24120 },
@@ -74,15 +123,22 @@
       ]
     },
     {
-      "sentence": "단순히 코드를 짜주는 것을 넘어, 시스템 아키텍처를 설계하고 최적화 포인트까지 제안합니다.",
+      "sentence": "단순히 코드를 짜주는 것을 넘어,",
       "startMs": 26220,
-      "endMs": 32020,
+      "endMs": 28630,
       "words": [
         { "text": "단순히", "startMs": 26220, "endMs": 26760 },
         { "text": "코드를", "startMs": 26760, "endMs": 27250 },
         { "text": "짜주는", "startMs": 27250, "endMs": 27760 },
         { "text": "것을", "startMs": 27760, "endMs": 28120 },
-        { "text": "넘어,", "startMs": 28120, "endMs": 28630 },
+        { "text": "넘어,", "startMs": 28120, "endMs": 28630 }
+      ]
+    },
+    {
+      "sentence": "시스템 아키텍처를 설계하고 최적화 포인트까지 제안합니다.",
+      "startMs": 28630,
+      "endMs": 32020,
+      "words": [
         { "text": "시스템", "startMs": 28630, "endMs": 28920 },
         { "text": "아키텍처를", "startMs": 28920, "endMs": 29570 },
         { "text": "설계하고", "startMs": 29570, "endMs": 30180 },
@@ -92,60 +148,95 @@
       ]
     },
     {
-      "sentence": "마치 수십 년 경력의 시니어 개발자가 항상 내 옆에 앉아 코드를 리뷰해 주는 것과 같죠.",
+      "sentence": "마치 수십 년 경력의 시니어 개발자가",
       "startMs": 32020,
-      "endMs": 38560,
+      "endMs": 35200,
       "words": [
         { "text": "마치", "startMs": 32020, "endMs": 32440 },
         { "text": "수십", "startMs": 32440, "endMs": 33000 },
         { "text": "년", "startMs": 33000, "endMs": 33070 },
         { "text": "경력의", "startMs": 33070, "endMs": 33700 },
         { "text": "시니어", "startMs": 33700, "endMs": 34410 },
-        { "text": "개발자가", "startMs": 34410, "endMs": 35200 },
+        { "text": "개발자가", "startMs": 34410, "endMs": 35200 }
+      ]
+    },
+    {
+      "sentence": "항상 내 옆에 앉아 코드를 리뷰해 주는 것과 같죠.",
+      "startMs": 35200,
+      "endMs": 38560,
+      "words": [
         { "text": "항상", "startMs": 35200, "endMs": 35520 },
         { "text": "내", "startMs": 35520, "endMs": 35820 },
         { "text": "옆에", "startMs": 35820, "endMs": 36010 },
         { "text": "앉아", "startMs": 36010, "endMs": 36410 },
         { "text": "코드를", "startMs": 36410, "endMs": 36880 },
-        { "text": "리뷰해", "startMs": 36880, "endMs": 37200 },
-        { "text": "주는", "startMs": 37200, "endMs": 37640 },
+        { "text": "리뷰해", "startMs": 36880, "endMs": 37260 },
+        { "text": "주는", "startMs": 37260, "endMs": 37640 },
         { "text": "것과", "startMs": 37640, "endMs": 37980 },
         { "text": "같죠.", "startMs": 37980, "endMs": 38560 }
       ]
     },
     {
-      "sentence": "이러한 변화는 단순히 개인의 코딩 속도를 높이는 것을 넘어, 팀 전체의 애자일한 협업 방식을 근본적으로 재정의하고 있습니다.",
+      "sentence": "이러한 변화는 단순히",
       "startMs": 38560,
-      "endMs": 46540,
+      "endMs": 40180,
       "words": [
         { "text": "이러한", "startMs": 38560, "endMs": 39160 },
         { "text": "변화는", "startMs": 39160, "endMs": 39640 },
-        { "text": "단순히", "startMs": 39640, "endMs": 40180 },
+        { "text": "단순히", "startMs": 39640, "endMs": 40180 }
+      ]
+    },
+    {
+      "sentence": "개인의 코딩 속도를 높이는 것을 넘어,",
+      "startMs": 40180,
+      "endMs": 42980,
+      "words": [
         { "text": "개인의", "startMs": 40180, "endMs": 40720 },
         { "text": "코딩", "startMs": 40720, "endMs": 41080 },
         { "text": "속도를", "startMs": 41080, "endMs": 41620 },
         { "text": "높이는", "startMs": 41620, "endMs": 42160 },
         { "text": "것을", "startMs": 42160, "endMs": 42520 },
-        { "text": "넘어,", "startMs": 42520, "endMs": 42980 },
+        { "text": "넘어,", "startMs": 42520, "endMs": 42980 }
+      ]
+    },
+    {
+      "sentence": "팀 전체의 애자일한 협업 방식을",
+      "startMs": 42980,
+      "endMs": 44550,
+      "words": [
         { "text": "팀", "startMs": 42980, "endMs": 43110 },
         { "text": "전체의", "startMs": 43110, "endMs": 43530 },
         { "text": "애자일한", "startMs": 43530, "endMs": 43940 },
         { "text": "협업", "startMs": 43940, "endMs": 44180 },
-        { "text": "방식을", "startMs": 44180, "endMs": 44550 },
+        { "text": "방식을", "startMs": 44180, "endMs": 44550 }
+      ]
+    },
+    {
+      "sentence": "근본적으로 재정의하고 있습니다.",
+      "startMs": 44550,
+      "endMs": 46540,
+      "words": [
         { "text": "근본적으로", "startMs": 44550, "endMs": 45160 },
         { "text": "재정의하고", "startMs": 45160, "endMs": 45770 },
         { "text": "있습니다.", "startMs": 45770, "endMs": 46540 }
       ]
     },
     {
-      "sentence": "우리는 더 빠르게 실패하고, 더 빨리 혁신할 수 있게 되었습니다.",
+      "sentence": "우리는 더 빠르게 실패하고,",
       "startMs": 46540,
-      "endMs": 51040,
+      "endMs": 48960,
       "words": [
         { "text": "우리는", "startMs": 46540, "endMs": 47160 },
         { "text": "더", "startMs": 47160, "endMs": 47550 },
         { "text": "빠르게", "startMs": 47550, "endMs": 48080 },
-        { "text": "실패하고,", "startMs": 48080, "endMs": 48960 },
+        { "text": "실패하고,", "startMs": 48080, "endMs": 48960 }
+      ]
+    },
+    {
+      "sentence": "더 빨리 혁신할 수 있게 되었습니다.",
+      "startMs": 48960,
+      "endMs": 51040,
+      "words": [
         { "text": "더", "startMs": 48960, "endMs": 49360 },
         { "text": "빨리", "startMs": 49360, "endMs": 49410 },
         { "text": "혁신할", "startMs": 49410, "endMs": 49750 },
@@ -172,28 +263,43 @@
       "words": [
         { "text": "\"미래의", "startMs": 53800, "endMs": 54220 },
         { "text": "코딩은", "startMs": 54220, "endMs": 54730 },
-        { "text": "타이핑이", "startMs": 54730, "endMs": 56680 },
-        { "text": "아니라", "startMs": 56680, "endMs": 56970 },
-        { "text": "대화가", "startMs": 56970, "endMs": 57040 },
-        { "text": "될", "startMs": 57040, "endMs": 57100 },
-        { "text": "것이다.", "startMs": 57100, "endMs": 57460 }
+        { "text": "타이핑이", "startMs": 56060, "endMs": 56400 },
+        { "text": "아니라", "startMs": 56400, "endMs": 56680 },
+        { "text": "대화가", "startMs": 56680, "endMs": 56970 },
+        { "text": "될", "startMs": 56970, "endMs": 57040 },
+        { "text": "것이다.", "startMs": 57040, "endMs": 57460 }
       ]
     },
     {
-      "sentence": "결국 우리에게 가장 필요한 역량은 타건 속도가 아니라, 문제를 정의하고 AI를 지휘하는 기획력이 될 것입니다.",
+      "sentence": "\" 결국 우리에게 가장 필요한 역량은",
       "startMs": 57460,
-      "endMs": 65100,
+      "endMs": 60350,
       "words": [
+        { "text": "\"", "startMs": 57460, "endMs": 57460 },
         { "text": "결국", "startMs": 57460, "endMs": 58190 },
         { "text": "우리에게", "startMs": 58190, "endMs": 58650 },
         { "text": "가장", "startMs": 58650, "endMs": 59130 },
         { "text": "필요한", "startMs": 59130, "endMs": 59640 },
-        { "text": "역량은", "startMs": 59640, "endMs": 60350 },
+        { "text": "역량은", "startMs": 59640, "endMs": 60350 }
+      ]
+    },
+    {
+      "sentence": "타건 속도가 아니라, 문제를 정의하고",
+      "startMs": 60350,
+      "endMs": 62400,
+      "words": [
         { "text": "타건", "startMs": 60350, "endMs": 60500 },
         { "text": "속도가", "startMs": 60500, "endMs": 60860 },
         { "text": "아니라,", "startMs": 60860, "endMs": 61260 },
         { "text": "문제를", "startMs": 61260, "endMs": 61910 },
-        { "text": "정의하고", "startMs": 61910, "endMs": 62400 },
+        { "text": "정의하고", "startMs": 61910, "endMs": 62400 }
+      ]
+    },
+    {
+      "sentence": "AI를 지휘하는 기획력이 될 것입니다.",
+      "startMs": 62400,
+      "endMs": 66320,
+      "words": [
         { "text": "AI를", "startMs": 62400, "endMs": 62670 },
         { "text": "지휘하는", "startMs": 62670, "endMs": 63310 },
         { "text": "기획력이", "startMs": 63310, "endMs": 63960 },

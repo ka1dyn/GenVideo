@@ -1,248 +1,396 @@
 import React from "react";
-import {
-  AbsoluteFill,
-  Series,
-  useCurrentFrame,
-  interpolate,
-  spring,
-  random,
-} from "remotion";
-import { COLORS, EFFECTS, FONTS, Z } from "../theme";
-
-const GFX_Grid: React.FC = () => {
-    const frame = useCurrentFrame();
-    const move = interpolate(frame, [0, 300], [0, -100], { extrapolateRight: "clamp" });
-    return (
-        <AbsoluteFill style={{ zIndex: Z.BG, background: COLORS.BG_VOID }}>
-            <div style={{
-                position: "absolute", width: "200%", height: "200%", top: "-50%", left: "-50%",
-                backgroundImage: `linear-gradient(to right, ${COLORS.BORDER} 1px, transparent 1px), linear-gradient(to bottom, ${COLORS.BORDER} 1px, transparent 1px)`,
-                backgroundSize: "60px 60px", transform: `perspective(1000px) rotateX(60deg) translateY(${move}px)`, opacity: 0.1
-            }} />
-        </AbsoluteFill>
-    );
-};
+import { AbsoluteFill, Series, interpolate, useCurrentFrame, spring, useVideoConfig, random } from "remotion";
+import { COLORS, FONTS, Z, EFFECTS } from "../theme";
 
 const Scene1: React.FC = () => {
-    const frame = useCurrentFrame();
-    const speed = interpolate(frame, [0, 300], [0, 5000]);
-    return (
-        <AbsoluteFill style={{ justifyContent: 'center', alignItems: 'center' }}>
-            <GFX_Grid />
-             <div style={{ position: 'absolute', right: 100, top: 100, color: COLORS.PRIMARY, fontFamily: FONTS.MONO, fontSize: 40 }}>
-                VELOCITY: {speed.toFixed(0)} km/h
-            </div>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
-                {Array.from({ length: 10 }).map((_, i) => (
-                   <div key={i} style={{ width: interpolate(frame, [0, 50], [0, 1000]), height: 2, backgroundColor: COLORS.PRIMARY, opacity: 0.3 }} />
-                ))}
-            </div>
-        </AbsoluteFill>
-    );
+  const frame = useCurrentFrame();
+  const stream = (frame * 30) % 1000;
+  return (
+    <AbsoluteFill style={{ backgroundColor: "#FFFFFF", overflow: "hidden" }}>
+       {[...Array(10)].map((_, i) => (
+         <div key={i} style={{ position: "absolute", left: `${i * 10}%`, top: stream - 200, width: 2, height: 200, backgroundColor: COLORS.PRIMARY_DIM, filter: "blur(2px)" }} />
+       ))}
+       <div style={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)", fontFamily: FONTS.DISPLAY, fontSize: 80, color: COLORS.PRIMARY, opacity: 0.1 }}>SPEED</div>
+    </AbsoluteFill>
+  );
 };
 
 const Scene2: React.FC = () => {
-    const frame = useCurrentFrame();
-    const rotate = interpolate(frame, [0, 203], [0, 360]);
-    const glow = interpolate(frame % 20, [0, 10, 20], [0.5, 1, 0.5]);
-    return (
-        <AbsoluteFill style={{ justifyContent: 'center', alignItems: 'center' }}>
-            <div style={{
-                width: 300, height: 300, border: `2px solid ${COLORS.PRIMARY}`,
-                transform: `rotateX(${rotate}deg) rotateY(${rotate}deg)`,
-                boxShadow: `0 0 ${40 * glow}px ${COLORS.PRIMARY_GLOW}`,
-                backgroundColor: COLORS.BG_SURFACE
-            }} />
-        </AbsoluteFill>
-    );
+  const frame = useCurrentFrame();
+  const stream = (frame * 50) % 1000;
+  const pop = spring({ frame, fps: 60 });
+  return (
+    <AbsoluteFill style={{ backgroundColor: "#FFFFFF", overflow: "hidden" }}>
+       {[...Array(20)].map((_, i) => (
+         <div key={i} style={{ position: "absolute", left: `${(i * 5) % 100}%`, top: stream - 200, width: 4, height: 300, backgroundColor: COLORS.PRIMARY, opacity: 0.2 }} />
+       ))}
+       <h1 style={{ position: "absolute", top: "50%", left: "50%", transform: `translate(-50%, -50%) scale(${pop * 1.2})`, fontFamily: FONTS.DISPLAY, fontSize: 100, color: COLORS.PRIMARY }}>EVOLUTION</h1>
+    </AbsoluteFill>
+  );
 };
 
 const Scene3: React.FC = () => {
-    const frame = useCurrentFrame();
-    const scatter = interpolate(frame, [0, 183], [1, 5]);
-    return (
-        <AbsoluteFill style={{ justifyContent: 'center', alignItems: 'center' }}>
-            {Array.from({ length: 40 }).map((_, i) => {
-                const angle = (i / 40) * Math.PI * 2;
-                return (
-                    <div key={i} style={{
-                        position: 'absolute', width: 20, height: 20, backgroundColor: COLORS.PRIMARY,
-                        left: 960 + Math.cos(angle) * (100 * scatter),
-                        top: 540 + Math.sin(angle) * (100 * scatter),
-                        opacity: 1 / scatter
-                    }} />
-                );
-            })}
-        </AbsoluteFill>
-    );
+  const frame = useCurrentFrame();
+  const flash = interpolate(frame, [0, 5, 20], [1, 1, 0]);
+  return (
+    <AbsoluteFill style={{ backgroundColor: "#FFFFFF", justifyContent: "center", alignItems: "center" }}>
+       <div style={{ position: "absolute", width: "100%", height: "100%", backgroundColor: "white", opacity: flash, zIndex: 100 }} />
+       <div style={{ width: 100, height: 2, backgroundColor: COLORS.BORDER }} />
+    </AbsoluteFill>
+  );
 };
 
 const Scene4: React.FC = () => {
-    const frame = useCurrentFrame();
-    const noiseX = (random(`x-${frame}`) - 0.5) * 10;
-    const noiseY = (random(`y-${frame}`) - 0.5) * 10;
-    return (
-        <AbsoluteFill style={{ justifyContent: 'center', alignItems: 'center', backgroundColor: '#110000' }}>
-            <h1 style={{ color: COLORS.NEGATIVE, fontSize: 100, fontFamily: FONTS.DISPLAY, transform: `translate(${noiseX}px, ${noiseY}px)` }}>
-                JOB DISPLACEMENT?
-            </h1>
-        </AbsoluteFill>
-    );
+  const frame = useCurrentFrame();
+  const year = frame < 40 ? "2024" : frame < 80 ? "2025" : "2026";
+  return (
+    <AbsoluteFill style={{ backgroundColor: COLORS.BG_DEEP, justifyContent: "center", alignItems: "center" }}>
+       <div style={{ padding: 40, backgroundColor: "white", borderRadius: 20, boxShadow: EFFECTS.SHADOW_LG, border: `2px solid ${COLORS.BORDER}` }}>
+          <div style={{ fontSize: 120, fontFamily: FONTS.DISPLAY, color: COLORS.PRIMARY }}>{year}</div>
+       </div>
+       <div style={{ position: "absolute", width: 600, height: 600, border: `1px solid ${COLORS.PRIMARY_DIM}`, borderRadius: "50%", opacity: 0.2, rotate: `${frame}deg` }}>
+          <div style={{ position: "absolute", top: 0, left: "50%", fontSize: 40 }}>🛠️</div>
+          <div style={{ position: "absolute", bottom: 0, left: "50%", fontSize: 40 }}>⚡</div>
+       </div>
+    </AbsoluteFill>
+  );
 };
 
 const Scene5: React.FC = () => {
-    const frame = useCurrentFrame();
-    const beamWidth = interpolate(frame, [0, 20], [0, 1920]);
-    return (
-        <AbsoluteFill style={{ justifyContent: 'center', alignItems: 'center' }}>
-            <div style={{ width: beamWidth, height: '100%', backgroundColor: COLORS.PRIMARY, opacity: 0.8, boxShadow: EFFECTS.GLOW_LG }} />
-        </AbsoluteFill>
-    );
+  const frame = useCurrentFrame();
+  const whirl = frame * 10;
+  return (
+    <AbsoluteFill style={{ backgroundColor: COLORS.BG_DEEP, justifyContent: "center", alignItems: "center" }}>
+       <div style={{ fontSize: 150 }}>👤</div>
+       <div style={{ position: "absolute", width: 500, height: 500, transform: `rotate(${whirl}deg)` }}>
+          {[1,2,3,4,5,6].map(i => (
+             <div key={i} style={{ position: "absolute", left: "50%", top: 0, fontSize: 40, transform: `rotate(${i * 60}deg)`, transformOrigin: "0 250px" }}>➔</div>
+          ))}
+       </div>
+    </AbsoluteFill>
+  );
 };
 
 const Scene6: React.FC = () => {
-    const frame = useCurrentFrame();
-    const scale = interpolate(frame, [0, 344], [1, 4]);
-    return (
-        <AbsoluteFill style={{ justifyContent: 'center', alignItems: 'center' }}>
-            <div style={{ width: 400, height: 400, border: `4px solid ${COLORS.PRIMARY}`, transform: `scale(${scale})`, opacity: 2 - scale/2 }} />
-            <h1 style={{ color: COLORS.TEXT_MAIN, fontSize: 80, fontFamily: FONTS.DISPLAY }}>EXPAND POTENTIAL</h1>
-        </AbsoluteFill>
-    );
+  const frame = useCurrentFrame();
+  const noise = (random("scene6-noise") - 0.5) * 5;
+  return (
+    <AbsoluteFill style={{ backgroundColor: "#F1F5F9", justifyContent: "center", alignItems: "center" }}>
+       <div style={{ fontSize: 150, transform: `translate(${noise}px, ${noise}px)` }}>😟</div>
+       <div style={{ position: "absolute", width: "100%", height: "100%", backgroundColor: "rgba(0,0,0,0.05)", opacity: 0.5 }} />
+    </AbsoluteFill>
+  );
 };
 
 const Scene7: React.FC = () => {
-    const frame = useCurrentFrame();
-    return (
-        <AbsoluteFill style={{ justifyContent: 'center', alignItems: 'center' }}>
-            <div style={{ position: 'relative' }}>
-                <h1 style={{ color: COLORS.TEXT_MUTED, fontSize: 120, fontFamily: FONTS.DISPLAY }}>COMPETITOR</h1>
-                {frame > 60 && <div style={{ position: 'absolute', top: '50%', left: 0, width: '100%', height: 10, backgroundColor: COLORS.NEGATIVE, transform: 'rotate(-15deg)' }} />}
-            </div>
-        </AbsoluteFill>
-    );
+  const frame = useCurrentFrame();
+  const smoke = interpolate(frame, [0, 220], [0, 1]);
+  return (
+    <AbsoluteFill style={{ backgroundColor: "#F1F5F9", justifyContent: "center", alignItems: "center" }}>
+       <h2 style={{ 
+         fontFamily: FONTS.DISPLAY, 
+         fontSize: 100, 
+         color: COLORS.TEXT_MUTED, 
+         opacity: 1 - smoke, 
+         transform: `translateY(${-smoke * 100}px) scale(${1 + smoke})`,
+         filter: `blur(${smoke * 10}px)`
+       }}>REPLACEMENT?</h2>
+    </AbsoluteFill>
+  );
 };
 
 const Scene8: React.FC = () => {
-    const frame = useCurrentFrame();
-    return (
-        <AbsoluteFill style={{ justifyContent: 'center', alignItems: 'center' }}>
-            {Array.from({ length: 5 }).map((_, i) => (
-                <div key={i} style={{
-                    position: 'absolute', width: (i + 1) * 200, height: (i + 1) * 200, borderRadius: '50%',
-                    border: `1px solid ${COLORS.ACCENT}`, opacity: interpolate(frame % 60, [0, 60], [1, 0])
-                }} />
-            ))}
-             <h1 style={{ color: COLORS.ACCENT, fontSize: 60, fontFamily: FONTS.DISPLAY }}>CREATIVITY</h1>
-        </AbsoluteFill>
-    );
+  const frame = useCurrentFrame();
+  const drawLine = interpolate(frame, [0, 152], [0, 100]);
+  return (
+    <AbsoluteFill style={{ backgroundColor: "#FFFFFF", justifyContent: "center", alignItems: "center" }}>
+       <div style={{ width: "80%", height: 4, backgroundColor: COLORS.BORDER, position: "relative" }}>
+          <div style={{ position: "absolute", left: 0, top: 0, height: "100%", width: `${drawLine}%`, backgroundColor: COLORS.PRIMARY }} />
+          <div style={{ position: "absolute", left: 0, top: -20, width: 40, height: 40, backgroundColor: COLORS.PRIMARY_DIM, borderRadius: "50%" }} />
+          <div style={{ position: "absolute", right: 0, top: -20, width: 40, height: 40, backgroundColor: COLORS.PRIMARY, borderRadius: "50%", opacity: drawLine/100 }} />
+       </div>
+    </AbsoluteFill>
+  );
 };
 
 const Scene9: React.FC = () => {
-    const frame = useCurrentFrame();
-    const lift = interpolate(frame, [0, 100], [0, -30]);
-    return (
-        <AbsoluteFill style={{ justifyContent: 'center', alignItems: 'center' }}>
-             <div style={{ width: 800, height: 10, backgroundColor: COLORS.PRIMARY, transform: `rotate(${lift}deg)`, position: 'relative' }}>
-                 <div style={{ position: 'absolute', right: 0, top: -100, width: 100, height: 100, border: `2px solid ${COLORS.PRIMARY}`, backgroundColor: COLORS.BG_SURFACE }} />
-             </div>
-             <h1 style={{ position: 'absolute', bottom: 100, color: COLORS.PRIMARY, fontSize: 80, fontFamily: FONTS.DISPLAY }}>LEVERAGE</h1>
-        </AbsoluteFill>
-    );
+  const frame = useCurrentFrame();
+  const converge = interpolate(frame, [0, 140], [400, 0], { extrapolateRight: "clamp" });
+  return (
+    <AbsoluteFill style={{ backgroundColor: COLORS.BG_DEEP, justifyContent: "center", alignItems: "center" }}>
+       {["🚂", "💻", "📱"].map((emoji, i) => (
+         <div key={i} style={{ position: "absolute", left: `calc(50% + ${Math.cos(i) * converge}px)`, top: `calc(50% + ${Math.sin(i) * converge}px)`, fontSize: 80, opacity: 1 - frame/140 }}>{emoji}</div>
+       ))}
+       <div style={{ width: 150, height: 150, backgroundColor: COLORS.PRIMARY, borderRadius: "50%", boxShadow: EFFECTS.GLOW_LG, display: "flex", justifyContent: "center", alignItems: "center", color: "white", fontFamily: FONTS.DISPLAY, fontSize: 60 }}>AI</div>
+    </AbsoluteFill>
+  );
 };
 
 const Scene10: React.FC = () => {
-    const frame = useCurrentFrame();
-    const sink = interpolate(frame, [0, 100], [0, 1080]);
-    return (
-        <AbsoluteFill style={{ justifyContent: 'center', alignItems: 'center' }}>
-            <div style={{ position: 'absolute', top: sink, width: '100%', height: '100%', border: `100px solid ${COLORS.BORDER}`, boxSizing: 'border-box' }} />
-             <h1 style={{ color: COLORS.PRIMARY, fontSize: 80, fontFamily: FONTS.DISPLAY }}>OPEN PATH</h1>
-        </AbsoluteFill>
-    );
+  const frame = useCurrentFrame();
+  const size = interpolate(frame, [0, 156], [100, 500]);
+  return (
+    <AbsoluteFill style={{ backgroundColor: COLORS.BG_DEEP, justifyContent: "center", alignItems: "center" }}>
+       <div style={{ width: size, height: size, backgroundColor: COLORS.PRIMARY, borderRadius: "50% 50% 0 0", opacity: 0.1 }} />
+       <div style={{ fontSize: 100, position: "absolute" }}>👤</div>
+    </AbsoluteFill>
+  );
 };
 
 const Scene11: React.FC = () => {
-    const frame = useCurrentFrame();
-    const op = spring({ frame, fps: 60 });
-    return (
-        <AbsoluteFill style={{ justifyContent: 'center', alignItems: 'center' }}>
-             <div style={{ textAlign: 'center', opacity: op }}>
-                 <div style={{ color: COLORS.PRIMARY, fontSize: 40, marginBottom: 20 }}>THE NEW WEAPON:</div>
-                 <div style={{ color: COLORS.TEXT_MAIN, fontSize: 120, fontFamily: FONTS.DISPLAY, textShadow: EFFECTS.GLOW_MD }}>PRODUCT MINDSET</div>
-             </div>
-        </AbsoluteFill>
-    );
+  const frame = useCurrentFrame();
+  const exp = interpolate(frame, [0, 179], [0, 1000]);
+  return (
+    <AbsoluteFill style={{ backgroundColor: COLORS.BG_DEEP, justifyContent: "center", alignItems: "center" }}>
+       <div style={{ width: exp, height: exp, border: `2px solid ${COLORS.PRIMARY}`, borderRadius: "50%", opacity: 1 - frame/179 }} />
+       <h1 style={{ fontFamily: FONTS.DISPLAY, fontSize: 120, color: COLORS.PRIMARY }}>EXPANSION</h1>
+    </AbsoluteFill>
+  );
 };
 
 const Scene12: React.FC = () => {
-    const frame = useCurrentFrame();
-    const roadMove = (frame * 20) % 100;
-    return (
-        <AbsoluteFill style={{ justifyContent: 'center', alignItems: 'center' }}>
-             <GFX_Grid />
-             <div style={{ position: 'absolute', bottom: 0, width: 200, height: '100%', background: `repeating-linear-gradient(to bottom, ${COLORS.PRIMARY} 0, ${COLORS.PRIMARY} 50px, transparent 50px, transparent 100px)`, opacity: 0.5, transform: `perspective(1000px) rotateX(80deg) translateY(${roadMove}px)` }} />
-             <h1 style={{ color: COLORS.TEXT_MAIN, fontSize: 60, fontFamily: FONTS.DISPLAY }}>NEW JOURNEY</h1>
-        </AbsoluteFill>
-    );
+  const frame = useCurrentFrame();
+  const showX = frame > 60;
+  return (
+    <AbsoluteFill style={{ backgroundColor: COLORS.BG_DEEP, justifyContent: "center", alignItems: "center" }}>
+       <div style={{ display: "flex", gap: 100 }}>
+          <div style={{ fontSize: 150 }}>👤</div>
+          <div style={{ alignSelf: "center", position: "relative" }}>
+             <div style={{ fontSize: 60, color: COLORS.TEXT_MUTED }}>VS</div>
+             {showX && <div style={{ position: "absolute", left: -20, top: -20, fontSize: 100, color: COLORS.NEGATIVE }}>❌</div>}
+          </div>
+          <div style={{ fontSize: 150 }}>🤖</div>
+       </div>
+    </AbsoluteFill>
+  );
 };
 
 const Scene13: React.FC = () => {
-    const frame = useCurrentFrame();
-    const op = interpolate(frame, [0, 50, 380, 432], [0, 1, 1, 0]);
-    return (
-        <AbsoluteFill style={{ justifyContent: 'center', alignItems: 'center', opacity: op }}>
-             <div style={{ textAlign: 'center' }}>
-                 <h1 style={{ color: COLORS.PRIMARY, fontSize: 80, fontFamily: FONTS.DISPLAY, textShadow: EFFECTS.GLOW_LG }}>IMAGINATION</h1>
-                 <div style={{ fontSize: 40, color: COLORS.TEXT_MUTED, margin: '20px 0' }}>TO</div>
-                 <h1 style={{ color: COLORS.TEXT_MAIN, fontSize: 100, fontFamily: FONTS.DISPLAY }}>REALITY</h1>
-             </div>
-        </AbsoluteFill>
-    );
+  const frame = useCurrentFrame();
+  const float = interpolate(frame, [0, 166], [0, -400]);
+  return (
+    <AbsoluteFill style={{ backgroundColor: COLORS.BG_DEEP, justifyContent: "center", alignItems: "center" }}>
+       <div style={{ transform: `translateY(${float}px)`, textAlign: "center" }}>
+          <div style={{ fontSize: 150 }}>🎈</div>
+          <div style={{ alignSelf: "center", marginTop: 20, color: COLORS.TEXT_MUTED }}>Bye bye, repetitive tasks!</div>
+       </div>
+       <div style={{ position: "absolute", bottom: 100, fontSize: 120 }}>📦</div>
+    </AbsoluteFill>
+  );
+};
+
+const Scene14: React.FC = () => {
+  const frame = useCurrentFrame();
+  const rotate = frame;
+  return (
+    <AbsoluteFill style={{ backgroundColor: COLORS.BG_DEEP, justifyContent: "center", alignItems: "center" }}>
+       <div style={{ position: "absolute", left: "30%", top: "40%", fontSize: 100, transform: `rotate(${rotate}deg)` }}>💎</div>
+       <div style={{ position: "absolute", right: "30%", bottom: "40%", fontSize: 100, transform: `rotate(${-rotate}deg)` }}>💡</div>
+    </AbsoluteFill>
+  );
+};
+
+const Scene15: React.FC = () => {
+  const frame = useCurrentFrame();
+  const zoom = interpolate(frame, [0, 98], [2, 1], { extrapolateRight: "clamp" });
+  return (
+    <AbsoluteFill style={{ backgroundColor: COLORS.BG_DEEP, justifyContent: "center", alignItems: "center" }}>
+       <div style={{ 
+         width: 500, 
+         height: 500, 
+         border: `50px solid black`, 
+         borderRadius: "50%", 
+         transform: `scale(${zoom})`,
+         display: "flex",
+         justifyContent: "center",
+         alignItems: "center"
+       }}>
+          <div style={{ width: 100, height: 100, backgroundColor: COLORS.PRIMARY, borderRadius: "50%" }} />
+       </div>
+    </AbsoluteFill>
+  );
+};
+
+const Scene16: React.FC = () => {
+  const frame = useCurrentFrame();
+  const lever = interpolate(frame, [0, 50], [10, -20], { extrapolateRight: "clamp" });
+  return (
+    <AbsoluteFill style={{ backgroundColor: COLORS.SECONDARY, justifyContent: "center", alignItems: "center" }}>
+       <div style={{ position: "relative", width: 600, height: 400 }}>
+          <div style={{ position: "absolute", bottom: 0, left: "50%", width: 0, height: 0, borderLeft: "40px solid transparent", borderRight: "40px solid transparent", borderBottom: `60px solid white`, transform: "translateX(-50%)" }} />
+          <div style={{ position: "absolute", bottom: 60, left: 0, width: "100%", height: 20, backgroundColor: "white", borderRadius: 10, transform: `rotate(${lever}deg)`, transformOrigin: "center" }} />
+          <div style={{ position: "absolute", bottom: 100, right: 0, width: 200, height: 200, backgroundColor: "#334155", borderRadius: 20, display: "flex", justifyContent: "center", alignItems: "center", color: "white", fontSize: 40 }}>PROBLEM</div>
+       </div>
+    </AbsoluteFill>
+  );
+};
+
+const Scene17: React.FC = () => {
+  const frame = useCurrentFrame();
+  const sink = interpolate(frame, [0, 80], [0, 500], { extrapolateRight: "clamp" });
+  return (
+    <AbsoluteFill style={{ backgroundColor: COLORS.BG_DEEP, justifyContent: "center", alignItems: "center" }}>
+       <div style={{ position: "absolute", bottom: -sink, width: "100%", height: 500, backgroundColor: "#E2E8F0", borderTop: `10px solid ${COLORS.BORDER}` }} />
+       <div style={{ fontFamily: FONTS.DISPLAY, fontSize: 80, color: COLORS.PRIMARY }}>PATH OPEN</div>
+    </AbsoluteFill>
+  );
+};
+
+const Scene18: React.FC = () => {
+  const frame = useCurrentFrame();
+  const fade = interpolate(frame, [0, 139], [1, 0]);
+  return (
+    <AbsoluteFill style={{ backgroundColor: COLORS.BG_DEEP, justifyContent: "center", alignItems: "center" }}>
+       <div style={{ opacity: fade, textAlign: "center" }}>
+          <div style={{ fontSize: 40, color: COLORS.TEXT_MUTED }}>WPM (Typing Speed)</div>
+          <div style={{ width: 400, height: 200, border: `2px solid ${COLORS.BORDER}`, borderBottom: "none", position: "relative", marginTop: 20 }}>
+             <path d="M 0 100 L 100 80 L 200 120 L 300 40 L 400 90" fill="none" stroke={COLORS.NEGATIVE} strokeWidth="4" />
+          </div>
+       </div>
+    </AbsoluteFill>
+  );
+};
+
+const Scene19: React.FC = () => {
+  return (
+    <AbsoluteFill style={{ backgroundColor: COLORS.BG_DEEP, justifyContent: "center", alignItems: "center" }}>
+       <h1 style={{ fontFamily: FONTS.DISPLAY, fontSize: 100, color: COLORS.PRIMARY, fontWeight: "bold" }}>WHAT & WHY</h1>
+    </AbsoluteFill>
+  );
+};
+
+const Scene20: React.FC = () => {
+  const frame = useCurrentFrame();
+  const shiny = interpolate(Math.sin(frame * 0.1), [-1, 1], [0.5, 1]);
+  return (
+    <AbsoluteFill style={{ backgroundColor: COLORS.BG_DEEP, justifyContent: "center", alignItems: "center" }}>
+       <div style={{ fontSize: 200, position: "relative" }}>
+          🧠
+          <div style={{ position: "absolute", left: "50%", top: "40%", width: 100, height: 100, backgroundColor: COLORS.PRIMARY_GLOW, borderRadius: "50%", transform: "translate(-50%, -50%)", filter: `blur(${shiny * 20}px)`, opacity: shiny }} />
+       </div>
+       <div style={{ marginTop: 20, fontFamily: FONTS.PRIMARY, color: COLORS.PRIMARY }}>PRODUCT MINDSET</div>
+    </AbsoluteFill>
+  );
+};
+
+const Scene21: React.FC = () => {
+  const frame = useCurrentFrame();
+  const spark = interpolate(frame, [0, 20], [0, 1]);
+  return (
+    <AbsoluteFill style={{ backgroundColor: COLORS.BG_DEEP, justifyContent: "center", alignItems: "center" }}>
+       <div style={{ fontSize: 200, transform: `rotate(-45deg)` }}>🪄</div>
+       <div style={{ position: "absolute", width: 300, height: 300, background: `radial-gradient(circle, ${COLORS.ACCENT_DIM} 0%, transparent 70%)`, opacity: spark, boxShadow: EFFECTS.GLOW_LG }} />
+    </AbsoluteFill>
+  );
+};
+
+const Scene22: React.FC = () => {
+  const frame = useCurrentFrame();
+  const pulse = 1 + Math.sin(frame * 0.2) * 0.1;
+  return (
+    <AbsoluteFill style={{ backgroundColor: COLORS.BG_DEEP, justifyContent: "center", alignItems: "center" }}>
+       <h1 style={{ fontFamily: FONTS.DISPLAY, fontSize: 200, color: COLORS.PRIMARY, transform: `scale(${pulse})`, textShadow: EFFECTS.GLOW_TEXT }}>GO!</h1>
+    </AbsoluteFill>
+  );
+};
+
+const Scene23: React.FC = () => {
+  return (
+    <AbsoluteFill style={{ backgroundColor: COLORS.BG_DEEP, justifyContent: "center", alignItems: "center" }}>
+       <div style={{ fontSize: 200 }}>🤝</div>
+       <div style={{ marginTop: 40, fontFamily: FONTS.PRIMARY, color: COLORS.TEXT_MUTED }}>HUMAN & AI</div>
+    </AbsoluteFill>
+  );
+};
+
+const Scene24: React.FC = () => {
+  const frame = useCurrentFrame();
+  const horizon = interpolate(frame, [0, 220], [0, 100]);
+  return (
+    <AbsoluteFill style={{ background: `linear-gradient(to top, ${COLORS.BG_VOID}, #FFFFFF)`, justifyContent: "center", alignItems: "center" }}>
+       <div style={{ width: "100%", height: 2, backgroundColor: COLORS.PRIMARY_DIM, position: "absolute", top: "60%" }} />
+       <div style={{ width: 10, height: 400, backgroundColor: COLORS.PRIMARY, position: "absolute", top: "60%", transform: "perspective(100px) rotateX(60deg)", opacity: horizon/100 }} />
+       <h1 style={{ fontFamily: FONTS.DISPLAY, fontSize: 60, color: COLORS.PRIMARY }}>START YOUR JOURNEY</h1>
+    </AbsoluteFill>
+  );
+};
+
+const Scene25: React.FC = () => {
+  const frame = useCurrentFrame();
+  return (
+    <AbsoluteFill style={{ backgroundColor: "#FFFFFF" }}>
+       {[...Array(10)].map((_, i) => (
+         <div key={i} style={{ 
+            position: "absolute", 
+            left: `${random(`smoke-x-${i}`) * 80 + 10}%`, 
+            top: `${random(`smoke-y-${i}`) * 80 + 10}%`, 
+            width: 100, 
+            height: 100, 
+            backgroundColor: [COLORS.PRIMARY, COLORS.SECONDARY, COLORS.ACCENT][i%3], 
+            borderRadius: "50%", 
+            filter: "blur(40px)",
+            opacity: 0.3,
+            transform: `scale(${interpolate(frame, [0, 153], [1, 3])})`
+         }} />
+       ))}
+    </AbsoluteFill>
+  );
+};
+
+const Scene26: React.FC = () => {
+  const frame = useCurrentFrame();
+  const { fps } = useVideoConfig();
+  const s = spring({ frame, fps });
+  return (
+    <AbsoluteFill style={{ backgroundColor: COLORS.BG_DEEP, justifyContent: "center", alignItems: "center" }}>
+       <div style={{ textAlign: "center", transform: `scale(${s})` }}>
+          <div style={{ fontSize: 120, fontFamily: FONTS.DISPLAY, color: COLORS.PRIMARY, textShadow: EFFECTS.GLOW_TEXT }}>REALIZED BY AI</div>
+          <div style={{ marginTop: 20, color: COLORS.TEXT_MUTED, letterSpacing: 5 }}>THANK YOU FOR WATCHING</div>
+       </div>
+       {[...Array(50)].map((_, i) => (
+         <div key={i} style={{
+            position: "absolute",
+            width: 4,
+            height: 4,
+            backgroundColor: COLORS.PRIMARY,
+            left: `${random(`star-x-${i}`) * 100}%`,
+            top: `${random(`star-y-${i}`) * 100}%`,
+            opacity: 0.5,
+         }} />
+       ))}
+    </AbsoluteFill>
+  );
 };
 
 export const Sequences: React.FC = () => {
   return (
     <Series>
-      <Series.Sequence durationInFrames={299} name="Velocity">
-        <Scene1 />
-      </Series.Sequence>
-      <Series.Sequence durationInFrames={386} name="Object">
-        <Scene2 />
-      </Series.Sequence>
-      <Series.Sequence durationInFrames={183} name="Particles">
-        <Scene3 />
-      </Series.Sequence>
-      <Series.Sequence durationInFrames={390} name="Fear">
-        <Scene4 />
-      </Series.Sequence>
-      <Series.Sequence durationInFrames={210} name="Beam">
-        <Scene5 />
-      </Series.Sequence>
-      <Series.Sequence durationInFrames={344} name="Limit">
-        <Scene6 />
-      </Series.Sequence>
-      <Series.Sequence durationInFrames={154} name="StrikeOut">
-        <Scene7 />
-      </Series.Sequence>
-      <Series.Sequence durationInFrames={264} name="Creative">
-        <Scene8 />
-      </Series.Sequence>
-      <Series.Sequence durationInFrames={299} name="Leverage">
-        <Scene9 />
-      </Series.Sequence>
-      <Series.Sequence durationInFrames={220} name="Wall">
-        <Scene10 />
-      </Series.Sequence>
-      <Series.Sequence durationInFrames={507} name="Mindset">
-        <Scene11 />
-      </Series.Sequence>
-      <Series.Sequence durationInFrames={469} name="Road">
-        <Scene12 />
-      </Series.Sequence>
-      <Series.Sequence durationInFrames={322} name="Final">
-        <Scene13 />
-      </Series.Sequence>
+      <Series.Sequence durationInFrames={106}><Scene1 /></Series.Sequence>
+      <Series.Sequence durationInFrames={120}><Scene2 /></Series.Sequence>
+      <Series.Sequence durationInFrames={73}><Scene3 /></Series.Sequence>
+      <Series.Sequence durationInFrames={203}><Scene4 /></Series.Sequence>
+      <Series.Sequence durationInFrames={183}><Scene5 /></Series.Sequence>
+      <Series.Sequence durationInFrames={170}><Scene6 /></Series.Sequence>
+      <Series.Sequence durationInFrames={220}><Scene7 /></Series.Sequence>
+      <Series.Sequence durationInFrames={152}><Scene8 /></Series.Sequence>
+      <Series.Sequence durationInFrames={140}><Scene9 /></Series.Sequence>
+      <Series.Sequence durationInFrames={156}><Scene10 /></Series.Sequence>
+      <Series.Sequence durationInFrames={179}><Scene11 /></Series.Sequence>
+      <Series.Sequence durationInFrames={154}><Scene12 /></Series.Sequence>
+      <Series.Sequence durationInFrames={166}><Scene13 /></Series.Sequence>
+      <Series.Sequence durationInFrames={153}><Scene14 /></Series.Sequence>
+      <Series.Sequence durationInFrames={98}><Scene15 /></Series.Sequence>
+      <Series.Sequence durationInFrames={145}><Scene16 /></Series.Sequence>
+      <Series.Sequence durationInFrames={220}><Scene17 /></Series.Sequence>
+      <Series.Sequence durationInFrames={139}><Scene18 /></Series.Sequence>
+      <Series.Sequence durationInFrames={127}><Scene19 /></Series.Sequence>
+      <Series.Sequence durationInFrames={107}><Scene20 /></Series.Sequence>
+      <Series.Sequence durationInFrames={135}><Scene21 /></Series.Sequence>
+      <Series.Sequence durationInFrames={145}><Scene22 /></Series.Sequence>
+      <Series.Sequence durationInFrames={104}><Scene23 /></Series.Sequence>
+      <Series.Sequence durationInFrames={220}><Scene24 /></Series.Sequence>
+      <Series.Sequence durationInFrames={153}><Scene25 /></Series.Sequence>
+      <Series.Sequence durationInFrames={279}><Scene26 /></Series.Sequence>
     </Series>
   );
 };

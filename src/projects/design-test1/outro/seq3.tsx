@@ -5,6 +5,7 @@ import { COLORS, FONTS, TEXT_SIZE, Z, SPRINGS, EASINGS } from "../theme";
 export const Seq3: React.FC = () => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
+  const {width, height} = useVideoConfig(); 
 
   // 지렛대 모션 중심(Slam In)
   const pivotSub = Math.max(0, frame - 60);

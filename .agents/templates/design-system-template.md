@@ -22,16 +22,18 @@
 {FILL: project 대본에 맞는 카테고리}
 
 [디자인컨셉]
-{FILL: project 대본에 맞는 디자인컨셉}
+
+- {FILL: project 대본에 맞는 디자인컨셉 1}
+- {FILL: project 대본에 맞는 디자인컨셉 2}
+- {FILL: project 대본에 맞는 디자인컨셉 3}
+  // 필요하다면 더 추가
 
 ```ts
 export const BRAND = {
-  PROJECT_ID: "{FILL: 프로젝트 ID (예: nvidia-blackwell-launch)}",
-  MOOD: "{FILL: 전체 무드 키워드 3~5개 (예: 다크 테크, 네온 엣지, 시네마틱, 압도적)}",
-  CONCEPT:
-    "{FILL: 한 줄 컨셉 (예: 엔비디아 블랙웰 아키텍처의 압도적 성능을 극적으로 전달)}",
-  FORBIDDEN:
-    "{FILL: 절대 금지 무드 (예: 귀엽고 캐주얼한 느낌, 파스텔, 느린 페이드)}",
+  PROJECT_ID: "{FILL: 프로젝트 ID}",
+  MOOD: "{FILL: 전체 무드 키워드 3~5개}",
+  CONCEPT: "{FILL: 한 줄 컨셉}",
+  FORBIDDEN: "{FILL: 절대 금지 무드}",
 };
 ```
 
