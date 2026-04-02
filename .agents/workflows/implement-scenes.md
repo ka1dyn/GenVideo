@@ -4,12 +4,40 @@ description: 기획서를 바탕으로 Remotion 씬을 순차적으로 구현하
 
 # /implement-scenes {project_id}
 
-각 섹션의 기획서(`{section}_plan.md`)를 바탕으로 실제 Remotion 컴포넌트를 순차 구현합니다.
+섹션별 Remotion 영상 계확서를 바탕으로 실제 코드로 영상을 구현하는 워크플로우입니다.
+
+## 최종 프로젝트 구조
+
+```
+public/{project_id}/
+    design-system.md
+    {section}/
+        {section}.txt
+        {section}.wav
+        {section}_timestamp.json
+        {section}_context.md
+        {section}_final_timeline.json
+        {section}_plan.md
+
+src/constants/
+    video-config.ts
+
+src/projects/{project_id}/
+    theme.ts                        <--- 디자인 시스템의 상수 모음 (여기서 import 하여 사용)
+    {section}/
+        {section}_subtitles.ts      <--- 해당 섹션의 자막 타이밍 배열
+        {section}.tsx               <--- 해당 섹션의 최상위 Series 래퍼 및 Audio 컴포넌트
+        sequences.tsx               <--- 각 section의 시퀀스 컴포넌트 모음
+
+src/shared-components/
+    CaptionOverlay.tsx
+
+```
 
 ## 사전 조건
 
-- scaffold 완료 상태여야 합니다.
 - 각 섹션의 기획서 작성 완료 (`public/{project_id}/{section}/{section}_plan.md`)
+- 디자인 테마 파일 생성 완료 (`src/projects/{project_id}/theme.ts`)
 
 ## 워크플로우 단계
 
@@ -27,18 +55,16 @@ description: 기획서를 바탕으로 Remotion 씬을 순차적으로 구현하
 - `rules/audio.md` — 오디오 처리
 - `rules/assets.md` — 에셋 임포트
 
-### 2. 섹션 순차 구현
+### 2. 섹션 순차 구현(Loop)
 
 디렉토리 탐색(list_dir 등)의 파일 목록을 바탕으로, 순차적으로 구현을 진행합니다.
 모든 섹션을 **하나씩** 완료한 후 다음 섹션으로 이동합니다 (예: intro → body1 → outro).
 
 각각의 독립된 `{section}`별로 다음을 수행합니다:
 
-#### 2-1. 자막 배열 생성
+#### 2-1. 자막 배열 하드코딩
 
-**매우 중요한 부분이므로 집중하세요**
-
-- `public/{project_id}/{section}/{section}_final_timeline.json`에 기록된 sentence 타이밍을 기준으로 파일(`{section}_subtitles.ts`)에 자막 배열(`Subtitle[]`)을 하드코딩합니다. 자막의 타이밍은 `startMs`/`endMs`(밀리초 단위)를 사용합니다.
+- `public/{project_id}/{section}/{section}_final_timeline.json`에 기록된 sentence 타이밍을 기준으로 `src/projects/{project_id}/{section}/{section}_subtitles.ts` 파일에 자막 배열(Subtitle[])을 하드코딩합니다.
 
 ```typescript
 import { Subtitle } from "../../../types/Subtitle";
@@ -47,89 +73,87 @@ export const introSubtitles: Subtitle[] = [
   {
     startMs: 0,
     endMs: 2900,
-    text: {sentence 텍스트 입력},
+    text: "단어를 조합한 원본과 일치하는 문장",
   },
   {
     startMs: 2900,
     endMs: 5860,
     text: "문장이 30자 이상으로 길다면 가독성을 고려해 의미 단위로\n줄바꿈 문자를 추가해 2줄로 표시되도록 하세요",
   },
-
   // ... 이하 동일 구조
 ];
 ```
 
-#### 2-2. 필수 준수 규칙 (프로젝트 고유 제약사항)
+#### 2-2. 기획서 확인
 
-> 💡 Remotion 기초 문법(`interpolate`, `spring`, `staticFile`, `extrapolate: 'clamp'` 등)은 반복 명시하지 않으며 `remotion-best-practices` 스킬을 따릅니다. 워크플로우 실행 시 다음의 프로젝트 핵심 원칙을 우선 준수합니다.
+각 섹션의 기획서(`{section}_plan.md`)를 확인하고 주제, 내용, 맥락을 이해합니다.
 
-- AI 본인이 세계적인 예술가, 연출가, 크리에이터가 된 것처럼, 사람들의 이목을 끌 수 있는 압도적인 연출을 구현해내세요.
-- 기존의 UI/UX 지식에 절대 얽매이지 않습니다.
-- **다채로운 레이아웃과 CSS 기법 (의무):** 뻔한 중앙 정렬(Center align)과 단순 페이드 인을 남발하는 것을 금지합니다. 매 씬마다 기획서를 바탕으로 **단순하지 않은 창의적인 구도**를 구현해야 합니다.
-  - 다양한 화면 분할(Flexbox, Grid), 비대칭 배치, 대각선 구도를 적극 활용하세요.
-  - 3D 효과(`perspective`), 클리핑 마스크(`clipPath`), SVG 패스 애니메이션, 엇박자 타이밍 등 **고급 CSS/Remotion 기법**을 최소 하나 이상 적용하여 역동성을 부여하세요.
-- **언어 및 텍스트 (중요! 반드시 지키기):**
-  - 화면에 노출되는 UI 텍스트는 회사명, 약어 등 영어로만 나타낼 수 있는 부분을 제외하고 전부 한국어 단어로 작성합니다.
+#### 2-3. 시퀀스 스켈레톤(껍데기) 선행 생성
 
-#### 2-3. 기획서 및 컨텍스트 확인
+`src/projects/{project_id}/{section}/sequences.tsx` 파일을 생성하고 아래와 같이 뼈대를 잡습니다.
 
-- 먼저 `public/{project_id}/{section}/{section}_plan.md`를 읽으세요.
-- 이후 `public/{project_id}/{section}/{section}_final_timeline.json` 를 읽어 원본 대본과 시퀀스 타임스탬프 타이밍을 더블체크합니다.
-- [중요]`public/{project_id}/design-system.md`가 존재하면 다시 읽고, 구현 시 브랜드 규약(색상 톤, 폰트, 무드 등)을 반영합니다.
-
-#### 2-4. 시퀀스 컴포넌트 파일 생성
-
-기획서의 각 시퀀스들을 나열할 시퀀스 컴포넌트 파일을 생성합니다.
-(배치 경로: `src/projects/{project_id}/{section}/sequences.tsx`)
+- [매우중요] 각 Scene 컴포넌트 바로 위에 JSDoc(/\*\* \*/)을 열고, {section}\_plan.md에 있는 해당 씬의 '원본 텍스트'와 '비주얼 컨셉'을 그대로 복사하여 주석으로 삽입하세요.
+- 최하단 Sequences 컴포넌트에는 <Series>를 절대 사용하지 말고, `public/{project_id}/{section}/{section}_final_timeline.json`에 명시된 startFrame과 durationInFrames 값을 가져와 **절대 좌표 <Sequence>**로 렌더링하세요.
 
 ```tsx
 import React from "react";
-import { AbsoluteFill, Series } from "remotion";
+import { AbsoluteFill, Sequence } from "remotion";
+// import { COLORS, FONTS } from "../theme"; // 테마 임포트 예시
 
-// 하위 시퀀스(씬)들을 단일 파일 내에 컴포넌트로 분리하여 정의합니다.
+/**
+ * [Scene 1 기획안]
+ * 원본 텍스트: (plan.md의 해당 scene 텍스트를 그대로 복사하여 삽입)
+ * 비주얼 컨셉: (plan.md의 내용을 그대로 복사하여 삽입)
+ */
 const Scene1: React.FC = () => {
-  return (
-    <AbsoluteFill>
-      {/* 
-        - 기획서에 써 있는 내용을 기반으로 창의적이고 독창적이며, 대본 맥락에
-        잘 맞아서 시청자들이 이해하기 쉬운 방식으로 구현합니다. 
-        - 각 Scene 내부에서 Sequence를 또 나눠서 사용해도 좋습니다 판단대로 진행하세요.
-        - 시퀀스 길이에 맞게, 후반부까지 애니메이션이 다양하게 이어지도록 합니다.
-        - 만약 단어 단위의 애니메이션이 필요하다면, final_timeline.json에 기록된
-        **현재 sentence**의 단어 타임스탬프을 참고해서 구현합니다.
-      */}
-    </AbsoluteFill>
-  );
+  // TODO: Phase 2에서 구현
+  return <AbsoluteFill></AbsoluteFill>;
 };
 
+/**
+ * [Scene 2 기획안]
+ * 원본 텍스트:
+ * 비주얼 컨셉:
+ */
 const Scene2: React.FC = () => {
-  return <AbsoluteFill>{/* 씬 2 구현 내용 */}</AbsoluteFill>;
+  // TODO: Phase 2에서 구현
+  return <AbsoluteFill></AbsoluteFill>;
 };
 
 export const Sequences: React.FC = () => {
   return (
-    <Series>
-      {/* Series 내부에 Series.Sequence를 사용하여 각 씬을 타임라인에 순차적으로 배치합니다. */}
-      {/* durationInFrames는 기획서에 명시된 해당 씬의 프레임 길이에 맞게 설정합니다. */}
-      <Series.Sequence durationInFrames={120}>
+    <AbsoluteFill>
+      {/* json의 startFrame과 durationInFrames 값을 하드코딩 매핑 */}
+      <Sequence from={0} durationInFrames={94}>
         <Scene1 />
-      </Series.Sequence>
-      <Series.Sequence durationInFrames={150}>
+      </Sequence>
+      <Sequence from={94} durationInFrames={178}>
         <Scene2 />
-      </Series.Sequence>
-    </Series>
-  ); // return
+      </Sequence>
+    </AbsoluteFill>
+  );
 };
 ```
 
-#### 2-5. 섹션 루트 컴포넌트 업데이트
+#### 2-4. 구현 전 필수 준수 규칙 (수석 디자이너 페르소나 적용)
 
-최상위 섹션 루트 파일인 `src/projects/{project_id}/{section}/{section}.tsx`를 수정합니다.
+> 💡 뼈대가 완성되었습니다. 이제 빈 컴포넌트를 채워 넣을 차례입니다. 당신은 지금부터 Apple, Vercel, Toss와 같은 최고 수준의 IT 기업에서 일하는 수석 UI/UX 모션 디자이너입니다. 복잡하고 유치한 연출을 철저히 배제하고, 깔끔하고 구조적인 코드로 세련미를 극대화하세요.
 
-##### 자막 처리 가이드
+- 미니멀리즘과 구조적 레이아웃: 뻔한 중앙 정렬이나 예술적인 기교보다는 타이포그래피, 여백, 정교한 Grid/Flexbox 정렬을 사용하여 전문적이고 신뢰감 있는 UI를 구성하세요.
+- In-Scene Animation (1:1 대응): 잦은 화면 전환(Cut)을 금지합니다. 하나의 씬 내부에서 컴포넌트들이 spring과 interpolate를 통해 크기, 투명도, 위치를 물리적으로 쫀득하게 바꾸며 유기적으로 변형되도록 2~3단계 모션을 반드시 구현하세요.
+- 클리셰 메타포 절대 금지 & 이모지 사용 금지: 가위, 전구, 돋보기 등 단어를 일차원적으로 표현하는 촌스러운 아이콘을 절대 사용하지 마세요. 또한 시스템 이모지(✅ 등) 사용을 엄격히 금지하며, 대신 순수 CSS나 SVG 패스를 활용해 직접 드로잉하세요.
+- 디자인 시스템 강제: 색상, 그림자, 글로우 효과 등은 반드시 `public/{project_id}/design-system.md`에 정의된 상수만 가져와서 사용해야 합니다.
+- 언어 및 텍스트: 화면에 노출되는 UI 텍스트는 프로그래밍 용어/회사명 등을 제외하고 모두 한국어 단어로 작성합니다.
 
-- 섹션 루트 컴포넌트(`{section}.tsx`)의 최상위 `AbsoluteFill` 가장 하단에 `src/shared-components/CaptionOverlay.tsx`를 배치하여 자막이 모든 영상 시각 요소 위에 오버레이 되도록 합니다.
-- 위에서 생성한 `{section}_subtitles` 배열을 `captions` props로 전달합니다. (`CaptionOverlay`가 내부적으로 `whiteSpace: 'pre-line'` 기법 및 애니메이션을 모두 처리하므로 별도의 스타일링은 불필요합니다.)
+#### 2-5. 디테일 구현(Chunking & Iteration)
+
+- 규칙 숙지가 끝났다면, 스켈레톤 파일(`src/projects/{project_id}/{section}/sequences.tsx`)의 빈 컴포넌트를 최대 3개 단위(Chunk)로 묶어서 순차적으로 내부 UI와 애니메이션 로직을 채워 넣습니다.
+- 다른 문서를 다시 열람할 필요 없이, 컴포넌트 바로 위에 적힌 기획 주석(JSDoc)에만 100% 의존하여 구현에 집중하세요.
+- 모든 Scene의 TODO 코드를 완벽하게 채울 때까지 이 작업을 반복 수행합니다.
+
+#### 2-6. 섹션 루트 컴포넌트 조립
+
+최상위 섹션 파일(`src/projects/{project_id}/{section}/{section}.tsx`)을 수정하여 오디오, 화면(Sequences), 자막을 조립합니다.
 
 ```tsx
 import React from "react";
@@ -141,13 +165,13 @@ import { Sequences } from "./sequences";
 export const Intro: React.FC = () => {
   return (
     <AbsoluteFill>
-      {/* 1. 오디오는 루트 컴포넌트에서만 단 한 번 선언 및 렌더링 */}
-      <Audio src={staticFile("project_id/intro/intro.wav")} />
+      {/* 1. 오디오 단일 선언 */}
+      <Audio src={staticFile(`project_id/intro/intro.wav`)} />
 
-      {/* 2. 하위 씬들의 묶음인 Sequences 렌더링 (단일 파일에서 모든 자식 씬 조립됨) */}
+      {/* 2. 절대 프레임 좌표로 배치된 하위 씬들의 묶음 렌더링 */}
       <Sequences />
 
-      {/* 3. 화면 최상단에 렌더링되도록 문서 제일 마지막에 자막 오버레이 컴포넌트 배치 */}
+      {/* 3. 화면 최상단 자막 오버레이 (whiteSpace: 'pre-line' 자동 처리됨) */}
       <CaptionOverlay captions={introSubtitles} />
     </AbsoluteFill>
   );
