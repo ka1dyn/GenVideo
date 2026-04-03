@@ -10,8 +10,7 @@ description: remotion 기반 영상을 작성하기 전 영상을 기획, 준비
 
 - **Phase 1: Scaffold** → (사용자가 사전 실행 완료) 폴더 구조, TTS 음성, 타임스탬프, 컨텍스트 파일 생성
 - **Phase 2: Set Timeline** → 원본 대본, 타임스탬프 값을 기반으로 최종 타임라인을 완성
-- **Phase 3: Design System** → 디자인시스템 확인 또는 자체 생성
-- **Phase 4: Plan** → 모델 기반으로 각 섹션별 애니메이션 기획서 작성
+- **Phase 3: Plan** → 모델 기반으로 각 섹션별 애니메이션 기획서 작성
 
 ## 프로젝트 예상 구조
 
@@ -22,20 +21,20 @@ description: remotion 기반 영상을 작성하기 전 영상을 기획, 준비
 
 ```text
 public/{project_id}/
-    design-system.md                <--- (Phase 3에서 확인 또는 생성) 브랜드 디자인 규약
+    design-system.md                <--- 브랜드 디자인 규약
     {section}/
         {section}.txt               <--- 대본에서 추출된 해당 섹션 원본 텍스트
         {section}.wav               <--- 원본 텍스트를 바탕으로 생성된 TTS 오디오
         {section}_timestamp.json    <--- 오디오를 기반으로 생성된 단어 타임스탬프 (Whisper AI)
         {section}_context.md        <--- 원본 대본과 타임스탬프 간 매핑 가이드가 포함된 종합 컨텍스트 요약본
         {section}_final_timeline.json  <--- (Phase 2에서 생성 예정), 최종 타임라인
-        {section}_plan.md           <--- (Phase 4에서 생성 예정) 애니메이션 및 시퀀스 기획서
+        {section}_plan.md           <--- (Phase 3에서 생성 예정) 애니메이션 및 시퀀스 기획서
 
 src/constants/
     video-config.ts                 <--- 60fps 해상도 등 전체 프로젝트의 기준이 되는 동적 상수 설정 (읽기 전용 참조)
 
 src/projects/{project_id}/
-    theme.ts                        <--- (Phase 4에서 생성 예정) 디자인 시스템의 상수 모음
+    theme.ts                        <--- 디자인 시스템의 상수 모음
 
 ```
 
@@ -54,17 +53,6 @@ src/projects/{project_id}/
 `.agents/workflows/set-timeline.md` 경로의 워크플로우 문서를 읽고 지시사항에 따라 타임라인을 구성하세요.
 해당 단계를 바탕으로 탐색된 모든 섹션의 `_final_timeline.json` 파일을 자동 생성합니다.
 
-## Phase 3: Design System
-
-`public/{project_id}/design-system.md` 파일 존재 여부를 확인합니다.
-
-- **파일이 있으면**: 파일을 읽지 말고 이 단계를 건너뜁니다.
-- **파일이 없으면**: 각 섹션의 원본 대본(`public/{project_id}/{section}/{section}.txt`)을 모두 읽고, 전체 영상의 주제·분위기·톤을 분석하여 `.agents/templates/design-system-template.md` 포맷에 맞게 디자인 시스템을 **자동 생성**합니다. `public/{project_id}/design-system.md`에 저장합니다.(가장 중요한건, 각 상수의 주석까지 전부 복사하세요. AI가 읽고 어떤 때에 사용해야하는지 명시해야합니다.)
-
-생성된 `public/{project_id}/design-system.md` 문서의 모든 상수(Constants) 블록을 추출하여 `src/projects/{project_id}/theme.ts` 파일로 통합 저장하세요. 이 때에는 주석은 없어도 됩니다. 값만 복사하세요
-
-이 단계까지 끝났다면 사용자에게 계획 시작 승인을 요청하세요
-
 ## Phase 4: Plan
 
 각 섹션별로 기획서를 작성하는 단계입니다.
@@ -75,11 +63,11 @@ src/projects/{project_id}/
 
 ## Phase 5: Skeleton Code Generation
 
-#### 2-3. 시퀀스 스켈레톤 코드 선행 생성
+각 section을 loop로 돌면서 아래 사항을 수정합니다.
 
 `src/projects/{project_id}/{section}/sequences.tsx` 파일을 생성하고 아래와 같이 뼈대를 잡습니다.
 
-- [매우중요] 각 Scene 컴포넌트 바로 위에 JSDoc(/\*\* \*/)을 열고, {section}\_plan.md에 있는 해당 씬의 '원본 텍스트'와 '비주얼 컨셉', 'In-SceneAnimation 기획'을 그대로 복사하여 주석으로 삽입하세요.
+- [매우중요] 각 Scene 컴포넌트 바로 위에 JSDoc(/\*\* \*/)을 열고, {section}\_plan.md에 있는 해당 씬의 '원본 텍스트'와 '단어 등장 시간', '비주얼 컨셉'을 그대로 복사하여 주석으로 삽입하세요.
 - 최하단 Sequences 컴포넌트에는 <Series>를 절대 사용하지 말고, `public/{project_id}/{section}/{section}_final_timeline.json`에 명시된 startFrame과 durationInFrames 값을 가져와 **절대 좌표 <Sequence>**로 렌더링하세요.
 - 아래 예시 스켈레톤 코드를 적극 참고하세요
 
@@ -91,13 +79,8 @@ import { AbsoluteFill, Sequence } from "remotion";
 /**
  * [Scene 1 기획안]
  * 원본 텍스트: (plan.md의 해당 scene 텍스트를 그대로 복사하여 삽입)
+ * 단어 등장 시간: (plan.md의 해당 scene 텍스트를 그대로 복사하여 삽입)
  * 비주얼 컨셉: (plan.md의 내용을 그대로 복사하여 삽입)
- * In-SceneAnimation 기획:
- *  - 진입 (0f ~ {}f):
- *  - 단계 1 ({f} ~ {f}):
- *  - 단계 2 ({f} ~ {f}):
- *  - ... (여러 단계)
- *  - 퇴장 ({f} ~ 끝):
  */
 const Scene1: React.FC = () => {
   // TODO: 주석 내용에 맞게 구현
