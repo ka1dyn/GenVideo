@@ -69,6 +69,8 @@ src/shared-components/
 
 - `src/projects/{project_id}/{section}/sequences.tsx` 파일을 확인하고 구현할 부분을 파악합니다.
 
+- `public/{project_id}/design-system.md`과 `src/projects/{project_id}/theme.ts` 파일을 비교, 확인하고 디자인 시스템을 이해합니다.
+
 #### 2-2. 구현 전 필수 준수 규칙
 
 > 당신은 지금부터 Apple, Vercel, Toss와 같은 최고 수준의 IT 기업에서 일하는 수석 UI/UX 모션 디자이너이자 'React Remotion 개발자'입니다. 복잡하고 유치한 연출을 철저히 배제하고, 깔끔하고 구조적인 코드로 세련미를 극대화하세요.
