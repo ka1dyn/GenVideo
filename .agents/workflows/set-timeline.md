@@ -34,7 +34,7 @@ description: TTS와 whisper를 통해 얻은 타임스탬프 데이터를 기반
 
 - 우선 마침표, 느낌표, 물음표를 기준으로 sentence를 나눕니다.
 - 각 sentence의 길이를 분석합니다. `마지막 단어의 endMs - 첫번째 단어의 startMs`로 계산 가능합니다.
-- 만약 sentence의 길이가 7초를 넘어간다면, 해당 sentence를 분할하는 것을 강력히 권장합니다. 하지만 자연스러운 호흡을 해치지 않는 선에서 분할해야합니다. 자막의 단위이므로, 읽을 때 어색하지 않도록 분할합니다.
+- 만약 sentence의 길이가 7초를 넘어간다면, 해당 sentence를 **반드시 분할**하세요. 자막의 단위이므로, 읽을 때 어색하지 않도록 분할합니다.
 - 분할까지 완료된 최종 sentence는 마침표, 느낌표, 물음표로 끝나지 않아도 됩니다. 기본적으로는 원본 문장 단위가 맞지만, 문장이 길면 분할할 뿐입니다.
 
 ### 반드시 지켜야 할 사항
@@ -68,7 +68,7 @@ durationInFrames = 임시 endFrame - startFrame
   "sentences": [
     {
       "sentence": "단어를 조합한 원본과 일치하는 문장",
-      "startMs": 0, // 첫 번째 단어의 startMs와 동일해야함.
+      "startMs": 0, // 첫 번째 단어의 startMs와 동일해야함. [매우매우 중요]첫 sentence는 반드시 0으로 시작해야함
       "endMs": 2900, // 다음 sentence의 startMs와 동일해야함. (마지막 단어의 endMs가 아닙니다)
       "startFrame": 0, // Math.round((startMs / 1000) * VIDEO_FPS)
       "durationInFrames": 174, // endFrame - startFrame

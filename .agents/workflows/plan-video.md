@@ -59,9 +59,11 @@ src/projects/{project_id}/
 `public/{project_id}/design-system.md` 파일 존재 여부를 확인합니다.
 
 - **파일이 있으면**: 파일을 읽지 말고 이 단계를 건너뜁니다.
-- **파일이 없으면**: 각 섹션의 원본 대본(`public/{project_id}/{section}/{section}.txt`)을 모두 읽고, 전체 영상의 주제·분위기·톤을 분석하여 `.agents/templates/design-system-template.md` 포맷에 맞게 디자인 시스템을 **자동 생성**합니다. `public/{project_id}/design-system.md`에 저장합니다.(필요 시 다른 프로젝트의 문서를 복사하여 재사용할 수 있습니다.)
+- **파일이 없으면**: 각 섹션의 원본 대본(`public/{project_id}/{section}/{section}.txt`)을 모두 읽고, 전체 영상의 주제·분위기·톤을 분석하여 `.agents/templates/design-system-template.md` 포맷에 맞게 디자인 시스템을 **자동 생성**합니다. `public/{project_id}/design-system.md`에 저장합니다.(가장 중요한건, 각 상수의 주석까지 전부 복사하세요. AI가 읽고 어떤 때에 사용해야하는지 명시해야합니다.)
 
-생성된 `public/{project_id}/design-system.md` 문서의 모든 상수(Constants) 블록을 추출하여 `src/projects/{project_id}/theme.ts` 파일로 통합 저장하세요.
+생성된 `public/{project_id}/design-system.md` 문서의 모든 상수(Constants) 블록을 추출하여 `src/projects/{project_id}/theme.ts` 파일로 통합 저장하세요. 이 때에는 주석은 없어도 됩니다. 값만 복사하세요
+
+이 단계까지 끝났다면 사용자에게 계획 시작 승인을 요청하세요 <--- 반드시 멈춤
 
 ## Phase 4: Plan
 

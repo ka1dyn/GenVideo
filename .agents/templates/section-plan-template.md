@@ -1,7 +1,6 @@
 # {Section} 애니메이션 기획서
 
 > ⚠️ AI 작성 지시문
-
 > 이 파일을 public/{project_id}/{section}/{section}-plan.md로 저장한다.
 > {FILL: ...} 형태를 모두 실제 값으로 교체한다.
 > 이 안내 블록은 삭제한다.
@@ -28,50 +27,30 @@
 
 - 타임라인 수치는 `public/{project_id}/{section}/{section}_final_timeline.json`과 100% 일치해야 하며, 임의로 수정하지 않는다.
 - Scene 수는 timeline의 sentence 수와 반드시 일치해야 한다. (sentence 1개 = Scene 1개)
-- 주제와 내용에 맞는 영상을 연출해야 한다.
-- `public/{project_id}/design-system.md`에 명시된 항목(색상 톤, 폰트, 무드 등)은 **반드시 준수**한다.
-- **명시되지 않은 영역은 AI가 자유롭고 창의적으로 구성**한다.
+- `public/{project_id}/design-system.md`에 명시된 항목(색상 톤, 폰트, 무드 등)은 반드시 준수한다.
 
-### 공통 비주얼 컨셉 규칙 (모든 Scene에 적용)
+### 🚨 공통 비주얼 컨셉 및 Remotion 구현 규칙 (필독)
 
-1. 당신은 트렌디한 IT 기업의 수석 UI/UX 모션 디자이너입니다.
-2. 단어를 일차원적으로 묘사하는 유치한 아이콘(가위, 전구, 돋보기 등) 사용을 엄격히 금지합니다.
-3. 데이터의 흐름, UI 컴포넌트의 배치 변화, 타이포그래피, 추상적인 기하학 도형을 활용하여 시각화하세요.
-4. 씬 전환(Cut)을 최소화하고, 하나의 씬 내부에서 요소들의 색상, 모션이 깔끔하게 바뀌는 'In-Scene Animation'을 2~3단계로 상세히 기획하세요.
+1. 당신은 트렌디한 IT 기업의 수석 UI/UX 모션 디자이너이자 'React Remotion 개발자'입니다.
+2. 모든 애니메이션은 Remotion의 `interpolate`, `spring` 함수와 CSS 속성(transform, opacity, color 등)으로 실제 구현 가능한 수준으로 기획해야 합니다.
+3. [선택사항: R3F를 쓸 경우] 3D 파티클이나 복잡한 도형 연출은 React Three Fiber(<Canvas>) 영역으로 배정하고, 텍스트나 단순 UI는 2D DOM 영역으로 분리하여 기획하세요.
+4. 두루뭉술한 표현("화려하게 등장한다", "마법처럼 변한다")을 금지하고, 애니메이션의 Target Property와 변화량(예: Scale 0 -> 1)을 명확히 기재하세요.
 
 ### Scene 작성 형식
 
-각 시퀀스를 다음과 같이 나열합니다.
+각 시퀀스를 다음과 같이 나열합니다. 이 때, 각 Scene을 한번에 전부 생각하지 말고 최대 3개의 Scene을 Chunk 단위로 Iterate하게 계획하세요.
 
-```
 Scene 1
-    - 원본 텍스트: {FILL: timeline에서 읽은 sentence 원문 — 수정 금지}
-    - 타임라인: {FILL: startFrame}f 부터 시작 (총 {FILL: durationInFrames}f 지속) / ({FILL: startMs}ms ~ {FILL: endMs}ms)
-    - 비주얼 컨셉: {FILL: 상단 공통 규칙을 준수하여, 이 씬의 레이아웃·핵심 요소·연출 방향을 2~3문장으로 요약}
 
-    In-Scene Animation 기획 (※ 씬 내부 프레임(0 기준 상대값)으로 작성하며, 합계가 durationInFrames를 초과할 수 없음)
-    1. 몇 단계로 나눌 지 직접 판단.
-    2. 각 단계별로 프레임과 설명을 작성.
+- 원본 텍스트: {FILL: timeline에서 읽은 sentence 원문 — 수정 금지}
+- 타임라인: {FILL: startFrame}f 부터 시작 (총 {FILL: durationInFrames}f 지속)
+- 비주얼 컨셉: {FILL: 이 씬의 전반적인 레이아웃과 핵심 연출 방향}
+- 필요 컴포넌트: {FILL: 이 씬을 구현하기 위해 분리해야 할 React 컴포넌트 목록. 예: <BackgroundParticles />, <GaugeChart />}
+- In-Scene Animation 기획 (※ 씬 내부 프레임(0 기준 상대값)으로 작성, 합계가 durationInFrames를 초과할 수 없음, 몇 단계로 나눠야할지 직접 판단하고 단계별로 프레임과 설명을 작성하기, `public/{project_id}/design-system.md`에 명시된 상수만 사용 가능. 다른 값 임의사용 절대금지)
+  - 진입 (0f ~ {FILL}f): [어떤 요소가] [어떤 속성으로 어떻게 변하는지]. 예: Title Text가 Opacity 0->1, TranslateY 50px->0px로 spring 애니메이션 진입.
+  - 단계1 ({FILL}f ~ {FILL}f): {FILL: 핵심 로직 설명. 예: interpolate를 사용해 0f~100f 동안 progress 값을 0에서 55로 카운트업}
+  - 단계2 ({FILL}f ~ {FILL}f): {FILL}
+  - ... (여러 단계)
+  - 퇴장 ({FILL}f ~ 끝): {FILL: 허용 전환 - Fade, Slide, 금지 전환 - rotate, wipe, zoom burst}
 
-    - 진입 (0f ~ {FILL}f): {FILL}
-    - 단계1 ({FILL}f ~ {FILL}f): {FILL}
-    - 단계2 ({FILL}f ~ {FILL}f): {FILL}
-    - ... (이하 루프)
-    - 퇴장 ({FILL}f ~ 끝): {FILL}
-
-Scene 2
-    - 원본 텍스트:
-    - 타임라인:
-    - 비주얼 컨셉:
-
-    - 진입 (0f ~ {FILL}f): {FILL}
-    - 단계1 ({FILL}f ~ {FILL}f): {FILL}
-    - ... (이하 루프)
-    - 퇴장 ({FILL}f ~ 끝): {FILL}
-
-... (이하 루프)
-
-```
-
-총 Scene의 개수는 timeline의 개수와 일치합니다.
-
+... (이하 루프 반복)
