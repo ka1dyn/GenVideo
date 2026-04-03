@@ -71,7 +71,7 @@ src/shared-components/
 
 - **생성 경로:** `src/projects/{project_id}/components/`
 - **설계 원칙 (Separation of Concerns):**
-  1. **로직 중심 설계:** 컴포넌트는 `spring`, `interpolate`를 활용한 **'움직임의 로직'** 구현에 집중하세요. (예: "글자가 튀어 오르는 물리 법칙")
+  1. **로직 중심 설계:** 컴포넌트는 `spring`, `interpolate`를 활용한 **'움직임의 로직'** 구현에 집중하세요.
   2. **스타일 주입 (Props):** `color`, `fontSize`, `fontWeight`, `delay` 등 시각적 속성은 내부에서 결정하지 말고 **반드시 Props를 통해 외부에서 주입**받도록 만드세요.
   3. **순수성 유지:** 컴포넌트 파일 자체에서 `theme.ts`를 직접 참조(Import)하는 것을 지양하고, **사용하는 쪽(Scene)에서 `theme.ts`의 상수를 Prop으로 넘겨주도록** 유도하여 재사용성을 극대화하세요.
 - **중복 방지:** 이미 `components/` 폴더에 생성된 동일한 목적의 컴포넌트가 있다면 새로 만들지 말고 적극적으로 재사용하세요.
@@ -98,9 +98,7 @@ const Scene1: React.FC = () => {
   return (
     <AbsoluteFill>
       {/* 1. 배경 레이어: 화면 전체 사용. (자막 영역 하단 150px을 침범해도 되는 배경색, 배경 이미지, 파티클 등) */}
-      <AbsoluteFill>
-         {/* 배경 요소는 이 곳에 */}
-      </AbsoluteFill>
+      <AbsoluteFill>{/* 배경 요소는 이 곳에 */}</AbsoluteFill>
 
       {/* 2. 메인 콘텐츠 안전 레이어: 자막과 겹치지 않도록 bottom: 150으로 하단이 격리된 도화지 */}
       <AbsoluteFill style={{ bottom: 150, height: "auto" }}>
@@ -120,9 +118,7 @@ const Scene2: React.FC = () => {
   return (
     <AbsoluteFill>
       {/* 1. 배경 레이어: 화면 전체 사용. (자막 영역 하단 150px을 침범해도 되는 배경색, 배경 이미지, 파티클 등) */}
-      <AbsoluteFill>
-         {/* 배경 요소는 이 곳에 */}
-      </AbsoluteFill>
+      <AbsoluteFill>{/* 배경 요소는 이 곳에 */}</AbsoluteFill>
 
       {/* 2. 메인 콘텐츠 안전 레이어: 자막과 겹치지 않도록 bottom: 150으로 하단이 격리된 도화지 */}
       <AbsoluteFill style={{ bottom: 150, height: "auto" }}>
