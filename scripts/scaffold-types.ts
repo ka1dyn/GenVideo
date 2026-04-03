@@ -5,8 +5,8 @@ export interface Section {
 
 export interface TimestampEntry {
   text: string;
-  startMs: number;
-  endMs: number;
+  startFrame: number;
+  endFrame: number;
 }
 
 export interface SectionMeta extends Section {

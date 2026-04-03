@@ -11,7 +11,6 @@
 
 주제: {FILL: 이 섹션이 다루는 핵심 주제}
 내용 요약: {FILL: 3~5문장으로 섹션 전체 흐름 요약}
-감정 톤: {FILL: 예 — 신뢰감 있는 설명체 / 긴장감 있는 임팩트 / 따뜻하고 공감적인 마무리}
 
 2. 섹션 개요
 
@@ -32,9 +31,8 @@
 ### 🚨 공통 비주얼 컨셉 및 Remotion 구현 규칙 (필독)
 
 1. 당신은 트렌디한 IT 기업의 수석 UI/UX 모션 디자이너이자 'React Remotion 개발자'입니다.
-2. 모든 애니메이션은 Remotion의 `interpolate`, `spring` 함수와 CSS 속성(transform, opacity, color 등)으로 실제 구현 가능한 수준으로 기획해야 합니다.
-3. [선택사항: R3F를 쓸 경우] 3D 파티클이나 복잡한 도형 연출은 React Three Fiber(<Canvas>) 영역으로 배정하고, 텍스트나 단순 UI는 2D DOM 영역으로 분리하여 기획하세요.
-4. 두루뭉술한 표현("화려하게 등장한다", "마법처럼 변한다")을 금지하고, 애니메이션의 Target Property와 변화량(예: Scale 0 -> 1)을 명확히 기재하세요.
+2. 단어를 일차원적으로 묘사하는 유치한 아이콘(가위, 전구, 돋보기 등) 사용을 엄격히 금지합니다. 맥락에 맞는 시각적 디자인을 묘사하세요
+3. 데이터의 흐름, UI 컴포넌트의 배치 변화, 타이포그래피, 추상적인 기하학 도형을 활용하여 시각화하세요. 곡선보다는 직선 위주의 심플함을 선호합니다.
 
 ### Scene 작성 형식
 
@@ -43,14 +41,8 @@
 Scene 1
 
 - 원본 텍스트: {FILL: timeline에서 읽은 sentence 원문 — 수정 금지}
+- 단어 등장 시간 : {단어별 등장 시간. 예: "AI": 0f, "개발": 16f, "혁신": 23f, ... (final_timeline.json의 단어별 startFrame과 100% 일치해야 함)}
 - 타임라인: {FILL: startFrame}f 부터 시작 (총 {FILL: durationInFrames}f 지속)
-- 비주얼 컨셉: {FILL: 이 씬의 전반적인 레이아웃과 핵심 연출 방향}
-- 필요 컴포넌트: {FILL: 이 씬을 구현하기 위해 분리해야 할 React 컴포넌트 목록. 예: <BackgroundParticles />, <GaugeChart />}
-- In-Scene Animation 기획 (※ 씬 내부 프레임(0 기준 상대값)으로 작성, 합계가 durationInFrames를 초과할 수 없음, 몇 단계로 나눠야할지 직접 판단하고 단계별로 프레임과 설명을 작성하기, `public/{project_id}/design-system.md`에 명시된 상수만 사용 가능. 다른 값 임의사용 절대금지)
-  - 진입 (0f ~ {FILL}f): [어떤 요소가] [어떤 속성으로 어떻게 변하는지]. 예: Title Text가 Opacity 0->1, TranslateY 50px->0px로 spring 애니메이션 진입.
-  - 단계1 ({FILL}f ~ {FILL}f): {FILL: 핵심 로직 설명. 예: interpolate를 사용해 0f~100f 동안 progress 값을 0에서 55로 카운트업}
-  - 단계2 ({FILL}f ~ {FILL}f): {FILL}
-  - ... (여러 단계)
-  - 퇴장 ({FILL}f ~ 끝): {FILL: 허용 전환 - Fade, Slide, 금지 전환 - rotate, wipe, zoom burst}
+- 비주얼 컨셉: {FILL: 상단 공통 규칙을 준수하여, 이 씬의 레이아웃·핵심 요소·연출 방향을 2~3문장으로 요약}
 
 ... (이하 루프 반복)

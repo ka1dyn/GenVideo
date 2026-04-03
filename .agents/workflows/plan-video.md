@@ -63,7 +63,7 @@ src/projects/{project_id}/
 
 생성된 `public/{project_id}/design-system.md` 문서의 모든 상수(Constants) 블록을 추출하여 `src/projects/{project_id}/theme.ts` 파일로 통합 저장하세요. 이 때에는 주석은 없어도 됩니다. 값만 복사하세요
 
-이 단계까지 끝났다면 사용자에게 계획 시작 승인을 요청하세요 <--- 반드시 멈춤
+이 단계까지 끝났다면 사용자에게 계획 시작 승인을 요청하세요
 
 ## Phase 4: Plan
 
@@ -71,4 +71,80 @@ src/projects/{project_id}/
 
 탐색 된 각 섹션 폴더를 하나씩 돌면서 `.agents/templates/section-plan-template.md` 템플릿 가이드에 맞춰 `public/{project_id}/{section}/{section}_plan.md` 파일을 생성하고 내용을 적어주세요.
 
-**최종 승인**: 모든 기획서 작성이 완료되면 사용자에게 최종 검토 및 승인을 요청하세요.
+**계획 승인 요청**: 모든 기획서 작성이 완료되면 사용자에게 최종 검토 및 승인을 요청하세요. <--- 반드시 멈춤
+
+## Phase 5: Skeleton Code Generation
+
+#### 2-3. 시퀀스 스켈레톤 코드 선행 생성
+
+`src/projects/{project_id}/{section}/sequences.tsx` 파일을 생성하고 아래와 같이 뼈대를 잡습니다.
+
+- [매우중요] 각 Scene 컴포넌트 바로 위에 JSDoc(/\*\* \*/)을 열고, {section}\_plan.md에 있는 해당 씬의 '원본 텍스트'와 '비주얼 컨셉', 'In-SceneAnimation 기획'을 그대로 복사하여 주석으로 삽입하세요.
+- 최하단 Sequences 컴포넌트에는 <Series>를 절대 사용하지 말고, `public/{project_id}/{section}/{section}_final_timeline.json`에 명시된 startFrame과 durationInFrames 값을 가져와 **절대 좌표 <Sequence>**로 렌더링하세요.
+- 아래 예시 스켈레톤 코드를 적극 참고하세요
+
+```tsx
+import React from "react";
+import { AbsoluteFill, Sequence } from "remotion";
+// import { COLORS, FONTS } from "../theme"; // 테마 임포트 예시
+
+/**
+ * [Scene 1 기획안]
+ * 원본 텍스트: (plan.md의 해당 scene 텍스트를 그대로 복사하여 삽입)
+ * 비주얼 컨셉: (plan.md의 내용을 그대로 복사하여 삽입)
+ * In-SceneAnimation 기획:
+ *  - 진입 (0f ~ {}f):
+ *  - 단계 1 ({f} ~ {f}):
+ *  - 단계 2 ({f} ~ {f}):
+ *  - ... (여러 단계)
+ *  - 퇴장 ({f} ~ 끝):
+ */
+const Scene1: React.FC = () => {
+  // TODO: 주석 내용에 맞게 구현
+  return (
+    <AbsoluteFill>
+      {/* 1. 배경 레이어: 화면 전체 사용. (자막 영역 하단 150px을 침범해도 되는 배경색, 배경 이미지, 파티클 등) */}
+      <AbsoluteFill>{/* 배경 요소는 이 곳에 */}</AbsoluteFill>
+
+      {/* 2. 메인 콘텐츠 안전 레이어: 자막과 겹치지 않도록 bottom: 150으로 하단이 격리된 도화지 */}
+      <AbsoluteFill style={{ bottom: 150, height: "auto" }}>
+        {/* 텍스트와 핵심 그래픽(주제 아이콘, 차트 등)은 묶음이므로, 반드시 모두 이 안에서 Flexbox 등으로 정렬하세요. */}
+      </AbsoluteFill>
+    </AbsoluteFill>
+  );
+};
+
+/**
+ * [Scene 2 기획안]
+ * 원본 텍스트: (plan.md의 해당 scene 텍스트를 그대로 복사하여 삽입)
+ * 비주얼 컨셉: (plan.md의 내용을 그대로 복사하여 삽입)
+ */
+const Scene2: React.FC = () => {
+  // TODO: 주석 내용에 맞게 구현
+  return (
+    <AbsoluteFill>
+      {/* 1. 배경 레이어: 화면 전체 사용. (자막 영역 하단 150px을 침범해도 되는 배경색, 배경 이미지, 파티클 등) */}
+      <AbsoluteFill>{/* 배경 요소는 이 곳에 */}</AbsoluteFill>
+
+      {/* 2. 메인 콘텐츠 안전 레이어: 자막과 겹치지 않도록 bottom: 150으로 하단이 격리된 도화지 */}
+      <AbsoluteFill style={{ bottom: 150, height: "auto" }}>
+        {/* 텍스트와 핵심 그래픽(주제 아이콘, 차트 등)은 묶음이므로, 반드시 모두 이 안에서 Flexbox 등으로 정렬하세요. */}
+      </AbsoluteFill>
+    </AbsoluteFill>
+  );
+};
+
+export const Sequences: React.FC = () => {
+  return (
+    <AbsoluteFill>
+      {/* json의 startFrame과 durationInFrames 값을 하드코딩 매핑 */}
+      <Sequence from={0} durationInFrames={94}>
+        <Scene1 />
+      </Sequence>
+      <Sequence from={94} durationInFrames={178}>
+        <Scene2 />
+      </Sequence>
+    </AbsoluteFill>
+  );
+};
+```

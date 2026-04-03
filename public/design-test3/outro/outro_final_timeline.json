@@ -4,238 +4,660 @@
   "sentences": [
     {
       "sentence": "기술의 발전 속도는 우리의 예상을 뛰어넘을 정도로 점점 더 빨라지고 있습니다.",
-      "startMs": 0,
-      "endMs": 4980,
       "startFrame": 0,
       "durationInFrames": 299,
       "words": [
-        { "text": "기술의", "startMs": 0, "endMs": 480 },
-        { "text": "발전", "startMs": 480, "endMs": 790 },
-        { "text": "속도는", "startMs": 790, "endMs": 1280 },
-        { "text": "우리의", "startMs": 1280, "endMs": 1770 },
-        { "text": "예상을", "startMs": 1770, "endMs": 2250 },
-        { "text": "뛰어넘을", "startMs": 2250, "endMs": 2870 },
-        { "text": "정도로", "startMs": 2870, "endMs": 3370 },
-        { "text": "점점", "startMs": 3370, "endMs": 3640 },
-        { "text": "더", "startMs": 3640, "endMs": 3770 },
-        { "text": "빨라지고", "startMs": 3770, "endMs": 4270 },
-        { "text": "있습니다.", "startMs": 4270, "endMs": 4980 }
-      ]
+        {
+          "text": "기술의",
+          "startFrame": 0,
+          "endFrame": 29
+        },
+        {
+          "text": "발전",
+          "startFrame": 29,
+          "endFrame": 47
+        },
+        {
+          "text": "속도는",
+          "startFrame": 47,
+          "endFrame": 77
+        },
+        {
+          "text": "우리의",
+          "startFrame": 77,
+          "endFrame": 106
+        },
+        {
+          "text": "예상을",
+          "startFrame": 106,
+          "endFrame": 135
+        },
+        {
+          "text": "뛰어넘을",
+          "startFrame": 135,
+          "endFrame": 172
+        },
+        {
+          "text": "정도로",
+          "startFrame": 172,
+          "endFrame": 202
+        },
+        {
+          "text": "점점",
+          "startFrame": 202,
+          "endFrame": 218
+        },
+        {
+          "text": "더",
+          "startFrame": 218,
+          "endFrame": 226
+        },
+        {
+          "text": "빨라지고",
+          "startFrame": 226,
+          "endFrame": 256
+        },
+        {
+          "text": "있습니다.",
+          "startFrame": 256,
+          "endFrame": 299
+        }
+      ],
+      "endFrame": 299
     },
     {
       "sentence": "당장 내년에는 또 어떤 혁신적인 도구가 등장하여 우리의 일하는 방식을 바꿀까요?",
-      "startMs": 4980,
-      "endMs": 11420,
       "startFrame": 299,
       "durationInFrames": 386,
       "words": [
-        { "text": "당장", "startMs": 4980, "endMs": 5400 },
-        { "text": "내년에는", "startMs": 5400, "endMs": 6250 },
-        { "text": "또", "startMs": 6250, "endMs": 6460 },
-        { "text": "어떤", "startMs": 6460, "endMs": 6890 },
-        { "text": "혁신적인", "startMs": 6890, "endMs": 7740 },
-        { "text": "도구가", "startMs": 7740, "endMs": 8370 },
-        { "text": "등장하여", "startMs": 8370, "endMs": 9310 },
-        { "text": "우리의", "startMs": 9310, "endMs": 9810 },
-        { "text": "일하는", "startMs": 9810, "endMs": 10200 },
-        { "text": "방식을", "startMs": 10200, "endMs": 10630 },
-        { "text": "바꿀까요?", "startMs": 10630, "endMs": 11420 }
-      ]
+        {
+          "text": "당장",
+          "startFrame": 299,
+          "endFrame": 324
+        },
+        {
+          "text": "내년에는",
+          "startFrame": 324,
+          "endFrame": 375
+        },
+        {
+          "text": "또",
+          "startFrame": 375,
+          "endFrame": 388
+        },
+        {
+          "text": "어떤",
+          "startFrame": 388,
+          "endFrame": 413
+        },
+        {
+          "text": "혁신적인",
+          "startFrame": 413,
+          "endFrame": 464
+        },
+        {
+          "text": "도구가",
+          "startFrame": 464,
+          "endFrame": 502
+        },
+        {
+          "text": "등장하여",
+          "startFrame": 502,
+          "endFrame": 559
+        },
+        {
+          "text": "우리의",
+          "startFrame": 559,
+          "endFrame": 589
+        },
+        {
+          "text": "일하는",
+          "startFrame": 589,
+          "endFrame": 612
+        },
+        {
+          "text": "방식을",
+          "startFrame": 612,
+          "endFrame": 638
+        },
+        {
+          "text": "바꿀까요?",
+          "startFrame": 638,
+          "endFrame": 685
+        }
+      ],
+      "endFrame": 685
     },
     {
       "sentence": "일각에서는 AI가 개발자의 일자리를 대체할 것이라는 막연한 우려도 있습니다.",
-      "startMs": 11420,
-      "endMs": 17920,
       "startFrame": 685,
       "durationInFrames": 390,
       "words": [
-        { "text": "일각에서는", "startMs": 11420, "endMs": 12390 },
-        { "text": "AI가", "startMs": 12390, "endMs": 12710 },
-        { "text": "개발자의", "startMs": 12710, "endMs": 13470 },
-        { "text": "일자리를", "startMs": 13470, "endMs": 14260 },
-        { "text": "대체할", "startMs": 14260, "endMs": 14860 },
-        { "text": "것이라는", "startMs": 14860, "endMs": 15610 },
-        { "text": "막연한", "startMs": 15610, "endMs": 16180 },
-        { "text": "우려도", "startMs": 16180, "endMs": 16760 },
-        { "text": "있습니다.", "startMs": 16760, "endMs": 17920 }
-      ]
+        {
+          "text": "일각에서는",
+          "startFrame": 685,
+          "endFrame": 743
+        },
+        {
+          "text": "AI가",
+          "startFrame": 743,
+          "endFrame": 763
+        },
+        {
+          "text": "개발자의",
+          "startFrame": 763,
+          "endFrame": 808
+        },
+        {
+          "text": "일자리를",
+          "startFrame": 808,
+          "endFrame": 856
+        },
+        {
+          "text": "대체할",
+          "startFrame": 856,
+          "endFrame": 892
+        },
+        {
+          "text": "것이라는",
+          "startFrame": 892,
+          "endFrame": 937
+        },
+        {
+          "text": "막연한",
+          "startFrame": 937,
+          "endFrame": 971
+        },
+        {
+          "text": "우려도",
+          "startFrame": 971,
+          "endFrame": 1006
+        },
+        {
+          "text": "있습니다.",
+          "startFrame": 1006,
+          "endFrame": 1075
+        }
+      ],
+      "endFrame": 1075
     },
     {
       "sentence": "하지만 역사가 증명하듯,",
-      "startMs": 17920,
-      "endMs": 20450,
       "startFrame": 1075,
       "durationInFrames": 152,
       "words": [
-        { "text": "하지만", "startMs": 17920, "endMs": 18680 },
-        { "text": "역사가", "startMs": 18680, "endMs": 19530 },
-        { "text": "증명하듯", "startMs": 19530, "endMs": 20450 }
-      ]
+        {
+          "text": "하지만",
+          "startFrame": 1075,
+          "endFrame": 1121
+        },
+        {
+          "text": "역사가",
+          "startFrame": 1121,
+          "endFrame": 1172
+        },
+        {
+          "text": "증명하듯",
+          "startFrame": 1172,
+          "endFrame": 1227
+        }
+      ],
+      "endFrame": 1227
     },
     {
       "sentence": "강력한 새로운 도구는 항상 인간의 잠재력과 한계를 더욱 확장시켜 왔습니다.",
-      "startMs": 20450,
-      "endMs": 28360,
       "startFrame": 1227,
       "durationInFrames": 475,
       "words": [
-        { "text": "강력한", "startMs": 20450, "endMs": 21420 },
-        { "text": "새로운", "startMs": 21420, "endMs": 21960 },
-        { "text": "도구는", "startMs": 21960, "endMs": 22780 },
-        { "text": "항상", "startMs": 22780, "endMs": 23350 },
-        { "text": "인간의", "startMs": 23350, "endMs": 23730 },
-        { "text": "잠재력과", "startMs": 23730, "endMs": 24550 },
-        { "text": "한계를", "startMs": 24550, "endMs": 25030 },
-        { "text": "더욱", "startMs": 25030, "endMs": 25380 },
-        { "text": "확장시켜", "startMs": 25380, "endMs": 26180 },
-        { "text": "왔습니다.", "startMs": 26180, "endMs": 27160 }
-      ]
+        {
+          "text": "강력한",
+          "startFrame": 1227,
+          "endFrame": 1285
+        },
+        {
+          "text": "새로운",
+          "startFrame": 1285,
+          "endFrame": 1318
+        },
+        {
+          "text": "도구는",
+          "startFrame": 1318,
+          "endFrame": 1367
+        },
+        {
+          "text": "항상",
+          "startFrame": 1367,
+          "endFrame": 1401
+        },
+        {
+          "text": "인간의",
+          "startFrame": 1401,
+          "endFrame": 1424
+        },
+        {
+          "text": "잠재력과",
+          "startFrame": 1424,
+          "endFrame": 1473
+        },
+        {
+          "text": "한계를",
+          "startFrame": 1473,
+          "endFrame": 1502
+        },
+        {
+          "text": "더욱",
+          "startFrame": 1502,
+          "endFrame": 1523
+        },
+        {
+          "text": "확장시켜",
+          "startFrame": 1523,
+          "endFrame": 1571
+        },
+        {
+          "text": "왔습니다.",
+          "startFrame": 1571,
+          "endFrame": 1630
+        }
+      ],
+      "endFrame": 1702
     },
     {
       "sentence": "AI는 우리를 밀어내는 경쟁자가 아닙니다.",
-      "startMs": 28360,
-      "endMs": 30920,
       "startFrame": 1702,
       "durationInFrames": 153,
       "words": [
-        { "text": "AI는", "startMs": 28360, "endMs": 28590 },
-        { "text": "우리를", "startMs": 28590, "endMs": 29020 },
-        { "text": "밀어내는", "startMs": 29020, "endMs": 29580 },
-        { "text": "경쟁자가", "startMs": 29580, "endMs": 30140 },
-        { "text": "아닙니다.", "startMs": 30140, "endMs": 30920 }
-      ]
+        {
+          "text": "AI는",
+          "startFrame": 1702,
+          "endFrame": 1715
+        },
+        {
+          "text": "우리를",
+          "startFrame": 1715,
+          "endFrame": 1741
+        },
+        {
+          "text": "밀어내는",
+          "startFrame": 1741,
+          "endFrame": 1775
+        },
+        {
+          "text": "경쟁자가",
+          "startFrame": 1775,
+          "endFrame": 1808
+        },
+        {
+          "text": "아닙니다.",
+          "startFrame": 1808,
+          "endFrame": 1855
+        }
+      ],
+      "endFrame": 1855
     },
     {
       "sentence": "오히려 우리가 단순 작업에서 벗어나",
-      "startMs": 30920,
-      "endMs": 33690,
       "startFrame": 1855,
       "durationInFrames": 166,
       "words": [
-        { "text": "오히려", "startMs": 30920, "endMs": 31470 },
-        { "text": "우리가", "startMs": 31470, "endMs": 32200 },
-        { "text": "단순", "startMs": 32200, "endMs": 32390 },
-        { "text": "작업에서", "startMs": 32390, "endMs": 33140 },
-        { "text": "벗어나", "startMs": 33140, "endMs": 33690 }
-      ]
+        {
+          "text": "오히려",
+          "startFrame": 1855,
+          "endFrame": 1888
+        },
+        {
+          "text": "우리가",
+          "startFrame": 1888,
+          "endFrame": 1932
+        },
+        {
+          "text": "단순",
+          "startFrame": 1932,
+          "endFrame": 1943
+        },
+        {
+          "text": "작업에서",
+          "startFrame": 1943,
+          "endFrame": 1988
+        },
+        {
+          "text": "벗어나",
+          "startFrame": 1988,
+          "endFrame": 2021
+        }
+      ],
+      "endFrame": 2021
     },
     {
       "sentence": "더 가치 있고 창의적인 문제 해결에 집중할 수 있도록 돕는 가장 강력한 지렛대입니다.",
-      "startMs": 33690,
-      "endMs": 40300,
       "startFrame": 2021,
       "durationInFrames": 397,
       "words": [
-        { "text": "더", "startMs": 33690, "endMs": 33870 },
-        { "text": "가치", "startMs": 33870, "endMs": 34230 },
-        { "text": "있고", "startMs": 34230, "endMs": 34630 },
-        { "text": "창의적인", "startMs": 34630, "endMs": 35320 },
-        { "text": "문제", "startMs": 35320, "endMs": 35700 },
-        { "text": "해결에", "startMs": 35700, "endMs": 36240 },
-        { "text": "집중할", "startMs": 36240, "endMs": 36780 },
-        { "text": "수", "startMs": 36780, "endMs": 36960 },
-        { "text": "있도록", "startMs": 36960, "endMs": 37550 },
-        { "text": "돕는", "startMs": 37550, "endMs": 37880 },
-        { "text": "가장", "startMs": 37880, "endMs": 38430 },
-        { "text": "강력한", "startMs": 38430, "endMs": 38810 },
-        { "text": "지렛대입니다.", "startMs": 38810, "endMs": 40300 }
-      ]
+        {
+          "text": "더",
+          "startFrame": 2021,
+          "endFrame": 2032
+        },
+        {
+          "text": "가치",
+          "startFrame": 2032,
+          "endFrame": 2054
+        },
+        {
+          "text": "있고",
+          "startFrame": 2054,
+          "endFrame": 2078
+        },
+        {
+          "text": "창의적인",
+          "startFrame": 2078,
+          "endFrame": 2119
+        },
+        {
+          "text": "문제",
+          "startFrame": 2119,
+          "endFrame": 2142
+        },
+        {
+          "text": "해결에",
+          "startFrame": 2142,
+          "endFrame": 2174
+        },
+        {
+          "text": "집중할",
+          "startFrame": 2174,
+          "endFrame": 2207
+        },
+        {
+          "text": "수",
+          "startFrame": 2207,
+          "endFrame": 2218
+        },
+        {
+          "text": "있도록",
+          "startFrame": 2218,
+          "endFrame": 2253
+        },
+        {
+          "text": "돕는",
+          "startFrame": 2253,
+          "endFrame": 2273
+        },
+        {
+          "text": "가장",
+          "startFrame": 2273,
+          "endFrame": 2306
+        },
+        {
+          "text": "강력한",
+          "startFrame": 2306,
+          "endFrame": 2329
+        },
+        {
+          "text": "지렛대입니다.",
+          "startFrame": 2329,
+          "endFrame": 2418
+        }
+      ],
+      "endFrame": 2418
     },
     {
       "sentence": "개발의 기술적 진입 장벽이 낮아짐에 따라,",
-      "startMs": 40300,
-      "endMs": 43960,
       "startFrame": 2418,
       "durationInFrames": 220,
       "words": [
-        { "text": "개발의", "startMs": 40300, "endMs": 40930 },
-        { "text": "기술적", "startMs": 40930, "endMs": 41710 },
-        { "text": "진입", "startMs": 41710, "endMs": 41980 },
-        { "text": "장벽이", "startMs": 41980, "endMs": 42600 },
-        { "text": "낮아짐에", "startMs": 42600, "endMs": 43450 },
-        { "text": "따라", "startMs": 43450, "endMs": 43960 }
-      ]
+        {
+          "text": "개발의",
+          "startFrame": 2418,
+          "endFrame": 2456
+        },
+        {
+          "text": "기술적",
+          "startFrame": 2456,
+          "endFrame": 2503
+        },
+        {
+          "text": "진입",
+          "startFrame": 2503,
+          "endFrame": 2519
+        },
+        {
+          "text": "장벽이",
+          "startFrame": 2519,
+          "endFrame": 2556
+        },
+        {
+          "text": "낮아짐에",
+          "startFrame": 2556,
+          "endFrame": 2607
+        },
+        {
+          "text": "따라",
+          "startFrame": 2607,
+          "endFrame": 2638
+        }
+      ],
+      "endFrame": 2638
     },
     {
       "sentence": "앞으로는 기술의 숙련도보다 '무엇을, 왜 만들 것인가'를 치열하게 고민하는",
-      "startMs": 43960,
-      "endMs": 48980,
       "startFrame": 2638,
       "durationInFrames": 301,
       "words": [
-        { "text": "앞으로는", "startMs": 43960, "endMs": 44730 },
-        { "text": "기술의", "startMs": 44730, "endMs": 45300 },
-        { "text": "숙련도보다", "startMs": 45300, "endMs": 46270 },
-        { "text": "무엇을", "startMs": 46270, "endMs": 46730 },
-        { "text": "왜", "startMs": 46730, "endMs": 46930 },
-        { "text": "만들", "startMs": 46930, "endMs": 47180 },
-        { "text": "것인가를", "startMs": 47180, "endMs": 47780 },
-        { "text": "치열하게", "startMs": 47780, "endMs": 48380 },
-        { "text": "고민하는", "startMs": 48380, "endMs": 48980 }
-      ]
+        {
+          "text": "앞으로는",
+          "startFrame": 2638,
+          "endFrame": 2684
+        },
+        {
+          "text": "기술의",
+          "startFrame": 2684,
+          "endFrame": 2718
+        },
+        {
+          "text": "숙련도보다",
+          "startFrame": 2718,
+          "endFrame": 2776
+        },
+        {
+          "text": "무엇을",
+          "startFrame": 2776,
+          "endFrame": 2804
+        },
+        {
+          "text": "왜",
+          "startFrame": 2804,
+          "endFrame": 2816
+        },
+        {
+          "text": "만들",
+          "startFrame": 2816,
+          "endFrame": 2831
+        },
+        {
+          "text": "것인가를",
+          "startFrame": 2831,
+          "endFrame": 2867
+        },
+        {
+          "text": "치열하게",
+          "startFrame": 2867,
+          "endFrame": 2903
+        },
+        {
+          "text": "고민하는",
+          "startFrame": 2903,
+          "endFrame": 2939
+        }
+      ],
+      "endFrame": 2939
     },
     {
       "sentence": "프로덕트 마인드가 가장 중요한 무기가 될 것입니다.",
-      "startMs": 48980,
-      "endMs": 52420,
       "startFrame": 2939,
       "durationInFrames": 206,
       "words": [
-        { "text": "프로덕트", "startMs": 48980, "endMs": 49580 },
-        { "text": "마인드가", "startMs": 49580, "endMs": 50170 },
-        { "text": "가장", "startMs": 50170, "endMs": 50700 },
-        { "text": "중요한", "startMs": 50700, "endMs": 50940 },
-        { "text": "무기가", "startMs": 50940, "endMs": 51390 },
-        { "text": "될", "startMs": 51390, "endMs": 51540 },
-        { "text": "것입니다.", "startMs": 51540, "endMs": 52420 }
-      ]
+        {
+          "text": "프로덕트",
+          "startFrame": 2939,
+          "endFrame": 2975
+        },
+        {
+          "text": "마인드가",
+          "startFrame": 2975,
+          "endFrame": 3010
+        },
+        {
+          "text": "가장",
+          "startFrame": 3010,
+          "endFrame": 3042
+        },
+        {
+          "text": "중요한",
+          "startFrame": 3042,
+          "endFrame": 3056
+        },
+        {
+          "text": "무기가",
+          "startFrame": 3056,
+          "endFrame": 3083
+        },
+        {
+          "text": "될",
+          "startFrame": 3083,
+          "endFrame": 3092
+        },
+        {
+          "text": "것입니다.",
+          "startFrame": 3092,
+          "endFrame": 3145
+        }
+      ],
+      "endFrame": 3145
     },
     {
       "sentence": "망설일 필요가 없습니다.",
-      "startMs": 52420,
-      "endMs": 55260,
       "startFrame": 3145,
       "durationInFrames": 171,
       "words": [
-        { "text": "망설일", "startMs": 52420, "endMs": 53120 },
-        { "text": "필요가", "startMs": 53120, "endMs": 53710 },
-        { "text": "없습니다.", "startMs": 53710, "endMs": 54840 }
-      ]
+        {
+          "text": "망설일",
+          "startFrame": 3145,
+          "endFrame": 3187
+        },
+        {
+          "text": "필요가",
+          "startFrame": 3187,
+          "endFrame": 3223
+        },
+        {
+          "text": "없습니다.",
+          "startFrame": 3223,
+          "endFrame": 3290
+        }
+      ],
+      "endFrame": 3316
     },
     {
       "sentence": "지금 바로 AI와 함께 완전히 새로운 개발 여정을 시작해 보세요.",
-      "startMs": 55260,
-      "endMs": 60240,
       "startFrame": 3316,
       "durationInFrames": 298,
       "words": [
-        { "text": "지금", "startMs": 54840, "endMs": 55260 },
-        { "text": "바로", "startMs": 55260, "endMs": 55720 },
-        { "text": "AI와", "startMs": 55720, "endMs": 56520 },
-        { "text": "함께", "startMs": 56520, "endMs": 56580 },
-        { "text": "완전히", "startMs": 58300, "endMs": 58610 },
-        { "text": "새로운", "startMs": 58610, "endMs": 58930 },
-        { "text": "개발", "startMs": 58930, "endMs": 59140 },
-        { "text": "여정을", "startMs": 59140, "endMs": 59450 },
-        { "text": "시작해보세요.", "startMs": 59450, "endMs": 60240 }
-      ]
+        {
+          "text": "지금",
+          "startFrame": 3290,
+          "endFrame": 3316
+        },
+        {
+          "text": "바로",
+          "startFrame": 3316,
+          "endFrame": 3343
+        },
+        {
+          "text": "AI와",
+          "startFrame": 3343,
+          "endFrame": 3391
+        },
+        {
+          "text": "함께",
+          "startFrame": 3391,
+          "endFrame": 3395
+        },
+        {
+          "text": "완전히",
+          "startFrame": 3498,
+          "endFrame": 3517
+        },
+        {
+          "text": "새로운",
+          "startFrame": 3517,
+          "endFrame": 3536
+        },
+        {
+          "text": "개발",
+          "startFrame": 3536,
+          "endFrame": 3548
+        },
+        {
+          "text": "여정을",
+          "startFrame": 3548,
+          "endFrame": 3567
+        },
+        {
+          "text": "시작해보세요.",
+          "startFrame": 3567,
+          "endFrame": 3614
+        }
+      ],
+      "endFrame": 3614
     },
     {
       "sentence": "한계 없는 여러분의 상상력을 완벽한 코드로 현실화할 시간입니다.",
-      "startMs": 60240,
-      "endMs": 67440,
       "startFrame": 3614,
       "durationInFrames": 433,
       "words": [
-        { "text": "한계", "startMs": 60240, "endMs": 60490 },
-        { "text": "없는", "startMs": 60490, "endMs": 61090 },
-        { "text": "여러분의", "startMs": 61090, "endMs": 62160 },
-        { "text": "상상력을", "startMs": 62160, "endMs": 62790 },
-        { "text": "완벽한", "startMs": 62790, "endMs": 63440 },
-        { "text": "코드로", "startMs": 63440, "endMs": 64210 },
-        { "text": "현실화할", "startMs": 64210, "endMs": 64920 },
-        { "text": "시간입니다.", "startMs": 64920, "endMs": 66360 }
-      ]
+        {
+          "text": "한계",
+          "startFrame": 3614,
+          "endFrame": 3629
+        },
+        {
+          "text": "없는",
+          "startFrame": 3629,
+          "endFrame": 3665
+        },
+        {
+          "text": "여러분의",
+          "startFrame": 3665,
+          "endFrame": 3730
+        },
+        {
+          "text": "상상력을",
+          "startFrame": 3730,
+          "endFrame": 3767
+        },
+        {
+          "text": "완벽한",
+          "startFrame": 3767,
+          "endFrame": 3806
+        },
+        {
+          "text": "코드로",
+          "startFrame": 3806,
+          "endFrame": 3853
+        },
+        {
+          "text": "현실화할",
+          "startFrame": 3853,
+          "endFrame": 3895
+        },
+        {
+          "text": "시간입니다.",
+          "startFrame": 3895,
+          "endFrame": 3982
+        }
+      ],
+      "endFrame": 4046
     }
   ]
 }

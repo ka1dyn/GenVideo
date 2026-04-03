@@ -9,18 +9,17 @@ import {
 // _final_timeline.json의 sentence 구조 (신규 방식)
 export interface TimelineSentence {
   sentence: string;
-  startMs: number;
-  endMs: number;
   startFrame: number;
+  endFrame: number;
   durationInFrames: number;
-  words: { text: string; startMs: number; endMs: number }[];
+  words: { text: string; startFrame: number; endFrame: number }[];
 }
 
-// 레거시 Subtitle 타입 (하위호환용)
+// 레거시 Subtitle 타입 (하위호환용, 이제 프레임 기반으로 동작)
 interface LegacySubtitle {
   text: string;
-  startMs: number;
-  endMs: number;
+  startFrame: number;
+  endFrame: number;
 }
 
 type Caption = TimelineSentence | LegacySubtitle;
@@ -36,13 +35,10 @@ function getCaptionText(cap: Caption): string {
 
 export const CaptionOverlay: React.FC<Props> = ({ captions }) => {
   const frame = useCurrentFrame();
-  const { fps } = useVideoConfig();
 
-  const currentTimeMs = (frame / fps) * 1000;
-
-  // Find the active subtitle
+  // Find the active subtitle based on frames
   const activeSubtitle = captions.find(
-    (cap) => currentTimeMs >= cap.startMs && currentTimeMs < cap.endMs
+    (cap) => frame >= cap.startFrame && frame < cap.endFrame
   );
 
   if (!activeSubtitle) {
@@ -50,7 +46,7 @@ export const CaptionOverlay: React.FC<Props> = ({ captions }) => {
   }
 
   // Animation: subtle fade in when a new caption starts
-  const entryFrame = (activeSubtitle.startMs / 1000) * fps;
+  const entryFrame = activeSubtitle.startFrame;
   const opacity = interpolate(
     frame,
     [entryFrame, entryFrame + 5],

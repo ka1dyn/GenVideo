@@ -25,7 +25,7 @@ description: TTS와 whisper를 통해 얻은 타임스탬프 데이터를 기반
 > ⚠️ [주의] 타임스탬프 객체의 텍스트는 Whisper AI 음성인식 엔진이 추출하여 원문과 오차가 나거나, 심지어 환각(없는 말 지어내기)이 존재할 확률이 높습니다!
 >
 > - **문장 분할의 기준은 100% "원본 대본"을 따라야 합니다.**
-> - 타임스탬프에서 얻어야 할 것은 글자 정보가 아니라 오직 타이밍(startMs / endMs) 값 뿐입니다.
+> - 타임스탬프에서 얻어야 할 것은 글자 정보가 아니라 오직 타이밍(startFrame / endFrame) 값 뿐입니다.
 > - Whisper가 마음대로 삽입한 잡음("감사합니다", "뉴스입니다", 오타 등) 구간은 시퀀스 기획에서 과감히 제외하거나 무시하세요.
 
 **중요**
@@ -33,75 +33,59 @@ description: TTS와 whisper를 통해 얻은 타임스탬프 데이터를 기반
 ### 진행 단계
 
 - 우선 마침표, 느낌표, 물음표를 기준으로 sentence를 나눕니다.
-- 각 sentence의 길이를 분석합니다. `마지막 단어의 endMs - 첫번째 단어의 startMs`로 계산 가능합니다.
-- 만약 sentence의 길이가 7초를 넘어간다면, 해당 sentence를 **반드시 분할**하세요. 자막의 단위이므로, 읽을 때 어색하지 않도록 분할합니다.
+- 각 sentence의 길이(durationInFrames)를 분석합니다. `마지막 단어의 endFrame - 첫번째 단어의 startFrame`로 계산 가능합니다.
+- 만약 sentence의 길이가 약 420프레임(약 7초)을 넘어간다면, 해당 sentence를 **반드시 분할**하세요. 자막의 단위이므로, 읽을 때 어색하지 않도록 분할합니다.
 - 분할까지 완료된 최종 sentence는 마침표, 느낌표, 물음표로 끝나지 않아도 됩니다. 기본적으로는 원본 문장 단위가 맞지만, 문장이 길면 분할할 뿐입니다.
 
 ### 반드시 지켜야 할 사항
 
-- 단어의 startMs와 endMs는 타임스탬프 데이터 값을 100% 반영해야하며, 임의로 변경이 불가합니다.
-- [프레임 가드] 각 문장 이후 오디오의 공백 때문에, 문장의 마지막 단어의 endMs가 다음 문장의 시작과 다를 수 있습니다. 이 경우
-  문장의 endMs를 다음 문장의 startMs와 동일하게 설정합니다.(이 때에도 단어의 타임스탬프는 절대 변경하지 않습니다)
-- 마지막 문장의 endMs는 섹션의 전체 '총 길이(totalDuration)'와 일치시켜 영상 끝부분의 묵음 여백(Tail)까지 포함시켜 나타냅니다. 즉 마지막 문장의 endMs는 totalDuration과 같아야합니다.
-- 문장 분할 및 공백 메우기가 완료되었다면, 프레임을 계산해서 추가합니다. 프레임은 `startFrame`과 `durationInFrames`로 구성됩니다
-
-⚠️ [매우 중요: FPS 동적 확인]
-프레임 계산 전, 반드시 파일 읽기 도구를 사용해 src/constants/video-config.ts 파일을 읽고 VIDEO_FPS 값을 정확히 파악하세요. 임의로 FPS를 추측하지 마십시오.
-프레임 계산 시 1프레임 밀림(Drift) 현상과 오차 누적을 방지하기 위해 반드시 아래의 절대 좌표 변환 공식을 따르세요:
-
----
-
-startFrame = Math.round((startMs / 1000) \* VIDEO_FPS)
-
-임시 endFrame = Math.round((endMs / 1000) \* VIDEO_FPS)
-
-durationInFrames = 임시 endFrame - startFrame
-
----
+- 단어의 startFrame과 endFrame은 타임스탬프 데이터 값을 100% 반영해야하며, 임의로 변경이 불가합니다.
+- [프레임 가드] 각 문장 이후 오디오의 공백 때문에, 문장의 마지막 단어의 endFrame이 다음 문장의 시작과 다를 수 있습니다. 이 경우
+  문장의 endFrame을 다음 문장의 startFrame과 동일하게 설정합니다.(이 때에도 단어의 타임스탬프는 절대 변경하지 않습니다)
+- 마지막 문장의 endFrame은 섹션의 전체 '총 프레임(totalFrames)'과 일치시켜 영상 끝부분의 묵음 여백(Tail)까지 포함시켜 나타냅니다. 즉 마지막 문장의 endFrame은 totalFrames과 같아야합니다.
+- 문장 분할 및 공백 메우기가 완료되었다면, 문장의 `startFrame`과 `durationInFrames`를 추가합니다.
 
 최종 타임스탬프 파일은 다음 형태로 구성됩니다.
 
 ```json
 {
-  "totalDuration": 66320, // context 파일에 명시
+  "totalDuration": 66320, // context 파일에 명시 (하위 호환용으로 유지)
   "totalFrames": 3980, // context 파일에 명시
   "sentences": [
     {
       "sentence": "단어를 조합한 원본과 일치하는 문장",
-      "startMs": 0, // 첫 번째 단어의 startMs와 동일해야함. [매우매우 중요]첫 sentence는 반드시 0으로 시작해야함
-      "endMs": 2900, // 다음 sentence의 startMs와 동일해야함. (마지막 단어의 endMs가 아닙니다)
-      "startFrame": 0, // Math.round((startMs / 1000) * VIDEO_FPS)
+      "startFrame": 0, // 첫 번째 단어의 startFrame과 동일해야함. [매우매우 중요]첫 sentence는 반드시 0으로 시작해야함
+      "endFrame": 174, // 다음 sentence의 startFrame과 동일해야함. (마지막 단어의 endFrame이 아닙니다)
       "durationInFrames": 174, // endFrame - startFrame
       "words": [
         {
           "text": "단어1", // 원본 대본의 단어와 100% 일치해야합니다.
-          "startMs": 0, // 각 단어의 시간은 타임스탬프 데이터 값이랑 100% 일치해야하며, 임의로 변경할 수 없습니다.
-          "endMs": 100
+          "startFrame": 0, // 각 단어의 프레임 시간은 타임스탬프 데이터 값이랑 100% 일치해야하며, 임의로 변경할 수 없습니다.
+          "endFrame": 6
         },
         {
           "text": "단어2",
-          "startMs": 100,
-          "endMs": 200
+          "startFrame": 6,
+          "endFrame": 12
         },
         ...
         {
           "text": "마지막 단어", // 원본 대본의 단어와 100% 일치해야합니다.
-          "startMs": 2400,
-          "endMs": 2780 // 다음 문장의 startMs와 다를 수 있습니다. 임의로 변경하지 않습니다.
-        },
+          "startFrame": 144,
+          "endFrame": 166 // 다음 문장의 startFrame과 다를 수 있습니다. 임의로 변경하지 않습니다.
+        }
       ]
     },
     {
       "sentence": "단어를 조합한 원본과 일치하는 문장",
-      "startMs": 2900, // 첫 번째 단어의 startMs와 동일해야함.
-      "endMs": 5860,
-      "startFrame": 174,
+      "startFrame": 174, // 이전 문장의 endFrame과 동일해야함.
+      "endFrame": 352,
       "durationInFrames": 178,
       "words": [
         {
           "text": "단어1",
-          "startMs": 2900,
-          "endMs": 3100
+          "startFrame": 174,
+          "endFrame": 186
         },
         ... (이하 생략)
       ]

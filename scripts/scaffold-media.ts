@@ -162,8 +162,8 @@ export async function processMediaForSections(
 
         timestamps = whisperOutput.transcription.map((segment) => ({
           text: segment.text.trim(),
-          startMs: segment.offsets.from,
-          endMs: segment.offsets.to,
+          startFrame: Math.round((segment.offsets.from / 1000) * FPS),
+          endFrame: Math.round((segment.offsets.to / 1000) * FPS),
         })).filter((t: any) => t.text.length > 0);
 
         fs.writeFileSync(jsonPath, JSON.stringify(timestamps, null, 2));
