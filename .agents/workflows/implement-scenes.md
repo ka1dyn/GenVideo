@@ -59,6 +59,8 @@ src/shared-components/
 디렉토리 탐색(list_dir 등)의 파일 목록을 바탕으로, 순차적으로 구현을 진행합니다.
 모든 섹션을 **하나씩** 완료한 후 다음 섹션으로 이동합니다 (예: intro → body1 → outro).
 
+각 섹션 구현 완료 후 반드시 사용자에게 검토를 요청하세요 <--- 반드시 멈춤
+
 각각의 독립된 `{section}`별로 다음을 수행합니다:
 
 #### 2-1. 기획서 확인
@@ -76,12 +78,13 @@ src/shared-components/
   3. **순수성 유지:** 컴포넌트 파일 자체에서 `theme.ts`를 직접 참조(Import)하는 것을 지양하고, **사용하는 쪽(Scene)에서 `theme.ts`의 상수를 Prop으로 넘겨주도록** 유도하여 재사용성을 극대화하세요.
 - **중복 방지:** 이미 `components/` 폴더에 생성된 동일한 목적의 컴포넌트가 있다면 새로 만들지 말고 적극적으로 재사용하세요.
 
-#### 2-3. 시퀀스 스켈레톤(껍데기) 선행 생성
+#### 2-3. 시퀀스 스켈레톤 코드 선행 생성
 
 `src/projects/{project_id}/{section}/sequences.tsx` 파일을 생성하고 아래와 같이 뼈대를 잡습니다.
 
-- [매우중요] 각 Scene 컴포넌트 바로 위에 JSDoc(/\*\* \*/)을 열고, {section}\_plan.md에 있는 해당 씬의 '원본 텍스트'와 '비주얼 컨셉'을 그대로 복사하여 주석으로 삽입하세요.
+- [매우중요] 각 Scene 컴포넌트 바로 위에 JSDoc(/\*\* \*/)을 열고, {section}\_plan.md에 있는 해당 씬의 '원본 텍스트'와 '비주얼 컨셉', 'In-SceneAnimation 기획'을 그대로 복사하여 주석으로 삽입하세요.
 - 최하단 Sequences 컴포넌트에는 <Series>를 절대 사용하지 말고, `public/{project_id}/{section}/{section}_final_timeline.json`에 명시된 startFrame과 durationInFrames 값을 가져와 **절대 좌표 <Sequence>**로 렌더링하세요.
+- 아래 예시 스켈레톤 코드를 적극 참고하세요
 
 ```tsx
 import React from "react";
@@ -92,9 +95,15 @@ import { AbsoluteFill, Sequence } from "remotion";
  * [Scene 1 기획안]
  * 원본 텍스트: (plan.md의 해당 scene 텍스트를 그대로 복사하여 삽입)
  * 비주얼 컨셉: (plan.md의 내용을 그대로 복사하여 삽입)
+ * In-SceneAnimation 기획:
+ *  - 진입 (0f ~ {}f):
+ *  - 단계 1 ({f} ~ {f}):
+ *  - 단계 2 ({f} ~ {f}):
+ *  - ... (여러 단계)
+ *  - 퇴장 ({f} ~ 끝):
  */
 const Scene1: React.FC = () => {
-  // TODO: Phase 2에서 컨셉에 맞춰 구현
+  // TODO: 주석 내용에 맞게 구현
   return (
     <AbsoluteFill>
       {/* 1. 배경 레이어: 화면 전체 사용. (자막 영역 하단 150px을 침범해도 되는 배경색, 배경 이미지, 파티클 등) */}
@@ -114,7 +123,7 @@ const Scene1: React.FC = () => {
  * 비주얼 컨셉: (plan.md의 내용을 그대로 복사하여 삽입)
  */
 const Scene2: React.FC = () => {
-  // TODO: Phase 2에서 컨셉에 맞춰 구현
+  // TODO: 주석 내용에 맞게 구현
   return (
     <AbsoluteFill>
       {/* 1. 배경 레이어: 화면 전체 사용. (자막 영역 하단 150px을 침범해도 되는 배경색, 배경 이미지, 파티클 등) */}
@@ -142,6 +151,8 @@ export const Sequences: React.FC = () => {
   );
 };
 ```
+
+스켈레톤 코드를 전부 작성했다면 사용자에게 검토를 요청하세요 <--- 반드시 멈춤
 
 #### 2-4. 구현 전 필수 준수 규칙 (수석 디자이너 페르소나 적용)
 

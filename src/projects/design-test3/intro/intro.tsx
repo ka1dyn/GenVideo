@@ -1,20 +1,29 @@
-import React from "react";
-import { AbsoluteFill, Audio, staticFile } from "remotion";
-import { CaptionOverlay } from "../../../shared-components/CaptionOverlay";
-import introTimeline from "../../../../public/design-test3/intro/intro_final_timeline.json";
-import { Sequences } from "./sequences";
+import React from 'react';
+import { AbsoluteFill, Audio, staticFile } from 'remotion';
 
+/**
+ * Section: intro
+ * Audio Duration: 66320ms (3980 frames @60fps)
+ *
+ * Assets (use with staticFile):
+ *   Audio:      staticFile('design-test3/intro/intro.wav')
+ *   Timestamps: staticFile('design-test3/intro/intro_timestamp.json')
+ *
+ * Plan: public/design-test3/intro/intro_plan.md
+ */
 export const Intro: React.FC = () => {
   return (
-    <AbsoluteFill>
-      {/* 1. 오디오 단일 선언 */}
-      <Audio src={staticFile(`design-test3/intro/intro.wav`)} />
-
-      {/* 2. 절대 프레임 좌표로 배치된 하위 씬들의 묶음 렌더링 */}
-      <Sequences />
-
-      {/* 3. 화면 최상단 자막 오버레이 — JSON을 직접 소비 */}
-      <CaptionOverlay captions={introTimeline.sentences} />
+    <AbsoluteFill
+      style={{
+        backgroundColor: '#0a0a0a',
+        justifyContent: 'center',
+        alignItems: 'center',
+      }}
+    >
+      <Audio src={staticFile('design-test3/intro/intro.wav')} />
+      <h1 style={{ color: '#ffffff', fontSize: 48 }}>
+        INTRO Scene
+      </h1>
     </AbsoluteFill>
   );
 };
