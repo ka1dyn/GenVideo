@@ -1,6 +1,10 @@
 import React from 'react';
-import { AbsoluteFill, Sequence, useVideoConfig } from 'remotion';
-import { COLORS } from '../theme';
+import { AbsoluteFill, Sequence, useVideoConfig, interpolate, spring, useCurrentFrame } from 'remotion';
+import { COLORS, ANIMATION, EFFECTS, FONTS, Z } from '../theme';
+import { GridBackground } from '../components/GridBackground';
+import { DataNode } from '../components/DataNode';
+import { ConnectionLine } from '../components/ConnectionLine';
+import { HighTechCodeBlock } from '../components/HighTechCodeBlock';
 
 /**
  * [Scene 1 기획안]
@@ -12,10 +16,53 @@ import { COLORS } from '../theme';
  * In-Scene Animation 구성: 각 씬의 프레임 내에서 여러 단계로 애니메이션을 분할하여 구현합니다.
  */
 const Scene1: React.FC = () => {
+  const frame = useCurrentFrame();
+  const { width, height } = useVideoConfig();
+
+  const gridOpacity = interpolate(frame, [0, 60], [0, 0.15], {
+    extrapolateRight: 'clamp',
+  });
+  const gridSpacing = interpolate(frame, [0, 136], [120, 60], {
+    extrapolateRight: 'clamp',
+  });
+
+  const textEntry = spring({
+    frame,
+    fps: 60,
+    config: ANIMATION.SPRING_GENTLE,
+  });
+
   return (
     <AbsoluteFill style={{ backgroundColor: COLORS.BG_VOID }}>
-      {/* TODO: Implement Grid Animation */}
-      {/* TODO: Implement Typography Sequence */}
+      <GridBackground color={COLORS.PRIMARY} opacity={gridOpacity} spacing={gridSpacing} speed={2} />
+      <div
+        style={{
+          flex: 1,
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'center',
+          zIndex: Z.CONTENT,
+          transform: `translateY(${interpolate(textEntry, [0, 1], [20, 0])}px)`,
+          opacity: textEntry,
+        }}
+      >
+        <h1
+          style={{
+            fontFamily: FONTS.DISPLAY,
+            fontSize: FONTS.SIZE_2XL,
+            color: COLORS.TEXT_MAIN,
+            fontWeight: FONTS.WEIGHT_BOLD,
+            textAlign: 'center',
+            textShadow: EFFECTS.GLOW_TEXT_LG,
+            letterSpacing: FONTS.TRACKING_TIGHT,
+          }}
+        >
+          웹 개발의 패러다임이
+          <br />
+          <span style={{ color: COLORS.PRIMARY }}>완전히 바뀌고 있습니다</span>
+        </h1>
+      </div>
     </AbsoluteFill>
   );
 };
@@ -30,10 +77,106 @@ const Scene1: React.FC = () => {
  * In-Scene Animation 구성: 각 씬의 프레임 내에서 여러 단계로 애니메이션을 분할하여 구현합니다.
  */
 const Scene2: React.FC = () => {
+  const frame = useCurrentFrame();
+  
+  // "바닥부터" trigger at 259f (relative 123f)
+  const foundationStartTime = 123;
+
+  // Clean, reduced code lines
+  const codeBlocks = Array.from({ length: 8 }).map((_, i) => ({
+    width: 120 + ((i * 61) % 200),
+    indent: i % 3 === 0 ? 0 : 32,
+    color: i % 4 === 0 ? COLORS.PRIMARY_MID : COLORS.TEXT_DISABLED,
+    delay: i * 3,
+  }));
+
   return (
-    <AbsoluteFill>
-      {/* TODO: Implement Complex Code Line Layout */}
-      {/* TODO: Implement Grid Square Layout Animation */}
+    <AbsoluteFill style={{ backgroundColor: COLORS.BG_VOID }}>
+      <GridBackground color={COLORS.PRIMARY} opacity={0.03} />
+
+      {/* Abstract Code Cluster - Simplified */}
+      <div style={{ padding: 80, opacity: 0.3 }}>
+        {codeBlocks.map((block, i) => {
+          const entry = spring({
+            frame: frame - block.delay,
+            fps: 60,
+            config: ANIMATION.SPRING_GENTLE,
+          });
+          return (
+            <div
+              key={i}
+              style={{
+                height: 10,
+                width: block.width,
+                marginLeft: block.indent,
+                backgroundColor: block.color,
+                marginBottom: 10,
+                borderRadius: 2,
+                opacity: entry,
+                transform: `translateX(${interpolate(entry, [0, 1], [-10, 0])}px)`,
+              }}
+            />
+          );
+        })}
+      </div>
+
+      {/* "Foundation" Grid - Minimal (8x4) */}
+      <div
+        style={{
+          position: 'absolute',
+          bottom: 180,
+          left: '10%',
+          width: '80%',
+          display: 'grid',
+          gridTemplateColumns: 'repeat(8, 1fr)',
+          gridTemplateRows: 'repeat(4, 1fr)',
+          gap: 12,
+        }}
+      >
+        {Array.from({ length: 32 }).map((_, i) => {
+          const row = Math.floor(i / 8);
+          const col = i % 8;
+          const stagger = col * 3 + (3 - row) * 8;
+          const pop = spring({
+            frame: frame - foundationStartTime - stagger,
+            fps: 60,
+            config: ANIMATION.SPRING_GENTLE,
+          });
+
+          if (pop <= 0) return null;
+
+          return (
+            <div
+              key={i}
+              style={{
+                height: 20,
+                backgroundColor: COLORS.PRIMARY_DIM,
+                border: `1px solid ${COLORS.BORDER_PRIMARY}`,
+                borderRadius: 2,
+                opacity: pop * 0.8,
+                transform: `translateY(${interpolate(pop, [0, 1], [10, 0])}px)`,
+              }}
+            />
+          );
+        })}
+      </div>
+
+      <div
+        style={{
+          position: 'absolute',
+          top: '35%',
+          right: 200,
+          opacity: interpolate(frame, [foundationStartTime, foundationStartTime + 20], [0, 1]),
+          textAlign: 'right',
+        }}
+      >
+        <div style={{ fontFamily: FONTS.DISPLAY, fontSize: FONTS.SIZE_MD, color: COLORS.TEXT_MAIN, fontWeight: 700 }}>
+          바닥부터 직접 구현
+        </div>
+        <div style={{ fontFamily: FONTS.MONO, fontSize: FONTS.SIZE_SM, color: COLORS.PRIMARY, marginTop: 8 }}>
+          [ MANUAL_PROCESS ]
+        </div>
+      </div>
     </AbsoluteFill>
   );
 };
@@ -48,10 +191,54 @@ const Scene2: React.FC = () => {
  * In-Scene Animation 구성: 각 씬의 프레임 내에서 여러 단계로 애니메이션을 분할하여 구현합니다.
  */
 const Scene3: React.FC = () => {
+  const frame = useCurrentFrame();
+
+  const entry = spring({
+    frame,
+    fps: 60,
+    config: ANIMATION.SPRING_GENTLE,
+  });
+
   return (
-    <AbsoluteFill>
-      {/* TODO: Implement Connected Layouts */}
-      {/* TODO: Implement Data Pulse Animation */}
+    <AbsoluteFill style={{ backgroundColor: COLORS.BG_VOID }}>
+      <GridBackground color={COLORS.PRIMARY} opacity={0.05} />
+      <div
+        style={{
+          flex: 1,
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          gap: 150,
+          opacity: entry,
+        }}
+      >
+        <DataNode type="rhombus" size={120} color={COLORS.PRIMARY} label="AI" />
+        <ConnectionLine
+          points={[
+            [880, 540],
+            [1040, 540],
+          ]}
+          color={COLORS.PRIMARY}
+          isFlowing
+          strokeWidth={4}
+        />
+        <DataNode type="square" size={120} color={COLORS.SECONDARY} label="DEV" />
+      </div>
+      <div
+        style={{
+          position: 'absolute',
+          top: '65%',
+          width: '100%',
+          textAlign: 'center',
+          fontFamily: FONTS.DISPLAY,
+          fontSize: FONTS.SIZE_LG,
+          color: COLORS.TEXT_MAIN,
+          fontWeight: FONTS.WEIGHT_SEMIBOLD,
+          opacity: interpolate(frame, [30, 60], [0, 1], { extrapolateLeft: 'clamp' }),
+        }}
+      >
+        든든한 페어 프로그래머
+      </div>
     </AbsoluteFill>
   );
 };
@@ -66,10 +253,105 @@ const Scene3: React.FC = () => {
  * In-Scene Animation 구성: 각 씬의 프레임 내에서 여러 단계로 애니메이션을 분할하여 구현합니다.
  */
 const Scene4: React.FC = () => {
+  const frame = useCurrentFrame();
+
+  const expansionTrigger = 150;
+  const expansion = spring({
+    frame: frame - expansionTrigger,
+    fps: 60,
+    config: ANIMATION.SPRING_GENTLE,
+  });
+
   return (
-    <AbsoluteFill>
-      {/* TODO: Implement Bottleneck Resolution Animation */}
-      {/* TODO: Implement UI Node to Code Transformation */}
+    <AbsoluteFill style={{ backgroundColor: COLORS.BG_VOID }}>
+      <GridBackground color={COLORS.PRIMARY} opacity={0.03} />
+
+      {/* SVG Container Lines - Simplified */}
+      <svg
+        width="1920"
+        height="1080"
+        style={{ position: 'absolute', inset: 0, opacity: 0.3 }}
+      >
+        <line
+          x1="0"
+          y1={interpolate(expansion, [0, 1], [480, 200])}
+          x2="1920"
+          y2={interpolate(expansion, [0, 1], [480, 200])}
+          stroke={COLORS.BORDER_PRIMARY}
+          strokeWidth={1}
+        />
+        <line
+          x1="0"
+          y1={interpolate(expansion, [0, 1], [600, 880])}
+          x2="1920"
+          y2={interpolate(expansion, [0, 1], [600, 880])}
+          stroke={COLORS.BORDER_PRIMARY}
+          strokeWidth={1}
+        />
+      </svg>
+
+      {/* Minimal Flowing Elements (reduced from 12 to 6) */}
+      {Array.from({ length: 6 }).map((_, i) => {
+        const delay = i * 40;
+        const speed = frame > expansionTrigger ? 10 : 4;
+        const progress = (frame - delay) * speed;
+        const x = progress % 2000;
+        
+        const yRange = x < 400 ? 80 : interpolate(expansion, [0, 1], [80, 600]);
+        const yPos = 540 + (i - 2.5) * (yRange / 6);
+
+        const isTransformed = x > 800;
+
+        return (
+          <div
+            key={i}
+            style={{
+              position: 'absolute',
+              left: x,
+              top: yPos,
+              transform: 'translate(-50%, -50%)',
+              opacity: x > 1800 ? 1 - (x - 1800) / 200 : 1,
+            }}
+          >
+            {isTransformed ? (
+              <div
+                style={{
+                  width: 50,
+                  height: 24,
+                  backgroundColor: COLORS.BG_ELEVATED,
+                  border: `1.5px solid ${COLORS.PRIMARY_MID}`,
+                  borderRadius: 1,
+                  opacity: interpolate(expansion, [0, 1], [0.4, 0.9]),
+                }}
+              />
+            ) : (
+              <DataNode
+                type="circle"
+                size={20}
+                color={COLORS.SECONDARY_DIM}
+                isGlowing={false}
+              />
+            )}
+          </div>
+        );
+      })}
+
+      <div
+        style={{
+          position: 'absolute',
+          top: '20%',
+          width: '100%',
+          textAlign: 'center',
+          fontFamily: FONTS.DISPLAY,
+          fontSize: FONTS.SIZE_LG,
+          color: COLORS.PRIMARY,
+          fontWeight: 800,
+          opacity: expansion,
+          letterSpacing: 8,
+        }}
+      >
+        Frictionless Flow
+      </div>
     </AbsoluteFill>
   );
 };
@@ -84,10 +366,91 @@ const Scene4: React.FC = () => {
  * In-Scene Animation 구성: 각 씬의 프레임 내에서 여러 단계로 애니메이션을 분할하여 구현합니다.
  */
 const Scene5: React.FC = () => {
+  const frame = useCurrentFrame();
+
+  const transitionTrigger = 100;
+  const transition = spring({
+    frame: frame - transitionTrigger,
+    fps: 60,
+    config: ANIMATION.SPRING_GENTLE,
+  });
+
+  const codeContent = [
+    'const App: React.FC = () => {',
+    '  return (',
+    '    <Layout>',
+    '      <Header />',
+    '      <Content />',
+    '    </Layout>',
+    '  );',
+    '};',
+  ];
+
+  const width = 800;
+  const height = 500;
+
   return (
-    <AbsoluteFill>
-      {/* TODO: Implement Sketch to Block Animation */}
-      {/* TODO: Implement Prompt Typing and Light Beam Animation */}
+    <AbsoluteFill style={{ backgroundColor: COLORS.BG_VOID }}>
+      <GridBackground color={COLORS.PRIMARY} opacity={0.03} />
+      <div
+        style={{
+          flex: 1,
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          transform: 'none',
+        }}
+      >
+        {/* Blueprint Sketch (Hidden after transition) */}
+        <div
+          style={{
+            position: 'absolute',
+            width,
+            height,
+            opacity: 1 - transition,
+            pointerEvents: transition > 0.5 ? 'none' : 'auto',
+          }}
+        >
+          <svg width={width} height={height} style={{ overflow: 'visible' }}>
+            <rect
+              width={width}
+              height={height}
+              fill="none"
+              stroke={COLORS.TEXT_DISABLED}
+              strokeWidth={1}
+              strokeDasharray="4 4"
+            />
+            {/* Skeletal wireframe lines */}
+            <line x1="0" y1="40" x2={width} y2="40" stroke={COLORS.TEXT_DISABLED} strokeWidth={1} />
+            <line x1="200" y1="40" x2="200" y2={height} stroke={COLORS.TEXT_DISABLED} strokeWidth={1} />
+            <rect x="230" y="70" width="540" height="400" stroke={COLORS.TEXT_MUTED} strokeWidth={1} fill="none" rx={4} />
+            <rect x="30" y="70" width="140" height="20" stroke={COLORS.TEXT_MUTED} strokeWidth={1} fill="none" rx={2} />
+            <rect x="30" y="110" width="140" height="20" stroke={COLORS.TEXT_MUTED} strokeWidth={1} fill="none" rx={2} />
+            
+            {/* Technical corner marks */}
+            {[ [0,0], [width,0], [0,height], [width,height] ].map(([x,y], i) => (
+              <circle key={i} cx={x} cy={y} r={4} fill={COLORS.PRIMARY_DIM} />
+            ))}
+          </svg>
+          <div style={{ position: 'absolute', bottom: -24, left: 0, fontFamily: FONTS.MONO, fontSize: 12, color: COLORS.TEXT_MUTED }}>
+            WFT_VER: 0.82-BETA // WIREFRAME_TRANSITION
+          </div>
+        </div>
+
+        {/* HighTechCodeBlock with BUILT-IN Typing & Cursor */}
+        <div style={{ opacity: transition, transform: `translateY(${interpolate(transition, [0, 1], [10, 0])}px)` }}>
+          <HighTechCodeBlock
+            width={width}
+            height={height}
+            color={COLORS.PRIMARY}
+            title="COMPONENT_FACTORY.TSX"
+            content={codeContent}
+            startFrame={transitionTrigger}
+            typingSpeed={1.5}
+            scale={1}
+          />
+        </div>
+      </div>
     </AbsoluteFill>
   );
 };
@@ -102,10 +465,62 @@ const Scene5: React.FC = () => {
  * In-Scene Animation 구성: 각 씬의 프레임 내에서 여러 단계로 애니메이션을 분할하여 구현합니다.
  */
 const Scene6: React.FC = () => {
+  const frame = useCurrentFrame();
+
+  const runProgress = spring({
+    frame,
+    fps: 60,
+    config: ANIMATION.SPRING_GENTLE,
+  });
+
   return (
-    <AbsoluteFill>
-      {/* TODO: Implement Run Status Bar and Interaction Feedback */}
-      {/* TODO: Implement Particle Sweep Animation */}
+    <AbsoluteFill style={{ backgroundColor: COLORS.BG_VOID }}>
+      <GridBackground color={COLORS.PRIMARY} opacity={0.05} />
+      <div
+        style={{
+          flex: 1,
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}
+      >
+        <div
+          style={{
+            width: 400,
+            height: 10,
+            backgroundColor: COLORS.BG_ELEVATED,
+            borderRadius: 5,
+            overflow: 'hidden',
+            marginBottom: 40,
+            border: `1px solid ${COLORS.BORDER}`,
+          }}
+        >
+          <div
+            style={{
+              width: `${runProgress * 100}%`,
+              height: '100%',
+              backgroundColor: COLORS.PRIMARY,
+              boxShadow: EFFECTS.GLOW_SM,
+            }}
+          />
+        </div>
+        <div style={{ display: 'flex', gap: 30 }}>
+          {Array.from({ length: 3 }).map((_, i) => {
+            const isActive = frame > 100 + i * 20;
+            return (
+              <DataNode
+                key={i}
+                type="rhombus"
+                size={80}
+                color={isActive ? COLORS.PRIMARY : COLORS.TEXT_DISABLED}
+                isGlowing={isActive}
+                label={isActive ? 'ACTIVE' : 'IDLE'}
+              />
+            );
+          })}
+        </div>
+      </div>
     </AbsoluteFill>
   );
 };
@@ -120,10 +535,129 @@ const Scene6: React.FC = () => {
  * In-Scene Animation 구성: 각 씬의 프레임 내에서 여러 단계로 애니메이션을 분할하여 구현합니다.
  */
 const Scene7: React.FC = () => {
+  const frame = useCurrentFrame();
+
+  const optimizationTrigger = 150;
+  const optimization = spring({
+    frame: frame - optimizationTrigger,
+    fps: 60,
+    config: ANIMATION.SPRING_SNAPPY,
+  });
+
+  const entryNode = { x: 960, y: 250, label: 'API_GATEWAY', type: 'rhombus' as const };
+  const serviceNodes = [
+    { x: 660, y: 450, label: 'AUTH_SVC', type: 'hexagon' as const },
+    { x: 960, y: 450, label: 'PAYMENT_SVC', type: 'hexagon' as const },
+    { x: 1260, y: 450, label: 'USER_SVC', type: 'hexagon' as const },
+  ];
+  const dataNodes = [
+    { x: 500, y: 700, label: 'REDIS', type: 'circle' as const },
+    { x: 820, y: 700, label: 'MONGO_DB', type: 'circle' as const },
+    { x: 1100, y: 700, label: 'POSTGRE_SQL', type: 'circle' as const },
+    { x: 1420, y: 700, label: 'ELASTIC', type: 'circle' as const },
+  ];
+
   return (
-    <AbsoluteFill>
-      {/* TODO: Implement 3D Architecture Diagram */}
-      {/* TODO: Implement Route Optimization Animation */}
+    <AbsoluteFill style={{ backgroundColor: COLORS.BG_VOID }}>
+      <GridBackground color={COLORS.PRIMARY} opacity={0.03} />
+
+      {/* Connection Lines (Gateway -> Services) */}
+      {serviceNodes.map((node, i) => {
+        // Jitter before optimization
+        const jitterX = Math.sin(frame * 0.1 + i) * 15 * (1 - optimization);
+        return (
+          <ConnectionLine
+            key={`ls-${i}`}
+            points={[
+              [entryNode.x, entryNode.y],
+              [node.x + jitterX, node.y],
+            ]}
+            color={optimization > 0.5 ? COLORS.PRIMARY : COLORS.SECONDARY_DIM}
+            isFlowing
+            strokeWidth={2}
+            opacity={0.4}
+          />
+        );
+      })}
+
+      {/* Connection Lines (Services -> Data) */}
+      {dataNodes.map((dnode, i) => {
+        const parentIdx = i % 3;
+        const pnode = serviceNodes[parentIdx];
+        const jitterX = Math.cos(frame * 0.1 + i) * 20 * (1 - optimization);
+        return (
+          <ConnectionLine
+            key={`sd-${i}`}
+            points={[
+              [pnode.x + Math.sin(frame * 0.1 + parentIdx) * 15 * (1 - optimization), pnode.y],
+              [dnode.x + jitterX, dnode.y],
+            ]}
+            color={optimization > 0.5 ? COLORS.POSITIVE : COLORS.ACCENT_DIM}
+            isFlowing
+            strokeWidth={1.5}
+            opacity={0.3}
+          />
+        );
+      })}
+
+      {/* Render Entry Node */}
+      <div style={{ position: 'absolute', left: entryNode.x, top: entryNode.y, transform: 'translate(-50%, -50%)' }}>
+        <DataNode type={entryNode.type} size={100} color={COLORS.PRIMARY} label={entryNode.label} isGlowing />
+      </div>
+
+      {/* Render Service Nodes */}
+      {serviceNodes.map((node, i) => {
+        const jitterX = Math.sin(frame * 0.1 + i) * 15 * (1 - optimization);
+        return (
+          <div
+            key={i}
+            style={{
+              position: 'absolute',
+              left: node.x + jitterX,
+              top: node.y,
+              transform: 'translate(-50%, -50%)',
+              opacity: interpolate(frame, [i * 20, i * 20 + 40], [0, 1]),
+            }}
+          >
+            <DataNode type={node.type} size={80} color={COLORS.SECONDARY} label={node.label} />
+          </div>
+        );
+      })}
+
+      {/* Render Data Nodes */}
+      {dataNodes.map((node, i) => {
+        const jitterX = Math.cos(frame * 0.1 + i) * 20 * (1 - optimization);
+        return (
+          <div
+            key={i}
+            style={{
+              position: 'absolute',
+              left: node.x + jitterX,
+              top: node.y,
+              transform: 'translate(-50%, -50%)',
+              opacity: interpolate(frame, [40 + i * 15, 80 + i * 15], [0, 1]),
+            }}
+          >
+            <DataNode type={node.type} size={50} color={COLORS.ACCENT_DIM} label={node.label} />
+          </div>
+        );
+      })}
+
+      {/* Optimization Indicator */}
+      <div
+        style={{
+          position: 'absolute',
+          top: 100,
+          right: 100,
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'flex-end',
+          opacity: optimization,
+        }}
+      >
+        <div style={{ fontFamily: FONTS.MONO, fontSize: 14, color: COLORS.POSITIVE }}>SYSTEM_STABLE: OK</div>
+        <div style={{ fontFamily: FONTS.MONO, fontSize: 14, color: COLORS.PRIMARY }}>LATENCY: 14ms (OPTIMIZED)</div>
+      </div>
     </AbsoluteFill>
   );
 };
@@ -138,10 +672,72 @@ const Scene7: React.FC = () => {
  * In-Scene Animation 구성: 각 씬의 프레임 내에서 여러 단계로 애니메이션을 분할하여 구현합니다.
  */
 const Scene8: React.FC = () => {
+  const frame = useCurrentFrame();
+
   return (
-    <AbsoluteFill>
-      {/* TODO: Implement Review Widget Panel */}
-      {/* TODO: Implement Insight Guide Lines Animation */}
+    <AbsoluteFill style={{ backgroundColor: COLORS.BG_VOID }}>
+      <GridBackground color={COLORS.PRIMARY} opacity={0.05} />
+      <div
+        style={{
+          padding: 80,
+          display: 'flex',
+          gap: 40,
+        }}
+      >
+        <HighTechCodeBlock
+          width={1200}
+          height={700}
+          color={COLORS.PRIMARY}
+          title="MAIN_MODULE.TSX"
+          content={[
+            'function main() {',
+            '  // Logic review required',
+            '  if (input === null) {',
+            '    return error;',
+            '  }',
+            '}',
+          ]}
+        />
+        <div
+          style={{
+            width: 400,
+            backgroundColor: COLORS.BG_SURFACE,
+            border: `1.5px solid ${COLORS.BORDER_PRIMARY}`,
+            borderRadius: 8,
+            padding: 24,
+            boxShadow: EFFECTS.SHADOW_LG,
+            transform: `translateX(${interpolate(frame, [0, 30], [100, 0], {
+              extrapolateRight: 'clamp',
+            })}px)`,
+            opacity: interpolate(frame, [0, 30], [0, 1]),
+          }}
+        >
+          <div
+            style={{
+              fontFamily: FONTS.DISPLAY,
+              fontSize: FONTS.SIZE_MD,
+              color: COLORS.POSITIVE,
+              marginBottom: 16,
+              fontWeight: 700,
+            }}
+          >
+            AI REVIEW
+          </div>
+          <p style={{ color: COLORS.TEXT_BODY, fontSize: FONTS.SIZE_SM, lineHeight: 1.6 }}>
+            이 구간의 중첩된 조건문을
+            <br />
+            배열 메서드로 최적화할 것을 제안합니다.
+          </p>
+          <div
+            style={{
+              marginTop: 20,
+              height: 2,
+              backgroundColor: COLORS.POSITIVE,
+              width: interpolate(frame, [40, 80], [0, 100], { extrapolateRight: 'clamp' }) + '%',
+            }}
+          />
+        </div>
+      </div>
     </AbsoluteFill>
   );
 };
@@ -156,10 +752,49 @@ const Scene8: React.FC = () => {
  * In-Scene Animation 구성: 각 씬의 프레임 내에서 여러 단계로 애니메이션을 분할하여 구현합니다.
  */
 const Scene9: React.FC = () => {
+  const frame = useCurrentFrame();
+
+  const speedValue = interpolate(frame, [0, 265], [10, 840]);
+
   return (
-    <AbsoluteFill>
-      {/* TODO: Implement Thread Expansion Animation */}
-      {/* TODO: Implement Speed Counter Animation */}
+    <AbsoluteFill style={{ backgroundColor: COLORS.BG_VOID }}>
+      <GridBackground angle={45} color={COLORS.PRIMARY} opacity={0.05} speed={10} />
+      <div
+        style={{
+          flex: 1,
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}
+      >
+        <div
+          style={{
+            fontFamily: FONTS.MONO,
+            fontSize: 180,
+            color: COLORS.TEXT_MAIN,
+            fontWeight: 800,
+            fontVariantNumeric: 'tabular-nums',
+            textShadow: EFFECTS.GLOW_TEXT_LG,
+          }}
+        >
+          {Math.floor(speedValue)}
+          <span style={{ fontSize: 40, color: COLORS.PRIMARY, marginLeft: 20 }}>TPS</span>
+        </div>
+        <div style={{ display: 'flex', gap: 10, marginTop: 40 }}>
+          {Array.from({ length: 20 }).map((_, i) => (
+            <div
+              key={i}
+              style={{
+                width: 10,
+                height: 40,
+                backgroundColor: i < (frame / 265) * 20 ? COLORS.PRIMARY : COLORS.BG_ELEVATED,
+                boxShadow: i < (frame / 265) * 20 ? EFFECTS.GLOW_SM : 'none',
+              }}
+            />
+          ))}
+        </div>
+      </div>
     </AbsoluteFill>
   );
 };
@@ -174,10 +809,71 @@ const Scene9: React.FC = () => {
  * In-Scene Animation 구성: 각 씬의 프레임 내에서 여러 단계로 애니메이션을 분할하여 구현합니다.
  */
 const Scene10: React.FC = () => {
+  const frame = useCurrentFrame();
+
   return (
-    <AbsoluteFill>
-      {/* TODO: Implement Agile Loop Animation */}
-      {/* TODO: Implement Node Collection Animation */}
+    <AbsoluteFill style={{ backgroundColor: COLORS.BG_VOID }}>
+      <GridBackground color={COLORS.PRIMARY} opacity={0.05} />
+      <div
+        style={{
+          flex: 1,
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}
+      >
+        <div style={{ position: 'relative', width: 500, height: 500 }}>
+          {Array.from({ length: 6 }).map((_, i) => {
+            const angle = (i * (360 / 6) + frame * 0.5) % 360;
+            const rad = (angle * Math.PI) / 180;
+            const x = Math.cos(rad) * 200 + 250;
+            const y = Math.sin(rad) * 200 + 250;
+
+            return (
+              <DataNode
+                key={i}
+                type="hexagon"
+                size={60}
+                color={COLORS.PRIMARY}
+                isGlowing={i === 0}
+                style={{
+                  position: 'absolute',
+                  left: x,
+                  top: y,
+                  transform: 'translate(-50%, -50%)',
+                }}
+              />
+            );
+          })}
+          <svg width="500" height="500" style={{ position: 'absolute', inset: 0 }}>
+            <circle
+              cx="250"
+              cy="250"
+              r="200"
+              fill="none"
+              stroke={COLORS.PRIMARY_DIM}
+              strokeWidth={2}
+              strokeDasharray="10 10"
+            />
+          </svg>
+        </div>
+      </div>
+      <div
+        style={{
+          position: 'absolute',
+          top: '50%',
+          width: '100%',
+          textAlign: 'center',
+          fontFamily: FONTS.DISPLAY,
+          fontSize: FONTS.SIZE_LG,
+          color: COLORS.TEXT_MAIN,
+          transform: 'translateY(-50%)',
+          letterSpacing: 10,
+          fontWeight: 800,
+        }}
+      >
+        AGILE COLLABORATION
+      </div>
     </AbsoluteFill>
   );
 };
@@ -192,10 +888,47 @@ const Scene10: React.FC = () => {
  * In-Scene Animation 구성: 각 씬의 프레임 내에서 여러 단계로 애니메이션을 분할하여 구현합니다.
  */
 const Scene11: React.FC = () => {
+  const frame = useCurrentFrame();
+
+  const isError = frame % 60 < 30;
+  const pulseColor = isError ? COLORS.NEGATIVE : COLORS.POSITIVE;
+
   return (
-    <AbsoluteFill>
-      {/* TODO: Implement Error to Correction Pulse Cycle */}
-      {/* TODO: Implement Evolving Core Object Animation */}
+    <AbsoluteFill style={{ backgroundColor: COLORS.BG_VOID }}>
+      <GridBackground color={COLORS.PRIMARY} opacity={0.03} />
+      <div
+        style={{
+          flex: 1,
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}
+      >
+        <div style={{ position: 'relative' }}>
+          <DataNode 
+            type="hexagon" 
+            size={180} 
+            color={pulseColor} 
+            isGlowing={!isError} 
+            label={isError ? 'STALLING' : 'OPTIMIZING'}
+          />
+        </div>
+      </div>
+      <div
+        style={{
+          position: 'absolute',
+          bottom: 200,
+          width: '100%',
+          textAlign: 'center',
+          fontFamily: FONTS.DISPLAY,
+          fontSize: FONTS.SIZE_LG,
+          color: pulseColor,
+          fontWeight: 800,
+          textShadow: `0 0 20px ${pulseColor}`,
+        }}
+      >
+        {isError ? 'FAIL FAST' : 'INNOVATE FASTER'}
+      </div>
     </AbsoluteFill>
   );
 };
@@ -210,9 +943,59 @@ const Scene11: React.FC = () => {
  * In-Scene Animation 구성: 각 씬의 프레임 내에서 여러 단계로 애니메이션을 분할하여 구현합니다.
  */
 const Scene12: React.FC = () => {
+  const frame = useCurrentFrame();
+
+  const spotlightEntry = spring({
+    frame,
+    fps: 60,
+    config: ANIMATION.SPRING_GENTLE,
+  });
+
   return (
-    <AbsoluteFill>
-      {/* TODO: Implement Spotlight and Quote Mark Animation */}
+    <AbsoluteFill style={{ backgroundColor: COLORS.BG_VOID }}>
+      <div
+        style={{
+          position: 'absolute',
+          inset: 0,
+          backgroundColor: '#000',
+          opacity: interpolate(spotlightEntry, [0, 1], [0, 0.4]),
+        }}
+      />
+      <AbsoluteFill
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'center',
+          opacity: spotlightEntry,
+        }}
+      >
+        <div
+          style={{
+            fontFamily: FONTS.DISPLAY,
+            fontSize: 120,
+            color: COLORS.PRIMARY,
+            marginBottom: 20,
+            textShadow: EFFECTS.GLOW_MD,
+          }}
+        >
+          &quot;
+        </div>
+        <div
+          style={{
+            fontFamily: FONTS.DISPLAY,
+            fontSize: FONTS.SIZE_XL,
+            color: COLORS.TEXT_MAIN,
+            fontWeight: 700,
+            textAlign: 'center',
+            maxWidth: 800,
+          }}
+        >
+          유명한 개발자는
+          <br />
+          이렇게 말했습니다.
+        </div>
+      </AbsoluteFill>
     </AbsoluteFill>
   );
 };
@@ -227,9 +1010,43 @@ const Scene12: React.FC = () => {
  * In-Scene Animation 구성: 각 씬의 프레임 내에서 여러 단계로 애니메이션을 분할하여 구현합니다.
  */
 const Scene13: React.FC = () => {
+  const frame = useCurrentFrame();
+
+  const points = Array.from({ length: 50 }).map((_, i) => {
+    const x = (i / 49) * 1920;
+    const y = 540 + Math.sin(frame * 0.2 + i * 0.5) * 100 * Math.sin(frame * 0.05);
+    return [x, y] as [number, number];
+  });
+
   return (
-    <AbsoluteFill>
-      {/* TODO: Implement Keyboard to Waveform Morphing Animation */}
+    <AbsoluteFill style={{ backgroundColor: COLORS.BG_VOID }}>
+      <GridBackground color={COLORS.PRIMARY} opacity={0.05} />
+      <AbsoluteFill
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}
+      >
+        <ConnectionLine points={points} color={COLORS.PRIMARY} strokeWidth={4} glowintensity={1} />
+        <div
+          style={{
+            marginTop: 200,
+            fontFamily: FONTS.DISPLAY,
+            fontSize: FONTS.SIZE_LG,
+            color: COLORS.TEXT_MAIN,
+            textAlign: 'center',
+            maxWidth: 1000,
+            lineHeight: 1.5,
+            textShadow: EFFECTS.GLOW_TEXT_SM,
+          }}
+        >
+          &quot;미래의 코딩은 타이핑이 아니라
+          <br />
+          <span style={{ color: COLORS.PRIMARY, fontWeight: 800 }}>대화가 될 것이다.</span>&quot;
+        </div>
+      </AbsoluteFill>
     </AbsoluteFill>
   );
 };
@@ -244,10 +1061,76 @@ const Scene13: React.FC = () => {
  * In-Scene Animation 구성: 각 씬의 프레임 내에서 여러 단계로 애니메이션을 분할하여 구현합니다.
  */
 const Scene14: React.FC = () => {
+  const frame = useCurrentFrame();
+
+  const arrowProgress = spring({
+    frame,
+    fps: 60,
+    config: ANIMATION.SPRING_GENTLE,
+  });
+
   return (
-    <AbsoluteFill>
-      {/* TODO: Implement Data Text Fading and Primary Node Highlight */}
-      {/* TODO: Implement Directional Vector Arrow Animation */}
+    <AbsoluteFill style={{ backgroundColor: COLORS.BG_VOID }}>
+      <GridBackground color={COLORS.PRIMARY} opacity={0.03} />
+      
+      {/* Vertical Content Flow */}
+      <div
+        style={{
+          flex: 1,
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'center',
+          gap: 120,
+        }}
+      >
+        {/* Top: Goal Node & Text */}
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 40 }}>
+          <div
+            style={{
+              fontFamily: FONTS.DISPLAY,
+              fontSize: FONTS.SIZE_LG,
+              color: COLORS.TEXT_MAIN,
+              fontWeight: 800,
+              opacity: interpolate(frame, [40, 70], [0, 1]),
+              textShadow: EFFECTS.GLOW_TEXT_SM,
+            }}
+          >
+            방향을 결정하는 기획력
+          </div>
+          <DataNode type="hexagon" size={60} color={COLORS.SECONDARY} isGlowing={false} />
+        </div>
+
+        {/* Middle: Vertical Directional Arrow */}
+        <div style={{ height: 300, position: 'relative' }}>
+          <svg width="60" height="300" style={{ overflow: 'visible' }}>
+            <path
+              d="M 30 300 L 30 20"
+              stroke={COLORS.PRIMARY}
+              strokeWidth={3}
+              strokeDasharray="300"
+              strokeDashoffset={interpolate(arrowProgress, [0, 1], [300, 0])}
+              markerEnd="url(#arrow-head)"
+            />
+            <defs>
+              <marker
+                id="arrow-head"
+                viewBox="0 0 10 10"
+                refX="5"
+                refY="5"
+                markerWidth="8"
+                markerHeight="8"
+                orient="auto-start-reverse"
+              >
+                <path d="M 0 0 L 10 5 L 0 10 z" fill={COLORS.PRIMARY} />
+              </marker>
+            </defs>
+          </svg>
+        </div>
+
+        {/* Bottom: User Node */}
+        <DataNode type="rhombus" size={100} color={COLORS.PRIMARY} isGlowing label="ORCHESTRATOR" />
+      </div>
     </AbsoluteFill>
   );
 };
@@ -262,10 +1145,54 @@ const Scene14: React.FC = () => {
  * In-Scene Animation 구성: 각 씬의 프레임 내에서 여러 단계로 애니메이션을 분할하여 구현합니다.
  */
 const Scene15: React.FC = () => {
+  const frame = useCurrentFrame();
+
   return (
-    <AbsoluteFill>
-      {/* TODO: Implement Conductor Path and Node Alignment Animation */}
-      {/* TODO: Implement Emphasized Text Animation */}
+    <AbsoluteFill style={{ backgroundColor: COLORS.BG_VOID }}>
+      <GridBackground color={COLORS.PRIMARY} opacity={0.1} spacing={40} speed={4} />
+      <div
+        style={{
+          flex: 1,
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}
+      >
+        <div
+          style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(10, 1fr)',
+            gap: 20,
+            opacity: interpolate(frame, [0, 60], [0, 1]),
+          }}
+        >
+          {Array.from({ length: 30 }).map((_, i) => (
+            <DataNode
+              key={i}
+              type="circle"
+              size={20}
+              color={COLORS.PRIMARY}
+              isGlowing={Math.random() > 0.8}
+            />
+          ))}
+        </div>
+        <div
+          style={{
+            marginTop: 100,
+            fontFamily: FONTS.DISPLAY,
+            fontSize: 100,
+            color: COLORS.TEXT_MAIN,
+            fontWeight: 900,
+            letterSpacing: 20,
+            textShadow: EFFECTS.GLOW_TEXT_LG,
+            transform: 'none',
+            opacity: interpolate(frame, [100, 120], [0, 1]),
+          }}
+        >
+          기획력의 시대
+        </div>
+      </div>
     </AbsoluteFill>
   );
 };
