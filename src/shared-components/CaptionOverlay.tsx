@@ -5,10 +5,33 @@ import {
   useVideoConfig,
   interpolate,
 } from 'remotion';
-import { Subtitle } from '../types/Subtitle';
+
+// _final_timeline.json의 sentence 구조 (신규 방식)
+export interface TimelineSentence {
+  sentence: string;
+  startMs: number;
+  endMs: number;
+  startFrame: number;
+  durationInFrames: number;
+  words: { text: string; startMs: number; endMs: number }[];
+}
+
+// 레거시 Subtitle 타입 (하위호환용)
+interface LegacySubtitle {
+  text: string;
+  startMs: number;
+  endMs: number;
+}
+
+type Caption = TimelineSentence | LegacySubtitle;
 
 interface Props {
-  captions: Subtitle[];
+  captions: Caption[];
+}
+
+function getCaptionText(cap: Caption): string {
+  if ('sentence' in cap) return cap.sentence;
+  return cap.text;
 }
 
 export const CaptionOverlay: React.FC<Props> = ({ captions }) => {
@@ -25,7 +48,6 @@ export const CaptionOverlay: React.FC<Props> = ({ captions }) => {
   if (!activeSubtitle) {
     return null;
   }
-
 
   // Animation: subtle fade in when a new caption starts
   const entryFrame = (activeSubtitle.startMs / 1000) * fps;
@@ -56,9 +78,10 @@ export const CaptionOverlay: React.FC<Props> = ({ captions }) => {
             padding: '10px 20px',
             borderRadius: 10,
             display: 'inline-block',
+            whiteSpace: 'pre-line',
           }}
         >
-          {activeSubtitle.text}
+          {getCaptionText(activeSubtitle)}
         </div>
     </AbsoluteFill>
   );

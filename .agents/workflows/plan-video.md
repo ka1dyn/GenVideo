@@ -59,8 +59,7 @@ src/projects/{project_id}/
 `public/{project_id}/design-system.md` 파일 존재 여부를 확인합니다.
 
 - **파일이 있으면**: 파일을 읽지 말고 이 단계를 건너뜁니다.
-- **파일이 없으면**: 사용자에게 "새로운 디자인 시스템 생성을 위한 지시사항(원하는 테마, 색상, 분위기 등)을 입력해주세요. 특별히 원하시는 톤이 없다면 대본을 바탕으로 자동 생성하겠습니다." 라고 질문을 던집니다.
-- **사용자의 답변을 받은 후**: `.agents/templates/design-system-template.md` 포맷과 사용자의 요구사항(또는 대본의 주제·톤)을 바탕으로 디자인시스템을 생성하고 `public/{project_id}/design-system.md`에 저장합니다.(필요 시 다른 프로젝트의 문서를 복사하여 재사용할 수 있습니다.)
+- **파일이 없으면**: 각 섹션의 원본 대본(`public/{project_id}/{section}/{section}.txt`)을 모두 읽고, 전체 영상의 주제·분위기·톤을 분석하여 `.agents/templates/design-system-template.md` 포맷에 맞게 디자인 시스템을 **자동 생성**합니다. `public/{project_id}/design-system.md`에 저장합니다.(필요 시 다른 프로젝트의 문서를 복사하여 재사용할 수 있습니다.)
 
 생성된 `public/{project_id}/design-system.md` 문서의 모든 상수(Constants) 블록을 추출하여 `src/projects/{project_id}/theme.ts` 파일로 통합 저장하세요.
 
