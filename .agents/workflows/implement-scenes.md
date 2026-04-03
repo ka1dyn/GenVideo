@@ -65,9 +65,20 @@ src/shared-components/
 
 #### 2-1. 기획서 확인
 
-각 섹션의 대본(`public/{project_id}/{section}/{section}.txt`)과 기획서(`public/{project_id}/{section}/{section}_plan.md`)를 확인하고 주제, 내용, 맥락을 이해합니다.
+- 각 섹션의 대본(`public/{project_id}/{section}/{section}.txt`)과 기획서(`public/{project_id}/{section}/{section}_plan.md`)를 확인하고 주제, 내용, 맥락을 이해합니다.
 
-#### 2-2. 공통 UI/애니메이션 컴포넌트 선행 생성 (Componentize)
+- `src/projects/{project_id}/{section}/sequences.tsx` 파일을 확인하고 구현할 부분을 파악합니다.
+
+#### 2-2. 구현 전 필수 준수 규칙
+
+> 당신은 지금부터 Apple, Vercel, Toss와 같은 최고 수준의 IT 기업에서 일하는 수석 UI/UX 모션 디자이너이자 'React Remotion 개발자'입니다. 복잡하고 유치한 연출을 철저히 배제하고, 깔끔하고 구조적인 코드로 세련미를 극대화하세요.
+
+- 미니멀리즘과 구조적 레이아웃: 뻔한 중앙 정렬이나 예술적인 기교보다는 타이포그래피, 여백, 정교한 Grid/Flexbox 정렬을 사용하여 전문적이고 신뢰감 있는 UI를 구성하세요.
+- 클리셰 메타포 절대 금지 & 이모지 사용 금지: 가위, 전구, 돋보기 등 단어를 일차원적으로 표현하는 촌스러운 아이콘을 절대 사용하지 마세요. 또한 시스템 이모지(✅ 등) 사용을 엄격히 금지하며, 대신 순수 CSS나 SVG 패스를 활용해 직접 드로잉하세요. 화려함보다는 깔끔함, 트렌디함을 중시합니다.
+- 그래픽 요소를 구현할 때, 곡선을 지양하고 직선적인 느낌으로 깔끔함과 트렌디함을 추구합니다. round를 과하게 사용하지 마세요.
+- 디자인 시스템 강제: 색상, 그림자, 글로우 효과 등은 반드시 `src/projects/{project_id}/theme.ts`에 정의된 상수만 가져와서 사용해야 합니다.
+
+#### 2-3. 공통 UI/애니메이션 컴포넌트 선행 생성 (Componentize)
 
 본격적인 씬 구현에 앞서, 기획서를 분석하여 반복적으로 등장하는 UI 패턴이나 특수 애니메이션을 독립된 공용 컴포넌트로 먼저 추출하세요.
 
@@ -78,51 +89,11 @@ src/shared-components/
   3. **순수성 유지:** 컴포넌트 파일 자체에서 `theme.ts`를 직접 참조(Import)하는 것을 지양하고, **사용하는 쪽(Scene)에서 `theme.ts`의 상수를 Prop으로 넘겨주도록** 유도하여 재사용성을 극대화하세요.
 - **중복 방지:** 이미 `components/` 폴더에 생성된 동일한 목적의 컴포넌트가 있다면 새로 만들지 말고 적극적으로 재사용하세요.
 
-스켈레톤 코드를 전부 작성했다면 사용자에게 검토를 요청하세요 <--- 반드시 멈춤
-
-#### 2-4. 구현 전 필수 준수 규칙 (수석 디자이너 페르소나 적용)
-
-> 💡 뼈대가 완성되었습니다. 이제 빈 컴포넌트를 채워 넣을 차례입니다. 당신은 지금부터 Apple, Vercel, Toss와 같은 최고 수준의 IT 기업에서 일하는 수석 UI/UX 모션 디자이너이자 'React Remotion 개발자'입니다. 복잡하고 유치한 연출을 철저히 배제하고, 깔끔하고 구조적인 코드로 세련미를 극대화하세요.
-
-- 미니멀리즘과 구조적 레이아웃: 뻔한 중앙 정렬이나 예술적인 기교보다는 타이포그래피, 여백, 정교한 Grid/Flexbox 정렬을 사용하여 전문적이고 신뢰감 있는 UI를 구성하세요.
-- In-Scene Animation (1:1 대응): 잦은 화면 전환(Cut)을 금지합니다. 하나의 씬 내부에서 컴포넌트들이 spring과 interpolate를 통해 크기, 투명도, 위치를 바꾸며 유기적으로 변형되도록 In-Scene Animation 단계 모션을 주석에 따라 반드시 구현하세요.
-- 클리셰 메타포 절대 금지 & 이모지 사용 금지: 가위, 전구, 돋보기 등 단어를 일차원적으로 표현하는 촌스러운 아이콘을 절대 사용하지 마세요. 또한 시스템 이모지(✅ 등) 사용을 엄격히 금지하며, 대신 순수 CSS나 SVG 패스를 활용해 직접 드로잉하세요. 화려함보다는 깔끔함, 트렌디함을 중시합니다.
-- 디자인 시스템 강제: 색상, 그림자, 글로우 효과 등은 반드시 `src/projects/{project_id}/theme.ts`에 정의된 상수만 가져와서 사용해야 합니다.
-- 언어 및 텍스트: 화면에 노출되는 UI 텍스트는 프로그래밍 용어/회사명 등을 제외하고 모두 한국어 단어로 작성합니다.
-
-#### 2-5. 디테일 구현(Chunking & Iteration)
+#### 2-4. 디테일 구현(Chunking & Iteration)
 
 - 규칙 숙지가 끝났다면, 스켈레톤 파일(`src/projects/{project_id}/{section}/sequences.tsx`)의 빈 컴포넌트를 최대 3개 단위(Chunk)로 묶어서 순차적으로 내부 UI와 애니메이션 로직을 채워 넣습니다.
 - 다른 문서를 다시 열람할 필요 없이, 컴포넌트 바로 위에 적힌 기획 주석(JSDoc)에만 100% 의존하여 구현에 집중하세요.
 - 모든 Scene의 TODO 코드를 완벽하게 채울 때까지 이 작업을 반복 수행합니다.
-
-#### 2-6. 섹션 루트 컴포넌트 조립
-
-- 최상위 섹션 파일(`src/projects/{project_id}/{section}/{section}.tsx`)을 수정하여 오디오, 화면(Sequences), 자막을 조립합니다.
-- `_final_timeline.json`을 직접 import하여 `CaptionOverlay`에 전달합니다. 별도의 `_subtitles.ts` 파일 생성은 불필요합니다.
-
-```tsx
-import React from "react";
-import { AbsoluteFill, Audio, staticFile } from "remotion";
-import { CaptionOverlay } from "../../../shared-components/CaptionOverlay";
-import introTimeline from "../../../../public/{project_id}/intro/intro_final_timeline.json";
-import { Sequences } from "./sequences";
-
-export const Intro: React.FC = () => {
-  return (
-    <AbsoluteFill>
-      {/* 1. 오디오 단일 선언 */}
-      <Audio src={staticFile(`{project_id}/intro/intro.wav`)} />
-
-      {/* 2. 절대 프레임 좌표로 배치된 하위 씬들의 묶음 렌더링 */}
-      <Sequences />
-
-      {/* 3. 화면 최상단 자막 오버레이 — JSON을 직접 소비 */}
-      <CaptionOverlay captions={introTimeline.sentences} />
-    </AbsoluteFill>
-  );
-};
-```
 
 ### 3. 린트 (결함 점검)
 

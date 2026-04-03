@@ -41,7 +41,7 @@
 Scene 1
 
 - 원본 텍스트: {FILL: timeline에서 읽은 sentence 원문 — 수정 금지}
-- 단어 등장 시간 : {단어별 등장 시간. 예: "AI": 0f, "개발": 16f, "혁신": 23f, ... (final_timeline.json의 단어별 startFrame과 100% 일치해야 함)}
+- 단어 등장 프레임: {단어별 등장 시간. 예: "AI": 0f, "개발": 16f, "혁신": 23f, ... (final_timeline.json의 단어별 startFrame과 100% 일치해야 함)}
 - 타임라인: {FILL: startFrame}f 부터 시작 (총 {FILL: durationInFrames}f 지속)
 - 비주얼 컨셉: {FILL: 상단 공통 규칙을 준수하여, 이 씬의 레이아웃·핵심 요소·연출 방향을 2~3문장으로 요약}
 

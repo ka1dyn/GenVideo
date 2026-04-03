@@ -4,13 +4,21 @@ description: remotion 기반 영상을 작성하기 전 영상을 기획, 준비
 
 # /plan-video {project_id}
 
-대본 파일(`src/ref/{project_id}.txt`)로부터 Remotion 영상 프로젝트 기획서를 작성하는 전체 워크플로우입니다.
+대본 파일(`src/ref/{project_id}.txt`)로부터 Remotion 영상 프로젝트 기획서와 스켈레톤 코드(뼈대 코드)를 작성하는 전체 워크플로우입니다.
 
 ## 전체 흐름
 
 - **Phase 1: Scaffold** → (사용자가 사전 실행 완료) 폴더 구조, TTS 음성, 타임스탬프, 컨텍스트 파일 생성
 - **Phase 2: Set Timeline** → 원본 대본, 타임스탬프 값을 기반으로 최종 타임라인을 완성
 - **Phase 3: Plan** → 모델 기반으로 각 섹션별 애니메이션 기획서 작성
+- **Phase 4: Skeleton Code Generation** → 각 섹션별로 뼈대 코드 생성
+- **Phase 5: Root Component Assembly** → 각 섹션별로 루트 컴포넌트 조립
+
+## 사전 조건
+
+`public/{project_id}/design-system.md` 파일이 존재해야 합니다.
+
+파일이 없다면 사용자에게 요청하고 대기합니다.
 
 ## 프로젝트 예상 구조
 
@@ -35,7 +43,9 @@ src/constants/
 
 src/projects/{project_id}/
     theme.ts                        <--- 디자인 시스템의 상수 모음
-
+    {section}/
+        sequences.tsx               <--- (Phase 4에서 생성 예정) 해당 섹션의 씬 시퀀스 코드
+        {section}.tsx               <--- (Phase 4에서 수정 예정) 해당 섹션의 최상위 래퍼 및 Audio 컴포넌트
 ```
 
 ## 프로젝트 구조 (분석 대상) 동적 파악
@@ -53,7 +63,7 @@ src/projects/{project_id}/
 `.agents/workflows/set-timeline.md` 경로의 워크플로우 문서를 읽고 지시사항에 따라 타임라인을 구성하세요.
 해당 단계를 바탕으로 탐색된 모든 섹션의 `_final_timeline.json` 파일을 자동 생성합니다.
 
-## Phase 4: Plan
+## Phase 3: Plan
 
 각 섹션별로 기획서를 작성하는 단계입니다.
 
@@ -61,60 +71,54 @@ src/projects/{project_id}/
 
 **계획 승인 요청**: 모든 기획서 작성이 완료되면 사용자에게 최종 검토 및 승인을 요청하세요. <--- 반드시 멈춤
 
-## Phase 5: Skeleton Code Generation
+## Phase 4: Skeleton Code Generation
 
 각 section을 loop로 돌면서 아래 사항을 수정합니다.
 
 `src/projects/{project_id}/{section}/sequences.tsx` 파일을 생성하고 아래와 같이 뼈대를 잡습니다.
 
-- [매우중요] 각 Scene 컴포넌트 바로 위에 JSDoc(/\*\* \*/)을 열고, {section}\_plan.md에 있는 해당 씬의 '원본 텍스트'와 '단어 등장 시간', '비주얼 컨셉'을 그대로 복사하여 주석으로 삽입하세요.
+- [매우중요] 각 Scene 컴포넌트 바로 위에 JSDoc(/\*\* \*/)을 열고, {section}\_plan.md에 있는 해당 씬의 '원본 텍스트'와 '단어 등장 프레임', '비주얼 컨셉'을 그대로 복사하여 주석으로 삽입하세요.
 - 최하단 Sequences 컴포넌트에는 <Series>를 절대 사용하지 말고, `public/{project_id}/{section}/{section}_final_timeline.json`에 명시된 startFrame과 durationInFrames 값을 가져와 **절대 좌표 <Sequence>**로 렌더링하세요.
-- 아래 예시 스켈레톤 코드를 적극 참고하세요
+- 아래 예시 스켈레톤 코드를 적극 참고하세요.
 
 ```tsx
 import React from "react";
-import { AbsoluteFill, Sequence } from "remotion";
-// import { COLORS, FONTS } from "../theme"; // 테마 임포트 예시
+import {
+  AbsoluteFill,
+  Sequence,
+  useCurrentFrame,
+  useVideoConfig,
+  interpolate,
+  spring,
+} from "remotion";
+import { BRAND, COLORS, EFFECTS, FONTS, SPACING, ANIMATION, Z } from "../theme"; // 테마 임포트
 
 /**
  * [Scene 1 기획안]
  * 원본 텍스트: (plan.md의 해당 scene 텍스트를 그대로 복사하여 삽입)
- * 단어 등장 시간: (plan.md의 해당 scene 텍스트를 그대로 복사하여 삽입)
+ * 단어 등장 타이밍: (plan.md의 해당 scene 텍스트를 그대로 복사하여 삽입)
  * 비주얼 컨셉: (plan.md의 내용을 그대로 복사하여 삽입)
+ * 하단 150px은 자막 영역이므로, 텍스트와 핵심 그래픽은 이 영역을 침범하지 않도록 주의하세요.
+ * 화면에 노출되는 UI 텍스트는 프로그래밍 용어/회사명 등을 제외하고 모두 한국어 단어로 작성합니다.
+ * In-Scene Animation 구성: 각 씬의 프레임 내에서 여러 단계로 애니메이션을 분할하여 구현합니다.
  */
 const Scene1: React.FC = () => {
   // TODO: 주석 내용에 맞게 구현
-  return (
-    <AbsoluteFill>
-      {/* 1. 배경 레이어: 화면 전체 사용. (자막 영역 하단 150px을 침범해도 되는 배경색, 배경 이미지, 파티클 등) */}
-      <AbsoluteFill>{/* 배경 요소는 이 곳에 */}</AbsoluteFill>
-
-      {/* 2. 메인 콘텐츠 안전 레이어: 자막과 겹치지 않도록 bottom: 150으로 하단이 격리된 도화지 */}
-      <AbsoluteFill style={{ bottom: 150, height: "auto" }}>
-        {/* 텍스트와 핵심 그래픽(주제 아이콘, 차트 등)은 묶음이므로, 반드시 모두 이 안에서 Flexbox 등으로 정렬하세요. */}
-      </AbsoluteFill>
-    </AbsoluteFill>
-  );
+  return <AbsoluteFill></AbsoluteFill>;
 };
 
 /**
  * [Scene 2 기획안]
  * 원본 텍스트: (plan.md의 해당 scene 텍스트를 그대로 복사하여 삽입)
+ * 단어 등장 타이밍: (plan.md의 해당 scene 텍스트를 그대로 복사하여 삽입)
  * 비주얼 컨셉: (plan.md의 내용을 그대로 복사하여 삽입)
+ * 하단 150px은 자막 영역이므로, 텍스트와 핵심 그래픽은 이 영역을 침범하지 않도록 주의하세요.
+ * 화면에 노출되는 UI 텍스트는 프로그래밍 용어/회사명 등을 제외하고 모두 한국어 단어로 작성합니다.
+ * In-Scene Animation 구성: 각 씬의 프레임 내에서 여러 단계로 애니메이션을 분할하여 구현합니다.
  */
 const Scene2: React.FC = () => {
   // TODO: 주석 내용에 맞게 구현
-  return (
-    <AbsoluteFill>
-      {/* 1. 배경 레이어: 화면 전체 사용. (자막 영역 하단 150px을 침범해도 되는 배경색, 배경 이미지, 파티클 등) */}
-      <AbsoluteFill>{/* 배경 요소는 이 곳에 */}</AbsoluteFill>
-
-      {/* 2. 메인 콘텐츠 안전 레이어: 자막과 겹치지 않도록 bottom: 150으로 하단이 격리된 도화지 */}
-      <AbsoluteFill style={{ bottom: 150, height: "auto" }}>
-        {/* 텍스트와 핵심 그래픽(주제 아이콘, 차트 등)은 묶음이므로, 반드시 모두 이 안에서 Flexbox 등으로 정렬하세요. */}
-      </AbsoluteFill>
-    </AbsoluteFill>
-  );
+  return <AbsoluteFill></AbsoluteFill>;
 };
 
 export const Sequences: React.FC = () => {
@@ -127,6 +131,34 @@ export const Sequences: React.FC = () => {
       <Sequence from={94} durationInFrames={178}>
         <Scene2 />
       </Sequence>
+    </AbsoluteFill>
+  );
+};
+```
+
+#### Phase 5. Root Component Assembly
+
+- 최상위 섹션 파일(`src/projects/{project_id}/{section}/{section}.tsx`)을 수정하여 오디오, 화면(Sequences), 자막을 조립합니다.
+- `_final_timeline.json`을 직접 import하여 `CaptionOverlay`에 전달합니다.
+
+```tsx
+import React from "react";
+import { AbsoluteFill, Audio, staticFile } from "remotion";
+import { CaptionOverlay } from "../../../shared-components/CaptionOverlay";
+import introTimeline from "../../../../public/{project_id}/intro/intro_final_timeline.json";
+import { Sequences } from "./sequences";
+
+export const Intro: React.FC = () => {
+  return (
+    <AbsoluteFill>
+      {/* 1. 오디오 단일 선언 */}
+      <Audio src={staticFile(`{project_id}/intro/intro.wav`)} />
+
+      {/* 2. 절대 프레임 좌표로 배치된 하위 씬들의 묶음 렌더링 */}
+      <Sequences />
+
+      {/* 3. 화면 최상단 자막 오버레이 — JSON을 직접 소비 */}
+      <CaptionOverlay captions={introTimeline.sentences} />
     </AbsoluteFill>
   );
 };
