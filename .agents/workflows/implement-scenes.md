@@ -118,17 +118,51 @@ import { AbsoluteFill, Sequence } from "remotion";
  */
 const Scene1: React.FC = () => {
   // TODO: Phase 2에서 구현
-  return <AbsoluteFill></AbsoluteFill>;
+  return (
+    <AbsoluteFill>
+      {/* 1. 그래픽 영역: 화면 전체 사용. 자막 영역(하단 150px)을 침범해도 무방함 */}
+
+      {/* 2. 텍스트 안전 영역: 자막과 겹치지 않도록 bottom: 150으로 격리된 도화지 */}
+      <div
+        style={{
+          position: "absolute",
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 150,
+        }}
+      >
+        {/* 텍스트 요소는 반드시 이 안에 배치하세요 */}
+      </div>
+    </AbsoluteFill>
+  );
 };
 
 /**
  * [Scene 2 기획안]
- * 원본 텍스트:
- * 비주얼 컨셉:
+ * 원본 텍스트: (plan.md의 해당 scene 텍스트를 그대로 복사하여 삽입)
+ * 비주얼 컨셉: (plan.md의 내용을 그대로 복사하여 삽입)
  */
 const Scene2: React.FC = () => {
   // TODO: Phase 2에서 구현
-  return <AbsoluteFill></AbsoluteFill>;
+  return (
+    <AbsoluteFill>
+      {/* 1. 그래픽 영역: 화면 전체 사용. 자막 영역(하단 150px)을 침범해도 무방함 */}
+
+      {/* 2. 텍스트 안전 영역: 자막과 겹치지 않도록 bottom: 150으로 격리된 도화지 */}
+      <div
+        style={{
+          position: "absolute",
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 150,
+        }}
+      >
+        {/* 텍스트 요소는 반드시 이 안에 배치하세요 */}
+      </div>
+    </AbsoluteFill>
+  );
 };
 
 export const Sequences: React.FC = () => {
@@ -164,7 +198,7 @@ export const Sequences: React.FC = () => {
 
 #### 2-7. 섹션 루트 컴포넌트 조립
 
-최상위 섹션 파일(`src/projects/{project_id}/{section}/{section}.tsx`)을 수정하여 오디오, 화면(Sequences), 자막을 조립합니다.
+- 최상위 섹션 파일(`src/projects/{project_id}/{section}/{section}.tsx`)을 수정하여 오디오, 화면(Sequences), 자막을 조립합니다.
 
 ```tsx
 import React from "react";

@@ -181,18 +181,20 @@ const Scene11: React.FC = () => {
 const Scene12: React.FC = () => {
   const frame = useCurrentFrame();
   const size = interpolate(frame, [0, 131], [40, 5]);
+
   return (
-    <AbsoluteFill style={{ backgroundColor: COLORS.BG_DEEP, justifyContent: "center", alignItems: "center" }}>
-        <div style={{ 
-         width: 400, 
-         height: 400, 
-         background: `conic-gradient(${COLORS.PRIMARY} 0% ${100-size}%, ${COLORS.TEXT_MUTED} ${100-size}% 100%)`, 
-         borderRadius: "50%",
-         transform: `rotate(-90deg)`,
-         boxShadow: EFFECTS.SHADOW_LG
-       }} />
-       <div style={{ position: "absolute", bottom: 100, fontFamily: FONTS.PRIMARY, color: COLORS.TEXT_MUTED, fontSize: 40 }}>REPETITIVE TASK</div>
-    </AbsoluteFill>
+      <AbsoluteFill style={{ backgroundColor: COLORS.BG_DEEP, justifyContent: "center", alignItems: "center",}}>
+            <div style={{ 
+                width: 400, 
+                height: 400, 
+                background: `conic-gradient(${COLORS.PRIMARY} 0% ${100-size}%, ${COLORS.TEXT_MUTED} ${100-size}% 100%)`, 
+                borderRadius: "50%",
+                transform: `rotate(-90deg)`,
+                boxShadow: EFFECTS.SHADOW_LG
+            }} />
+            <div style={{ position: "absolute", bottom: 100, fontFamily: FONTS.PRIMARY, color: COLORS.TEXT_MUTED, fontSize: 40 }}>REPETITIVE TASK</div>
+        </AbsoluteFill> 
+    
   );
 };
 

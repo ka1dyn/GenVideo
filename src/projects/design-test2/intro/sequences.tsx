@@ -384,37 +384,46 @@ const Scene12: React.FC = () => {
   const move = interpolate(frame, [0, 145], [0, -100]);
 
   return (
-    <AbsoluteFill style={{ backgroundColor: COLORS.BG_DEEP, overflow: "hidden" }}>
+    <AbsoluteFill style={{ backgroundColor: COLORS.BG_DEEP, overflow: "hidden"}}>
       <div style={{ 
-        display: "flex", 
-        flexDirection: "column", 
-        gap: 40, 
-        padding: 100,
-        transform: `translateY(${move}px) scale(1.1)`
-      }}>
-        {[1, 2, 3].map((i) => (
-          <div key={i} style={{ 
-            width: "100%", 
-            height: 300, 
-            border: `2px dashed ${COLORS.PRIMARY}`, 
-            borderRadius: 20,
-            backgroundColor: "white",
-            opacity: 0.5,
-            padding: 40,
-          }}>
-            <div style={{ width: 200, height: 30, backgroundColor: COLORS.PRIMARY_DIM, borderRadius: 15 }} />
-          </div>
-        ))}
-      </div>
+          display: "flex", 
+          flexDirection: "column", 
+          gap: 40, 
+          padding: 100,
+          transform: `translateY(${move}px) scale(1.1)`
+        }}>
+          {[1, 2, 3].map((i) => (
+            <div key={i} style={{ 
+              width: "100%", 
+              height: 300, 
+              border: `2px dashed ${COLORS.PRIMARY}`, 
+              borderRadius: 20,
+              backgroundColor: "white",
+              opacity: 0.5,
+              padding: 40,
+            }}>
+              <div style={{ width: 200, height: 30, backgroundColor: COLORS.PRIMARY_DIM, borderRadius: 15 }} />
+            </div>
+          ))}
+        </div>
+      
       <div style={{ 
         position: "absolute", 
-        bottom: 100, 
-        right: 100, 
-        fontFamily: FONTS.PRIMARY, 
-        fontSize: 80, 
-        color: COLORS.PRIMARY,
-        fontWeight: "bold"
-      }}>ARCHITECTURE</div>
+        top: 0, 
+        left: 0, 
+        right: 0, 
+        bottom: 150
+      }}>
+        <div style={{ 
+          position: "absolute", 
+          bottom: 100, 
+          right: 100, 
+          fontFamily: FONTS.PRIMARY, 
+          fontSize: 80, 
+          color: COLORS.PRIMARY,
+          fontWeight: "bold"
+        }}>ARCHITECTURE</div>
+      </div>
     </AbsoluteFill>
   );
 };
