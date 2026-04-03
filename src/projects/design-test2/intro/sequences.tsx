@@ -407,13 +407,7 @@ const Scene12: React.FC = () => {
           ))}
         </div>
       
-      <div style={{ 
-        position: "absolute", 
-        top: 0, 
-        left: 0, 
-        right: 0, 
-        bottom: 150
-      }}>
+      <AbsoluteFill style={{bottom: 150, height: 'auto'}}>
         <div style={{ 
           position: "absolute", 
           bottom: 100, 
@@ -423,7 +417,7 @@ const Scene12: React.FC = () => {
           color: COLORS.PRIMARY,
           fontWeight: "bold"
         }}>ARCHITECTURE</div>
-      </div>
+      </AbsoluteFill>
     </AbsoluteFill>
   );
 };

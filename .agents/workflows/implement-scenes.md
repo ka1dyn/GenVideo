@@ -94,23 +94,18 @@ import { AbsoluteFill, Sequence } from "remotion";
  * 비주얼 컨셉: (plan.md의 내용을 그대로 복사하여 삽입)
  */
 const Scene1: React.FC = () => {
-  // TODO: Phase 2에서 구현
+  // TODO: Phase 2에서 컨셉에 맞춰 구현
   return (
     <AbsoluteFill>
-      {/* 1. 그래픽 영역: 화면 전체 사용. 자막 영역(하단 150px)을 침범해도 무방함 */}
+      {/* 1. 배경 레이어: 화면 전체 사용. (자막 영역 하단 150px을 침범해도 되는 배경색, 배경 이미지, 파티클 등) */}
+      <AbsoluteFill>
+         {/* 배경 요소는 이 곳에 */}
+      </AbsoluteFill>
 
-      {/* 2. 텍스트 안전 영역: 자막과 겹치지 않도록 bottom: 150으로 격리된 도화지 */}
-      <div
-        style={{
-          position: "absolute",
-          top: 0,
-          left: 0,
-          right: 0,
-          bottom: 150,
-        }}
-      >
-        {/* 텍스트 요소는 반드시 이 안에 배치하세요 */}
-      </div>
+      {/* 2. 메인 콘텐츠 안전 레이어: 자막과 겹치지 않도록 bottom: 150으로 하단이 격리된 도화지 */}
+      <AbsoluteFill style={{ bottom: 150, height: "auto" }}>
+        {/* 텍스트와 핵심 그래픽(주제 아이콘, 차트 등)은 묶음이므로, 반드시 모두 이 안에서 Flexbox 등으로 정렬하세요. */}
+      </AbsoluteFill>
     </AbsoluteFill>
   );
 };
@@ -121,23 +116,18 @@ const Scene1: React.FC = () => {
  * 비주얼 컨셉: (plan.md의 내용을 그대로 복사하여 삽입)
  */
 const Scene2: React.FC = () => {
-  // TODO: Phase 2에서 구현
+  // TODO: Phase 2에서 컨셉에 맞춰 구현
   return (
     <AbsoluteFill>
-      {/* 1. 그래픽 영역: 화면 전체 사용. 자막 영역(하단 150px)을 침범해도 무방함 */}
+      {/* 1. 배경 레이어: 화면 전체 사용. (자막 영역 하단 150px을 침범해도 되는 배경색, 배경 이미지, 파티클 등) */}
+      <AbsoluteFill>
+         {/* 배경 요소는 이 곳에 */}
+      </AbsoluteFill>
 
-      {/* 2. 텍스트 안전 영역: 자막과 겹치지 않도록 bottom: 150으로 격리된 도화지 */}
-      <div
-        style={{
-          position: "absolute",
-          top: 0,
-          left: 0,
-          right: 0,
-          bottom: 150,
-        }}
-      >
-        {/* 텍스트 요소는 반드시 이 안에 배치하세요 */}
-      </div>
+      {/* 2. 메인 콘텐츠 안전 레이어: 자막과 겹치지 않도록 bottom: 150으로 하단이 격리된 도화지 */}
+      <AbsoluteFill style={{ bottom: 150, height: "auto" }}>
+        {/* 텍스트와 핵심 그래픽(주제 아이콘, 차트 등)은 묶음이므로, 반드시 모두 이 안에서 Flexbox 등으로 정렬하세요. */}
+      </AbsoluteFill>
     </AbsoluteFill>
   );
 };
