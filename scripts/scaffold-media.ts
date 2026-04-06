@@ -23,12 +23,10 @@ function getAudioDurationMs(wavPath: string): number {
   }
 }
 
-export async function processMediaForSections(
+export async function extractMedia(
   projectId: string,
   sections: Section[]
-): Promise<SectionMeta[]> {
-  const sectionMetas: SectionMeta[] = [];
-
+): Promise<void> {
   // 1. Create folders and text files
   console.log("\n=== Phase 1: Creating Directories and TXT files ===");
   for (const doc of sections) {
@@ -84,6 +82,13 @@ export async function processMediaForSections(
       console.error(`❌ TTS generation failed for ${doc.name}`, e);
     }
   }
+}
+
+export async function generateTimestamps(
+  projectId: string,
+  sections: Section[]
+): Promise<SectionMeta[]> {
+  const sectionMetas: SectionMeta[] = [];
 
   // 3. Setup Whisper and Generate Timestamps
   console.log("\n=== Phase 3: Setup Whisper and Generate Timestamps ===");

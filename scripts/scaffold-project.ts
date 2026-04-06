@@ -1,7 +1,7 @@
 import fs from "fs";
 import path from "path";
 import { Section, SectionMeta } from "./scaffold-types";
-import { processMediaForSections } from "./scaffold-media";
+import { extractMedia, generateTimestamps } from "./scaffold-media";
 import { generateComponents } from "./scaffold-components";
 
 import { VIDEO_FPS as FPS } from "../src/constants/video-config";
@@ -68,14 +68,21 @@ ${timestampTable}
 
 async function main() {
   const args = process.argv.slice(2);
-  if (args.length === 0) {
+  if (args.length < 2) {
     console.error(
-      "Usage: npx ts-node scripts/scaffold-project.ts <project_id>"
+      "Usage: npx ts-node scripts/scaffold-project.ts [extract|process|all] <project_id>"
     );
     process.exit(1);
   }
 
-  const projectId = args[0];
+  const command = args[0];
+  const projectId = args[1];
+
+  if (!["extract", "process", "all"].includes(command)) {
+    console.error("Invalid command. Use 'extract', 'process', or 'all'.");
+    process.exit(1);
+  }
+
   const refPath = path.join(process.cwd(), `src/ref/${projectId}.txt`);
 
   if (!fs.existsSync(refPath)) {
@@ -105,29 +112,43 @@ async function main() {
     `Found ${sections.length} sections: ${sections.map((s) => s.name).join(", ")}`
   );
 
-  // Step 1: Handle directories, TTS wave files, and Whisper JSONs
-  const sectionMetas = await processMediaForSections(projectId, sections);
-
-  // Step 2: Handle React Component generation and Root.tsx registration
-  generateComponents(projectId, sectionMetas);
-
-  // Step 3: Generate context files for AI planning
-  console.log("\n=== Phase 4: Generating Context Files ===");
-  for (const meta of sectionMetas) {
-    generateContextFile(projectId, meta);
+  if (command === "extract" || command === "all") {
+    // Step 1: Handle directories and TTS wave files
+    await extractMedia(projectId, sections);
+    if (command === "extract") {
+      console.log(`\n✅ Extract complete for ${projectId}!`);
+      console.log(`\n📌 Next steps:`);
+      console.log(`   1. Edit audio files in public/${projectId}/*/ if necessary.`);
+      console.log(`   2. Run: npx ts-node scripts/scaffold-project.ts process ${projectId}`);
+      return;
+    }
   }
 
-  console.log(`\n✅ Scaffold complete for ${projectId}!`);
-  console.log(`\n📌 Next steps:`);
-  console.log(
-    `   1. Review context files in public/${projectId}/*/`
-  );
-  console.log(
-    `   2. Run /plan-animations ${projectId} to generate animation plans`
-  );
-  console.log(
-    `   3. Run /implement-scenes ${projectId} to implement scenes`
-  );
+  if (command === "process" || command === "all") {
+    // Step 2: Handle Whisper JSONs and duration
+    const sectionMetas = await generateTimestamps(projectId, sections);
+
+    // Step 3: Handle React Component generation and Root.tsx registration
+    generateComponents(projectId, sectionMetas);
+
+    // Step 4: Generate context files for AI planning
+    console.log("\n=== Phase 4: Generating Context Files ===");
+    for (const meta of sectionMetas) {
+      generateContextFile(projectId, meta);
+    }
+
+    console.log(`\n✅ Scaffold complete for ${projectId}!`);
+    console.log(`\n📌 Next steps:`);
+    console.log(
+      `   1. Review context files in public/${projectId}/*/`
+    );
+    console.log(
+      `   2. Run /plan-animations ${projectId} to generate animation plans`
+    );
+    console.log(
+      `   3. Run /implement-scenes ${projectId} to implement scenes`
+    );
+  }
 }
 
 main().catch(console.error);
