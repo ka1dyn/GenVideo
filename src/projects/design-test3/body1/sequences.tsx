@@ -1,6 +1,9 @@
 import React from 'react';
-import { AbsoluteFill, Sequence } from 'remotion';
-import { COLORS } from '../theme';
+import { AbsoluteFill, Sequence, interpolate, spring, useCurrentFrame, useVideoConfig, Easing } from 'remotion';
+import { COLORS, SPACING, EFFECTS, FONTS, ANIMATION } from '../theme';
+import { GridBackground } from '../components/GridBackground';
+import { DataNode } from '../components/DataNode';
+import { ConnectionLine } from '../components/ConnectionLine';
 
 /**
  * [Scene 1 기획안]
@@ -12,10 +15,86 @@ import { COLORS } from '../theme';
  * In-Scene Animation 구성: 각 씬의 프레임 내에서 여러 단계로 애니메이션을 분할하여 구현합니다.
  */
 const Scene1: React.FC = () => {
+  const frame = useCurrentFrame();
+  const { fps } = useVideoConfig();
+
+  const wordSprings = [
+    spring({ frame: frame - 1, fps, config: ANIMATION.SPRING_SNAPPY }),
+    spring({ frame: frame - 32, fps, config: ANIMATION.SPRING_SNAPPY }),
+    spring({ frame: frame - 44, fps, config: ANIMATION.SPRING_SNAPPY }),
+    spring({ frame: frame - 81, fps, config: ANIMATION.SPRING_SNAPPY }),
+    spring({ frame: frame - 97, fps, config: ANIMATION.SPRING_SNAPPY }),
+    spring({ frame: frame - 118, fps, config: ANIMATION.SPRING_SNAPPY }),
+    spring({ frame: frame - 147, fps, config: ANIMATION.SPRING_SNAPPY }),
+  ];
+
+  const words = ["그렇다면", "실제", "현장에서는", "어떤", "변화가", "일어나고", "있을까요?"];
+
+  const nodeSpring1 = spring({ frame: frame - 10, fps, config: ANIMATION.SPRING_GENTLE });
+  const nodeSpring2 = spring({ frame: frame - 25, fps, config: ANIMATION.SPRING_GENTLE });
+  const nodeSpring3 = spring({ frame: frame - 40, fps, config: ANIMATION.SPRING_GENTLE });
+
   return (
-    <AbsoluteFill style={{ backgroundColor: COLORS.BG_VOID }}>
-      {/* TODO: Implement Infographic Board with Electrical Signals */}
-      {/* TODO: Implement Workstation Node Activation Animation */}
+    <AbsoluteFill style={{ backgroundColor: COLORS.BG_VOID, overflow: 'hidden' }}>
+      <GridBackground color={COLORS.PRIMARY_DIM} speed={0.5} opacity={0.2} spacing={100} />
+      
+      {/* Background Graphic: Workstation Nodes */}
+      <AbsoluteFill style={{ alignItems: 'center', justifyContent: 'center', bottom: 150, top: 0 }}>
+        <div style={{ position: 'relative', width: 600, height: 400 }}>
+          <ConnectionLine 
+            points={[[300, 200], [150, 100]]} 
+            color={COLORS.PRIMARY} 
+            progress={nodeSpring2} 
+            isFlowing={true} 
+            opacity={0.3} 
+          />
+          <ConnectionLine 
+            points={[[300, 200], [450, 100]]} 
+            color={COLORS.SECONDARY} 
+            progress={nodeSpring3} 
+            isFlowing={true} 
+            opacity={0.3} 
+          />
+          
+          {/* Center Main Node */}
+          <div style={{ position: 'absolute', top: 200, left: 300, transform: `translate(-50%, -50%) scale(${nodeSpring1})` }}>
+            <DataNode color={COLORS.PRIMARY} size={120} type="hexagon" glowColor={COLORS.PRIMARY_GLOW} label="CORE" />
+          </div>
+          
+          {/* Side Nodes */}
+          <div style={{ position: 'absolute', top: 100, left: 150, transform: `translate(-50%, -50%) scale(${nodeSpring2})` }}>
+            <DataNode color={COLORS.TEXT_MAIN} size={60} type="square" glowColor={COLORS.PRIMARY_DIM} />
+          </div>
+          <div style={{ position: 'absolute', top: 100, left: 450, transform: `translate(-50%, -50%) scale(${nodeSpring3})` }}>
+            <DataNode color={COLORS.SECONDARY} size={60} type="square" glowColor={COLORS.SECONDARY_DIM} />
+          </div>
+        </div>
+      </AbsoluteFill>
+
+      {/* Typography container */}
+      <AbsoluteFill style={{ justifyContent: 'center', alignItems: 'center', top: '10%' }}>
+        <div style={{
+          display: 'flex', gap: SPACING.PX_24, flexWrap: 'wrap', 
+          width: '80%', justifyContent: 'center'
+        }}>
+          {words.map((word, i) => (
+            <span
+              key={i}
+              style={{
+                fontFamily: FONTS.PRIMARY,
+                fontWeight: FONTS.WEIGHT_BOLD,
+                fontSize: FONTS.SIZE_LG,
+                color: i === 1 || i === 2 ? COLORS.PRIMARY : COLORS.TEXT_MAIN,
+                opacity: wordSprings[i],
+                transform: `translateY(${interpolate(wordSprings[i], [0, 1], [ANIMATION.ENTER_Y_MD, 0])}px) scale(${interpolate(wordSprings[i], [0, 1], [0.9, 1])})`,
+                textShadow: EFFECTS.GLOW_TEXT_SM,
+              }}
+            >
+              {word}
+            </span>
+          ))}
+        </div>
+      </AbsoluteFill>
     </AbsoluteFill>
   );
 };
@@ -30,10 +109,90 @@ const Scene1: React.FC = () => {
  * In-Scene Animation 구성: 각 씬의 프레임 내에서 여러 단계로 애니메이션을 분할하여 구현합니다.
  */
 const Scene2: React.FC = () => {
+  const frame = useCurrentFrame();
+  const { fps } = useVideoConfig();
+
+  const wordTimings = [0, 57, 98, 129, 161, 197, 247, 255, 272, 297, 323];
+  const words = ["막연한", "기대감이", "아닌,", "실제", "데이터를", "바탕으로", "AI", "도입의", "극적인", "효과를", "살펴보겠습니다."];
+  const wordSprings = wordTimings.map(t => spring({ frame: frame - t, fps, config: ANIMATION.SPRING_SNAPPY }));
+
+  const dashboardSlide = spring({ frame: frame - 30, fps, config: ANIMATION.SPRING_HEAVY });
+  const dashboardOpacity = interpolate(dashboardSlide, [0, 1], [0, 1]);
+
+  const barStartFrame = 129;
+  const bar1 = spring({ frame: frame - barStartFrame, fps, config: ANIMATION.SPRING_SNAPPY });
+  const bar2 = spring({ frame: frame - barStartFrame - 5, fps, config: ANIMATION.SPRING_SNAPPY });
+  const bar3 = spring({ frame: frame - barStartFrame - 10, fps, config: ANIMATION.SPRING_SNAPPY });
+  const bar4 = spring({ frame: frame - barStartFrame - 15, fps, config: ANIMATION.SPRING_BOUNCY });
+
   return (
-    <AbsoluteFill>
-      {/* TODO: Implement Digital Dashboard Loading Animation */}
-      {/* TODO: Implement Rising Bar Chart and AI Timeline Highlight */}
+    <AbsoluteFill style={{ backgroundColor: COLORS.BG_VOID, overflow: 'hidden' }}>
+      <GridBackground color={COLORS.PRIMARY_DIM} speed={0.2} opacity={0.1} />
+
+      {/* Typography */}
+      <AbsoluteFill style={{ padding: SPACING.PX_64, top: SPACING.PX_40 }}>
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: SPACING.PX_16, maxWidth: '80%' }}>
+          {words.map((w, i) => (
+            <span key={i} style={{
+              fontFamily: FONTS.PRIMARY,
+              fontWeight: i >= 3 && i <= 4 ? FONTS.WEIGHT_EXTRABOLD : FONTS.WEIGHT_MEDIUM,
+              fontSize: FONTS.SIZE_LG,
+              color: i >= 3 && i <= 4 ? COLORS.PRIMARY : (i >= 6 ? COLORS.TEXT_MAIN : COLORS.TEXT_MUTED),
+              opacity: wordSprings[i],
+              transform: `translateY(${interpolate(wordSprings[i], [0, 1], [10, 0])}px)`,
+            }}>
+              {w}
+            </span>
+          ))}
+        </div>
+      </AbsoluteFill>
+
+      {/* Digital Dashboard & Bar Chart */}
+      <AbsoluteFill style={{ alignItems: 'center', justifyContent: 'flex-end', bottom: 200 }}>
+        <div style={{ 
+          width: 800, height: 400, 
+          backgroundColor: COLORS.BG_SURFACE, 
+          borderRadius: SPACING.RADIUS_LG,
+          border: `1px solid ${COLORS.BORDER}`,
+          opacity: dashboardOpacity,
+          transform: `translateY(${interpolate(dashboardSlide, [0, 1], [100, 0])}px)`,
+          boxShadow: EFFECTS.SHADOW_LG,
+          display: 'flex', flexDirection: 'column',
+          padding: SPACING.PX_32,
+          position: 'relative',
+          overflow: 'hidden'
+        }}>
+          {/* Dashboard Header */}
+          <div style={{ display: 'flex', justifyContent: 'space-between', borderBottom: `1px solid ${COLORS.BORDER}`, paddingBottom: SPACING.PX_16 }}>
+            <span style={{ color: COLORS.TEXT_MUTED, fontFamily: FONTS.MONO }}>PERFORMANCE_METRICS</span>
+            <span style={{ color: COLORS.PRIMARY, fontFamily: FONTS.MONO }}>LIVE</span>
+          </div>
+          
+          {/* Bars area */}
+          <div style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-around', flex: 1, marginTop: SPACING.PX_32 }}>
+            {[bar1, bar2, bar3, bar4].map((b, i) => (
+              <div key={i} style={{
+                width: 80,
+                height: `${interpolate(b, [0, 1], [0, i === 3 ? 90 : 30 + i * 15])}%`,
+                backgroundColor: i === 3 ? COLORS.PRIMARY : COLORS.TEXT_DISABLED,
+                borderRadius: `${SPACING.RADIUS_SM}px ${SPACING.RADIUS_SM}px 0 0`,
+                position: 'relative',
+                boxShadow: i === 3 ? EFFECTS.GLOW_SM : 'none',
+              }}>
+                {i === 3 && (
+                  <div style={{
+                    position: 'absolute', top: -30, left: '50%', transform: 'translateX(-50%)',
+                    fontFamily: FONTS.MONO, color: COLORS.PRIMARY, fontSize: FONTS.SIZE_SM,
+                    opacity: b
+                  }}>
+                    AI 도입
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
+      </AbsoluteFill>
     </AbsoluteFill>
   );
 };
@@ -48,10 +207,93 @@ const Scene2: React.FC = () => {
  * In-Scene Animation 구성: 각 씬의 프레임 내에서 여러 단계로 애니메이션을 분할하여 구현합니다.
  */
 const Scene3: React.FC = () => {
+  const frame = useCurrentFrame();
+  const { fps } = useVideoConfig();
+
+  const offset = 587;
+  const wordTimings = [587, 634, 676, 680, 727, 776, 782, 803, 863].map(t => t - offset);
+  const words = ["실제로", "최근", "한", "연구에", "따르면,", "AI", "코딩", "어시스턴트를", "도입한"];
+
+  const wordSprings = wordTimings.map(t => spring({ frame: frame - t, fps, config: ANIMATION.SPRING_SNAPPY }));
+
+  const layoutSpring1 = spring({ frame: frame - 20, fps, config: ANIMATION.SPRING_HEAVY });
+  const layoutSpring2 = spring({ frame: frame - 35, fps, config: ANIMATION.SPRING_HEAVY });
+  const layoutSpring3 = spring({ frame: frame - 50, fps, config: ANIMATION.SPRING_HEAVY });
+
+  const scanProgress = interpolate(frame, [80, 180], [0, 100], { extrapolateRight: 'clamp', extrapolateLeft: 'clamp' });
+  const scanOpacity = interpolate(frame, [80, 100, 160, 180], [0, 1, 1, 0], { extrapolateRight: 'clamp', extrapolateLeft: 'clamp' });
+
   return (
-    <AbsoluteFill>
-      {/* TODO: Implement Abstract Paper Layout with Partitions */}
-      {/* TODO: Implement Scanning Line Animation */}
+    <AbsoluteFill style={{ backgroundColor: COLORS.BG_VOID, overflow: 'hidden' }}>
+      <GridBackground color={COLORS.TEXT_MUTED} speed={0.1} opacity={0.05} />
+
+      {/* Typography */}
+      <AbsoluteFill style={{ padding: SPACING.PX_64, top: SPACING.PX_40 }}>
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: SPACING.PX_16, maxWidth: '90%', justifyContent: 'center' }}>
+          {words.map((w, i) => (
+            <span key={i} style={{
+              fontFamily: FONTS.PRIMARY,
+              fontWeight: i >= 5 ? FONTS.WEIGHT_BOLD : FONTS.WEIGHT_REGULAR,
+              fontSize: FONTS.SIZE_LG,
+              color: i >= 5 ? COLORS.PRIMARY : COLORS.TEXT_MAIN,
+              opacity: wordSprings[i],
+              transform: `translateX(${interpolate(wordSprings[i], [0, 1], [-10, 0])}px)`,
+            }}>
+              {w}
+            </span>
+          ))}
+        </div>
+      </AbsoluteFill>
+
+      {/* Paper Layout */}
+      <AbsoluteFill style={{ alignItems: 'center', justifyContent: 'center', top: 100, bottom: 150 }}>
+        <div style={{
+          width: 800, height: 400,
+          display: 'grid',
+          gridTemplateColumns: '2fr 1fr',
+          gridTemplateRows: '1fr 1fr',
+          gap: SPACING.PX_16,
+          position: 'relative'
+        }}>
+          <div style={{ 
+            backgroundColor: COLORS.BG_SURFACE, 
+            border: `1px solid ${COLORS.BORDER}`,
+            gridRow: '1 / 3',
+            borderRadius: SPACING.RADIUS_MD,
+            transform: `scaleY(${layoutSpring1})`,
+            transformOrigin: 'top',
+            opacity: layoutSpring1,
+          }} />
+          <div style={{ 
+            backgroundColor: COLORS.BG_SURFACE, 
+            border: `1px solid ${COLORS.BORDER}`,
+            borderRadius: SPACING.RADIUS_MD,
+            transform: `scaleX(${layoutSpring2})`,
+            transformOrigin: 'left',
+            opacity: layoutSpring2,
+          }} />
+          <div style={{ 
+            backgroundColor: COLORS.BG_SURFACE, 
+            border: `1px solid ${COLORS.BORDER}`,
+            borderRadius: SPACING.RADIUS_MD,
+            transform: `scaleX(${layoutSpring3})`,
+            transformOrigin: 'left',
+            opacity: layoutSpring3,
+          }} />
+          
+          {/* Scanning Line */}
+          <AbsoluteFill style={{ opacity: scanOpacity, zIndex: 10 }}>
+            <div style={{
+              position: 'absolute',
+              top: `${scanProgress}%`,
+              left: 0, right: 0,
+              height: 2,
+              backgroundColor: COLORS.SECONDARY,
+              boxShadow: EFFECTS.GLOW_SECONDARY
+            }} />
+          </AbsoluteFill>
+        </div>
+      </AbsoluteFill>
     </AbsoluteFill>
   );
 };
