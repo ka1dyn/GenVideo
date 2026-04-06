@@ -1,0 +1,410 @@
+{
+  "totalDuration": 32006,
+  "totalFrames": 1921,
+  "sentences": [
+    {
+      "sentence": "드론이 하늘에서 날아다닙니다.",
+      "startFrame": 0,
+      "endFrame": 96,
+      "durationInFrames": 96,
+      "words": [
+        {
+          "text": "드론이",
+          "startFrame": 0,
+          "endFrame": 20
+        },
+        {
+          "text": "하늘에서",
+          "startFrame": 20,
+          "endFrame": 46
+        },
+        {
+          "text": "날아다닙니다.",
+          "startFrame": 46,
+          "endFrame": 96
+        }
+      ]
+    },
+    {
+      "sentence": "지금 이 순간에도요.",
+      "startFrame": 96,
+      "endFrame": 203,
+      "durationInFrames": 107,
+      "words": [
+        {
+          "text": "지금",
+          "startFrame": 96,
+          "endFrame": 122
+        },
+        {
+          "text": "이",
+          "startFrame": 122,
+          "endFrame": 140
+        },
+        {
+          "text": "순간에도요.",
+          "startFrame": 140,
+          "endFrame": 203
+        }
+      ]
+    },
+    {
+      "sentence": "그리고 그 드론이 찍은 영상을\nAI가 실시간으로 봅니다.",
+      "startFrame": 203,
+      "endFrame": 416,
+      "durationInFrames": 213,
+      "words": [
+        {
+          "text": "그리고",
+          "startFrame": 203,
+          "endFrame": 233
+        },
+        {
+          "text": "그",
+          "startFrame": 233,
+          "endFrame": 244
+        },
+        {
+          "text": "드론이",
+          "startFrame": 244,
+          "endFrame": 274
+        },
+        {
+          "text": "찍은",
+          "startFrame": 274,
+          "endFrame": 295
+        },
+        {
+          "text": "영상을",
+          "startFrame": 295,
+          "endFrame": 328
+        },
+        {
+          "text": "AI가",
+          "startFrame": 328,
+          "endFrame": 341
+        },
+        {
+          "text": "실시간으로",
+          "startFrame": 341,
+          "endFrame": 381
+        },
+        {
+          "text": "봅니다.",
+          "startFrame": 381,
+          "endFrame": 416
+        }
+      ]
+    },
+    {
+      "sentence": "그리고 이렇게 말하는 거예요.",
+      "startFrame": 416,
+      "endFrame": 521,
+      "durationInFrames": 105,
+      "words": [
+        {
+          "text": "그리고",
+          "startFrame": 416,
+          "endFrame": 448
+        },
+        {
+          "text": "이렇게",
+          "startFrame": 448,
+          "endFrame": 464
+        },
+        {
+          "text": "말하는",
+          "startFrame": 464,
+          "endFrame": 487
+        },
+        {
+          "text": "거예요.",
+          "startFrame": 487,
+          "endFrame": 521
+        }
+      ]
+    },
+    {
+      "sentence": "저 차량, 군사 차량입니다.",
+      "startFrame": 521,
+      "endFrame": 689,
+      "durationInFrames": 168,
+      "words": [
+        {
+          "text": "저",
+          "startFrame": 521,
+          "endFrame": 554
+        },
+        {
+          "text": "차량,",
+          "startFrame": 554,
+          "endFrame": 576
+        },
+        {
+          "text": "군사",
+          "startFrame": 576,
+          "endFrame": 601
+        },
+        {
+          "text": "차량입니다.",
+          "startFrame": 601,
+          "endFrame": 689
+        }
+      ]
+    },
+    {
+      "sentence": "저 건물, 무기 시설로 추정됩니다.",
+      "startFrame": 689,
+      "endFrame": 889,
+      "durationInFrames": 200,
+      "words": [
+        {
+          "text": "저",
+          "startFrame": 689,
+          "endFrame": 701
+        },
+        {
+          "text": "건물,",
+          "startFrame": 701,
+          "endFrame": 740
+        },
+        {
+          "text": "무기",
+          "startFrame": 740,
+          "endFrame": 776
+        },
+        {
+          "text": "시설로",
+          "startFrame": 776,
+          "endFrame": 805
+        },
+        {
+          "text": "추정됩니다.",
+          "startFrame": 805,
+          "endFrame": 889
+        }
+      ]
+    },
+    {
+      "sentence": "근데요.",
+      "startFrame": 889,
+      "endFrame": 926,
+      "durationInFrames": 37,
+      "words": [
+        {
+          "text": "근데요,",
+          "startFrame": 889,
+          "endFrame": 926
+        }
+      ]
+    },
+    {
+      "sentence": "이게 영화 얘기가 아니에요.",
+      "startFrame": 926,
+      "endFrame": 1050,
+      "durationInFrames": 124,
+      "words": [
+        {
+          "text": "이게",
+          "startFrame": 926,
+          "endFrame": 947
+        },
+        {
+          "text": "영화",
+          "startFrame": 947,
+          "endFrame": 952
+        },
+        {
+          "text": "얘기가",
+          "startFrame": 952,
+          "endFrame": 998
+        },
+        {
+          "text": "아니에요.",
+          "startFrame": 998,
+          "endFrame": 1050
+        }
+      ]
+    },
+    {
+      "sentence": "올해 실제로 일어난 일입니다.",
+      "startFrame": 1050,
+      "endFrame": 1177,
+      "durationInFrames": 127,
+      "words": [
+        {
+          "text": "올해",
+          "startFrame": 1050,
+          "endFrame": 1098
+        },
+        {
+          "text": "실제로",
+          "startFrame": 1098,
+          "endFrame": 1101
+        },
+        {
+          "text": "일어난",
+          "startFrame": 1101,
+          "endFrame": 1127
+        },
+        {
+          "text": "일입니다.",
+          "startFrame": 1127,
+          "endFrame": 1177
+        }
+      ]
+    },
+    {
+      "sentence": "미국이 이란을 공격했을 때,\n그 작전의 핵심에 AI가 있었어요.",
+      "startFrame": 1177,
+      "endFrame": 1444,
+      "durationInFrames": 267,
+      "words": [
+        {
+          "text": "미국이",
+          "startFrame": 1177,
+          "endFrame": 1216
+        },
+        {
+          "text": "이란을",
+          "startFrame": 1216,
+          "endFrame": 1243
+        },
+        {
+          "text": "공격했을",
+          "startFrame": 1243,
+          "endFrame": 1286
+        },
+        {
+          "text": "때",
+          "startFrame": 1286,
+          "endFrame": 1300
+        },
+        {
+          "text": "그",
+          "startFrame": 1300,
+          "endFrame": 1309
+        },
+        {
+          "text": "작전에",
+          "startFrame": 1309,
+          "endFrame": 1341
+        },
+        {
+          "text": "핵심의",
+          "startFrame": 1341,
+          "endFrame": 1371
+        },
+        {
+          "text": "AI가",
+          "startFrame": 1371,
+          "endFrame": 1388
+        },
+        {
+          "text": "있었어요.",
+          "startFrame": 1388,
+          "endFrame": 1444
+        }
+      ]
+    },
+    {
+      "sentence": "프로젝트 메이븐.",
+      "startFrame": 1444,
+      "endFrame": 1546,
+      "durationInFrames": 102,
+      "words": [
+        {
+          "text": "프로젝트",
+          "startFrame": 1444,
+          "endFrame": 1494
+        },
+        {
+          "text": "메이븐.",
+          "startFrame": 1494,
+          "endFrame": 1546
+        }
+      ]
+    },
+    {
+      "sentence": "오늘은 이게 뭔지, 어떻게 작동하는지",
+      "startFrame": 1546,
+      "endFrame": 1721,
+      "durationInFrames": 175,
+      "words": [
+        {
+          "text": "오늘은",
+          "startFrame": 1546,
+          "endFrame": 1573
+        },
+        {
+          "text": "이게",
+          "startFrame": 1573,
+          "endFrame": 1592
+        },
+        {
+          "text": "뭔지,",
+          "startFrame": 1592,
+          "endFrame": 1616
+        },
+        {
+          "text": "어떻게",
+          "startFrame": 1616,
+          "endFrame": 1643
+        },
+        {
+          "text": "작동하는지,",
+          "startFrame": 1643,
+          "endFrame": 1692
+        }
+      ]
+    },
+    {
+      "sentence": "그리고 솔직히 좀 무섭기도\n한 얘기까지 전부 털어놓을게요.",
+      "startFrame": 1721,
+      "endFrame": 1921,
+      "durationInFrames": 200,
+      "words": [
+        {
+          "text": "그리고",
+          "startFrame": 1721,
+          "endFrame": 1740
+        },
+        {
+          "text": "솔직히",
+          "startFrame": 1740,
+          "endFrame": 1760
+        },
+        {
+          "text": "좀",
+          "startFrame": 1760,
+          "endFrame": 1767
+        },
+        {
+          "text": "무섭기도",
+          "startFrame": 1767,
+          "endFrame": 1793
+        },
+        {
+          "text": "한",
+          "startFrame": 1793,
+          "endFrame": 1800
+        },
+        {
+          "text": "얘기까지",
+          "startFrame": 1800,
+          "endFrame": 1831
+        },
+        {
+          "text": "전부",
+          "startFrame": 1831,
+          "endFrame": 1844
+        },
+        {
+          "text": "털어놓을게요.",
+          "startFrame": 1844,
+          "endFrame": 1892
+        }
+      ]
+    }
+  ]
+}

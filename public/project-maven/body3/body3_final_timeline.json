@@ -1,0 +1,743 @@
+{
+  "totalDuration": 60916,
+  "totalFrames": 3655,
+  "sentences": [
+    {
+      "sentence": "올해 2월, 미국이 이란을 공격했어요.",
+      "words": [
+        {
+          "text": "올해",
+          "startFrame": 0,
+          "endFrame": 31
+        },
+        {
+          "text": "2월,",
+          "startFrame": 31,
+          "endFrame": 47
+        },
+        {
+          "text": "미국이",
+          "startFrame": 47,
+          "endFrame": 83
+        },
+        {
+          "text": "이란을",
+          "startFrame": 83,
+          "endFrame": 109
+        },
+        {
+          "text": "공격했어요.",
+          "startFrame": 109,
+          "endFrame": 164
+        }
+      ],
+      "startFrame": 0,
+      "endFrame": 164,
+      "durationInFrames": 164
+    },
+    {
+      "sentence": "외신 보도에 따르면 첫 24시간 안에 이란의\n1,000개가 넘는 표적을 타격했다고 합니다.",
+      "words": [
+        {
+          "text": "외신",
+          "startFrame": 164,
+          "endFrame": 199
+        },
+        {
+          "text": "보도에",
+          "startFrame": 199,
+          "endFrame": 223
+        },
+        {
+          "text": "따르면",
+          "startFrame": 223,
+          "endFrame": 260
+        },
+        {
+          "text": "첫",
+          "startFrame": 260,
+          "endFrame": 281
+        },
+        {
+          "text": "24시간",
+          "startFrame": 281,
+          "endFrame": 323
+        },
+        {
+          "text": "안에",
+          "startFrame": 323,
+          "endFrame": 349
+        },
+        {
+          "text": "이란의",
+          "startFrame": 349,
+          "endFrame": 369
+        },
+        {
+          "text": "1,000개가",
+          "startFrame": 369,
+          "endFrame": 376
+        },
+        {
+          "text": "넘는",
+          "startFrame": 376,
+          "endFrame": 389
+        },
+        {
+          "text": "표적을",
+          "startFrame": 389,
+          "endFrame": 401
+        },
+        {
+          "text": "타격했다고",
+          "startFrame": 401,
+          "endFrame": 424
+        },
+        {
+          "text": "합니다.",
+          "startFrame": 424,
+          "endFrame": 456
+        }
+      ],
+      "startFrame": 164,
+      "endFrame": 488,
+      "durationInFrames": 324
+    },
+    {
+      "sentence": "1,000개를 하루 만에요.",
+      "words": [
+        {
+          "text": "1,000개를",
+          "startFrame": 488,
+          "endFrame": 499
+        },
+        {
+          "text": "하루",
+          "startFrame": 499,
+          "endFrame": 539
+        },
+        {
+          "text": "만에요.",
+          "startFrame": 539,
+          "endFrame": 547
+        }
+      ],
+      "startFrame": 488,
+      "endFrame": 595,
+      "durationInFrames": 107
+    },
+    {
+      "sentence": "예전이라면요?",
+      "words": [
+        {
+          "text": "예전이라면요?",
+          "startFrame": 595,
+          "endFrame": 655
+        }
+      ],
+      "startFrame": 595,
+      "endFrame": 655,
+      "durationInFrames": 60
+    },
+    {
+      "sentence": "표적 하나 분석하는 데만\n며칠이 걸렸을 거예요.",
+      "words": [
+        {
+          "text": "표적",
+          "startFrame": 655,
+          "endFrame": 673
+        },
+        {
+          "text": "하나",
+          "startFrame": 673,
+          "endFrame": 701
+        },
+        {
+          "text": "분석하는",
+          "startFrame": 701,
+          "endFrame": 728
+        },
+        {
+          "text": "데만",
+          "startFrame": 728,
+          "endFrame": 746
+        },
+        {
+          "text": "며칠이",
+          "startFrame": 746,
+          "endFrame": 773
+        },
+        {
+          "text": "걸렸을",
+          "startFrame": 773,
+          "endFrame": 800
+        },
+        {
+          "text": "거예요.",
+          "startFrame": 800,
+          "endFrame": 846
+        }
+      ],
+      "startFrame": 655,
+      "endFrame": 846,
+      "durationInFrames": 191
+    },
+    {
+      "sentence": "사람이 데이터 보고,\n회의하고, 결재 받고.",
+      "words": [
+        {
+          "text": "사람이",
+          "startFrame": 846,
+          "endFrame": 881
+        },
+        {
+          "text": "데이터",
+          "startFrame": 881,
+          "endFrame": 918
+        },
+        {
+          "text": "보고,",
+          "startFrame": 918,
+          "endFrame": 943
+        },
+        {
+          "text": "회의하고,",
+          "startFrame": 943,
+          "endFrame": 990
+        },
+        {
+          "text": "결재",
+          "startFrame": 990,
+          "endFrame": 1040
+        },
+        {
+          "text": "받고.",
+          "startFrame": 1040,
+          "endFrame": 1040
+        }
+      ],
+      "startFrame": 846,
+      "endFrame": 1040,
+      "durationInFrames": 194
+    },
+    {
+      "sentence": "근데 이번엔 달랐다는 거예요.",
+      "words": [
+        {
+          "text": "근데",
+          "startFrame": 1040,
+          "endFrame": 1058
+        },
+        {
+          "text": "이번엔",
+          "startFrame": 1058,
+          "endFrame": 1087
+        },
+        {
+          "text": "달랐다는",
+          "startFrame": 1087,
+          "endFrame": 1121
+        },
+        {
+          "text": "거예요.",
+          "startFrame": 1121,
+          "endFrame": 1159
+        }
+      ],
+      "startFrame": 1040,
+      "endFrame": 1159,
+      "durationInFrames": 119
+    },
+    {
+      "sentence": "외신 보도에 따르면",
+      "words": [
+        {
+          "text": "외신",
+          "startFrame": 1159,
+          "endFrame": 1180
+        },
+        {
+          "text": "보도에",
+          "startFrame": 1180,
+          "endFrame": 1218
+        },
+        {
+          "text": "따르면,",
+          "startFrame": 1218,
+          "endFrame": 1247
+        }
+      ],
+      "startFrame": 1159,
+      "endFrame": 1247,
+      "durationInFrames": 88
+    },
+    {
+      "sentence": "정보 수집부터 표적 선정까지 전 과정에\nAI가 주도적으로 개입했다고 해요.",
+      "words": [
+        {
+          "text": "정보",
+          "startFrame": 1247,
+          "endFrame": 1269
+        },
+        {
+          "text": "수집부터",
+          "startFrame": 1269,
+          "endFrame": 1313
+        },
+        {
+          "text": "표적",
+          "startFrame": 1313,
+          "endFrame": 1334
+        },
+        {
+          "text": "선정까지",
+          "startFrame": 1334,
+          "endFrame": 1386
+        },
+        {
+          "text": "전",
+          "startFrame": 1386,
+          "endFrame": 1400
+        },
+        {
+          "text": "과정에",
+          "startFrame": 1400,
+          "endFrame": 1432
+        },
+        {
+          "text": "AI가",
+          "startFrame": 1432,
+          "endFrame": 1459
+        },
+        {
+          "text": "주도적으로",
+          "startFrame": 1459,
+          "endFrame": 1499
+        },
+        {
+          "text": "개입했다고",
+          "startFrame": 1499,
+          "endFrame": 1541
+        },
+        {
+          "text": "해요.",
+          "startFrame": 1541,
+          "endFrame": 1570
+        }
+      ],
+      "startFrame": 1247,
+      "endFrame": 1610,
+      "durationInFrames": 363
+    },
+    {
+      "sentence": "팔란티어 AI가 드론 데이터를\n분석해서 표적 우선순위를 뽑고",
+      "words": [
+        {
+          "text": "팔란티어",
+          "startFrame": 1610,
+          "endFrame": 1653
+        },
+        {
+          "text": "AI가",
+          "startFrame": 1653,
+          "endFrame": 1668
+        },
+        {
+          "text": "드론",
+          "startFrame": 1668,
+          "endFrame": 1688
+        },
+        {
+          "text": "데이터를",
+          "startFrame": 1688,
+          "endFrame": 1729
+        },
+        {
+          "text": "분석해서",
+          "startFrame": 1729,
+          "endFrame": 1771
+        },
+        {
+          "text": "표적",
+          "startFrame": 1771,
+          "endFrame": 1790
+        },
+        {
+          "text": "우선순위를",
+          "startFrame": 1790,
+          "endFrame": 1841
+        },
+        {
+          "text": "뽑고,",
+          "startFrame": 1841,
+          "endFrame": 1868
+        }
+      ],
+      "startFrame": 1610,
+      "endFrame": 1909,
+      "durationInFrames": 299
+    },
+    {
+      "sentence": "클로드라는 생성형 AI가 수만 가지 공격 시나리오를\n시뮬레이션해서 지휘부에 보고했다는 거거든요.",
+      "words": [
+        {
+          "text": "클로드라는",
+          "startFrame": 1909,
+          "endFrame": 1935
+        },
+        {
+          "text": "생성형",
+          "startFrame": 1935,
+          "endFrame": 1946
+        },
+        {
+          "text": "AI가",
+          "startFrame": 1946,
+          "endFrame": 1962
+        },
+        {
+          "text": "수만",
+          "startFrame": 1962,
+          "endFrame": 1978
+        },
+        {
+          "text": "가지",
+          "startFrame": 1978,
+          "endFrame": 1994
+        },
+        {
+          "text": "공격",
+          "startFrame": 1994,
+          "endFrame": 2034
+        },
+        {
+          "text": "시나리오를",
+          "startFrame": 2034,
+          "endFrame": 2090
+        },
+        {
+          "text": "시뮬레이션해서",
+          "startFrame": 2090,
+          "endFrame": 2122
+        },
+        {
+          "text": "지휘부에",
+          "startFrame": 2122,
+          "endFrame": 2162
+        },
+        {
+          "text": "보고했다는",
+          "startFrame": 2162,
+          "endFrame": 2215
+        },
+        {
+          "text": "거거든요.",
+          "startFrame": 2215,
+          "endFrame": 2215
+        }
+      ],
+      "startFrame": 1909,
+      "endFrame": 2215,
+      "durationInFrames": 306
+    },
+    {
+      "sentence": "잠깐, 클로드요?",
+      "words": [
+        {
+          "text": "잠깐,",
+          "startFrame": 2215,
+          "endFrame": 2257
+        },
+        {
+          "text": "클로드요?",
+          "startFrame": 2257,
+          "endFrame": 2318
+        }
+      ],
+      "startFrame": 2215,
+      "endFrame": 2318,
+      "durationInFrames": 103
+    },
+    {
+      "sentence": "네.",
+      "words": [
+        {
+          "text": "네.",
+          "startFrame": 2318,
+          "endFrame": 2338
+        }
+      ],
+      "startFrame": 2318,
+      "endFrame": 2338,
+      "durationInFrames": 20
+    },
+    {
+      "sentence": "여러분이 유튜브에서 자주\n접하는 그 AI 맞아요.",
+      "words": [
+        {
+          "text": "여러분이",
+          "startFrame": 2338,
+          "endFrame": 2390
+        },
+        {
+          "text": "유튜브에서",
+          "startFrame": 2390,
+          "endFrame": 2425
+        },
+        {
+          "text": "자주",
+          "startFrame": 2425,
+          "endFrame": 2441
+        },
+        {
+          "text": "접하는",
+          "startFrame": 2441,
+          "endFrame": 2472
+        },
+        {
+          "text": "그",
+          "startFrame": 2472,
+          "endFrame": 2479
+        },
+        {
+          "text": "AI",
+          "startFrame": 2479,
+          "endFrame": 2488
+        },
+        {
+          "text": "맞아요.",
+          "startFrame": 2488,
+          "endFrame": 2530
+        }
+      ],
+      "startFrame": 2338,
+      "endFrame": 2530,
+      "durationInFrames": 192
+    },
+    {
+      "sentence": "저도 이거 알고 한동안\n멍하니 있었거든요.",
+      "words": [
+        {
+          "text": "저도",
+          "startFrame": 2530,
+          "endFrame": 2546
+        },
+        {
+          "text": "이거",
+          "startFrame": 2546,
+          "endFrame": 2574
+        },
+        {
+          "text": "알고",
+          "startFrame": 2574,
+          "endFrame": 2579
+        },
+        {
+          "text": "한동안",
+          "startFrame": 2579,
+          "endFrame": 2603
+        },
+        {
+          "text": "멍하니",
+          "startFrame": 2603,
+          "endFrame": 2626
+        },
+        {
+          "text": "있었거든요.",
+          "startFrame": 2626,
+          "endFrame": 2680
+        }
+      ],
+      "startFrame": 2530,
+      "endFrame": 2680,
+      "durationInFrames": 150
+    },
+    {
+      "sentence": "우리가 일상에서 쓰는 AI가,\n전쟁 시나리오를 짜고 있었던 겁니다.",
+      "words": [
+        {
+          "text": "우리가",
+          "startFrame": 2680,
+          "endFrame": 2709
+        },
+        {
+          "text": "일상에서",
+          "startFrame": 2709,
+          "endFrame": 2751
+        },
+        {
+          "text": "쓰는",
+          "startFrame": 2751,
+          "endFrame": 2771
+        },
+        {
+          "text": "AI가,",
+          "startFrame": 2771,
+          "endFrame": 2788
+        },
+        {
+          "text": "전쟁",
+          "startFrame": 2788,
+          "endFrame": 2809
+        },
+        {
+          "text": "시나리오를",
+          "startFrame": 2809,
+          "endFrame": 2863
+        },
+        {
+          "text": "짜고",
+          "startFrame": 2863,
+          "endFrame": 2879
+        },
+        {
+          "text": "있었던",
+          "startFrame": 2879,
+          "endFrame": 2909
+        },
+        {
+          "text": "겁니다.",
+          "startFrame": 2909,
+          "endFrame": 2956
+        }
+      ],
+      "startFrame": 2680,
+      "endFrame": 2956,
+      "durationInFrames": 276
+    },
+    {
+      "sentence": "물론 이 내용은 기밀 작전 특성상\n공식 확인이 된 건 아니에요.",
+      "words": [
+        {
+          "text": "물론",
+          "startFrame": 2956,
+          "endFrame": 2978
+        },
+        {
+          "text": "이",
+          "startFrame": 2978,
+          "endFrame": 2989
+        },
+        {
+          "text": "내용은",
+          "startFrame": 2989,
+          "endFrame": 3022
+        },
+        {
+          "text": "기밀",
+          "startFrame": 3022,
+          "endFrame": 3065
+        },
+        {
+          "text": "작전",
+          "startFrame": 3065,
+          "endFrame": 3098
+        },
+        {
+          "text": "특성상",
+          "startFrame": 3098,
+          "endFrame": 3119
+        },
+        {
+          "text": "공식",
+          "startFrame": 3119,
+          "endFrame": 3153
+        },
+        {
+          "text": "확인이",
+          "startFrame": 3153,
+          "endFrame": 3163
+        },
+        {
+          "text": "된",
+          "startFrame": 3163,
+          "endFrame": 3174
+        },
+        {
+          "text": "건",
+          "startFrame": 3174,
+          "endFrame": 3238
+        },
+        {
+          "text": "아니에요.",
+          "startFrame": 3238,
+          "endFrame": 3238
+        }
+      ],
+      "startFrame": 2956,
+      "endFrame": 3238,
+      "durationInFrames": 282
+    },
+    {
+      "sentence": "\"외신 보도에 따르면\"\n수준이라는 거 말씀드려요.",
+      "words": [
+        {
+          "text": "\"외신",
+          "startFrame": 3238,
+          "endFrame": 3269
+        },
+        {
+          "text": "보도에",
+          "startFrame": 3269,
+          "endFrame": 3319
+        },
+        {
+          "text": "따르면\"",
+          "startFrame": 3319,
+          "endFrame": 3371
+        },
+        {
+          "text": "수준이라는",
+          "startFrame": 3371,
+          "endFrame": 3394
+        },
+        {
+          "text": "거",
+          "startFrame": 3394,
+          "endFrame": 3409
+        },
+        {
+          "text": "말씀드려요.",
+          "startFrame": 3409,
+          "endFrame": 3409
+        }
+      ],
+      "startFrame": 3238,
+      "endFrame": 3409,
+      "durationInFrames": 171
+    },
+    {
+      "sentence": "그래서 있는 그대로 전달드리는 거예요.",
+      "words": [
+        {
+          "text": "그래서",
+          "startFrame": 3409,
+          "endFrame": 3455
+        },
+        {
+          "text": "있는",
+          "startFrame": 3455,
+          "endFrame": 3511
+        },
+        {
+          "text": "그대로",
+          "startFrame": 3511,
+          "endFrame": 3531
+        },
+        {
+          "text": "전달드리는",
+          "startFrame": 3531,
+          "endFrame": 3606
+        },
+        {
+          "text": "거예요.",
+          "startFrame": 3606,
+          "endFrame": 3655
+        }
+      ],
+      "startFrame": 3409,
+      "endFrame": 3655,
+      "durationInFrames": 246
+    }
+  ]
+}

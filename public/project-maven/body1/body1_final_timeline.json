@@ -1,0 +1,1035 @@
+{
+  "totalDuration": 74586,
+  "totalFrames": 4476,
+  "sentences": [
+    {
+      "sentence": "때는 2017년이에요.",
+      "words": [
+        {
+          "text": "때는",
+          "startFrame": 0,
+          "endFrame": 18
+        },
+        {
+          "text": "2017년이에요.",
+          "startFrame": 18,
+          "endFrame": 117
+        }
+      ],
+      "startFrame": 0,
+      "endFrame": 117,
+      "durationInFrames": 117
+    },
+    {
+      "sentence": "미국 국방부가 심각한 고민에 빠졌습니다.",
+      "words": [
+        {
+          "text": "미국",
+          "startFrame": 117,
+          "endFrame": 121
+        },
+        {
+          "text": "국방부가",
+          "startFrame": 121,
+          "endFrame": 151
+        },
+        {
+          "text": "심각한",
+          "startFrame": 151,
+          "endFrame": 178
+        },
+        {
+          "text": "고민에",
+          "startFrame": 178,
+          "endFrame": 202
+        },
+        {
+          "text": "빠졌습니다.",
+          "startFrame": 202,
+          "endFrame": 259
+        }
+      ],
+      "startFrame": 117,
+      "endFrame": 259,
+      "durationInFrames": 142
+    },
+    {
+      "sentence": "드론이 찍어오는 영상이 너무 많아.",
+      "words": [
+        {
+          "text": "\"드론이",
+          "startFrame": 259,
+          "endFrame": 289
+        },
+        {
+          "text": "찍어오는",
+          "startFrame": 289,
+          "endFrame": 326
+        },
+        {
+          "text": "영상이",
+          "startFrame": 326,
+          "endFrame": 354
+        },
+        {
+          "text": "너무",
+          "startFrame": 354,
+          "endFrame": 373
+        },
+        {
+          "text": "많아.",
+          "startFrame": 373,
+          "endFrame": 401
+        }
+      ],
+      "startFrame": 259,
+      "endFrame": 401,
+      "durationInFrames": 142
+    },
+    {
+      "sentence": "사람이 다 볼 수가 없어.",
+      "words": [
+        {
+          "text": "사람이",
+          "startFrame": 401,
+          "endFrame": 441
+        },
+        {
+          "text": "다",
+          "startFrame": 441,
+          "endFrame": 442
+        },
+        {
+          "text": "볼",
+          "startFrame": 442,
+          "endFrame": 451
+        },
+        {
+          "text": "수가",
+          "startFrame": 451,
+          "endFrame": 470
+        },
+        {
+          "text": "없어.\"",
+          "startFrame": 470,
+          "endFrame": 496
+        }
+      ],
+      "startFrame": 401,
+      "endFrame": 496,
+      "durationInFrames": 95
+    },
+    {
+      "sentence": "생각해보세요.",
+      "words": [
+        {
+          "text": "생각해보세요.",
+          "startFrame": 496,
+          "endFrame": 574
+        }
+      ],
+      "startFrame": 496,
+      "endFrame": 574,
+      "durationInFrames": 78
+    },
+    {
+      "sentence": "전 세계에 깔린 군사 드론이 하루\n24시간 영상을 찍어서 쏟아붓는 거예요.",
+      "words": [
+        {
+          "text": "전",
+          "startFrame": 574,
+          "endFrame": 580
+        },
+        {
+          "text": "세계에",
+          "startFrame": 580,
+          "endFrame": 613
+        },
+        {
+          "text": "깔린",
+          "startFrame": 613,
+          "endFrame": 632
+        },
+        {
+          "text": "군사",
+          "startFrame": 632,
+          "endFrame": 681
+        },
+        {
+          "text": "드론이",
+          "startFrame": 681,
+          "endFrame": 701
+        },
+        {
+          "text": "하루",
+          "startFrame": 701,
+          "endFrame": 740
+        },
+        {
+          "text": "24시간",
+          "startFrame": 740,
+          "endFrame": 770
+        },
+        {
+          "text": "영상을",
+          "startFrame": 770,
+          "endFrame": 800
+        },
+        {
+          "text": "찍어서",
+          "startFrame": 800,
+          "endFrame": 838
+        },
+        {
+          "text": "쏟아붓는",
+          "startFrame": 838,
+          "endFrame": 886
+        },
+        {
+          "text": "거예요.",
+          "startFrame": 886,
+          "endFrame": 886
+        }
+      ],
+      "startFrame": 574,
+      "endFrame": 886,
+      "durationInFrames": 312
+    },
+    {
+      "sentence": "그걸 사람이 한 명 한 명 앉아서\n들여다보고 있으면 어느 세월에 다 보겠어요.",
+      "words": [
+        {
+          "text": "그걸",
+          "startFrame": 886,
+          "endFrame": 928
+        },
+        {
+          "text": "사람이",
+          "startFrame": 928,
+          "endFrame": 932
+        },
+        {
+          "text": "한",
+          "startFrame": 932,
+          "endFrame": 937
+        },
+        {
+          "text": "명",
+          "startFrame": 937,
+          "endFrame": 952
+        },
+        {
+          "text": "한",
+          "startFrame": 952,
+          "endFrame": 954
+        },
+        {
+          "text": "명",
+          "startFrame": 954,
+          "endFrame": 962
+        },
+        {
+          "text": "앉아서",
+          "startFrame": 962,
+          "endFrame": 988
+        },
+        {
+          "text": "들여다보고",
+          "startFrame": 988,
+          "endFrame": 1031
+        },
+        {
+          "text": "있으면",
+          "startFrame": 1031,
+          "endFrame": 1057
+        },
+        {
+          "text": "어느",
+          "startFrame": 1057,
+          "endFrame": 1074
+        },
+        {
+          "text": "세월에",
+          "startFrame": 1074,
+          "endFrame": 1099
+        },
+        {
+          "text": "다",
+          "startFrame": 1099,
+          "endFrame": 1108
+        },
+        {
+          "text": "보겠어요.",
+          "startFrame": 1108,
+          "endFrame": 1157
+        }
+      ],
+      "startFrame": 886,
+      "endFrame": 1157,
+      "durationInFrames": 271
+    },
+    {
+      "sentence": "이거 군사 차량이야, 민간 차량이야?",
+      "words": [
+        {
+          "text": "\"이거",
+          "startFrame": 1157,
+          "endFrame": 1175
+        },
+        {
+          "text": "군사",
+          "startFrame": 1175,
+          "endFrame": 1195
+        },
+        {
+          "text": "차량이야,",
+          "startFrame": 1195,
+          "endFrame": 1243
+        },
+        {
+          "text": "민간",
+          "startFrame": 1243,
+          "endFrame": 1262
+        },
+        {
+          "text": "차량이야?\"",
+          "startFrame": 1262,
+          "endFrame": 1309
+        }
+      ],
+      "startFrame": 1157,
+      "endFrame": 1309,
+      "durationInFrames": 152
+    },
+    {
+      "sentence": "이러다가 전쟁이 먼저 끝나는 거죠.",
+      "words": [
+        {
+          "text": "이러다가",
+          "startFrame": 1309,
+          "endFrame": 1357
+        },
+        {
+          "text": "전쟁이",
+          "startFrame": 1357,
+          "endFrame": 1376
+        },
+        {
+          "text": "먼저",
+          "startFrame": 1376,
+          "endFrame": 1396
+        },
+        {
+          "text": "끝나는",
+          "startFrame": 1396,
+          "endFrame": 1427
+        },
+        {
+          "text": "거죠.",
+          "startFrame": 1427,
+          "endFrame": 1457
+        }
+      ],
+      "startFrame": 1309,
+      "endFrame": 1474,
+      "durationInFrames": 165
+    },
+    {
+      "sentence": "그래서 만든 게 프로젝트 메이븐이에요.",
+      "words": [
+        {
+          "text": "그래서",
+          "startFrame": 1474,
+          "endFrame": 1514
+        },
+        {
+          "text": "만든",
+          "startFrame": 1514,
+          "endFrame": 1515
+        },
+        {
+          "text": "게",
+          "startFrame": 1515,
+          "endFrame": 1523
+        },
+        {
+          "text": "프로젝트",
+          "startFrame": 1523,
+          "endFrame": 1558
+        },
+        {
+          "text": "메이븐이에요.",
+          "startFrame": 1558,
+          "endFrame": 1619
+        }
+      ],
+      "startFrame": 1474,
+      "endFrame": 1619,
+      "durationInFrames": 145
+    },
+    {
+      "sentence": "비유하자면요",
+      "words": [
+        {
+          "text": "비유하자면요,",
+          "startFrame": 1619,
+          "endFrame": 1687
+        }
+      ],
+      "startFrame": 1619,
+      "endFrame": 1687,
+      "durationInFrames": 68
+    },
+    {
+      "sentence": "\"전쟁터의 유튜브 알고리즘\" 이에요.",
+      "words": [
+        {
+          "text": "\"전쟁터의",
+          "startFrame": 1687,
+          "endFrame": 1748
+        },
+        {
+          "text": "유튜브",
+          "startFrame": 1748,
+          "endFrame": 1756
+        },
+        {
+          "text": "알고리즘\"",
+          "startFrame": 1756,
+          "endFrame": 1843
+        },
+        {
+          "text": "이에요.",
+          "startFrame": 1843,
+          "endFrame": 1843
+        }
+      ],
+      "startFrame": 1687,
+      "endFrame": 1843,
+      "durationInFrames": 156
+    },
+    {
+      "sentence": "유튜브가 영상 수백만 개 중에서\n내 취향에 맞는 걸 골라주잖아요.",
+      "words": [
+        {
+          "text": "유튜브가",
+          "startFrame": 1843,
+          "endFrame": 1889
+        },
+        {
+          "text": "영상",
+          "startFrame": 1889,
+          "endFrame": 1901
+        },
+        {
+          "text": "수백만",
+          "startFrame": 1901,
+          "endFrame": 1920
+        },
+        {
+          "text": "개",
+          "startFrame": 1920,
+          "endFrame": 1928
+        },
+        {
+          "text": "중에서",
+          "startFrame": 1928,
+          "endFrame": 1954
+        },
+        {
+          "text": "내",
+          "startFrame": 1954,
+          "endFrame": 1963
+        },
+        {
+          "text": "취향에",
+          "startFrame": 1963,
+          "endFrame": 1988
+        },
+        {
+          "text": "맞는",
+          "startFrame": 1988,
+          "endFrame": 2007
+        },
+        {
+          "text": "걸",
+          "startFrame": 2007,
+          "endFrame": 2014
+        },
+        {
+          "text": "골라주잖아요.",
+          "startFrame": 2014,
+          "endFrame": 2082
+        }
+      ],
+      "startFrame": 1843,
+      "endFrame": 2082,
+      "durationInFrames": 239
+    },
+    {
+      "sentence": "메이븐은 드론 영상 수천 시간 중에서\n\"위험한 것\"만 걸러내는 거예요.",
+      "words": [
+        {
+          "text": "메이븐은",
+          "startFrame": 2082,
+          "endFrame": 2126
+        },
+        {
+          "text": "드론",
+          "startFrame": 2126,
+          "endFrame": 2138
+        },
+        {
+          "text": "영상",
+          "startFrame": 2138,
+          "endFrame": 2158
+        },
+        {
+          "text": "수천",
+          "startFrame": 2158,
+          "endFrame": 2177
+        },
+        {
+          "text": "시간",
+          "startFrame": 2177,
+          "endFrame": 2199
+        },
+        {
+          "text": "중에서",
+          "startFrame": 2199,
+          "endFrame": 2225
+        },
+        {
+          "text": "\"위험한",
+          "startFrame": 2225,
+          "endFrame": 2253
+        },
+        {
+          "text": "것\"만",
+          "startFrame": 2253,
+          "endFrame": 2275
+        },
+        {
+          "text": "걸러내는",
+          "startFrame": 2275,
+          "endFrame": 2311
+        },
+        {
+          "text": "거예요.",
+          "startFrame": 2311,
+          "endFrame": 2358
+        }
+      ],
+      "startFrame": 2082,
+      "endFrame": 2358,
+      "durationInFrames": 276
+    },
+    {
+      "sentence": "방식은 다르지만 원리는 비슷합니다.",
+      "words": [
+        {
+          "text": "방식은",
+          "startFrame": 2358,
+          "endFrame": 2358
+        },
+        {
+          "text": "다르지만",
+          "startFrame": 2358,
+          "endFrame": 2358
+        },
+        {
+          "text": "원리는",
+          "startFrame": 2358,
+          "endFrame": 2358
+        },
+        {
+          "text": "비슷합니다.",
+          "startFrame": 2358,
+          "endFrame": 2358
+        }
+      ],
+      "startFrame": 2358,
+      "endFrame": 2358,
+      "durationInFrames": 0
+    },
+    {
+      "sentence": "근데 이게 처음부터 잘 된 건 아니에요.",
+      "words": [
+        {
+          "text": "근데",
+          "startFrame": 2358,
+          "endFrame": 2375
+        },
+        {
+          "text": "이게",
+          "startFrame": 2375,
+          "endFrame": 2403
+        },
+        {
+          "text": "처음부터",
+          "startFrame": 2403,
+          "endFrame": 2430
+        },
+        {
+          "text": "잘",
+          "startFrame": 2430,
+          "endFrame": 2439
+        },
+        {
+          "text": "된",
+          "startFrame": 2439,
+          "endFrame": 2448
+        },
+        {
+          "text": "건",
+          "startFrame": 2448,
+          "endFrame": 2457
+        },
+        {
+          "text": "아니에요.",
+          "startFrame": 2457,
+          "endFrame": 2503
+        }
+      ],
+      "startFrame": 2358,
+      "endFrame": 2503,
+      "durationInFrames": 145
+    },
+    {
+      "sentence": "처음엔 구글이 기술을 제공했어요.",
+      "words": [
+        {
+          "text": "처음엔",
+          "startFrame": 2503,
+          "endFrame": 2530
+        },
+        {
+          "text": "구글이",
+          "startFrame": 2530,
+          "endFrame": 2560
+        },
+        {
+          "text": "기술을",
+          "startFrame": 2560,
+          "endFrame": 2589
+        },
+        {
+          "text": "제공했어요.",
+          "startFrame": 2589,
+          "endFrame": 2651
+        }
+      ],
+      "startFrame": 2503,
+      "endFrame": 2651,
+      "durationInFrames": 148
+    },
+    {
+      "sentence": "근데 구글 직원들이 들고 일어났거든요.",
+      "words": [
+        {
+          "text": "근데",
+          "startFrame": 2651,
+          "endFrame": 2680
+        },
+        {
+          "text": "구글",
+          "startFrame": 2680,
+          "endFrame": 2690
+        },
+        {
+          "text": "직원들이",
+          "startFrame": 2690,
+          "endFrame": 2729
+        },
+        {
+          "text": "들고",
+          "startFrame": 2729,
+          "endFrame": 2749
+        },
+        {
+          "text": "일어났거든요.",
+          "startFrame": 2749,
+          "endFrame": 2822
+        }
+      ],
+      "startFrame": 2651,
+      "endFrame": 2822,
+      "durationInFrames": 171
+    },
+    {
+      "sentence": "우리 AI를 전쟁에 쓴다고?",
+      "words": [
+        {
+          "text": "\"우리",
+          "startFrame": 2822,
+          "endFrame": 2837
+        },
+        {
+          "text": "AI를",
+          "startFrame": 2837,
+          "endFrame": 2853
+        },
+        {
+          "text": "전쟁에",
+          "startFrame": 2853,
+          "endFrame": 2882
+        },
+        {
+          "text": "쓴다고?",
+          "startFrame": 2882,
+          "endFrame": 2920
+        }
+      ],
+      "startFrame": 2822,
+      "endFrame": 2920,
+      "durationInFrames": 98
+    },
+    {
+      "sentence": "우리는 그거 동의 못 해.",
+      "words": [
+        {
+          "text": "우리는",
+          "startFrame": 2920,
+          "endFrame": 2958
+        },
+        {
+          "text": "그거",
+          "startFrame": 2958,
+          "endFrame": 2970
+        },
+        {
+          "text": "동의",
+          "startFrame": 2970,
+          "endFrame": 2992
+        },
+        {
+          "text": "못",
+          "startFrame": 2992,
+          "endFrame": 3018
+        },
+        {
+          "text": "해.\"",
+          "startFrame": 3018,
+          "endFrame": 3018
+        }
+      ],
+      "startFrame": 2920,
+      "endFrame": 3018,
+      "durationInFrames": 98
+    },
+    {
+      "sentence": "결국 구글은 2019년에\n손을 떼고 나왔어요.",
+      "words": [
+        {
+          "text": "결국",
+          "startFrame": 3018,
+          "endFrame": 3037
+        },
+        {
+          "text": "구글은",
+          "startFrame": 3037,
+          "endFrame": 3067
+        },
+        {
+          "text": "2019년에",
+          "startFrame": 3067,
+          "endFrame": 3128
+        },
+        {
+          "text": "손을",
+          "startFrame": 3128,
+          "endFrame": 3148
+        },
+        {
+          "text": "떼고",
+          "startFrame": 3148,
+          "endFrame": 3164
+        },
+        {
+          "text": "나왔어요.",
+          "startFrame": 3164,
+          "endFrame": 3223
+        }
+      ],
+      "startFrame": 3018,
+      "endFrame": 3274,
+      "durationInFrames": 256
+    },
+    {
+      "sentence": "그래도 프로젝트 메이븐은\n멈추지 않았습니다.",
+      "words": [
+        {
+          "text": "그래도",
+          "startFrame": 3274,
+          "endFrame": 3296
+        },
+        {
+          "text": "프로젝트",
+          "startFrame": 3296,
+          "endFrame": 3328
+        },
+        {
+          "text": "메이븐은",
+          "startFrame": 3328,
+          "endFrame": 3359
+        },
+        {
+          "text": "멈추지",
+          "startFrame": 3359,
+          "endFrame": 3382
+        },
+        {
+          "text": "않았습니다.",
+          "startFrame": 3382,
+          "endFrame": 3437
+        }
+      ],
+      "startFrame": 3274,
+      "endFrame": 3437,
+      "durationInFrames": 163
+    },
+    {
+      "sentence": "지금은 팔란티어라는 데이터\n분석 회사가 핵심을 맡고 있어요.",
+      "words": [
+        {
+          "text": "지금은",
+          "startFrame": 3437,
+          "endFrame": 3457
+        },
+        {
+          "text": "팔란티어라는",
+          "startFrame": 3457,
+          "endFrame": 3497
+        },
+        {
+          "text": "데이터",
+          "startFrame": 3497,
+          "endFrame": 3518
+        },
+        {
+          "text": "분석",
+          "startFrame": 3518,
+          "endFrame": 3530
+        },
+        {
+          "text": "회사가",
+          "startFrame": 3530,
+          "endFrame": 3550
+        },
+        {
+          "text": "핵심을",
+          "startFrame": 3550,
+          "endFrame": 3569
+        },
+        {
+          "text": "맡고",
+          "startFrame": 3569,
+          "endFrame": 3583
+        },
+        {
+          "text": "있어요.",
+          "startFrame": 3583,
+          "endFrame": 3620
+        }
+      ],
+      "startFrame": 3437,
+      "endFrame": 3620,
+      "durationInFrames": 183
+    },
+    {
+      "sentence": "AWS, 마이크로소프트 포함해서\n10개 회사가 같이 붙어 있고요.",
+      "words": [
+        {
+          "text": "AWS,",
+          "startFrame": 3620,
+          "endFrame": 3635
+        },
+        {
+          "text": "마이크로소프트",
+          "startFrame": 3635,
+          "endFrame": 3706
+        },
+        {
+          "text": "포함해서",
+          "startFrame": 3706,
+          "endFrame": 3741
+        },
+        {
+          "text": "10개",
+          "startFrame": 3741,
+          "endFrame": 3770
+        },
+        {
+          "text": "회사가",
+          "startFrame": 3770,
+          "endFrame": 3799
+        },
+        {
+          "text": "같이",
+          "startFrame": 3799,
+          "endFrame": 3818
+        },
+        {
+          "text": "붙어",
+          "startFrame": 3818,
+          "endFrame": 3880
+        },
+        {
+          "text": "있고요.",
+          "startFrame": 3880,
+          "endFrame": 3880
+        }
+      ],
+      "startFrame": 3620,
+      "endFrame": 3880,
+      "durationInFrames": 260
+    },
+    {
+      "sentence": "규모가 어느 정도냐면요",
+      "words": [
+        {
+          "text": "규모가",
+          "startFrame": 3880,
+          "endFrame": 3928
+        },
+        {
+          "text": "어느",
+          "startFrame": 3928,
+          "endFrame": 3931
+        },
+        {
+          "text": "정도냐면요,",
+          "startFrame": 3931,
+          "endFrame": 3997
+        }
+      ],
+      "startFrame": 3880,
+      "endFrame": 3997,
+      "durationInFrames": 117
+    },
+    {
+      "sentence": "팔란티어 혼자 미 국방부와 맺은\n계약 규모가 최대 100억 달러",
+      "words": [
+        {
+          "text": "팔란티어",
+          "startFrame": 3997,
+          "endFrame": 4029
+        },
+        {
+          "text": "혼자",
+          "startFrame": 4029,
+          "endFrame": 4045
+        },
+        {
+          "text": "미",
+          "startFrame": 4045,
+          "endFrame": 4053
+        },
+        {
+          "text": "국방부와",
+          "startFrame": 4053,
+          "endFrame": 4088
+        },
+        {
+          "text": "맺은",
+          "startFrame": 4088,
+          "endFrame": 4100
+        },
+        {
+          "text": "계약",
+          "startFrame": 4100,
+          "endFrame": 4115
+        },
+        {
+          "text": "규모가",
+          "startFrame": 4115,
+          "endFrame": 4139
+        },
+        {
+          "text": "최대",
+          "startFrame": 4139,
+          "endFrame": 4156
+        },
+        {
+          "text": "100억",
+          "startFrame": 4156,
+          "endFrame": 4191
+        },
+        {
+          "text": "달러,",
+          "startFrame": 4191,
+          "endFrame": 4220
+        }
+      ],
+      "startFrame": 3997,
+      "endFrame": 4220,
+      "durationInFrames": 223
+    },
+    {
+      "sentence": "우리 돈으로 약 13조 원 수준이에요.",
+      "words": [
+        {
+          "text": "우리",
+          "startFrame": 4220,
+          "endFrame": 4246
+        },
+        {
+          "text": "돈으로",
+          "startFrame": 4246,
+          "endFrame": 4264
+        },
+        {
+          "text": "약",
+          "startFrame": 4264,
+          "endFrame": 4272
+        },
+        {
+          "text": "13조",
+          "startFrame": 4272,
+          "endFrame": 4302
+        },
+        {
+          "text": "원",
+          "startFrame": 4302,
+          "endFrame": 4306
+        },
+        {
+          "text": "수준이에요.",
+          "startFrame": 4306,
+          "endFrame": 4358
+        }
+      ],
+      "startFrame": 4220,
+      "endFrame": 4358,
+      "durationInFrames": 138
+    },
+    {
+      "sentence": "이게 장난이 아닌 거죠.",
+      "words": [
+        {
+          "text": "이게",
+          "startFrame": 4358,
+          "endFrame": 4390
+        },
+        {
+          "text": "장난이",
+          "startFrame": 4390,
+          "endFrame": 4402
+        },
+        {
+          "text": "아닌",
+          "startFrame": 4402,
+          "endFrame": 4418
+        },
+        {
+          "text": "거죠.",
+          "startFrame": 4418,
+          "endFrame": 4450
+        }
+      ],
+      "startFrame": 4358,
+      "endFrame": 4476,
+      "durationInFrames": 118
+    }
+  ]
+}
