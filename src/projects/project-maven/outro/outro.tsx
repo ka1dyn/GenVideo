@@ -1,29 +1,21 @@
 import React from 'react';
 import { AbsoluteFill, Audio, staticFile } from 'remotion';
+import { CaptionOverlay } from '../../../shared-components/CaptionOverlay';
+import outroTimeline from '../../../../public/project-maven/outro/outro_final_timeline.json';
+import { Sequences } from './sequences';
+import { COLORS } from '../theme';
 
-/**
- * Section: outro
- * Audio Duration: 36925ms (2216 frames @60fps)
- *
- * Assets (use with staticFile):
- *   Audio:      staticFile('project-maven/outro/outro.wav')
- *   Timestamps: staticFile('project-maven/outro/outro_timestamp.json')
- *
- * Plan: public/project-maven/outro/outro_plan.md
- */
 export const Outro: React.FC = () => {
   return (
-    <AbsoluteFill
-      style={{
-        backgroundColor: '#0a0a0a',
-        justifyContent: 'center',
-        alignItems: 'center',
-      }}
-    >
+    <AbsoluteFill style={{ backgroundColor: COLORS.BG_BASE }}>
+      {/* 1. 오디오 단일 선언 */}
       <Audio src={staticFile('project-maven/outro/outro.wav')} />
-      <h1 style={{ color: '#ffffff', fontSize: 48 }}>
-        OUTRO Scene
-      </h1>
+
+      {/* 2. 절대 프레임 좌표로 배치된 하위 씬들의 묶음 렌더링 */}
+      <Sequences />
+
+      {/* 3. 화면 최상단 자막 오버레이 — JSON을 직접 소비 */}
+      <CaptionOverlay captions={outroTimeline.sentences} />
     </AbsoluteFill>
   );
 };

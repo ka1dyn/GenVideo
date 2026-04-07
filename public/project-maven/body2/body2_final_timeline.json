@@ -1121,99 +1121,22 @@
         }
       ],
       "startFrame": 4486,
-      "endFrame": 4916,
-      "durationInFrames": 430
+      "endFrame": 4856,
+      "durationInFrames": 370
     },
     {
       "sentence": "2023년에 미 국방부가\n공식 명령으로도 못 박았어요.",
-      "words": [
-        {
-          "text": "2023년에",
-          "startFrame": 4916,
-          "endFrame": 4921
-        },
-        {
-          "text": "미",
-          "startFrame": 4921,
-          "endFrame": 4926
-        },
-        {
-          "text": "국방부가",
-          "startFrame": 4926,
-          "endFrame": 4931
-        },
-        {
-          "text": "공식",
-          "startFrame": 4931,
-          "endFrame": 4936
-        },
-        {
-          "text": "명령으로도",
-          "startFrame": 4936,
-          "endFrame": 4941
-        },
-        {
-          "text": "못",
-          "startFrame": 4941,
-          "endFrame": 4946
-        },
-        {
-          "text": "박았어요.",
-          "startFrame": 4946,
-          "endFrame": 4951
-        }
-      ],
-      "startFrame": 4916,
-      "endFrame": 4916,
-      "durationInFrames": 0
+      "words": [],
+      "startFrame": 4856,
+      "endFrame": 5098,
+      "durationInFrames": 242
     },
     {
       "sentence": "AI 시스템의 판단에 대해\n인간이 반드시 감독하고 개입한다.",
-      "words": [
-        {
-          "text": "\"AI",
-          "startFrame": 4916,
-          "endFrame": 4948
-        },
-        {
-          "text": "시스템의",
-          "startFrame": 4948,
-          "endFrame": 4988
-        },
-        {
-          "text": "판단에",
-          "startFrame": 4988,
-          "endFrame": 5018
-        },
-        {
-          "text": "대해",
-          "startFrame": 5018,
-          "endFrame": 5025
-        },
-        {
-          "text": "인간이",
-          "startFrame": 5025,
-          "endFrame": 5065
-        },
-        {
-          "text": "반드시",
-          "startFrame": 5065,
-          "endFrame": 5093
-        },
-        {
-          "text": "감독하고",
-          "startFrame": 5093,
-          "endFrame": 5119
-        },
-        {
-          "text": "개입한다.\"",
-          "startFrame": 5119,
-          "endFrame": 5137
-        }
-      ],
-      "startFrame": 4916,
+      "words": [],
+      "startFrame": 5098,
       "endFrame": 5297,
-      "durationInFrames": 381
+      "durationInFrames": 199
     },
     {
       "sentence": "지금은요.",

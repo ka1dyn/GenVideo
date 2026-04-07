@@ -1,0 +1,180 @@
+import { VIDEO_FPS } from "../../constants/video-config";
+
+export const BRAND = {
+  PROJECT_ID: "tech-brief",
+  MOOD: "신뢰감, 속보, 프리미엄, 정밀, 금융 터미널",
+  CONCEPT:
+    "Bloomberg Terminal을 모바일로 옮긴 듯한 다크 금융 테크 UI — 어두운 네이비 배경 위에 전기 블루 포인트가 빛나고, 주가 티커와 속보 레이블이 신뢰감 있게 흘러간다",
+  FORBIDDEN:
+    "유치한 아이콘(가위·전구·돋보기), 과한 그라데이션, 무지개 배색, 90년대 PPT 감성, 클립아트",
+} as const;
+
+export const COLORS = {
+  BG_VOID: "#050810",
+  BG_BASE: "#0A0E1A",
+  BG_SURFACE: "#0D1220",
+  BG_ELEVATED: "#111827",
+  BG_HOVER: "rgba(56, 138, 221, 0.08)",
+
+  PRIMARY: "#378ADD",
+  PRIMARY_DIM: "rgba(55, 138, 221, 0.15)",
+  PRIMARY_MID: "rgba(55, 138, 221, 0.30)",
+  PRIMARY_GLOW: "rgba(55, 138, 221, 0.50)",
+
+  SECONDARY: "#1D9E75",
+  SECONDARY_DIM: "rgba(29, 158, 117, 0.15)",
+
+  ACCENT: "#EF9F27",
+  ACCENT_DIM: "rgba(239, 159, 39, 0.15)",
+
+  TEXT_MAIN: "#E8EEFA",
+  TEXT_BODY: "#A8B4CC",
+  TEXT_MUTED: "#6B7A9F",
+  TEXT_DISABLED: "#3A4460",
+  TEXT_INVERSE: "#E8EEFA",
+  TEXT_ON_PRIMARY: "#FFFFFF",
+
+  BORDER: "rgba(255, 255, 255, 0.08)",
+  BORDER_STRONG: "rgba(255, 255, 255, 0.18)",
+  BORDER_PRIMARY: "rgba(55, 138, 221, 0.55)",
+
+  POSITIVE: "#1D9E75",
+  POSITIVE_DIM: "rgba(29, 158, 117, 0.15)",
+  NEGATIVE: "#E24B4A",
+  NEGATIVE_DIM: "rgba(226, 75, 74, 0.15)",
+  WARNING: "#EF9F27",
+  WARNING_DIM: "rgba(239, 159, 39, 0.15)",
+  INFO: "#378ADD",
+  INFO_DIM: "rgba(55, 138, 221, 0.15)",
+
+  DATA_1: "#378ADD",
+  DATA_2: "#1D9E75",
+  DATA_3: "#EF9F27",
+  DATA_4: "#D4537E",
+  DATA_5: "#AFA9EC",
+} as const;
+
+export const EFFECTS = {
+  SHADOW_SM: "0 2px 8px rgba(5, 8, 16, 0.60)",
+  SHADOW_MD: "0 4px 16px rgba(5, 8, 16, 0.75)",
+  SHADOW_LG: "0 10px 32px rgba(5, 8, 16, 0.85)",
+  SHADOW_XL: "0 20px 60px rgba(5, 8, 16, 0.95)",
+
+  GLOW_SM: `0 0 12px ${COLORS.PRIMARY_MID}`,
+  GLOW_MD: `0 0 24px ${COLORS.PRIMARY_GLOW}`,
+  GLOW_LG: `0 0 48px ${COLORS.PRIMARY_GLOW}, 0 0 80px ${COLORS.PRIMARY_DIM}`,
+  GLOW_TEXT_SM: `0 0 16px ${COLORS.PRIMARY_MID}`,
+  GLOW_TEXT_LG: `0 0 32px ${COLORS.PRIMARY_GLOW}`,
+  GLOW_SECONDARY: "0 0 24px rgba(29, 158, 117, 0.50)",
+  GLOW_ACCENT: "0 0 24px rgba(239, 159, 39, 0.50)",
+
+  GLASS_BG: "rgba(13, 18, 32, 0.72)",
+  GLASS_BORDER: "rgba(55, 138, 221, 0.20)",
+  GLASS_BLUR: "blur(12px)",
+  GLASS_BLUR_HEAVY: "blur(24px)",
+
+  FADE_UP: `linear-gradient(to top, ${COLORS.BG_BASE}, transparent)`,
+  FADE_DOWN: `linear-gradient(to bottom, ${COLORS.BG_BASE}, transparent)`,
+  FADE_RIGHT: `linear-gradient(to right, ${COLORS.BG_BASE}, transparent)`,
+  RADIAL_PRIMARY: `radial-gradient(ellipse at center, ${COLORS.PRIMARY_DIM} 0%, transparent 70%)`,
+} as const;
+
+export const FONTS = {
+  DISPLAY: "'Pretendard Variable', 'Inter', sans-serif",
+  PRIMARY: "'Pretendard Variable', sans-serif",
+  MONO: "'JetBrains Mono', 'Fira Code', monospace",
+
+  SIZE_XS: 12,
+  SIZE_SM: 16,
+  SIZE_MD: 22,
+  SIZE_LG: 32,
+  SIZE_XL: 48,
+  SIZE_2XL: 64,
+  SIZE_3XL: 88,
+  SIZE_4XL: 120,
+
+  WEIGHT_REGULAR: 400,
+  WEIGHT_MEDIUM: 500,
+  WEIGHT_SEMIBOLD: 600,
+  WEIGHT_BOLD: 700,
+  WEIGHT_EXTRABOLD: 800,
+
+  LEADING_TIGHT: 1.1,
+  LEADING_SNUG: 1.3,
+  LEADING_NORMAL: 1.6,
+  LEADING_LOOSE: 1.9,
+
+  TRACKING_TIGHT: -0.03,
+  TRACKING_NORMAL: 0,
+  TRACKING_WIDE: 0.05,
+  TRACKING_WIDER: 0.12,
+} as const;
+
+export const SPACING = {
+  PX_2: 2,
+  PX_4: 4,
+  PX_8: 8,
+  PX_12: 12,
+  PX_16: 16,
+  PX_24: 24,
+  PX_32: 32,
+  PX_40: 40,
+  PX_48: 48,
+  PX_64: 64,
+  PX_80: 80,
+  PX_96: 96,
+  PX_120: 120,
+
+  RADIUS_SM: 6,
+  RADIUS_MD: 12,
+  RADIUS_LG: 20,
+  RADIUS_XL: 32,
+  RADIUS_PILL: 9999,
+
+  BORDER_THIN: 1,
+  BORDER_NORMAL: 1.5,
+  BORDER_THICK: 2.5,
+} as const;
+
+export const ANIMATION = {
+  // Scaling based on 60fps (original design system was 30fps)
+  DUR_XS: 12, 
+  DUR_SM: 18,
+  DUR_MD: 30,
+  DUR_LG: 42,
+  DUR_XL: 60,
+  DUR_2XL: 90,
+
+  SPRING_GENTLE: { damping: 14, stiffness: 120, mass: 1 },
+  SPRING_BOUNCY: { damping: 10, stiffness: 160, mass: 0.9 },
+  SPRING_SNAPPY: { damping: 22, stiffness: 250, mass: 0.8 },
+  SPRING_HEAVY: { damping: 18, stiffness: 80, mass: 1.2 },
+
+  EASE_OUT: [0.0, 0.0, 0.2, 1.0] as const,
+  EASE_IN: [0.4, 0.0, 1.0, 1.0] as const,
+  EASE_IN_OUT: [0.4, 0.0, 0.2, 1.0] as const,
+  EASE_ELASTIC: [0.0, 0.8, 0.2, 1.2] as const,
+
+  ENTER_Y_SM: -12,
+  ENTER_Y_MD: -24,
+  ENTER_Y_LG: -48,
+  ENTER_X_SM: -16,
+  ENTER_X_MD: -32,
+
+  STAGGER_SM: 6,
+  STAGGER_MD: 10,
+  STAGGER_LG: 16,
+
+  SCALE_ENTER: 0.92,
+  SCALE_EMPHASIS: 1.04,
+  SCALE_EXIT: 0.96,
+} as const;
+
+export const Z = {
+  BG: 0,
+  CONTENT: 10,
+  OVERLAY: 20,
+  UI: 30,
+  CAPTION: 40,
+  TOP: 50,
+} as const;

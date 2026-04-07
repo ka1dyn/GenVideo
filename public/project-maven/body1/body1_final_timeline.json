@@ -525,34 +525,6 @@
       "durationInFrames": 276
     },
     {
-      "sentence": "방식은 다르지만 원리는 비슷합니다.",
-      "words": [
-        {
-          "text": "방식은",
-          "startFrame": 2358,
-          "endFrame": 2358
-        },
-        {
-          "text": "다르지만",
-          "startFrame": 2358,
-          "endFrame": 2358
-        },
-        {
-          "text": "원리는",
-          "startFrame": 2358,
-          "endFrame": 2358
-        },
-        {
-          "text": "비슷합니다.",
-          "startFrame": 2358,
-          "endFrame": 2358
-        }
-      ],
-      "startFrame": 2358,
-      "endFrame": 2358,
-      "durationInFrames": 0
-    },
-    {
       "sentence": "근데 이게 처음부터 잘 된 건 아니에요.",
       "words": [
         {
