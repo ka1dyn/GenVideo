@@ -12,8 +12,8 @@ export const BRAND = {
 export const COLORS = {
   BG_VOID: "#050810",
   BG_BASE: "#0A0E1A",
-  BG_SURFACE: "#0D1220",
-  BG_ELEVATED: "#111827",
+  BG_SURFACE: "#141C30",
+  BG_ELEVATED: "#1C2540",
   BG_HOVER: "rgba(56, 138, 221, 0.08)",
 
   PRIMARY: "#378ADD",
@@ -68,7 +68,7 @@ export const EFFECTS = {
   GLOW_SECONDARY: "0 0 24px rgba(29, 158, 117, 0.50)",
   GLOW_ACCENT: "0 0 24px rgba(239, 159, 39, 0.50)",
 
-  GLASS_BG: "rgba(13, 18, 32, 0.72)",
+  GLASS_BG: "rgba(20, 28, 48, 0.75)",
   GLASS_BORDER: "rgba(55, 138, 221, 0.20)",
   GLASS_BLUR: "blur(12px)",
   GLASS_BLUR_HEAVY: "blur(24px)",
@@ -84,14 +84,14 @@ export const FONTS = {
   PRIMARY: "'Pretendard Variable', sans-serif",
   MONO: "'JetBrains Mono', 'Fira Code', monospace",
 
-  SIZE_XS: 12,
-  SIZE_SM: 16,
-  SIZE_MD: 22,
-  SIZE_LG: 32,
-  SIZE_XL: 48,
-  SIZE_2XL: 64,
-  SIZE_3XL: 88,
-  SIZE_4XL: 120,
+  SIZE_XS: 18,
+  SIZE_SM: 24,
+  SIZE_MD: 32,
+  SIZE_LG: 48,
+  SIZE_XL: 64,
+  SIZE_2XL: 80,
+  SIZE_3XL: 100,
+  SIZE_4XL: 140,
 
   WEIGHT_REGULAR: 400,
   WEIGHT_MEDIUM: 500,
