@@ -11,6 +11,196 @@ import { BRAND, COLORS, EFFECTS, FONTS, SPACING, ANIMATION, Z } from "../theme";
 import { QuotePanel } from "../components/QuotePanel";
 import { TypewriterText } from "../components/TypewriterText";
 import { CounterText } from "../components/CounterText";
+import { GridOverlay } from "../components/GridOverlay";
+import { ScanLine } from "../components/ScanLine";
+ 
+const AICore: React.FC<{ frame: number; pulseStart: number }> = ({ frame, pulseStart }) => {
+  const isAnalyzing = frame >= pulseStart;
+  const analysisProgress = spring({ frame: Math.max(0, frame - pulseStart), fps: 30, config: ANIMATION.SPRING_SNAPPY });
+  
+  const rotationOuter = interpolate(frame, [0, 300], [0, 360]);
+  const rotationInner = interpolate(frame, [0, 200], [360, 0]);
+  
+  const pulse = isAnalyzing ? Math.sin((frame - pulseStart) * 0.15) * 0.1 + 1 : 1;
+  const glowIntensity = isAnalyzing ? Math.sin((frame - pulseStart) * 0.15) * 20 + 40 : 10;
+
+  return (
+    <div style={{ position: "relative", width: 280, height: 280, display: "flex", justifyContent: "center", alignItems: "center" }}>
+      {/* Outer Rotating Ring */}
+      <div style={{
+        position: "absolute",
+        width: "100%",
+        height: "100%",
+        border: `2px dashed ${COLORS.PRIMARY_MID}`,
+        borderRadius: "50%",
+        transform: `rotate(${rotationOuter}deg) scale(${analysisProgress})`,
+        opacity: analysisProgress,
+      }} />
+      
+      {/* Inner Rotating Ring */}
+      <div style={{
+        position: "absolute",
+        width: "80%",
+        height: "80%",
+        border: `3px solid ${COLORS.PRIMARY}`,
+        borderRadius: "50%",
+        borderTopColor: "transparent",
+        borderBottomColor: "transparent",
+        transform: `rotate(${rotationInner}deg) scale(${analysisProgress})`,
+        opacity: analysisProgress,
+      }} />
+
+      {/* Central Core */}
+      <div style={{
+        width: 160,
+        height: 160,
+        borderRadius: "50%",
+        backgroundColor: COLORS.BG_ELEVATED,
+        border: `2px solid ${COLORS.PRIMARY}`,
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center",
+        transform: `scale(${pulse * analysisProgress})`,
+        boxShadow: `0 0 ${glowIntensity}px ${COLORS.PRIMARY_GLOW}`,
+        zIndex: Z.CONTENT,
+      }}>
+        <div style={{ color: COLORS.PRIMARY, fontSize: FONTS.SIZE_XS, letterSpacing: FONTS.TRACKING_WIDER, opacity: 0.7 }}>ANALYSIS</div>
+        <div style={{ color: COLORS.PRIMARY, fontSize: FONTS.SIZE_MD, fontWeight: FONTS.WEIGHT_EXTRABOLD, letterSpacing: FONTS.TRACKING_WIDE }}>AI CORE</div>
+      </div>
+      
+      {/* Hexagon Pattern Placeholder / Visual enhancement */}
+      <svg style={{ position: "absolute", width: "120%", height: "120%", opacity: analysisProgress * 0.3 }}>
+         <defs>
+           <pattern id="hexagons" width="30" height="26" patternUnits="userSpaceOnUse" patternTransform="scale(1.5)">
+             <path d="M15 0l15 8.7v17.3l-15 8.7-15-8.7v-17.3z" fill="none" stroke={COLORS.PRIMARY} strokeWidth="1" />
+           </pattern>
+         </defs>
+         <rect width="100%" height="100%" fill="url(#hexagons)" />
+      </svg>
+    </div>
+  );
+};
+
+const DataPacket: React.FC<{ frame: number; startFrame: number; delay: number; endFrame: number; color: string; path: {x1: number, y1: number, x2: number, y2: number} }> = ({ frame, startFrame, delay, endFrame, color, path }) => {
+  const activeFrame = frame - (startFrame + delay);
+  if (activeFrame < 0 || frame > endFrame) return null;
+  
+  const duration = 45;
+  const progress = (activeFrame % duration) / duration;
+  
+  const x = interpolate(progress, [0, 1], [path.x1, path.x2]);
+  const y = interpolate(progress, [0, 1], [path.y1, path.y2]);
+  const opacity = interpolate(progress, [0, 0.1, 0.9, 1], [0, 1, 1, 0]);
+
+  return (
+    <div style={{
+      position: "absolute",
+      left: x,
+      top: y,
+      width: 8,
+      height: 8,
+      backgroundColor: color,
+      borderRadius: "2px",
+      boxShadow: `0 0 10px ${color}`,
+      opacity,
+      zIndex: Z.CONTENT - 1
+    }} />
+  );
+};
+
+/**
+ * Helper component for the Phase Overview layout used in Scene 1, 8, and 13.
+ */
+const PhaseOverview: React.FC<{
+  highlightIndex: number;
+  appearanceDelay?: number;
+  highlightStartFrame?: number;
+}> = ({ highlightIndex, appearanceDelay = 0, highlightStartFrame = 0 }) => {
+  const frame = useCurrentFrame();
+
+  const titleIn = spring({ frame, fps: 30, config: ANIMATION.SPRING_GENTLE });
+  const titleY = interpolate(titleIn, [0, 1], [20, 0]);
+
+  const lineProgress = spring({
+    frame: frame - 15,
+    fps: 30,
+    config: ANIMATION.SPRING_SNAPPY,
+  });
+
+  const steps = [
+    { num: "01", label: "보기" },
+    { num: "02", label: "연결" },
+    { num: "03", label: "보고" },
+  ];
+
+  const highlightIn = spring({
+    frame: Math.max(0, frame - highlightStartFrame),
+    fps: 30,
+    config: ANIMATION.SPRING_SNAPPY,
+  });
+  const highlightGlow = interpolateColors(highlightIn, [0, 1], ["transparent", COLORS.PRIMARY_DIM]);
+  const highlightBorder = interpolateColors(highlightIn, [0, 1], [COLORS.BORDER_STRONG, COLORS.PRIMARY]);
+
+  return (
+    <AbsoluteFill style={{ backgroundColor: COLORS.BG_BASE, justifyContent: "center", alignItems: "center" }}>
+      {/* Title section */}
+      <div style={{ position: "absolute", top: 180, display: "flex", flexDirection: "column", alignItems: "center", width: "100%" }}>
+        <h2 style={{ 
+          color: COLORS.TEXT_MUTED, 
+          fontSize: FONTS.SIZE_LG, 
+          fontWeight: FONTS.WEIGHT_SEMIBOLD, 
+          letterSpacing: FONTS.TRACKING_WIDER,
+          opacity: titleIn,
+          transform: `translateY(${titleY}px)`,
+          marginBottom: SPACING.PX_32,
+        }}>
+          메이븐 스마트 시스템
+        </h2>
+        <div style={{ 
+          width: 800, 
+          height: 2, 
+          backgroundColor: COLORS.BORDER_STRONG,
+          transform: `scaleX(${lineProgress})`,
+          transformOrigin: "left",
+          opacity: lineProgress > 0 ? 1 : 0
+        }} />
+      </div>
+
+      {/* 3-Phase Steps */}
+      <div style={{ display: "flex", gap: SPACING.PX_40, marginTop: 0 }}>
+        {steps.map((step, i) => {
+          const stepFrame = frame - (appearanceDelay + i * 15);
+          const stepIn = spring({ frame: Math.max(0, stepFrame), fps: 30, config: ANIMATION.SPRING_SNAPPY });
+          const stepY = interpolate(stepIn, [0, 1], [30, 0]);
+
+          const isHighlighted = i === highlightIndex && frame >= highlightStartFrame;
+
+          return (
+            <div key={i} style={{ 
+              opacity: stepIn, 
+              transform: `translateY(${stepY}px)`,
+              display: "flex", flexDirection: "column", alignItems: "center"
+            }}>
+              <div style={{ 
+                width: 140, height: 140, 
+                backgroundColor: isHighlighted ? highlightGlow : COLORS.BG_ELEVATED, 
+                border: `2px solid ${isHighlighted ? highlightBorder : COLORS.BORDER_STRONG}`,
+                display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center",
+                gap: SPACING.PX_8,
+                boxShadow: isHighlighted ? `0 0 30px ${COLORS.PRIMARY_DIM}` : EFFECTS.SHADOW_MD,
+                transition: "background-color 0.2s, box-shadow 0.2s"
+              }}>
+                <div style={{ color: isHighlighted ? COLORS.PRIMARY : COLORS.TEXT_DISABLED, fontSize: FONTS.SIZE_LG, fontWeight: FONTS.WEIGHT_BOLD }}>{step.num}</div>
+                <div style={{ color: isHighlighted ? COLORS.PRIMARY : COLORS.TEXT_BODY, fontSize: FONTS.SIZE_MD, fontWeight: FONTS.WEIGHT_BOLD }}>{step.label}</div>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </AbsoluteFill>
+  );
+};
 
 /**
  * [Scene 1 기획안]
@@ -22,70 +212,7 @@ import { CounterText } from "../components/CounterText";
  * In-Scene Animation 구성: 각 씬의 프레임 내에서 여러 단계로 애니메이션을 분할하여 구현합니다.
  */
 const Scene1: React.FC = () => {
-  const frame = useCurrentFrame();
-
-  const titleOpacity = spring({ frame, fps: 30, config: ANIMATION.SPRING_GENTLE });
-  const titleY = interpolate(titleOpacity, [0, 1], [20, 0]);
-
-  const lineProgress = spring({
-    frame: frame - 15,
-    fps: 30,
-    config: ANIMATION.SPRING_SNAPPY,
-  });
-
-  const stepStartFrame = 122; // "볼게요."
-
-  return (
-    <AbsoluteFill style={{ backgroundColor: COLORS.BG_BASE, justifyContent: "center", alignItems: "center" }}>
-      <div style={{ position: "absolute", top: 200, display: "flex", flexDirection: "column", alignItems: "center", width: "80%" }}>
-        <h2
-          style={{
-            color: COLORS.TEXT_MUTED,
-            fontSize: FONTS.SIZE_LG,
-            fontWeight: FONTS.WEIGHT_SEMIBOLD,
-            letterSpacing: FONTS.TRACKING_WIDER,
-            opacity: titleOpacity,
-            transform: `translateY(${titleY}px)`,
-            marginBottom: SPACING.PX_32,
-          }}
-        >
-          MAVEN SMART SYSTEM
-        </h2>
-        <div style={{ width: `${lineProgress * 100}%`, height: 2, backgroundColor: COLORS.BORDER_STRONG }} />
-        
-        <div style={{ display: "flex", gap: SPACING.PX_96, marginTop: SPACING.PX_96 }}>
-          {[1, 2, 3].map((num, i) => {
-            const stepFrame = frame - (stepStartFrame + i * 10);
-            const stepScale = spring({ frame: Math.max(0, stepFrame), fps: 30, config: ANIMATION.SPRING_SNAPPY });
-            const stepOpacity = interpolate(stepFrame, [0, 10], [0, 1], { extrapolateRight: "clamp" });
-
-            return (
-              <div
-                key={num}
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  width: 80,
-                  height: 80,
-                  border: `2px solid ${COLORS.BORDER_STRONG}`,
-                  borderRadius: num === 1 ? 0 : 4, // Straight edges, minimal border radius
-                  color: COLORS.TEXT_MUTED,
-                  fontSize: FONTS.SIZE_2XL,
-                  fontWeight: FONTS.WEIGHT_BOLD,
-                  opacity: stepOpacity,
-                  transform: `scale(${stepScale})`,
-                  backgroundColor: COLORS.BG_ELEVATED,
-                }}
-              >
-                0{num}
-              </div>
-            );
-          })}
-        </div>
-      </div>
-    </AbsoluteFill>
-  );
+  return <PhaseOverview highlightIndex={0} appearanceDelay={360} highlightStartFrame={527} />;
 };
 
 /**
@@ -97,72 +224,11 @@ const Scene1: React.FC = () => {
  * 화면에 노출되는 UI 텍스트는 프로그래밍 용어/회사명 등을 제외하고 모두 한국어 단어로 작성합니다.
  * In-Scene Animation 구성: 각 씬의 프레임 내에서 여러 단계로 애니메이션을 분할하여 구현합니다.
  */
+/**
+ * Scene 2 is merged into Scene 1.
+ */
 const Scene2: React.FC = () => {
-  const frame = useCurrentFrame();
-
-  const cardProgress = spring({ frame, fps: 30, config: ANIMATION.SPRING_GENTLE });
-  const cardScale = interpolate(cardProgress, [0, 1], [0.95, 1]);
-  
-  const placeholdersStartFrame = 373 - 527 + 527; // "세 가지예요."는 479f, offset from 154f is 479 - 154 = 325.
-  const stepStartFrame = 479 - 154; // "세": 479f (Scene2 starts at 154)
-
-  return (
-    <AbsoluteFill style={{ backgroundColor: COLORS.BG_BASE, justifyContent: "center", alignItems: "center" }}>
-      <div
-        style={{
-          width: 800,
-          backgroundColor: COLORS.BG_ELEVATED,
-          border: `1px solid ${COLORS.BORDER_STRONG}`,
-          boxShadow: EFFECTS.SHADOW_MD,
-          padding: SPACING.PX_96,
-          display: "flex",
-          flexDirection: "column",
-          opacity: cardProgress,
-          transform: `scale(${cardScale})`,
-        }}
-      >
-        <div style={{ display: "flex", alignItems: "center", marginBottom: SPACING.PX_64 }}>
-          <div style={{ color: COLORS.TEXT_MUTED, fontSize: FONTS.SIZE_SM, fontWeight: FONTS.WEIGHT_BOLD, letterSpacing: FONTS.TRACKING_WIDER }}>
-            PROJECT MAVEN
-          </div>
-          <div style={{ margin: `0 ${SPACING.PX_16}px`, color: COLORS.PRIMARY, fontSize: FONTS.SIZE_SM }}>→</div>
-          <div style={{ color: COLORS.PRIMARY, fontSize: FONTS.SIZE_MD, fontWeight: FONTS.WEIGHT_BOLD }}>
-            MAVEN SMART SYSTEM
-          </div>
-        </div>
-
-        <div style={{ display: "flex", flexDirection: "column", gap: SPACING.PX_32 }}>
-          {[1, 2, 3].map((num, i) => {
-            const rowFrame = frame - (stepStartFrame + i * 10);
-            const rowOpacity = interpolate(rowFrame, [0, 15], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
-            const rowX = interpolate(rowFrame, [0, 15], [20, 0], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
-
-            return (
-              <div
-                key={num}
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  padding: SPACING.PX_24,
-                  backgroundColor: COLORS.BG_BASE,
-                  border: `1px solid ${COLORS.BORDER}`,
-                  opacity: rowOpacity,
-                  transform: `translateX(${rowX}px)`,
-                }}
-              >
-                <div style={{ color: COLORS.TEXT_DISABLED, fontSize: FONTS.SIZE_LG, fontWeight: FONTS.WEIGHT_BOLD, marginRight: SPACING.PX_32 }}>
-                  0{num}
-                </div>
-                <div style={{ color: COLORS.TEXT_DISABLED, fontSize: FONTS.SIZE_MD, letterSpacing: FONTS.TRACKING_WIDER }}>
-                  ————————
-                </div>
-              </div>
-            );
-          })}
-        </div>
-      </div>
-    </AbsoluteFill>
-  );
+  return null;
 };
 
 /**
@@ -174,65 +240,11 @@ const Scene2: React.FC = () => {
  * 화면에 노출되는 UI 텍스트는 프로그래밍 용어/회사명 등을 제외하고 모두 한국어 단어로 작성합니다.
  * In-Scene Animation 구성: 각 씬의 프레임 내에서 여러 단계로 애니메이션을 분할하여 구현합니다.
  */
+/**
+ * Scene 3 is merged into Scene 1.
+ */
 const Scene3: React.FC = () => {
-  const frame = useCurrentFrame();
-
-  const highlightProgress = spring({ frame: frame - 15, fps: 30, config: ANIMATION.SPRING_SNAPPY }); // Delay slightly for transition
-  const activeColor = interpolateColors(highlightProgress, [0, 1], [COLORS.TEXT_DISABLED, COLORS.PRIMARY]);
-  const activeBg = interpolateColors(highlightProgress, [0, 1], [COLORS.BG_BASE, "rgba(0, 240, 255, 0.1)"]);
-  const activeBorder = interpolateColors(highlightProgress, [0, 1], [COLORS.BORDER, COLORS.PRIMARY]);
-
-  return (
-    <AbsoluteFill style={{ backgroundColor: COLORS.BG_BASE, justifyContent: "center", alignItems: "center" }}>
-      <div
-        style={{
-          width: 800,
-          backgroundColor: COLORS.BG_ELEVATED,
-          border: `1px solid ${COLORS.BORDER_STRONG}`,
-          boxShadow: EFFECTS.SHADOW_MD,
-          padding: SPACING.PX_96,
-          display: "flex",
-          flexDirection: "column",
-        }}
-      >
-        <div style={{ display: "flex", alignItems: "center", marginBottom: SPACING.PX_64 }}>
-          <div style={{ color: COLORS.TEXT_MUTED, fontSize: FONTS.SIZE_SM, fontWeight: FONTS.WEIGHT_BOLD, letterSpacing: FONTS.TRACKING_WIDER }}>
-            PROJECT MAVEN
-          </div>
-          <div style={{ margin: `0 ${SPACING.PX_16}px`, color: COLORS.PRIMARY, fontSize: FONTS.SIZE_SM }}>→</div>
-          <div style={{ color: COLORS.PRIMARY, fontSize: FONTS.SIZE_MD, fontWeight: FONTS.WEIGHT_BOLD }}>
-            MAVEN SMART SYSTEM
-          </div>
-        </div>
-
-        <div style={{ display: "flex", flexDirection: "column", gap: SPACING.PX_32 }}>
-          {[1, 2, 3].map((num) => {
-            const isActive = num === 1;
-            return (
-              <div
-                key={num}
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  padding: SPACING.PX_24,
-                  backgroundColor: isActive ? activeBg : COLORS.BG_BASE,
-                  border: `1px solid ${isActive ? activeBorder : COLORS.BORDER}`,
-                  boxShadow: isActive ? `0 0 10px ${activeBorder}` : "none",
-                }}
-              >
-                <div style={{ color: isActive ? activeColor : COLORS.TEXT_DISABLED, fontSize: isActive ? FONTS.SIZE_2XL : FONTS.SIZE_LG, fontWeight: FONTS.WEIGHT_BOLD, marginRight: SPACING.PX_32 }}>
-                  0{num}
-                </div>
-                <div style={{ color: isActive ? activeColor : COLORS.TEXT_DISABLED, fontSize: isActive ? FONTS.SIZE_XL : FONTS.SIZE_MD, fontWeight: isActive ? FONTS.WEIGHT_BOLD : FONTS.WEIGHT_REGULAR, letterSpacing: FONTS.TRACKING_WIDER }}>
-                  {isActive ? "보기 (DETECT)" : "————————"}
-                </div>
-              </div>
-            );
-          })}
-        </div>
-      </div>
-    </AbsoluteFill>
-  );
+  return null;
 };
 
 /**
@@ -247,88 +259,140 @@ const Scene3: React.FC = () => {
 const Scene4: React.FC = () => {
   const frame = useCurrentFrame();
 
-  const inputs = [
-    { label: "드론 영상", frameStart: 702 - 628, icon: "⌖" }, // "영상"
-    { label: "위성 사진", frameStart: 754 - 628, icon: "✧" }, // "사진"
-    { label: "레이더 데이터", frameStart: 784 - 628, icon: "⚲" }, // "레이더"
+  const droneStart = 702 - 628;
+  const satStart = 754 - 628;
+  const radarStart = 784 - 628;
+  const analyzeStart = 926 - 628;
+
+  const sources = [
+    { label: "드론 영상", start: droneStart, icon: "🛸", id: "DRONE_FEED" },
+    { label: "위성 사진", start: satStart, icon: "🛰️", id: "SAT_IMAGE" },
+    { label: "레이더 데이터", start: radarStart, icon: "📡", id: "RADAR_DATA" },
   ];
 
-  const arrowProgressStart = 820 - 628; // "데이터를"
-  const aiNodeStart = 868 - 628; // "받아서"
-  const analysisStart = 926 - 628; // "분석해요"
-
-  const aiNodeScale = spring({ frame: Math.max(0, frame - aiNodeStart), fps: 30, config: ANIMATION.SPRING_BOUNCY });
-  const pulse = Math.sin((frame - analysisStart) * 0.2) * 0.5 + 0.5;
-  const aiNodeGlow = frame > analysisStart ? `0 0 ${20 + pulse * 40}px ${COLORS.PRIMARY_GLOW}` : "none";
-
   return (
-    <AbsoluteFill style={{ backgroundColor: COLORS.BG_BASE, justifyContent: "center", alignItems: "center" }}>
-      <div style={{ display: "flex", width: "100%", maxWidth: 1000, justifyContent: "space-between", alignItems: "center" }}>
-        
-        {/* INPUT SOURCES */}
-        <div style={{ display: "flex", flexDirection: "column", gap: SPACING.PX_48, zIndex: Z.CONTENT }}>
-          {inputs.map((input, idx) => {
-            const inputScale = spring({ frame: Math.max(0, frame - input.frameStart), fps: 30, config: ANIMATION.SPRING_SNAPPY });
-            const inputOpacity = interpolate(frame - input.frameStart, [0, 10], [0, 1], { extrapolateRight: "clamp" });
-            
-            return (
-              <div
-                key={idx}
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  padding: `${SPACING.PX_16}px ${SPACING.PX_32}px`,
-                  backgroundColor: COLORS.BG_SURFACE,
-                  border: `1px solid ${COLORS.BORDER_STRONG}`,
-                  opacity: inputOpacity,
-                  transform: `scale(${inputScale})`,
-                }}
-              >
-                <span style={{ color: COLORS.PRIMARY, fontSize: FONTS.SIZE_MD, marginRight: SPACING.PX_16 }}>{input.icon}</span>
-                <span style={{ color: COLORS.TEXT_MAIN, fontSize: FONTS.SIZE_SM, fontWeight: FONTS.WEIGHT_BOLD, letterSpacing: FONTS.TRACKING_WIDER }}>
-                  {input.label}
-                </span>
-                
-                {/* Connecting Line Right */}
-                <div style={{ position: "absolute", right: -200, top: "50%", width: 200, height: 1, overflow: "hidden" }}>
-                   <div style={{ 
-                     width: "100%", 
-                     height: "100%", 
-                     backgroundColor: COLORS.PRIMARY,
-                     transform: `translateX(${-100 + interpolate(Math.max(0, frame - arrowProgressStart), [0, 15], [0, 100], { extrapolateRight: "clamp" })}%)`
-                   }} />
+    <AbsoluteFill style={{ backgroundColor: COLORS.BG_BASE, overflow: "hidden", justifyContent: "center", alignItems: "center" }}>
+      <GridOverlay cellSize={60} opacity={0.15} />
+      
+      {/* Background Decorative Glow */}
+      <div style={{
+        position: "absolute",
+        width: 1200,
+        height: 600,
+        background: EFFECTS.RADIAL_PRIMARY,
+        opacity: interpolate(frame, [analyzeStart, analyzeStart + 30], [0, 0.4], { extrapolateRight: "clamp" }),
+      }} />
+
+      <div style={{ 
+        display: "flex", 
+        gap: SPACING.PX_48, 
+        zIndex: Z.CONTENT,
+        alignItems: "center"
+      }}>
+        {sources.map((source, i) => {
+          const appear = spring({ frame: Math.max(0, frame - source.start), fps: 30, config: ANIMATION.SPRING_SNAPPY });
+          const isScanning = frame > source.start + 20;
+          const isAnalysisActive = frame >= analyzeStart;
+          
+          return (
+            <div key={i} style={{ 
+              width: 380,
+              height: 480,
+              backgroundColor: EFFECTS.GLASS_BG, 
+              backdropFilter: EFFECTS.GLASS_BLUR,
+              border: `1px solid ${isAnalysisActive ? COLORS.PRIMARY : COLORS.BORDER_STRONG}`,
+              borderRadius: SPACING.RADIUS_LG,
+              transform: `translateY(${interpolate(appear, [0, 1], [40, 0])}px) scale(${appear})`,
+              opacity: appear,
+              display: "flex", 
+              flexDirection: "column",
+              justifyContent: "center",
+              alignItems: "center",
+              padding: SPACING.PX_40,
+              gap: SPACING.PX_32,
+              boxShadow: isAnalysisActive ? EFFECTS.GLOW_MD : EFFECTS.SHADOW_LG,
+              transition: "all 0.5s ease-out"
+            }}>
+              {/* Type label at top */}
+              <div style={{ 
+                position: "absolute", 
+                top: 24, 
+                left: 24, 
+                color: COLORS.PRIMARY, 
+                fontSize: 14, 
+                fontFamily: FONTS.MONO,
+                letterSpacing: 2,
+                opacity: 0.8
+              }}>
+                [ {source.id} ]
+              </div>
+
+              {/* Central Icon */}
+              <div style={{ 
+                fontSize: 100, 
+                filter: isAnalysisActive ? `drop-shadow(0 0 20px ${COLORS.PRIMARY_GLOW})` : "none",
+                transform: isAnalysisActive ? `scale(${1 + Math.sin(frame * 0.1) * 0.05})` : "none",
+                transition: "all 0.3s"
+              }}>
+                {source.icon}
+              </div>
+
+              {/* Label */}
+              <div style={{ textAlign: "center" }}>
+                <div style={{ 
+                  color: COLORS.TEXT_MAIN, 
+                  fontSize: 36, 
+                  fontWeight: FONTS.WEIGHT_EXTRABOLD,
+                  marginBottom: 8,
+                  letterSpacing: -0.5
+                }}>
+                  {source.label}
+                </div>
+                <div style={{ 
+                  color: COLORS.TEXT_MUTED, 
+                  fontSize: 16, 
+                  fontFamily: FONTS.MONO,
+                  letterSpacing: 1
+                }}>
+                  STATUS: {isAnalysisActive ? "ANALYZING..." : "READY"}
                 </div>
               </div>
-            );
-          })}
-        </div>
 
-        {/* AI NODE */}
-        <div
-          style={{
-            position: "relative",
-            width: 160,
-            height: 160,
-            borderRadius: "50%",
-            border: `2px solid ${COLORS.PRIMARY}`,
-            backgroundColor: COLORS.BG_ELEVATED,
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            transform: `scale(${aiNodeScale})`,
-            boxShadow: aiNodeGlow,
-            zIndex: Z.CONTENT
-          }}
-        >
-           <span style={{ color: COLORS.PRIMARY, fontSize: FONTS.SIZE_MD, fontWeight: FONTS.WEIGHT_BOLD, letterSpacing: FONTS.TRACKING_WIDER }}>
-             AI 코어
-           </span>
-        </div>
+              {/* Decorative scanline or progress bar */}
+              <div style={{ 
+                width: "100%", 
+                height: 2, 
+                backgroundColor: COLORS.BORDER_STRONG,
+                position: "relative",
+                overflow: "hidden"
+              }}>
+                {isAnalysisActive && (
+                  <div style={{ 
+                    position: "absolute",
+                    top: 0,
+                    left: 0,
+                    width: "100%",
+                    height: "100%",
+                    backgroundColor: COLORS.PRIMARY,
+                    transform: `translateX(${-100 + (frame * 2 % 200)}%)`,
+                    boxShadow: `0 0 10px ${COLORS.PRIMARY}`
+                  }} />
+                )}
+              </div>
 
+              <ScanLine startFrame={source.start} sweepDuration={120} color={COLORS.PRIMARY_MID} loop />
+            </div>
+          );
+        })}
       </div>
+
+      {/* Subtle bottom gradient */}
+      <div style={{ position: "absolute", bottom: 0, width: "100%", height: 200, background: EFFECTS.FADE_UP, opacity: 0.5, pointerEvents: "none" }} />
     </AbsoluteFill>
   );
 };
+
+
 
 /**
  * [Scene 5 기획안]
@@ -348,16 +412,11 @@ const Scene5: React.FC = () => {
   return (
     <AbsoluteFill style={{ backgroundColor: COLORS.BG_BASE, justifyContent: "center", alignItems: "center" }}>
       <QuotePanel startFrame={0}>
-        <div style={{ color: COLORS.TEXT_MUTED, fontSize: FONTS.SIZE_SM, letterSpacing: FONTS.TRACKING_WIDER, marginBottom: SPACING.PX_16 }}>
+        <div style={{ width: 600, color: COLORS.TEXT_MUTED, fontSize: FONTS.SIZE_SM, letterSpacing: FONTS.TRACKING_WIDER, marginBottom: SPACING.PX_16 }}>
           질의 1:
         </div>
         <div style={{ color: COLORS.TEXT_MAIN, fontSize: FONTS.SIZE_MD, fontWeight: FONTS.WEIGHT_MEDIUM, lineHeight: FONTS.LEADING_LOOSE }}>
           <TypewriterText text="저기 움직이는 거 차량이야, 사람이야?" startFrame={0} framesPerChar={2} />
-        </div>
-        <div style={{ marginTop: SPACING.PX_32, display: "flex", gap: SPACING.PX_16, opacity: optionsOpacity }}>
-           <div style={{ padding: `${SPACING.PX_8}px ${SPACING.PX_16}px`, border: `1px solid ${COLORS.BORDER_STRONG}`, color: COLORS.TEXT_BODY, fontSize: FONTS.SIZE_SM }}>[차량]</div>
-           <div style={{ color: COLORS.TEXT_MUTED, fontSize: FONTS.SIZE_SM, display: "flex", alignItems: "center" }}>vs</div>
-           <div style={{ padding: `${SPACING.PX_8}px ${SPACING.PX_16}px`, border: `1px solid ${COLORS.BORDER_STRONG}`, color: COLORS.TEXT_BODY, fontSize: FONTS.SIZE_SM }}>[사람]</div>
         </div>
       </QuotePanel>
     </AbsoluteFill>
@@ -383,7 +442,7 @@ const Scene6: React.FC = () => {
   return (
     <AbsoluteFill style={{ backgroundColor: COLORS.BG_BASE, justifyContent: "center", alignItems: "center" }}>
       <QuotePanel startFrame={0}>
-        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", gap: SPACING.PX_32 }}>
+        <div style={{ width: 600, display: "flex", justifyContent: "space-between", alignItems: "flex-end", gap: SPACING.PX_32 }}>
           <div>
             <div style={{ color: COLORS.TEXT_MUTED, fontSize: FONTS.SIZE_SM, letterSpacing: FONTS.TRACKING_WIDER, marginBottom: SPACING.PX_16 }}>
               질의 2:
@@ -391,26 +450,6 @@ const Scene6: React.FC = () => {
             <div style={{ color: COLORS.TEXT_MAIN, fontSize: FONTS.SIZE_MD, fontWeight: FONTS.WEIGHT_MEDIUM, lineHeight: FONTS.LEADING_LOOSE }}>
               <TypewriterText text="저 건물에서 열 감지가 되는데 뭐가 있는 거지?" startFrame={0} />
             </div>
-          </div>
-          
-          {/* Heat signature bar */}
-          <div style={{ 
-            width: 8, 
-            height: 120, 
-            backgroundColor: COLORS.BG_SURFACE, 
-            border: `1px solid ${COLORS.BORDER}`,
-            position: "relative",
-            overflow: "hidden"
-          }}>
-            <div style={{
-              position: "absolute",
-              bottom: 0,
-              width: "100%",
-              height: `${heatHeight * 100}%`,
-              background: `linear-gradient(to top, ${COLORS.WARNING}, ${COLORS.NEGATIVE})`,
-              boxShadow: EFFECTS.GLOW_ACCENT,
-              opacity: 0.8 + pulse * 0.2
-            }} />
           </div>
         </div>
       </QuotePanel>
@@ -477,76 +516,7 @@ const Scene7: React.FC = () => {
  * In-Scene Animation 구성: 각 씬의 프레임 내에서 여러 단계로 애니메이션을 분할하여 구현합니다.
  */
 const Scene8: React.FC = () => {
-  const frame = useCurrentFrame();
-
-  const activeBg = "rgba(0, 240, 255, 0.1)";
-
-  return (
-    <AbsoluteFill style={{ backgroundColor: COLORS.BG_BASE, justifyContent: "center", alignItems: "center" }}>
-      <div
-        style={{
-          width: 800,
-          backgroundColor: COLORS.BG_ELEVATED,
-          border: `1px solid ${COLORS.BORDER_STRONG}`,
-          boxShadow: EFFECTS.SHADOW_MD,
-          padding: SPACING.PX_96,
-          display: "flex",
-          flexDirection: "column",
-        }}
-      >
-        <div style={{ display: "flex", alignItems: "center", marginBottom: SPACING.PX_64 }}>
-          <div style={{ color: COLORS.TEXT_MUTED, fontSize: FONTS.SIZE_SM, fontWeight: FONTS.WEIGHT_BOLD, letterSpacing: FONTS.TRACKING_WIDER }}>
-            PROJECT MAVEN
-          </div>
-          <div style={{ margin: `0 ${SPACING.PX_16}px`, color: COLORS.PRIMARY, fontSize: FONTS.SIZE_SM }}>→</div>
-          <div style={{ color: COLORS.PRIMARY, fontSize: FONTS.SIZE_MD, fontWeight: FONTS.WEIGHT_BOLD }}>
-            MAVEN SMART SYSTEM
-          </div>
-        </div>
-
-        <div style={{ display: "flex", flexDirection: "column", gap: SPACING.PX_32 }}>
-          {[1, 2, 3].map((num) => {
-            const isCompleted = num === 1;
-            const isActive = num === 2;
-
-            const iconScale = spring({ frame: Math.max(0, frame - 15), fps: 30, config: ANIMATION.SPRING_SNAPPY });
-            
-            return (
-              <div
-                key={num}
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  padding: SPACING.PX_24,
-                  backgroundColor: isActive ? activeBg : COLORS.BG_BASE,
-                  border: `1px solid ${isActive ? COLORS.PRIMARY : COLORS.BORDER}`,
-                  boxShadow: isActive ? `0 0 10px ${COLORS.PRIMARY}` : "none",
-                }}
-              >
-                <div style={{ 
-                  color: isActive ? COLORS.PRIMARY : (isCompleted ? COLORS.SECONDARY : COLORS.TEXT_DISABLED), 
-                  fontSize: isActive ? FONTS.SIZE_2XL : FONTS.SIZE_LG, 
-                  fontWeight: FONTS.WEIGHT_BOLD, 
-                  marginRight: SPACING.PX_32,
-                  transform: isActive ? `scale(${iconScale})` : "scale(1)",
-                }}>
-                  0{num}
-                </div>
-                <div style={{ 
-                  color: isActive ? COLORS.PRIMARY : (isCompleted ? COLORS.SECONDARY : COLORS.TEXT_DISABLED), 
-                  fontSize: isActive ? FONTS.SIZE_XL : FONTS.SIZE_MD, 
-                  fontWeight: isActive ? FONTS.WEIGHT_BOLD : FONTS.WEIGHT_REGULAR, 
-                  letterSpacing: FONTS.TRACKING_WIDER 
-                }}>
-                  {isActive ? "연결 (CORRELATE)" : (isCompleted ? "보기 (DETECT)" : "————————")}
-                </div>
-              </div>
-            );
-          })}
-        </div>
-      </div>
-    </AbsoluteFill>
-  );
+  return <PhaseOverview highlightIndex={1} appearanceDelay={0} highlightStartFrame={0} />;
 };
 
 /**
@@ -594,75 +564,171 @@ const Scene9: React.FC = () => {
  * 화면에 노출되는 UI 텍스트는 프로그래밍 용어/회사명 등을 제외하고 모두 한국어 단어로 작성합니다.
  * In-Scene Animation 구성: 각 씬의 프레임 내에서 여러 단계로 애니메이션을 분할하여 구현합니다.
  */
+
+
 const Scene10: React.FC = () => {
   const frame = useCurrentFrame();
 
-  const ipStart = 1588 - 1588; // 0
-  const snsStart = 1622 - 1588; // 34
-  const gpsStart = 1721 - 1588; // 133
-  const analyzeStart = 1852 - 1588; // 264
+  const ipStart = 0;
+  const snsStart = 1622 - 1588; 
+  const gpsStart = 1721 - 1588; 
+  const scrapeStart = 1792 - 1588;
+  const analyzeStart = 1852 - 1588;
 
+  // Layout constants
+  const CONTAINER_WIDTH = 1200;
+  const NODE_WIDTH = 320;
+  const CORE_SIZE = 280;
+  
   const sources = [
-    { label: "IP 주소", start: ipStart, y: -200 },
-    { label: "SNS 태그", start: snsStart, y: 0 },
-    { label: "GPS 데이터", start: gpsStart, y: 200 },
+    { label: "IP 주소", start: ipStart, icon: "🌐", y: -180 },
+    { label: "SNS 태그", start: snsStart, icon: "📍", y: 0 },
+    { label: "GPS 데이터", start: gpsStart, icon: "📡", y: 180 },
   ];
 
-  const pulse = Math.sin((frame - analyzeStart) * 0.3) * 0.5 + 0.5;
-  const centralGlow = frame > analyzeStart ? `0 0 ${30 + pulse * 40}px ${COLORS.PRIMARY_GLOW}` : "none";
+  // Starting point for lines (right edge of nodes)
+  const lineStartX = (1920 - CONTAINER_WIDTH) / 2 + NODE_WIDTH;
+  // Ending point for lines (center of AI Core)
+  const lineEndX = (1920 + CONTAINER_WIDTH) / 2 - CORE_SIZE / 2;
+  const centerY = 1080 / 2;
 
   return (
-    <AbsoluteFill style={{ backgroundColor: COLORS.BG_BASE, justifyContent: "center", alignItems: "center" }}>
-      <div style={{ position: "relative", width: 800, height: 600, display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+    <AbsoluteFill style={{ backgroundColor: COLORS.BG_BASE, overflow: "hidden" }}>
+      <GridOverlay cellSize={40} opacity={0.15} />
+      
+      {/* Radial Background Glow - Centered on AI Core */}
+      <div style={{
+        position: "absolute",
+        left: lineEndX - 400,
+        top: centerY - 400,
+        width: 800,
+        height: 800,
+        background: EFFECTS.RADIAL_PRIMARY,
+        opacity: interpolate(frame, [analyzeStart, analyzeStart + 30], [0, 0.4], { extrapolateRight: "clamp" }),
+      }} />
+
+      <div style={{ position: "relative", width: "100%", height: "100%" }}>
         
-        <div style={{ display: "flex", flexDirection: "column", gap: SPACING.PX_48, width: 250 }}>
+        {/* Connection Lines */}
+        <svg style={{ position: "absolute", inset: 0, width: "100%", height: "100%", pointerEvents: "none" }}>
+          {sources.map((source, i) => {
+            const isVisible = frame > source.start + 15;
+            const lineIn = spring({ frame: Math.max(0, frame - (source.start + 15)), fps: 30, config: ANIMATION.SPRING_SNAPPY });
+            
+            const startY = centerY + source.y;
+            const endY = centerY;
+
+            return (
+              <g key={i}>
+                <line 
+                  x1={lineStartX} y1={startY} 
+                  x2={interpolate(lineIn, [0, 1], [lineStartX, lineEndX])} 
+                  y2={interpolate(lineIn, [0, 1], [startY, endY])}
+                  stroke={COLORS.PRIMARY_MID} strokeWidth="1.5"
+                  strokeDasharray="4 4"
+                  opacity={isVisible ? 0.4 : 0}
+                />
+              </g>
+            );
+          })}
+        </svg>
+
+        {/* Data Packets */}
+        {sources.map((source, i) => {
+           const isScraping = frame >= scrapeStart;
+           if (!isScraping) return null;
+           
+           return [0, 15, 30].map(delay => (
+             <DataPacket 
+               key={`${i}-${delay}`}
+               frame={frame}
+               startFrame={scrapeStart}
+               delay={delay + i * 5}
+               endFrame={analyzeStart + 120}
+               color={COLORS.PRIMARY}
+               path={{ 
+                 x1: lineStartX, 
+                 y1: centerY + source.y, 
+                 x2: lineEndX, 
+                 y2: centerY 
+               }}
+             />
+           ));
+        })}
+
+        {/* Source Nodes Container */}
+        <div style={{ 
+          position: "absolute", 
+          left: (1920 - CONTAINER_WIDTH) / 2, 
+          top: 0, 
+          height: "100%", 
+          display: "flex", 
+          flexDirection: "column", 
+          justifyContent: "center", 
+          gap: 100 
+        }}>
           {sources.map((source, i) => {
             const appear = spring({ frame: Math.max(0, frame - source.start), fps: 30, config: ANIMATION.SPRING_SNAPPY });
+            const isScanned = frame > source.start + 30;
+            
             return (
               <div key={i} style={{ 
-                position: "relative",
-                padding: SPACING.PX_16, 
-                backgroundColor: COLORS.BG_SURFACE, 
-                border: `1px solid ${COLORS.BORDER}`,
-                transform: `scale(${appear})`,
+                width: NODE_WIDTH,
+                height: 90,
+                backgroundColor: EFFECTS.GLASS_BG, 
+                backdropFilter: EFFECTS.GLASS_BLUR,
+                border: `1px solid ${COLORS.BORDER_STRONG}`,
+                borderRadius: SPACING.RADIUS_MD,
+                transform: `translateX(${interpolate(appear, [0, 1], [-40, 0])}px) scale(${appear})`,
                 opacity: appear,
-                display: "flex", justifyContent: "center"
+                display: "flex", alignItems: "center",
+                padding: "0 28px",
+                gap: 20,
+                boxShadow: isScanned ? `0 0 20px ${COLORS.PRIMARY_DIM}` : EFFECTS.SHADOW_MD,
               }}>
-                <span style={{ color: COLORS.TEXT_MAIN, fontSize: FONTS.SIZE_SM, fontWeight: FONTS.WEIGHT_BOLD }}>
-                  {source.label}
-                </span>
-
-                {/* 연결선 */}
-                <svg style={{ position: "absolute", left: "100%", top: "50%", width: 300, height: 2, overflow: "visible" }}>
-                  <line 
-                    x1="0" y1="0" 
-                    x2={interpolate(frame - source.start - 10, [0, 20], [0, 300], { extrapolateLeft: "clamp", extrapolateRight: "clamp" })} 
-                    y2={source.y === 0 ? 0 : -source.y} // 중앙 AI를 향하게
-                    stroke={COLORS.PRIMARY} strokeWidth="2"
-                    opacity={frame > source.start + 10 ? 1 : 0}
-                  />
-                </svg>
+                <div style={{ fontSize: 36, opacity: 0.9 }}>{source.icon}</div>
+                <div style={{ display: "flex", flexDirection: "column" }}>
+                  <div style={{ color: COLORS.TEXT_MUTED, fontSize: 14, letterSpacing: 1.5, fontFamily: FONTS.MONO }}>SOURCE_0{i+1}</div>
+                  <div style={{ color: COLORS.TEXT_MAIN, fontSize: 28, fontWeight: FONTS.WEIGHT_BOLD }}>
+                    {source.label}
+                  </div>
+                </div>
+                {isScanned && (
+                  <div style={{ 
+                    position: "absolute", 
+                    right: 16, top: 16, 
+                    width: 8, height: 8, 
+                    borderRadius: "50%", 
+                    backgroundColor: COLORS.PRIMARY, 
+                    boxShadow: `0 0 10px ${COLORS.PRIMARY}`,
+                    animation: "pulse 2s infinite"
+                  }} />
+                )}
+                <ScanLine startFrame={source.start} sweepDuration={80} color={COLORS.PRIMARY_MID} loop />
               </div>
             );
           })}
         </div>
 
-        {/* AI 중앙 노드 */}
+        {/* AI Core Container */}
         <div style={{ 
-          width: 150, height: 150, 
-          borderRadius: "50%", 
-          backgroundColor: COLORS.BG_ELEVATED,
-          border: `2px solid ${COLORS.PRIMARY}`,
-          display: "flex", justifyContent: "center", alignItems: "center",
-          boxShadow: centralGlow,
-          zIndex: Z.CONTENT
+          position: "absolute", 
+          left: (1920 + CONTAINER_WIDTH) / 2 - CORE_SIZE, 
+          top: "50%", 
+          transform: "translateY(-50%)" 
         }}>
-           <span style={{ color: COLORS.PRIMARY, fontSize: FONTS.SIZE_MD, fontWeight: FONTS.WEIGHT_BOLD }}>
-             AI 코어
-           </span>
+           <AICore frame={frame} pulseStart={analyzeStart} />
         </div>
 
       </div>
+      
+      {/* Visual Depth: Vignette */}
+      <div style={{ 
+        position: "absolute", 
+        inset: 0, 
+        background: "radial-gradient(circle at center, transparent 40%, rgba(5,8,16,0.4) 100%)",
+        pointerEvents: "none" 
+      }} />
     </AbsoluteFill>
   );
 };
@@ -794,75 +860,7 @@ const Scene12: React.FC = () => {
  * In-Scene Animation 구성: 각 씬의 프레임 내에서 여러 단계로 애니메이션을 분할하여 구현합니다.
  */
 const Scene13: React.FC = () => {
-  const frame = useCurrentFrame();
-  const activeBg = "rgba(0, 240, 255, 0.1)";
-
-  return (
-    <AbsoluteFill style={{ backgroundColor: COLORS.BG_BASE, justifyContent: "center", alignItems: "center" }}>
-      <div
-        style={{
-          width: 800,
-          backgroundColor: COLORS.BG_ELEVATED,
-          border: `1px solid ${COLORS.BORDER_STRONG}`,
-          boxShadow: EFFECTS.SHADOW_MD,
-          padding: SPACING.PX_96,
-          display: "flex",
-          flexDirection: "column",
-        }}
-      >
-        <div style={{ display: "flex", alignItems: "center", marginBottom: SPACING.PX_64 }}>
-          <div style={{ color: COLORS.TEXT_MUTED, fontSize: FONTS.SIZE_SM, fontWeight: FONTS.WEIGHT_BOLD, letterSpacing: FONTS.TRACKING_WIDER }}>
-            PROJECT MAVEN
-          </div>
-          <div style={{ margin: `0 ${SPACING.PX_16}px`, color: COLORS.PRIMARY, fontSize: FONTS.SIZE_SM }}>→</div>
-          <div style={{ color: COLORS.PRIMARY, fontSize: FONTS.SIZE_MD, fontWeight: FONTS.WEIGHT_BOLD }}>
-            MAVEN SMART SYSTEM
-          </div>
-        </div>
-
-        <div style={{ display: "flex", flexDirection: "column", gap: SPACING.PX_32 }}>
-          {[1, 2, 3].map((num) => {
-            const isCompleted = num === 1 || num === 2;
-            const isActive = num === 3;
-
-            const iconScale = spring({ frame: Math.max(0, frame - 15), fps: 30, config: ANIMATION.SPRING_SNAPPY });
-            
-            return (
-              <div
-                key={num}
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  padding: SPACING.PX_24,
-                  backgroundColor: isActive ? activeBg : COLORS.BG_BASE,
-                  border: `1px solid ${isActive ? COLORS.PRIMARY : COLORS.BORDER}`,
-                  boxShadow: isActive ? `0 0 10px ${COLORS.PRIMARY}` : "none",
-                }}
-              >
-                <div style={{ 
-                  color: isActive ? COLORS.PRIMARY : (isCompleted ? COLORS.SECONDARY : COLORS.TEXT_DISABLED), 
-                  fontSize: isActive ? FONTS.SIZE_2XL : FONTS.SIZE_LG, 
-                  fontWeight: FONTS.WEIGHT_BOLD, 
-                  marginRight: SPACING.PX_32,
-                  transform: isActive ? `scale(${iconScale})` : "scale(1)",
-                }}>
-                  0{num}
-                </div>
-                <div style={{ 
-                  color: isActive ? COLORS.PRIMARY : (isCompleted ? COLORS.SECONDARY : COLORS.TEXT_DISABLED), 
-                  fontSize: isActive ? FONTS.SIZE_XL : FONTS.SIZE_MD, 
-                  fontWeight: isActive ? FONTS.WEIGHT_BOLD : FONTS.WEIGHT_REGULAR, 
-                  letterSpacing: FONTS.TRACKING_WIDER 
-                }}>
-                  {isActive ? "보고 (REPORT)" : (num === 1 ? "보기 (DETECT)" : "연결 (CORRELATE)")}
-                </div>
-              </div>
-            );
-          })}
-        </div>
-      </div>
-    </AbsoluteFill>
-  );
+  return <PhaseOverview highlightIndex={2} appearanceDelay={0} highlightStartFrame={0} />;
 };
 
 /**
@@ -1579,14 +1577,8 @@ const Scene28: React.FC = () => {
 export const Sequences: React.FC = () => {
   return (
     <AbsoluteFill>
-      <Sequence from={0} durationInFrames={154}>
+      <Sequence from={0} durationInFrames={628}>
         <Scene1 />
-      </Sequence>
-      <Sequence from={154} durationInFrames={373}>
-        <Scene2 />
-      </Sequence>
-      <Sequence from={527} durationInFrames={101}>
-        <Scene3 />
       </Sequence>
       <Sequence from={628} durationInFrames={298}>
         <Scene4 />
