@@ -781,7 +781,6 @@ const Scene17: React.FC = () => {
             <div style={{ padding: `${SPACING.PX_24}px ${SPACING.PX_32}px`, backgroundColor: COLORS.BG_SURFACE, border: `${SPACING.BORDER_NORMAL}px solid ${COLORS.SECONDARY}`, minWidth: 280 }}>
               <div style={{ color: COLORS.TEXT_MUTED, fontSize: FONTS.SIZE_SM, fontFamily: FONTS.MONO, letterSpacing: `${FONTS.TRACKING_WIDER}em`, marginBottom: SPACING.PX_12 }}>기술 제공사</div>
               <div style={{ color: COLORS.TEXT_MAIN, fontSize: FONTS.SIZE_LG, fontWeight: FONTS.WEIGHT_BOLD, fontFamily: FONTS.DISPLAY }}>Google</div>
-              <div style={{ color: COLORS.TEXT_MUTED, fontSize: FONTS.SIZE_SM, fontFamily: FONTS.MONO, marginTop: SPACING.PX_8 }}>AI / Machine Learning</div>
             </div>
           </div>
         </div>
@@ -1327,12 +1326,12 @@ export const Sequences: React.FC = () => {
       <Sequence from={1843} durationInFrames={239}>
         <Scene13 />
       </Sequence>
-      <Sequence from={2082} durationInFrames={276}>
+      <Sequence from={2082} durationInFrames={421}>
         <Scene14 />
       </Sequence>
-      <Sequence from={2358} durationInFrames={145}>
+      {/* <Sequence from={2358} durationInFrames={145}>
         <Scene16 />
-      </Sequence>
+      </Sequence> */}
       <Sequence from={2503} durationInFrames={148}>
         <Scene17 />
       </Sequence>
