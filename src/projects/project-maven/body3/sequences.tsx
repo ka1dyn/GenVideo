@@ -1,261 +1,701 @@
 import React from "react";
-import {
-  AbsoluteFill,
-  Sequence,
-} from "remotion";
+import { AbsoluteFill, Sequence, spring, interpolateColors, interpolate, useCurrentFrame, useVideoConfig } from "remotion";
 import { BRAND, COLORS, EFFECTS, FONTS, SPACING, ANIMATION, Z } from "../theme";
+import { FlowBox } from "../components/FlowBox";
+import { DrawLine } from "../components/DrawLine";
+import { FlashOverlay } from "../components/FlashOverlay";
+import { StatusTag } from "../components/StatusTag";
+import { CounterText } from "../components/CounterText";
+import { TimelineBar } from "../components/TimelineBar";
+import { QuotePanel } from "../components/QuotePanel";
 
 /**
  * [Scene 1 기획안]
- * 원본 텍스트: 올해 2월, 미국이 이란을 공격했어요.
- * 단어 등장 타이밍: "올해": 0f, "2월,": 31f, "미국이": 47f, "이란을": 83f, "공격했어요.": 109f
- * 비주얼 컨셉: BG_VOID 배경에서 BG_BASE로 전환. 화면 상단에 ACCENT 배경의 [BREAKING] 속보 레이블이 좌→우 slide-in. 그 아래 "2025.02" 날짜 레이블이 TEXT_MUTED TRACKING_WIDER로 등장. 중앙에 두 레이블 [US] ——→ [IR]이 좌→우 연결선과 함께 등장. "공격했어요." 단어에서 화살표 끝부분 NEGATIVE 색 flash.
- * 하단 150px은 자막 영역이므로, 텍스트와 핵심 그래픽은 이 영역을 침범하지 않도록 주의하세요.
- * 화면에 노출되는 UI 텍스트는 프로그래밍 용어/회사명 등을 제외하고 모두 한국어 단어로 작성합니다.
- * In-Scene Animation 구성: 각 씬의 프레임 내에서 여러 단계로 애니메이션을 분할하여 구현합니다.
+ * ...
  */
 const Scene1: React.FC = () => {
-  return <AbsoluteFill style={{ backgroundColor: COLORS.BG_BASE }}></AbsoluteFill>;
+  const frame = useCurrentFrame();
+  const { fps } = useVideoConfig();
+
+  const bgInterpolation = interpolateColors(
+    frame,
+    [0, 20],
+    [COLORS.BG_VOID, COLORS.BG_BASE]
+  );
+
+  const breakingEnter = spring({ frame: frame - 0, fps, config: ANIMATION.SPRING_SNAPPY });
+  const dateEnter = spring({ frame: frame - 31, fps, config: ANIMATION.SPRING_GENTLE });
+
+  return (
+    <AbsoluteFill style={{ backgroundColor: bgInterpolation }}>
+      {/* Top Section */}
+      <div style={{ position: "absolute", top: 100, left: 0, right: 0, display: "flex", flexDirection: "column", alignItems: "center", gap: SPACING.PX_16 }}>
+        <div style={{ transform: `translateX(${(1 - breakingEnter) * -100}px)`, opacity: breakingEnter }}>
+          <StatusTag label="속보" bgColor={COLORS.ACCENT} textColor={COLORS.BG_VOID} borderColor={COLORS.ACCENT} showDot dotColor={COLORS.BG_VOID} startFrame={0} />
+        </div>
+        <div style={{ transform: `translateY(${(1 - dateEnter) * 10}px)`, opacity: dateEnter, fontFamily: FONTS.MONO, fontSize: FONTS.SIZE_SM, color: COLORS.TEXT_MUTED, letterSpacing: FONTS.TRACKING_WIDER }}>
+          2025.02
+        </div>
+      </div>
+
+      {/* Center Flow */}
+      <div style={{ position: "absolute", top: "40%", left: 0, width: "100%", display: "flex", justifyContent: "center", alignItems: "center", gap: 0 }}>
+        <div style={{ zIndex: Z.CONTENT + 1 }}>
+          <FlowBox title="미국" subtitle="US" borderColor={COLORS.PRIMARY} isActive={false} delay={47} />
+        </div>
+        <div style={{ width: 250, display: "flex", alignItems: "center", margin: "0 -20px", zIndex: Z.CONTENT }}>
+           <DrawLine startFrame={47} durationInFrames={36} color={COLORS.TEXT_MUTED} thickness={SPACING.BORDER_THICK} direction="ltr" />
+        </div>
+        <div style={{ zIndex: Z.CONTENT + 1 }}>
+          <FlowBox title="이란" subtitle="IR" borderColor={COLORS.NEGATIVE} isActive={frame >= 109} delay={83} glowColor={COLORS.NEGATIVE_DIM} />
+        </div>
+      </div>
+
+      {frame >= 109 && <FlashOverlay startFrame={109} durationInFrames={15} color={COLORS.NEGATIVE} maxOpacity={0.15} />}
+    </AbsoluteFill>
+  );
 };
 
 /**
  * [Scene 2 기획안]
- * 원본 텍스트: 외신 보도에 따르면 첫 24시간 안에 이란의 1,000개가 넘는 표적을 타격했다고 합니다.
- * 단어 등장 타이밍: "외신": 164f, "보도에": 199f, "따르면": 223f, "첫": 260f, "24시간": 281f, "안에": 323f, "이란의": 349f, "1,000개가": 369f, "넘는": 376f, "표적을": 389f, "타격했다고": 401f, "합니다.": 424f
- * 비주얼 컨셉: 화면 상단 바에 "1H" 타이머가 카운트다운. 중앙에 "1,000+" 숫자가 SIZE_4XL WEIGHT_EXTRABOLD NEGATIVE 색 GLOW_ACCENT 효과로 counter up 등장. "1,000개가" 단어 등장 순간 최종값 정지. 측면에 "TARGETS STRUCK" TEXT_MUTED 레이블. 아래 출처: "외신 보도" SOURCE 레이블(TEXT_DISABLED SIZE_XS).
- * 하단 150px은 자막 영역이므로, 텍스트와 핵심 그래픽은 이 영역을 침범하지 않도록 주의하세요.
- * 화면에 노출되는 UI 텍스트는 프로그래밍 용어/회사명 등을 제외하고 모두 한국어 단어로 작성합니다.
- * In-Scene Animation 구성: 각 씬의 프레임 내에서 여러 단계로 애니메이션을 분할하여 구현합니다.
+ * ...
  */
 const Scene2: React.FC = () => {
-  return <AbsoluteFill></AbsoluteFill>;
+  const frame = useCurrentFrame();
+  const { fps } = useVideoConfig();
+
+  const timerEnter = spring({ frame: frame - 0, fps, config: ANIMATION.SPRING_GENTLE });
+  const counterEnter = spring({ frame: frame - 117, fps, config: ANIMATION.SPRING_SNAPPY });
+  const labelEnter = spring({ frame: frame - 205, fps, config: ANIMATION.SPRING_GENTLE });
+
+  return (
+    <AbsoluteFill style={{ backgroundColor: COLORS.BG_BASE }}>
+      {/* Top Timer Bar */}
+      <div style={{ position: "absolute", top: 60, width: "100%", display: "flex", justifyContent: "center", transform: `translateY(${(1 - timerEnter) * -20}px)`, opacity: timerEnter }}>
+         <StatusTag label="1H 카운트다운" borderColor={COLORS.NEGATIVE} textColor={COLORS.NEGATIVE} showDot dotColor={COLORS.NEGATIVE} bgColor={COLORS.NEGATIVE_DIM} />
+      </div>
+
+      <div style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", height: "100%", transform: `translateY(-30px)` }}>
+        <div style={{ transform: `scale(${counterEnter})`, opacity: counterEnter, textShadow: EFFECTS.GLOW_ACCENT }}>
+          <CounterText from={0} to={1000} startFrame={117} durationInFrames={88} suffix="+" color={COLORS.NEGATIVE} fontSize={FONTS.SIZE_4XL} fontWeight={FONTS.WEIGHT_EXTRABOLD} />
+        </div>
+        
+        <div style={{ transform: `translateY(${(1 - counterEnter) * 10}px)`, opacity: counterEnter, fontFamily: FONTS.PRIMARY, fontSize: FONTS.SIZE_SM, color: COLORS.TEXT_MUTED, letterSpacing: FONTS.TRACKING_WIDER, marginTop: SPACING.PX_16 }}>
+          타격된 표적
+        </div>
+      </div>
+
+      {/* Source */}
+      <div style={{ position: "absolute", bottom: 180, right: 60, opacity: labelEnter }}>
+        <div style={{ fontFamily: FONTS.MONO, fontSize: FONTS.SIZE_XS, color: COLORS.TEXT_DISABLED }}>
+          출처: 외신 보도
+        </div>
+      </div>
+    </AbsoluteFill>
+  );
 };
 
 /**
  * [Scene 3 기획안]
- * 원본 텍스트: 1,000개를 하루 만에요.
- * 단어 등장 타이밍: "1,000개를": 488f, "하루": 499f, "만에요.": 539f
- * 비주얼 컨셉: "1,000" 숫자가 중앙에 유지되며 그 아래 "÷ 24H" 연산식이 TEXT_MUTED로 등장. 결과값 "= 41+/hr" 가 PRIMARY 색으로 fade-in. 압축된 임팩트 수치 표현.
- * 하단 150px은 자막 영역이므로, 텍스트와 핵심 그래픽은 이 영역을 침범하지 않도록 주의하세요.
- * 화면에 노출되는 UI 텍스트는 프로그래밍 용어/회사명 등을 제외하고 모두 한국어 단어로 작성합니다.
- * In-Scene Animation 구성: 각 씬의 프레임 내에서 여러 단계로 애니메이션을 분할하여 구현합니다.
+ * ...
  */
 const Scene3: React.FC = () => {
-  return <AbsoluteFill></AbsoluteFill>;
+  const frame = useCurrentFrame();
+  const { fps } = useVideoConfig();
+
+  const divisionEnter = spring({ frame: frame - 11, fps, config: ANIMATION.SPRING_SNAPPY });
+  const resultEnter = spring({ frame: frame - 51, fps, config: ANIMATION.SPRING_BOUNCY });
+
+  return (
+    <AbsoluteFill style={{ backgroundColor: COLORS.BG_BASE }}>
+      <div style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", height: "100%", transform: `translateY(-30px)` }}>
+        <div style={{ textShadow: EFFECTS.GLOW_ACCENT, color: COLORS.NEGATIVE, fontSize: FONTS.SIZE_4XL, fontWeight: FONTS.WEIGHT_EXTRABOLD, fontFamily: FONTS.DISPLAY }}>
+          1000+
+        </div>
+        <div style={{ transform: `translateY(${(1 - divisionEnter) * 10}px)`, opacity: divisionEnter, fontFamily: FONTS.MONO, fontSize: FONTS.SIZE_MD, color: COLORS.TEXT_MUTED, marginTop: SPACING.PX_16 }}>
+          ÷ 24H
+        </div>
+        <div style={{ transform: `translateY(${(1 - resultEnter) * 10}px) scale(${resultEnter})`, opacity: resultEnter, fontFamily: FONTS.PRIMARY, fontSize: FONTS.SIZE_XL, color: COLORS.PRIMARY, fontWeight: FONTS.WEIGHT_BOLD, marginTop: SPACING.PX_24, textShadow: EFFECTS.GLOW_LG }}>
+          = 41+ / hr
+        </div>
+      </div>
+    </AbsoluteFill>
+  );
 };
 
 /**
  * [Scene 4 기획안]
- * 원본 텍스트: 예전이라면요?
- * 단어 등장 타이밍: "예전이라면요?": 595f
- * 비주얼 컨셉: 화면 클리어 후 "예전이라면요?" 텍스트가 중앙에 SIZE_XL TEXT_BODY 색으로 홀로 fade-in. 미니멀 여백으로 대비 효과 극대화. 배경 BG_ELEVATED 단색.
- * 하단 150px은 자막 영역이므로, 텍스트와 핵심 그래픽은 이 영역을 침범하지 않도록 주의하세요.
- * 화면에 노출되는 UI 텍스트는 프로그래밍 용어/회사명 등을 제외하고 모두 한국어 단어로 작성합니다.
- * In-Scene Animation 구성: 각 씬의 프레임 내에서 여러 단계로 애니메이션을 분할하여 구현합니다.
+ * ...
  */
 const Scene4: React.FC = () => {
-  return <AbsoluteFill></AbsoluteFill>;
+  const frame = useCurrentFrame();
+  const { fps } = useVideoConfig();
+
+  const textEnter = spring({ frame: frame - 0, fps, config: ANIMATION.SPRING_GENTLE });
+
+  return (
+    <AbsoluteFill style={{ backgroundColor: COLORS.BG_ELEVATED, display: "flex", justifyContent: "center", alignItems: "center" }}>
+      <div style={{ opacity: textEnter, transform: `translateY(${(1 - textEnter) * 10}px)`, fontFamily: FONTS.PRIMARY, fontSize: FONTS.SIZE_XL, color: COLORS.TEXT_BODY, fontWeight: FONTS.WEIGHT_MEDIUM }}>
+        예전이라면요?
+      </div>
+    </AbsoluteFill>
+  );
 };
 
 /**
  * [Scene 5 기획안]
- * 원본 텍스트: 표적 하나 분석하는 데만 며칠이 걸렸을 거예요.
- * 단어 등장 타이밍: "표적": 655f, "하나": 673f, "분석하는": 701f, "데만": 728f, "며칠이": 746f, "걸렸을": 773f, "거예요.": 800f
- * 비주얼 컨셉: 화면 중앙에 타임라인 막대. 좌측 "과거" 레이블. "며칠이" 단어 등장 시 막대 길이가 길게(DAYS 단위) 늘어남. WARNING 색 수평 막대로 긴 시간을 시각화. "걸렸을" 단어에서 막대가 최대 길이로 정지.
- * 하단 150px은 자막 영역이므로, 텍스트와 핵심 그래픽은 이 영역을 침범하지 않도록 주의하세요.
- * 화면에 노출되는 UI 텍스트는 프로그래밍 용어/회사명 등을 제외하고 모두 한국어 단어로 작성합니다.
- * In-Scene Animation 구성: 각 씬의 프레임 내에서 여러 단계로 애니메이션을 분할하여 구현합니다.
+ * ...
  */
 const Scene5: React.FC = () => {
-  return <AbsoluteFill></AbsoluteFill>;
+  return (
+    <AbsoluteFill style={{ backgroundColor: COLORS.BG_BASE }}>
+      <div style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "100%", transform: "translateY(-30px)" }}>
+        <TimelineBar
+          label="과거"
+          delay={0}
+          expandDelay={91}
+          duration={27}
+          color={COLORS.WARNING}
+          maxWidth={700}
+        />
+      </div>
+    </AbsoluteFill>
+  );
 };
 
 /**
  * [Scene 6 기획안]
- * 원본 텍스트: 사람이 데이터 보고, 회의하고, 결재 받고.
- * 단어 등장 타이밍: "사람이": 846f, "데이터": 881f, "보고,": 918f, "회의하고,": 943f, "결재": 990f, "받고.": 1040f
- * 비주얼 컨셉: 수평 플로우 다이어그램: [데이터 검토] → [회의] → [결재]. 각 노드가 단어 등장 stagger로 순차 등장. 노드 간 화살표는 TEXT_MUTED 색의 느린 점선 애니메이션. 전체적으로 느리고 무거운 느낌 연출.
- * 하단 150px은 자막 영역이므로, 텍스트와 핵심 그래픽은 이 영역을 침범하지 않도록 주의하세요.
- * 화면에 노출되는 UI 텍스트는 프로그래밍 용어/회사명 등을 제외하고 모두 한국어 단어로 작성합니다.
- * In-Scene Animation 구성: 각 씬의 프레임 내에서 여러 단계로 애니메이션을 분할하여 구현합니다.
+ * ...
  */
 const Scene6: React.FC = () => {
-  return <AbsoluteFill></AbsoluteFill>;
+  const frame = useCurrentFrame();
+
+  return (
+    <AbsoluteFill style={{ backgroundColor: COLORS.BG_BASE }}>
+      <div style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "100%", gap: 0, transform: "translateY(-30px)" }}>
+        {/* 데이터 검토 (35f) */}
+        <div style={{ zIndex: Z.CONTENT + 1 }}>
+          <FlowBox title="데이터 검토" borderColor={COLORS.TEXT_DISABLED} isActive={false} delay={35} />
+        </div>
+        
+        {/* 연결 지연 */}
+        <div style={{ width: 140, display: "flex", alignItems: "center", margin: "0 -20px", zIndex: Z.CONTENT }}>
+           <DrawLine startFrame={72} durationInFrames={25} color={COLORS.TEXT_DISABLED} thickness={2} direction="ltr" />
+        </div>
+
+        {/* 회의 (97f) */}
+        <div style={{ zIndex: Z.CONTENT + 1 }}>
+          <FlowBox title="회의" borderColor={COLORS.TEXT_DISABLED} isActive={false} delay={97} />
+        </div>
+
+        {/* 연결 지연 */}
+        <div style={{ width: 140, display: "flex", alignItems: "center", margin: "0 -20px", zIndex: Z.CONTENT }}>
+           <DrawLine startFrame={120} durationInFrames={24} color={COLORS.TEXT_DISABLED} thickness={2} direction="ltr" />
+        </div>
+
+        {/* 결재 (144f) */}
+        <div style={{ zIndex: Z.CONTENT + 1 }}>
+          <FlowBox title="결재" borderColor={COLORS.TEXT_DISABLED} isActive={false} delay={144} />
+        </div>
+      </div>
+    </AbsoluteFill>
+  );
 };
 
 /**
  * [Scene 7 기획안]
- * 원본 텍스트: 근데 이번엔 달랐다는 거예요.
- * 단어 등장 타이밍: "근데": 1040f, "이번엔": 1058f, "달랐다는": 1087f, "거예요.": 1121f
- * 비주얼 컨셉: 과거 플로우 다이어그램이 fade-out하고 배경이 BG_BASE로 전환. "달랐다는 거예요." 텍스트가 PRIMARY 색 SIZE_LG로 중앙에 spring 진입. 배경에 PRIMARY_DIM 방사형 glow가 서서히 등장.
- * 하단 150px은 자막 영역이므로, 텍스트와 핵심 그래픽은 이 영역을 침범하지 않도록 주의하세요.
- * 화면에 노출되는 UI 텍스트는 프로그래밍 용어/회사명 등을 제외하고 모두 한국어 단어로 작성합니다.
- * In-Scene Animation 구성: 각 씬의 프레임 내에서 여러 단계로 애니메이션을 분할하여 구현합니다.
+ * ...
  */
 const Scene7: React.FC = () => {
-  return <AbsoluteFill></AbsoluteFill>;
+  const frame = useCurrentFrame();
+  const { fps } = useVideoConfig();
+
+  const bgGlow = spring({ frame: frame - 47, fps, config: ANIMATION.SPRING_GENTLE });
+  const textEnter = spring({ frame: frame - 47, fps, config: ANIMATION.SPRING_SNAPPY });
+
+  return (
+    <AbsoluteFill style={{ backgroundColor: COLORS.BG_BASE, display: "flex", justifyContent: "center", alignItems: "center" }}>
+      <div style={{ position: "absolute", inset: 0, background: EFFECTS.RADIAL_PRIMARY, opacity: bgGlow * 0.5 }} />
+      <div style={{ zIndex: 1, opacity: textEnter, transform: `scale(${textEnter})`, fontFamily: FONTS.PRIMARY, fontSize: FONTS.SIZE_LG, color: COLORS.PRIMARY, fontWeight: FONTS.WEIGHT_BOLD, textShadow: EFFECTS.GLOW_LG }}>
+        달랐다는 거예요.
+      </div>
+    </AbsoluteFill>
+  );
 };
 
 /**
  * [Scene 8 기획안]
- * 원본 텍스트: 외신 보도에 따르면
- * 단어 등장 타이밍: "외신": 1159f, "보도에": 1180f, "따르면,": 1218f
- * 비주얼 컨셉: 화면 상단 좌측에 "SOURCE:" 레이블과 함께 외신 미디어 로고 대신 ["REUTERS"] ["AP NEWS"] 텍스트 태그 2개가 stagger 등장. GLASS_BG 배경의 소형 출처 카드 형태.
- * 하단 150px은 자막 영역이므로, 텍스트와 핵심 그래픽은 이 영역을 침범하지 않도록 주의하세요.
- * 화면에 노출되는 UI 텍스트는 프로그래밍 용어/회사명 등을 제외하고 모두 한국어 단어로 작성합니다.
- * In-Scene Animation 구성: 각 씬의 프레임 내에서 여러 단계로 애니메이션을 분할하여 구현합니다.
+ * ...
  */
 const Scene8: React.FC = () => {
-  return <AbsoluteFill></AbsoluteFill>;
+  const frame = useCurrentFrame();
+  const { fps } = useVideoConfig();
+
+  const sourceEnter = spring({ frame: frame - 0, fps, config: ANIMATION.SPRING_GENTLE });
+  const reutersEnter = spring({ frame: frame - 21, fps, config: ANIMATION.SPRING_SNAPPY });
+  const apEnter = spring({ frame: frame - 35, fps, config: ANIMATION.SPRING_SNAPPY });
+
+  return (
+    <AbsoluteFill style={{ backgroundColor: COLORS.BG_BASE }}>
+      <div style={{ position: "absolute", top: 100, left: 100, background: EFFECTS.GLASS_BG, backdropFilter: EFFECTS.GLASS_BLUR, padding: SPACING.PX_24, borderRadius: SPACING.RADIUS_MD, border: `1px solid ${EFFECTS.GLASS_BORDER}`, display: "flex", flexDirection: "column", gap: SPACING.PX_16, opacity: sourceEnter, transform: `translateX(${(1 - sourceEnter) * -20}px)` }}>
+        <div style={{ fontFamily: FONTS.MONO, fontSize: FONTS.SIZE_SM, color: COLORS.TEXT_MUTED, letterSpacing: FONTS.TRACKING_WIDER }}>
+          출처
+        </div>
+        <div style={{ display: "flex", gap: SPACING.PX_12 }}>
+          <div style={{ opacity: reutersEnter, transform: `scale(${reutersEnter})` }}>
+            <StatusTag label="REUTERS" bgColor={COLORS.BG_ELEVATED} textColor={COLORS.TEXT_MAIN} />
+          </div>
+          <div style={{ opacity: apEnter, transform: `scale(${apEnter})` }}>
+            <StatusTag label="AP NEWS" bgColor={COLORS.BG_ELEVATED} textColor={COLORS.TEXT_MAIN} />
+          </div>
+        </div>
+      </div>
+    </AbsoluteFill>
+  );
 };
 
 /**
  * [Scene 9 기획안]
- * 원본 텍스트: 정보 수집부터 표적 선정까지 전 과정에 AI가 주도적으로 개입했다고 해요.
- * 단어 등장 타이밍: "정보": 1247f, "수집부터": 1269f, "표적": 1313f, "선정까지": 1334f, "전": 1386f, "과정에": 1400f, "AI가": 1432f, "주도적으로": 1459f, "개입했다고": 1499f, "해요.": 1541f
- * 비주얼 컨셉: 수평 파이프라인 UI: [정보 수집] → [표적 선정]. 각 단어 등장 시 해당 단계 노드가 PRIMARY 색으로 활성화. "AI가" 단어에서 파이프라인 전체가 PRIMARY_DIM 배경으로 강조되며 상단에 "AI-DRIVEN" 레이블 등장. 모든 노드에 AI 처리 표시.
- * 하단 150px은 자막 영역이므로, 텍스트와 핵심 그래픽은 이 영역을 침범하지 않도록 주의하세요.
- * 화면에 노출되는 UI 텍스트는 프로그래밍 용어/회사명 등을 제외하고 모두 한국어 단어로 작성합니다.
- * In-Scene Animation 구성: 각 씬의 프레임 내에서 여러 단계로 애니메이션을 분할하여 구현합니다.
+ * ...
  */
 const Scene9: React.FC = () => {
-  return <AbsoluteFill></AbsoluteFill>;
+  const frame = useCurrentFrame();
+  const { fps } = useVideoConfig();
+
+  const aiGlow = spring({ frame: frame - 185, fps, config: ANIMATION.SPRING_GENTLE });
+  const aiTag = spring({ frame: frame - 185, fps, config: ANIMATION.SPRING_SNAPPY });
+
+  return (
+    <AbsoluteFill style={{ backgroundColor: COLORS.BG_BASE }}>
+      <div style={{ position: "absolute", inset: 0, backgroundColor: COLORS.PRIMARY_DIM, opacity: aiGlow * 0.3 }} />
+
+      <div style={{ position: "absolute", top: 80, width: "100%", display: "flex", justifyContent: "center", opacity: aiTag, transform: `translateY(${(1 - aiTag) * -20}px)` }}>
+         <StatusTag label="AI-DRIVEN" bgColor={COLORS.PRIMARY_DIM} textColor={COLORS.PRIMARY} borderColor={COLORS.PRIMARY} showDot dotColor={COLORS.PRIMARY} />
+      </div>
+
+      <div style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "100%", gap: 0, transform: "translateY(-30px)" }}>
+        <div style={{ zIndex: Z.CONTENT + 1 }}>
+          <FlowBox title="정보 수집" borderColor={COLORS.PRIMARY} isActive={true} delay={0} glowColor={COLORS.PRIMARY_GLOW} />
+        </div>
+        
+        <div style={{ width: 140, display: "flex", alignItems: "center", margin: "0 -20px", zIndex: Z.CONTENT }}>
+           <DrawLine startFrame={20} durationInFrames={30} color={COLORS.PRIMARY} thickness={SPACING.BORDER_THICK} direction="ltr" />
+        </div>
+
+        {frame >= 66 && (
+          <div style={{ zIndex: Z.CONTENT + 1 }}>
+            <FlowBox title="표적 선정" borderColor={COLORS.PRIMARY} isActive={true} delay={66} glowColor={COLORS.PRIMARY_GLOW} />
+          </div>
+        )}
+      </div>
+    </AbsoluteFill>
+  );
 };
 
 /**
  * [Scene 10 기획안]
- * 원본 텍스트: 팔란티어 AI가 드론 데이터를 분석해서 표적 우선순위를 뽑고
- * 단어 등장 타이밍: "팔란티어": 1610f, "AI가": 1653f, "드론": 1668f, "데이터를": 1688f, "분석해서": 1729f, "표적": 1771f, "우선순위를": 1790f, "뽑고,": 1841f
- * 비주얼 컨셉: 좌측에 "Palantir AI" 레이블 박스. 입력: [DRONE DATA] 화살표 → Palantir 박스 → 출력: [PRIORITY LIST #1, #2, #3]. 각 단어 등장에 맞춰 입력→처리→출력 순서로 데이터 흐름 애니메이션.
- * 하단 150px은 자막 영역이므로, 텍스트와 핵심 그래픽은 이 영역을 침범하지 않도록 주의하세요.
- * 화면에 노출되는 UI 텍스트는 프로그래밍 용어/회사명 등을 제외하고 모두 한국어 단어로 작성합니다.
- * In-Scene Animation 구성: 각 씬의 프레임 내에서 여러 단계로 애니메이션을 분할하여 구현합니다.
+ * ...
  */
 const Scene10: React.FC = () => {
-  return <AbsoluteFill></AbsoluteFill>;
+  const frame = useCurrentFrame();
+  const { fps } = useVideoConfig();
+
+  const droneDataEnter = frame >= 58;
+  const priorityEnter = frame >= 161;
+
+  return (
+    <AbsoluteFill style={{ backgroundColor: COLORS.BG_BASE }}>
+      <div style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "100%", gap: 0, transform: "translateY(-30px)" }}>
+        
+        {/* Left: Input */}
+        <div style={{ width: 140, display: "flex", alignItems: "center", justifyContent: "flex-end", zIndex: Z.CONTENT }}>
+          {droneDataEnter && (
+            <div style={{ marginRight: SPACING.PX_16 }}>
+              <StatusTag label="드론 데이터" bgColor={COLORS.BG_ELEVATED} />
+            </div>
+          )}
+        </div>
+        <div style={{ width: 100, display: "flex", alignItems: "center", margin: "0 -20px", zIndex: Z.CONTENT }}>
+           {frame >= 78 && <DrawLine startFrame={78} durationInFrames={20} color={COLORS.PRIMARY} thickness={SPACING.BORDER_NORMAL} direction="ltr" />}
+        </div>
+
+        {/* Center: Palantir */}
+        <div style={{ zIndex: Z.CONTENT + 1 }}>
+          <FlowBox title="Palantir" subtitle="AI ANALYSIS" borderColor={COLORS.PRIMARY} isActive={true} delay={0} glowColor={frame >= 119 ? COLORS.PRIMARY : "transparent"} />
+        </div>
+        
+        {/* Right: Output */}
+        <div style={{ width: 100, display: "flex", alignItems: "center", margin: "0 -20px", zIndex: Z.CONTENT }}>
+           {frame >= 161 && <DrawLine startFrame={161} durationInFrames={20} color={COLORS.PRIMARY} thickness={SPACING.BORDER_NORMAL} direction="ltr" />}
+        </div>
+        <div style={{ width: 160, display: "flex", alignItems: "center", justifyContent: "flex-start", zIndex: Z.CONTENT, paddingLeft: SPACING.PX_16 }}>
+          {priorityEnter && (
+             <div style={{ display: "flex", flexDirection: "column", gap: SPACING.PX_8 }}>
+               <StatusTag label="#1 우선순위 목록" borderColor={COLORS.SECONDARY} textColor={COLORS.SECONDARY} startFrame={161} />
+               {frame >= 180 && <StatusTag label="#2 표적 데이터" borderColor={COLORS.TEXT_MUTED} textColor={COLORS.TEXT_BODY} startFrame={180} />}
+             </div>
+          )}
+        </div>
+      </div>
+    </AbsoluteFill>
+  );
 };
 
 /**
  * [Scene 11 기획안]
- * 원본 텍스트: 클로드라는 생성형 AI가 수만 가지 공격 시나리오를 시뮬레이션해서 지휘부에 보고했다는 거거든요.
- * 단어 등장 타이밍: "클로드라는": 1909f, "생성형": 1935f, "AI가": 1946f, "수만": 1962f, "가지": 1978f, "공격": 1994f, "시나리오를": 2034f, "시뮬레이션해서": 2090f, "지휘부에": 2122f, "보고했다는": 2162f, "거거든요.": 2215f
- * 비주얼 컨셉: Palantir 박스 아래에 "Claude (Anthropic)" 박스가 SECONDARY 테두리로 추가 등장. 입력: [SCENARIOS: 수만 가지] → Claude → 출력: [OPTIMAL PLAN → 지휘부]. "수만" 단어에 입력 카운터 빠르게 증가. "지휘부에" 단어에 최종 화살표 지휘부 노드로 전달.
- * 하단 150px은 자막 영역이므로, 텍스트와 핵심 그래픽은 이 영역을 침범하지 않도록 주의하세요.
- * 화면에 노출되는 UI 텍스트는 프로그래밍 용어/회사명 등을 제외하고 모두 한국어 단어로 작성합니다.
- * In-Scene Animation 구성: 각 씬의 프레임 내에서 여러 단계로 애니메이션을 분할하여 구현합니다.
+ * ...
  */
 const Scene11: React.FC = () => {
-  return <AbsoluteFill></AbsoluteFill>;
+  const frame = useCurrentFrame();
+  const { fps } = useVideoConfig();
+
+  const claudeEnter = spring({ frame: frame - 0, fps, config: ANIMATION.SPRING_SNAPPY });
+
+  return (
+    <AbsoluteFill style={{ backgroundColor: COLORS.BG_BASE }}>
+      {/* Same Palantir flow from Scene 10 but dimmed/moved up */}
+      <div style={{ display: "flex", justifyContent: "center", alignItems: "center", gap: 0, position: "absolute", top: "30%", width: "100%", opacity: 0.4 }}>
+        <div style={{ width: 140, display: "flex", justifyContent: "flex-end", marginRight: SPACING.PX_16 }}><StatusTag label="드론 데이터" bgColor={COLORS.BG_ELEVATED} /></div>
+        <div style={{ width: 100, margin: "0 -20px" }}><DrawLine color={COLORS.PRIMARY} /></div>
+        <div style={{ zIndex: Z.CONTENT + 1 }}><FlowBox title="Palantir" subtitle="AI ANALYSIS" borderColor={COLORS.PRIMARY} isActive={false} /></div>
+        <div style={{ width: 100, margin: "0 -20px" }}><DrawLine color={COLORS.PRIMARY} /></div>
+        <div style={{ width: 160, paddingLeft: SPACING.PX_16 }}><StatusTag label="#1 우선순위 목록" borderColor={COLORS.SECONDARY} textColor={COLORS.SECONDARY} /></div>
+      </div>
+
+      {/* Claude flow below */}
+      <div style={{ display: "flex", justifyContent: "center", alignItems: "center", gap: 0, position: "absolute", top: "55%", width: "100%", transform: `translateY(${(1 - claudeEnter) * 20}px)`, opacity: claudeEnter }}>
+        {/* Left: Input */}
+        <div style={{ width: 140, display: "flex", alignItems: "center", justifyContent: "flex-end", zIndex: Z.CONTENT }}>
+          {frame >= 53 && (
+            <div style={{ marginRight: SPACING.PX_16, display: "flex", flexDirection: "column", alignItems: "flex-end", gap: SPACING.PX_4 }}>
+              <div style={{ fontFamily: FONTS.MONO, fontSize: FONTS.SIZE_XS, color: COLORS.TEXT_MUTED }}>SCENARIOS</div>
+              <CounterText from={0} to={50000} startFrame={53} durationInFrames={40} suffix="+" color={COLORS.TEXT_MAIN} fontSize={FONTS.SIZE_MD} fontWeight={FONTS.WEIGHT_BOLD} />
+            </div>
+          )}
+        </div>
+        <div style={{ width: 100, display: "flex", alignItems: "center", margin: "0 -20px", zIndex: Z.CONTENT }}>
+           {frame >= 85 && <DrawLine startFrame={85} durationInFrames={20} color={COLORS.SECONDARY} thickness={SPACING.BORDER_NORMAL} direction="ltr" />}
+        </div>
+
+        {/* Center: Claude */}
+        <div style={{ zIndex: Z.CONTENT + 1 }}>
+          <FlowBox title="Claude" subtitle="Anthropic" borderColor={COLORS.SECONDARY} isActive={true} delay={0} glowColor={frame >= 181 ? COLORS.SECONDARY : "transparent"} />
+        </div>
+        
+        {/* Right: Output */}
+        <div style={{ width: 100, display: "flex", alignItems: "center", margin: "0 -20px", zIndex: Z.CONTENT }}>
+           {frame >= 213 && <DrawLine startFrame={213} durationInFrames={20} color={COLORS.SECONDARY} thickness={SPACING.BORDER_NORMAL} direction="ltr" />}
+        </div>
+        <div style={{ width: 160, display: "flex", alignItems: "center", justifyContent: "flex-start", zIndex: Z.CONTENT, paddingLeft: SPACING.PX_16 }}>
+          {frame >= 213 && (
+             <StatusTag label="최적의 시나리오" borderColor={COLORS.SECONDARY} textColor={COLORS.SECONDARY} startFrame={213} bgColor={COLORS.SECONDARY_DIM} />
+          )}
+        </div>
+      </div>
+      
+      {/* Target 지휘부 */}
+      {frame >= 213 && (
+         <div style={{ position: "absolute", top: "50%", right: "8%", transform: "translateY(-50%)" }}>
+           <FlowBox title="지휘부" subtitle="COMMAND" borderColor={COLORS.TEXT_DISABLED} isActive={false} delay={213} />
+         </div>
+      )}
+    </AbsoluteFill>
+  );
 };
 
 /**
  * [Scene 12 기획안]
- * 원본 텍스트: 잠깐, 클로드요?
- * 단어 등장 타이밍: "잠깐,": 2215f, "클로드요?": 2257f
- * 비주얼 컨셉: 모든 그래픽 일시 멈춤(freeze 효과). 중앙에 "잠깐, 클로드요?" 텍스트가 TEXT_MAIN SIZE_XL WEIGHT_BOLD로 flash-in. WARNING 색 테두리의 인터럽트 카드 느낌.
- * 하단 150px은 자막 영역이므로, 텍스트와 핵심 그래픽은 이 영역을 침범하지 않도록 주의하세요.
- * 화면에 노출되는 UI 텍스트는 프로그래밍 용어/회사명 등을 제외하고 모두 한국어 단어로 작성합니다.
- * In-Scene Animation 구성: 각 씬의 프레임 내에서 여러 단계로 애니메이션을 분할하여 구현합니다.
+ * ...
  */
 const Scene12: React.FC = () => {
-  return <AbsoluteFill></AbsoluteFill>;
+  const frame = useCurrentFrame();
+  const { fps } = useVideoConfig();
+
+  const flashEnter = spring({ frame: frame - 0, fps, config: ANIMATION.SPRING_SNAPPY });
+
+  return (
+    <AbsoluteFill style={{ backgroundColor: COLORS.BG_BASE }}>
+      {/* Background frozen from previous - just a dim overlay over it */}
+      <div style={{ position: "absolute", inset: 0, backgroundColor: COLORS.BG_VOID, opacity: 0.8 }} />
+      
+      <div style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "100%" }}>
+        <div style={{ 
+          transform: `scale(${flashEnter})`,
+          opacity: flashEnter,
+          border: `2px solid ${COLORS.WARNING}`,
+          backgroundColor: COLORS.BG_ELEVATED,
+          padding: `${SPACING.PX_32}px ${SPACING.PX_64}px`,
+          borderRadius: SPACING.RADIUS_MD,
+          boxShadow: EFFECTS.GLOW_ACCENT,
+          fontFamily: FONTS.PRIMARY, 
+          fontSize: FONTS.SIZE_XL, 
+          color: COLORS.TEXT_MAIN, 
+          fontWeight: FONTS.WEIGHT_BOLD 
+        }}>
+          잠깐, {frame >= 42 ? "클로드요?" : ""}
+        </div>
+      </div>
+    </AbsoluteFill>
+  );
 };
 
 /**
  * [Scene 13 기획안]
- * 원본 텍스트: 네.
- * 단어 등장 타이밍: "네.": 2318f
- * 비주얼 컨셉: "잠깐" 카드 사라지고 중앙에 "네." TEXT_MAIN SIZE_2XL WEIGHT_EXTRABOLD만 홀로 등장. 극적 단순함. 배경 BG_BASE.
- * 하단 150px은 자막 영역이므로, 텍스트와 핵심 그래픽은 이 영역을 침범하지 않도록 주의하세요.
- * 화면에 노출되는 UI 텍스트는 프로그래밍 용어/회사명 등을 제외하고 모두 한국어 단어로 작성합니다.
- * In-Scene Animation 구성: 각 씬의 프레임 내에서 여러 단계로 애니메이션을 분할하여 구현합니다.
+ * ...
  */
 const Scene13: React.FC = () => {
-  return <AbsoluteFill></AbsoluteFill>;
+  return (
+    <AbsoluteFill style={{ backgroundColor: COLORS.BG_BASE, display: "flex", justifyContent: "center", alignItems: "center" }}>
+      <div style={{ fontFamily: FONTS.PRIMARY, fontSize: FONTS.SIZE_2XL, color: COLORS.TEXT_MAIN, fontWeight: FONTS.WEIGHT_EXTRABOLD }}>
+        네.
+      </div>
+    </AbsoluteFill>
+  );
 };
 
 /**
  * [Scene 14 기획안]
- * 원본 텍스트: 여러분이 유튜브에서 자주 접하는 그 AI 맞아요.
- * 단어 등장 타이밍: "여러분이": 2338f, "유튜브에서": 2390f, "자주": 2425f, "접하는": 2441f, "그": 2472f, "AI": 2479f, "맞아요.": 2488f
- * 비주얼 컨셉: 화면 좌측에 "일상 AI" 레이블과 함께 [Claude] 텍스트 박스가 SECONDARY 색 테두리(친근한 느낌)로 등장. 우측에 "군사 AI" 레이블과 같은 [Claude] 텍스트 박스가 NEGATIVE 색 테두리(위협 느낌)로 등장. "그 AI 맞아요." 에서 두 박스를 연결하는 수평선 PRIMARY 색으로 draw.
- * 하단 150px은 자막 영역이므로, 텍스트와 핵심 그래픽은 이 영역을 침범하지 않도록 주의하세요.
- * 화면에 노출되는 UI 텍스트는 프로그래밍 용어/회사명 등을 제외하고 모두 한국어 단어로 작성합니다.
- * In-Scene Animation 구성: 각 씬의 프레임 내에서 여러 단계로 애니메이션을 분할하여 구현합니다.
+ * ...
  */
 const Scene14: React.FC = () => {
-  return <AbsoluteFill></AbsoluteFill>;
+  const frame = useCurrentFrame();
+  const { fps } = useVideoConfig();
+
+  const leftEnter = spring({ frame: frame - 0, fps, config: ANIMATION.SPRING_SNAPPY });
+  const rightEnter = spring({ frame: frame - 52, fps, config: ANIMATION.SPRING_SNAPPY });
+
+  return (
+    <AbsoluteFill style={{ backgroundColor: COLORS.BG_BASE }}>
+      <div style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "100%", gap: 0 }}>
+        
+        {/* Left */}
+        <div style={{ transform: `scale(${leftEnter})`, opacity: leftEnter, zIndex: Z.CONTENT + 1, position: "relative" }}>
+          <div style={{ position: "absolute", top: -40, width: "100%", textAlign: "center" }}>
+            <StatusTag label="일상 AI" bgColor={COLORS.SECONDARY_DIM} textColor={COLORS.SECONDARY} borderColor="transparent" />
+          </div>
+          <FlowBox title="Claude" borderColor={COLORS.SECONDARY} isActive={false} />
+        </div>
+
+        {/* Line connection */}
+        <div style={{ width: 150, display: "flex", alignItems: "center", margin: "0 -20px", zIndex: Z.CONTENT }}>
+           {frame >= 134 && <DrawLine startFrame={134} durationInFrames={16} color={COLORS.PRIMARY} thickness={SPACING.BORDER_THICK} direction="ltr" />}
+        </div>
+
+        {/* Right */}
+        <div style={{ transform: `scale(${rightEnter})`, opacity: rightEnter, zIndex: Z.CONTENT + 1, position: "relative" }}>
+           <div style={{ position: "absolute", top: -40, width: "100%", textAlign: "center" }}>
+            <StatusTag label="군사 AI" bgColor={COLORS.NEGATIVE_DIM} textColor={COLORS.NEGATIVE} borderColor="transparent" />
+          </div>
+          <FlowBox title="Claude" borderColor={COLORS.NEGATIVE} isActive={false} />
+        </div>
+
+      </div>
+    </AbsoluteFill>
+  );
 };
 
 /**
  * [Scene 15 기획안]
- * 원본 텍스트: 저도 이거 알고 한동안 멍하니 있었거든요.
- * 단어 등장 타이밍: "저도": 2530f, "이거": 2546f, "알고": 2574f, "한동안": 2579f, "멍하니": 2603f, "있었거든요.": 2626f
- * 비주얼 컨셉: 화면이 서서히 어두워짐(opacity감소). 중앙에 CURSOR 깜빡임만 남음. "멍하니" 단어에서 화면 거의 암전(BG_VOID 수준). 개인적 감정 공유를 위한 비주얼 침묵.
- * 하단 150px은 자막 영역이므로, 텍스트와 핵심 그래픽은 이 영역을 침범하지 않도록 주의하세요.
- * 화면에 노출되는 UI 텍스트는 프로그래밍 용어/회사명 등을 제외하고 모두 한국어 단어로 작성합니다.
- * In-Scene Animation 구성: 각 씬의 프레임 내에서 여러 단계로 애니메이션을 분할하여 구현합니다.
+ * ...
  */
 const Scene15: React.FC = () => {
-  return <AbsoluteFill></AbsoluteFill>;
+  const frame = useCurrentFrame();
+
+  const bgInterp = interpolateColors(
+    frame,
+    [0, 73],
+    [COLORS.BG_BASE, COLORS.BG_VOID]
+  );
+  
+  const opacityInterp = interpolate(frame, [0, 73], [1, 0], { extrapolateRight: "clamp" });
+  
+  // Blinking cursor every 30 frames
+  const cursorOpacity = Math.floor(frame / 30) % 2 === 0 ? 1 : 0;
+
+  return (
+    <AbsoluteFill style={{ backgroundColor: bgInterp, display: "flex", justifyContent: "center", alignItems: "center" }}>
+      <div style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "100%", gap: 0, opacity: opacityInterp }}>
+        <div style={{ position: "relative" }}>
+          <div style={{ position: "absolute", top: -40, width: "100%", textAlign: "center" }}><StatusTag label="일상 AI" bgColor={COLORS.SECONDARY_DIM} textColor={COLORS.SECONDARY} borderColor="transparent" /></div>
+          <FlowBox title="Claude" borderColor={COLORS.SECONDARY} isActive={false} />
+        </div>
+        <div style={{ width: 150, margin: "0 -20px" }}><DrawLine color={COLORS.PRIMARY} thickness={SPACING.BORDER_THICK} /></div>
+        <div style={{ position: "relative" }}>
+          <div style={{ position: "absolute", top: -40, width: "100%", textAlign: "center" }}><StatusTag label="군사 AI" bgColor={COLORS.NEGATIVE_DIM} textColor={COLORS.NEGATIVE} borderColor="transparent" /></div>
+          <FlowBox title="Claude" borderColor={COLORS.NEGATIVE} isActive={false} />
+        </div>
+      </div>
+
+      <div style={{ position: "absolute", opacity: cursorOpacity, fontFamily: FONTS.MONO, fontSize: FONTS.SIZE_2XL, color: COLORS.TEXT_MAIN, top: "50%", left: "50%", transform: "translate(-50%, -50%)" }}>
+        |
+      </div>
+    </AbsoluteFill>
+  );
 };
 
 /**
  * [Scene 16 기획안]
- * 원본 텍스트: 우리가 일상에서 쓰는 AI가, 전쟁 시나리오를 짜고 있었던 겁니다.
- * 단어 등장 타이밍: "우리가": 2680f, "일상에서": 2709f, "쓰는": 2751f, "AI가,": 2771f, "전쟁": 2788f, "시나리오를": 2809f, "짜고": 2863f, "있었던": 2879f, "겁니다.": 2909f
- * 비주얼 컨셉: 화면 2분할: 좌측 [일상] 영역(SECONDARY_DIM 배경) / 우측 [전쟁] 영역(NEGATIVE_DIM 배경). 중앙에 Claude 로고 텍스트가 두 영역 경계선 위에 위치. "전쟁" 단어 등장 시 우측 영역이 WARNING 색 테두리로 강조. 이중성의 충격적 시각화.
- * 하단 150px은 자막 영역이므로, 텍스트와 핵심 그래픽은 이 영역을 침범하지 않도록 주의하세요.
- * 화면에 노출되는 UI 텍스트는 프로그래밍 용어/회사명 등을 제외하고 모두 한국어 단어로 작성합니다.
- * In-Scene Animation 구성: 각 씬의 프레임 내에서 여러 단계로 애니메이션을 분할하여 구현합니다.
+ * ...
  */
 const Scene16: React.FC = () => {
-  return <AbsoluteFill></AbsoluteFill>;
+  const frame = useCurrentFrame();
+  const { fps } = useVideoConfig();
+
+  const leftEnter = spring({ frame: frame - 29, fps, config: ANIMATION.SPRING_GENTLE });
+  const rightEnter = spring({ frame: frame - 108, fps, config: ANIMATION.SPRING_GENTLE });
+
+  return (
+    <AbsoluteFill style={{ backgroundColor: COLORS.BG_BASE, display: "flex", flexDirection: "row" }}>
+      {/* Left: 일상 */}
+      <div style={{ flex: 1, height: "100%", backgroundColor: COLORS.SECONDARY_DIM, opacity: leftEnter, display: "flex", justifyContent: "center", alignItems: "center" }}>
+        <StatusTag label="일상" bgColor="transparent" textColor={COLORS.SECONDARY} borderColor="transparent" fontSize={FONTS.SIZE_LG} />
+      </div>
+
+      {/* Right: 전쟁 */}
+      <div style={{ 
+        flex: 1, 
+        height: "100%", 
+        backgroundColor: COLORS.NEGATIVE_DIM, 
+        opacity: rightEnter, 
+        boxShadow: frame >= 108 ? `inset 0 0 0 4px ${COLORS.WARNING}` : "none",
+        display: "flex", justifyContent: "center", alignItems: "center" 
+      }}>
+        <StatusTag label="전쟁" bgColor="transparent" textColor={COLORS.NEGATIVE} borderColor="transparent" fontSize={FONTS.SIZE_LG} />
+      </div>
+
+      <div style={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)", zIndex: Z.CONTENT }}>
+         <FlowBox title="Claude" borderColor={COLORS.TEXT_DISABLED} isActive={false} />
+      </div>
+    </AbsoluteFill>
+  );
 };
 
 /**
  * [Scene 17 기획안]
- * 원본 텍스트: 물론 이 내용은 기밀 작전 특성상 공식 확인이 된 건 아니에요.
- * 단어 등장 타이밍: "물론": 2956f, "이": 2978f, "내용은": 2989f, "기밀": 3022f, "작전": 3065f, "특성상": 3098f, "공식": 3119f, "확인이": 3153f, "된": 3163f, "건": 3174f, "아니에요.": 3238f
- * 비주얼 컨셉: 화면 중앙에 [CLASSIFIED] 스타일 레이블 등장 (TEXT_MAIN TRACKING_WIDER, 붉은 밑줄 없이 WARNING 색 테두리만). "공식 확인이 된 건 아니에요." 텍스트가 TEXT_MUTED SIZE_MD로 하단에 fade-in. 투명성 있는 정보 제공 UI.
- * 하단 150px은 자막 영역이므로, 텍스트와 핵심 그래픽은 이 영역을 침범하지 않도록 주의하세요.
- * 화면에 노출되는 UI 텍스트는 프로그래밍 용어/회사명 등을 제외하고 모두 한국어 단어로 작성합니다.
- * In-Scene Animation 구성: 각 씬의 프레임 내에서 여러 단계로 애니메이션을 분할하여 구현합니다.
+ * ...
  */
 const Scene17: React.FC = () => {
-  return <AbsoluteFill></AbsoluteFill>;
+  const frame = useCurrentFrame();
+  const { fps } = useVideoConfig();
+
+  const labelEnter = spring({ frame: frame - 66, fps, config: ANIMATION.SPRING_SNAPPY });
+  const textEnter = spring({ frame: frame - 163, fps, config: ANIMATION.SPRING_GENTLE });
+
+  return (
+    <AbsoluteFill style={{ backgroundColor: COLORS.BG_BASE }}>
+      <div style={{ display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", height: "100%", gap: SPACING.PX_32 }}>
+        <div style={{ 
+          transform: `scale(${labelEnter})`, 
+          opacity: labelEnter, 
+          border: `2px solid ${COLORS.WARNING}`, 
+          padding: `${SPACING.PX_16}px ${SPACING.PX_32}px`,
+          fontFamily: FONTS.MONO,
+          fontSize: FONTS.SIZE_LG,
+          color: COLORS.TEXT_MAIN,
+          letterSpacing: FONTS.TRACKING_WIDER,
+          textTransform: "uppercase"
+        }}>
+          기밀 작전
+        </div>
+        <div style={{ 
+          transform: `translateY(${(1 - textEnter) * 10}px)`, 
+          opacity: textEnter, 
+          fontFamily: FONTS.PRIMARY,
+          fontSize: FONTS.SIZE_MD,
+          color: COLORS.TEXT_MUTED
+        }}>
+          공식 확인되지 않은 정보입니다
+        </div>
+      </div>
+    </AbsoluteFill>
+  );
 };
 
 /**
  * [Scene 18 기획안]
- * 원본 텍스트: "외신 보도에 따르면" 수준이라는 거 말씀드려요.
- * 단어 등장 타이밍: "\"외신": 3238f, "보도에": 3269f, "따르면\"": 3319f, "수준이라는": 3371f, "거": 3394f, "말씀드려요.": 3409f
- * 비주얼 컨셉: GLASS_BG 패널에 ["외신 보도에 따르면"] 따옴표 인용 레이블이 등장. 그 옆에 DISCLAIMER 배지(TEXT_DISABLED SIZE_XS). "수준이라는 거" 텍스트가 같은 패널 하단에 fade-in. 솔직한 정보 제한 고지.
- * 하단 150px은 자막 영역이므로, 텍스트와 핵심 그래픽은 이 영역을 침범하지 않도록 주의하세요.
- * 화면에 노출되는 UI 텍스트는 프로그래밍 용어/회사명 등을 제외하고 모두 한국어 단어로 작성합니다.
- * In-Scene Animation 구성: 각 씬의 프레임 내에서 여러 단계로 애니메이션을 분할하여 구현합니다.
+ * ...
  */
 const Scene18: React.FC = () => {
-  return <AbsoluteFill></AbsoluteFill>;
+  const frame = useCurrentFrame();
+  const { fps } = useVideoConfig();
+
+  const textEnter = spring({ frame: frame - 133, fps, config: ANIMATION.SPRING_GENTLE });
+  const disclaimerEnter = spring({ frame: frame - 0, fps, config: ANIMATION.SPRING_SNAPPY });
+
+  return (
+    <AbsoluteFill style={{ backgroundColor: COLORS.BG_BASE }}>
+      <div style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "100%" }}>
+        <QuotePanel startFrame={0} showQuoteMark={true}>
+          <div style={{ display: "flex", alignItems: "center", gap: SPACING.PX_16 }}>
+             <div style={{ fontFamily: FONTS.PRIMARY, fontSize: FONTS.SIZE_LG, color: COLORS.TEXT_MAIN, fontWeight: FONTS.WEIGHT_BOLD }}>
+               외신 보도에 따르면
+             </div>
+             <div style={{ opacity: disclaimerEnter, transform: `scale(${disclaimerEnter})` }}>
+               <StatusTag label="DISCLAIMER" bgColor={COLORS.BG_ELEVATED} textColor={COLORS.TEXT_DISABLED} borderColor="transparent" fontSize={FONTS.SIZE_XS} />
+             </div>
+          </div>
+          
+          <div style={{ 
+            opacity: textEnter, 
+            transform: `translateY(${(1 - textEnter) * 10}px)`, 
+            fontFamily: FONTS.PRIMARY, 
+            fontSize: FONTS.SIZE_MD, 
+            color: COLORS.TEXT_MUTED,
+            marginTop: SPACING.PX_16
+          }}>
+            수준이라는 거 말씀드려요.
+          </div>
+        </QuotePanel>
+      </div>
+    </AbsoluteFill>
+  );
 };
 
 /**
  * [Scene 19 기획안]
- * 원본 텍스트: 그래서 있는 그대로 전달드리는 거예요.
- * 단어 등장 타이밍: "그래서": 3409f, "있는": 3455f, "그대로": 3511f, "전달드리는": 3531f, "거예요.": 3606f
- * 비주얼 컨셉: 화면 중앙에 "있는 그대로" 텍스트가 TEXT_MAIN SIZE_XL으로 크게 fade-in. 그 아래 "전달드리는 거예요." SIZE_MD TEXT_BODY 색. 배경에 PRIMARY_DIM 방사형 glow가 서서히 밝아지며 섹션 마무리. 신뢰와 솔직함의 시각 표현.
- * 하단 150px은 자막 영역이므로, 텍스트와 핵심 그래픽은 이 영역을 침범하지 않도록 주의하세요.
- * 화면에 노출되는 UI 텍스트는 프로그래밍 용어/회사명 등을 제외하고 모두 한국어 단어로 작성합니다.
- * In-Scene Animation 구성: 각 씬의 프레임 내에서 여러 단계로 애니메이션을 분할하여 구현합니다.
+ * ...
  */
 const Scene19: React.FC = () => {
-  return <AbsoluteFill></AbsoluteFill>;
+  const frame = useCurrentFrame();
+  const { fps } = useVideoConfig();
+
+  const asIsEnter = spring({ frame: frame - 46, fps, config: ANIMATION.SPRING_GENTLE });
+  const conveyEnter = spring({ frame: frame - 122, fps, config: ANIMATION.SPRING_GENTLE });
+  const bgGlow = spring({ frame: frame - 46, fps, config: { damping: 200, stiffness: 20, mass: 1 } });
+
+  return (
+    <AbsoluteFill style={{ backgroundColor: COLORS.BG_BASE, display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center" }}>
+      <div style={{ position: "absolute", inset: 0, background: EFFECTS.RADIAL_PRIMARY, opacity: bgGlow * 0.4 }} />
+      
+      <div style={{ zIndex: 1, display: "flex", flexDirection: "column", alignItems: "center", gap: SPACING.PX_16 }}>
+        <div style={{ 
+          opacity: asIsEnter, 
+          transform: `translateY(${(1 - asIsEnter) * 10}px)`, 
+          fontFamily: FONTS.PRIMARY, 
+          fontSize: FONTS.SIZE_XL, 
+          color: COLORS.TEXT_MAIN, 
+          fontWeight: FONTS.WEIGHT_BOLD 
+        }}>
+          있는 그대로
+        </div>
+        <div style={{ 
+          opacity: conveyEnter, 
+          transform: `translateY(${(1 - conveyEnter) * 10}px)`, 
+          fontFamily: FONTS.PRIMARY, 
+          fontSize: FONTS.SIZE_MD, 
+          color: COLORS.TEXT_BODY 
+        }}>
+          전달드리는 거예요.
+        </div>
+      </div>
+    </AbsoluteFill>
+  );
 };
 
 export const Sequences: React.FC = () => {
   return (
     <AbsoluteFill>
-      <Sequence from={0} durationInFrames={164}>
+      <Sequence durationInFrames={164}>
         <Scene1 />
       </Sequence>
       <Sequence from={164} durationInFrames={324}>

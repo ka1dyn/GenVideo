@@ -101,15 +101,41 @@ const Scene3: React.FC = () => {
     { text: "영상이", f: 67 },
     { text: "너무 많아.", f: 95 },
   ];
-  const thumbs = Array.from({ length: 24 }, (_, i) => i);
+  const thumbs = Array.from({ length: 48 }, (_, i) => i);
   return (
     <AbsoluteFill style={{ backgroundColor: COLORS.BG_BASE }}>
-      {/* Background grid of thumbnails */}
-      <div style={{ position: "absolute", top: 120, right: 80, display: "grid", gridTemplateColumns: "repeat(6, 56px)", gap: 8, zIndex: Z.BG }}>
+      {/* Background grid of thumbnails - OVERLOAD FOCUS */}
+      <div style={{ 
+        position: "absolute", 
+        top: 80, 
+        right: 40, 
+        display: "grid", 
+        gridTemplateColumns: "repeat(6, 140px)", 
+        gap: 12, 
+        zIndex: Z.BG 
+      }}>
         {thumbs.map((i) => {
-          const delay = 20 + i * 3;
-          const o = interpolate(frame, [delay, delay + 12], [0, 0.25], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
-          return <div key={i} style={{ width: 56, height: 36, backgroundColor: COLORS.BG_ELEVATED, border: `1px solid ${COLORS.BORDER}`, opacity: o }} />;
+          const delay = 10 + i * 2; // Faster staggering
+          const o = interpolate(frame, [delay, delay + 10], [0, 0.4], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
+          
+          // Jitter/Vibration effect for stress
+          const jitterX = Math.sin(frame * 1.2 + i * 5) * 1.5;
+          const jitterY = Math.cos(frame * 1.2 + i * 3) * 1.5;
+
+          return (
+            <div 
+              key={i} 
+              style={{ 
+                width: 140, 
+                height: 90, 
+                backgroundColor: COLORS.BG_ELEVATED, 
+                border: `${SPACING.BORDER_NORMAL}px solid ${COLORS.BORDER_STRONG}`, 
+                opacity: o,
+                transform: `translate(${jitterX}px, ${jitterY}px)`,
+                boxShadow: o > 0.3 ? `0 0 10px ${COLORS.BORDER}` : "none"
+              }} 
+            />
+          );
         })}
       </div>
       {/* Quote panel */}
@@ -151,12 +177,42 @@ const Scene4: React.FC = () => {
   const negFlash = interpolate(frame, [CANT_FRAME, CANT_FRAME + 8, CANT_FRAME + 20], [0, 0.15, 0], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
   const sourceIn = interpolate(frame, [15, 35], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
   const thumbDim = interpolate(frame, [CANT_FRAME, CANT_FRAME + 15], [0.25, 0.06], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
-  const thumbs = Array.from({ length: 24 }, (_, i) => i);
+  const thumbs = Array.from({ length: 48 }, (_, i) => i);
   return (
     <AbsoluteFill style={{ backgroundColor: COLORS.BG_BASE }}>
       <div style={{ position: "absolute", inset: 0, backgroundColor: COLORS.NEGATIVE, opacity: negFlash, zIndex: Z.OVERLAY, pointerEvents: "none" }} />
-      <div style={{ position: "absolute", top: 120, right: 80, display: "grid", gridTemplateColumns: "repeat(6, 56px)", gap: 8, zIndex: Z.BG }}>
-        {thumbs.map((i) => <div key={i} style={{ width: 56, height: 36, backgroundColor: COLORS.BG_ELEVATED, border: `1px solid ${COLORS.BORDER}`, opacity: thumbDim }} />)}
+      
+      {/* Persist the dense grid from Scene 3 */}
+      <div style={{ 
+        position: "absolute", 
+        top: 80, 
+        right: 40, 
+        display: "grid", 
+        gridTemplateColumns: "repeat(6, 140px)", 
+        gap: 12, 
+        zIndex: Z.BG 
+      }}>
+        {thumbs.map((i) => {
+          // At peak (CANT_FRAME), some items turn slightly negative/red
+          const isStressed = frame >= CANT_FRAME && (i % 7 === 0);
+          const jitterX = Math.sin(frame * 2 + i) * 2; // More intense jitter in Scene 4
+          const jitterY = Math.cos(frame * 2.2 + i) * 2;
+
+          return (
+            <div 
+              key={i} 
+              style={{ 
+                width: 140, 
+                height: 90, 
+                backgroundColor: isStressed ? COLORS.NEGATIVE_DIM : COLORS.BG_ELEVATED, 
+                border: `${SPACING.BORDER_NORMAL}px solid ${isStressed ? COLORS.NEGATIVE : COLORS.BORDER_STRONG}`, 
+                opacity: thumbDim * 1.6, // maintain higher visibility
+                transform: `translate(${jitterX}px, ${jitterY}px)`,
+                boxShadow: isStressed ? `0 0 15px ${COLORS.NEGATIVE_DIM}` : "none"
+              }} 
+            />
+          );
+        })}
       </div>
       <div style={{ position: "absolute", top: 0, left: 0, right: 0, bottom: 150, display: "flex", alignItems: "center", zIndex: Z.CONTENT }}>
         <div style={{ marginLeft: SPACING.PX_96 }}>
@@ -1172,11 +1228,11 @@ const Scene27: React.FC = () => {
       <div style={{ position: "absolute", top: 0, left: 0, right: 0, bottom: 150, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: SPACING.PX_16, zIndex: Z.CONTENT }}>
         {/* $10B maintained */}
         <div style={{ color: COLORS.TEXT_MAIN, fontSize: FONTS.SIZE_4XL, fontWeight: FONTS.WEIGHT_EXTRABOLD, fontFamily: FONTS.DISPLAY, textShadow: EFFECTS.GLOW_TEXT_LG }}>$10B</div>
-        {/* Arrow + KRW conversion */}
+        {/* Arrow + KRW conversion
         <div style={{ display: "flex", alignItems: "center", gap: SPACING.PX_16, opacity: arrowIn }}>
           <div style={{ width: 40, height: 2, backgroundColor: COLORS.TEXT_DISABLED }} />
           <span style={{ color: COLORS.TEXT_DISABLED, fontSize: FONTS.SIZE_SM, fontFamily: FONTS.MONO }}>→</span>
-        </div>
+        </div> */}
         <div style={{ opacity: krwIn, transform: `translateY(${interpolate(krwIn, [0, 1], [ANIMATION.ENTER_Y_SM, 0])}px)`, color: COLORS.TEXT_BODY, fontSize: FONTS.SIZE_XL, fontWeight: FONTS.WEIGHT_BOLD, fontFamily: FONTS.DISPLAY }}>
           ≈ ₩13조
         </div>
@@ -1298,21 +1354,21 @@ export const Sequences: React.FC = () => {
       <Sequence from={3437} durationInFrames={183}>
         <Scene23 />
       </Sequence>
-      <Sequence from={3620} durationInFrames={260}>
+      <Sequence from={3620} durationInFrames={377}>
         <Scene24 />
       </Sequence>
-      <Sequence from={3880} durationInFrames={117}>
+      {/* <Sequence from={3880} durationInFrames={117}>
         <Scene25 />
-      </Sequence>
+      </Sequence> */}
       <Sequence from={3997} durationInFrames={223}>
         <Scene26 />
       </Sequence>
-      <Sequence from={4220} durationInFrames={138}>
+      <Sequence from={4220} durationInFrames={256}>
         <Scene27 />
       </Sequence>
-      <Sequence from={4358} durationInFrames={118}>
+      {/* <Sequence from={4358} durationInFrames={118}>
         <Scene28 />
-      </Sequence>
+      </Sequence> */}
     </AbsoluteFill>
   );
 };

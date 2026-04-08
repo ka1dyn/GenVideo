@@ -1,6 +1,6 @@
 import React from "react";
-import { useCurrentFrame, spring, useVideoConfig, interpolate } from "remotion";
-import { COLORS, FONTS, SPACING, ANIMATION, EFFECTS } from "../theme";
+import { useCurrentFrame } from "remotion";
+import { COLORS, FONTS, SPACING, EFFECTS } from "../theme";
 
 interface QuotePanelProps {
   children: React.ReactNode;
@@ -8,8 +8,6 @@ interface QuotePanelProps {
   startFrame?: number;
   /** Background color - defaults to GLASS_BG */
   bgColor?: string;
-  /** Left accent bar color - defaults to PRIMARY */
-  barColor?: string;
   /** Quotation mark color - defaults to ACCENT */
   quoteColor?: string;
   /** Source attribution text */
@@ -34,9 +32,8 @@ interface QuotePanelProps {
  */
 export const QuotePanel: React.FC<QuotePanelProps> = ({
   children,
-  startFrame = 5, // Default slight delay
+  startFrame = 5,
   bgColor = EFFECTS.GLASS_BG,
-  barColor = COLORS.PRIMARY,
   quoteColor = COLORS.ACCENT,
   source,
   sourceColor = COLORS.TEXT_DISABLED,
@@ -46,25 +43,14 @@ export const QuotePanel: React.FC<QuotePanelProps> = ({
   style,
   showQuoteMark = true,
 }) => {
-  const frame = useCurrentFrame();
-  const { fps } = useVideoConfig();
-
-  // Entrance animation for the entire panel
-  const panelIn = spring({
-    frame: Math.max(0, frame - startFrame),
-    fps,
-    config: ANIMATION.SPRING_SNAPPY,
-  });
-
   return (
     <div
       style={{
-        opacity: panelIn,
-        transform: `translateX(${interpolate(panelIn, [0, 1], [ANIMATION.ENTER_X_MD, 0])}px)`,
         backgroundColor: bgColor,
         padding: SPACING.PX_40,
         maxWidth: 600,
         display: "flex",
+        flexDirection: "column",
         gap: SPACING.PX_24,
         position: "relative",
         overflow: "hidden",
@@ -86,18 +72,7 @@ export const QuotePanel: React.FC<QuotePanelProps> = ({
         />
       )}
 
-      {/* Left accent bar */}
-      <div
-        style={{
-          width: 4,
-          backgroundColor: barColor,
-          flexShrink: 0,
-          borderRadius: SPACING.RADIUS_PILL,
-          boxShadow: barColor === COLORS.PRIMARY ? EFFECTS.GLOW_SM : "none",
-        }}
-      />
-
-      <div style={{ position: "relative", zIndex: 1, flex: 1 }}>
+      <div style={{ position: "relative", zIndex: 1 }}>
         {showQuoteMark && (
           <div
             style={{

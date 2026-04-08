@@ -2,8 +2,58 @@ import React from "react";
 import {
   AbsoluteFill,
   Sequence,
+  useCurrentFrame,
+  spring,
+  interpolate,
+  interpolateColors,
 } from "remotion";
 import { BRAND, COLORS, EFFECTS, FONTS, SPACING, ANIMATION, Z } from "../theme";
+
+const VBar: React.FC<{ label: string; value: number; color: string; delay: number; frame: number; isCracked?: boolean; crackFrame?: number }> = ({ label, value, color, delay, frame, isCracked = false, crackFrame = 0 }) => {
+  const fps = 60;
+  const progress = spring({ frame: frame - delay, fps, config: ANIMATION.SPRING_SNAPPY });
+  const currentHeight = interpolate(progress, [0, 1], [0, value]);
+  
+  const crackProgress = isCracked ? spring({ frame: frame - crackFrame, fps, config: ANIMATION.SPRING_BOUNCY }) : 0;
+  const finalHeight = isCracked ? interpolate(crackProgress, [0, 1], [value, 60]) : currentHeight;
+  
+  const barColor = isCracked ? interpolateColors(crackProgress, [0, 1], [color, COLORS.NEGATIVE]) : color;
+  const shadow = isCracked ? (crackProgress > 0 ? `0 0 16px ${COLORS.NEGATIVE}` : `0 0 16px ${color}`) : `0 0 16px ${color}`;
+
+  return (
+    <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: SPACING.PX_16 }}>
+      <div style={{ height: 240, width: 48, backgroundColor: COLORS.BG_SURFACE, borderRadius: SPACING.RADIUS_MD, display: "flex", alignItems: "flex-end", overflow: "hidden", position: "relative", border: `1px solid ${COLORS.BORDER}` }}>
+        <div style={{ width: "100%", height: `${finalHeight}%`, backgroundColor: barColor, boxShadow: shadow }} />
+        {isCracked && crackProgress > 0 && (
+          <div style={{ position: "absolute", bottom: `${finalHeight}%`, left: 0, width: "100%", height: 3, backgroundColor: COLORS.NEGATIVE, zIndex: 10, opacity: crackProgress }} />
+        )}
+      </div>
+      <div style={{ fontFamily: FONTS.PRIMARY, fontSize: FONTS.SIZE_SM, color: COLORS.TEXT_MAIN, fontWeight: FONTS.WEIGHT_SEMIBOLD }}>{label}</div>
+    </div>
+  );
+};
+
+const HBar: React.FC<{ label: string; value: number; color: string; delay: number; frame: number; showValue?: boolean; pulsingQuestion?: boolean }> = ({ label, value, color, delay, frame, showValue = true, pulsingQuestion = false }) => {
+  const fps = 60;
+  const progress = spring({ frame: frame - delay, fps, config: ANIMATION.SPRING_SNAPPY });
+  const currentWidth = interpolate(progress, [0, 1], [0, value]);
+  
+  const pulse = Math.sin(frame / 5) * 0.5 + 0.5;
+
+  return (
+    <div style={{ display: "flex", alignItems: "center", gap: SPACING.PX_32, width: 800 }}>
+      <div style={{ width: 140, fontFamily: FONTS.PRIMARY, fontSize: FONTS.SIZE_MD, color: COLORS.TEXT_MAIN, fontWeight: FONTS.WEIGHT_BOLD, textAlign: "right", letterSpacing: FONTS.TRACKING_WIDER }}>
+        [{label}]
+      </div>
+      <div style={{ flex: 1, height: 24, backgroundColor: COLORS.BG_SURFACE, borderRadius: SPACING.RADIUS_MD, overflow: "hidden", border: `1px solid ${COLORS.BORDER}` }}>
+        <div style={{ width: `${currentWidth}%`, height: "100%", backgroundColor: color, boxShadow: `0 0 16px ${color}` }} />
+      </div>
+      <div style={{ width: 80, fontFamily: FONTS.MONO, fontSize: FONTS.SIZE_MD, color: showValue ? color : COLORS.TEXT_MUTED, fontWeight: FONTS.WEIGHT_BOLD }}>
+        {showValue ? `${Math.round(currentWidth)}%` : pulsingQuestion ? <span style={{ opacity: pulse }}>?</span> : ""}
+      </div>
+    </div>
+  );
+};
 
 /**
  * [Scene 1 기획안]
@@ -15,7 +65,24 @@ import { BRAND, COLORS, EFFECTS, FONTS, SPACING, ANIMATION, Z } from "../theme";
  * In-Scene Animation 구성: 각 씬의 프레임 내에서 여러 단계로 애니메이션을 분할하여 구현합니다.
  */
 const Scene1: React.FC = () => {
-  return <AbsoluteFill style={{ backgroundColor: COLORS.BG_BASE }}></AbsoluteFill>;
+  const frame = useCurrentFrame();
+  const fps = 60;
+  
+  const butOpacity = spring({ frame, fps, config: ANIMATION.SPRING_GENTLE });
+  const lineWidth = spring({ frame: frame - 22, fps, config: ANIMATION.SPRING_SNAPPY });
+  const dotOpacity = spring({ frame: frame - 53, fps, config: ANIMATION.SPRING_BOUNCY });
+  const dotScale = interpolate(dotOpacity, [0, 1], [0, 1]);
+
+  return (
+    <AbsoluteFill style={{ backgroundColor: COLORS.BG_BASE, justifyContent: "center", alignItems: "center" }}>
+      <div style={{ position: "absolute", top: 120, fontFamily: FONTS.PRIMARY, fontSize: FONTS.SIZE_LG, color: COLORS.TEXT_MUTED, letterSpacing: FONTS.TRACKING_WIDER, opacity: butOpacity, fontWeight: FONTS.WEIGHT_BOLD }}>
+        하지만...
+      </div>
+      <div style={{ width: "60%", height: 2, backgroundColor: COLORS.BORDER_STRONG, display: "flex", alignItems: "center", justifyContent: "center", transform: `scaleX(${lineWidth})` }}>
+        <div style={{ width: 16, height: 16, backgroundColor: COLORS.WARNING, borderRadius: "50%", opacity: dotOpacity, transform: `scale(${dotScale})`, boxShadow: EFFECTS.GLOW_ACCENT }} />
+      </div>
+    </AbsoluteFill>
+  );
 };
 
 /**
@@ -28,7 +95,26 @@ const Scene1: React.FC = () => {
  * In-Scene Animation 구성: 각 씬의 프레임 내에서 여러 단계로 애니메이션을 분할하여 구현합니다.
  */
 const Scene2: React.FC = () => {
-  return <AbsoluteFill></AbsoluteFill>;
+  const frame = useCurrentFrame();
+  const fps = 60;
+  
+  const textOpacity = spring({ frame, fps, config: ANIMATION.SPRING_GENTLE });
+  const textY = interpolate(textOpacity, [0, 1], [30, 0]);
+
+  return (
+    <AbsoluteFill style={{ backgroundColor: COLORS.BG_BASE, justifyContent: "center", alignItems: "center" }}>
+      <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: SPACING.PX_64, top: -40, position: "relative" }}>
+        <div style={{ fontFamily: FONTS.DISPLAY, fontSize: FONTS.SIZE_2XL, fontWeight: FONTS.WEIGHT_EXTRABOLD, color: COLORS.PRIMARY, textShadow: EFFECTS.GLOW_MD, opacity: textOpacity, transform: `translateY(${textY}px)`}}>
+          프로젝트 메이븐
+        </div>
+        <div style={{ display: "flex", gap: SPACING.PX_80 }}>
+          <VBar label="속도" value={95} color={COLORS.PRIMARY} delay={30} frame={frame} />
+          <VBar label="정확도" value={90} color={COLORS.PRIMARY} delay={45} frame={frame} />
+          <VBar label="범위" value={85} color={COLORS.PRIMARY} delay={60} frame={frame} />
+        </div>
+      </div>
+    </AbsoluteFill>
+  );
 };
 
 /**
@@ -41,7 +127,33 @@ const Scene2: React.FC = () => {
  * In-Scene Animation 구성: 각 씬의 프레임 내에서 여러 단계로 애니메이션을 분할하여 구현합니다.
  */
 const Scene3: React.FC = () => {
-  return <AbsoluteFill></AbsoluteFill>;
+  const frame = useCurrentFrame();
+  const fps = 60;
+  
+  const labelOpacity = spring({ frame: frame - 31, fps, config: ANIMATION.SPRING_GENTLE });
+  const labelX = interpolate(labelOpacity, [0, 1], [-20, 0]);
+
+  return (
+    <AbsoluteFill style={{ backgroundColor: COLORS.BG_BASE, justifyContent: "center", alignItems: "center" }}>
+      <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: SPACING.PX_64, top: -40, position: "relative" }}>
+        <div style={{ fontFamily: FONTS.DISPLAY, fontSize: FONTS.SIZE_2XL, fontWeight: FONTS.WEIGHT_EXTRABOLD, color: COLORS.PRIMARY, textShadow: EFFECTS.GLOW_MD }}>
+          프로젝트 메이븐
+        </div>
+        <div style={{ display: "flex", gap: SPACING.PX_80, position: "relative" }}>
+          <VBar label="속도" value={95} color={COLORS.PRIMARY} delay={0} frame={999} />
+          <VBar label="정확도" value={90} color={COLORS.PRIMARY} delay={0} frame={frame} isCracked crackFrame={31} />
+          <VBar label="범위" value={85} color={COLORS.PRIMARY} delay={0} frame={999} />
+          
+          <div style={{ position: "absolute", top: 100, right: -240, display: "flex", alignItems: "center", gap: SPACING.PX_12, opacity: labelOpacity, transform: `translateX(${labelX}px)` }}>
+             <div style={{ width: 12, height: 12, backgroundColor: COLORS.NEGATIVE, borderRadius: "50%", boxShadow: EFFECTS.GLOW_SM }} />
+             <div style={{ fontFamily: FONTS.MONO, fontSize: FONTS.SIZE_SM, color: COLORS.NEGATIVE, fontWeight: FONTS.WEIGHT_BOLD }}>
+               [결함 감지]
+             </div>
+          </div>
+        </div>
+      </div>
+    </AbsoluteFill>
+  );
 };
 
 /**
@@ -54,7 +166,26 @@ const Scene3: React.FC = () => {
  * In-Scene Animation 구성: 각 씬의 프레임 내에서 여러 단계로 애니메이션을 분할하여 구현합니다.
  */
 const Scene4: React.FC = () => {
-  return <AbsoluteFill></AbsoluteFill>;
+  const frame = useCurrentFrame();
+  const fps = 60;
+  const topTextOpacity = spring({ frame, fps, config: ANIMATION.SPRING_GENTLE });
+  const bgOpacity = spring({ frame: frame - 15, fps, config: ANIMATION.SPRING_GENTLE });
+  const badgeOpacity = spring({ frame: frame - 114, fps, config: ANIMATION.SPRING_SNAPPY });
+  const badgeScale = interpolate(badgeOpacity, [0, 1], [0.9, 1]);
+
+  return (
+    <AbsoluteFill style={{ backgroundColor: COLORS.BG_BASE, justifyContent: "center", alignItems: "center" }}>
+      <div style={{ position: "absolute", inset: 0, opacity: bgOpacity, background: `repeating-linear-gradient(0deg, transparent, transparent 10px, ${COLORS.BG_ELEVATED} 10px, ${COLORS.BG_ELEVATED} 12px)` }} />
+      
+      <div style={{ position: "absolute", top: 120, fontFamily: FONTS.MONO, fontSize: FONTS.SIZE_MD, color: COLORS.TEXT_MUTED, letterSpacing: FONTS.TRACKING_WIDE, opacity: topTextOpacity }}>
+        중동 · 사막 환경
+      </div>
+      
+      <div style={{ opacity: badgeOpacity, transform: `scale(${badgeScale})`, padding: `${SPACING.PX_16}px ${SPACING.PX_32}px`, border: `1px solid ${COLORS.BORDER_STRONG}`, borderRadius: SPACING.RADIUS_SM, backgroundColor: EFFECTS.GLASS_BG, backdropFilter: EFFECTS.GLASS_BLUR, fontFamily: FONTS.PRIMARY, fontSize: FONTS.SIZE_LG, color: COLORS.TEXT_MAIN, fontWeight: FONTS.WEIGHT_BOLD }}>
+        실험 조건
+      </div>
+    </AbsoluteFill>
+  );
 };
 
 /**
@@ -67,7 +198,19 @@ const Scene4: React.FC = () => {
  * In-Scene Animation 구성: 각 씬의 프레임 내에서 여러 단계로 애니메이션을 분할하여 구현합니다.
  */
 const Scene5: React.FC = () => {
-  return <AbsoluteFill></AbsoluteFill>;
+  const frame = useCurrentFrame();
+  const fps = 60;
+  
+  const uiOpacity = spring({ frame, fps, config: ANIMATION.SPRING_GENTLE });
+
+  return (
+    <AbsoluteFill style={{ backgroundColor: COLORS.BG_BASE, justifyContent: "center", alignItems: "center" }}>
+      <div style={{ display: "flex", flexDirection: "column", gap: SPACING.PX_48, opacity: uiOpacity }}>
+        <HBar label="사람" value={84} color={COLORS.SECONDARY} delay={43} frame={frame} />
+        <HBar label="메이븐" value={0} color={COLORS.PRIMARY} delay={0} frame={frame} showValue={false} pulsingQuestion={true} />
+      </div>
+    </AbsoluteFill>
+  );
 };
 
 /**
@@ -80,7 +223,55 @@ const Scene5: React.FC = () => {
  * In-Scene Animation 구성: 각 씬의 프레임 내에서 여러 단계로 애니메이션을 분할하여 구현합니다.
  */
 const Scene6: React.FC = () => {
-  return <AbsoluteFill></AbsoluteFill>;
+  const frame = useCurrentFrame();
+  const fps = 60;
+  
+  const gapOpacity = spring({ frame: frame - 20, fps, config: ANIMATION.SPRING_SNAPPY });
+
+  return (
+    <AbsoluteFill style={{ backgroundColor: COLORS.BG_BASE, justifyContent: "center", alignItems: "center" }}>
+      <div style={{ display: "flex", flexDirection: "column", gap: SPACING.PX_48 }}>
+        <HBar label="사람" value={84} color={COLORS.SECONDARY} delay={-999} frame={999} />
+        <div style={{ position: "relative" }}>
+          <HBar label="메이븐" value={60} color={COLORS.NEGATIVE} delay={0} frame={frame} />
+          
+          <div style={{ position: "absolute", left: 140 + 32 + 516 * 0.6, width: 516 * 0.24, height: 24, top: 0, backgroundColor: COLORS.NEGATIVE_DIM, border: `1px dashed ${COLORS.NEGATIVE}`, opacity: gapOpacity, display: "flex", justifyContent: "center", alignItems: "center" }}>
+            <span style={{ position: "absolute", top: -30, fontFamily: FONTS.MONO, fontSize: FONTS.SIZE_SM, color: COLORS.NEGATIVE, fontWeight: FONTS.WEIGHT_BOLD }}>격차</span>
+          </div>
+        </div>
+      </div>
+    </AbsoluteFill>
+  );
+};
+
+/**
+ * [Scene 7 기획안]
+ * 원본 텍스트: 왜냐면 AI가 트럭이랑 나무를, 계곡이랑 장갑차를 혼동했거든요.
+ * 단어 등장 타이밍: "왜냐면": 905f, "AI가": 947f, "트럭이랑": 967f, "나무를,": 1019f, "계곡이랑": 1067f, "장갑차를": 1099f, "혼동했거든요.": 1133f
+ * 비주얼 컨셉: 화면을 2행 구조로: 상행 [A] vs [B] 쌍 / 하행 [C] vs [D] 쌍. "트럭이랑 나무" 단어에 상행 두 레이블 텍스트 박스 등장, 사이에 "≈ ?" 혼동 기호. "계곡이랑 장갑차" 단어에 하행 두 박스 등장. "혼동했거든요." 단어에 각 쌍 사이에 NEGATIVE 색 "≈" 등호 pulse.
+ * 하단 150px은 자막 영역이므로, 텍스트와 핵심 그래픽은 이 영역을 침범하지 않도록 주의하세요.
+ * 화면에 노출되는 UI 텍스트는 프로그래밍 용어/회사명 등을 제외하고 모두 한국어 단어로 작성합니다.
+ * In-Scene Animation 구성: 각 씬의 프레임 내에서 여러 단계로 애니메이션을 분할하여 구현합니다.
+ */
+const PairBox: React.FC<{ left: string; right: string; delay: number; pulseDelay: number; frame: number }> = ({ left, right, delay, pulseDelay, frame }) => {
+  const fps = 60;
+  const enter = spring({ frame: frame - delay, fps, config: ANIMATION.SPRING_SNAPPY });
+  const pulseScale = spring({ frame: frame - pulseDelay, fps, config: ANIMATION.SPRING_BOUNCY });
+  const isPulsing = frame >= pulseDelay;
+
+  return (
+    <div style={{ display: "flex", alignItems: "center", gap: SPACING.PX_40, opacity: enter, transform: `translateY(${(1-enter)*20}px)` }}>
+      <div style={{ width: 160, height: 80, backgroundColor: COLORS.BG_SURFACE, border: `1px solid ${COLORS.BORDER}`, display: "flex", justifyContent: "center", alignItems: "center", fontFamily: FONTS.PRIMARY, fontSize: FONTS.SIZE_MD, color: COLORS.TEXT_MAIN, borderRadius: SPACING.RADIUS_MD, fontWeight: FONTS.WEIGHT_BOLD }}>
+        {left}
+      </div>
+      <div style={{ width: 60, textAlign: "center", fontFamily: FONTS.MONO, fontSize: FONTS.SIZE_XL, color: isPulsing ? COLORS.NEGATIVE : COLORS.TEXT_MUTED, fontWeight: FONTS.WEIGHT_BOLD, transform: `scale(${isPulsing ? 1 + pulseScale * 0.2 : 1})`, textShadow: isPulsing ? EFFECTS.GLOW_SM : "none" }}>
+        {isPulsing ? "≈" : "≈ ?"}
+      </div>
+      <div style={{ width: 160, height: 80, backgroundColor: COLORS.BG_SURFACE, border: `1px solid ${COLORS.BORDER}`, display: "flex", justifyContent: "center", alignItems: "center", fontFamily: FONTS.PRIMARY, fontSize: FONTS.SIZE_MD, color: COLORS.TEXT_MAIN, borderRadius: SPACING.RADIUS_MD, fontWeight: FONTS.WEIGHT_BOLD }}>
+        {right}
+      </div>
+    </div>
+  );
 };
 
 /**
@@ -93,7 +284,16 @@ const Scene6: React.FC = () => {
  * In-Scene Animation 구성: 각 씬의 프레임 내에서 여러 단계로 애니메이션을 분할하여 구현합니다.
  */
 const Scene7: React.FC = () => {
-  return <AbsoluteFill></AbsoluteFill>;
+  const frame = useCurrentFrame();
+
+  return (
+    <AbsoluteFill style={{ backgroundColor: COLORS.BG_BASE, justifyContent: "center", alignItems: "center" }}>
+      <div style={{ display: "flex", flexDirection: "column", gap: SPACING.PX_64 }}>
+        <PairBox left="트럭" right="나무" delay={62} pulseDelay={228} frame={frame} />
+        <PairBox left="계곡" right="장갑차" delay={162} pulseDelay={228} frame={frame} />
+      </div>
+    </AbsoluteFill>
+  );
 };
 
 /**
@@ -106,7 +306,36 @@ const Scene7: React.FC = () => {
  * In-Scene Animation 구성: 각 씬의 프레임 내에서 여러 단계로 애니메이션을 분할하여 구현합니다.
  */
 const Scene8: React.FC = () => {
-  return <AbsoluteFill></AbsoluteFill>;
+  const frame = useCurrentFrame();
+  const fps = 60;
+  
+  const leftPulse = spring({ frame: frame - 85, fps, config: ANIMATION.SPRING_BOUNCY });
+  const rightPulse = spring({ frame: frame - 160, fps, config: ANIMATION.SPRING_BOUNCY });
+
+  return (
+    <AbsoluteFill style={{ backgroundColor: COLORS.BG_BASE, justifyContent: "center", alignItems: "center" }}>
+      <div style={{ display: "flex", gap: 120 }}>
+        {/* Left */}
+        <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: SPACING.PX_32 }}>
+          <div style={{ fontFamily: FONTS.MONO, fontSize: FONTS.SIZE_MD, color: COLORS.SECONDARY, fontWeight: FONTS.WEIGHT_BOLD, letterSpacing: FONTS.TRACKING_WIDER }}>사람의 인식</div>
+          <div style={{ display: "flex", alignItems: "center", gap: SPACING.PX_24 }}>
+             <div style={{ width: 100, height: 100, backgroundColor: COLORS.BG_SURFACE, border: `1px solid ${COLORS.BORDER}`, borderRadius: SPACING.RADIUS_MD }} />
+             <div style={{ fontFamily: FONTS.MONO, fontSize: FONTS.SIZE_XL, color: leftPulse > 0 ? COLORS.PRIMARY : COLORS.TEXT_MUTED, transform: `scale(${1 + leftPulse * 0.2})`, textShadow: leftPulse > 0 ? EFFECTS.GLOW_SM : "none", fontWeight: FONTS.WEIGHT_BOLD }}>≠</div>
+             <div style={{ width: 100, height: 100, backgroundColor: COLORS.BG_SURFACE, border: `1px solid ${COLORS.BORDER}`, borderRadius: 50 }} />
+          </div>
+        </div>
+        {/* Right */}
+        <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: SPACING.PX_32 }}>
+          <div style={{ fontFamily: FONTS.MONO, fontSize: FONTS.SIZE_MD, color: COLORS.WARNING, fontWeight: FONTS.WEIGHT_BOLD, letterSpacing: FONTS.TRACKING_WIDER }}>AI의 인식</div>
+          <div style={{ display: "flex", alignItems: "center", gap: SPACING.PX_24 }}>
+             <div style={{ width: 100, height: 100, backgroundColor: COLORS.BG_SURFACE, border: `1px solid ${COLORS.BORDER}`, borderRadius: SPACING.RADIUS_MD }} />
+             <div style={{ fontFamily: FONTS.MONO, fontSize: FONTS.SIZE_XL, color: rightPulse > 0 ? COLORS.WARNING : COLORS.TEXT_MUTED, transform: `scale(${1 + rightPulse * 0.2})`, textShadow: rightPulse > 0 ? EFFECTS.GLOW_ACCENT : "none", fontWeight: FONTS.WEIGHT_BOLD }}>≈</div>
+             <div style={{ width: 100, height: 100, backgroundColor: COLORS.BG_SURFACE, border: `1px solid ${COLORS.BORDER}`, borderRadius: 50 }} />
+          </div>
+        </div>
+      </div>
+    </AbsoluteFill>
+  );
 };
 
 /**
@@ -119,7 +348,24 @@ const Scene8: React.FC = () => {
  * In-Scene Animation 구성: 각 씬의 프레임 내에서 여러 단계로 애니메이션을 분할하여 구현합니다.
  */
 const Scene9: React.FC = () => {
-  return <AbsoluteFill></AbsoluteFill>;
+  const frame = useCurrentFrame();
+  const fps = 60;
+  const enter = spring({ frame, fps, config: ANIMATION.SPRING_SNAPPY });
+  const cursorOpacity = Math.floor(frame / 15) % 2 === 0 ? 1 : 0;
+
+  return (
+    <AbsoluteFill style={{ backgroundColor: COLORS.BG_BASE, justifyContent: "center", alignItems: "center" }}>
+      <div style={{ width: 800, padding: SPACING.PX_40, backgroundColor: EFFECTS.GLASS_BG, border: `1px solid ${EFFECTS.GLASS_BORDER}`, borderRadius: SPACING.RADIUS_LG, opacity: enter, transform: `translateY(${(1-enter)*40}px)` }}>
+        <div style={{ fontFamily: FONTS.MONO, fontSize: FONTS.SIZE_SM, color: COLORS.TEXT_MUTED, letterSpacing: FONTS.TRACKING_WIDER, marginBottom: SPACING.PX_32, display: "flex", alignItems: "center", gap: 12 }}>
+          <div style={{ width: 8, height: 8, backgroundColor: COLORS.TEXT_MUTED, borderRadius: "50%" }} />
+          미군 관계자 — 공식 인정
+        </div>
+        <div style={{ fontFamily: FONTS.PRIMARY, fontSize: FONTS.SIZE_LG, color: COLORS.TEXT_MAIN, lineHeight: FONTS.LEADING_NORMAL }}>
+          <span style={{ opacity: cursorOpacity, color: COLORS.PRIMARY }}>|</span>
+        </div>
+      </div>
+    </AbsoluteFill>
+  );
 };
 
 /**
@@ -132,7 +378,43 @@ const Scene9: React.FC = () => {
  * In-Scene Animation 구성: 각 씬의 프레임 내에서 여러 단계로 애니메이션을 분할하여 구현합니다.
  */
 const Scene10: React.FC = () => {
-  return <AbsoluteFill></AbsoluteFill>;
+  const frame = useCurrentFrame();
+  const fps = 60;
+  
+  const text1 = "메이븐의 장점은 어디까지나 ";
+  const text2 = "속도다.";
+  const showText1Length = Math.max(0, Math.min(text1.length, Math.floor(frame / 2)));
+  const showText2 = frame >= 99;
+  
+  const barProgress = spring({ frame: frame - 15, fps, config: ANIMATION.SPRING_SNAPPY });
+
+  return (
+    <AbsoluteFill style={{ backgroundColor: COLORS.BG_BASE, justifyContent: "center", alignItems: "center" }}>
+      <div style={{ display: "flex", gap: SPACING.PX_80, alignItems: "center" }}>
+        <div style={{ width: 600, padding: SPACING.PX_40, backgroundColor: EFFECTS.GLASS_BG, border: `1px solid ${EFFECTS.GLASS_BORDER}`, borderRadius: SPACING.RADIUS_LG }}>
+          <div style={{ fontFamily: FONTS.MONO, fontSize: FONTS.SIZE_SM, color: COLORS.TEXT_MUTED, letterSpacing: FONTS.TRACKING_WIDER, marginBottom: SPACING.PX_32, display: "flex", alignItems: "center", gap: 12 }}>
+            <div style={{ width: 8, height: 8, backgroundColor: COLORS.TEXT_MUTED, borderRadius: "50%" }} />
+            미군 관계자 — 공식 인정
+          </div>
+          <div style={{ fontFamily: FONTS.PRIMARY, fontSize: FONTS.SIZE_LG, color: COLORS.TEXT_MAIN, lineHeight: FONTS.LEADING_NORMAL }}>
+            {text1.substring(0, showText1Length)}
+            {showText2 ? <span style={{ color: COLORS.PRIMARY, textShadow: EFFECTS.GLOW_SM }}>{text2}</span> : null}
+            <span style={{ opacity: Math.floor(frame / 15) % 2 === 0 ? 1 : 0, color: COLORS.PRIMARY }}>|</span>
+          </div>
+        </div>
+        
+        {/* Right Bars */}
+        <div style={{ display: "flex", flexDirection: "column", gap: SPACING.PX_32, opacity: barProgress, transform: `translateX(${(1-barProgress)*20}px)` }}>
+          <div style={{ display: "flex", alignItems: "center", gap: SPACING.PX_24 }}>
+             <div style={{ width: 120, textAlign: "right", fontFamily: FONTS.PRIMARY, fontSize: FONTS.SIZE_MD, color: COLORS.PRIMARY, fontWeight: FONTS.WEIGHT_BOLD }}>속도</div>
+             <div style={{ width: 300, height: 16, backgroundColor: COLORS.BG_SURFACE, borderRadius: 8, position: "relative", overflow: "hidden" }}>
+                <div style={{ position: "absolute", left: 0, top: 0, bottom: 0, width: "100%", backgroundColor: COLORS.PRIMARY, boxShadow: `0 0 16px ${COLORS.PRIMARY}` }} />
+             </div>
+          </div>
+        </div>
+      </div>
+    </AbsoluteFill>
+  );
 };
 
 /**
@@ -145,7 +427,59 @@ const Scene10: React.FC = () => {
  * In-Scene Animation 구성: 각 씬의 프레임 내에서 여러 단계로 애니메이션을 분할하여 구현합니다.
  */
 const Scene11: React.FC = () => {
-  return <AbsoluteFill></AbsoluteFill>;
+  const frame = useCurrentFrame();
+  const fps = 60;
+  
+  const text3 = "전술적 판단 수준엔 아직 ";
+  const text4 = "못 미친다.";
+  const showText3Length = Math.max(0, Math.min(text3.length, Math.floor(frame / 2)));
+  const showText4 = frame >= 102;
+
+  const bar2Enter = spring({ frame: frame - 15, fps, config: ANIMATION.SPRING_SNAPPY });
+  const bar2Width = interpolate(bar2Enter, [0, 1], [0, 60]);
+  
+  const xScale = spring({ frame: frame - 102, fps, config: ANIMATION.SPRING_BOUNCY });
+
+  return (
+    <AbsoluteFill style={{ backgroundColor: COLORS.BG_BASE, justifyContent: "center", alignItems: "center" }}>
+      <div style={{ display: "flex", gap: SPACING.PX_80, alignItems: "center" }}>
+        <div style={{ width: 600, padding: SPACING.PX_40, backgroundColor: EFFECTS.GLASS_BG, border: `1px solid ${EFFECTS.GLASS_BORDER}`, borderRadius: SPACING.RADIUS_LG }}>
+          <div style={{ fontFamily: FONTS.MONO, fontSize: FONTS.SIZE_SM, color: COLORS.TEXT_MUTED, letterSpacing: FONTS.TRACKING_WIDER, marginBottom: SPACING.PX_32, display: "flex", alignItems: "center", gap: 12 }}>
+            <div style={{ width: 8, height: 8, backgroundColor: COLORS.TEXT_MUTED, borderRadius: "50%" }} />
+            미군 관계자 — 공식 인정
+          </div>
+          <div style={{ fontFamily: FONTS.PRIMARY, fontSize: FONTS.SIZE_LG, color: COLORS.TEXT_MAIN, lineHeight: FONTS.LEADING_NORMAL }}>
+            메이븐의 장점은 어디까지나 <span style={{ color: COLORS.PRIMARY, textShadow: EFFECTS.GLOW_SM }}>속도다.</span>
+            <br/><br/>
+            {text3.substring(0, showText3Length)}
+            {showText4 ? <span style={{ color: COLORS.NEGATIVE, textShadow: EFFECTS.GLOW_SM }}>{text4}</span> : null}
+            <span style={{ opacity: Math.floor(frame / 15) % 2 === 0 ? 1 : 0, color: COLORS.PRIMARY }}>|</span>
+          </div>
+        </div>
+        
+        {/* Right Bars */}
+        <div style={{ display: "flex", flexDirection: "column", gap: SPACING.PX_32 }}>
+          <div style={{ display: "flex", alignItems: "center", gap: SPACING.PX_24 }}>
+             <div style={{ width: 120, textAlign: "right", fontFamily: FONTS.PRIMARY, fontSize: FONTS.SIZE_MD, color: COLORS.TEXT_MUTED, fontWeight: FONTS.WEIGHT_BOLD }}>속도</div>
+             <div style={{ width: 300, height: 16, backgroundColor: COLORS.BG_SURFACE, borderRadius: 8, position: "relative", overflow: "hidden" }}>
+                <div style={{ position: "absolute", left: 0, top: 0, bottom: 0, width: "100%", backgroundColor: COLORS.TEXT_MUTED }} />
+             </div>
+          </div>
+          <div style={{ display: "flex", alignItems: "center", gap: SPACING.PX_24, opacity: bar2Enter, transform: `translateY(${(1-bar2Enter)*10}px)` }}>
+             <div style={{ width: 120, textAlign: "right", fontFamily: FONTS.PRIMARY, fontSize: FONTS.SIZE_MD, color: COLORS.NEGATIVE, fontWeight: FONTS.WEIGHT_BOLD }}>전술적 판단</div>
+             <div style={{ width: 300, height: 16, backgroundColor: COLORS.BG_SURFACE, borderRadius: 8, position: "relative", overflow: "visible" }}>
+                <div style={{ position: "absolute", left: 0, top: 0, bottom: 0, width: `${bar2Width}%`, backgroundColor: COLORS.NEGATIVE, boxShadow: `0 0 16px ${COLORS.NEGATIVE}` }} />
+                {frame >= 102 && (
+                  <div style={{ position: "absolute", right: -30, top: -8, fontFamily: FONTS.MONO, fontSize: FONTS.SIZE_LG, color: COLORS.NEGATIVE, fontWeight: FONTS.WEIGHT_BOLD, transform: `scale(${xScale})`, textShadow: EFFECTS.GLOW_SM }}>
+                    ✕
+                  </div>
+                )}
+             </div>
+          </div>
+        </div>
+      </div>
+    </AbsoluteFill>
+  );
 };
 
 /**
@@ -158,7 +492,52 @@ const Scene11: React.FC = () => {
  * In-Scene Animation 구성: 각 씬의 프레임 내에서 여러 단계로 애니메이션을 분할하여 구현합니다.
  */
 const Scene12: React.FC = () => {
-  return <AbsoluteFill></AbsoluteFill>;
+  const frame = useCurrentFrame();
+  const fps = 60;
+  
+  const textScale = spring({ frame, fps, config: ANIMATION.SPRING_SNAPPY });
+  const qOpacity = spring({ frame: frame - 30, fps, config: ANIMATION.SPRING_GENTLE });
+  const borderDash = frame >= 240 ? spring({ frame: frame - 240, fps, config: ANIMATION.SPRING_BOUNCY }) : 0;
+
+  return (
+    <AbsoluteFill style={{ backgroundColor: COLORS.BG_BASE, justifyContent: "center", alignItems: "center" }}>
+      <div style={{ position: "relative", display: "flex", justifyContent: "center", alignItems: "center" }}>
+        <div style={{ 
+          position: "absolute", 
+          inset: -40, 
+          border: `2px dashed ${COLORS.WARNING}`, 
+          borderRadius: SPACING.RADIUS_MD,
+          opacity: borderDash,
+          transform: `scale(${1 + (1 - borderDash) * 0.1})` 
+        }} />
+        
+        <div style={{ 
+          fontFamily: FONTS.MONO, 
+          fontSize: FONTS.SIZE_4XL, 
+          fontWeight: FONTS.WEIGHT_EXTRABOLD, 
+          color: COLORS.WARNING, 
+          textShadow: EFFECTS.GLOW_ACCENT,
+          transform: `scale(${textScale})`
+        }}>
+          1,000
+        </div>
+        
+        <div style={{ 
+          position: "absolute", 
+          right: -80, 
+          top: -40, 
+          fontFamily: FONTS.MONO, 
+          fontSize: FONTS.SIZE_2XL, 
+          fontWeight: FONTS.WEIGHT_BOLD, 
+          color: COLORS.WARNING, 
+          opacity: qOpacity * 0.5,
+          textShadow: EFFECTS.GLOW_ACCENT
+        }}>
+          ?
+        </div>
+      </div>
+    </AbsoluteFill>
+  );
 };
 
 /**
@@ -171,7 +550,39 @@ const Scene12: React.FC = () => {
  * In-Scene Animation 구성: 각 씬의 프레임 내에서 여러 단계로 애니메이션을 분할하여 구현합니다.
  */
 const Scene13: React.FC = () => {
-  return <AbsoluteFill></AbsoluteFill>;
+  const frame = useCurrentFrame();
+  const fps = 60;
+  
+  const mulSlide = spring({ frame: frame - 36, fps, config: ANIMATION.SPRING_SNAPPY });
+  const eqSlide = spring({ frame: frame - 77, fps, config: ANIMATION.SPRING_SNAPPY });
+  
+  return (
+    <AbsoluteFill style={{ backgroundColor: COLORS.BG_BASE, justifyContent: "center", alignItems: "center" }}>
+      <div style={{ display: "flex", alignItems: "center", gap: SPACING.PX_40, fontFamily: FONTS.MONO, fontSize: FONTS.SIZE_3XL, fontWeight: FONTS.WEIGHT_EXTRABOLD }}>
+        <div style={{ color: COLORS.WARNING, textShadow: EFFECTS.GLOW_ACCENT }}>
+          1,000
+        </div>
+        
+        <div style={{ color: COLORS.TEXT_MUTED, opacity: mulSlide, transform: `translateX(${(1-mulSlide)*-20}px)` }}>
+          ×
+        </div>
+        
+        <div style={{ color: COLORS.TEXT_MAIN, opacity: mulSlide, transform: `translateX(${(1-mulSlide)*-20}px)` }}>
+          60%
+        </div>
+        
+        <div style={{ color: COLORS.NEGATIVE, opacity: eqSlide, transform: `translateY(${(1-eqSlide)*20}px) scale(${1 + (1-eqSlide)*0.5})`, marginLeft: SPACING.PX_40, textShadow: EFFECTS.GLOW_LG }}>
+          = 600?
+        </div>
+      </div>
+      
+      <div style={{ position: "absolute", bottom: 200, display: "flex", gap: 12, opacity: eqSlide }}>
+        <div style={{ padding: "10px 24px", backgroundColor: COLORS.NEGATIVE_DIM, border: `1px solid ${COLORS.NEGATIVE}`, borderRadius: SPACING.RADIUS_SM, color: COLORS.NEGATIVE, fontFamily: FONTS.PRIMARY, fontSize: FONTS.SIZE_MD, fontWeight: FONTS.WEIGHT_BOLD }}>
+          오차범위 400개
+        </div>
+      </div>
+    </AbsoluteFill>
+  );
 };
 
 /**
@@ -184,7 +595,27 @@ const Scene13: React.FC = () => {
  * In-Scene Animation 구성: 각 씬의 프레임 내에서 여러 단계로 애니메이션을 분할하여 구현합니다.
  */
 const Scene14: React.FC = () => {
-  return <AbsoluteFill></AbsoluteFill>;
+  const frame = useCurrentFrame();
+  const fps = 60;
+  
+  const enter = spring({ frame, fps, config: ANIMATION.SPRING_SNAPPY });
+  const pulse = spring({ frame: frame - 85, fps, config: ANIMATION.SPRING_BOUNCY });
+  const borderColor = interpolateColors(pulse, [0, 1], [COLORS.BORDER_STRONG, COLORS.NEGATIVE]);
+  const glow = pulse > 0 ? EFFECTS.GLOW_SM : "none";
+
+  return (
+    <AbsoluteFill style={{ backgroundColor: COLORS.BG_BASE, justifyContent: "center", alignItems: "center" }}>
+      <div style={{ width: 600, padding: SPACING.PX_48, backgroundColor: COLORS.NEGATIVE_DIM, border: `2px solid ${borderColor}`, borderRadius: SPACING.RADIUS_MD, opacity: enter, transform: `scale(${1 + (1-enter)*0.1})`, boxShadow: pulse > 0 ? `0 0 32px ${COLORS.NEGATIVE_DIM}` : "none", display: "flex", flexDirection: "column", alignItems: "center", gap: SPACING.PX_32 }}>
+        <div style={{ fontFamily: FONTS.PRIMARY, fontSize: FONTS.SIZE_LG, color: pulse > 0 ? COLORS.NEGATIVE : COLORS.TEXT_MAIN, fontWeight: FONTS.WEIGHT_BOLD, textShadow: glow, transform: `scale(${1 + pulse * 0.05})` }}>
+          민간인 피해 보도
+        </div>
+        <div style={{ width: 40, height: 2, backgroundColor: COLORS.NEGATIVE, opacity: pulse }} />
+        <div style={{ fontFamily: FONTS.MONO, fontSize: FONTS.SIZE_SM, color: COLORS.TEXT_DISABLED, letterSpacing: FONTS.TRACKING_WIDE }}>
+          출처: 복수의 언론 보도
+        </div>
+      </div>
+    </AbsoluteFill>
+  );
 };
 
 /**
@@ -197,7 +628,63 @@ const Scene14: React.FC = () => {
  * In-Scene Animation 구성: 각 씬의 프레임 내에서 여러 단계로 애니메이션을 분할하여 구현합니다.
  */
 const Scene15: React.FC = () => {
-  return <AbsoluteFill></AbsoluteFill>;
+  const frame = useCurrentFrame();
+  const fps = 60;
+  
+  const enterL = spring({ frame: frame - 20, fps, config: ANIMATION.SPRING_SNAPPY });
+  const enterM = spring({ frame: frame - 40, fps, config: ANIMATION.SPRING_SNAPPY });
+  const enterR = spring({ frame: frame - 60, fps, config: ANIMATION.SPRING_SNAPPY });
+  
+  const impactR = spring({ frame: frame - 157, fps, config: ANIMATION.SPRING_BOUNCY });
+  const scaleR = interpolate(impactR, [0, 1], [1, 1.2]);
+
+  return (
+    <AbsoluteFill style={{ backgroundColor: COLORS.BG_BASE, justifyContent: "center", alignItems: "center" }}>
+      <div style={{ display: "flex", alignItems: "center", gap: SPACING.PX_64 }}>
+        <div style={{ width: 240, height: 160, display: "flex", justifyContent: "center", alignItems: "center", backgroundColor: COLORS.BG_SURFACE, border: `2px solid ${COLORS.WARNING}`, borderRadius: SPACING.RADIUS_MD, fontFamily: FONTS.PRIMARY, fontSize: FONTS.SIZE_LG, fontWeight: FONTS.WEIGHT_BOLD, color: COLORS.WARNING, opacity: enterL, transform: `translateY(${(1-enterL)*20}px)`, boxShadow: EFFECTS.GLOW_ACCENT }}>
+          AI 오류
+        </div>
+        
+        <div style={{ fontFamily: FONTS.MONO, fontSize: FONTS.SIZE_2XL, color: COLORS.TEXT_MUTED, opacity: enterM }}>
+          →
+        </div>
+        
+        <div style={{ width: 240, height: 160, display: "flex", justifyContent: "center", alignItems: "center", backgroundColor: impactR > 0 ? COLORS.NEGATIVE_DIM : COLORS.BG_SURFACE, border: `2px solid ${COLORS.NEGATIVE}`, borderRadius: SPACING.RADIUS_MD, fontFamily: FONTS.PRIMARY, fontSize: FONTS.SIZE_LG, fontWeight: FONTS.WEIGHT_BOLD, color: COLORS.NEGATIVE, opacity: enterR, transform: `translateY(${(1-enterR)*20}px) scale(${scaleR})`, boxShadow: impactR > 0 ? `0 0 40px ${COLORS.NEGATIVE_DIM}` : "none", transition: "background-color 0.3s" }}>
+          치명적 결과
+        </div>
+      </div>
+    </AbsoluteFill>
+  );
+};
+
+const PipeNode: React.FC<{ label: string; highlightedState?: "none" | "pulse" | "solid"; pulseFrame?: number; delay?: number; frame: number; children?: React.ReactNode }> = ({ label, highlightedState = "none", pulseFrame = 0, delay = 0, frame, children }) => {
+  const fps = 60;
+  const enter = spring({ frame: frame - delay, fps, config: ANIMATION.SPRING_SNAPPY });
+  let pulse = 0;
+  if (highlightedState === "pulse") {
+    pulse = spring({ frame: frame - pulseFrame, fps, config: ANIMATION.SPRING_BOUNCY });
+  } else if (highlightedState === "solid") {
+    pulse = 1;
+  }
+  
+  const isHighlighted = highlightedState === "solid" || (highlightedState === "pulse" && frame >= pulseFrame);
+
+  return (
+    <div style={{ position: "relative", padding: "16px 24px", backgroundColor: COLORS.BG_SURFACE, border: `2px solid ${isHighlighted ? COLORS.PRIMARY : COLORS.BORDER}`, borderRadius: SPACING.RADIUS_MD, fontFamily: FONTS.PRIMARY, fontSize: FONTS.SIZE_MD, color: COLORS.TEXT_MAIN, fontWeight: FONTS.WEIGHT_BOLD, opacity: enter, transform: `translateY(${(1-enter)*20}px) scale(${1 + pulse * 0.05})`, boxShadow: isHighlighted ? EFFECTS.GLOW_SM : "none", transition: "border 0.3s" }}>
+      {label}
+      {children}
+    </div>
+  );
+};
+
+const FlowArrow: React.FC<{ delay: number; frame: number }> = ({ delay, frame }) => {
+  const fps = 60;
+  const enter = spring({ frame: frame - delay, fps, config: ANIMATION.SPRING_GENTLE });
+  const offset = -(frame % 30);
+  
+  return (
+    <div style={{ width: 60, height: 2, background: `repeating-linear-gradient(90deg, ${COLORS.PRIMARY}, ${COLORS.PRIMARY} 6px, transparent 6px, transparent 12px)`, opacity: enter, backgroundPositionX: offset }} />
+  );
 };
 
 /**
@@ -210,7 +697,29 @@ const Scene15: React.FC = () => {
  * In-Scene Animation 구성: 각 씬의 프레임 내에서 여러 단계로 애니메이션을 분할하여 구현합니다.
  */
 const Scene16: React.FC = () => {
-  return <AbsoluteFill></AbsoluteFill>;
+  const frame = useCurrentFrame();
+  const fps = 60;
+  
+  const plusPulse = spring({ frame: frame - 40, fps, config: ANIMATION.SPRING_BOUNCY });
+  const showText = frame >= 80;
+  const textOpacity = spring({ frame: frame - 80, fps, config: ANIMATION.SPRING_GENTLE });
+
+  return (
+    <AbsoluteFill style={{ backgroundColor: COLORS.BG_BASE, justifyContent: "center", alignItems: "center" }}>
+      <div style={{ position: "relative", display: "flex", justifyContent: "center", alignItems: "center" }}>
+        {frame < 90 && (
+          <div style={{ position: "absolute", fontFamily: FONTS.MONO, fontSize: FONTS.SIZE_3XL, color: COLORS.PRIMARY, fontWeight: FONTS.WEIGHT_EXTRABOLD, transform: `scale(${1 + plusPulse * 0.2})`, textShadow: EFFECTS.GLOW_MD, opacity: 1 - Math.max(0, (frame - 70) / 20) }}>
+            +
+          </div>
+        )}
+        {showText && (
+          <div style={{ fontFamily: FONTS.PRIMARY, fontSize: FONTS.SIZE_SM, color: COLORS.TEXT_MUTED, letterSpacing: FONTS.TRACKING_WIDER, fontWeight: FONTS.WEIGHT_BOLD, opacity: textOpacity }}>
+            두 번째 위협
+          </div>
+        )}
+      </div>
+    </AbsoluteFill>
+  );
 };
 
 /**
@@ -223,7 +732,19 @@ const Scene16: React.FC = () => {
  * In-Scene Animation 구성: 각 씬의 프레임 내에서 여러 단계로 애니메이션을 분할하여 구현합니다.
  */
 const Scene17: React.FC = () => {
-  return <AbsoluteFill></AbsoluteFill>;
+  const frame = useCurrentFrame();
+
+  return (
+    <AbsoluteFill style={{ backgroundColor: COLORS.BG_BASE, justifyContent: "center", alignItems: "center" }}>
+      <div style={{ display: "flex", alignItems: "center", gap: SPACING.PX_32 }}>
+        <PipeNode label="학습 데이터" highlightedState="pulse" pulseFrame={104} delay={0} frame={frame} />
+        <FlowArrow delay={20} frame={frame} />
+        <PipeNode label="AI 모델" delay={40} frame={frame} />
+        <FlowArrow delay={60} frame={frame} />
+        <PipeNode label="결과" delay={80} frame={frame} />
+      </div>
+    </AbsoluteFill>
+  );
 };
 
 /**
@@ -236,7 +757,38 @@ const Scene17: React.FC = () => {
  * In-Scene Animation 구성: 각 씬의 프레임 내에서 여러 단계로 애니메이션을 분할하여 구현합니다.
  */
 const Scene18: React.FC = () => {
-  return <AbsoluteFill></AbsoluteFill>;
+  const frame = useCurrentFrame();
+  const fps = 60;
+  
+  const attackActive = frame >= 169;
+  const errorBoxEnter = spring({ frame: frame - 180, fps, config: ANIMATION.SPRING_SNAPPY });
+
+  return (
+    <AbsoluteFill style={{ backgroundColor: COLORS.BG_BASE, justifyContent: "center", alignItems: "center" }}>
+      <div style={{ display: "flex", alignItems: "center", gap: SPACING.PX_32, position: "relative" }}>
+        
+        <div style={{ position: "absolute", top: -100, left: 20, display: "flex", flexDirection: "column", alignItems: "center", gap: 12 }}>
+          <div style={{ fontFamily: FONTS.PRIMARY, fontSize: FONTS.SIZE_SM, color: attackActive ? COLORS.WARNING : COLORS.TEXT_MUTED, fontWeight: FONTS.WEIGHT_BOLD, transition: "color 0.3s" }}>
+            적대국
+          </div>
+          <div style={{ width: 2, height: 60, background: `repeating-linear-gradient(180deg, ${attackActive ? COLORS.WARNING : COLORS.TEXT_MUTED}, ${attackActive ? COLORS.WARNING : COLORS.TEXT_MUTED} 4px, transparent 4px, transparent 8px)`, backgroundPositionY: frame % 20 }} />
+          <div style={{ width: 0, height: 0, borderLeft: "6px solid transparent", borderRight: "6px solid transparent", borderTop: `8px solid ${attackActive ? COLORS.WARNING : COLORS.TEXT_MUTED}` }} />
+        </div>
+
+        <PipeNode label="학습 데이터" highlightedState="solid" delay={-999} frame={999}>
+          {errorBoxEnter > 0 && (
+            <div style={{ position: "absolute", bottom: -20, right: -20, padding: "4px 8px", backgroundColor: COLORS.NEGATIVE, borderRadius: 4, fontFamily: FONTS.MONO, fontSize: 12, fontWeight: FONTS.WEIGHT_BOLD, color: COLORS.BG_BASE, transform: `scale(${errorBoxEnter})`, boxShadow: EFFECTS.GLOW_SM }}>
+              오류
+            </div>
+          )}
+        </PipeNode>
+        <FlowArrow delay={-999} frame={999} />
+        <PipeNode label="AI 모델" delay={-999} frame={999} />
+        <FlowArrow delay={-999} frame={999} />
+        <PipeNode label="결과" delay={-999} frame={999} />
+      </div>
+    </AbsoluteFill>
+  );
 };
 
 /**
@@ -249,7 +801,34 @@ const Scene18: React.FC = () => {
  * In-Scene Animation 구성: 각 씬의 프레임 내에서 여러 단계로 애니메이션을 분할하여 구현합니다.
  */
 const Scene19: React.FC = () => {
-  return <AbsoluteFill></AbsoluteFill>;
+  const frame = useCurrentFrame();
+  const fps = 60;
+  
+  const enter = spring({ frame, fps, config: ANIMATION.SPRING_SNAPPY });
+  const highlight = spring({ frame: frame - 142, fps, config: ANIMATION.SPRING_BOUNCY });
+
+  return (
+    <AbsoluteFill style={{ backgroundColor: COLORS.BG_BASE, justifyContent: "center", alignItems: "center" }}>
+      <div style={{ padding: SPACING.PX_40, backgroundColor: COLORS.BG_SURFACE, border: `2px solid ${highlight > 0 ? COLORS.WARNING : COLORS.BORDER}`, borderRadius: SPACING.RADIUS_MD, opacity: enter, transform: `translateY(${(1-enter)*40}px) scale(${1 + highlight * 0.05})`, boxShadow: highlight > 0 ? EFFECTS.GLOW_ACCENT : EFFECTS.SHADOW_MD, display: "flex", flexDirection: "column", gap: SPACING.PX_32 }}>
+        <div style={{ fontFamily: FONTS.MONO, fontSize: FONTS.SIZE_MD, color: COLORS.TEXT_MUTED, letterSpacing: FONTS.TRACKING_WIDER }}>
+          AI 분석 보고서
+        </div>
+        <div style={{ display: "flex", flexDirection: "column", gap: SPACING.PX_16 }}>
+          <div style={{ fontFamily: FONTS.PRIMARY, fontSize: FONTS.SIZE_LG, color: COLORS.TEXT_MAIN }}>
+            분류: 민간인 구역 <span style={{ color: COLORS.WARNING }}>→ 잘못된 분류</span>
+          </div>
+          <div style={{ fontFamily: FONTS.PRIMARY, fontSize: FONTS.SIZE_2XL, color: COLORS.PRIMARY, fontWeight: FONTS.WEIGHT_EXTRABOLD, textShadow: EFFECTS.GLOW_MD, display: "flex", alignItems: "center", gap: SPACING.PX_24 }}>
+            신뢰도: 98%
+            {highlight > 0 && (
+              <span style={{ fontSize: FONTS.SIZE_MD, color: COLORS.NEGATIVE, backgroundColor: COLORS.NEGATIVE_DIM, padding: "4px 12px", borderRadius: 4, transform: `scale(${highlight})` }}>
+                오답
+              </span>
+            )}
+          </div>
+        </div>
+      </div>
+    </AbsoluteFill>
+  );
 };
 
 /**
@@ -262,7 +841,32 @@ const Scene19: React.FC = () => {
  * In-Scene Animation 구성: 각 씬의 프레임 내에서 여러 단계로 애니메이션을 분할하여 구현합니다.
  */
 const Scene20: React.FC = () => {
-  return <AbsoluteFill></AbsoluteFill>;
+  const frame = useCurrentFrame();
+  const fps = 60;
+  
+  const enterL = spring({ frame: frame - 20, fps, config: ANIMATION.SPRING_SNAPPY });
+  const enterM = spring({ frame: frame - 100, fps, config: ANIMATION.SPRING_GENTLE });
+  const enterR = spring({ frame: frame - 200, fps, config: ANIMATION.SPRING_SNAPPY });
+  const pulseR = spring({ frame: frame - 236, fps, config: ANIMATION.SPRING_BOUNCY });
+
+  return (
+    <AbsoluteFill style={{ backgroundColor: COLORS.BG_BASE, justifyContent: "center", alignItems: "center" }}>
+      <div style={{ display: "flex", alignItems: "center", gap: SPACING.PX_64 }}>
+        <div style={{ padding: "24px 40px", backgroundColor: COLORS.WARNING_DIM, border: `2px solid ${COLORS.WARNING}`, borderRadius: SPACING.RADIUS_MD, fontFamily: FONTS.PRIMARY, fontSize: FONTS.SIZE_LG, color: COLORS.WARNING, fontWeight: FONTS.WEIGHT_BOLD, opacity: enterL, transform: `translateY(${(1-enterL)*20}px)` }}>
+          미 국방부 우려
+        </div>
+        
+        <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 12, opacity: enterM }}>
+          <div style={{ fontFamily: FONTS.MONO, fontSize: FONTS.SIZE_SM, color: COLORS.TEXT_MUTED, letterSpacing: FONTS.TRACKING_WIDER }}>경쟁</div>
+          <div style={{ width: 80, height: 2, background: `repeating-linear-gradient(90deg, ${COLORS.TEXT_MUTED}, ${COLORS.TEXT_MUTED} 4px, transparent 4px, transparent 8px)`, backgroundPositionX: -(frame % 20) }} />
+        </div>
+        
+        <div style={{ padding: "24px 40px", backgroundColor: COLORS.NEGATIVE_DIM, border: `2px solid ${COLORS.NEGATIVE}`, borderRadius: SPACING.RADIUS_MD, fontFamily: FONTS.PRIMARY, fontSize: FONTS.SIZE_LG, color: COLORS.NEGATIVE, fontWeight: FONTS.WEIGHT_BOLD, opacity: enterR, transform: `translateY(${(1-enterR)*20}px) scale(${1 + pulseR * 0.1})`, boxShadow: pulseR > 0 ? EFFECTS.GLOW_SM : "none" }}>
+          중국 연구 진행
+        </div>
+      </div>
+    </AbsoluteFill>
+  );
 };
 
 /**
@@ -275,7 +879,42 @@ const Scene20: React.FC = () => {
  * In-Scene Animation 구성: 각 씬의 프레임 내에서 여러 단계로 애니메이션을 분할하여 구현합니다.
  */
 const Scene21: React.FC = () => {
-  return <AbsoluteFill></AbsoluteFill>;
+  const frame = useCurrentFrame();
+  const fps = 60;
+  
+  const enterL = spring({ frame: frame - 20, fps, config: ANIMATION.SPRING_SNAPPY });
+  const enterR = spring({ frame: frame - 100, fps, config: ANIMATION.SPRING_SNAPPY });
+  const pulseR = spring({ frame: frame - 148, fps, config: ANIMATION.SPRING_BOUNCY });
+
+  return (
+    <AbsoluteFill style={{ backgroundColor: COLORS.BG_BASE, justifyContent: "center", alignItems: "center" }}>
+      <div style={{ display: "flex", alignItems: "center", gap: 120 }}>
+        {/* Left */}
+        <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: SPACING.PX_32, opacity: enterL, transform: `translateX(${(1-enterL)*-20}px)` }}>
+          <div style={{ width: 160, height: 160, backgroundColor: COLORS.BG_SURFACE, border: `2px solid ${COLORS.BORDER}`, borderRadius: SPACING.RADIUS_MD, display: "flex", justifyContent: "center", alignItems: "center", fontFamily: FONTS.PRIMARY, fontSize: FONTS.SIZE_LG, color: COLORS.TEXT_MUTED, fontWeight: FONTS.WEIGHT_BOLD, textDecoration: "line-through" }}>
+            무력화
+          </div>
+          <div style={{ fontFamily: FONTS.MONO, fontSize: FONTS.SIZE_3XL, color: COLORS.TEXT_DISABLED, fontWeight: FONTS.WEIGHT_EXTRABOLD }}>
+            ✕
+          </div>
+        </div>
+        
+        <div style={{ fontFamily: FONTS.MONO, fontSize: FONTS.SIZE_XL, color: COLORS.TEXT_MUTED, fontStyle: "italic" }}>
+          vs
+        </div>
+        
+        {/* Right */}
+        <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: SPACING.PX_32, opacity: enterR, transform: `translateX(${(1-enterR)*20}px) scale(${1 + pulseR * 0.05})` }}>
+          <div style={{ width: 160, height: 160, backgroundColor: pulseR > 0 ? COLORS.WARNING_DIM : COLORS.BG_SURFACE, border: `2px solid ${pulseR > 0 ? COLORS.WARNING : COLORS.PRIMARY}`, borderRadius: SPACING.RADIUS_MD, display: "flex", justifyContent: "center", alignItems: "center", fontFamily: FONTS.PRIMARY, fontSize: FONTS.SIZE_LG, color: pulseR > 0 ? COLORS.WARNING : COLORS.PRIMARY, fontWeight: FONTS.WEIGHT_BOLD, boxShadow: pulseR > 0 ? EFFECTS.GLOW_ACCENT : "none", transition: "all 0.3s" }}>
+            오류 유도
+          </div>
+          <div style={{ fontFamily: FONTS.MONO, fontSize: FONTS.SIZE_3XL, color: pulseR > 0 ? COLORS.WARNING : COLORS.PRIMARY, fontWeight: FONTS.WEIGHT_EXTRABOLD }}>
+            ✓
+          </div>
+        </div>
+      </div>
+    </AbsoluteFill>
+  );
 };
 
 /**
@@ -288,7 +927,23 @@ const Scene21: React.FC = () => {
  * In-Scene Animation 구성: 각 씬의 프레임 내에서 여러 단계로 애니메이션을 분할하여 구현합니다.
  */
 const Scene22: React.FC = () => {
-  return <AbsoluteFill></AbsoluteFill>;
+  const frame = useCurrentFrame();
+  const fps = 60;
+  
+  const textOpacity = spring({ frame, fps, config: ANIMATION.SPRING_GENTLE });
+  const lineEnter = spring({ frame: frame - 20, fps, config: ANIMATION.SPRING_SNAPPY });
+  const flash = spring({ frame, fps, config: { damping: 10, stiffness: 400, mass: 0.5 } });
+
+  return (
+    <AbsoluteFill style={{ backgroundColor: interpolateColors(flash, [0, 0.5, 1], [COLORS.BG_BASE, COLORS.BG_ELEVATED, COLORS.BG_BASE]), justifyContent: "center", alignItems: "center" }}>
+      <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: SPACING.PX_32 }}>
+        <div style={{ fontFamily: FONTS.PRIMARY, fontSize: FONTS.SIZE_XL, color: COLORS.TEXT_MAIN, fontWeight: FONTS.WEIGHT_EXTRABOLD, opacity: textOpacity, letterSpacing: FONTS.TRACKING_NORMAL }}>
+          새로운 형태의 전쟁
+        </div>
+        <div style={{ width: 400, height: 2, backgroundColor: COLORS.PRIMARY, transform: `scaleX(${lineEnter})`, boxShadow: EFFECTS.GLOW_SM }} />
+      </div>
+    </AbsoluteFill>
+  );
 };
 
 /**
@@ -301,7 +956,22 @@ const Scene22: React.FC = () => {
  * In-Scene Animation 구성: 각 씬의 프레임 내에서 여러 단계로 애니메이션을 분할하여 구현합니다.
  */
 const Scene23: React.FC = () => {
-  return <AbsoluteFill></AbsoluteFill>;
+  const frame = useCurrentFrame();
+  const fps = 60;
+  
+  const bgTransition = spring({ frame, fps, config: ANIMATION.SPRING_GENTLE });
+  const overlayOpacity = spring({ frame: frame - 38, fps, config: ANIMATION.SPRING_GENTLE });
+  const textOpacity = spring({ frame: frame - 20, fps, config: ANIMATION.SPRING_GENTLE });
+
+  return (
+    <AbsoluteFill style={{ backgroundColor: interpolateColors(bgTransition, [0, 1], [COLORS.BG_BASE, COLORS.BG_VOID]), justifyContent: "center", alignItems: "center" }}>
+      <AbsoluteFill style={{ backgroundColor: COLORS.NEGATIVE_DIM, opacity: overlayOpacity }} />
+      
+      <div style={{ fontFamily: FONTS.PRIMARY, fontSize: FONTS.SIZE_LG, color: COLORS.TEXT_MUTED, letterSpacing: FONTS.TRACKING_WIDER, fontWeight: FONTS.WEIGHT_BOLD, opacity: textOpacity }}>
+        결정적 사실
+      </div>
+    </AbsoluteFill>
+  );
 };
 
 /**
@@ -314,7 +984,25 @@ const Scene23: React.FC = () => {
  * In-Scene Animation 구성: 각 씬의 프레임 내에서 여러 단계로 애니메이션을 분할하여 구현합니다.
  */
 const Scene24: React.FC = () => {
-  return <AbsoluteFill></AbsoluteFill>;
+  const frame = useCurrentFrame();
+  const fps = 60;
+  
+  const enter1 = spring({ frame: frame - 20, fps, config: ANIMATION.SPRING_SNAPPY });
+  const enter2 = spring({ frame: frame - 60, fps, config: ANIMATION.SPRING_SNAPPY });
+
+  return (
+    <AbsoluteFill style={{ backgroundColor: COLORS.BG_VOID, justifyContent: "center", alignItems: "center" }}>
+      <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: SPACING.PX_24 }}>
+        <div style={{ fontFamily: FONTS.MONO, fontSize: FONTS.SIZE_MD, color: COLORS.TEXT_MUTED, fontWeight: FONTS.WEIGHT_BOLD, opacity: enter1, transform: `translateY(${(1-enter1)*20}px)` }}>
+          2025.02
+        </div>
+        <div style={{ width: 2, height: 40, backgroundColor: COLORS.BORDER, opacity: enter2, transform: `scaleY(${enter2})`, transformOrigin: "top" }} />
+        <div style={{ padding: "16px 32px", backgroundColor: COLORS.BG_SURFACE, border: `1px solid ${COLORS.BORDER}`, borderRadius: SPACING.RADIUS_MD, fontFamily: FONTS.PRIMARY, fontSize: FONTS.SIZE_LG, color: COLORS.TEXT_MAIN, fontWeight: FONTS.WEIGHT_BOLD, opacity: enter2, transform: `translateY(${(1-enter2)*20}px)` }}>
+          연구 논문 발표
+        </div>
+      </div>
+    </AbsoluteFill>
+  );
 };
 
 /**
@@ -327,7 +1015,32 @@ const Scene24: React.FC = () => {
  * In-Scene Animation 구성: 각 씬의 프레임 내에서 여러 단계로 애니메이션을 분할하여 구현합니다.
  */
 const Scene25: React.FC = () => {
-  return <AbsoluteFill></AbsoluteFill>;
+  const frame = useCurrentFrame();
+  const fps = 60;
+  
+  const enter = spring({ frame, fps, config: ANIMATION.SPRING_SNAPPY });
+
+  return (
+    <AbsoluteFill style={{ backgroundColor: COLORS.BG_VOID, justifyContent: "center", alignItems: "center" }}>
+      <div style={{ 
+        padding: "32px 48px", 
+        backgroundColor: EFFECTS.GLASS_BG, 
+        border: `2px solid ${COLORS.SECONDARY}`, 
+        borderRadius: SPACING.RADIUS_MD, 
+        opacity: enter, 
+        transform: `translateY(${(1-enter)*40}px)`,
+        boxShadow: EFFECTS.GLOW_MD,
+        display: "flex", flexDirection: "column", gap: SPACING.PX_16, alignItems: "center"
+      }}>
+        <div style={{ fontFamily: FONTS.PRIMARY, fontSize: FONTS.SIZE_LG, color: COLORS.SECONDARY, fontWeight: FONTS.WEIGHT_BOLD, letterSpacing: FONTS.TRACKING_WIDER }}>
+          King's College London
+        </div>
+        <div style={{ fontFamily: FONTS.MONO, fontSize: FONTS.SIZE_SM, color: COLORS.TEXT_MUTED }}>
+          UK · Academic Research
+        </div>
+      </div>
+    </AbsoluteFill>
+  );
 };
 
 /**
@@ -340,7 +1053,28 @@ const Scene25: React.FC = () => {
  * In-Scene Animation 구성: 각 씬의 프레임 내에서 여러 단계로 애니메이션을 분할하여 구현합니다.
  */
 const Scene26: React.FC = () => {
-  return <AbsoluteFill></AbsoluteFill>;
+  const frame = useCurrentFrame();
+  const fps = 60;
+  
+  const enter1 = spring({ frame, fps, config: ANIMATION.SPRING_SNAPPY });
+  const enter2 = spring({ frame: frame - 15, fps, config: ANIMATION.SPRING_SNAPPY });
+  const enter3 = spring({ frame: frame - 30, fps, config: ANIMATION.SPRING_SNAPPY });
+
+  return (
+    <AbsoluteFill style={{ backgroundColor: COLORS.BG_VOID, justifyContent: "center", alignItems: "center" }}>
+      <div style={{ display: "flex", gap: SPACING.PX_40 }}>
+        <div style={{ padding: "20px 32px", backgroundColor: COLORS.PRIMARY_DIM, border: `1px solid ${COLORS.PRIMARY}`, borderRadius: SPACING.RADIUS_MD, fontFamily: FONTS.PRIMARY, fontSize: FONTS.SIZE_LG, color: COLORS.TEXT_MAIN, fontWeight: FONTS.WEIGHT_BOLD, opacity: enter1, transform: `translateY(${(1-enter1)*20}px)` }}>
+          GPT
+        </div>
+        <div style={{ padding: "20px 32px", backgroundColor: COLORS.PRIMARY_DIM, border: `1px solid ${COLORS.PRIMARY}`, borderRadius: SPACING.RADIUS_MD, fontFamily: FONTS.PRIMARY, fontSize: FONTS.SIZE_LG, color: COLORS.TEXT_MAIN, fontWeight: FONTS.WEIGHT_BOLD, opacity: enter2, transform: `translateY(${(1-enter2)*20}px)` }}>
+          Claude
+        </div>
+        <div style={{ padding: "20px 32px", backgroundColor: COLORS.PRIMARY_DIM, border: `1px solid ${COLORS.PRIMARY}`, borderRadius: SPACING.RADIUS_MD, fontFamily: FONTS.PRIMARY, fontSize: FONTS.SIZE_LG, color: COLORS.TEXT_MAIN, fontWeight: FONTS.WEIGHT_BOLD, opacity: enter3, transform: `translateY(${(1-enter3)*20}px)` }}>
+          Gemini
+        </div>
+      </div>
+    </AbsoluteFill>
+  );
 };
 
 /**
@@ -353,7 +1087,42 @@ const Scene26: React.FC = () => {
  * In-Scene Animation 구성: 각 씬의 프레임 내에서 여러 단계로 애니메이션을 분할하여 구현합니다.
  */
 const Scene27: React.FC = () => {
-  return <AbsoluteFill></AbsoluteFill>;
+  const frame = useCurrentFrame();
+  const fps = 60;
+  
+  const bgOverlay = interpolate(frame, [0, 60], [0, 0.4], { extrapolateRight: "clamp" });
+  const isWar = frame >= 42;
+  const warGameScale = spring({ frame: frame - 59, fps, config: ANIMATION.SPRING_BOUNCY });
+
+  return (
+    <AbsoluteFill style={{ backgroundColor: COLORS.BG_VOID, justifyContent: "center", alignItems: "center", overflow: "hidden" }}>
+      <div style={{ position: "absolute", inset: 0, backgroundColor: COLORS.NEGATIVE, opacity: bgOverlay, mixBlendMode: "overlay" }} />
+      
+      {warGameScale > 0 && (
+         <div style={{ position: "absolute", fontFamily: FONTS.DISPLAY, fontSize: 180, color: COLORS.TEXT_DISABLED, fontWeight: FONTS.WEIGHT_EXTRABOLD, opacity: 0.2, transform: `scale(${warGameScale})` }}>
+            WAR GAME
+         </div>
+      )}
+
+      <div style={{ display: "flex", gap: SPACING.PX_40, zIndex: 1 }}>
+        {["GPT", "Claude", "Gemini"].map((ai, index) => (
+          <div key={index} style={{ 
+            padding: "20px 32px", 
+            backgroundColor: isWar ? COLORS.NEGATIVE_DIM : COLORS.PRIMARY_DIM, 
+            border: `2px solid ${isWar ? COLORS.NEGATIVE : COLORS.PRIMARY}`, 
+            borderRadius: SPACING.RADIUS_MD, 
+            fontFamily: FONTS.PRIMARY, 
+            fontSize: FONTS.SIZE_LG, 
+            color: isWar ? COLORS.NEGATIVE : COLORS.TEXT_MAIN, 
+            fontWeight: FONTS.WEIGHT_BOLD,
+            transition: "all 0.2s"
+          }}>
+            {ai}
+          </div>
+        ))}
+      </div>
+    </AbsoluteFill>
+  );
 };
 
 /**
@@ -366,7 +1135,41 @@ const Scene27: React.FC = () => {
  * In-Scene Animation 구성: 각 씬의 프레임 내에서 여러 단계로 애니메이션을 분할하여 구현합니다.
  */
 const Scene28: React.FC = () => {
-  return <AbsoluteFill></AbsoluteFill>;
+  const frame = useCurrentFrame();
+  const fps = 60;
+  
+  const enter = spring({ frame: frame - 20, fps, config: ANIMATION.SPRING_SNAPPY });
+  const roleEnter = spring({ frame: frame - 40, fps, config: ANIMATION.SPRING_SNAPPY });
+  // "영토 분쟁이나" : 146f (5350 - 5204 = 146) -> 대충 약간 일찍 120f
+  const tag1Enter = spring({ frame: frame - 120, fps, config: ANIMATION.SPRING_BOUNCY });
+  // "자원 경쟁" : 197f (5401 - 5204 = 197) -> 대충 170f
+  const tag2Enter = spring({ frame: frame - 170, fps, config: ANIMATION.SPRING_BOUNCY });
+
+  return (
+    <AbsoluteFill style={{ backgroundColor: COLORS.BG_VOID, justifyContent: "center", alignItems: "center" }}>
+      <div style={{ width: 600, padding: SPACING.PX_40, backgroundColor: EFFECTS.GLASS_BG, border: `1px solid ${EFFECTS.GLASS_BORDER}`, borderRadius: SPACING.RADIUS_LG, opacity: enter, transform: `translateY(${(1-enter)*40}px)` }}>
+        <div style={{ fontFamily: FONTS.MONO, fontSize: FONTS.SIZE_SM, color: COLORS.PRIMARY, letterSpacing: FONTS.TRACKING_WIDER, marginBottom: SPACING.PX_32, display: "flex", alignItems: "center", gap: 12 }}>
+          <div style={{ width: 8, height: 8, backgroundColor: COLORS.PRIMARY, borderRadius: "50%", boxShadow: EFFECTS.GLOW_SM }} />
+          SIMULATION MODE
+        </div>
+        
+        <div style={{ display: "flex", flexDirection: "column", gap: SPACING.PX_40 }}>
+           <div style={{ padding: "16px 24px", backgroundColor: COLORS.BG_SURFACE, border: `1px solid ${COLORS.BORDER}`, borderRadius: SPACING.RADIUS_MD, fontFamily: FONTS.PRIMARY, fontSize: FONTS.SIZE_LG, color: COLORS.TEXT_MAIN, fontWeight: FONTS.WEIGHT_BOLD, opacity: roleEnter, transform: `translateX(${(1-roleEnter)*-20}px)` }}>
+             <span style={{ color: COLORS.TEXT_MUTED, marginRight: 16 }}>ROLE:</span> 국가 지도자
+           </div>
+           
+           <div style={{ display: "flex", gap: SPACING.PX_24 }}>
+             <div style={{ padding: "12px 20px", backgroundColor: COLORS.WARNING_DIM, border: `1px solid ${COLORS.WARNING}`, borderRadius: SPACING.RADIUS_SM, fontFamily: FONTS.PRIMARY, fontSize: FONTS.SIZE_MD, color: COLORS.WARNING, fontWeight: FONTS.WEIGHT_BOLD, opacity: tag1Enter, transform: `scale(${tag1Enter})` }}>
+               # 영토 분쟁
+             </div>
+             <div style={{ padding: "12px 20px", backgroundColor: COLORS.NEGATIVE_DIM, border: `1px solid ${COLORS.NEGATIVE}`, borderRadius: SPACING.RADIUS_SM, fontFamily: FONTS.PRIMARY, fontSize: FONTS.SIZE_MD, color: COLORS.NEGATIVE, fontWeight: FONTS.WEIGHT_BOLD, opacity: tag2Enter, transform: `scale(${tag2Enter})` }}>
+               # 자원 경쟁
+             </div>
+           </div>
+        </div>
+      </div>
+    </AbsoluteFill>
+  );
 };
 
 /**
@@ -379,7 +1182,32 @@ const Scene28: React.FC = () => {
  * In-Scene Animation 구성: 각 씬의 프레임 내에서 여러 단계로 애니메이션을 분할하여 구현합니다.
  */
 const Scene29: React.FC = () => {
-  return <AbsoluteFill></AbsoluteFill>;
+  const frame = useCurrentFrame();
+  const fps = 60;
+  
+  const textOpacity = spring({ frame, fps, config: ANIMATION.SPRING_GENTLE });
+  const resultMark = spring({ frame: frame - 29, fps, config: ANIMATION.SPRING_SNAPPY });
+
+  return (
+    <AbsoluteFill style={{ backgroundColor: COLORS.BG_VOID, justifyContent: "center", alignItems: "center" }}>
+      <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: SPACING.PX_32, opacity: textOpacity }}>
+        <div style={{ fontFamily: FONTS.MONO, fontSize: FONTS.SIZE_XL, color: COLORS.TEXT_MUTED, letterSpacing: FONTS.TRACKING_WIDER }}>
+          CALCULATING
+        </div>
+        <div style={{ display: "flex", gap: 12 }}>
+           <div style={{ width: 8, height: 8, backgroundColor: COLORS.TEXT_MUTED, borderRadius: "50%", opacity: frame % 30 < 15 ? 1 : 0.3 }} />
+           <div style={{ width: 8, height: 8, backgroundColor: COLORS.TEXT_MUTED, borderRadius: "50%", opacity: (frame + 10) % 30 < 15 ? 1 : 0.3 }} />
+           <div style={{ width: 8, height: 8, backgroundColor: COLORS.TEXT_MUTED, borderRadius: "50%", opacity: (frame + 20) % 30 < 15 ? 1 : 0.3 }} />
+        </div>
+        
+        {resultMark > 0 && (
+           <div style={{ position: "absolute", bottom: -60, fontFamily: FONTS.MONO, fontSize: FONTS.SIZE_LG, color: COLORS.WARNING, transform: `scaleX(${resultMark})` }}>
+              --------------------------------
+           </div>
+        )}
+      </div>
+    </AbsoluteFill>
+  );
 };
 
 /**
@@ -392,7 +1220,23 @@ const Scene29: React.FC = () => {
  * In-Scene Animation 구성: 각 씬의 프레임 내에서 여러 단계로 애니메이션을 분할하여 구현합니다.
  */
 const Scene30: React.FC = () => {
-  return <AbsoluteFill></AbsoluteFill>;
+  const frame = useCurrentFrame();
+  const fps = 60;
+  
+  const scaleIn = spring({ frame, fps, config: ANIMATION.SPRING_BOUNCY });
+
+  return (
+    <AbsoluteFill style={{ backgroundColor: COLORS.BG_VOID, justifyContent: "center", alignItems: "center" }}>
+      <div style={{ display: "flex", alignItems: "baseline", gap: 16, transform: `scale(${scaleIn})` }}>
+        <div style={{ fontFamily: FONTS.MONO, fontSize: FONTS.SIZE_4XL, color: COLORS.NEGATIVE, fontWeight: FONTS.WEIGHT_EXTRABOLD, textShadow: EFFECTS.GLOW_LG }}>
+          20
+        </div>
+        <div style={{ fontFamily: FONTS.MONO, fontSize: FONTS.SIZE_3XL, color: COLORS.TEXT_MUTED, fontWeight: FONTS.WEIGHT_BOLD }}>
+          /21
+        </div>
+      </div>
+    </AbsoluteFill>
+  );
 };
 
 /**
@@ -405,7 +1249,27 @@ const Scene30: React.FC = () => {
  * In-Scene Animation 구성: 각 씬의 프레임 내에서 여러 단계로 애니메이션을 분할하여 구현합니다.
  */
 const Scene31: React.FC = () => {
-  return <AbsoluteFill></AbsoluteFill>;
+  const frame = useCurrentFrame();
+  const fps = 60;
+  
+  // count up from 20 -> 95
+  const count = Math.floor(interpolate(frame, [0, 20], [20, 95], { extrapolateRight: "clamp" }));
+  const flash = spring({ frame: frame - 42, fps, config: { damping: 10, mass: 0.5, stiffness: 400 } });
+
+  return (
+    <AbsoluteFill style={{ backgroundColor: interpolateColors(flash, [0, 0.5, 1], [COLORS.BG_VOID, COLORS.NEGATIVE_DIM, COLORS.BG_VOID]), justifyContent: "center", alignItems: "center" }}>
+      <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: SPACING.PX_32, transform: `scale(${1 + flash * 0.1})` }}>
+        <div style={{ fontFamily: FONTS.MONO, fontSize: FONTS.SIZE_4XL, color: COLORS.NEGATIVE, fontWeight: FONTS.WEIGHT_EXTRABOLD, textShadow: EFFECTS.GLOW_LG }}>
+          {count}%
+        </div>
+        {frame >= 42 && (
+          <div style={{ fontFamily: FONTS.PRIMARY, fontSize: FONTS.SIZE_XL, color: COLORS.NEGATIVE, fontWeight: FONTS.WEIGHT_BOLD, letterSpacing: FONTS.TRACKING_WIDER }}>
+            핵무기 공격 선택
+          </div>
+        )}
+      </div>
+    </AbsoluteFill>
+  );
 };
 
 /**
@@ -418,7 +1282,35 @@ const Scene31: React.FC = () => {
  * In-Scene Animation 구성: 각 씬의 프레임 내에서 여러 단계로 애니메이션을 분할하여 구현합니다.
  */
 const Scene32: React.FC = () => {
-  return <AbsoluteFill></AbsoluteFill>;
+  const frame = useCurrentFrame();
+  const fps = 60;
+  
+  // "협상도": 0f, "외교도": 51f, "핵 버튼이에요": 102f (approx diff based on timing)
+  const item1 = spring({ frame, fps, config: ANIMATION.SPRING_SNAPPY });
+  const item2 = spring({ frame: frame - 51, fps, config: ANIMATION.SPRING_SNAPPY });
+  const item3 = spring({ frame: frame - 102, fps, config: ANIMATION.SPRING_BOUNCY });
+
+  return (
+    <AbsoluteFill style={{ backgroundColor: COLORS.BG_VOID, justifyContent: "center", alignItems: "center" }}>
+      <div style={{ display: "flex", flexDirection: "column", gap: SPACING.PX_32 }}>
+        <div style={{ display: "flex", alignItems: "center", gap: SPACING.PX_32, opacity: item1, transform: `translateX(${(1-item1)*-20}px)` }}>
+          <div style={{ fontFamily: FONTS.PRIMARY, fontSize: FONTS.SIZE_2XL, color: COLORS.TEXT_DISABLED, textDecoration: "line-through", fontWeight: FONTS.WEIGHT_BOLD }}>협상</div>
+          <div style={{ fontFamily: FONTS.MONO, fontSize: FONTS.SIZE_XL, color: COLORS.TEXT_MUTED }}>→</div>
+          <div style={{ fontFamily: FONTS.MONO, fontSize: FONTS.SIZE_2XL, color: COLORS.TEXT_DISABLED, fontWeight: FONTS.WEIGHT_EXTRABOLD }}>✕</div>
+        </div>
+        <div style={{ display: "flex", alignItems: "center", gap: SPACING.PX_32, opacity: item2, transform: `translateX(${(1-item2)*-20}px)` }}>
+          <div style={{ fontFamily: FONTS.PRIMARY, fontSize: FONTS.SIZE_2XL, color: COLORS.TEXT_DISABLED, textDecoration: "line-through", fontWeight: FONTS.WEIGHT_BOLD }}>외교</div>
+          <div style={{ fontFamily: FONTS.MONO, fontSize: FONTS.SIZE_XL, color: COLORS.TEXT_MUTED }}>→</div>
+          <div style={{ fontFamily: FONTS.MONO, fontSize: FONTS.SIZE_2XL, color: COLORS.TEXT_DISABLED, fontWeight: FONTS.WEIGHT_EXTRABOLD }}>✕</div>
+        </div>
+        <div style={{ display: "flex", alignItems: "center", gap: SPACING.PX_32, opacity: item3, transform: `translateX(${(1-item3)*-20}px) scale(${1 + item3 * 0.1})` }}>
+          <div style={{ fontFamily: FONTS.PRIMARY, fontSize: FONTS.SIZE_3XL, color: COLORS.NEGATIVE, fontWeight: FONTS.WEIGHT_EXTRABOLD, textShadow: EFFECTS.GLOW_LG }}>핵 버튼</div>
+          <div style={{ fontFamily: FONTS.MONO, fontSize: FONTS.SIZE_XL, color: COLORS.TEXT_MUTED }}>→</div>
+          <div style={{ fontFamily: FONTS.MONO, fontSize: FONTS.SIZE_3XL, color: COLORS.NEGATIVE, fontWeight: FONTS.WEIGHT_EXTRABOLD, textShadow: EFFECTS.GLOW_LG }}>✓</div>
+        </div>
+      </div>
+    </AbsoluteFill>
+  );
 };
 
 /**
@@ -431,7 +1323,24 @@ const Scene32: React.FC = () => {
  * In-Scene Animation 구성: 각 씬의 프레임 내에서 여러 단계로 애니메이션을 분할하여 구현합니다.
  */
 const Scene33: React.FC = () => {
-  return <AbsoluteFill></AbsoluteFill>;
+  const frame = useCurrentFrame();
+  const fps = 60;
+  
+  const enter = spring({ frame, fps, config: ANIMATION.SPRING_SNAPPY });
+
+  return (
+    <AbsoluteFill style={{ backgroundColor: COLORS.BG_VOID, justifyContent: "center", alignItems: "center" }}>
+      <div style={{ width: 800, padding: SPACING.PX_40, backgroundColor: EFFECTS.GLASS_BG, border: `1px solid ${EFFECTS.GLASS_BORDER}`, borderRadius: SPACING.RADIUS_LG, opacity: enter, transform: `translateY(${(1-enter)*40}px)` }}>
+        <div style={{ fontFamily: FONTS.MONO, fontSize: FONTS.SIZE_SM, color: COLORS.TEXT_MUTED, letterSpacing: FONTS.TRACKING_WIDER, marginBottom: SPACING.PX_32, display: "flex", alignItems: "center", gap: 12 }}>
+          <div style={{ width: 8, height: 8, backgroundColor: COLORS.TEXT_MUTED, borderRadius: "50%" }} />
+          킹스칼리지 런던 연구팀
+        </div>
+        <div style={{ fontFamily: FONTS.PRIMARY, fontSize: FONTS.SIZE_XL, color: COLORS.TEXT_MAIN, lineHeight: FONTS.LEADING_NORMAL }}>
+          <span style={{ opacity: Math.floor(frame / 15) % 2 === 0 ? 1 : 0, color: COLORS.PRIMARY }}>|</span>
+        </div>
+      </div>
+    </AbsoluteFill>
+  );
 };
 
 /**
@@ -444,7 +1353,43 @@ const Scene33: React.FC = () => {
  * In-Scene Animation 구성: 각 씬의 프레임 내에서 여러 단계로 애니메이션을 분할하여 구현합니다.
  */
 const Scene34: React.FC = () => {
-  return <AbsoluteFill></AbsoluteFill>;
+  const frame = useCurrentFrame();
+  
+  const text = `"핵무기에 대한 금기는 인간 사회에서만큼 AI에겐 작동하지 않는다."`;
+  const showTextLength = Math.max(0, Math.min(text.length, Math.floor(frame / 3)));
+  
+  const isAiPart = frame >= 153;
+  const isGlitch = frame >= 215; // "작동하지 않는다"
+  
+  return (
+    <AbsoluteFill style={{ backgroundColor: COLORS.BG_VOID, justifyContent: "center", alignItems: "center" }}>
+      <div style={{ 
+        width: 800, 
+        padding: SPACING.PX_40, 
+        backgroundColor: EFFECTS.GLASS_BG, 
+        border: `1px solid ${isGlitch ? COLORS.NEGATIVE : EFFECTS.GLASS_BORDER}`, 
+        borderRadius: SPACING.RADIUS_LG,
+        boxShadow: isGlitch ? EFFECTS.GLOW_LG : "none",
+        transition: "all 0.3s"
+      }}>
+        <div style={{ fontFamily: FONTS.MONO, fontSize: FONTS.SIZE_SM, color: COLORS.TEXT_MUTED, letterSpacing: FONTS.TRACKING_WIDER, marginBottom: SPACING.PX_32, display: "flex", alignItems: "center", gap: 12 }}>
+          <div style={{ width: 8, height: 8, backgroundColor: isGlitch ? COLORS.NEGATIVE : COLORS.TEXT_MUTED, borderRadius: "50%" }} />
+          킹스칼리지 런던 연구팀
+        </div>
+        <div style={{ 
+          fontFamily: FONTS.PRIMARY, 
+          fontSize: FONTS.SIZE_XL, 
+          color: isGlitch ? COLORS.NEGATIVE : (isAiPart ? COLORS.NEGATIVE : COLORS.SECONDARY), 
+          lineHeight: FONTS.LEADING_NORMAL,
+          textShadow: isGlitch ? EFFECTS.GLOW_SM : "none",
+          transition: "all 0.3s"
+        }}>
+          {text.substring(0, showTextLength)}
+          <span style={{ opacity: Math.floor(frame / 15) % 2 === 0 ? 1 : 0, color: COLORS.PRIMARY }}>|</span>
+        </div>
+      </div>
+    </AbsoluteFill>
+  );
 };
 
 /**
@@ -457,7 +1402,18 @@ const Scene34: React.FC = () => {
  * In-Scene Animation 구성: 각 씬의 프레임 내에서 여러 단계로 애니메이션을 분할하여 구현합니다.
  */
 const Scene35: React.FC = () => {
-  return <AbsoluteFill></AbsoluteFill>;
+  const frame = useCurrentFrame();
+  const fps = 60;
+  
+  const textOpacity = spring({ frame, fps, config: ANIMATION.SPRING_GENTLE });
+
+  return (
+    <AbsoluteFill style={{ backgroundColor: COLORS.BG_VOID, justifyContent: "center", alignItems: "center" }}>
+      <div style={{ fontFamily: FONTS.PRIMARY, fontSize: FONTS.SIZE_XL, color: COLORS.TEXT_MAIN, fontWeight: FONTS.WEIGHT_BOLD, opacity: textOpacity, letterSpacing: FONTS.TRACKING_WIDE }}>
+        왜일까요.
+      </div>
+    </AbsoluteFill>
+  );
 };
 
 /**
@@ -470,7 +1426,17 @@ const Scene35: React.FC = () => {
  * In-Scene Animation 구성: 각 씬의 프레임 내에서 여러 단계로 애니메이션을 분할하여 구현합니다.
  */
 const Scene36: React.FC = () => {
-  return <AbsoluteFill></AbsoluteFill>;
+  const frame = useCurrentFrame();
+  const fps = 60;
+  const enter = spring({ frame, fps, config: ANIMATION.SPRING_SNAPPY });
+
+  return (
+    <AbsoluteFill style={{ backgroundColor: COLORS.BG_VOID, justifyContent: "center", alignItems: "center" }}>
+      <div style={{ fontFamily: FONTS.PRIMARY, fontSize: FONTS.SIZE_XL, color: COLORS.TEXT_MAIN, fontWeight: FONTS.WEIGHT_BOLD, opacity: enter, transform: `translateY(${(1-enter)*20}px)` }}>
+        AI는 <span style={{ borderBottom: `2px solid ${COLORS.WARNING}` }}>두렵지 않으니까요.</span>
+      </div>
+    </AbsoluteFill>
+  );
 };
 
 /**
@@ -483,7 +1449,34 @@ const Scene36: React.FC = () => {
  * In-Scene Animation 구성: 각 씬의 프레임 내에서 여러 단계로 애니메이션을 분할하여 구현합니다.
  */
 const Scene37: React.FC = () => {
-  return <AbsoluteFill></AbsoluteFill>;
+  const frame = useCurrentFrame();
+  const fps = 60;
+  
+  // "역사로"(93f), "감정으로"(124f), "몸으로"(164f), "알아요"(189f diff approximately)
+  const item1 = spring({ frame: frame - 93, fps, config: ANIMATION.SPRING_SNAPPY });
+  const item2 = spring({ frame: frame - 124, fps, config: ANIMATION.SPRING_SNAPPY });
+  const item3 = spring({ frame: frame - 164, fps, config: ANIMATION.SPRING_SNAPPY });
+  
+  const fadeOut = spring({ frame: frame - 189, fps, config: ANIMATION.SPRING_GENTLE });
+  
+  return (
+    <AbsoluteFill style={{ backgroundColor: COLORS.BG_VOID, justifyContent: "center", alignItems: "flex-start", paddingLeft: 200 }}>
+      <div style={{ display: "flex", flexDirection: "column", gap: SPACING.PX_40, opacity: 1 - fadeOut * 0.7 }}>
+        <div style={{ display: "flex", alignItems: "center", gap: 16, opacity: item1, transform: `translateX(${(1-item1)*-40}px)` }}>
+          <div style={{ width: 12, height: 12, backgroundColor: COLORS.SECONDARY, borderRadius: "50%", boxShadow: EFFECTS.GLOW_SM }} />
+          <div style={{ fontFamily: FONTS.PRIMARY, fontSize: FONTS.SIZE_2XL, color: COLORS.TEXT_MAIN, fontWeight: FONTS.WEIGHT_BOLD }}>역사</div>
+        </div>
+        <div style={{ display: "flex", alignItems: "center", gap: 16, opacity: item2, transform: `translateX(${(1-item2)*-40}px)` }}>
+          <div style={{ width: 12, height: 12, backgroundColor: COLORS.SECONDARY, borderRadius: "50%", boxShadow: EFFECTS.GLOW_SM }} />
+          <div style={{ fontFamily: FONTS.PRIMARY, fontSize: FONTS.SIZE_2XL, color: COLORS.TEXT_MAIN, fontWeight: FONTS.WEIGHT_BOLD }}>감정</div>
+        </div>
+        <div style={{ display: "flex", alignItems: "center", gap: 16, opacity: item3, transform: `translateX(${(1-item3)*-40}px)` }}>
+          <div style={{ width: 12, height: 12, backgroundColor: COLORS.SECONDARY, borderRadius: "50%", boxShadow: EFFECTS.GLOW_SM }} />
+          <div style={{ fontFamily: FONTS.PRIMARY, fontSize: FONTS.SIZE_2XL, color: COLORS.TEXT_MAIN, fontWeight: FONTS.WEIGHT_BOLD }}>몸</div>
+        </div>
+      </div>
+    </AbsoluteFill>
+  );
 };
 
 /**
@@ -496,7 +1489,34 @@ const Scene37: React.FC = () => {
  * In-Scene Animation 구성: 각 씬의 프레임 내에서 여러 단계로 애니메이션을 분할하여 구현합니다.
  */
 const Scene38: React.FC = () => {
-  return <AbsoluteFill></AbsoluteFill>;
+  const frame = useCurrentFrame();
+  const fps = 60;
+  
+  const enter = spring({ frame, fps, config: ANIMATION.SPRING_SNAPPY });
+  // "효율적인" : 144f diff
+  const selectOptB = spring({ frame: frame - 144, fps, config: ANIMATION.SPRING_BOUNCY });
+
+  return (
+    <AbsoluteFill style={{ backgroundColor: COLORS.BG_VOID, justifyContent: "center", alignItems: "flex-end", paddingRight: 200 }}>
+      <div style={{ display: "flex", flexDirection: "column", gap: SPACING.PX_32, opacity: enter, transform: `translateX(${(1-enter)*40}px)` }}>
+        <div style={{ padding: "20px 40px", backgroundColor: COLORS.BG_SURFACE, border: `1px solid ${COLORS.BORDER_STRONG}`, borderRadius: SPACING.RADIUS_MD, opacity: 1 - selectOptB * 0.5, transition: "opacity 0.3s" }}>
+          <div style={{ fontFamily: FONTS.MONO, fontSize: FONTS.SIZE_SM, color: COLORS.TEXT_MUTED, letterSpacing: FONTS.TRACKING_WIDER }}>OPTION A</div>
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: SPACING.PX_40, marginTop: 8 }}>
+            <div style={{ fontFamily: FONTS.PRIMARY, fontSize: FONTS.SIZE_XL, color: COLORS.TEXT_MAIN, fontWeight: FONTS.WEIGHT_BOLD }}>외교</div>
+            <div style={{ fontFamily: FONTS.MONO, fontSize: FONTS.SIZE_LG, color: COLORS.TEXT_MUTED }}>효율 32%</div>
+          </div>
+        </div>
+        
+        <div style={{ padding: "20px 40px", backgroundColor: selectOptB > 0 ? COLORS.PRIMARY_DIM : COLORS.BG_SURFACE, border: `1px solid ${selectOptB > 0 ? COLORS.PRIMARY : COLORS.BORDER_STRONG}`, borderRadius: SPACING.RADIUS_MD, transform: `scale(${1 + selectOptB * 0.05})`, boxShadow: selectOptB > 0 ? EFFECTS.GLOW_MD : "none" }}>
+          <div style={{ fontFamily: FONTS.MONO, fontSize: FONTS.SIZE_SM, color: selectOptB > 0 ? COLORS.PRIMARY : COLORS.TEXT_MUTED, letterSpacing: FONTS.TRACKING_WIDER }}>OPTION B</div>
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: SPACING.PX_40, marginTop: 8 }}>
+            <div style={{ fontFamily: FONTS.PRIMARY, fontSize: FONTS.SIZE_XL, color: selectOptB > 0 ? COLORS.PRIMARY : COLORS.TEXT_MAIN, fontWeight: FONTS.WEIGHT_BOLD }}>핵</div>
+            <div style={{ fontFamily: FONTS.MONO, fontSize: FONTS.SIZE_LG, color: selectOptB > 0 ? COLORS.PRIMARY : COLORS.WARNING }}>효율 98%</div>
+          </div>
+        </div>
+      </div>
+    </AbsoluteFill>
+  );
 };
 
 /**
@@ -509,7 +1529,39 @@ const Scene38: React.FC = () => {
  * In-Scene Animation 구성: 각 씬의 프레임 내에서 여러 단계로 애니메이션을 분할하여 구현합니다.
  */
 const Scene39: React.FC = () => {
-  return <AbsoluteFill></AbsoluteFill>;
+  const frame = useCurrentFrame();
+  const fps = 60;
+  
+  const text1 = spring({ frame, fps, config: ANIMATION.SPRING_SNAPPY });
+  const text2 = spring({ frame: frame - 96, fps, config: ANIMATION.SPRING_SNAPPY }); // "망설임 없이" 139 - 43 = 96 diff roughly
+  const mainBox = spring({ frame: frame - 180, fps, config: ANIMATION.SPRING_BOUNCY }); // "최적화" roughly
+  const flash = frame >= 278 ? 1 : 0; // "겁니다" 7321 - 7043 = 278
+  
+  return (
+    <AbsoluteFill style={{ backgroundColor: COLORS.BG_VOID, justifyContent: "center", alignItems: "center" }}>
+      <div style={{ position: "absolute", top: 200, display: "flex", flexDirection: "column", alignItems: "center", gap: 16 }}>
+        <div style={{ fontFamily: FONTS.PRIMARY, fontSize: FONTS.SIZE_LG, color: COLORS.TEXT_DISABLED, textDecoration: "line-through", opacity: text1, transform: `translateY(${(1-text1)*-20}px)` }}>도덕적 고뇌 없이</div>
+        <div style={{ fontFamily: FONTS.PRIMARY, fontSize: FONTS.SIZE_LG, color: COLORS.TEXT_DISABLED, textDecoration: "line-through", opacity: text2, transform: `translateY(${(1-text2)*-20}px)` }}>망설임 없이</div>
+      </div>
+      
+      <div style={{ 
+        padding: "32px 64px", 
+        backgroundColor: COLORS.NEGATIVE_DIM, 
+        border: `2px solid ${COLORS.NEGATIVE}`, 
+        borderRadius: SPACING.RADIUS_LG, 
+        opacity: mainBox, 
+        transform: `scale(${mainBox})`,
+        boxShadow: EFFECTS.GLOW_LG
+      }}>
+        <div style={{ fontFamily: FONTS.MONO, fontSize: FONTS.SIZE_SM, color: COLORS.NEGATIVE, letterSpacing: FONTS.TRACKING_WIDER, marginBottom: 8, textAlign: "center" }}>STATUS</div>
+        <div style={{ fontFamily: FONTS.PRIMARY, fontSize: FONTS.SIZE_3XL, color: COLORS.NEGATIVE, fontWeight: FONTS.WEIGHT_EXTRABOLD, letterSpacing: FONTS.TRACKING_WIDE }}>NUCLEAR: SELECTED</div>
+      </div>
+      
+      {flash > 0 && (
+         <div style={{ position: "absolute", inset: 0, backgroundColor: COLORS.NEGATIVE, opacity: 0.8, mixBlendMode: "overlay" }} />
+      )}
+    </AbsoluteFill>
+  );
 };
 
 export const Sequences: React.FC = () => {
