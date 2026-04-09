@@ -10,73 +10,93 @@ export const BRAND = {
 } as const;
 
 export const COLORS = {
-  BG_VOID: "#050810",
-  BG_BASE: "#0A0E1A",
-  BG_SURFACE: "#141C30",
-  BG_ELEVATED: "#1C2540",
-  BG_HOVER: "rgba(56, 138, 221, 0.08)",
+  // ── Backgrounds ──────────────────────────────────────
+  // 스케치북 종이 질감 느낌의 크림 베이지
+  BG_VOID:     "#EDE9E0",
+  BG_BASE:     "#FAF8F3",
+  BG_SURFACE:  "#F4F1E9",
+  BG_ELEVATED: "#EDEAE1",
+  BG_CARD:     "#FFFFFF",
+  BG_HOVER:    "rgba(90, 120, 80, 0.07)",
 
-  PRIMARY: "#378ADD",
-  PRIMARY_DIM: "rgba(55, 138, 221, 0.15)",
-  PRIMARY_MID: "rgba(55, 138, 221, 0.30)",
-  PRIMARY_GLOW: "rgba(55, 138, 221, 0.50)",
+  // ── Primary — Sage Ink ────────────────────────────────
+  // 수채화 녹색, 너무 선명하지 않게 그레이 섞음
+  PRIMARY:      "#5A7850",
+  PRIMARY_DIM:  "rgba(90, 120, 80, 0.12)",
+  PRIMARY_MID:  "rgba(90, 120, 80, 0.25)",
+  PRIMARY_GLOW: "rgba(90, 120, 80, 0.38)",
 
-  SECONDARY: "#1D9E75",
-  SECONDARY_DIM: "rgba(29, 158, 117, 0.15)",
+  // ── Secondary — Warm Sand ─────────────────────────────
+  // 전구 앰버에서 바랜 모래빛으로
+  SECONDARY:     "#C4923A",
+  SECONDARY_DIM: "rgba(196, 146, 58, 0.14)",
 
-  ACCENT: "#EF9F27",
-  ACCENT_DIM: "rgba(239, 159, 39, 0.15)",
+  // ── Accent — Dusty Coral ─────────────────────────────
+  // 튀지 않는 코랄, 연필 스케치 위 수채화 느낌
+  ACCENT:     "#C4715A",
+  ACCENT_DIM: "rgba(196, 113, 90, 0.13)",
 
-  TEXT_MAIN: "#E8EEFA",
-  TEXT_BODY: "#A8B4CC",
-  TEXT_MUTED: "#6B7A9F",
-  TEXT_DISABLED: "#3A4460",
-  TEXT_INVERSE: "#E8EEFA",
+  // ── Text ─────────────────────────────────────────────
+  // 완전한 검정 대신 잉크가 바랜 느낌의 다크 브라운
+  TEXT_MAIN:       "#2A2720",
+  TEXT_BODY:       "#58534A",
+  TEXT_MUTED:      "#8C8478",
+  TEXT_DISABLED:   "#BEB8AF",
+  TEXT_INVERSE:    "#FAF8F3",
   TEXT_ON_PRIMARY: "#FFFFFF",
 
-  BORDER: "rgba(255, 255, 255, 0.08)",
-  BORDER_STRONG: "rgba(255, 255, 255, 0.18)",
-  BORDER_PRIMARY: "rgba(55, 138, 221, 0.55)",
+  // ── Border ───────────────────────────────────────────
+  BORDER:         "#DED9CF",
+  BORDER_STRONG:  "#CAC4B8",
+  BORDER_PRIMARY: "#B8C8B0",
 
-  POSITIVE: "#1D9E75",
-  POSITIVE_DIM: "rgba(29, 158, 117, 0.15)",
-  NEGATIVE: "#E24B4A",
-  NEGATIVE_DIM: "rgba(226, 75, 74, 0.15)",
-  WARNING: "#EF9F27",
-  WARNING_DIM: "rgba(239, 159, 39, 0.15)",
-  INFO: "#378ADD",
-  INFO_DIM: "rgba(55, 138, 221, 0.15)",
+  // ── Semantic — 채도 낮춘 수채화 톤 ────────────────────
+  // 형광 없이, 스케치북에 수성펜으로 칠한 느낌
+  POSITIVE:      "#4F8C68",   // 바랜 민트그린
+  POSITIVE_DIM:  "rgba(79, 140, 104, 0.13)",
+  NEGATIVE:      "#B85555",   // 바랜 레드, 형광 없음
+  NEGATIVE_DIM:  "rgba(184, 85, 85, 0.13)",
+  WARNING:       "#C4923A",   // 세컨더리와 통일감
+  WARNING_DIM:   "rgba(196, 146, 58, 0.14)",
+  INFO:          "#5A7850",   // 프라이머리와 통일감
+  INFO_DIM:      "rgba(90, 120, 80, 0.12)",
 
-  DATA_1: "#378ADD",
-  DATA_2: "#1D9E75",
-  DATA_3: "#EF9F27",
-  DATA_4: "#D4537E",
-  DATA_5: "#AFA9EC",
+  // ── Data palette — 스케치 수채화 5색 ─────────────────
+  // 모두 같은 채도/명도 레벨로 맞춰서 통일감 유지
+  DATA_1: "#5A7850",   // sage green  (primary)
+  DATA_2: "#C4923A",   // warm amber  (secondary)
+  DATA_3: "#5A7A9E",   // dusty blue  — 하늘빛 수채
+  DATA_4: "#C4715A",   // dusty coral (accent)
+  DATA_5: "#8A7AAE",   // muted lavender — 연필 그림자색
 } as const;
 
 export const EFFECTS = {
-  SHADOW_SM: "0 2px 8px rgba(5, 8, 16, 0.60)",
-  SHADOW_MD: "0 4px 16px rgba(5, 8, 16, 0.75)",
-  SHADOW_LG: "0 10px 32px rgba(5, 8, 16, 0.85)",
-  SHADOW_XL: "0 20px 60px rgba(5, 8, 16, 0.95)",
+  // ── Shadows — 잉크 얼룩처럼 퍼지는 소프트 쉐도우 ──────
+  SHADOW_SM: "0 1px 3px rgba(42, 39, 32, 0.07)",
+  SHADOW_MD: "0 3px 10px rgba(42, 39, 32, 0.09)",
+  SHADOW_LG: "0 8px 24px rgba(42, 39, 32, 0.11)",
+  SHADOW_XL: "0 16px 48px rgba(42, 39, 32, 0.14)",
 
-  GLOW_SM: `0 0 12px ${COLORS.PRIMARY_MID}`,
-  GLOW_MD: `0 0 24px ${COLORS.PRIMARY_GLOW}`,
-  GLOW_LG: `0 0 48px ${COLORS.PRIMARY_GLOW}, 0 0 80px ${COLORS.PRIMARY_DIM}`,
-  GLOW_TEXT_SM: `0 0 16px ${COLORS.PRIMARY_MID}`,
-  GLOW_TEXT_LG: `0 0 32px ${COLORS.PRIMARY_GLOW}`,
-  GLOW_SECONDARY: "0 0 24px rgba(29, 158, 117, 0.50)",
-  GLOW_ACCENT: "0 0 24px rgba(239, 159, 39, 0.50)",
+  // ── Tint (glow 대체) — 수채화 번짐 느낌 ──────────────
+  TINT_SM:        "0 0 0 3px rgba(90, 120, 80, 0.13)",
+  TINT_MD:        "0 0 0 4px rgba(90, 120, 80, 0.20)",
+  TINT_LG:        "0 0 0 6px rgba(90, 120, 80, 0.22), 0 2px 12px rgba(90, 120, 80, 0.09)",
+  TINT_TEXT_SM:   "0 2px 0 rgba(90, 120, 80, 0.28)",
+  TINT_TEXT_LG:   "0 2px 0 rgba(90, 120, 80, 0.50)",
+  TINT_SECONDARY: "0 0 0 4px rgba(196, 146, 58, 0.20)",
+  TINT_ACCENT:    "0 0 0 4px rgba(196, 113, 90, 0.18)",
 
-  GLASS_BG: "rgba(20, 28, 48, 0.75)",
-  GLASS_BORDER: "rgba(55, 138, 221, 0.20)",
-  GLASS_BLUR: "blur(12px)",
+  // ── Glass — 스케치북 종이 위 트레싱지 느낌 ────────────
+  GLASS_BG:         "rgba(250, 248, 243, 0.88)",
+  GLASS_BORDER:     "rgba(90, 120, 80, 0.16)",
+  GLASS_BLUR:       "blur(12px)",
   GLASS_BLUR_HEAVY: "blur(24px)",
 
-  FADE_UP: `linear-gradient(to top, ${COLORS.BG_BASE}, transparent)`,
-  FADE_DOWN: `linear-gradient(to bottom, ${COLORS.BG_BASE}, transparent)`,
-  FADE_RIGHT: `linear-gradient(to right, ${COLORS.BG_BASE}, transparent)`,
-  RADIAL_PRIMARY: `radial-gradient(ellipse at center, ${COLORS.PRIMARY_DIM} 0%, transparent 70%)`,
+  // ── Fades — BG_BASE 기준 ──────────────────────────────
+  FADE_UP:        "linear-gradient(to top, #FAF8F3, transparent)",
+  FADE_DOWN:      "linear-gradient(to bottom, #FAF8F3, transparent)",
+  FADE_RIGHT:     "linear-gradient(to right, #FAF8F3, transparent)",
+  RADIAL_PRIMARY: "radial-gradient(ellipse at center, rgba(90, 120, 80, 0.11) 0%, transparent 70%)",
 } as const;
 
 export const FONTS = {

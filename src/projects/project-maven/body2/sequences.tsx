@@ -22,7 +22,7 @@ const AICore: React.FC<{ frame: number; pulseStart: number }> = ({ frame, pulseS
   const rotationInner = interpolate(frame, [0, 200], [360, 0]);
   
   const pulse = isAnalyzing ? Math.sin((frame - pulseStart) * 0.15) * 0.1 + 1 : 1;
-  const glowIntensity = isAnalyzing ? Math.sin((frame - pulseStart) * 0.15) * 20 + 40 : 10;
+  const TINTIntensity = isAnalyzing ? Math.sin((frame - pulseStart) * 0.15) * 20 + 40 : 10;
 
   return (
     <div style={{ position: "relative", width: 280, height: 280, display: "flex", justifyContent: "center", alignItems: "center" }}>
@@ -62,7 +62,7 @@ const AICore: React.FC<{ frame: number; pulseStart: number }> = ({ frame, pulseS
         justifyContent: "center",
         alignItems: "center",
         transform: `scale(${pulse * analysisProgress})`,
-        boxShadow: `0 0 ${glowIntensity}px ${COLORS.PRIMARY_GLOW}`,
+        boxShadow: `0 0 ${TINTIntensity}px ${COLORS.PRIMARY_GLOW}`,
         zIndex: Z.CONTENT,
       }}>
         <div style={{ color: COLORS.PRIMARY, fontSize: FONTS.SIZE_XS, letterSpacing: FONTS.TRACKING_WIDER, opacity: 0.7 }}>ANALYSIS</div>
@@ -139,7 +139,7 @@ const PhaseOverview: React.FC<{
     fps: 30,
     config: ANIMATION.SPRING_SNAPPY,
   });
-  const highlightGlow = interpolateColors(highlightIn, [0, 1], ["transparent", COLORS.PRIMARY_DIM]);
+  const highlightTINT = interpolateColors(highlightIn, [0, 1], ["transparent", COLORS.PRIMARY_DIM]);
   const highlightBorder = interpolateColors(highlightIn, [0, 1], [COLORS.BORDER_STRONG, COLORS.PRIMARY]);
 
   return (
@@ -184,7 +184,7 @@ const PhaseOverview: React.FC<{
             }}>
               <div style={{ 
                 width: 140, height: 140, 
-                backgroundColor: isHighlighted ? highlightGlow : COLORS.BG_ELEVATED, 
+                backgroundColor: isHighlighted ? highlightTINT : COLORS.BG_ELEVATED, 
                 border: `2px solid ${isHighlighted ? highlightBorder : COLORS.BORDER_STRONG}`,
                 display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center",
                 gap: SPACING.PX_8,
@@ -274,7 +274,7 @@ const Scene4: React.FC = () => {
     <AbsoluteFill style={{ backgroundColor: COLORS.BG_BASE, overflow: "hidden", justifyContent: "center", alignItems: "center" }}>
       <GridOverlay cellSize={60} opacity={0.15} />
       
-      {/* Background Decorative Glow */}
+      {/* Background Decorative TINT */}
       <div style={{
         position: "absolute",
         width: 1200,
@@ -310,7 +310,7 @@ const Scene4: React.FC = () => {
               alignItems: "center",
               padding: SPACING.PX_40,
               gap: SPACING.PX_32,
-              boxShadow: isAnalysisActive ? EFFECTS.GLOW_MD : EFFECTS.SHADOW_LG,
+              boxShadow: isAnalysisActive ? EFFECTS.TINT_MD : EFFECTS.SHADOW_LG,
               transition: "all 0.5s ease-out"
             }}>
               {/* Type label at top */}
@@ -427,7 +427,7 @@ const Scene5: React.FC = () => {
  * [Scene 6 기획안]
  * 원본 텍스트: ", "저 건물에서 열 감지가 되는데 뭐가 있는 거지?
  * 단어 등장 타이밍: "\",": 1069f, "\"저": 1077f, "건물에서": 1110f, "열": 1144f, "감지가": 1169f, "되는데": 1186f, "뭐가": 1202f, "있는": 1232f, "거지?": 1232f
- * 비주얼 컨셉: 인용문 패널에 "QUERY 2:" 레이블과 함께 두 번째 질문 타이핑. "열" 단어 등장 시 패널 우측에 열감지 표시 (적색 → 오렌지 그라데이션의 수직 바, 추상적 ACCENT 색 표현). GLOW_ACCENT 효과로 강조.
+ * 비주얼 컨셉: 인용문 패널에 "QUERY 2:" 레이블과 함께 두 번째 질문 타이핑. "열" 단어 등장 시 패널 우측에 열감지 표시 (적색 → 오렌지 그라데이션의 수직 바, 추상적 ACCENT 색 표현). TINT_ACCENT 효과로 강조.
  * 하단 150px은 자막 영역이므로, 텍스트와 핵심 그래픽은 이 영역을 침범하지 않도록 주의하세요.
  * 화면에 노출되는 UI 텍스트는 프로그래밍 용어/회사명 등을 제외하고 모두 한국어 단어로 작성합니다.
  * In-Scene Animation 구성: 각 씬의 프레임 내에서 여러 단계로 애니메이션을 분할하여 구현합니다.
@@ -480,7 +480,7 @@ const Scene7: React.FC = () => {
           fontWeight: FONTS.WEIGHT_EXTRABOLD, 
           color: COLORS.PRIMARY, 
           fontFamily: FONTS.MONO,
-          textShadow: EFFECTS.GLOW_LG
+          textShadow: EFFECTS.TINT_LG
         }}>
           {isLooping ? (
              <div style={{ display: "flex", overflow: "hidden", height: 160 }}>
@@ -548,7 +548,7 @@ const Scene9: React.FC = () => {
           height: 6, 
           backgroundColor: COLORS.NEGATIVE,
           transform: "rotate(15deg)",
-          boxShadow: EFFECTS.GLOW_ACCENT,
+          boxShadow: EFFECTS.TINT_ACCENT,
         }} />
       </div>
     </AbsoluteFill>
@@ -596,7 +596,7 @@ const Scene10: React.FC = () => {
     <AbsoluteFill style={{ backgroundColor: COLORS.BG_BASE, overflow: "hidden" }}>
       <GridOverlay cellSize={40} opacity={0.15} />
       
-      {/* Radial Background Glow - Centered on AI Core */}
+      {/* Radial Background TINT - Centered on AI Core */}
       <div style={{
         position: "absolute",
         left: lineEndX - 400,
@@ -737,7 +737,7 @@ const Scene10: React.FC = () => {
  * [Scene 11 기획안]
  * 원본 텍스트: "이 차량이 어제 이 SNS 계정 근처에 있었는데?
  * 단어 등장 타이밍: "\"이": 1920f, "차량이": 1929f, "어제": 1956f, "이": 1975f, "SNS": 1984f, "계정": 1993f, "근처에": 2011f, "있었는데?": 2037f
- * 비주얼 컨셉: GLASS_BG 패널에 상관관계 결과 UI: 상단 [VEHICLE ID: XX-7731] / 하단 [SNS ACCOUNT: @xxx]. 두 항목 사이에 "CORRELATION DETECTED" 레이블과 PRIMARY 색 연결선. "있었는데?" 단어에 GLOW_MD 강조.
+ * 비주얼 컨셉: GLASS_BG 패널에 상관관계 결과 UI: 상단 [VEHICLE ID: XX-7731] / 하단 [SNS ACCOUNT: @xxx]. 두 항목 사이에 "CORRELATION DETECTED" 레이블과 PRIMARY 색 연결선. "있었는데?" 단어에 TINT_MD 강조.
  * 하단 150px은 자막 영역이므로, 텍스트와 핵심 그래픽은 이 영역을 침범하지 않도록 주의하세요.
  * 화면에 노출되는 UI 텍스트는 프로그래밍 용어/회사명 등을 제외하고 모두 한국어 단어로 작성합니다.
  * In-Scene Animation 구성: 각 씬의 프레임 내에서 여러 단계로 애니메이션을 분할하여 구현합니다.
@@ -767,7 +767,7 @@ const Scene11: React.FC = () => {
           <div style={{ width: 60, height: 2, backgroundColor: COLORS.PRIMARY }} />
           <div style={{ 
             color: COLORS.PRIMARY, fontSize: FONTS.SIZE_SM, fontWeight: FONTS.WEIGHT_BOLD,
-            textShadow: frame >= wordHighlight ? EFFECTS.GLOW_MD : "none"
+            textShadow: frame >= wordHighlight ? EFFECTS.TINT_MD : "none"
           }}>
             상관관계 감지됨
           </div>
@@ -840,7 +840,7 @@ const Scene12: React.FC = () => {
               width: 20, height: 20,
               borderRadius: "50%",
               backgroundColor: isConnected ? COLORS.PRIMARY : COLORS.TEXT_DISABLED,
-              boxShadow: isConnected ? EFFECTS.GLOW_SM : "none",
+              boxShadow: isConnected ? EFFECTS.TINT_SM : "none",
               transition: "all 0.3s"
             }} />
           )
@@ -867,7 +867,7 @@ const Scene13: React.FC = () => {
  * [Scene 14 기획안]
  * 원본 텍스트: "이건 군사 시설일 확률 98%입니다, 사령관님 결정하세요.
  * 단어 등장 타이밍: "\"이건": 2377f, "군사": 2408f, "시설일": 2418f, "확률": 2451f, "98%입니다,": 2468f, "사령관님": 2542f, "결정하세요.": 2585f
- * 비주얼 컨셉: AI 보고서 UI 패널. 상단 "AI REPORT" 레이블, 내부: [CLASSIFICATION: MILITARY FACILITY] + [CONFIDENCE: 98%] 수치가 counter up으로 등장. "98%" 단어에 PRIMARY GLOW_LG 강조. 하단 "— DECISION REQUIRED" 레이블 ACCENT 색 blink.
+ * 비주얼 컨셉: AI 보고서 UI 패널. 상단 "AI REPORT" 레이블, 내부: [CLASSIFICATION: MILITARY FACILITY] + [CONFIDENCE: 98%] 수치가 counter up으로 등장. "98%" 단어에 PRIMARY TINT_LG 강조. 하단 "— DECISION REQUIRED" 레이블 ACCENT 색 blink.
  * 하단 150px은 자막 영역이므로, 텍스트와 핵심 그래픽은 이 영역을 침범하지 않도록 주의하세요.
  * 화면에 노출되는 UI 텍스트는 프로그래밍 용어/회사명 등을 제외하고 모두 한국어 단어로 작성합니다.
  * In-Scene Animation 구성: 각 씬의 프레임 내에서 여러 단계로 애니메이션을 분할하여 구현합니다.
@@ -904,7 +904,7 @@ const Scene14: React.FC = () => {
               color: showPercent ? COLORS.PRIMARY : COLORS.TEXT_BODY, 
               fontSize: FONTS.SIZE_3XL, 
               fontWeight: FONTS.WEIGHT_EXTRABOLD,
-              textShadow: showPercent ? EFFECTS.GLOW_LG : "none",
+              textShadow: showPercent ? EFFECTS.TINT_LG : "none",
               fontFamily: FONTS.MONO
             }}>
               <CounterText from={0} to={98} durationInFrames={30} suffix="%" />
@@ -1029,7 +1029,7 @@ const Scene16: React.FC = () => {
           fontFamily: FONTS.MONO, 
           fontWeight: FONTS.WEIGHT_EXTRABOLD,
           color: frame >= speedUpStart ? COLORS.WARNING : COLORS.PRIMARY,
-          textShadow: frame >= speedUpStart ? EFFECTS.GLOW_ACCENT : EFFECTS.GLOW_LG,
+          textShadow: frame >= speedUpStart ? EFFECTS.TINT_ACCENT : EFFECTS.TINT_LG,
           fontVariantNumeric: "tabular-nums"
         }}>
           {pad(m, 2)}:{pad(s, 2)}:{pad(ms, 3)}
@@ -1087,7 +1087,7 @@ const Scene17: React.FC = () => {
  * [Scene 18 기획안]
  * 원본 텍스트: 메이븐 AI 덕분에 1시간에 최대 80개의 표적을 포착할 수 있게 됐다고 합니다.
  * 단어 등장 타이밍: "메이븐": 3155f, "AI": 3179f, "덕분에": 3184f, "1시간에": 3211f, "최대": 3250f, "80개의": 3262f, "표적을": 3293f, "포착할": 3321f, "수": 3343f, "있게": 3352f, "됐다고": 3373f, "합니다.": 3394f
- * 비주얼 컨셉: 중앙에 대형 숫자 "80" SIZE_4XL WEIGHT_EXTRABOLD PRIMARY GLOW_LG 발광으로 counter up 등장. 아래에 "표적 / 1시간" TEXT_MUTED SIZE_SM 레이블. 배경에 PRIMARY_DIM 방사형 glow. "80개의" 단어에서 최종값 정지.
+ * 비주얼 컨셉: 중앙에 대형 숫자 "80" SIZE_4XL WEIGHT_EXTRABOLD PRIMARY TINT_LG 발광으로 counter up 등장. 아래에 "표적 / 1시간" TEXT_MUTED SIZE_SM 레이블. 배경에 PRIMARY_DIM 방사형 TINT. "80개의" 단어에서 최종값 정지.
  * 하단 150px은 자막 영역이므로, 텍스트와 핵심 그래픽은 이 영역을 침범하지 않도록 주의하세요.
  * 화면에 노출되는 UI 텍스트는 프로그래밍 용어/회사명 등을 제외하고 모두 한국어 단어로 작성합니다.
  * In-Scene Animation 구성: 각 씬의 프레임 내에서 여러 단계로 애니메이션을 분할하여 구현합니다.
@@ -1110,7 +1110,7 @@ const Scene18: React.FC = () => {
           fontWeight: FONTS.WEIGHT_EXTRABOLD, 
           color: COLORS.PRIMARY, 
           fontFamily: FONTS.MONO,
-          textShadow: EFFECTS.GLOW_LG,
+          textShadow: EFFECTS.TINT_LG,
           lineHeight: 1
         }}>
           {frame < stopFrame ? (
@@ -1164,8 +1164,8 @@ const Scene19: React.FC = () => {
             <span style={{ color: COLORS.PRIMARY, fontWeight: FONTS.WEIGHT_BOLD }}>AI</span>
             <span style={{ color: COLORS.PRIMARY, fontFamily: FONTS.MONO }}>80개/시간</span>
           </div>
-          <div style={{ width: "100%", height: 16, backgroundColor: COLORS.BG_SURFACE, border: `1px solid ${COLORS.BORDER_PRIMARY}`, overflow: "hidden", boxShadow: frame >= aiStart ? EFFECTS.GLOW_SM : "none" }}>
-            <div style={{ width: `${aiProgress}%`, height: "100%", backgroundColor: COLORS.PRIMARY, boxShadow: EFFECTS.GLOW_MD }} />
+          <div style={{ width: "100%", height: 16, backgroundColor: COLORS.BG_SURFACE, border: `1px solid ${COLORS.BORDER_PRIMARY}`, overflow: "hidden", boxShadow: frame >= aiStart ? EFFECTS.TINT_SM : "none" }}>
+            <div style={{ width: `${aiProgress}%`, height: "100%", backgroundColor: COLORS.PRIMARY, boxShadow: EFFECTS.TINT_MD }} />
           </div>
         </div>
 
@@ -1257,7 +1257,7 @@ const Scene21: React.FC = () => {
                 position: "absolute", bottom: -5, left: 0, height: 4, 
                 backgroundColor: COLORS.NEGATIVE, 
                 width: `${lineScale * 100}%`,
-                boxShadow: EFFECTS.GLOW_ACCENT
+                boxShadow: EFFECTS.TINT_ACCENT
               }} />
             )}
           </span>"
@@ -1487,7 +1487,7 @@ const Scene26: React.FC = () => {
                 position: "absolute", bottom: -8, left: 0, height: 6, 
                 backgroundColor: COLORS.PRIMARY, 
                 width: `${spring({ frame: frame - mustKeywordStart, fps: 30, config: ANIMATION.SPRING_SNAPPY }) * 100}%`,
-                boxShadow: EFFECTS.GLOW_SM
+                boxShadow: EFFECTS.TINT_SM
               }} />
             )}
           </span> 감독하고 개입한다."

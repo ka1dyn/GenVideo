@@ -905,7 +905,7 @@ const Scene21: React.FC = () => {
         
         {/* Right */}
         <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: SPACING.PX_32, opacity: enterR, transform: `translateX(${(1-enterR)*20}px) scale(${1 + pulseR * 0.05})` }}>
-          <div style={{ width: 160, height: 160, backgroundColor: pulseR > 0 ? COLORS.WARNING_DIM : COLORS.BG_SURFACE, border: `2px solid ${pulseR > 0 ? COLORS.WARNING : COLORS.PRIMARY}`, borderRadius: SPACING.RADIUS_MD, display: "flex", justifyContent: "center", alignItems: "center", fontFamily: FONTS.PRIMARY, fontSize: FONTS.SIZE_LG, color: pulseR > 0 ? COLORS.WARNING : COLORS.PRIMARY, fontWeight: FONTS.WEIGHT_BOLD, boxShadow: pulseR > 0 ? EFFECTS.GLOW_ACCENT : "none", transition: "all 0.3s" }}>
+          <div style={{ width: 220, height: 160, backgroundColor: pulseR > 0 ? COLORS.WARNING_DIM : COLORS.BG_SURFACE, border: `2px solid ${pulseR > 0 ? COLORS.WARNING : COLORS.PRIMARY}`, borderRadius: SPACING.RADIUS_MD, display: "flex", justifyContent: "center", alignItems: "center", fontFamily: FONTS.PRIMARY, fontSize: FONTS.SIZE_LG, color: pulseR > 0 ? COLORS.WARNING : COLORS.PRIMARY, fontWeight: FONTS.WEIGHT_BOLD, boxShadow: pulseR > 0 ? EFFECTS.GLOW_ACCENT : "none", transition: "all 0.3s" }}>
             오류 유도
           </div>
           <div style={{ fontFamily: FONTS.MONO, fontSize: FONTS.SIZE_3XL, color: pulseR > 0 ? COLORS.WARNING : COLORS.PRIMARY, fontWeight: FONTS.WEIGHT_EXTRABOLD }}>

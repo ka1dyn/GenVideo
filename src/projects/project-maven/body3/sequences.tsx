@@ -76,7 +76,7 @@ const Scene2: React.FC = () => {
       </div>
 
       <div style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", height: "100%", transform: `translateY(-30px)` }}>
-        <div style={{ transform: `scale(${counterEnter})`, opacity: counterEnter, textShadow: EFFECTS.GLOW_ACCENT }}>
+        <div style={{ transform: `scale(${counterEnter})`, opacity: counterEnter, textShadow: EFFECTS.TINT_ACCENT }}>
           <CounterText from={0} to={1000} startFrame={117} durationInFrames={88} suffix="+" color={COLORS.NEGATIVE} fontSize={FONTS.SIZE_4XL} fontWeight={FONTS.WEIGHT_EXTRABOLD} />
         </div>
         
@@ -109,13 +109,13 @@ const Scene3: React.FC = () => {
   return (
     <AbsoluteFill style={{ backgroundColor: COLORS.BG_BASE }}>
       <div style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", height: "100%", transform: `translateY(-30px)` }}>
-        <div style={{ textShadow: EFFECTS.GLOW_ACCENT, color: COLORS.NEGATIVE, fontSize: FONTS.SIZE_4XL, fontWeight: FONTS.WEIGHT_EXTRABOLD, fontFamily: FONTS.DISPLAY }}>
+        <div style={{ textShadow: EFFECTS.TINT_ACCENT, color: COLORS.NEGATIVE, fontSize: FONTS.SIZE_4XL, fontWeight: FONTS.WEIGHT_EXTRABOLD, fontFamily: FONTS.DISPLAY }}>
           1000+
         </div>
         <div style={{ transform: `translateY(${(1 - divisionEnter) * 10}px)`, opacity: divisionEnter, fontFamily: FONTS.MONO, fontSize: FONTS.SIZE_MD, color: COLORS.TEXT_MUTED, marginTop: SPACING.PX_16 }}>
           ÷ 24H
         </div>
-        <div style={{ transform: `translateY(${(1 - resultEnter) * 10}px) scale(${resultEnter})`, opacity: resultEnter, fontFamily: FONTS.PRIMARY, fontSize: FONTS.SIZE_XL, color: COLORS.PRIMARY, fontWeight: FONTS.WEIGHT_BOLD, marginTop: SPACING.PX_24, textShadow: EFFECTS.GLOW_LG }}>
+        <div style={{ transform: `translateY(${(1 - resultEnter) * 10}px) scale(${resultEnter})`, opacity: resultEnter, fontFamily: FONTS.PRIMARY, fontSize: FONTS.SIZE_XL, color: COLORS.PRIMARY, fontWeight: FONTS.WEIGHT_BOLD, marginTop: SPACING.PX_24, textShadow: EFFECTS.TINT_LG }}>
           = 41+ / hr
         </div>
       </div>
@@ -210,13 +210,13 @@ const Scene7: React.FC = () => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
 
-  const bgGlow = spring({ frame: frame - 47, fps, config: ANIMATION.SPRING_GENTLE });
+  const bgTINT = spring({ frame: frame - 47, fps, config: ANIMATION.SPRING_GENTLE });
   const textEnter = spring({ frame: frame - 47, fps, config: ANIMATION.SPRING_SNAPPY });
 
   return (
     <AbsoluteFill style={{ backgroundColor: COLORS.BG_BASE, display: "flex", justifyContent: "center", alignItems: "center" }}>
-      <div style={{ position: "absolute", inset: 0, background: EFFECTS.RADIAL_PRIMARY, opacity: bgGlow * 0.5 }} />
-      <div style={{ zIndex: 1, opacity: textEnter, transform: `scale(${textEnter})`, fontFamily: FONTS.PRIMARY, fontSize: FONTS.SIZE_LG, color: COLORS.PRIMARY, fontWeight: FONTS.WEIGHT_BOLD, textShadow: EFFECTS.GLOW_LG }}>
+      <div style={{ position: "absolute", inset: 0, background: EFFECTS.RADIAL_PRIMARY, opacity: bgTINT * 0.5 }} />
+      <div style={{ zIndex: 1, opacity: textEnter, transform: `scale(${textEnter})`, fontFamily: FONTS.PRIMARY, fontSize: FONTS.SIZE_LG, color: COLORS.PRIMARY, fontWeight: FONTS.WEIGHT_BOLD, textShadow: EFFECTS.TINT_LG }}>
         달랐다는 거예요.
       </div>
     </AbsoluteFill>
@@ -262,12 +262,12 @@ const Scene9: React.FC = () => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
 
-  const aiGlow = spring({ frame: frame - 185, fps, config: ANIMATION.SPRING_GENTLE });
+  const aiTINT = spring({ frame: frame - 185, fps, config: ANIMATION.SPRING_GENTLE });
   const aiTag = spring({ frame: frame - 185, fps, config: ANIMATION.SPRING_SNAPPY });
 
   return (
     <AbsoluteFill style={{ backgroundColor: COLORS.BG_BASE }}>
-      <div style={{ position: "absolute", inset: 0, backgroundColor: COLORS.PRIMARY_DIM, opacity: aiGlow * 0.3 }} />
+      <div style={{ position: "absolute", inset: 0, backgroundColor: COLORS.PRIMARY_DIM, opacity: aiTINT * 0.3 }} />
 
       <div style={{ position: "absolute", top: 80, width: "100%", display: "flex", justifyContent: "center", opacity: aiTag, transform: `translateY(${(1 - aiTag) * -20}px)` }}>
          <StatusTag label="AI-DRIVEN" bgColor={COLORS.PRIMARY_DIM} textColor={COLORS.PRIMARY} borderColor={COLORS.PRIMARY} showDot dotColor={COLORS.PRIMARY} />
@@ -321,14 +321,14 @@ const Scene10: React.FC = () => {
 
         {/* Center: Palantir */}
         <div style={{ zIndex: Z.CONTENT + 1 }}>
-          <FlowBox title="Palantir" subtitle="AI ANALYSIS" borderColor={COLORS.PRIMARY} isActive={true} delay={0} glowColor={frame >= 119 ? COLORS.PRIMARY : "transparent"} />
+          <FlowBox title="Palantir" borderColor={COLORS.PRIMARY} isActive={true} delay={0} glowColor={frame >= 119 ? COLORS.PRIMARY : "transparent"} />
         </div>
         
         {/* Right: Output */}
         <div style={{ width: 100, display: "flex", alignItems: "center", margin: "0 -20px", zIndex: Z.CONTENT }}>
            {frame >= 161 && <DrawLine startFrame={161} durationInFrames={20} color={COLORS.PRIMARY} thickness={SPACING.BORDER_NORMAL} direction="ltr" />}
         </div>
-        <div style={{ width: 160, display: "flex", alignItems: "center", justifyContent: "flex-start", zIndex: Z.CONTENT, paddingLeft: SPACING.PX_16 }}>
+        <div style={{ width: 200, display: "flex", alignItems: "center", justifyContent: "flex-start", zIndex: Z.CONTENT, paddingLeft: SPACING.PX_16 }}>
           {priorityEnter && (
              <div style={{ display: "flex", flexDirection: "column", gap: SPACING.PX_8 }}>
                <StatusTag label="#1 우선순위 목록" borderColor={COLORS.SECONDARY} textColor={COLORS.SECONDARY} startFrame={161} />
@@ -357,9 +357,9 @@ const Scene11: React.FC = () => {
       <div style={{ display: "flex", justifyContent: "center", alignItems: "center", gap: 0, position: "absolute", top: "30%", width: "100%", opacity: 0.4 }}>
         <div style={{ width: 140, display: "flex", justifyContent: "flex-end", marginRight: SPACING.PX_16 }}><StatusTag label="드론 데이터" bgColor={COLORS.BG_ELEVATED} /></div>
         <div style={{ width: 100, margin: "0 -20px" }}><DrawLine color={COLORS.PRIMARY} /></div>
-        <div style={{ zIndex: Z.CONTENT + 1 }}><FlowBox title="Palantir" subtitle="AI ANALYSIS" borderColor={COLORS.PRIMARY} isActive={false} /></div>
+        <div style={{ zIndex: Z.CONTENT + 1 }}><FlowBox title="Palantir" borderColor={COLORS.PRIMARY} isActive={false} /></div>
         <div style={{ width: 100, margin: "0 -20px" }}><DrawLine color={COLORS.PRIMARY} /></div>
-        <div style={{ width: 160, paddingLeft: SPACING.PX_16 }}><StatusTag label="#1 우선순위 목록" borderColor={COLORS.SECONDARY} textColor={COLORS.SECONDARY} /></div>
+        <div style={{ width: 200, paddingLeft: SPACING.PX_16 }}><StatusTag label="#1 우선순위 목록" borderColor={COLORS.SECONDARY} textColor={COLORS.SECONDARY} /></div>
       </div>
 
       {/* Claude flow below */}
@@ -368,7 +368,7 @@ const Scene11: React.FC = () => {
         <div style={{ width: 140, display: "flex", alignItems: "center", justifyContent: "flex-end", zIndex: Z.CONTENT }}>
           {frame >= 53 && (
             <div style={{ marginRight: SPACING.PX_16, display: "flex", flexDirection: "column", alignItems: "flex-end", gap: SPACING.PX_4 }}>
-              <div style={{ fontFamily: FONTS.MONO, fontSize: FONTS.SIZE_XS, color: COLORS.TEXT_MUTED }}>SCENARIOS</div>
+              <div style={{ fontFamily: FONTS.MONO, fontSize: FONTS.SIZE_XS, color: COLORS.TEXT_MUTED }}>시나리오</div>
               <CounterText from={0} to={50000} startFrame={53} durationInFrames={40} suffix="+" color={COLORS.TEXT_MAIN} fontSize={FONTS.SIZE_MD} fontWeight={FONTS.WEIGHT_BOLD} />
             </div>
           )}
@@ -379,14 +379,14 @@ const Scene11: React.FC = () => {
 
         {/* Center: Claude */}
         <div style={{ zIndex: Z.CONTENT + 1 }}>
-          <FlowBox title="Claude" subtitle="Anthropic" borderColor={COLORS.SECONDARY} isActive={true} delay={0} glowColor={frame >= 181 ? COLORS.SECONDARY : "transparent"} />
+          <FlowBox title="Claude" borderColor={COLORS.SECONDARY} isActive={true} delay={0} glowColor={frame >= 181 ? COLORS.SECONDARY : "transparent"} />
         </div>
         
         {/* Right: Output */}
         <div style={{ width: 100, display: "flex", alignItems: "center", margin: "0 -20px", zIndex: Z.CONTENT }}>
            {frame >= 213 && <DrawLine startFrame={213} durationInFrames={20} color={COLORS.SECONDARY} thickness={SPACING.BORDER_NORMAL} direction="ltr" />}
         </div>
-        <div style={{ width: 160, display: "flex", alignItems: "center", justifyContent: "flex-start", zIndex: Z.CONTENT, paddingLeft: SPACING.PX_16 }}>
+        <div style={{ width: 200, display: "flex", alignItems: "center", justifyContent: "flex-start", zIndex: Z.CONTENT, paddingLeft: SPACING.PX_16 }}>
           {frame >= 213 && (
              <StatusTag label="최적의 시나리오" borderColor={COLORS.SECONDARY} textColor={COLORS.SECONDARY} startFrame={213} bgColor={COLORS.SECONDARY_DIM} />
           )}
@@ -426,7 +426,7 @@ const Scene12: React.FC = () => {
           backgroundColor: COLORS.BG_ELEVATED,
           padding: `${SPACING.PX_32}px ${SPACING.PX_64}px`,
           borderRadius: SPACING.RADIUS_MD,
-          boxShadow: EFFECTS.GLOW_ACCENT,
+          boxShadow: EFFECTS.TINT_ACCENT,
           fontFamily: FONTS.PRIMARY, 
           fontSize: FONTS.SIZE_XL, 
           color: COLORS.TEXT_MAIN, 
@@ -630,20 +630,6 @@ const Scene18: React.FC = () => {
              <div style={{ fontFamily: FONTS.PRIMARY, fontSize: FONTS.SIZE_LG, color: COLORS.TEXT_MAIN, fontWeight: FONTS.WEIGHT_BOLD }}>
                외신 보도에 따르면
              </div>
-             <div style={{ opacity: disclaimerEnter, transform: `scale(${disclaimerEnter})` }}>
-               <StatusTag label="DISCLAIMER" bgColor={COLORS.BG_ELEVATED} textColor={COLORS.TEXT_DISABLED} borderColor="transparent" fontSize={FONTS.SIZE_XS} />
-             </div>
-          </div>
-          
-          <div style={{ 
-            opacity: textEnter, 
-            transform: `translateY(${(1 - textEnter) * 10}px)`, 
-            fontFamily: FONTS.PRIMARY, 
-            fontSize: FONTS.SIZE_MD, 
-            color: COLORS.TEXT_MUTED,
-            marginTop: SPACING.PX_16
-          }}>
-            수준이라는 거 말씀드려요.
           </div>
         </QuotePanel>
       </div>
@@ -661,11 +647,11 @@ const Scene19: React.FC = () => {
 
   const asIsEnter = spring({ frame: frame - 46, fps, config: ANIMATION.SPRING_GENTLE });
   const conveyEnter = spring({ frame: frame - 122, fps, config: ANIMATION.SPRING_GENTLE });
-  const bgGlow = spring({ frame: frame - 46, fps, config: { damping: 200, stiffness: 20, mass: 1 } });
+  const bgTINT = spring({ frame: frame - 46, fps, config: { damping: 200, stiffness: 20, mass: 1 } });
 
   return (
     <AbsoluteFill style={{ backgroundColor: COLORS.BG_BASE, display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center" }}>
-      <div style={{ position: "absolute", inset: 0, background: EFFECTS.RADIAL_PRIMARY, opacity: bgGlow * 0.4 }} />
+      <div style={{ position: "absolute", inset: 0, background: EFFECTS.RADIAL_PRIMARY, opacity: bgTINT * 0.4 }} />
       
       <div style={{ zIndex: 1, display: "flex", flexDirection: "column", alignItems: "center", gap: SPACING.PX_16 }}>
         <div style={{ 
@@ -713,12 +699,12 @@ export const Sequences: React.FC = () => {
       <Sequence from={846} durationInFrames={194}>
         <Scene6 />
       </Sequence>
-      <Sequence from={1040} durationInFrames={119}>
+      <Sequence from={1040} durationInFrames={207}>
         <Scene7 />
       </Sequence>
-      <Sequence from={1159} durationInFrames={88}>
+      {/* <Sequence from={1159} durationInFrames={88}>
         <Scene8 />
-      </Sequence>
+      </Sequence> */}
       <Sequence from={1247} durationInFrames={363}>
         <Scene9 />
       </Sequence>
@@ -746,10 +732,10 @@ export const Sequences: React.FC = () => {
       <Sequence from={2956} durationInFrames={282}>
         <Scene17 />
       </Sequence>
-      <Sequence from={3238} durationInFrames={171}>
+      <Sequence from={3238} durationInFrames={200}>
         <Scene18 />
       </Sequence>
-      <Sequence from={3409} durationInFrames={246}>
+      <Sequence from={3438} durationInFrames={217}>
         <Scene19 />
       </Sequence>
     </AbsoluteFill>

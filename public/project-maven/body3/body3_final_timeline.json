@@ -703,8 +703,8 @@
         }
       ],
       "startFrame": 3238,
-      "endFrame": 3409,
-      "durationInFrames": 171
+      "endFrame": 3438,
+      "durationInFrames": 200
     },
     {
       "sentence": "그래서 있는 그대로 전달드리는 거예요.",
@@ -735,9 +735,9 @@
           "endFrame": 3655
         }
       ],
-      "startFrame": 3409,
+      "startFrame": 3438,
       "endFrame": 3655,
-      "durationInFrames": 246
+      "durationInFrames": 217
     }
   ]
 }

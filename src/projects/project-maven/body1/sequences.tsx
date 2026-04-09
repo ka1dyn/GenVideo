@@ -68,14 +68,14 @@ const Scene2: React.FC = () => {
   const labelSlide = spring({ frame, fps, config: ANIMATION.SPRING_SNAPPY });
   const panelIn = spring({ frame: Math.max(0, frame - 15), fps, config: ANIMATION.SPRING_SNAPPY });
   const borderColor = frame >= WORRY_FRAME ? COLORS.WARNING : COLORS.BORDER;
-  const borderGlow = frame >= WORRY_FRAME ? `0 0 16px ${COLORS.WARNING_DIM}` : "none";
+  const borderTINT = frame >= WORRY_FRAME ? `0 0 16px ${COLORS.WARNING_DIM}` : "none";
   return (
     <AbsoluteFill style={{ backgroundColor: COLORS.BG_BASE }}>
       <div style={{ position: "absolute", top: SPACING.PX_96, left: 0, right: 0, textAlign: "center", zIndex: Z.UI, opacity: labelSlide, transform: `translateY(${interpolate(labelSlide, [0, 1], [ANIMATION.ENTER_Y_SM, 0])}px)` }}>
         <span style={{ color: COLORS.TEXT_MUTED, fontSize: FONTS.SIZE_SM, fontFamily: FONTS.MONO, letterSpacing: `${FONTS.TRACKING_WIDE}em` }}>U.S. DEPARTMENT OF DEFENSE</span>
       </div>
       <div style={{ position: "absolute", top: 0, left: 0, right: 0, bottom: 150, display: "flex", alignItems: "center", justifyContent: "center", zIndex: Z.CONTENT }}>
-        <div style={{ opacity: panelIn, transform: `translateY(${interpolate(panelIn, [0, 1], [ANIMATION.ENTER_Y_MD, 0])}px)`, width: 620, padding: `${SPACING.PX_32}px ${SPACING.PX_40}px`, border: `${SPACING.BORDER_NORMAL}px solid ${borderColor}`, backgroundColor: COLORS.BG_SURFACE, boxShadow: borderGlow, transition: "border-color 0.3s" }}>
+        <div style={{ opacity: panelIn, transform: `translateY(${interpolate(panelIn, [0, 1], [ANIMATION.ENTER_Y_MD, 0])}px)`, width: 620, padding: `${SPACING.PX_32}px ${SPACING.PX_40}px`, border: `${SPACING.BORDER_NORMAL}px solid ${borderColor}`, backgroundColor: COLORS.BG_SURFACE, boxShadow: borderTINT, transition: "border-color 0.3s" }}>
           <TypewriterText text="문제 식별 완료" startFrame={20} framesPerChar={3} color={COLORS.TEXT_MAIN} fontSize={FONTS.SIZE_LG} fontWeight={FONTS.WEIGHT_BOLD} fontFamily={FONTS.MONO} cursorColor={COLORS.ACCENT} showCursor={true} />
         </div>
       </div>
@@ -293,7 +293,7 @@ const Scene6: React.FC = () => {
       <div style={{ position: "absolute", top: 0, left: 0, right: 0, bottom: 150, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: SPACING.PX_24, zIndex: Z.CONTENT }}>
         <div style={{ color: COLORS.TEXT_MAIN, fontSize: FONTS.SIZE_3XL, fontWeight: FONTS.WEIGHT_EXTRABOLD, fontFamily: FONTS.DISPLAY }}>{Math.round(hourCount)}H</div>
         <div style={{ width: 600, height: 6, backgroundColor: COLORS.BG_ELEVATED }}>
-          <div style={{ height: "100%", width: `${barProgress}%`, backgroundColor: COLORS.PRIMARY, boxShadow: EFFECTS.GLOW_SM }} />
+          <div style={{ height: "100%", width: `${barProgress}%`, backgroundColor: COLORS.PRIMARY, boxShadow: EFFECTS.TINT_SM }} />
         </div>
       </div>
     </AbsoluteFill>
@@ -445,7 +445,7 @@ const Scene9: React.FC = () => {
         <div style={{ opacity: barIn, width: 700 }}>
           <div style={{ display: "flex", height: 8, backgroundColor: COLORS.BG_ELEVATED, width: "100%" }}>
             {/* Analysis portion */}
-            <div style={{ height: "100%", width: `${analysisWidth}%`, backgroundColor: COLORS.SECONDARY, boxShadow: EFFECTS.GLOW_SECONDARY }} />
+            <div style={{ height: "100%", width: `${analysisWidth}%`, backgroundColor: COLORS.SECONDARY, boxShadow: EFFECTS.TINT_SECONDARY }} />
             {/* Gap */}
             <div style={{ flex: 1 }} />
             {/* War end portion */}
@@ -472,7 +472,7 @@ const Scene9: React.FC = () => {
  * [Scene 10 기획안]
  * 원본 텍스트: 그래서 만든 게 프로젝트 메이븐이에요.
  * 단어 등장 타이밍: "그래서": 1474f, "만든": 1514f, "게": 1515f, "프로젝트": 1523f, "메이븐이에요.": 1558f
- * 비주얼 컨셉: 화면 중앙에 "PROJECT MAVEN" 텍스트가 GLOW_MD 속성으로 발광하며 등장. "프로젝트" 단어 등장 프레임과 동기화. 텍스트 아래 얇은 PRIMARY 2px 수평선이 좌→우로 그려짐. 배경은 BG_VOID로 전환하며 미래지향적 분위기.
+ * 비주얼 컨셉: 화면 중앙에 "PROJECT MAVEN" 텍스트가 TINT_MD 속성으로 발광하며 등장. "프로젝트" 단어 등장 프레임과 동기화. 텍스트 아래 얇은 PRIMARY 2px 수평선이 좌→우로 그려짐. 배경은 BG_VOID로 전환하며 미래지향적 분위기.
  * 하단 150px은 자막 영역이므로, 텍스트와 핵심 그래픽은 이 영역을 침범하지 않도록 주의하세요.
  * 화면에 노출되는 UI 텍스트는 프로그래밍 용어/회사명 등을 제외하고 모두 한국어 단어로 작성합니다.
  * In-Scene Animation 구성: 각 씬의 프레임 내에서 여러 단계로 애니메이션을 분할하여 구현합니다.
@@ -489,7 +489,7 @@ const Scene10: React.FC = () => {
     <AbsoluteFill style={{ backgroundColor: COLORS.BG_BASE }}>
       <div style={{ position: "absolute", inset: 0, backgroundColor: COLORS.BG_VOID, opacity: bgFade }} />
       <div style={{ position: "absolute", top: 0, left: 0, right: 0, bottom: 150, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: SPACING.PX_24, zIndex: Z.CONTENT }}>
-        <div style={{ opacity: textIn, transform: `translateY(${interpolate(textIn, [0, 1], [ANIMATION.ENTER_Y_LG, 0])}px)`, color: COLORS.TEXT_MAIN, fontSize: FONTS.SIZE_3XL, fontWeight: FONTS.WEIGHT_EXTRABOLD, fontFamily: FONTS.DISPLAY, letterSpacing: `${FONTS.TRACKING_WIDE}em`, textShadow: EFFECTS.GLOW_TEXT_LG }}>
+        <div style={{ opacity: textIn, transform: `translateY(${interpolate(textIn, [0, 1], [ANIMATION.ENTER_Y_LG, 0])}px)`, color: COLORS.TEXT_MAIN, fontSize: FONTS.SIZE_3XL, fontWeight: FONTS.WEIGHT_EXTRABOLD, fontFamily: FONTS.DISPLAY, letterSpacing: `${FONTS.TRACKING_WIDE}em`, textShadow: EFFECTS.TINT_TEXT_LG }}>
           PROJECT MAVEN
         </div>
         <div style={{ width: 320, marginTop: SPACING.PX_8 }}>
@@ -618,7 +618,7 @@ const Scene13: React.FC = () => {
         </div>
         {/* Center: scan line (vertical) */}
         <div style={{ width: 2, height: 400, position: "relative", marginLeft: -1, marginRight: -1 }}>
-          <div style={{ position: "absolute", top: 0, left: 0, width: 2, height: `${scanProgress}%`, backgroundColor: COLORS.PRIMARY, boxShadow: EFFECTS.GLOW_SM }} />
+          <div style={{ position: "absolute", top: 0, left: 0, width: 2, height: `${scanProgress}%`, backgroundColor: COLORS.PRIMARY, boxShadow: EFFECTS.TINT_SM }} />
         </div>
         {/* Right: filtered result */}
         <div style={{ flex: 1, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: SPACING.PX_16 }}>
@@ -626,7 +626,7 @@ const Scene13: React.FC = () => {
           {frame >= PICK_FRAME && (() => {
             const resultIn = spring({ frame: Math.max(0, frame - PICK_FRAME), fps, config: ANIMATION.SPRING_SNAPPY });
             return (
-              <div style={{ opacity: resultIn, transform: `scale(${interpolate(resultIn, [0, 1], [ANIMATION.SCALE_ENTER, 1])})`, width: 120, height: 72, backgroundColor: COLORS.BG_ELEVATED, border: `2px solid ${COLORS.PRIMARY}`, boxShadow: EFFECTS.GLOW_SM, display: "flex", alignItems: "center", justifyContent: "center" }}>
+              <div style={{ opacity: resultIn, transform: `scale(${interpolate(resultIn, [0, 1], [ANIMATION.SCALE_ENTER, 1])})`, width: 120, height: 72, backgroundColor: COLORS.BG_ELEVATED, border: `2px solid ${COLORS.PRIMARY}`, boxShadow: EFFECTS.TINT_SM, display: "flex", alignItems: "center", justifyContent: "center" }}>
                 <span style={{ color: COLORS.PRIMARY, fontSize: FONTS.SIZE_SM, fontFamily: FONTS.MONO, fontWeight: FONTS.WEIGHT_BOLD }}>MATCHED</span>
               </div>
             );
@@ -724,7 +724,7 @@ const Scene16: React.FC = () => {
         <div style={{ position: "relative", marginTop: 120 }}>
           {/* 2017 Node */}
           <div style={{ opacity: nodeIn, display: "flex", alignItems: "center", gap: SPACING.PX_16 }}>
-            <div style={{ width: 12, height: 12, backgroundColor: COLORS.PRIMARY, boxShadow: EFFECTS.GLOW_SM }} />
+            <div style={{ width: 12, height: 12, backgroundColor: COLORS.PRIMARY, boxShadow: EFFECTS.TINT_SM }} />
             <span style={{ color: COLORS.TEXT_MAIN, fontSize: FONTS.SIZE_XL, fontWeight: FONTS.WEIGHT_EXTRABOLD, fontFamily: FONTS.DISPLAY }}>2017</span>
           </div>
           {/* Vertical line */}
@@ -771,7 +771,7 @@ const Scene17: React.FC = () => {
         <div style={{ position: "relative", marginTop: 200 }}>
           {/* 2017 Node */}
           <div style={{ opacity: nodeIn, display: "flex", alignItems: "center", gap: SPACING.PX_16 }}>
-            <div style={{ width: 12, height: 12, backgroundColor: COLORS.PRIMARY, boxShadow: EFFECTS.GLOW_SM }} />
+            <div style={{ width: 12, height: 12, backgroundColor: COLORS.PRIMARY, boxShadow: EFFECTS.TINT_SM }} />
             <span style={{ color: COLORS.TEXT_MAIN, fontSize: FONTS.SIZE_XL, fontWeight: FONTS.WEIGHT_EXTRABOLD, fontFamily: FONTS.DISPLAY }}>2017</span>
           </div>
           {/* Horizontal connector */}
@@ -962,14 +962,14 @@ const Scene21: React.FC = () => {
         <div style={{ position: "relative", marginTop: 120 }}>
           {/* 2017 Node */}
           <div style={{ opacity: topNodeIn, display: "flex", alignItems: "center", gap: SPACING.PX_16 }}>
-            <div style={{ width: 12, height: 12, backgroundColor: COLORS.PRIMARY, boxShadow: EFFECTS.GLOW_SM }} />
+            <div style={{ width: 12, height: 12, backgroundColor: COLORS.PRIMARY, boxShadow: EFFECTS.TINT_SM }} />
             <span style={{ color: COLORS.TEXT_BODY, fontSize: FONTS.SIZE_MD, fontWeight: FONTS.WEIGHT_BOLD, fontFamily: FONTS.DISPLAY }}>2017</span>
           </div>
           {/* Vertical line mapping to 2019 */}
           <div style={{ position: "absolute", left: 5, top: 28, width: 2, height: lineGrow, backgroundColor: COLORS.BORDER_STRONG }} />
           {/* 2019 Node (Current focus point for exit) */}
           <div style={{ position: "absolute", left: 0, top: 28 + lineGrow, opacity: bottomNodeIn, display: "flex", alignItems: "center", gap: SPACING.PX_16 }}>
-            <div style={{ width: 12, height: 12, border: `2px solid ${COLORS.PRIMARY}`, backgroundColor: "transparent", boxShadow: EFFECTS.GLOW_SM }} />
+            <div style={{ width: 12, height: 12, border: `2px solid ${COLORS.PRIMARY}`, backgroundColor: "transparent", boxShadow: EFFECTS.TINT_SM }} />
             <span style={{ color: COLORS.TEXT_MAIN, fontSize: FONTS.SIZE_XL, fontWeight: FONTS.WEIGHT_EXTRABOLD, fontFamily: FONTS.DISPLAY }}>2019</span>
           </div>
           {/* Horizontal connector from 2019 node to EXITING partner */}
@@ -996,7 +996,7 @@ const Scene21: React.FC = () => {
  * [Scene 22 기획안]
  * 원본 텍스트: 그래도 프로젝트 메이븐은 멈추지 않았습니다.
  * 단어 등장 타이밍: "그래도": 3274f, "프로젝트": 3296f, "메이븐은": 3328f, "멈추지": 3359f, "않았습니다.": 3382f
- * 비주얼 컨셉: 타임라인 라인이 계속 아래로 연장되는 애니메이션. "PROJECT MAVEN" 텍스트가 우측에 유지되며 PRIMARY GLOW_SM 발광. "ACTIVE" 그린(SECONDARY) 상태 dot이 pulse.
+ * 비주얼 컨셉: 타임라인 라인이 계속 아래로 연장되는 애니메이션. "PROJECT MAVEN" 텍스트가 우측에 유지되며 PRIMARY TINT_SM 발광. "ACTIVE" 그린(SECONDARY) 상태 dot이 pulse.
  * 하단 150px은 자막 영역이므로, 텍스트와 핵심 그래픽은 이 영역을 침범하지 않도록 주의하세요.
  * 화면에 노출되는 UI 텍스트는 프로그래밍 용어/회사명 등을 제외하고 모두 한국어 단어로 작성합니다.
  * In-Scene Animation 구성: 각 씬의 프레임 내에서 여러 단계로 애니메이션을 분할하여 구현합니다.
@@ -1022,7 +1022,7 @@ const Scene22: React.FC = () => {
           </div>
           {/* PROJECT MAVEN label on right */}
           <div style={{ position: "absolute", left: 40, top: lineGrow - 8, opacity: textIn, transform: `translateX(${interpolate(textIn, [0, 1], [ANIMATION.ENTER_X_SM, 0])}px)` }}>
-            <div style={{ color: COLORS.TEXT_MAIN, fontSize: FONTS.SIZE_LG, fontWeight: FONTS.WEIGHT_BOLD, fontFamily: FONTS.DISPLAY, textShadow: EFFECTS.GLOW_TEXT_SM }}>PROJECT MAVEN</div>
+            <div style={{ color: COLORS.TEXT_MAIN, fontSize: FONTS.SIZE_LG, fontWeight: FONTS.WEIGHT_BOLD, fontFamily: FONTS.DISPLAY, textShadow: EFFECTS.TINT_TEXT_SM }}>PROJECT MAVEN</div>
             <div style={{ display: "flex", alignItems: "center", gap: SPACING.PX_8, marginTop: SPACING.PX_8 }}>
               <div style={{ width: 6, height: 6, backgroundColor: COLORS.SECONDARY, opacity: dotPulse }} />
               <span style={{ color: COLORS.SECONDARY, fontSize: FONTS.SIZE_SM, fontFamily: FONTS.MONO, fontWeight: FONTS.WEIGHT_BOLD, letterSpacing: `${FONTS.TRACKING_WIDER}em` }}>활성</span>
@@ -1150,17 +1150,17 @@ const Scene25: React.FC = () => {
           return (
             <div key={i} style={{ position: "absolute", right: 0, top: y, display: "flex", alignItems: "center", gap: 12, opacity: markOp }}>
               <span style={{ color: COLORS.TEXT_MUTED, fontSize: 16, fontFamily: FONTS.MONO, fontWeight: FONTS.WEIGHT_BOLD }}>{(i + 1) * 10}</span>
-              <div style={{ width: 32, height: 2, backgroundColor: COLORS.PRIMARY, boxShadow: EFFECTS.GLOW_SM }} />
+              <div style={{ width: 32, height: 2, backgroundColor: COLORS.PRIMARY, boxShadow: EFFECTS.TINT_SM }} />
             </div>
           );
         })}
         {/* Vertical line with growth animation */}
-        <div style={{ position: "absolute", right: 0, top: 0, width: 2, height: interpolate(frame, [10, 100], [0, 600], { extrapolateLeft: "clamp", extrapolateRight: "clamp" }), backgroundColor: COLORS.PRIMARY, opacity: 0.8, boxShadow: EFFECTS.GLOW_SM }} />
+        <div style={{ position: "absolute", right: 0, top: 0, width: 2, height: interpolate(frame, [10, 100], [0, 600], { extrapolateLeft: "clamp", extrapolateRight: "clamp" }), backgroundColor: COLORS.PRIMARY, opacity: 0.8, boxShadow: EFFECTS.TINT_SM }} />
       </div>
       {/* SCALE label */}
       <div style={{ position: "absolute", top: 0, left: 0, right: 0, bottom: 150, display: "flex", alignItems: "center", zIndex: Z.CONTENT }}>
         <div style={{ marginLeft: SPACING.PX_96, opacity: labelIn, transform: `translateX(${interpolate(labelIn, [0, 1], [ANIMATION.ENTER_X_MD, 0])}px)` }}>
-          <div style={{ color: COLORS.PRIMARY, fontSize: FONTS.SIZE_LG, fontWeight: FONTS.WEIGHT_EXTRABOLD, fontFamily: FONTS.DISPLAY, letterSpacing: `${FONTS.TRACKING_WIDER}em`, textShadow: EFFECTS.GLOW_TEXT_SM }}>규모</div>
+          <div style={{ color: COLORS.PRIMARY, fontSize: FONTS.SIZE_LG, fontWeight: FONTS.WEIGHT_EXTRABOLD, fontFamily: FONTS.DISPLAY, letterSpacing: `${FONTS.TRACKING_WIDER}em`, textShadow: EFFECTS.TINT_TEXT_SM }}>규모</div>
           <div style={{ color: COLORS.TEXT_MUTED, fontSize: FONTS.SIZE_SM, fontFamily: FONTS.MONO, marginTop: SPACING.PX_8 }}>SCALE BUILDUP</div>
         </div>
       </div>
@@ -1172,7 +1172,7 @@ const Scene25: React.FC = () => {
  * [Scene 26 기획안]
  * 원본 텍스트: 팔란티어 혼자 미 국방부와 맺은 계약 규모가 최대 100억 달러
  * 단어 등장 타이밍: "팔란티어": 3997f, "혼자": 4029f, "미": 4045f, "국방부와": 4053f, "맺은": 4088f, "계약": 4100f, "규모가": 4115f, "최대": 4139f, "100억": 4156f, "달러,": 4191f
- * 비주얼 컨셉: 중앙에 "$10B" 숫자가 SIZE_4XL WEIGHT_EXTRABOLD GLOW_LG 효과로 counter up 애니메이션으로 등장. "100억" 단어 등장 시 최종값 정지. 배경에 PRIMARY_DIM 방사형 glow. 아래에 "MAX CONTRACT VALUE — Palantir × DOD" 소형 레이블.
+ * 비주얼 컨셉: 중앙에 "$10B" 숫자가 SIZE_4XL WEIGHT_EXTRABOLD TINT_LG 효과로 counter up 애니메이션으로 등장. "100억" 단어 등장 시 최종값 정지. 배경에 PRIMARY_DIM 방사형 TINT. 아래에 "MAX CONTRACT VALUE — Palantir × DOD" 소형 레이블.
  * 하단 150px은 자막 영역이므로, 텍스트와 핵심 그래픽은 이 영역을 침범하지 않도록 주의하세요.
  * 화면에 노출되는 UI 텍스트는 프로그래밍 용어/회사명 등을 제외하고 모두 한국어 단어로 작성합니다.
  * In-Scene Animation 구성: 각 씬의 프레임 내에서 여러 단계로 애니메이션을 분할하여 구현합니다.
@@ -1182,17 +1182,17 @@ const Scene26: React.FC = () => {
   const { fps } = useVideoConfig();
   const HUNDRED_FRAME = 159; // "100억" at 4156-3997
 
-  const bgGlow = interpolate(frame, [0, 60], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
+  const bgTINT = interpolate(frame, [0, 60], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
   const counterValue = interpolate(frame, [30, HUNDRED_FRAME], [0, 10], { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.bezier(...ANIMATION.EASE_OUT) });
   const numIn = spring({ frame: Math.max(0, frame - 20), fps, config: ANIMATION.SPRING_HEAVY });
   const labelIn = spring({ frame: Math.max(0, frame - 60), fps, config: ANIMATION.SPRING_GENTLE });
 
   return (
     <AbsoluteFill style={{ backgroundColor: COLORS.BG_VOID }}>
-      {/* Radial glow */}
-      <div style={{ position: "absolute", inset: 0, background: EFFECTS.RADIAL_PRIMARY, opacity: bgGlow * 0.6, pointerEvents: "none" }} />
+      {/* Radial TINT */}
+      <div style={{ position: "absolute", inset: 0, background: EFFECTS.RADIAL_PRIMARY, opacity: bgTINT * 0.6, pointerEvents: "none" }} />
       <div style={{ position: "absolute", top: 0, left: 0, right: 0, bottom: 150, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: SPACING.PX_24, zIndex: Z.CONTENT }}>
-        <div style={{ opacity: numIn, transform: `scale(${interpolate(numIn, [0, 1], [ANIMATION.SCALE_ENTER, 1])})`, color: COLORS.TEXT_MAIN, fontSize: FONTS.SIZE_4XL, fontWeight: FONTS.WEIGHT_EXTRABOLD, fontFamily: FONTS.DISPLAY, textShadow: EFFECTS.GLOW_TEXT_LG, fontVariantNumeric: "tabular-nums" }}>
+        <div style={{ opacity: numIn, transform: `scale(${interpolate(numIn, [0, 1], [ANIMATION.SCALE_ENTER, 1])})`, color: COLORS.TEXT_MAIN, fontSize: FONTS.SIZE_4XL, fontWeight: FONTS.WEIGHT_EXTRABOLD, fontFamily: FONTS.DISPLAY, textShadow: EFFECTS.TINT_TEXT_LG, fontVariantNumeric: "tabular-nums" }}>
           ${counterValue.toFixed(0)}B
         </div>
         <div style={{ opacity: labelIn, color: COLORS.TEXT_MUTED, fontSize: FONTS.SIZE_SM, fontFamily: FONTS.MONO, letterSpacing: `${FONTS.TRACKING_WIDER}em`, textAlign: "center" }}>
@@ -1217,16 +1217,16 @@ const Scene27: React.FC = () => {
   const { fps } = useVideoConfig();
   const KRW_FRAME = 52; // "13조" at 4272-4220
 
-  const bgGlow = 0.5;
+  const bgTINT = 0.5;
   const krwIn = spring({ frame: Math.max(0, frame - KRW_FRAME), fps, config: ANIMATION.SPRING_SNAPPY });
   const arrowIn = spring({ frame: Math.max(0, frame - KRW_FRAME - 10), fps, config: ANIMATION.SPRING_GENTLE });
 
   return (
     <AbsoluteFill style={{ backgroundColor: COLORS.BG_VOID }}>
-      <div style={{ position: "absolute", inset: 0, background: EFFECTS.RADIAL_PRIMARY, opacity: bgGlow, pointerEvents: "none" }} />
+      <div style={{ position: "absolute", inset: 0, background: EFFECTS.RADIAL_PRIMARY, opacity: bgTINT, pointerEvents: "none" }} />
       <div style={{ position: "absolute", top: 0, left: 0, right: 0, bottom: 150, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: SPACING.PX_16, zIndex: Z.CONTENT }}>
         {/* $10B maintained */}
-        <div style={{ color: COLORS.TEXT_MAIN, fontSize: FONTS.SIZE_4XL, fontWeight: FONTS.WEIGHT_EXTRABOLD, fontFamily: FONTS.DISPLAY, textShadow: EFFECTS.GLOW_TEXT_LG }}>$10B</div>
+        <div style={{ color: COLORS.TEXT_MAIN, fontSize: FONTS.SIZE_4XL, fontWeight: FONTS.WEIGHT_EXTRABOLD, fontFamily: FONTS.DISPLAY, textShadow: EFFECTS.TINT_TEXT_LG }}>$10B</div>
         {/* Arrow + KRW conversion
         <div style={{ display: "flex", alignItems: "center", gap: SPACING.PX_16, opacity: arrowIn }}>
           <div style={{ width: 40, height: 2, backgroundColor: COLORS.TEXT_DISABLED }} />
