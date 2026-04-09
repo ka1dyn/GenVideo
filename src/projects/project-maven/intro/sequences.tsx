@@ -15,81 +15,49 @@ import { GridOverlay } from "../components/GridOverlay";
 import { FlashOverlay } from "../components/FlashOverlay";
 import { DrawLine } from "../components/DrawLine";
 
+import { Wobble } from "../components/Wobble";
+import { RoughDrone } from "../components/RoughDrone";
+
 /**
- * [Scene 1 기획안]
+ * [Scene 1 기획안 - 개편]
  * 원본 텍스트: 드론이 하늘에서 날아다닙니다.
- * 단어 등장 타이밍: "드론이": 0f, "하늘에서": 20f, "날아다닙니다.": 46f
- * 비주얼 컨셉: BG_BASE 배경 위, 화면 중앙에 모노스페이스 폰트로 [DRONE FEED ACTIVE] 레이블이 타이핑 이펙트로 등장. 우측 상단에 00:00:00 형식의 실시간 타임코드 카운터가 깜빡이며 동작. 하단 스캔라인 패턴(얇은 수평선 반복)이 약한 opacity로 깔리며 군사 드론 영상 UI 느낌을 만듦.
- * 하단 150px은 자막 영역이므로, 텍스트와 핵심 그래픽은 이 영역을 침범하지 않도록 주의하세요.
- * 화면에 노출되는 UI 텍스트는 프로그래밍 용어/회사명 등을 제외하고 모두 한국어 단어로 작성합니다.
- * In-Scene Animation 구성: 각 씬의 프레임 내에서 여러 단계로 애니메이션을 분할하여 구현합니다.
+ * 비주얼 컨셉: 
+ * - 크림색 종이 배경 위에 펜으로 그린 듯한 드론 일러스트가 중앙에서 Wobble 효과와 함께 등장.
+ * - 텍스트는 펜으로 꾹꾹 눌러 써내려가는 듯한 드로잉 느낌 강조.
  */
 const Scene1: React.FC = () => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
 
-  // Phase 1: Background fade-in (0-12f)
-  const bgOpacity = interpolate(frame, [0, ANIMATION.DUR_XS], [0, 1], {
+  // Phase 1: Background Paper Texture Appearance
+  const bgOpacity = interpolate(frame, [0, 20], [0, 1], {
     extrapolateRight: "clamp",
   });
 
-  // Phase 2: Label typewriter starts at 8f
-  const labelStartFrame = 8;
-
-  // Phase 3: Timecode counter — starts at 20f
-  const timecodeOpacity = interpolate(frame, [20, 32], [0, 1], {
-    extrapolateLeft: "clamp",
-    extrapolateRight: "clamp",
-  });
-  const timecodeSeconds = Math.floor(Math.max(0, frame - 20) / fps);
-  const timecodeFrames = Math.max(0, frame - 20) % fps;
-  const timecodeStr = `00:00:${String(timecodeSeconds).padStart(2, "0")}:${String(timecodeFrames).padStart(2, "0")}`;
-  const timecodeBlink = Math.floor(frame / 30) % 2 === 0;
-
-  // Phase 4: Status indicator — appears at 40f
-  const statusOpacity = interpolate(frame, [40, 52], [0, 1], {
-    extrapolateLeft: "clamp",
-    extrapolateRight: "clamp",
-  });
-
-  // Scanline pattern (static horizontal lines at low opacity)
-  const scanlineRows = Array.from({ length: 18 }, (_, i) => i);
+  // Phase 2: Drone Illustration Entrance
+  const droneStart = 10;
+  
+  // Phase 3: "Drone" label / text
+  const textStart = 30;
 
   return (
     <AbsoluteFill style={{ backgroundColor: COLORS.BG_BASE, opacity: bgOpacity }}>
-      {/* Scanline pattern background — subtle texture in new theme */}
+      {/* Paper Texture Overlay */}
       <div
         style={{
           position: "absolute",
           inset: 0,
-          bottom: 150,
-          zIndex: Z.BG,
-          overflow: "hidden",
+          opacity: 0.05,
+          pointerEvents: "none",
+          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3col%3e%3cfilter id='noiseFilter'%3e%3cfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3e%3c/filter%3e%3crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3e%3c/svg%3e")`,
         }}
-      >
-        {scanlineRows.map((i) => (
-          <div
-            key={i}
-            style={{
-              position: "absolute",
-              top: `${(i + 1) * 5}%`,
-              left: 0,
-              width: "100%",
-              height: 1,
-              backgroundColor: COLORS.STROKE_DEFAULT,
-              opacity: 0.1,
-            }}
-          />
-        ))}
-      </div>
+      />
 
-      {/* Center: DRONE FEED ACTIVE label */}
+      {/* Main Content Area */}
       <div
         style={{
           position: "absolute",
-          top: 0,
-          left: 0,
-          right: 0,
+          inset: 0,
           bottom: 150,
           display: "flex",
           flexDirection: "column",
@@ -98,290 +66,234 @@ const Scene1: React.FC = () => {
           zIndex: Z.CONTENT,
         }}
       >
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            gap: SPACING.PX_12,
-          }}
-        >
-          {/* Status dot */}
-          <div
-            style={{
-              width: 12,
-              height: 12,
-              backgroundColor: COLORS.STATE_SUCCESS_FG,
-              opacity: statusOpacity * (timecodeBlink ? 1 : 0.3),
-            }}
-          />
-          <TypewriterText
-            text="DRONE FEED ACTIVE"
-            startFrame={labelStartFrame}
-            framesPerChar={2}
-            color={COLORS.PRIMARY_DARK}
-            fontSize={FONTS.SIZE_LG}
-            fontWeight={FONTS.WEIGHT_BOLD}
-            fontFamily={FONTS.MONO}
-            letterSpacing={`${FONTS.TRACKING_WIDER}em`}
-            cursorColor={COLORS.PRIMARY}
-            showCursor={true}
-          />
+        {/* Drone Sketch */}
+        <div style={{ marginBottom: SPACING.PX_48 }}>
+          <RoughDrone size={450} startFrame={droneStart} />
         </div>
 
-        {/* Sub-label */}
-        <div
-          style={{
-            marginTop: SPACING.PX_16,
-            opacity: statusOpacity * 0.8,
-            color: COLORS.TEXT_SUB,
-            fontSize: FONTS.SIZE_MD,
-            fontFamily: FONTS.MONO,
-            letterSpacing: `${FONTS.TRACKING_WIDE}em`,
-          }}
-        >
-          FEED_01 // MQ-9 REAPER // 1080p60
+        {/* Floating Clouds / Environment lines */}
+        <div style={{ position: "absolute", top: "25%", left: "20%" }}>
+          <Wobble mode="jumpy" intensity={1} interval={6}>
+            <svg width="120" height="40" viewBox="0 0 100 30">
+              <path d="M 10,20 Q 30,5 50,20 Q 70,35 90,20" stroke={COLORS.TEXT_SUB} strokeWidth="2" fill="none" strokeLinecap="round" />
+            </svg>
+          </Wobble>
         </div>
-      </div>
+        <div style={{ position: "absolute", bottom: "35%", right: "20%" }}>
+          <Wobble mode="jumpy" intensity={1} interval={8}>
+            <svg width="100" height="30" viewBox="0 0 100 30">
+              <path d="M 5,15 Q 25,5 45,15 Q 65,25 85,15" stroke={COLORS.TEXT_SUB} strokeWidth="2" fill="none" strokeLinecap="round" opacity={0.6} />
+            </svg>
+          </Wobble>
+        </div>
 
-      {/* Top-right: Timecode counter */}
-      <div
-        style={{
-          position: "absolute",
-          top: SPACING.PX_40,
-          right: SPACING.PX_48,
-          opacity: timecodeOpacity,
-          zIndex: Z.UI,
-        }}
-      >
+        {/* Text Area */}
         <div
           style={{
-            color: timecodeBlink ? COLORS.TEXT_BODY : COLORS.TEXT_DISABLED,
-            fontSize: FONTS.SIZE_MD,
-            fontFamily: FONTS.MONO,
-            fontWeight: FONTS.WEIGHT_MEDIUM,
-            letterSpacing: `${FONTS.TRACKING_WIDE}em`,
+            marginTop: SPACING.PX_24,
+            textAlign: "center",
           }}
         >
-          TC {timecodeStr}
+          <Wobble mode="smooth" intensity={2} interval={8}>
+             <div style={{
+               fontSize: FONTS.SIZE_LG,
+               fontWeight: FONTS.WEIGHT_BOLD,
+               color: COLORS.TEXT_MAIN,
+               fontFamily: FONTS.DISPLAY, 
+             }}>
+               드론이 하늘을 날아다닙니다.
+             </div>
+             {/* Underline Marker */}
+             <DrawLine 
+               startFrame={textStart + 10} 
+               durationInFrames={30} 
+               color={COLORS.PRIMARY_SOFT} 
+               thickness={12} 
+               style={{ 
+                 marginTop: -10, 
+                 opacity: 0.4, 
+                 borderRadius: 10,
+                 zIndex: -1 
+               }} 
+             />
+          </Wobble>
         </div>
       </div>
 
-      {/* Top-left: Classification label */}
+      {/* Top Left: Note corner */}
       <div
         style={{
           position: "absolute",
-          top: SPACING.PX_40,
-          left: SPACING.PX_48,
-          opacity: statusOpacity,
-          zIndex: Z.UI,
+          top: SPACING.PX_48,
+          left: SPACING.PX_64,
+          transform: "rotate(-3deg)",
         }}
       >
-        <div
-          style={{
-            color: COLORS.STATE_ERROR_FG,
-            fontSize: FONTS.SIZE_MD,
-            fontFamily: FONTS.MONO,
-            fontWeight: FONTS.WEIGHT_BOLD,
-            letterSpacing: `${FONTS.TRACKING_WIDER}em`,
-            border: `2px solid ${COLORS.STROKE_DEFAULT}`,
-            padding: `${SPACING.PX_8}px ${SPACING.PX_16}px`,
+        <Wobble mode="jumpy" intensity={2} interval={10}>
+          <div style={{
+            padding: `${SPACING.PX_12}px ${SPACING.PX_24}px`,
             backgroundColor: COLORS.BG_SURFACE,
-          }}
-        >
-          기밀
-        </div>
+            border: `2px solid ${COLORS.STROKE_INK}`,
+            boxShadow: "4px 4px 0px rgba(0,0,0,0.05)",
+            color: COLORS.TEXT_BODY,
+            fontSize: FONTS.SIZE_MD,
+            fontWeight: FONTS.WEIGHT_MEDIUM,
+          }}>
+            #AI_Trend_01
+          </div>
+        </Wobble>
       </div>
+
     </AbsoluteFill>
   );
 };
 
+import { RoughClock } from "../components/RoughClock";
+
 /**
- * [Scene 2 기획안]
+ * [Scene 2 기획안 - 개편]
  * 원본 텍스트: 지금 이 순간에도요.
- * 단어 등장 타이밍: "지금": 96f, "이": 122f, "순간에도요.": 140f
- * 비주얼 컨셉: Scene 1 UI 위에 PRIMARY(#378ADD) 수평 Scan Line이 화면을 위→아래로 빠르게 훑는 애니메이션. "지금 이 순간에도요" 텍스트가 중앙에 TEXT_MAIN 색으로 크게(SIZE_2XL) fade-in. 배경은 미세한 파티클 흐름이 감지 시스템 느낌 연출.
- * 하단 150px은 자막 영역이므로, 텍스트와 핵심 그래픽은 이 영역을 침범하지 않도록 주의하세요.
- * 화면에 노출되는 UI 텍스트는 프로그래밍 용어/회사명 등을 제외하고 모두 한국어 단어로 작성합니다.
- * In-Scene Animation 구성: 각 씬의 프레임 내에서 여러 단계로 애니메이션을 분할하여 구현합니다.
+ * 비주얼 컨셉: 
+ * - 화면 중앙에 "지금 이 순간에도요" 텍스트가 크게 등장.
+ * - 텍스트 주변에 짤깍거리는 스케치 시계 아이콘이 배치되어 시간의 흐름을 표현.
  */
 const Scene2: React.FC = () => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
 
-  // Scan line sweep: starts immediately, sweeps in ~40 frames
-  // Main text fade-in: starts at ~15f
-  const textEntrance = spring({
-    frame: Math.max(0, frame - 15),
+  const entrance = spring({
+    frame,
     fps,
     config: ANIMATION.SPRING_GENTLE,
   });
 
-  const textOpacity = interpolate(textEntrance, [0, 1], [0, 1]);
-  const textY = interpolate(textEntrance, [0, 1], [ANIMATION.ENTER_Y_MD, 0]);
-
-  // Subtle radial glow background — fades in with text
-  const glowOpacity = interpolate(frame, [10, 40], [0, 0.6], {
-    extrapolateLeft: "clamp",
-    extrapolateRight: "clamp",
-  });
-
-  // Particle dots (static positions, subtle drift via frame)
-  const particles = Array.from({ length: 24 }, (_, i) => ({
-    id: i,
-    x: ((i * 137 + 50) % 1800) + 60,
-    y: ((i * 89 + 30) % 780) + 60,
-    size: (i % 3) + 1,
-  }));
+  const textOpacity = interpolate(entrance, [0, 1], [0, 1]);
+  const textScale = interpolate(entrance, [0, 1], [0.9, 1]);
 
   return (
     <AbsoluteFill style={{ backgroundColor: COLORS.BG_BASE }}>
-      {/* Particle background */}
+      {/* Paper Texture Overlay */}
       <div
         style={{
           position: "absolute",
           inset: 0,
-          bottom: 150,
-          zIndex: Z.BG,
+          opacity: 0.05,
+          pointerEvents: "none",
+          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3col%3e%3cfilter id='noiseFilter'%3e%3cfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3e%3c/filter%3e%3crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3e%3c/svg%3e")`,
         }}
-      >
-        {particles.map((p) => {
-          const drift = Math.sin((frame + p.id * 40) / 60) * 8;
-          const pOpacity = interpolate(frame, [5, 30], [0, 0.2], {
-            extrapolateLeft: "clamp",
-            extrapolateRight: "clamp",
-          });
-          return (
-            <div
-              key={p.id}
-              style={{
-                position: "absolute",
-                left: p.x + drift,
-                top: p.y + drift * 0.5,
-                width: p.size * 2,
-                height: p.size * 2,
-                backgroundColor: COLORS.PRIMARY_SOFT,
-                opacity: pOpacity,
-              }}
-            />
-          );
-        })}
-      </div>
+      />
 
-      {/* Radial glow */}
       <div
         style={{
           position: "absolute",
           inset: 0,
-          background: `radial-gradient(circle, ${COLORS.PRIMARY_LIGHT}44 0%, transparent 70%)`,
-          opacity: glowOpacity,
-          zIndex: Z.BG,
-        }}
-      />
-
-      {/* Scan line sweep */}
-      <ScanLine
-        startFrame={0}
-        sweepDuration={50}
-        color={COLORS.PRIMARY}
-        opacity={0.5}
-        thickness={2}
-        loop={false}
-      />
-
-      {/* Center text */}
-      <div
-        style={{
-          position: "absolute",
-          top: 0,
-          left: 0,
-          right: 0,
           bottom: 150,
           display: "flex",
+          flexDirection: "column",
           alignItems: "center",
           justifyContent: "center",
           zIndex: Z.CONTENT,
         }}
       >
+        {/* Large Handwritten-style Text */}
         <div
           style={{
             opacity: textOpacity,
-            transform: `translateY(${textY}px)`,
-            color: COLORS.TEXT_MAIN,
-            fontSize: FONTS.SIZE_2XL,
-            fontWeight: FONTS.WEIGHT_BOLD,
-            fontFamily: FONTS.DISPLAY,
-            lineHeight: FONTS.LEADING_TIGHT,
-            textShadow: EFFECTS.SHADOW_SM,
+            transform: `scale(${textScale})`,
+            textAlign: "center",
+            display: "flex",
+            alignItems: "center",
+            gap: SPACING.PX_32,
           }}
         >
-          지금 이 순간에도요.
+          <Wobble mode="smooth" intensity={3} interval={10}>
+            <div
+              style={{
+                color: COLORS.TEXT_MAIN,
+                fontSize: FONTS.SIZE_2XL,
+                fontWeight: FONTS.WEIGHT_BOLD,
+                fontFamily: FONTS.DISPLAY,
+              }}
+            >
+              지금 이 순간에도요.
+            </div>
+          </Wobble>
+          
+          {/* Ticking Clock */}
+          <RoughClock size={160} />
+        </div>
+
+        {/* Highlight Marker Line */}
+        <div style={{ width: 600, marginTop: -20, opacity: textOpacity * 0.3 }}>
+          <DrawLine 
+            startFrame={10} 
+            durationInFrames={40} 
+            color={COLORS.PRIMARY_SOFT} 
+            thickness={15} 
+            style={{ borderRadius: 20 }}
+          />
         </div>
       </div>
+
+      {/* Background Decorative Sparkles/Dots */}
+      {Array.from({ length: 10 }).map((_, i) => (
+        <div
+          key={i}
+          style={{
+            position: "absolute",
+            left: `${(i * 137) % 100}%`,
+            top: `${(i * 89) % 100}%`,
+            opacity: 0.2,
+          }}
+        >
+          <Wobble mode="jumpy" intensity={3} interval={12 + (i % 5)}>
+            <div style={{ color: COLORS.SECONDARY, fontSize: 32 }}>*</div>
+          </Wobble>
+        </div>
+      ))}
     </AbsoluteFill>
   );
 };
 
+import { RoughCanvasAI } from "../components/RoughCanvasAI";
+
 /**
- * [Scene 3 기획안]
+ * [Scene 3 기획안 - 개편]
  * 원본 텍스트: 그리고 그 드론이 찍은 영상을 AI가 실시간으로 봅니다.
- * 단어 등장 타이밍: "그리고": 203f, "그": 233f, "드론이": 244f, "찍은": 274f, "영상을": 295f, "AI가": 328f, "실시간으로": 341f, "봅니다.": 381f
- * 비주얼 컨셉: 화면이 2분할(좌: DRONE INPUT / 우: AI PROCESSING). 좌측에 격자 오버레이가 있는 사각형 영역, 우측에 [ANALYZING...] + 진행 중인 바 형태의 분석 UI. AI가 등장하는 단어 순간에 우측 패널이 PRIMARY_DIM 색으로 활성화되며 blink.
- * 하단 150px은 자막 영역이므로, 텍스트와 핵심 그래픽은 이 영역을 침범하지 않도록 주의하세요.
- * 화면에 노출되는 UI 텍스트는 프로그래밍 용어/회사명 등을 제외하고 모두 한국어 단어로 작성합니다.
- * In-Scene Animation 구성: 각 씬의 프레임 내에서 여러 단계로 애니메이션을 분할하여 구현합니다.
+ * 비주얼 컨셉: 
+ * - 화면을 좌우로 분할하여 드론 시점(왼쪽)과 AI의 분석 칠판(오른쪽)을 표현.
+ * - 오른쪽 패널은 Canvas를 사용하여 실시간으로 데이터를 스케치하는 느낌 연출.
  */
 const Scene3: React.FC = () => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
-
-  // Local word timings (relative to scene start at 203f)
-  const AI_WORD_FRAME = 125; // "AI가" appears at local frame 125
 
   // Panel entrance springs
   const leftPanelIn = spring({
     frame,
     fps,
     config: ANIMATION.SPRING_SNAPPY,
-    durationInFrames: ANIMATION.DUR_MD,
   });
 
   const rightPanelIn = spring({
-    frame: Math.max(0, frame - ANIMATION.STAGGER_LG),
+    frame: Math.max(0, frame - 15),
     fps,
     config: ANIMATION.SPRING_SNAPPY,
-    durationInFrames: ANIMATION.DUR_MD,
   });
-
-  // AI activation — blink effect after AI_WORD_FRAME
-  const aiActivated = frame >= AI_WORD_FRAME;
-  const aiBlinkPhase = aiActivated ? Math.floor((frame - AI_WORD_FRAME) / 8) % 2 : 0;
-  const aiBgColor = aiActivated
-    ? aiBlinkPhase === 0
-      ? COLORS.OVERLAY_PRIMARY
-      : "transparent"
-    : "transparent";
-
-  // Progress bar fills from 0 to ~92% over the scene
-  const progressWidth = interpolate(frame, [30, 180], [0, 92], {
-    extrapolateLeft: "clamp",
-    extrapolateRight: "clamp",
-    easing: Easing.bezier(...ANIMATION.EASE_OUT),
-  });
-
-  // Analyzing dots animation
-  const dotCount = (Math.floor(frame / 20) % 3) + 1;
-  const analyzingText = `분석 중${".".repeat(dotCount)}`;
-
-  // Labels that appear sequentially
-  const labels = [
-    { text: "차량 탐지", frame: 71 },
-    { text: "시설 탐지", frame: 92 },
-    { text: "위협 평가", frame: 138 },
-  ];
 
   return (
     <AbsoluteFill style={{ backgroundColor: COLORS.BG_BASE }}>
-      {/* Two-panel layout */}
+      {/* Paper Texture Overlay */}
+      <div
+        style={{
+          position: "absolute",
+          inset: 0,
+          opacity: 0.05,
+          pointerEvents: "none",
+          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3col%3e%3cfilter id='noiseFilter'%3e%3cfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3e%3c/filter%3e%3crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3e%3c/svg%3e")`,
+        }}
+      />
+
       <div
         style={{
           position: "absolute",
@@ -390,284 +302,122 @@ const Scene3: React.FC = () => {
           right: SPACING.PX_64,
           bottom: 150 + SPACING.PX_32,
           display: "flex",
-          gap: SPACING.PX_24,
+          gap: SPACING.PX_32,
           zIndex: Z.CONTENT,
         }}
       >
-        {/* Left panel: DRONE INPUT */}
+        {/* Left Panel: DRONE INPUT (Sketch Box) */}
         <div
           style={{
             flex: 1,
-            border: `2px solid ${COLORS.STROKE_DEFAULT}`,
-            position: "relative",
-            overflow: "hidden",
             opacity: leftPanelIn,
-            transform: `translateX(${interpolate(leftPanelIn, [0, 1], [ANIMATION.ENTER_X_MD, 0])}px)`,
+            transform: `translateY(${interpolate(leftPanelIn, [0, 1], [20, 0])}px)`,
           }}
         >
-          {/* Panel header */}
-          <div
-            style={{
-              padding: `${SPACING.PX_12}px ${SPACING.PX_16}px`,
-              borderBottom: `${SPACING.BORDER_THIN}px solid ${COLORS.STROKE_DEFAULT}`,
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "space-between",
-            }}
-          >
-            <span
-              style={{
-                color: COLORS.TEXT_SUB,
-                fontSize: FONTS.SIZE_MD,
-                fontFamily: FONTS.MONO,
-                fontWeight: FONTS.WEIGHT_BOLD,
-                letterSpacing: `${FONTS.TRACKING_WIDER}em`,
-              }}
-            >
-              드론 입력
-            </span>
+          <Wobble mode="smooth" intensity={1.5} interval={10} style={{ width: "100%", height: "100%" }}>
             <div
               style={{
-                width: 6,
-                height: 6,
-                backgroundColor: COLORS.STATE_SUCCESS_FG,
-                opacity: Math.floor(frame / 30) % 2 === 0 ? 1 : 0.3,
-              }}
-            />
-          </div>
-
-          {/* Grid overlay content area */}
-          <div style={{ position: "relative", flex: 1, height: "100%" }}>
-            <GridOverlay
-              cellSize={60}
-              color={COLORS.PRIMARY_SOFT}
-              opacity={0.15}
-            />
-            {/* Crosshair center */}
-            <div
-              style={{
-                position: "absolute",
-                top: "50%",
-                left: "50%",
-                transform: "translate(-50%, -50%)",
+                width: "100%",
+                height: "100%",
+                backgroundColor: COLORS.BG_SURFACE,
+                border: `3px solid ${COLORS.STROKE_INK}`,
+                borderRadius: 8,
+                position: "relative",
+                overflow: "hidden",
+                display: "flex",
+                flexDirection: "column",
+                boxShadow: "6px 6px 0px rgba(0,0,0,0.05)",
               }}
             >
-              {/* Horizontal crosshair */}
-              <div
-                style={{
-                  position: "absolute",
-                  width: 40,
-                  height: 1,
-                  backgroundColor: COLORS.PRIMARY,
-                  opacity: 0.6,
-                  top: 0,
-                  left: -20,
-                }}
-              />
-              {/* Vertical crosshair */}
-              <div
-                style={{
-                  position: "absolute",
-                  width: 1,
-                  height: 40,
-                  backgroundColor: COLORS.PRIMARY,
-                  opacity: 0.6,
-                  top: -20,
-                  left: 0,
-                }}
-              />
+              {/* Header */}
+              <div style={{
+                padding: SPACING.PX_16,
+                borderBottom: `2px solid ${COLORS.STROKE_INK}`,
+                color: COLORS.TEXT_MAIN,
+                fontSize: 28,
+                fontWeight: "bold",
+                fontFamily: FONTS.DISPLAY,
+                display: "flex",
+                justifyContent: "space-between"
+              }}>
+                <span>DRONE_FEED.avi</span>
+                <span style={{ color: COLORS.SECONDARY }}>REC ●</span>
+              </div>
+              
+              {/* Content: Simple Rough Illustration */}
+              <div style={{ flex: 1, display: "flex", alignItems: "center", justifyContent: "center" }}>
+                 <RoughDrone size={300} startFrame={10} />
+              </div>
             </div>
-
-            {/* Corner brackets */}
-            {[
-              { top: "20%", left: "15%" },
-              { top: "20%", right: "15%" },
-              { bottom: "25%", left: "15%" },
-              { bottom: "25%", right: "15%" },
-            ].map((pos, i) => (
-              <div
-                key={i}
-                style={{
-                  position: "absolute",
-                  ...pos,
-                  width: 16,
-                  height: 16,
-                  borderColor: COLORS.PRIMARY,
-                  borderStyle: "solid",
-                  borderWidth: 0,
-                  ...(i === 0
-                    ? { borderTopWidth: 1, borderLeftWidth: 1 }
-                    : i === 1
-                      ? { borderTopWidth: 1, borderRightWidth: 1 }
-                      : i === 2
-                        ? { borderBottomWidth: 1, borderLeftWidth: 1 }
-                        : { borderBottomWidth: 1, borderRightWidth: 1 }),
-                  opacity: 0.5,
-                }}
-              />
-            ))}
-          </div>
+          </Wobble>
         </div>
 
-        {/* Right panel: AI PROCESSING */}
+        {/* Right Panel: AI PROCESSING (Experimental Canvas) */}
         <div
           style={{
             flex: 1,
-            border: `2px solid ${aiActivated ? COLORS.STROKE_PRIMARY : COLORS.STROKE_DEFAULT}`,
-            position: "relative",
-            overflow: "hidden",
             opacity: rightPanelIn,
-            transform: `translateX(${interpolate(rightPanelIn, [0, 1], [-ANIMATION.ENTER_X_MD, 0])}px)`,
-            backgroundColor: aiBgColor,
+            transform: `translateY(${interpolate(rightPanelIn, [0, 1], [20, 0])}px)`,
           }}
         >
-          {/* Panel header */}
-          <div
-            style={{
-              padding: `${SPACING.PX_12}px ${SPACING.PX_16}px`,
-              borderBottom: `${SPACING.BORDER_THIN}px solid ${COLORS.STROKE_DEFAULT}`,
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "space-between",
-            }}
-          >
-            <span
-              style={{
-                color: aiActivated ? COLORS.PRIMARY_BOLD : COLORS.TEXT_SUB,
-                fontSize: FONTS.SIZE_MD,
-                fontFamily: FONTS.MONO,
-                fontWeight: FONTS.WEIGHT_BOLD,
-                letterSpacing: `${FONTS.TRACKING_WIDER}em`,
-              }}
-            >
-              AI 처리
-            </span>
-            <span
-              style={{
-                color: COLORS.TEXT_DISABLED,
-                fontSize: FONTS.SIZE_MD,
-                fontFamily: FONTS.MONO,
-              }}
-            >
-              v3.1.7
-            </span>
-          </div>
-
-          {/* Analysis content */}
-          <div style={{ padding: SPACING.PX_24 }}>
-            {/* Analyzing text */}
+          <Wobble mode="smooth" intensity={1} interval={12} style={{ width: "100%", height: "100%" }}>
             <div
               style={{
-                color: COLORS.PRIMARY,
-                fontSize: FONTS.SIZE_MD,
-                fontFamily: FONTS.MONO,
-                fontWeight: FONTS.WEIGHT_BOLD,
-                letterSpacing: `${FONTS.TRACKING_WIDE}em`,
-                marginBottom: SPACING.PX_24,
+                width: "100%",
+                height: "100%",
+                backgroundColor: "#FFFFFF",
+                border: `3px solid ${COLORS.STROKE_INK}`,
+                borderRadius: 8,
+                position: "relative",
+                display: "flex",
+                flexDirection: "column",
+                boxShadow: "6px 6px 0px rgba(0,0,0,0.05)",
               }}
             >
-              {analyzingText}
-            </div>
-
-            {/* Progress bar */}
-            <div style={{ marginBottom: SPACING.PX_32 }}>
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "space-between",
-                  marginBottom: SPACING.PX_8,
-                }}
-              >
-                <span
-                  style={{
-                    color: COLORS.TEXT_SUB,
-                    fontSize: FONTS.SIZE_MD,
-                    fontFamily: FONTS.MONO,
-                  }}
-                >
-                  프레임 분석
-                </span>
-                <span
-                  style={{
-                    color: COLORS.TEXT_BODY,
-                    fontSize: FONTS.SIZE_MD,
-                    fontFamily: FONTS.MONO,
-                  }}
-                >
-                  {Math.round(progressWidth)}%
-                </span>
+              {/* Header */}
+              <div style={{
+                padding: SPACING.PX_16,
+                borderBottom: `2px solid ${COLORS.STROKE_INK}`,
+                color: COLORS.PRIMARY_DARK,
+                fontSize: 28,
+                fontWeight: "bold",
+                fontFamily: FONTS.DISPLAY,
+              }}>
+                AI_ANALYSIS_ENGINE
               </div>
-              <div
-                style={{
-                  height: 6,
-                  backgroundColor: COLORS.BG_MUTED,
-                  width: "100%",
-                  position: "relative",
-                }}
-              >
-                <div
-                  style={{
-                    height: "100%",
-                    width: `${progressWidth}%`,
-                    backgroundColor: COLORS.PRIMARY,
-                    boxShadow: EFFECTS.SHADOW_SM,
-                  }}
-                />
+
+              {/* EXPERIMENTAL CANVAS AREA */}
+              <div style={{ flex: 1 }}>
+                <RoughCanvasAI width={750} height={550} startFrame={30} />
               </div>
             </div>
-
-            {/* Detection labels appearing sequentially */}
-            {labels.map((label, i) => {
-              const labelOpacity = interpolate(
-                frame,
-                [label.frame, label.frame + ANIMATION.DUR_XS],
-                [0, 1],
-                { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
-              );
-              return (
-                <div
-                  key={i}
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                    gap: SPACING.PX_8,
-                    marginBottom: SPACING.PX_12,
-                    opacity: labelOpacity,
-                  }}
-                >
-                  <div
-                    style={{
-                      width: 4,
-                      height: 4,
-                      backgroundColor:
-                        i === 2 ? COLORS.STATE_WARN_FG : COLORS.PRIMARY,
-                    }}
-                  />
-                  <span
-                    style={{
-                      color: COLORS.TEXT_BODY,
-                      fontSize: FONTS.SIZE_MD,
-                      fontFamily: FONTS.MONO,
-                      letterSpacing: `${FONTS.TRACKING_WIDE}em`,
-                    }}
-                  >
-                    {label.text}
-                  </span>
-                  <span
-                    style={{
-                      color: COLORS.TEXT_DISABLED,
-                      fontSize: FONTS.SIZE_MD,
-                      fontFamily: FONTS.MONO,
-                      marginLeft: "auto",
-                    }}
-                  >
-                    대기 중
-                  </span>
-                </div>
-              );
-            })}
-          </div>
+          </Wobble>
         </div>
+      </div>
+
+      {/* Narrative Label at the bottom */}
+      <div style={{
+        position: "absolute",
+        bottom: 180,
+        left: 0,
+        right: 0,
+        display: "flex",
+        justifyContent: "center",
+        zIndex: Z.UI,
+      }}>
+         <Wobble intensity={0.5}>
+            <div style={{
+              padding: "10px 30px",
+              backgroundColor: COLORS.PRIMARY_LIGHT,
+              border: `2px dashed ${COLORS.PRIMARY}`,
+              borderRadius: 30,
+              fontSize: 24,
+              color: COLORS.PRIMARY_BOLD,
+              fontWeight: "600"
+            }}>
+              "AI가 실시간으로 데이터를 스캔 중..."
+            </div>
+         </Wobble>
       </div>
     </AbsoluteFill>
   );

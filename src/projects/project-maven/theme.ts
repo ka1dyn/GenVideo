@@ -1,12 +1,12 @@
 import { VIDEO_FPS } from "../../constants/video-config";
 
 export const BRAND = {
-  PROJECT_ID: "tech-brief",
-  MOOD: "신뢰감, 속보, 프리미엄, 정밀, 금융 터미널",
+  PROJECT_ID: "ai-sketch-brief",
+  MOOD: "친근함, 쉬운 설명, 따뜻함, 스케치, 아날로그",
   CONCEPT:
-    "Bloomberg Terminal을 모바일로 옮긴 듯한 다크 금융 테크 UI — 어두운 네이비 배경 위에 전기 블루 포인트가 빛나고, 주가 티커와 속보 레이블이 신뢰감 있게 흘러간다",
+    "펜으로 직접 그린 듯한 스케치 스타일 UI — 크림색 종이 배경 위에 마커와 펜으로 핵심 내용을 요약하며, 자유롭고 생동감 넘치는 드로잉 애니메이션으로 복잡한 AI 트렌드를 쉽게 설명한다",
   FORBIDDEN:
-    "유치한 아이콘(가위·전구·돋보기), 과한 그라데이션, 무지개 배색, 90년대 PPT 감성, 클립아트",
+    "딱딱한 그리드, 차가운 네온 컬러, 과도한 그림자, 고광택 버튼, 복잡한 데이터 시각화",
 } as const;
 
 export const COLORS = {
