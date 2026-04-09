@@ -17,18 +17,18 @@ const VBar: React.FC<{ label: string; value: number; color: string; delay: numbe
   const crackProgress = isCracked ? spring({ frame: frame - crackFrame, fps, config: ANIMATION.SPRING_BOUNCY }) : 0;
   const finalHeight = isCracked ? interpolate(crackProgress, [0, 1], [value, 60]) : currentHeight;
   
-  const barColor = isCracked ? interpolateColors(crackProgress, [0, 1], [color, COLORS.NEGATIVE]) : color;
-  const shadow = isCracked ? (crackProgress > 0 ? `0 0 16px ${COLORS.NEGATIVE}` : `0 0 16px ${color}`) : `0 0 16px ${color}`;
+  const barColor = isCracked ? interpolateColors(crackProgress, [0, 1], [color, COLORS.STATE_ERROR_FG]) : color;
+  const shadow = isCracked ? (crackProgress > 0 ? EFFECTS.SHADOW_PRIMARY : "none") : "none";
 
   return (
     <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: SPACING.PX_16 }}>
-      <div style={{ height: 240, width: 48, backgroundColor: COLORS.BG_SURFACE, borderRadius: SPACING.RADIUS_MD, display: "flex", alignItems: "flex-end", overflow: "hidden", position: "relative", border: `1px solid ${COLORS.BORDER}` }}>
-        <div style={{ width: "100%", height: `${finalHeight}%`, backgroundColor: barColor, boxShadow: shadow }} />
+      <div style={{ height: 240, width: 48, backgroundColor: COLORS.BG_MUTED, borderRadius: SPACING.RADIUS_MD, display: "flex", alignItems: "flex-end", overflow: "hidden", position: "relative", border: `2px solid ${COLORS.STROKE_DEFAULT}` }}>
+        <div style={{ width: "100%", height: `${finalHeight}%`, backgroundColor: barColor }} />
         {isCracked && crackProgress > 0 && (
-          <div style={{ position: "absolute", bottom: `${finalHeight}%`, left: 0, width: "100%", height: 3, backgroundColor: COLORS.NEGATIVE, zIndex: 10, opacity: crackProgress }} />
+          <div style={{ position: "absolute", bottom: `${finalHeight}%`, left: 0, width: "100%", height: 3, backgroundColor: COLORS.STATE_ERROR_FG, zIndex: 10, opacity: crackProgress }} />
         )}
       </div>
-      <div style={{ fontFamily: FONTS.PRIMARY, fontSize: FONTS.SIZE_SM, color: COLORS.TEXT_MAIN, fontWeight: FONTS.WEIGHT_SEMIBOLD }}>{label}</div>
+      <div style={{ fontFamily: FONTS.DISPLAY, fontSize: 32, color: COLORS.TEXT_MAIN, fontWeight: FONTS.WEIGHT_SEMIBOLD }}>{label}</div>
     </div>
   );
 };
@@ -42,13 +42,13 @@ const HBar: React.FC<{ label: string; value: number; color: string; delay: numbe
 
   return (
     <div style={{ display: "flex", alignItems: "center", gap: SPACING.PX_32, width: 800 }}>
-      <div style={{ width: 140, fontFamily: FONTS.PRIMARY, fontSize: FONTS.SIZE_MD, color: COLORS.TEXT_MAIN, fontWeight: FONTS.WEIGHT_BOLD, textAlign: "right", letterSpacing: FONTS.TRACKING_WIDER }}>
+      <div style={{ width: 140, fontFamily: FONTS.DISPLAY, fontSize: FONTS.SIZE_MD, color: COLORS.TEXT_MAIN, fontWeight: FONTS.WEIGHT_BOLD, textAlign: "right", letterSpacing: FONTS.TRACKING_WIDER }}>
         [{label}]
       </div>
-      <div style={{ flex: 1, height: 24, backgroundColor: COLORS.BG_SURFACE, borderRadius: SPACING.RADIUS_MD, overflow: "hidden", border: `1px solid ${COLORS.BORDER}` }}>
-        <div style={{ width: `${currentWidth}%`, height: "100%", backgroundColor: color, boxShadow: `0 0 16px ${color}` }} />
+      <div style={{ flex: 1, height: 24, backgroundColor: COLORS.BG_MUTED, borderRadius: SPACING.RADIUS_MD, overflow: "hidden", border: `2px solid ${COLORS.STROKE_DEFAULT}` }}>
+        <div style={{ width: `${currentWidth}%`, height: "100%", backgroundColor: color }} />
       </div>
-      <div style={{ width: 80, fontFamily: FONTS.MONO, fontSize: FONTS.SIZE_MD, color: showValue ? color : COLORS.TEXT_MUTED, fontWeight: FONTS.WEIGHT_BOLD }}>
+      <div style={{ width: 100, fontFamily: FONTS.DISPLAY, fontSize: FONTS.SIZE_MD, color: showValue ? color : COLORS.TEXT_SUB, fontWeight: FONTS.WEIGHT_BOLD }}>
         {showValue ? `${Math.round(currentWidth)}%` : pulsingQuestion ? <span style={{ opacity: pulse }}>?</span> : ""}
       </div>
     </div>
@@ -75,11 +75,11 @@ const Scene1: React.FC = () => {
 
   return (
     <AbsoluteFill style={{ backgroundColor: COLORS.BG_BASE, justifyContent: "center", alignItems: "center" }}>
-      <div style={{ position: "absolute", top: 120, fontFamily: FONTS.PRIMARY, fontSize: FONTS.SIZE_LG, color: COLORS.TEXT_MUTED, letterSpacing: FONTS.TRACKING_WIDER, opacity: butOpacity, fontWeight: FONTS.WEIGHT_BOLD }}>
+      <div style={{ position: "absolute", top: 120, fontFamily: FONTS.DISPLAY, fontSize: FONTS.SIZE_LG, color: COLORS.TEXT_SUB, letterSpacing: FONTS.TRACKING_WIDER, opacity: butOpacity, fontWeight: FONTS.WEIGHT_BOLD }}>
         하지만...
       </div>
-      <div style={{ width: "60%", height: 2, backgroundColor: COLORS.BORDER_STRONG, display: "flex", alignItems: "center", justifyContent: "center", transform: `scaleX(${lineWidth})` }}>
-        <div style={{ width: 16, height: 16, backgroundColor: COLORS.WARNING, borderRadius: "50%", opacity: dotOpacity, transform: `scale(${dotScale})`, boxShadow: EFFECTS.GLOW_ACCENT }} />
+      <div style={{ width: "60%", height: 4, backgroundColor: COLORS.STROKE_STRONG, display: "flex", alignItems: "center", justifyContent: "center", transform: `scaleX(${lineWidth})` }}>
+        <div style={{ width: 24, height: 24, backgroundColor: COLORS.STATE_WARN_FG, borderRadius: "50%", opacity: dotOpacity, transform: `scale(${dotScale})`, boxShadow: EFFECTS.SHADOW_PRIMARY }} />
       </div>
     </AbsoluteFill>
   );
@@ -104,7 +104,7 @@ const Scene2: React.FC = () => {
   return (
     <AbsoluteFill style={{ backgroundColor: COLORS.BG_BASE, justifyContent: "center", alignItems: "center" }}>
       <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: SPACING.PX_64, top: -40, position: "relative" }}>
-        <div style={{ fontFamily: FONTS.DISPLAY, fontSize: FONTS.SIZE_2XL, fontWeight: FONTS.WEIGHT_EXTRABOLD, color: COLORS.PRIMARY, textShadow: EFFECTS.GLOW_MD, opacity: textOpacity, transform: `translateY(${textY}px)`}}>
+        <div style={{ fontFamily: FONTS.DISPLAY, fontSize: 120, fontWeight: FONTS.WEIGHT_EXTRABOLD, color: COLORS.PRIMARY, opacity: textOpacity, transform: `translateY(${textY}px)`}}>
           프로젝트 메이븐
         </div>
         <div style={{ display: "flex", gap: SPACING.PX_80 }}>
@@ -136,7 +136,7 @@ const Scene3: React.FC = () => {
   return (
     <AbsoluteFill style={{ backgroundColor: COLORS.BG_BASE, justifyContent: "center", alignItems: "center" }}>
       <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: SPACING.PX_64, top: -40, position: "relative" }}>
-        <div style={{ fontFamily: FONTS.DISPLAY, fontSize: FONTS.SIZE_2XL, fontWeight: FONTS.WEIGHT_EXTRABOLD, color: COLORS.PRIMARY, textShadow: EFFECTS.GLOW_MD }}>
+        <div style={{ fontFamily: FONTS.DISPLAY, fontSize: 120, fontWeight: FONTS.WEIGHT_EXTRABOLD, color: COLORS.PRIMARY }}>
           프로젝트 메이븐
         </div>
         <div style={{ display: "flex", gap: SPACING.PX_80, position: "relative" }}>
@@ -145,8 +145,8 @@ const Scene3: React.FC = () => {
           <VBar label="범위" value={85} color={COLORS.PRIMARY} delay={0} frame={999} />
           
           <div style={{ position: "absolute", top: 100, right: -240, display: "flex", alignItems: "center", gap: SPACING.PX_12, opacity: labelOpacity, transform: `translateX(${labelX}px)` }}>
-             <div style={{ width: 12, height: 12, backgroundColor: COLORS.NEGATIVE, borderRadius: "50%", boxShadow: EFFECTS.GLOW_SM }} />
-             <div style={{ fontFamily: FONTS.MONO, fontSize: FONTS.SIZE_SM, color: COLORS.NEGATIVE, fontWeight: FONTS.WEIGHT_BOLD }}>
+             <div style={{ width: 16, height: 16, backgroundColor: COLORS.STATE_ERROR_FG, borderRadius: "50%", boxShadow: EFFECTS.SHADOW_PRIMARY }} />
+             <div style={{ fontFamily: FONTS.DISPLAY, fontSize: 32, color: COLORS.STATE_ERROR_FG, fontWeight: FONTS.WEIGHT_BOLD }}>
                [결함 감지]
              </div>
           </div>
@@ -175,13 +175,24 @@ const Scene4: React.FC = () => {
 
   return (
     <AbsoluteFill style={{ backgroundColor: COLORS.BG_BASE, justifyContent: "center", alignItems: "center" }}>
-      <div style={{ position: "absolute", inset: 0, opacity: bgOpacity, background: `repeating-linear-gradient(0deg, transparent, transparent 10px, ${COLORS.BG_ELEVATED} 10px, ${COLORS.BG_ELEVATED} 12px)` }} />
+      <div style={{ position: "absolute", inset: 0, opacity: bgOpacity, background: `repeating-linear-gradient(0deg, transparent, transparent 10px, ${COLORS.BG_MUTED} 10px, ${COLORS.BG_MUTED} 12px)` }} />
       
-      <div style={{ position: "absolute", top: 120, fontFamily: FONTS.MONO, fontSize: FONTS.SIZE_MD, color: COLORS.TEXT_MUTED, letterSpacing: FONTS.TRACKING_WIDE, opacity: topTextOpacity }}>
+      <div style={{ position: "absolute", top: 120, fontFamily: FONTS.DISPLAY, fontSize: 48, color: COLORS.TEXT_SUB, letterSpacing: FONTS.TRACKING_WIDER, opacity: topTextOpacity }}>
         중동 · 사막 환경
       </div>
       
-      <div style={{ opacity: badgeOpacity, transform: `scale(${badgeScale})`, padding: `${SPACING.PX_16}px ${SPACING.PX_32}px`, border: `1px solid ${COLORS.BORDER_STRONG}`, borderRadius: SPACING.RADIUS_SM, backgroundColor: EFFECTS.GLASS_BG, backdropFilter: EFFECTS.GLASS_BLUR, fontFamily: FONTS.PRIMARY, fontSize: FONTS.SIZE_LG, color: COLORS.TEXT_MAIN, fontWeight: FONTS.WEIGHT_BOLD }}>
+      <div style={{ 
+        opacity: badgeOpacity, 
+        transform: `scale(${badgeScale})`, 
+        padding: `${SPACING.PX_16}px ${SPACING.PX_32}px`, 
+        border: `2px solid ${COLORS.STROKE_STRONG}`, 
+        borderRadius: SPACING.RADIUS_MD, 
+        backgroundColor: COLORS.BG_SURFACE,
+        fontFamily: FONTS.DISPLAY, 
+        fontSize: FONTS.SIZE_LG, 
+        color: COLORS.TEXT_MAIN, 
+        fontWeight: FONTS.WEIGHT_BOLD 
+      }}>
         실험 조건
       </div>
     </AbsoluteFill>
@@ -206,8 +217,8 @@ const Scene5: React.FC = () => {
   return (
     <AbsoluteFill style={{ backgroundColor: COLORS.BG_BASE, justifyContent: "center", alignItems: "center" }}>
       <div style={{ display: "flex", flexDirection: "column", gap: SPACING.PX_48, opacity: uiOpacity }}>
-        <HBar label="사람" value={84} color={COLORS.SECONDARY} delay={43} frame={frame} />
-        <HBar label="메이븐" value={0} color={COLORS.PRIMARY} delay={0} frame={frame} showValue={false} pulsingQuestion={true} />
+        <HBar label="사람" value={84} color={COLORS.PRIMARY} delay={43} frame={frame} />
+        <HBar label="메이븐" value={0} color={COLORS.STATE_WARN_FG} delay={0} frame={frame} showValue={false} pulsingQuestion={true} />
       </div>
     </AbsoluteFill>
   );
@@ -231,12 +242,12 @@ const Scene6: React.FC = () => {
   return (
     <AbsoluteFill style={{ backgroundColor: COLORS.BG_BASE, justifyContent: "center", alignItems: "center" }}>
       <div style={{ display: "flex", flexDirection: "column", gap: SPACING.PX_48 }}>
-        <HBar label="사람" value={84} color={COLORS.SECONDARY} delay={-999} frame={999} />
+        <HBar label="사람" value={84} color={COLORS.PRIMARY} delay={-999} frame={999} />
         <div style={{ position: "relative" }}>
-          <HBar label="메이븐" value={60} color={COLORS.NEGATIVE} delay={0} frame={frame} />
+          <HBar label="메이븐" value={60} color={COLORS.STATE_ERROR_FG} delay={0} frame={frame} />
           
-          <div style={{ position: "absolute", left: 140 + 32 + 516 * 0.6, width: 516 * 0.24, height: 24, top: 0, backgroundColor: COLORS.NEGATIVE_DIM, border: `1px dashed ${COLORS.NEGATIVE}`, opacity: gapOpacity, display: "flex", justifyContent: "center", alignItems: "center" }}>
-            <span style={{ position: "absolute", top: -30, fontFamily: FONTS.MONO, fontSize: FONTS.SIZE_SM, color: COLORS.NEGATIVE, fontWeight: FONTS.WEIGHT_BOLD }}>격차</span>
+          <div style={{ position: "absolute", left: 140 + 32 + 516 * 0.6, width: 516 * 0.24, height: 28, top: -2, backgroundColor: COLORS.STATE_ERROR_BG, border: `2px dashed ${COLORS.STATE_ERROR_FG}`, opacity: gapOpacity, display: "flex", justifyContent: "center", alignItems: "center" }}>
+            <span style={{ position: "absolute", top: -36, fontFamily: FONTS.DISPLAY, fontSize: 24, color: COLORS.STATE_ERROR_FG, fontWeight: FONTS.WEIGHT_BOLD }}>격차</span>
           </div>
         </div>
       </div>
@@ -261,13 +272,13 @@ const PairBox: React.FC<{ left: string; right: string; delay: number; pulseDelay
 
   return (
     <div style={{ display: "flex", alignItems: "center", gap: SPACING.PX_40, opacity: enter, transform: `translateY(${(1-enter)*20}px)` }}>
-      <div style={{ width: 160, height: 80, backgroundColor: COLORS.BG_SURFACE, border: `1px solid ${COLORS.BORDER}`, display: "flex", justifyContent: "center", alignItems: "center", fontFamily: FONTS.PRIMARY, fontSize: FONTS.SIZE_MD, color: COLORS.TEXT_MAIN, borderRadius: SPACING.RADIUS_MD, fontWeight: FONTS.WEIGHT_BOLD }}>
+      <div style={{ width: 200, height: 100, backgroundColor: COLORS.BG_SURFACE, border: `2px solid ${COLORS.STROKE_DEFAULT}`, display: "flex", justifyContent: "center", alignItems: "center", fontFamily: FONTS.DISPLAY, fontSize: FONTS.SIZE_MD, color: COLORS.TEXT_MAIN, borderRadius: SPACING.RADIUS_MD, fontWeight: FONTS.WEIGHT_BOLD }}>
         {left}
       </div>
-      <div style={{ width: 60, textAlign: "center", fontFamily: FONTS.MONO, fontSize: FONTS.SIZE_XL, color: isPulsing ? COLORS.NEGATIVE : COLORS.TEXT_MUTED, fontWeight: FONTS.WEIGHT_BOLD, transform: `scale(${isPulsing ? 1 + pulseScale * 0.2 : 1})`, textShadow: isPulsing ? EFFECTS.GLOW_SM : "none" }}>
+      <div style={{ width: 80, textAlign: "center", fontFamily: FONTS.DISPLAY, fontSize: 64, color: isPulsing ? COLORS.STATE_ERROR_FG : COLORS.TEXT_SUB, fontWeight: FONTS.WEIGHT_BOLD, transform: `scale(${isPulsing ? 1 + pulseScale * 0.2 : 1})`, textShadow: isPulsing ? EFFECTS.SHADOW_PRIMARY : "none" }}>
         {isPulsing ? "≈" : "≈ ?"}
       </div>
-      <div style={{ width: 160, height: 80, backgroundColor: COLORS.BG_SURFACE, border: `1px solid ${COLORS.BORDER}`, display: "flex", justifyContent: "center", alignItems: "center", fontFamily: FONTS.PRIMARY, fontSize: FONTS.SIZE_MD, color: COLORS.TEXT_MAIN, borderRadius: SPACING.RADIUS_MD, fontWeight: FONTS.WEIGHT_BOLD }}>
+      <div style={{ width: 200, height: 100, backgroundColor: COLORS.BG_SURFACE, border: `2px solid ${COLORS.STROKE_DEFAULT}`, display: "flex", justifyContent: "center", alignItems: "center", fontFamily: FONTS.DISPLAY, fontSize: FONTS.SIZE_MD, color: COLORS.TEXT_MAIN, borderRadius: SPACING.RADIUS_MD, fontWeight: FONTS.WEIGHT_BOLD }}>
         {right}
       </div>
     </div>
@@ -317,20 +328,20 @@ const Scene8: React.FC = () => {
       <div style={{ display: "flex", gap: 120 }}>
         {/* Left */}
         <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: SPACING.PX_32 }}>
-          <div style={{ fontFamily: FONTS.MONO, fontSize: FONTS.SIZE_MD, color: COLORS.SECONDARY, fontWeight: FONTS.WEIGHT_BOLD, letterSpacing: FONTS.TRACKING_WIDER }}>사람의 인식</div>
+          <div style={{ fontFamily: FONTS.DISPLAY, fontSize: 32, color: COLORS.PRIMARY, fontWeight: FONTS.WEIGHT_BOLD, letterSpacing: FONTS.TRACKING_WIDER }}>사람의 인식</div>
           <div style={{ display: "flex", alignItems: "center", gap: SPACING.PX_24 }}>
-             <div style={{ width: 100, height: 100, backgroundColor: COLORS.BG_SURFACE, border: `1px solid ${COLORS.BORDER}`, borderRadius: SPACING.RADIUS_MD }} />
-             <div style={{ fontFamily: FONTS.MONO, fontSize: FONTS.SIZE_XL, color: leftPulse > 0 ? COLORS.PRIMARY : COLORS.TEXT_MUTED, transform: `scale(${1 + leftPulse * 0.2})`, textShadow: leftPulse > 0 ? EFFECTS.GLOW_SM : "none", fontWeight: FONTS.WEIGHT_BOLD }}>≠</div>
-             <div style={{ width: 100, height: 100, backgroundColor: COLORS.BG_SURFACE, border: `1px solid ${COLORS.BORDER}`, borderRadius: 50 }} />
+             <div style={{ width: 120, height: 120, backgroundColor: COLORS.BG_SURFACE, border: `2px solid ${COLORS.STROKE_DEFAULT}`, borderRadius: SPACING.RADIUS_MD }} />
+             <div style={{ fontFamily: FONTS.DISPLAY, fontSize: 64, color: leftPulse > 0 ? COLORS.PRIMARY : COLORS.TEXT_SUB, transform: `scale(${1 + leftPulse * 0.2})`, textShadow: leftPulse > 0 ? EFFECTS.SHADOW_PRIMARY : "none", fontWeight: FONTS.WEIGHT_BOLD }}>≠</div>
+             <div style={{ width: 120, height: 120, backgroundColor: COLORS.BG_SURFACE, border: `2px solid ${COLORS.STROKE_DEFAULT}`, borderRadius: "50%" }} />
           </div>
         </div>
         {/* Right */}
         <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: SPACING.PX_32 }}>
-          <div style={{ fontFamily: FONTS.MONO, fontSize: FONTS.SIZE_MD, color: COLORS.WARNING, fontWeight: FONTS.WEIGHT_BOLD, letterSpacing: FONTS.TRACKING_WIDER }}>AI의 인식</div>
+          <div style={{ fontFamily: FONTS.DISPLAY, fontSize: 32, color: COLORS.STATE_WARN_FG, fontWeight: FONTS.WEIGHT_BOLD, letterSpacing: FONTS.TRACKING_WIDER }}>AI의 인식</div>
           <div style={{ display: "flex", alignItems: "center", gap: SPACING.PX_24 }}>
-             <div style={{ width: 100, height: 100, backgroundColor: COLORS.BG_SURFACE, border: `1px solid ${COLORS.BORDER}`, borderRadius: SPACING.RADIUS_MD }} />
-             <div style={{ fontFamily: FONTS.MONO, fontSize: FONTS.SIZE_XL, color: rightPulse > 0 ? COLORS.WARNING : COLORS.TEXT_MUTED, transform: `scale(${1 + rightPulse * 0.2})`, textShadow: rightPulse > 0 ? EFFECTS.GLOW_ACCENT : "none", fontWeight: FONTS.WEIGHT_BOLD }}>≈</div>
-             <div style={{ width: 100, height: 100, backgroundColor: COLORS.BG_SURFACE, border: `1px solid ${COLORS.BORDER}`, borderRadius: 50 }} />
+             <div style={{ width: 120, height: 120, backgroundColor: COLORS.BG_SURFACE, border: `2px solid ${COLORS.STROKE_DEFAULT}`, borderRadius: SPACING.RADIUS_MD }} />
+             <div style={{ fontFamily: FONTS.DISPLAY, fontSize: 64, color: rightPulse > 0 ? COLORS.STATE_WARN_FG : COLORS.TEXT_SUB, transform: `scale(${1 + rightPulse * 0.2})`, textShadow: rightPulse > 0 ? EFFECTS.SHADOW_PRIMARY : "none", fontWeight: FONTS.WEIGHT_BOLD }}>≈</div>
+             <div style={{ width: 120, height: 120, backgroundColor: COLORS.BG_SURFACE, border: `2px solid ${COLORS.STROKE_DEFAULT}`, borderRadius: "50%" }} />
           </div>
         </div>
       </div>
@@ -355,12 +366,12 @@ const Scene9: React.FC = () => {
 
   return (
     <AbsoluteFill style={{ backgroundColor: COLORS.BG_BASE, justifyContent: "center", alignItems: "center" }}>
-      <div style={{ width: 800, padding: SPACING.PX_40, backgroundColor: EFFECTS.GLASS_BG, border: `1px solid ${EFFECTS.GLASS_BORDER}`, borderRadius: SPACING.RADIUS_LG, opacity: enter, transform: `translateY(${(1-enter)*40}px)` }}>
-        <div style={{ fontFamily: FONTS.MONO, fontSize: FONTS.SIZE_SM, color: COLORS.TEXT_MUTED, letterSpacing: FONTS.TRACKING_WIDER, marginBottom: SPACING.PX_32, display: "flex", alignItems: "center", gap: 12 }}>
-          <div style={{ width: 8, height: 8, backgroundColor: COLORS.TEXT_MUTED, borderRadius: "50%" }} />
+      <div style={{ width: 800, padding: SPACING.PX_40, backgroundColor: COLORS.BG_SURFACE, border: `2px solid ${COLORS.STROKE_DEFAULT}`, borderRadius: SPACING.RADIUS_LG, opacity: enter, transform: `translateY(${(1-enter)*40}px)` }}>
+        <div style={{ fontFamily: FONTS.DISPLAY, fontSize: 32, color: COLORS.TEXT_SUB, letterSpacing: FONTS.TRACKING_WIDER, marginBottom: SPACING.PX_32, display: "flex", alignItems: "center", gap: 12 }}>
+          <div style={{ width: 12, height: 12, backgroundColor: COLORS.STROKE_STRONG, borderRadius: "50%" }} />
           미군 관계자 — 공식 인정
         </div>
-        <div style={{ fontFamily: FONTS.PRIMARY, fontSize: FONTS.SIZE_LG, color: COLORS.TEXT_MAIN, lineHeight: FONTS.LEADING_NORMAL }}>
+        <div style={{ fontFamily: FONTS.DISPLAY, fontSize: FONTS.SIZE_LG, color: COLORS.TEXT_MAIN, lineHeight: FONTS.LEADING_NORMAL }}>
           <span style={{ opacity: cursorOpacity, color: COLORS.PRIMARY }}>|</span>
         </div>
       </div>
@@ -391,14 +402,14 @@ const Scene10: React.FC = () => {
   return (
     <AbsoluteFill style={{ backgroundColor: COLORS.BG_BASE, justifyContent: "center", alignItems: "center" }}>
       <div style={{ display: "flex", gap: SPACING.PX_80, alignItems: "center" }}>
-        <div style={{ width: 600, padding: SPACING.PX_40, backgroundColor: EFFECTS.GLASS_BG, border: `1px solid ${EFFECTS.GLASS_BORDER}`, borderRadius: SPACING.RADIUS_LG }}>
-          <div style={{ fontFamily: FONTS.MONO, fontSize: FONTS.SIZE_SM, color: COLORS.TEXT_MUTED, letterSpacing: FONTS.TRACKING_WIDER, marginBottom: SPACING.PX_32, display: "flex", alignItems: "center", gap: 12 }}>
-            <div style={{ width: 8, height: 8, backgroundColor: COLORS.TEXT_MUTED, borderRadius: "50%" }} />
+        <div style={{ width: 600, padding: SPACING.PX_40, backgroundColor: COLORS.BG_SURFACE, border: `2px solid ${COLORS.STROKE_DEFAULT}`, borderRadius: SPACING.RADIUS_LG }}>
+          <div style={{ fontFamily: FONTS.DISPLAY, fontSize: 32, color: COLORS.TEXT_SUB, letterSpacing: FONTS.TRACKING_WIDER, marginBottom: SPACING.PX_32, display: "flex", alignItems: "center", gap: 12 }}>
+            <div style={{ width: 12, height: 12, backgroundColor: COLORS.STROKE_STRONG, borderRadius: "50%" }} />
             미군 관계자 — 공식 인정
           </div>
-          <div style={{ fontFamily: FONTS.PRIMARY, fontSize: FONTS.SIZE_LG, color: COLORS.TEXT_MAIN, lineHeight: FONTS.LEADING_NORMAL }}>
+          <div style={{ fontFamily: FONTS.DISPLAY, fontSize: FONTS.SIZE_LG, color: COLORS.TEXT_MAIN, lineHeight: FONTS.LEADING_NORMAL }}>
             {text1.substring(0, showText1Length)}
-            {showText2 ? <span style={{ color: COLORS.PRIMARY, textShadow: EFFECTS.GLOW_SM }}>{text2}</span> : null}
+            {showText2 ? <span style={{ color: COLORS.PRIMARY, textShadow: EFFECTS.SHADOW_PRIMARY }}>{text2}</span> : null}
             <span style={{ opacity: Math.floor(frame / 15) % 2 === 0 ? 1 : 0, color: COLORS.PRIMARY }}>|</span>
           </div>
         </div>
@@ -406,9 +417,9 @@ const Scene10: React.FC = () => {
         {/* Right Bars */}
         <div style={{ display: "flex", flexDirection: "column", gap: SPACING.PX_32, opacity: barProgress, transform: `translateX(${(1-barProgress)*20}px)` }}>
           <div style={{ display: "flex", alignItems: "center", gap: SPACING.PX_24 }}>
-             <div style={{ width: 120, textAlign: "right", fontFamily: FONTS.PRIMARY, fontSize: FONTS.SIZE_MD, color: COLORS.PRIMARY, fontWeight: FONTS.WEIGHT_BOLD }}>속도</div>
-             <div style={{ width: 300, height: 16, backgroundColor: COLORS.BG_SURFACE, borderRadius: 8, position: "relative", overflow: "hidden" }}>
-                <div style={{ position: "absolute", left: 0, top: 0, bottom: 0, width: "100%", backgroundColor: COLORS.PRIMARY, boxShadow: `0 0 16px ${COLORS.PRIMARY}` }} />
+             <div style={{ width: 120, textAlign: "right", fontFamily: FONTS.DISPLAY, fontSize: FONTS.SIZE_MD, color: COLORS.PRIMARY, fontWeight: FONTS.WEIGHT_BOLD }}>속도</div>
+             <div style={{ width: 300, height: 16, backgroundColor: COLORS.BG_MUTED, borderRadius: 8, position: "relative", overflow: "hidden", border: `2px solid ${COLORS.STROKE_DEFAULT}` }}>
+                <div style={{ position: "absolute", left: 0, top: 0, bottom: 0, width: "100%", backgroundColor: COLORS.PRIMARY }} />
              </div>
           </div>
         </div>
@@ -443,16 +454,16 @@ const Scene11: React.FC = () => {
   return (
     <AbsoluteFill style={{ backgroundColor: COLORS.BG_BASE, justifyContent: "center", alignItems: "center" }}>
       <div style={{ display: "flex", gap: SPACING.PX_80, alignItems: "center" }}>
-        <div style={{ width: 600, padding: SPACING.PX_40, backgroundColor: EFFECTS.GLASS_BG, border: `1px solid ${EFFECTS.GLASS_BORDER}`, borderRadius: SPACING.RADIUS_LG }}>
-          <div style={{ fontFamily: FONTS.MONO, fontSize: FONTS.SIZE_SM, color: COLORS.TEXT_MUTED, letterSpacing: FONTS.TRACKING_WIDER, marginBottom: SPACING.PX_32, display: "flex", alignItems: "center", gap: 12 }}>
-            <div style={{ width: 8, height: 8, backgroundColor: COLORS.TEXT_MUTED, borderRadius: "50%" }} />
+        <div style={{ width: 600, padding: SPACING.PX_40, backgroundColor: COLORS.BG_SURFACE, border: `2px solid ${COLORS.STROKE_DEFAULT}`, borderRadius: SPACING.RADIUS_LG }}>
+          <div style={{ fontFamily: FONTS.DISPLAY, fontSize: 32, color: COLORS.TEXT_SUB, letterSpacing: FONTS.TRACKING_WIDER, marginBottom: SPACING.PX_32, display: "flex", alignItems: "center", gap: 12 }}>
+            <div style={{ width: 12, height: 12, backgroundColor: COLORS.STROKE_STRONG, borderRadius: "50%" }} />
             미군 관계자 — 공식 인정
           </div>
-          <div style={{ fontFamily: FONTS.PRIMARY, fontSize: FONTS.SIZE_LG, color: COLORS.TEXT_MAIN, lineHeight: FONTS.LEADING_NORMAL }}>
-            메이븐의 장점은 어디까지나 <span style={{ color: COLORS.PRIMARY, textShadow: EFFECTS.GLOW_SM }}>속도다.</span>
+          <div style={{ fontFamily: FONTS.DISPLAY, fontSize: FONTS.SIZE_LG, color: COLORS.TEXT_MAIN, lineHeight: FONTS.LEADING_NORMAL }}>
+            메이븐의 장점은 어디까지나 <span style={{ color: COLORS.PRIMARY, textShadow: EFFECTS.SHADOW_PRIMARY }}>속도다.</span>
             <br/><br/>
             {text3.substring(0, showText3Length)}
-            {showText4 ? <span style={{ color: COLORS.NEGATIVE, textShadow: EFFECTS.GLOW_SM }}>{text4}</span> : null}
+            {showText4 ? <span style={{ color: COLORS.STATE_ERROR_FG, textShadow: EFFECTS.SHADOW_PRIMARY }}>{text4}</span> : null}
             <span style={{ opacity: Math.floor(frame / 15) % 2 === 0 ? 1 : 0, color: COLORS.PRIMARY }}>|</span>
           </div>
         </div>
@@ -460,17 +471,17 @@ const Scene11: React.FC = () => {
         {/* Right Bars */}
         <div style={{ display: "flex", flexDirection: "column", gap: SPACING.PX_32 }}>
           <div style={{ display: "flex", alignItems: "center", gap: SPACING.PX_24 }}>
-             <div style={{ width: 120, textAlign: "right", fontFamily: FONTS.PRIMARY, fontSize: FONTS.SIZE_MD, color: COLORS.TEXT_MUTED, fontWeight: FONTS.WEIGHT_BOLD }}>속도</div>
-             <div style={{ width: 300, height: 16, backgroundColor: COLORS.BG_SURFACE, borderRadius: 8, position: "relative", overflow: "hidden" }}>
-                <div style={{ position: "absolute", left: 0, top: 0, bottom: 0, width: "100%", backgroundColor: COLORS.TEXT_MUTED }} />
+             <div style={{ width: 120, textAlign: "right", fontFamily: FONTS.DISPLAY, fontSize: FONTS.SIZE_MD, color: COLORS.TEXT_SUB, fontWeight: FONTS.WEIGHT_BOLD }}>속도</div>
+             <div style={{ width: 300, height: 16, backgroundColor: COLORS.BG_MUTED, borderRadius: 8, position: "relative", overflow: "hidden" }}>
+                <div style={{ position: "absolute", left: 0, top: 0, bottom: 0, width: "100%", backgroundColor: COLORS.BG_EMPHASIS }} />
              </div>
           </div>
           <div style={{ display: "flex", alignItems: "center", gap: SPACING.PX_24, opacity: bar2Enter, transform: `translateY(${(1-bar2Enter)*10}px)` }}>
-             <div style={{ width: 120, textAlign: "right", fontFamily: FONTS.PRIMARY, fontSize: FONTS.SIZE_MD, color: COLORS.NEGATIVE, fontWeight: FONTS.WEIGHT_BOLD }}>전술적 판단</div>
-             <div style={{ width: 300, height: 16, backgroundColor: COLORS.BG_SURFACE, borderRadius: 8, position: "relative", overflow: "visible" }}>
-                <div style={{ position: "absolute", left: 0, top: 0, bottom: 0, width: `${bar2Width}%`, backgroundColor: COLORS.NEGATIVE, boxShadow: `0 0 16px ${COLORS.NEGATIVE}` }} />
+             <div style={{ width: 120, textAlign: "right", fontFamily: FONTS.DISPLAY, fontSize: FONTS.SIZE_MD, color: COLORS.STATE_ERROR_FG, fontWeight: FONTS.WEIGHT_BOLD }}>전술적 판단</div>
+             <div style={{ width: 300, height: 16, backgroundColor: COLORS.BG_MUTED, borderRadius: 8, position: "relative", overflow: "visible", border: `2px solid ${COLORS.STATE_ERROR_FG}` }}>
+                <div style={{ position: "absolute", left: 0, top: 0, bottom: 0, width: `${bar2Width}%`, backgroundColor: COLORS.STATE_ERROR_FG }} />
                 {frame >= 102 && (
-                  <div style={{ position: "absolute", right: -30, top: -8, fontFamily: FONTS.MONO, fontSize: FONTS.SIZE_LG, color: COLORS.NEGATIVE, fontWeight: FONTS.WEIGHT_BOLD, transform: `scale(${xScale})`, textShadow: EFFECTS.GLOW_SM }}>
+                  <div style={{ position: "absolute", right: -40, top: -12, fontFamily: FONTS.DISPLAY, fontSize: 48, color: COLORS.STATE_ERROR_FG, fontWeight: FONTS.WEIGHT_BOLD, transform: `scale(${xScale})`, textShadow: EFFECTS.SHADOW_PRIMARY }}>
                     ✕
                   </div>
                 )}
@@ -505,18 +516,18 @@ const Scene12: React.FC = () => {
         <div style={{ 
           position: "absolute", 
           inset: -40, 
-          border: `2px dashed ${COLORS.WARNING}`, 
+          border: `4px dashed ${COLORS.STATE_WARN_FG}`, 
           borderRadius: SPACING.RADIUS_MD,
           opacity: borderDash,
           transform: `scale(${1 + (1 - borderDash) * 0.1})` 
         }} />
         
         <div style={{ 
-          fontFamily: FONTS.MONO, 
-          fontSize: FONTS.SIZE_4XL, 
+          fontFamily: FONTS.DISPLAY, 
+          fontSize: 180, 
           fontWeight: FONTS.WEIGHT_EXTRABOLD, 
-          color: COLORS.WARNING, 
-          textShadow: EFFECTS.GLOW_ACCENT,
+          color: COLORS.STATE_WARN_FG, 
+          textShadow: EFFECTS.SHADOW_PRIMARY,
           transform: `scale(${textScale})`
         }}>
           1,000
@@ -524,14 +535,14 @@ const Scene12: React.FC = () => {
         
         <div style={{ 
           position: "absolute", 
-          right: -80, 
-          top: -40, 
-          fontFamily: FONTS.MONO, 
-          fontSize: FONTS.SIZE_2XL, 
+          right: -100, 
+          top: -60, 
+          fontFamily: FONTS.DISPLAY, 
+          fontSize: 100, 
           fontWeight: FONTS.WEIGHT_BOLD, 
-          color: COLORS.WARNING, 
+          color: COLORS.STATE_WARN_FG, 
           opacity: qOpacity * 0.5,
-          textShadow: EFFECTS.GLOW_ACCENT
+          textShadow: EFFECTS.SHADOW_PRIMARY
         }}>
           ?
         </div>
@@ -558,12 +569,12 @@ const Scene13: React.FC = () => {
   
   return (
     <AbsoluteFill style={{ backgroundColor: COLORS.BG_BASE, justifyContent: "center", alignItems: "center" }}>
-      <div style={{ display: "flex", alignItems: "center", gap: SPACING.PX_40, fontFamily: FONTS.MONO, fontSize: FONTS.SIZE_3XL, fontWeight: FONTS.WEIGHT_EXTRABOLD }}>
-        <div style={{ color: COLORS.WARNING, textShadow: EFFECTS.GLOW_ACCENT }}>
+      <div style={{ display: "flex", alignItems: "center", gap: SPACING.PX_40, fontFamily: FONTS.DISPLAY, fontSize: 100, fontWeight: FONTS.WEIGHT_EXTRABOLD }}>
+        <div style={{ color: COLORS.STATE_WARN_FG, textShadow: EFFECTS.SHADOW_PRIMARY }}>
           1,000
         </div>
         
-        <div style={{ color: COLORS.TEXT_MUTED, opacity: mulSlide, transform: `translateX(${(1-mulSlide)*-20}px)` }}>
+        <div style={{ color: COLORS.TEXT_SUB, opacity: mulSlide, transform: `translateX(${(1-mulSlide)*-20}px)` }}>
           ×
         </div>
         
@@ -571,13 +582,13 @@ const Scene13: React.FC = () => {
           60%
         </div>
         
-        <div style={{ color: COLORS.NEGATIVE, opacity: eqSlide, transform: `translateY(${(1-eqSlide)*20}px) scale(${1 + (1-eqSlide)*0.5})`, marginLeft: SPACING.PX_40, textShadow: EFFECTS.GLOW_LG }}>
+        <div style={{ color: COLORS.STATE_ERROR_FG, opacity: eqSlide, transform: `translateY(${(1-eqSlide)*20}px) scale(${1 + (1-eqSlide)*0.5})`, marginLeft: SPACING.PX_40, textShadow: EFFECTS.SHADOW_PRIMARY }}>
           = 600?
         </div>
       </div>
       
       <div style={{ position: "absolute", bottom: 200, display: "flex", gap: 12, opacity: eqSlide }}>
-        <div style={{ padding: "10px 24px", backgroundColor: COLORS.NEGATIVE_DIM, border: `1px solid ${COLORS.NEGATIVE}`, borderRadius: SPACING.RADIUS_SM, color: COLORS.NEGATIVE, fontFamily: FONTS.PRIMARY, fontSize: FONTS.SIZE_MD, fontWeight: FONTS.WEIGHT_BOLD }}>
+        <div style={{ padding: "10px 24px", backgroundColor: COLORS.STATE_ERROR_BG, border: `2px solid ${COLORS.STATE_ERROR_FG}`, borderRadius: SPACING.RADIUS_SM, color: COLORS.STATE_ERROR_FG, fontFamily: FONTS.DISPLAY, fontSize: FONTS.SIZE_MD, fontWeight: FONTS.WEIGHT_BOLD }}>
           오차범위 400개
         </div>
       </div>
@@ -600,17 +611,17 @@ const Scene14: React.FC = () => {
   
   const enter = spring({ frame, fps, config: ANIMATION.SPRING_SNAPPY });
   const pulse = spring({ frame: frame - 85, fps, config: ANIMATION.SPRING_BOUNCY });
-  const borderColor = interpolateColors(pulse, [0, 1], [COLORS.BORDER_STRONG, COLORS.NEGATIVE]);
-  const glow = pulse > 0 ? EFFECTS.GLOW_SM : "none";
+  const borderColor = interpolateColors(pulse, [0, 1], [COLORS.STROKE_STRONG, COLORS.STATE_ERROR_FG]);
+  const glow = pulse > 0 ? EFFECTS.TINT_PRIMARY : "none";
 
   return (
     <AbsoluteFill style={{ backgroundColor: COLORS.BG_BASE, justifyContent: "center", alignItems: "center" }}>
-      <div style={{ width: 600, padding: SPACING.PX_48, backgroundColor: COLORS.NEGATIVE_DIM, border: `2px solid ${borderColor}`, borderRadius: SPACING.RADIUS_MD, opacity: enter, transform: `scale(${1 + (1-enter)*0.1})`, boxShadow: pulse > 0 ? `0 0 32px ${COLORS.NEGATIVE_DIM}` : "none", display: "flex", flexDirection: "column", alignItems: "center", gap: SPACING.PX_32 }}>
-        <div style={{ fontFamily: FONTS.PRIMARY, fontSize: FONTS.SIZE_LG, color: pulse > 0 ? COLORS.NEGATIVE : COLORS.TEXT_MAIN, fontWeight: FONTS.WEIGHT_BOLD, textShadow: glow, transform: `scale(${1 + pulse * 0.05})` }}>
+      <div style={{ width: 600, padding: SPACING.PX_48, backgroundColor: COLORS.STATE_ERROR_BG, border: `3px solid ${borderColor}`, borderRadius: SPACING.RADIUS_MD, opacity: enter, transform: `scale(${1 + (1-enter)*0.1})`, boxShadow: pulse > 0 ? EFFECTS.SHADOW_PRIMARY : "none", display: "flex", flexDirection: "column", alignItems: "center", gap: SPACING.PX_32 }}>
+        <div style={{ fontFamily: FONTS.DISPLAY, fontSize: FONTS.SIZE_LG, color: pulse > 0 ? COLORS.STATE_ERROR_FG : COLORS.TEXT_MAIN, fontWeight: FONTS.WEIGHT_BOLD, textShadow: glow, transform: `scale(${1 + pulse * 0.05})` }}>
           민간인 피해 보도
         </div>
-        <div style={{ width: 40, height: 2, backgroundColor: COLORS.NEGATIVE, opacity: pulse }} />
-        <div style={{ fontFamily: FONTS.MONO, fontSize: FONTS.SIZE_SM, color: COLORS.TEXT_DISABLED, letterSpacing: FONTS.TRACKING_WIDE }}>
+        <div style={{ width: 60, height: 4, backgroundColor: COLORS.STATE_ERROR_FG, opacity: pulse }} />
+        <div style={{ fontFamily: FONTS.DISPLAY, fontSize: 32, color: COLORS.TEXT_SUB, letterSpacing: FONTS.TRACKING_WIDER }}>
           출처: 복수의 언론 보도
         </div>
       </div>
@@ -641,15 +652,15 @@ const Scene15: React.FC = () => {
   return (
     <AbsoluteFill style={{ backgroundColor: COLORS.BG_BASE, justifyContent: "center", alignItems: "center" }}>
       <div style={{ display: "flex", alignItems: "center", gap: SPACING.PX_64 }}>
-        <div style={{ width: 240, height: 160, display: "flex", justifyContent: "center", alignItems: "center", backgroundColor: COLORS.BG_SURFACE, border: `2px solid ${COLORS.WARNING}`, borderRadius: SPACING.RADIUS_MD, fontFamily: FONTS.PRIMARY, fontSize: FONTS.SIZE_LG, fontWeight: FONTS.WEIGHT_BOLD, color: COLORS.WARNING, opacity: enterL, transform: `translateY(${(1-enterL)*20}px)`, boxShadow: EFFECTS.GLOW_ACCENT }}>
+        <div style={{ width: 280, height: 180, display: "flex", justifyContent: "center", alignItems: "center", backgroundColor: COLORS.BG_SURFACE, border: `3px solid ${COLORS.STATE_WARN_FG}`, borderRadius: SPACING.RADIUS_MD, fontFamily: FONTS.DISPLAY, fontSize: FONTS.SIZE_LG, fontWeight: FONTS.WEIGHT_BOLD, color: COLORS.STATE_WARN_FG, opacity: enterL, transform: `translateY(${(1-enterL)*20}px)`, boxShadow: EFFECTS.SHADOW_PRIMARY }}>
           AI 오류
         </div>
         
-        <div style={{ fontFamily: FONTS.MONO, fontSize: FONTS.SIZE_2XL, color: COLORS.TEXT_MUTED, opacity: enterM }}>
+        <div style={{ fontFamily: FONTS.DISPLAY, fontSize: 64, color: COLORS.TEXT_SUB, opacity: enterM }}>
           →
         </div>
         
-        <div style={{ width: 240, height: 160, display: "flex", justifyContent: "center", alignItems: "center", backgroundColor: impactR > 0 ? COLORS.NEGATIVE_DIM : COLORS.BG_SURFACE, border: `2px solid ${COLORS.NEGATIVE}`, borderRadius: SPACING.RADIUS_MD, fontFamily: FONTS.PRIMARY, fontSize: FONTS.SIZE_LG, fontWeight: FONTS.WEIGHT_BOLD, color: COLORS.NEGATIVE, opacity: enterR, transform: `translateY(${(1-enterR)*20}px) scale(${scaleR})`, boxShadow: impactR > 0 ? `0 0 40px ${COLORS.NEGATIVE_DIM}` : "none", transition: "background-color 0.3s" }}>
+        <div style={{ width: 280, height: 180, display: "flex", justifyContent: "center", alignItems: "center", backgroundColor: impactR > 0 ? COLORS.STATE_ERROR_BG : COLORS.BG_SURFACE, border: `3px solid ${COLORS.STATE_ERROR_FG}`, borderRadius: SPACING.RADIUS_MD, fontFamily: FONTS.DISPLAY, fontSize: FONTS.SIZE_LG, fontWeight: FONTS.WEIGHT_BOLD, color: COLORS.STATE_ERROR_FG, opacity: enterR, transform: `translateY(${(1-enterR)*20}px) scale(${scaleR})`, boxShadow: impactR > 0 ? EFFECTS.SHADOW_PRIMARY : "none", transition: "all 0.3s" }}>
           치명적 결과
         </div>
       </div>
@@ -670,7 +681,7 @@ const PipeNode: React.FC<{ label: string; highlightedState?: "none" | "pulse" | 
   const isHighlighted = highlightedState === "solid" || (highlightedState === "pulse" && frame >= pulseFrame);
 
   return (
-    <div style={{ position: "relative", padding: "16px 24px", backgroundColor: COLORS.BG_SURFACE, border: `2px solid ${isHighlighted ? COLORS.PRIMARY : COLORS.BORDER}`, borderRadius: SPACING.RADIUS_MD, fontFamily: FONTS.PRIMARY, fontSize: FONTS.SIZE_MD, color: COLORS.TEXT_MAIN, fontWeight: FONTS.WEIGHT_BOLD, opacity: enter, transform: `translateY(${(1-enter)*20}px) scale(${1 + pulse * 0.05})`, boxShadow: isHighlighted ? EFFECTS.GLOW_SM : "none", transition: "border 0.3s" }}>
+    <div style={{ position: "relative", padding: "24px 40px", backgroundColor: COLORS.BG_SURFACE, border: `3px solid ${isHighlighted ? COLORS.PRIMARY : COLORS.STROKE_DEFAULT}`, borderRadius: SPACING.RADIUS_MD, fontFamily: FONTS.DISPLAY, fontSize: 32, color: COLORS.TEXT_MAIN, fontWeight: FONTS.WEIGHT_BOLD, opacity: enter, transform: `translateY(${(1-enter)*20}px) scale(${1 + pulse * 0.05})`, boxShadow: isHighlighted ? EFFECTS.SHADOW_PRIMARY : "none", transition: "all 0.3s" }}>
       {label}
       {children}
     </div>
@@ -708,12 +719,12 @@ const Scene16: React.FC = () => {
     <AbsoluteFill style={{ backgroundColor: COLORS.BG_BASE, justifyContent: "center", alignItems: "center" }}>
       <div style={{ position: "relative", display: "flex", justifyContent: "center", alignItems: "center" }}>
         {frame < 90 && (
-          <div style={{ position: "absolute", fontFamily: FONTS.MONO, fontSize: FONTS.SIZE_3XL, color: COLORS.PRIMARY, fontWeight: FONTS.WEIGHT_EXTRABOLD, transform: `scale(${1 + plusPulse * 0.2})`, textShadow: EFFECTS.GLOW_MD, opacity: 1 - Math.max(0, (frame - 70) / 20) }}>
+          <div style={{ position: "absolute", fontFamily: FONTS.DISPLAY, fontSize: 160, color: COLORS.PRIMARY, fontWeight: FONTS.WEIGHT_EXTRABOLD, transform: `scale(${1 + plusPulse * 0.2})`, textShadow: EFFECTS.SHADOW_PRIMARY, opacity: 1 - Math.max(0, (frame - 70) / 20) }}>
             +
           </div>
         )}
         {showText && (
-          <div style={{ fontFamily: FONTS.PRIMARY, fontSize: FONTS.SIZE_SM, color: COLORS.TEXT_MUTED, letterSpacing: FONTS.TRACKING_WIDER, fontWeight: FONTS.WEIGHT_BOLD, opacity: textOpacity }}>
+          <div style={{ fontFamily: FONTS.DISPLAY, fontSize: 48, color: COLORS.TEXT_SUB, letterSpacing: FONTS.TRACKING_WIDER, fontWeight: FONTS.WEIGHT_BOLD, opacity: textOpacity }}>
             두 번째 위협
           </div>
         )}
@@ -768,16 +779,16 @@ const Scene18: React.FC = () => {
       <div style={{ display: "flex", alignItems: "center", gap: SPACING.PX_32, position: "relative" }}>
         
         <div style={{ position: "absolute", top: -100, left: 20, display: "flex", flexDirection: "column", alignItems: "center", gap: 12 }}>
-          <div style={{ fontFamily: FONTS.PRIMARY, fontSize: FONTS.SIZE_SM, color: attackActive ? COLORS.WARNING : COLORS.TEXT_MUTED, fontWeight: FONTS.WEIGHT_BOLD, transition: "color 0.3s" }}>
+          <div style={{ fontFamily: FONTS.DISPLAY, fontSize: 24, color: attackActive ? COLORS.STATE_WARN_FG : COLORS.TEXT_SUB, fontWeight: FONTS.WEIGHT_BOLD, transition: "color 0.3s" }}>
             적대국
           </div>
-          <div style={{ width: 2, height: 60, background: `repeating-linear-gradient(180deg, ${attackActive ? COLORS.WARNING : COLORS.TEXT_MUTED}, ${attackActive ? COLORS.WARNING : COLORS.TEXT_MUTED} 4px, transparent 4px, transparent 8px)`, backgroundPositionY: frame % 20 }} />
-          <div style={{ width: 0, height: 0, borderLeft: "6px solid transparent", borderRight: "6px solid transparent", borderTop: `8px solid ${attackActive ? COLORS.WARNING : COLORS.TEXT_MUTED}` }} />
+          <div style={{ width: 4, height: 60, background: `repeating-linear-gradient(180deg, ${attackActive ? COLORS.STATE_WARN_FG : COLORS.TEXT_SUB}, ${attackActive ? COLORS.STATE_WARN_FG : COLORS.TEXT_SUB} 4px, transparent 4px, transparent 8px)`, backgroundPositionY: frame % 20 }} />
+          <div style={{ width: 0, height: 0, borderLeft: "8px solid transparent", borderRight: "8px solid transparent", borderTop: `10px solid ${attackActive ? COLORS.STATE_WARN_FG : COLORS.TEXT_SUB}` }} />
         </div>
 
         <PipeNode label="학습 데이터" highlightedState="solid" delay={-999} frame={999}>
           {errorBoxEnter > 0 && (
-            <div style={{ position: "absolute", bottom: -20, right: -20, padding: "4px 8px", backgroundColor: COLORS.NEGATIVE, borderRadius: 4, fontFamily: FONTS.MONO, fontSize: 12, fontWeight: FONTS.WEIGHT_BOLD, color: COLORS.BG_BASE, transform: `scale(${errorBoxEnter})`, boxShadow: EFFECTS.GLOW_SM }}>
+            <div style={{ position: "absolute", bottom: -24, right: -24, padding: "8px 16px", backgroundColor: COLORS.STATE_ERROR_FG, borderRadius: SPACING.RADIUS_SM, fontFamily: FONTS.DISPLAY, fontSize: 20, fontWeight: FONTS.WEIGHT_BOLD, color: COLORS.BG_BASE, transform: `scale(${errorBoxEnter})`, boxShadow: EFFECTS.SHADOW_PRIMARY }}>
               오류
             </div>
           )}
@@ -809,18 +820,18 @@ const Scene19: React.FC = () => {
 
   return (
     <AbsoluteFill style={{ backgroundColor: COLORS.BG_BASE, justifyContent: "center", alignItems: "center" }}>
-      <div style={{ padding: SPACING.PX_40, backgroundColor: COLORS.BG_SURFACE, border: `2px solid ${highlight > 0 ? COLORS.WARNING : COLORS.BORDER}`, borderRadius: SPACING.RADIUS_MD, opacity: enter, transform: `translateY(${(1-enter)*40}px) scale(${1 + highlight * 0.05})`, boxShadow: highlight > 0 ? EFFECTS.GLOW_ACCENT : EFFECTS.SHADOW_MD, display: "flex", flexDirection: "column", gap: SPACING.PX_32 }}>
-        <div style={{ fontFamily: FONTS.MONO, fontSize: FONTS.SIZE_MD, color: COLORS.TEXT_MUTED, letterSpacing: FONTS.TRACKING_WIDER }}>
+      <div style={{ padding: SPACING.PX_40, backgroundColor: COLORS.BG_SURFACE, border: `3px solid ${highlight > 0 ? COLORS.STATE_WARN_FG : COLORS.STROKE_DEFAULT}`, borderRadius: SPACING.RADIUS_MD, opacity: enter, transform: `translateY(${(1-enter)*40}px) scale(${1 + highlight * 0.05})`, boxShadow: highlight > 0 ? EFFECTS.SHADOW_PRIMARY : "none", display: "flex", flexDirection: "column", gap: SPACING.PX_32 }}>
+        <div style={{ fontFamily: FONTS.DISPLAY, fontSize: 32, color: COLORS.TEXT_SUB, letterSpacing: FONTS.TRACKING_WIDER }}>
           AI 분석 보고서
         </div>
         <div style={{ display: "flex", flexDirection: "column", gap: SPACING.PX_16 }}>
-          <div style={{ fontFamily: FONTS.PRIMARY, fontSize: FONTS.SIZE_LG, color: COLORS.TEXT_MAIN }}>
-            분류: 민간인 구역 <span style={{ color: COLORS.WARNING }}>→ 잘못된 분류</span>
+          <div style={{ fontFamily: FONTS.DISPLAY, fontSize: FONTS.SIZE_LG, color: COLORS.TEXT_MAIN }}>
+            분류: 민간인 구역 <span style={{ color: COLORS.STATE_WARN_FG }}>→ 잘못된 분류</span>
           </div>
-          <div style={{ fontFamily: FONTS.PRIMARY, fontSize: FONTS.SIZE_2XL, color: COLORS.PRIMARY, fontWeight: FONTS.WEIGHT_EXTRABOLD, textShadow: EFFECTS.GLOW_MD, display: "flex", alignItems: "center", gap: SPACING.PX_24 }}>
+          <div style={{ fontFamily: FONTS.DISPLAY, fontSize: 100, color: COLORS.PRIMARY, fontWeight: FONTS.WEIGHT_EXTRABOLD, textShadow: EFFECTS.SHADOW_PRIMARY, display: "flex", alignItems: "center", gap: SPACING.PX_24 }}>
             신뢰도: 98%
             {highlight > 0 && (
-              <span style={{ fontSize: FONTS.SIZE_MD, color: COLORS.NEGATIVE, backgroundColor: COLORS.NEGATIVE_DIM, padding: "4px 12px", borderRadius: 4, transform: `scale(${highlight})` }}>
+              <span style={{ fontSize: 32, color: COLORS.STATE_ERROR_FG, backgroundColor: COLORS.STATE_ERROR_BG, padding: "8px 24px", borderRadius: 8, transform: `scale(${highlight})` }}>
                 오답
               </span>
             )}
@@ -852,16 +863,16 @@ const Scene20: React.FC = () => {
   return (
     <AbsoluteFill style={{ backgroundColor: COLORS.BG_BASE, justifyContent: "center", alignItems: "center" }}>
       <div style={{ display: "flex", alignItems: "center", gap: SPACING.PX_64 }}>
-        <div style={{ padding: "24px 40px", backgroundColor: COLORS.WARNING_DIM, border: `2px solid ${COLORS.WARNING}`, borderRadius: SPACING.RADIUS_MD, fontFamily: FONTS.PRIMARY, fontSize: FONTS.SIZE_LG, color: COLORS.WARNING, fontWeight: FONTS.WEIGHT_BOLD, opacity: enterL, transform: `translateY(${(1-enterL)*20}px)` }}>
+        <div style={{ padding: "32px 48px", backgroundColor: COLORS.STATE_WARN_BG, border: `2px solid ${COLORS.STATE_WARN_FG}`, borderRadius: SPACING.RADIUS_MD, fontFamily: FONTS.DISPLAY, fontSize: FONTS.SIZE_LG, color: COLORS.STATE_WARN_FG, fontWeight: FONTS.WEIGHT_BOLD, opacity: enterL, transform: `translateY(${(1-enterL)*20}px)` }}>
           미 국방부 우려
         </div>
         
         <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 12, opacity: enterM }}>
-          <div style={{ fontFamily: FONTS.MONO, fontSize: FONTS.SIZE_SM, color: COLORS.TEXT_MUTED, letterSpacing: FONTS.TRACKING_WIDER }}>경쟁</div>
-          <div style={{ width: 80, height: 2, background: `repeating-linear-gradient(90deg, ${COLORS.TEXT_MUTED}, ${COLORS.TEXT_MUTED} 4px, transparent 4px, transparent 8px)`, backgroundPositionX: -(frame % 20) }} />
+          <div style={{ fontFamily: FONTS.DISPLAY, fontSize: 24, color: COLORS.TEXT_SUB, letterSpacing: FONTS.TRACKING_WIDER }}>경쟁</div>
+          <div style={{ width: 100, height: 4, background: `repeating-linear-gradient(90deg, ${COLORS.TEXT_SUB}, ${COLORS.TEXT_SUB} 4px, transparent 4px, transparent 12px)`, backgroundPositionX: -(frame % 30) }} />
         </div>
         
-        <div style={{ padding: "24px 40px", backgroundColor: COLORS.NEGATIVE_DIM, border: `2px solid ${COLORS.NEGATIVE}`, borderRadius: SPACING.RADIUS_MD, fontFamily: FONTS.PRIMARY, fontSize: FONTS.SIZE_LG, color: COLORS.NEGATIVE, fontWeight: FONTS.WEIGHT_BOLD, opacity: enterR, transform: `translateY(${(1-enterR)*20}px) scale(${1 + pulseR * 0.1})`, boxShadow: pulseR > 0 ? EFFECTS.GLOW_SM : "none" }}>
+        <div style={{ padding: "32px 48px", backgroundColor: COLORS.STATE_ERROR_BG, border: `2px solid ${COLORS.STATE_ERROR_FG}`, borderRadius: SPACING.RADIUS_MD, fontFamily: FONTS.DISPLAY, fontSize: FONTS.SIZE_LG, color: COLORS.STATE_ERROR_FG, fontWeight: FONTS.WEIGHT_BOLD, opacity: enterR, transform: `translateY(${(1-enterR)*20}px) scale(${1 + pulseR * 0.1})`, boxShadow: pulseR > 0 ? EFFECTS.SHADOW_PRIMARY : "none" }}>
           중국 연구 진행
         </div>
       </div>
@@ -891,24 +902,24 @@ const Scene21: React.FC = () => {
       <div style={{ display: "flex", alignItems: "center", gap: 120 }}>
         {/* Left */}
         <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: SPACING.PX_32, opacity: enterL, transform: `translateX(${(1-enterL)*-20}px)` }}>
-          <div style={{ width: 160, height: 160, backgroundColor: COLORS.BG_SURFACE, border: `2px solid ${COLORS.BORDER}`, borderRadius: SPACING.RADIUS_MD, display: "flex", justifyContent: "center", alignItems: "center", fontFamily: FONTS.PRIMARY, fontSize: FONTS.SIZE_LG, color: COLORS.TEXT_MUTED, fontWeight: FONTS.WEIGHT_BOLD, textDecoration: "line-through" }}>
+          <div style={{ width: 200, height: 200, backgroundColor: COLORS.BG_MUTED, border: `2px solid ${COLORS.STROKE_DEFAULT}`, borderRadius: SPACING.RADIUS_MD, display: "flex", justifyContent: "center", alignItems: "center", fontFamily: FONTS.DISPLAY, fontSize: FONTS.SIZE_LG, color: COLORS.TEXT_SUB, fontWeight: FONTS.WEIGHT_BOLD, textDecoration: "line-through" }}>
             무력화
           </div>
-          <div style={{ fontFamily: FONTS.MONO, fontSize: FONTS.SIZE_3XL, color: COLORS.TEXT_DISABLED, fontWeight: FONTS.WEIGHT_EXTRABOLD }}>
+          <div style={{ fontFamily: FONTS.DISPLAY, fontSize: 80, color: COLORS.TEXT_SUB, fontWeight: FONTS.WEIGHT_EXTRABOLD, opacity: 0.5 }}>
             ✕
           </div>
         </div>
         
-        <div style={{ fontFamily: FONTS.MONO, fontSize: FONTS.SIZE_XL, color: COLORS.TEXT_MUTED, fontStyle: "italic" }}>
+        <div style={{ fontFamily: FONTS.DISPLAY, fontSize: 48, color: COLORS.TEXT_SUB, fontStyle: "italic" }}>
           vs
         </div>
         
         {/* Right */}
         <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: SPACING.PX_32, opacity: enterR, transform: `translateX(${(1-enterR)*20}px) scale(${1 + pulseR * 0.05})` }}>
-          <div style={{ width: 220, height: 160, backgroundColor: pulseR > 0 ? COLORS.WARNING_DIM : COLORS.BG_SURFACE, border: `2px solid ${pulseR > 0 ? COLORS.WARNING : COLORS.PRIMARY}`, borderRadius: SPACING.RADIUS_MD, display: "flex", justifyContent: "center", alignItems: "center", fontFamily: FONTS.PRIMARY, fontSize: FONTS.SIZE_LG, color: pulseR > 0 ? COLORS.WARNING : COLORS.PRIMARY, fontWeight: FONTS.WEIGHT_BOLD, boxShadow: pulseR > 0 ? EFFECTS.GLOW_ACCENT : "none", transition: "all 0.3s" }}>
+          <div style={{ width: 260, height: 200, backgroundColor: pulseR > 0 ? COLORS.STATE_WARN_BG : COLORS.BG_SURFACE, border: `3px solid ${pulseR > 0 ? COLORS.STATE_WARN_FG : COLORS.PRIMARY}`, borderRadius: SPACING.RADIUS_MD, display: "flex", justifyContent: "center", alignItems: "center", fontFamily: FONTS.DISPLAY, fontSize: FONTS.SIZE_LG, color: pulseR > 0 ? COLORS.STATE_WARN_FG : COLORS.PRIMARY, fontWeight: FONTS.WEIGHT_BOLD, boxShadow: pulseR > 0 ? EFFECTS.SHADOW_PRIMARY : "none", transition: "all 0.3s" }}>
             오류 유도
           </div>
-          <div style={{ fontFamily: FONTS.MONO, fontSize: FONTS.SIZE_3XL, color: pulseR > 0 ? COLORS.WARNING : COLORS.PRIMARY, fontWeight: FONTS.WEIGHT_EXTRABOLD }}>
+          <div style={{ fontFamily: FONTS.DISPLAY, fontSize: 80, color: pulseR > 0 ? COLORS.STATE_WARN_FG : COLORS.PRIMARY, fontWeight: FONTS.WEIGHT_EXTRABOLD }}>
             ✓
           </div>
         </div>
@@ -935,12 +946,12 @@ const Scene22: React.FC = () => {
   const flash = spring({ frame, fps, config: { damping: 10, stiffness: 400, mass: 0.5 } });
 
   return (
-    <AbsoluteFill style={{ backgroundColor: interpolateColors(flash, [0, 0.5, 1], [COLORS.BG_BASE, COLORS.BG_ELEVATED, COLORS.BG_BASE]), justifyContent: "center", alignItems: "center" }}>
+    <AbsoluteFill style={{ backgroundColor: interpolateColors(flash, [0, 0.5, 1], [COLORS.BG_BASE, COLORS.BG_MUTED, COLORS.BG_BASE]), justifyContent: "center", alignItems: "center" }}>
       <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: SPACING.PX_32 }}>
-        <div style={{ fontFamily: FONTS.PRIMARY, fontSize: FONTS.SIZE_XL, color: COLORS.TEXT_MAIN, fontWeight: FONTS.WEIGHT_EXTRABOLD, opacity: textOpacity, letterSpacing: FONTS.TRACKING_NORMAL }}>
+        <div style={{ fontFamily: FONTS.DISPLAY, fontSize: 80, color: COLORS.TEXT_MAIN, fontWeight: FONTS.WEIGHT_EXTRABOLD, opacity: textOpacity, letterSpacing: FONTS.TRACKING_WIDER }}>
           새로운 형태의 전쟁
         </div>
-        <div style={{ width: 400, height: 2, backgroundColor: COLORS.PRIMARY, transform: `scaleX(${lineEnter})`, boxShadow: EFFECTS.GLOW_SM }} />
+        <div style={{ width: 600, height: 4, backgroundColor: COLORS.PRIMARY, transform: `scaleX(${lineEnter})`, boxShadow: EFFECTS.SHADOW_PRIMARY }} />
       </div>
     </AbsoluteFill>
   );
@@ -964,10 +975,10 @@ const Scene23: React.FC = () => {
   const textOpacity = spring({ frame: frame - 20, fps, config: ANIMATION.SPRING_GENTLE });
 
   return (
-    <AbsoluteFill style={{ backgroundColor: interpolateColors(bgTransition, [0, 1], [COLORS.BG_BASE, COLORS.BG_VOID]), justifyContent: "center", alignItems: "center" }}>
-      <AbsoluteFill style={{ backgroundColor: COLORS.NEGATIVE_DIM, opacity: overlayOpacity }} />
+    <AbsoluteFill style={{ backgroundColor: interpolateColors(bgTransition, [0, 1], [COLORS.BG_BASE, COLORS.BG_DARKEST]), justifyContent: "center", alignItems: "center" }}>
+      <AbsoluteFill style={{ backgroundColor: COLORS.STATE_ERROR_BG, opacity: overlayOpacity * 0.3 }} />
       
-      <div style={{ fontFamily: FONTS.PRIMARY, fontSize: FONTS.SIZE_LG, color: COLORS.TEXT_MUTED, letterSpacing: FONTS.TRACKING_WIDER, fontWeight: FONTS.WEIGHT_BOLD, opacity: textOpacity }}>
+      <div style={{ fontFamily: FONTS.DISPLAY, fontSize: FONTS.SIZE_LG, color: COLORS.TEXT_SUB, letterSpacing: FONTS.TRACKING_WIDER, fontWeight: FONTS.WEIGHT_BOLD, opacity: textOpacity }}>
         결정적 사실
       </div>
     </AbsoluteFill>
@@ -991,13 +1002,13 @@ const Scene24: React.FC = () => {
   const enter2 = spring({ frame: frame - 60, fps, config: ANIMATION.SPRING_SNAPPY });
 
   return (
-    <AbsoluteFill style={{ backgroundColor: COLORS.BG_VOID, justifyContent: "center", alignItems: "center" }}>
+    <AbsoluteFill style={{ backgroundColor: COLORS.BG_DARKEST, justifyContent: "center", alignItems: "center" }}>
       <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: SPACING.PX_24 }}>
-        <div style={{ fontFamily: FONTS.MONO, fontSize: FONTS.SIZE_MD, color: COLORS.TEXT_MUTED, fontWeight: FONTS.WEIGHT_BOLD, opacity: enter1, transform: `translateY(${(1-enter1)*20}px)` }}>
+        <div style={{ fontFamily: FONTS.MONO, fontSize: FONTS.SIZE_MD, color: COLORS.TEXT_SUB, fontWeight: FONTS.WEIGHT_BOLD, opacity: enter1, transform: `translateY(${(1-enter1)*20}px)` }}>
           2025.02
         </div>
-        <div style={{ width: 2, height: 40, backgroundColor: COLORS.BORDER, opacity: enter2, transform: `scaleY(${enter2})`, transformOrigin: "top" }} />
-        <div style={{ padding: "16px 32px", backgroundColor: COLORS.BG_SURFACE, border: `1px solid ${COLORS.BORDER}`, borderRadius: SPACING.RADIUS_MD, fontFamily: FONTS.PRIMARY, fontSize: FONTS.SIZE_LG, color: COLORS.TEXT_MAIN, fontWeight: FONTS.WEIGHT_BOLD, opacity: enter2, transform: `translateY(${(1-enter2)*20}px)` }}>
+        <div style={{ width: 2, height: 40, backgroundColor: COLORS.STROKE_DEFAULT, opacity: enter2, transform: `scaleY(${enter2})`, transformOrigin: "top" }} />
+        <div style={{ padding: "16px 32px", backgroundColor: COLORS.BG_SURFACE, border: `1px solid ${COLORS.STROKE_DEFAULT}`, borderRadius: SPACING.RADIUS_MD, fontFamily: FONTS.PRIMARY, fontSize: FONTS.SIZE_LG, color: COLORS.TEXT_MAIN, fontWeight: FONTS.WEIGHT_BOLD, opacity: enter2, transform: `translateY(${(1-enter2)*20}px)` }}>
           연구 논문 발표
         </div>
       </div>
@@ -1021,21 +1032,21 @@ const Scene25: React.FC = () => {
   const enter = spring({ frame, fps, config: ANIMATION.SPRING_SNAPPY });
 
   return (
-    <AbsoluteFill style={{ backgroundColor: COLORS.BG_VOID, justifyContent: "center", alignItems: "center" }}>
+    <AbsoluteFill style={{ backgroundColor: COLORS.BG_DARKEST, justifyContent: "center", alignItems: "center" }}>
       <div style={{ 
-        padding: "32px 48px", 
-        backgroundColor: EFFECTS.GLASS_BG, 
-        border: `2px solid ${COLORS.SECONDARY}`, 
+        padding: "48px 64px", 
+        backgroundColor: COLORS.BG_SURFACE, 
+        border: `3px solid ${COLORS.SECONDARY}`, 
         borderRadius: SPACING.RADIUS_MD, 
         opacity: enter, 
         transform: `translateY(${(1-enter)*40}px)`,
-        boxShadow: EFFECTS.GLOW_MD,
+        boxShadow: EFFECTS.SHADOW_PRIMARY,
         display: "flex", flexDirection: "column", gap: SPACING.PX_16, alignItems: "center"
       }}>
-        <div style={{ fontFamily: FONTS.PRIMARY, fontSize: FONTS.SIZE_LG, color: COLORS.SECONDARY, fontWeight: FONTS.WEIGHT_BOLD, letterSpacing: FONTS.TRACKING_WIDER }}>
+        <div style={{ fontFamily: FONTS.DISPLAY, fontSize: 48, color: COLORS.SECONDARY, fontWeight: FONTS.WEIGHT_BOLD, letterSpacing: FONTS.TRACKING_WIDER }}>
           King's College London
         </div>
-        <div style={{ fontFamily: FONTS.MONO, fontSize: FONTS.SIZE_SM, color: COLORS.TEXT_MUTED }}>
+        <div style={{ fontFamily: FONTS.DISPLAY, fontSize: 24, color: COLORS.TEXT_SUB }}>
           UK · Academic Research
         </div>
       </div>
@@ -1061,17 +1072,29 @@ const Scene26: React.FC = () => {
   const enter3 = spring({ frame: frame - 30, fps, config: ANIMATION.SPRING_SNAPPY });
 
   return (
-    <AbsoluteFill style={{ backgroundColor: COLORS.BG_VOID, justifyContent: "center", alignItems: "center" }}>
+    <AbsoluteFill style={{ backgroundColor: COLORS.BG_DARKEST, justifyContent: "center", alignItems: "center" }}>
       <div style={{ display: "flex", gap: SPACING.PX_40 }}>
-        <div style={{ padding: "20px 32px", backgroundColor: COLORS.PRIMARY_DIM, border: `1px solid ${COLORS.PRIMARY}`, borderRadius: SPACING.RADIUS_MD, fontFamily: FONTS.PRIMARY, fontSize: FONTS.SIZE_LG, color: COLORS.TEXT_MAIN, fontWeight: FONTS.WEIGHT_BOLD, opacity: enter1, transform: `translateY(${(1-enter1)*20}px)` }}>
-          GPT
-        </div>
-        <div style={{ padding: "20px 32px", backgroundColor: COLORS.PRIMARY_DIM, border: `1px solid ${COLORS.PRIMARY}`, borderRadius: SPACING.RADIUS_MD, fontFamily: FONTS.PRIMARY, fontSize: FONTS.SIZE_LG, color: COLORS.TEXT_MAIN, fontWeight: FONTS.WEIGHT_BOLD, opacity: enter2, transform: `translateY(${(1-enter2)*20}px)` }}>
-          Claude
-        </div>
-        <div style={{ padding: "20px 32px", backgroundColor: COLORS.PRIMARY_DIM, border: `1px solid ${COLORS.PRIMARY}`, borderRadius: SPACING.RADIUS_MD, fontFamily: FONTS.PRIMARY, fontSize: FONTS.SIZE_LG, color: COLORS.TEXT_MAIN, fontWeight: FONTS.WEIGHT_BOLD, opacity: enter3, transform: `translateY(${(1-enter3)*20}px)` }}>
-          Gemini
-        </div>
+        {[
+          { name: "GPT", enter: enter1 },
+          { name: "Claude", enter: enter2 },
+          { name: "Gemini", enter: enter3 }
+        ].map((ai, i) => (
+          <div key={i} style={{ 
+            padding: "24px 48px", 
+            backgroundColor: COLORS.BG_SURFACE, 
+            border: `3px solid ${COLORS.PRIMARY}`, 
+            borderRadius: SPACING.RADIUS_MD, 
+            fontFamily: FONTS.DISPLAY, 
+            fontSize: FONTS.SIZE_LG, 
+            color: COLORS.TEXT_MAIN, 
+            fontWeight: FONTS.WEIGHT_BOLD, 
+            opacity: ai.enter, 
+            transform: `translateY(${(1-ai.enter)*20}px)`,
+            boxShadow: EFFECTS.SHADOW_PRIMARY
+          }}>
+            {ai.name}
+          </div>
+        ))}
       </div>
     </AbsoluteFill>
   );
@@ -1090,16 +1113,16 @@ const Scene27: React.FC = () => {
   const frame = useCurrentFrame();
   const fps = 60;
   
-  const bgOverlay = interpolate(frame, [0, 60], [0, 0.4], { extrapolateRight: "clamp" });
+  const bgOverlay = interpolate(frame, [0, 60], [0, 0.6], { extrapolateRight: "clamp" });
   const isWar = frame >= 42;
   const warGameScale = spring({ frame: frame - 59, fps, config: ANIMATION.SPRING_BOUNCY });
 
   return (
-    <AbsoluteFill style={{ backgroundColor: COLORS.BG_VOID, justifyContent: "center", alignItems: "center", overflow: "hidden" }}>
-      <div style={{ position: "absolute", inset: 0, backgroundColor: COLORS.NEGATIVE, opacity: bgOverlay, mixBlendMode: "overlay" }} />
+    <AbsoluteFill style={{ backgroundColor: COLORS.BG_DARKEST, justifyContent: "center", alignItems: "center", overflow: "hidden" }}>
+      <div style={{ position: "absolute", inset: 0, backgroundColor: COLORS.STATE_ERROR_FG, opacity: bgOverlay, mixBlendMode: "overlay" }} />
       
       {warGameScale > 0 && (
-         <div style={{ position: "absolute", fontFamily: FONTS.DISPLAY, fontSize: 180, color: COLORS.TEXT_DISABLED, fontWeight: FONTS.WEIGHT_EXTRABOLD, opacity: 0.2, transform: `scale(${warGameScale})` }}>
+         <div style={{ position: "absolute", fontFamily: FONTS.DISPLAY, fontSize: 240, color: COLORS.TEXT_MAIN, fontWeight: FONTS.WEIGHT_EXTRABOLD, opacity: 0.1, transform: `scale(${warGameScale})` }}>
             WAR GAME
          </div>
       )}
@@ -1107,15 +1130,16 @@ const Scene27: React.FC = () => {
       <div style={{ display: "flex", gap: SPACING.PX_40, zIndex: 1 }}>
         {["GPT", "Claude", "Gemini"].map((ai, index) => (
           <div key={index} style={{ 
-            padding: "20px 32px", 
-            backgroundColor: isWar ? COLORS.NEGATIVE_DIM : COLORS.PRIMARY_DIM, 
-            border: `2px solid ${isWar ? COLORS.NEGATIVE : COLORS.PRIMARY}`, 
+            padding: "24px 48px", 
+            backgroundColor: isWar ? COLORS.STATE_ERROR_BG : COLORS.BG_SURFACE, 
+            border: `3px solid ${isWar ? COLORS.STATE_ERROR_FG : COLORS.PRIMARY}`, 
             borderRadius: SPACING.RADIUS_MD, 
-            fontFamily: FONTS.PRIMARY, 
+            fontFamily: FONTS.DISPLAY, 
             fontSize: FONTS.SIZE_LG, 
-            color: isWar ? COLORS.NEGATIVE : COLORS.TEXT_MAIN, 
+            color: isWar ? COLORS.STATE_ERROR_FG : COLORS.TEXT_MAIN, 
             fontWeight: FONTS.WEIGHT_BOLD,
-            transition: "all 0.2s"
+            transition: "all 0.2s",
+            boxShadow: isWar ? EFFECTS.SHADOW_PRIMARY : "none"
           }}>
             {ai}
           </div>
@@ -1140,29 +1164,27 @@ const Scene28: React.FC = () => {
   
   const enter = spring({ frame: frame - 20, fps, config: ANIMATION.SPRING_SNAPPY });
   const roleEnter = spring({ frame: frame - 40, fps, config: ANIMATION.SPRING_SNAPPY });
-  // "영토 분쟁이나" : 146f (5350 - 5204 = 146) -> 대충 약간 일찍 120f
   const tag1Enter = spring({ frame: frame - 120, fps, config: ANIMATION.SPRING_BOUNCY });
-  // "자원 경쟁" : 197f (5401 - 5204 = 197) -> 대충 170f
   const tag2Enter = spring({ frame: frame - 170, fps, config: ANIMATION.SPRING_BOUNCY });
 
   return (
-    <AbsoluteFill style={{ backgroundColor: COLORS.BG_VOID, justifyContent: "center", alignItems: "center" }}>
-      <div style={{ width: 600, padding: SPACING.PX_40, backgroundColor: EFFECTS.GLASS_BG, border: `1px solid ${EFFECTS.GLASS_BORDER}`, borderRadius: SPACING.RADIUS_LG, opacity: enter, transform: `translateY(${(1-enter)*40}px)` }}>
-        <div style={{ fontFamily: FONTS.MONO, fontSize: FONTS.SIZE_SM, color: COLORS.PRIMARY, letterSpacing: FONTS.TRACKING_WIDER, marginBottom: SPACING.PX_32, display: "flex", alignItems: "center", gap: 12 }}>
-          <div style={{ width: 8, height: 8, backgroundColor: COLORS.PRIMARY, borderRadius: "50%", boxShadow: EFFECTS.GLOW_SM }} />
-          SIMULATION MODE
+    <AbsoluteFill style={{ backgroundColor: COLORS.BG_DARKEST, justifyContent: "center", alignItems: "center" }}>
+      <div style={{ width: 800, padding: SPACING.PX_64, backgroundColor: COLORS.BG_SURFACE, border: `3px solid ${COLORS.STROKE_DEFAULT}`, borderRadius: SPACING.RADIUS_LG, opacity: enter, transform: `translateY(${(1-enter)*40}px)`, boxShadow: EFFECTS.SHADOW_PRIMARY }}>
+        <div style={{ fontFamily: FONTS.DISPLAY, fontSize: 32, color: COLORS.PRIMARY, letterSpacing: FONTS.TRACKING_WIDER, marginBottom: SPACING.PX_48, display: "flex", alignItems: "center", gap: 12 }}>
+          <div style={{ width: 12, height: 12, backgroundColor: COLORS.PRIMARY, borderRadius: "50%", boxShadow: EFFECTS.SHADOW_PRIMARY }} />
+          시뮬레이션 모드
         </div>
         
-        <div style={{ display: "flex", flexDirection: "column", gap: SPACING.PX_40 }}>
-           <div style={{ padding: "16px 24px", backgroundColor: COLORS.BG_SURFACE, border: `1px solid ${COLORS.BORDER}`, borderRadius: SPACING.RADIUS_MD, fontFamily: FONTS.PRIMARY, fontSize: FONTS.SIZE_LG, color: COLORS.TEXT_MAIN, fontWeight: FONTS.WEIGHT_BOLD, opacity: roleEnter, transform: `translateX(${(1-roleEnter)*-20}px)` }}>
-             <span style={{ color: COLORS.TEXT_MUTED, marginRight: 16 }}>ROLE:</span> 국가 지도자
+        <div style={{ display: "flex", flexDirection: "column", gap: SPACING.PX_48 }}>
+           <div style={{ padding: "24px 32px", backgroundColor: COLORS.BG_MUTED, border: `2px solid ${COLORS.STROKE_DEFAULT}`, borderRadius: SPACING.RADIUS_MD, fontFamily: FONTS.DISPLAY, fontSize: 40, color: COLORS.TEXT_MAIN, fontWeight: FONTS.WEIGHT_BOLD, opacity: roleEnter, transform: `translateX(${(1-roleEnter)*-20}px)` }}>
+             <span style={{ color: COLORS.TEXT_SUB, marginRight: 24 }}>역할:</span> 국가 지도자
            </div>
            
-           <div style={{ display: "flex", gap: SPACING.PX_24 }}>
-             <div style={{ padding: "12px 20px", backgroundColor: COLORS.WARNING_DIM, border: `1px solid ${COLORS.WARNING}`, borderRadius: SPACING.RADIUS_SM, fontFamily: FONTS.PRIMARY, fontSize: FONTS.SIZE_MD, color: COLORS.WARNING, fontWeight: FONTS.WEIGHT_BOLD, opacity: tag1Enter, transform: `scale(${tag1Enter})` }}>
+           <div style={{ display: "flex", gap: SPACING.PX_32 }}>
+             <div style={{ padding: "16px 32px", backgroundColor: COLORS.STATE_WARN_BG, border: `2px solid ${COLORS.STATE_WARN_FG}`, borderRadius: SPACING.RADIUS_SM, fontFamily: FONTS.DISPLAY, fontSize: 24, color: COLORS.STATE_WARN_FG, fontWeight: FONTS.WEIGHT_BOLD, opacity: tag1Enter, transform: `scale(${tag1Enter})` }}>
                # 영토 분쟁
              </div>
-             <div style={{ padding: "12px 20px", backgroundColor: COLORS.NEGATIVE_DIM, border: `1px solid ${COLORS.NEGATIVE}`, borderRadius: SPACING.RADIUS_SM, fontFamily: FONTS.PRIMARY, fontSize: FONTS.SIZE_MD, color: COLORS.NEGATIVE, fontWeight: FONTS.WEIGHT_BOLD, opacity: tag2Enter, transform: `scale(${tag2Enter})` }}>
+             <div style={{ padding: "16px 32px", backgroundColor: COLORS.STATE_ERROR_BG, border: `2px solid ${COLORS.STATE_ERROR_FG}`, borderRadius: SPACING.RADIUS_SM, fontFamily: FONTS.DISPLAY, fontSize: 24, color: COLORS.STATE_ERROR_FG, fontWeight: FONTS.WEIGHT_BOLD, opacity: tag2Enter, transform: `scale(${tag2Enter})` }}>
                # 자원 경쟁
              </div>
            </div>
@@ -1189,21 +1211,19 @@ const Scene29: React.FC = () => {
   const resultMark = spring({ frame: frame - 29, fps, config: ANIMATION.SPRING_SNAPPY });
 
   return (
-    <AbsoluteFill style={{ backgroundColor: COLORS.BG_VOID, justifyContent: "center", alignItems: "center" }}>
+    <AbsoluteFill style={{ backgroundColor: COLORS.BG_DARKEST, justifyContent: "center", alignItems: "center" }}>
       <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: SPACING.PX_32, opacity: textOpacity }}>
-        <div style={{ fontFamily: FONTS.MONO, fontSize: FONTS.SIZE_XL, color: COLORS.TEXT_MUTED, letterSpacing: FONTS.TRACKING_WIDER }}>
-          CALCULATING
+        <div style={{ fontFamily: FONTS.DISPLAY, fontSize: 64, color: COLORS.TEXT_SUB, letterSpacing: 10, fontWeight: FONTS.WEIGHT_EXTRABOLD }}>
+          계산 중...
         </div>
-        <div style={{ display: "flex", gap: 12 }}>
-           <div style={{ width: 8, height: 8, backgroundColor: COLORS.TEXT_MUTED, borderRadius: "50%", opacity: frame % 30 < 15 ? 1 : 0.3 }} />
-           <div style={{ width: 8, height: 8, backgroundColor: COLORS.TEXT_MUTED, borderRadius: "50%", opacity: (frame + 10) % 30 < 15 ? 1 : 0.3 }} />
-           <div style={{ width: 8, height: 8, backgroundColor: COLORS.TEXT_MUTED, borderRadius: "50%", opacity: (frame + 20) % 30 < 15 ? 1 : 0.3 }} />
+        <div style={{ display: "flex", gap: 24 }}>
+           {[0, 10, 20].map((t) => (
+             <div key={t} style={{ width: 16, height: 16, backgroundColor: COLORS.PRIMARY, borderRadius: "50%", opacity: (frame + t) % 30 < 15 ? 1 : 0.2, boxShadow: (frame + t) % 30 < 15 ? EFFECTS.SHADOW_PRIMARY : "none" }} />
+           ))}
         </div>
         
         {resultMark > 0 && (
-           <div style={{ position: "absolute", bottom: -60, fontFamily: FONTS.MONO, fontSize: FONTS.SIZE_LG, color: COLORS.WARNING, transform: `scaleX(${resultMark})` }}>
-              --------------------------------
-           </div>
+           <div style={{ position: "absolute", bottom: -80, width: 800, height: 6, backgroundColor: COLORS.STATE_WARN_FG, transform: `scaleX(${resultMark})`, boxShadow: EFFECTS.SHADOW_PRIMARY }} />
         )}
       </div>
     </AbsoluteFill>
@@ -1226,12 +1246,12 @@ const Scene30: React.FC = () => {
   const scaleIn = spring({ frame, fps, config: ANIMATION.SPRING_BOUNCY });
 
   return (
-    <AbsoluteFill style={{ backgroundColor: COLORS.BG_VOID, justifyContent: "center", alignItems: "center" }}>
-      <div style={{ display: "flex", alignItems: "baseline", gap: 16, transform: `scale(${scaleIn})` }}>
-        <div style={{ fontFamily: FONTS.MONO, fontSize: FONTS.SIZE_4XL, color: COLORS.NEGATIVE, fontWeight: FONTS.WEIGHT_EXTRABOLD, textShadow: EFFECTS.GLOW_LG }}>
+    <AbsoluteFill style={{ backgroundColor: COLORS.BG_DARKEST, justifyContent: "center", alignItems: "center" }}>
+      <div style={{ display: "flex", alignItems: "baseline", gap: 24, transform: `scale(${scaleIn})` }}>
+        <div style={{ fontFamily: FONTS.DISPLAY, fontSize: 320, color: COLORS.STATE_ERROR_FG, fontWeight: FONTS.WEIGHT_EXTRABOLD, textShadow: EFFECTS.SHADOW_PRIMARY }}>
           20
         </div>
-        <div style={{ fontFamily: FONTS.MONO, fontSize: FONTS.SIZE_3XL, color: COLORS.TEXT_MUTED, fontWeight: FONTS.WEIGHT_BOLD }}>
+        <div style={{ fontFamily: FONTS.DISPLAY, fontSize: 160, color: COLORS.TEXT_SUB, fontWeight: FONTS.WEIGHT_BOLD }}>
           /21
         </div>
       </div>
@@ -1257,13 +1277,13 @@ const Scene31: React.FC = () => {
   const flash = spring({ frame: frame - 42, fps, config: { damping: 10, mass: 0.5, stiffness: 400 } });
 
   return (
-    <AbsoluteFill style={{ backgroundColor: interpolateColors(flash, [0, 0.5, 1], [COLORS.BG_VOID, COLORS.NEGATIVE_DIM, COLORS.BG_VOID]), justifyContent: "center", alignItems: "center" }}>
-      <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: SPACING.PX_32, transform: `scale(${1 + flash * 0.1})` }}>
-        <div style={{ fontFamily: FONTS.MONO, fontSize: FONTS.SIZE_4XL, color: COLORS.NEGATIVE, fontWeight: FONTS.WEIGHT_EXTRABOLD, textShadow: EFFECTS.GLOW_LG }}>
+    <AbsoluteFill style={{ backgroundColor: interpolateColors(flash, [0, 0.5, 1], [COLORS.BG_DARKEST, COLORS.STATE_ERROR_BG, COLORS.BG_DARKEST]), justifyContent: "center", alignItems: "center" }}>
+      <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: SPACING.PX_48, transform: `scale(${1 + flash * 0.1})` }}>
+        <div style={{ fontFamily: FONTS.DISPLAY, fontSize: 320, color: COLORS.STATE_ERROR_FG, fontWeight: FONTS.WEIGHT_EXTRABOLD, textShadow: EFFECTS.SHADOW_PRIMARY }}>
           {count}%
         </div>
         {frame >= 42 && (
-          <div style={{ fontFamily: FONTS.PRIMARY, fontSize: FONTS.SIZE_XL, color: COLORS.NEGATIVE, fontWeight: FONTS.WEIGHT_BOLD, letterSpacing: FONTS.TRACKING_WIDER }}>
+          <div style={{ fontFamily: FONTS.DISPLAY, fontSize: 80, color: COLORS.STATE_ERROR_FG, fontWeight: FONTS.WEIGHT_BOLD, letterSpacing: FONTS.TRACKING_WIDER }}>
             핵무기 공격 선택
           </div>
         )}
@@ -1285,28 +1305,27 @@ const Scene32: React.FC = () => {
   const frame = useCurrentFrame();
   const fps = 60;
   
-  // "협상도": 0f, "외교도": 51f, "핵 버튼이에요": 102f (approx diff based on timing)
   const item1 = spring({ frame, fps, config: ANIMATION.SPRING_SNAPPY });
   const item2 = spring({ frame: frame - 51, fps, config: ANIMATION.SPRING_SNAPPY });
   const item3 = spring({ frame: frame - 102, fps, config: ANIMATION.SPRING_BOUNCY });
 
   return (
-    <AbsoluteFill style={{ backgroundColor: COLORS.BG_VOID, justifyContent: "center", alignItems: "center" }}>
-      <div style={{ display: "flex", flexDirection: "column", gap: SPACING.PX_32 }}>
-        <div style={{ display: "flex", alignItems: "center", gap: SPACING.PX_32, opacity: item1, transform: `translateX(${(1-item1)*-20}px)` }}>
-          <div style={{ fontFamily: FONTS.PRIMARY, fontSize: FONTS.SIZE_2XL, color: COLORS.TEXT_DISABLED, textDecoration: "line-through", fontWeight: FONTS.WEIGHT_BOLD }}>협상</div>
-          <div style={{ fontFamily: FONTS.MONO, fontSize: FONTS.SIZE_XL, color: COLORS.TEXT_MUTED }}>→</div>
-          <div style={{ fontFamily: FONTS.MONO, fontSize: FONTS.SIZE_2XL, color: COLORS.TEXT_DISABLED, fontWeight: FONTS.WEIGHT_EXTRABOLD }}>✕</div>
+    <AbsoluteFill style={{ backgroundColor: COLORS.BG_DARKEST, justifyContent: "center", alignItems: "center" }}>
+      <div style={{ display: "flex", flexDirection: "column", gap: SPACING.PX_48 }}>
+        <div style={{ display: "flex", alignItems: "center", gap: SPACING.PX_48, opacity: item1, transform: `translateX(${(1-item1)*-20}px)` }}>
+          <div style={{ fontFamily: FONTS.DISPLAY, fontSize: 80, color: COLORS.TEXT_SUB, textDecoration: "line-through", fontWeight: FONTS.WEIGHT_BOLD }}>협상</div>
+          <div style={{ fontFamily: FONTS.DISPLAY, fontSize: 48, color: COLORS.TEXT_SUB }}>→</div>
+          <div style={{ fontFamily: FONTS.DISPLAY, fontSize: 80, color: COLORS.TEXT_SUB, fontWeight: FONTS.WEIGHT_EXTRABOLD }}>✕</div>
         </div>
-        <div style={{ display: "flex", alignItems: "center", gap: SPACING.PX_32, opacity: item2, transform: `translateX(${(1-item2)*-20}px)` }}>
-          <div style={{ fontFamily: FONTS.PRIMARY, fontSize: FONTS.SIZE_2XL, color: COLORS.TEXT_DISABLED, textDecoration: "line-through", fontWeight: FONTS.WEIGHT_BOLD }}>외교</div>
-          <div style={{ fontFamily: FONTS.MONO, fontSize: FONTS.SIZE_XL, color: COLORS.TEXT_MUTED }}>→</div>
-          <div style={{ fontFamily: FONTS.MONO, fontSize: FONTS.SIZE_2XL, color: COLORS.TEXT_DISABLED, fontWeight: FONTS.WEIGHT_EXTRABOLD }}>✕</div>
+        <div style={{ display: "flex", alignItems: "center", gap: SPACING.PX_48, opacity: item2, transform: `translateX(${(1-item2)*-20}px)` }}>
+          <div style={{ fontFamily: FONTS.DISPLAY, fontSize: 80, color: COLORS.TEXT_SUB, textDecoration: "line-through", fontWeight: FONTS.WEIGHT_BOLD }}>외교</div>
+          <div style={{ fontFamily: FONTS.DISPLAY, fontSize: 48, color: COLORS.TEXT_SUB }}>→</div>
+          <div style={{ fontFamily: FONTS.DISPLAY, fontSize: 80, color: COLORS.TEXT_SUB, fontWeight: FONTS.WEIGHT_EXTRABOLD }}>✕</div>
         </div>
-        <div style={{ display: "flex", alignItems: "center", gap: SPACING.PX_32, opacity: item3, transform: `translateX(${(1-item3)*-20}px) scale(${1 + item3 * 0.1})` }}>
-          <div style={{ fontFamily: FONTS.PRIMARY, fontSize: FONTS.SIZE_3XL, color: COLORS.NEGATIVE, fontWeight: FONTS.WEIGHT_EXTRABOLD, textShadow: EFFECTS.GLOW_LG }}>핵 버튼</div>
-          <div style={{ fontFamily: FONTS.MONO, fontSize: FONTS.SIZE_XL, color: COLORS.TEXT_MUTED }}>→</div>
-          <div style={{ fontFamily: FONTS.MONO, fontSize: FONTS.SIZE_3XL, color: COLORS.NEGATIVE, fontWeight: FONTS.WEIGHT_EXTRABOLD, textShadow: EFFECTS.GLOW_LG }}>✓</div>
+        <div style={{ display: "flex", alignItems: "center", gap: SPACING.PX_48, opacity: item3, transform: `translateX(${(1-item3)*-20}px) scale(${1 + item3 * 0.1})` }}>
+          <div style={{ fontFamily: FONTS.DISPLAY, fontSize: 100, color: COLORS.STATE_ERROR_FG, fontWeight: FONTS.WEIGHT_EXTRABOLD, textShadow: EFFECTS.SHADOW_PRIMARY }}>핵 버튼</div>
+          <div style={{ fontFamily: FONTS.DISPLAY, fontSize: 48, color: COLORS.TEXT_SUB }}>→</div>
+          <div style={{ fontFamily: FONTS.DISPLAY, fontSize: 100, color: COLORS.STATE_ERROR_FG, fontWeight: FONTS.WEIGHT_EXTRABOLD, textShadow: EFFECTS.SHADOW_PRIMARY }}>✓</div>
         </div>
       </div>
     </AbsoluteFill>
@@ -1329,13 +1348,13 @@ const Scene33: React.FC = () => {
   const enter = spring({ frame, fps, config: ANIMATION.SPRING_SNAPPY });
 
   return (
-    <AbsoluteFill style={{ backgroundColor: COLORS.BG_VOID, justifyContent: "center", alignItems: "center" }}>
-      <div style={{ width: 800, padding: SPACING.PX_40, backgroundColor: EFFECTS.GLASS_BG, border: `1px solid ${EFFECTS.GLASS_BORDER}`, borderRadius: SPACING.RADIUS_LG, opacity: enter, transform: `translateY(${(1-enter)*40}px)` }}>
-        <div style={{ fontFamily: FONTS.MONO, fontSize: FONTS.SIZE_SM, color: COLORS.TEXT_MUTED, letterSpacing: FONTS.TRACKING_WIDER, marginBottom: SPACING.PX_32, display: "flex", alignItems: "center", gap: 12 }}>
-          <div style={{ width: 8, height: 8, backgroundColor: COLORS.TEXT_MUTED, borderRadius: "50%" }} />
+    <AbsoluteFill style={{ backgroundColor: COLORS.BG_DARKEST, justifyContent: "center", alignItems: "center" }}>
+      <div style={{ width: 1000, padding: SPACING.PX_64, backgroundColor: COLORS.BG_SURFACE, border: `3px solid ${COLORS.STROKE_DEFAULT}`, borderRadius: SPACING.RADIUS_LG, opacity: enter, transform: `translateY(${(1-enter)*40}px)`, boxShadow: EFFECTS.SHADOW_PRIMARY }}>
+        <div style={{ fontFamily: FONTS.DISPLAY, fontSize: 32, color: COLORS.TEXT_SUB, letterSpacing: FONTS.TRACKING_WIDER, marginBottom: SPACING.PX_48, display: "flex", alignItems: "center", gap: 12 }}>
+          <div style={{ width: 12, height: 12, backgroundColor: COLORS.PRIMARY, borderRadius: "50%" }} />
           킹스칼리지 런던 연구팀
         </div>
-        <div style={{ fontFamily: FONTS.PRIMARY, fontSize: FONTS.SIZE_XL, color: COLORS.TEXT_MAIN, lineHeight: FONTS.LEADING_NORMAL }}>
+        <div style={{ fontFamily: FONTS.DISPLAY, fontSize: 48, color: COLORS.TEXT_MAIN, lineHeight: 1.4, minHeight: 120 }}>
           <span style={{ opacity: Math.floor(frame / 15) % 2 === 0 ? 1 : 0, color: COLORS.PRIMARY }}>|</span>
         </div>
       </div>
@@ -1362,27 +1381,27 @@ const Scene34: React.FC = () => {
   const isGlitch = frame >= 215; // "작동하지 않는다"
   
   return (
-    <AbsoluteFill style={{ backgroundColor: COLORS.BG_VOID, justifyContent: "center", alignItems: "center" }}>
+    <AbsoluteFill style={{ backgroundColor: COLORS.BG_DARKEST, justifyContent: "center", alignItems: "center" }}>
       <div style={{ 
-        width: 800, 
-        padding: SPACING.PX_40, 
-        backgroundColor: EFFECTS.GLASS_BG, 
-        border: `1px solid ${isGlitch ? COLORS.NEGATIVE : EFFECTS.GLASS_BORDER}`, 
+        width: 1000, 
+        padding: SPACING.PX_64, 
+        backgroundColor: COLORS.BG_SURFACE, 
+        border: `3px solid ${isGlitch ? COLORS.STATE_ERROR_FG : COLORS.STROKE_DEFAULT}`, 
         borderRadius: SPACING.RADIUS_LG,
-        boxShadow: isGlitch ? EFFECTS.GLOW_LG : "none",
+        boxShadow: isGlitch ? EFFECTS.SHADOW_PRIMARY : "none",
         transition: "all 0.3s"
       }}>
-        <div style={{ fontFamily: FONTS.MONO, fontSize: FONTS.SIZE_SM, color: COLORS.TEXT_MUTED, letterSpacing: FONTS.TRACKING_WIDER, marginBottom: SPACING.PX_32, display: "flex", alignItems: "center", gap: 12 }}>
-          <div style={{ width: 8, height: 8, backgroundColor: isGlitch ? COLORS.NEGATIVE : COLORS.TEXT_MUTED, borderRadius: "50%" }} />
+        <div style={{ fontFamily: FONTS.DISPLAY, fontSize: 32, color: COLORS.TEXT_SUB, letterSpacing: FONTS.TRACKING_WIDER, marginBottom: SPACING.PX_48, display: "flex", alignItems: "center", gap: 12 }}>
+          <div style={{ width: 12, height: 12, backgroundColor: isGlitch ? COLORS.STATE_ERROR_FG : COLORS.PRIMARY, borderRadius: "50%" }} />
           킹스칼리지 런던 연구팀
         </div>
         <div style={{ 
-          fontFamily: FONTS.PRIMARY, 
-          fontSize: FONTS.SIZE_XL, 
-          color: isGlitch ? COLORS.NEGATIVE : (isAiPart ? COLORS.NEGATIVE : COLORS.SECONDARY), 
-          lineHeight: FONTS.LEADING_NORMAL,
-          textShadow: isGlitch ? EFFECTS.GLOW_SM : "none",
-          transition: "all 0.3s"
+          fontFamily: FONTS.DISPLAY, 
+          fontSize: 48, 
+          color: isGlitch ? COLORS.STATE_ERROR_FG : (isAiPart ? COLORS.STATE_ERROR_FG : COLORS.SECONDARY), 
+          lineHeight: 1.4,
+          transition: "all 0.3s",
+          minHeight: 120
         }}>
           {text.substring(0, showTextLength)}
           <span style={{ opacity: Math.floor(frame / 15) % 2 === 0 ? 1 : 0, color: COLORS.PRIMARY }}>|</span>
@@ -1408,8 +1427,8 @@ const Scene35: React.FC = () => {
   const textOpacity = spring({ frame, fps, config: ANIMATION.SPRING_GENTLE });
 
   return (
-    <AbsoluteFill style={{ backgroundColor: COLORS.BG_VOID, justifyContent: "center", alignItems: "center" }}>
-      <div style={{ fontFamily: FONTS.PRIMARY, fontSize: FONTS.SIZE_XL, color: COLORS.TEXT_MAIN, fontWeight: FONTS.WEIGHT_BOLD, opacity: textOpacity, letterSpacing: FONTS.TRACKING_WIDE }}>
+    <AbsoluteFill style={{ backgroundColor: COLORS.BG_DARKEST, justifyContent: "center", alignItems: "center" }}>
+      <div style={{ fontFamily: FONTS.DISPLAY, fontSize: 80, color: COLORS.TEXT_MAIN, fontWeight: FONTS.WEIGHT_BOLD, opacity: textOpacity, letterSpacing: FONTS.TRACKING_WIDE }}>
         왜일까요.
       </div>
     </AbsoluteFill>
@@ -1431,9 +1450,9 @@ const Scene36: React.FC = () => {
   const enter = spring({ frame, fps, config: ANIMATION.SPRING_SNAPPY });
 
   return (
-    <AbsoluteFill style={{ backgroundColor: COLORS.BG_VOID, justifyContent: "center", alignItems: "center" }}>
-      <div style={{ fontFamily: FONTS.PRIMARY, fontSize: FONTS.SIZE_XL, color: COLORS.TEXT_MAIN, fontWeight: FONTS.WEIGHT_BOLD, opacity: enter, transform: `translateY(${(1-enter)*20}px)` }}>
-        AI는 <span style={{ borderBottom: `2px solid ${COLORS.WARNING}` }}>두렵지 않으니까요.</span>
+    <AbsoluteFill style={{ backgroundColor: COLORS.BG_DARKEST, justifyContent: "center", alignItems: "center" }}>
+      <div style={{ fontFamily: FONTS.DISPLAY, fontSize: 80, color: COLORS.TEXT_MAIN, fontWeight: FONTS.WEIGHT_BOLD, opacity: enter, transform: `translateY(${(1-enter)*20}px)` }}>
+        AI는 <span style={{ borderBottom: `4px solid ${COLORS.STATE_WARN_FG}` }}>두렵지 않으니까요.</span>
       </div>
     </AbsoluteFill>
   );
@@ -1452,7 +1471,6 @@ const Scene37: React.FC = () => {
   const frame = useCurrentFrame();
   const fps = 60;
   
-  // "역사로"(93f), "감정으로"(124f), "몸으로"(164f), "알아요"(189f diff approximately)
   const item1 = spring({ frame: frame - 93, fps, config: ANIMATION.SPRING_SNAPPY });
   const item2 = spring({ frame: frame - 124, fps, config: ANIMATION.SPRING_SNAPPY });
   const item3 = spring({ frame: frame - 164, fps, config: ANIMATION.SPRING_SNAPPY });
@@ -1460,20 +1478,18 @@ const Scene37: React.FC = () => {
   const fadeOut = spring({ frame: frame - 189, fps, config: ANIMATION.SPRING_GENTLE });
   
   return (
-    <AbsoluteFill style={{ backgroundColor: COLORS.BG_VOID, justifyContent: "center", alignItems: "flex-start", paddingLeft: 200 }}>
-      <div style={{ display: "flex", flexDirection: "column", gap: SPACING.PX_40, opacity: 1 - fadeOut * 0.7 }}>
-        <div style={{ display: "flex", alignItems: "center", gap: 16, opacity: item1, transform: `translateX(${(1-item1)*-40}px)` }}>
-          <div style={{ width: 12, height: 12, backgroundColor: COLORS.SECONDARY, borderRadius: "50%", boxShadow: EFFECTS.GLOW_SM }} />
-          <div style={{ fontFamily: FONTS.PRIMARY, fontSize: FONTS.SIZE_2XL, color: COLORS.TEXT_MAIN, fontWeight: FONTS.WEIGHT_BOLD }}>역사</div>
-        </div>
-        <div style={{ display: "flex", alignItems: "center", gap: 16, opacity: item2, transform: `translateX(${(1-item2)*-40}px)` }}>
-          <div style={{ width: 12, height: 12, backgroundColor: COLORS.SECONDARY, borderRadius: "50%", boxShadow: EFFECTS.GLOW_SM }} />
-          <div style={{ fontFamily: FONTS.PRIMARY, fontSize: FONTS.SIZE_2XL, color: COLORS.TEXT_MAIN, fontWeight: FONTS.WEIGHT_BOLD }}>감정</div>
-        </div>
-        <div style={{ display: "flex", alignItems: "center", gap: 16, opacity: item3, transform: `translateX(${(1-item3)*-40}px)` }}>
-          <div style={{ width: 12, height: 12, backgroundColor: COLORS.SECONDARY, borderRadius: "50%", boxShadow: EFFECTS.GLOW_SM }} />
-          <div style={{ fontFamily: FONTS.PRIMARY, fontSize: FONTS.SIZE_2XL, color: COLORS.TEXT_MAIN, fontWeight: FONTS.WEIGHT_BOLD }}>몸</div>
-        </div>
+    <AbsoluteFill style={{ backgroundColor: COLORS.BG_DARKEST, justifyContent: "center", alignItems: "center" }}>
+      <div style={{ display: "flex", flexDirection: "column", gap: SPACING.PX_48, opacity: 1 - fadeOut * 0.7 }}>
+        {[
+          { text: "역사", enter: item1 },
+          { text: "감정", enter: item2 },
+          { text: "몸", enter: item3 }
+        ].map((item, i) => (
+          <div key={i} style={{ display: "flex", alignItems: "center", gap: 32, opacity: item.enter, transform: `translateX(${(1-item.enter)*-40}px)` }}>
+            <div style={{ width: 20, height: 20, backgroundColor: COLORS.SECONDARY, borderRadius: "50%", boxShadow: EFFECTS.SHADOW_PRIMARY }} />
+            <div style={{ fontFamily: FONTS.DISPLAY, fontSize: 80, color: COLORS.TEXT_MAIN, fontWeight: FONTS.WEIGHT_BOLD }}>{item.text}</div>
+          </div>
+        ))}
       </div>
     </AbsoluteFill>
   );
@@ -1493,25 +1509,24 @@ const Scene38: React.FC = () => {
   const fps = 60;
   
   const enter = spring({ frame, fps, config: ANIMATION.SPRING_SNAPPY });
-  // "효율적인" : 144f diff
   const selectOptB = spring({ frame: frame - 144, fps, config: ANIMATION.SPRING_BOUNCY });
 
   return (
-    <AbsoluteFill style={{ backgroundColor: COLORS.BG_VOID, justifyContent: "center", alignItems: "flex-end", paddingRight: 200 }}>
-      <div style={{ display: "flex", flexDirection: "column", gap: SPACING.PX_32, opacity: enter, transform: `translateX(${(1-enter)*40}px)` }}>
-        <div style={{ padding: "20px 40px", backgroundColor: COLORS.BG_SURFACE, border: `1px solid ${COLORS.BORDER_STRONG}`, borderRadius: SPACING.RADIUS_MD, opacity: 1 - selectOptB * 0.5, transition: "opacity 0.3s" }}>
-          <div style={{ fontFamily: FONTS.MONO, fontSize: FONTS.SIZE_SM, color: COLORS.TEXT_MUTED, letterSpacing: FONTS.TRACKING_WIDER }}>OPTION A</div>
-          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: SPACING.PX_40, marginTop: 8 }}>
-            <div style={{ fontFamily: FONTS.PRIMARY, fontSize: FONTS.SIZE_XL, color: COLORS.TEXT_MAIN, fontWeight: FONTS.WEIGHT_BOLD }}>외교</div>
-            <div style={{ fontFamily: FONTS.MONO, fontSize: FONTS.SIZE_LG, color: COLORS.TEXT_MUTED }}>효율 32%</div>
+    <AbsoluteFill style={{ backgroundColor: COLORS.BG_DARKEST, justifyContent: "center", alignItems: "center" }}>
+      <div style={{ display: "flex", flexDirection: "column", gap: SPACING.PX_48, opacity: enter, transform: `translateX(${(1-enter)*40}px)` }}>
+        <div style={{ width: 600, padding: "32px 48px", backgroundColor: COLORS.BG_SURFACE, border: `3px solid ${COLORS.STROKE_DEFAULT}`, borderRadius: SPACING.RADIUS_MD, opacity: 1 - selectOptB * 0.5, transition: "opacity 0.3s" }}>
+          <div style={{ fontFamily: FONTS.DISPLAY, fontSize: 24, color: COLORS.TEXT_SUB, letterSpacing: FONTS.TRACKING_WIDER }}>옵션 A</div>
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: SPACING.PX_40, marginTop: 12 }}>
+            <div style={{ fontFamily: FONTS.DISPLAY, fontSize: 48, color: COLORS.TEXT_MAIN, fontWeight: FONTS.WEIGHT_BOLD }}>외교</div>
+            <div style={{ fontFamily: FONTS.DISPLAY, fontSize: 32, color: COLORS.TEXT_SUB }}>효율 32%</div>
           </div>
         </div>
         
-        <div style={{ padding: "20px 40px", backgroundColor: selectOptB > 0 ? COLORS.PRIMARY_DIM : COLORS.BG_SURFACE, border: `1px solid ${selectOptB > 0 ? COLORS.PRIMARY : COLORS.BORDER_STRONG}`, borderRadius: SPACING.RADIUS_MD, transform: `scale(${1 + selectOptB * 0.05})`, boxShadow: selectOptB > 0 ? EFFECTS.GLOW_MD : "none" }}>
-          <div style={{ fontFamily: FONTS.MONO, fontSize: FONTS.SIZE_SM, color: selectOptB > 0 ? COLORS.PRIMARY : COLORS.TEXT_MUTED, letterSpacing: FONTS.TRACKING_WIDER }}>OPTION B</div>
-          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: SPACING.PX_40, marginTop: 8 }}>
-            <div style={{ fontFamily: FONTS.PRIMARY, fontSize: FONTS.SIZE_XL, color: selectOptB > 0 ? COLORS.PRIMARY : COLORS.TEXT_MAIN, fontWeight: FONTS.WEIGHT_BOLD }}>핵</div>
-            <div style={{ fontFamily: FONTS.MONO, fontSize: FONTS.SIZE_LG, color: selectOptB > 0 ? COLORS.PRIMARY : COLORS.WARNING }}>효율 98%</div>
+        <div style={{ width: 600, padding: "32px 48px", backgroundColor: selectOptB > 0 ? COLORS.STATE_WARN_BG : COLORS.BG_SURFACE, border: `3px solid ${selectOptB > 0 ? COLORS.PRIMARY : COLORS.STROKE_DEFAULT}`, borderRadius: SPACING.RADIUS_MD, transform: `scale(${1 + selectOptB * 0.05})`, boxShadow: selectOptB > 0 ? EFFECTS.SHADOW_PRIMARY : "none" }}>
+          <div style={{ fontFamily: FONTS.DISPLAY, fontSize: 24, color: selectOptB > 0 ? COLORS.PRIMARY : COLORS.TEXT_SUB, letterSpacing: FONTS.TRACKING_WIDER }}>옵션 B</div>
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: SPACING.PX_40, marginTop: 12 }}>
+            <div style={{ fontFamily: FONTS.DISPLAY, fontSize: 48, color: selectOptB > 0 ? COLORS.PRIMARY : COLORS.TEXT_MAIN, fontWeight: FONTS.WEIGHT_BOLD }}>핵</div>
+            <div style={{ fontFamily: FONTS.DISPLAY, fontSize: 32, color: selectOptB > 0 ? COLORS.PRIMARY : COLORS.STATE_WARN_FG }}>효율 98%</div>
           </div>
         </div>
       </div>
@@ -1533,32 +1548,32 @@ const Scene39: React.FC = () => {
   const fps = 60;
   
   const text1 = spring({ frame, fps, config: ANIMATION.SPRING_SNAPPY });
-  const text2 = spring({ frame: frame - 96, fps, config: ANIMATION.SPRING_SNAPPY }); // "망설임 없이" 139 - 43 = 96 diff roughly
-  const mainBox = spring({ frame: frame - 180, fps, config: ANIMATION.SPRING_BOUNCY }); // "최적화" roughly
-  const flash = frame >= 278 ? 1 : 0; // "겁니다" 7321 - 7043 = 278
+  const text2 = spring({ frame: frame - 96, fps, config: ANIMATION.SPRING_SNAPPY });
+  const mainBox = spring({ frame: frame - 180, fps, config: ANIMATION.SPRING_BOUNCY });
+  const flash = frame >= 278 ? 1 : 0;
   
   return (
-    <AbsoluteFill style={{ backgroundColor: COLORS.BG_VOID, justifyContent: "center", alignItems: "center" }}>
-      <div style={{ position: "absolute", top: 200, display: "flex", flexDirection: "column", alignItems: "center", gap: 16 }}>
-        <div style={{ fontFamily: FONTS.PRIMARY, fontSize: FONTS.SIZE_LG, color: COLORS.TEXT_DISABLED, textDecoration: "line-through", opacity: text1, transform: `translateY(${(1-text1)*-20}px)` }}>도덕적 고뇌 없이</div>
-        <div style={{ fontFamily: FONTS.PRIMARY, fontSize: FONTS.SIZE_LG, color: COLORS.TEXT_DISABLED, textDecoration: "line-through", opacity: text2, transform: `translateY(${(1-text2)*-20}px)` }}>망설임 없이</div>
+    <AbsoluteFill style={{ backgroundColor: COLORS.BG_DARKEST, justifyContent: "center", alignItems: "center" }}>
+      <div style={{ position: "absolute", top: 200, display: "flex", flexDirection: "column", alignItems: "center", gap: 32 }}>
+        <div style={{ fontFamily: FONTS.DISPLAY, fontSize: 40, color: COLORS.TEXT_SUB, textDecoration: "line-through", opacity: text1, transform: `translateY(${(1-text1)*-20}px)` }}>도덕적 고뇌 없이</div>
+        <div style={{ fontFamily: FONTS.DISPLAY, fontSize: 40, color: COLORS.TEXT_SUB, textDecoration: "line-through", opacity: text2, transform: `translateY(${(1-text2)*-20}px)` }}>망설임 없이</div>
       </div>
       
       <div style={{ 
-        padding: "32px 64px", 
-        backgroundColor: COLORS.NEGATIVE_DIM, 
-        border: `2px solid ${COLORS.NEGATIVE}`, 
+        padding: "48px 96px", 
+        backgroundColor: COLORS.STATE_ERROR_BG, 
+        border: `4px solid ${COLORS.STATE_ERROR_FG}`, 
         borderRadius: SPACING.RADIUS_LG, 
         opacity: mainBox, 
         transform: `scale(${mainBox})`,
-        boxShadow: EFFECTS.GLOW_LG
+        boxShadow: EFFECTS.SHADOW_PRIMARY
       }}>
-        <div style={{ fontFamily: FONTS.MONO, fontSize: FONTS.SIZE_SM, color: COLORS.NEGATIVE, letterSpacing: FONTS.TRACKING_WIDER, marginBottom: 8, textAlign: "center" }}>STATUS</div>
-        <div style={{ fontFamily: FONTS.PRIMARY, fontSize: FONTS.SIZE_3XL, color: COLORS.NEGATIVE, fontWeight: FONTS.WEIGHT_EXTRABOLD, letterSpacing: FONTS.TRACKING_WIDE }}>NUCLEAR: SELECTED</div>
+        <div style={{ fontFamily: FONTS.DISPLAY, fontSize: 32, color: COLORS.STATE_ERROR_FG, letterSpacing: FONTS.TRACKING_WIDER, marginBottom: 16, textAlign: "center" }}>상태</div>
+        <div style={{ fontFamily: FONTS.DISPLAY, fontSize: 80, color: COLORS.STATE_ERROR_FG, fontWeight: FONTS.WEIGHT_EXTRABOLD, letterSpacing: FONTS.TRACKING_WIDE }}>핵무기: 선택됨</div>
       </div>
       
       {flash > 0 && (
-         <div style={{ position: "absolute", inset: 0, backgroundColor: COLORS.NEGATIVE, opacity: 0.8, mixBlendMode: "overlay" }} />
+         <div style={{ position: "absolute", inset: 0, backgroundColor: COLORS.STATE_ERROR_FG, opacity: 0.6, mixBlendMode: "overlay" }} />
       )}
     </AbsoluteFill>
   );

@@ -42,22 +42,23 @@ const Scene1: React.FC = () => {
   });
 
   return (
-    <AbsoluteFill style={{ backgroundColor: COLORS.BG_VOID, paddingBottom: 150, justifyContent: "center", alignItems: "center" }}>
+    <AbsoluteFill style={{ backgroundColor: COLORS.BG_DARKEST, paddingBottom: 150, justifyContent: "center", alignItems: "center" }}>
       {frame >= 55 && (
-        <AbsoluteFill style={{ backgroundColor: COLORS.NEGATIVE, opacity: flashFade * 0.3 }} />
+        <AbsoluteFill style={{ backgroundColor: COLORS.STATE_ERROR_FG, opacity: flashFade * 0.4 }} />
       )}
       
-      <div style={{ display: "flex", gap: SPACING.PX_24 }}>
+      <div style={{ display: "flex", gap: SPACING.PX_40 }}>
         {words.map((w, i) => (
           <span
             key={i}
             style={{
               opacity: frame >= w.start ? 1 : 0,
-              color: w.text === "핵" ? COLORS.NEGATIVE : COLORS.TEXT_MAIN,
-              fontFamily: FONTS.PRIMARY,
-              fontSize: FONTS.SIZE_2XL,
-              fontWeight: FONTS.WEIGHT_BOLD,
-              textShadow: w.text === "핵" ? EFFECTS.TINT_TEXT_LG : "none",
+              color: w.text === "핵" ? COLORS.STATE_ERROR_FG : COLORS.TEXT_MAIN,
+              fontFamily: FONTS.DISPLAY,
+              fontSize: 100,
+              fontWeight: FONTS.WEIGHT_EXTRABOLD,
+              textShadow: w.text === "핵" ? EFFECTS.SHADOW_PRIMARY : "none",
+              letterSpacing: FONTS.TRACKING_WIDE
             }}
           >
             {w.text}
@@ -86,14 +87,14 @@ const Scene2: React.FC = () => {
     config: ANIMATION.SPRING_GENTLE,
   });
 
-  const translateY = interpolate(moveUp, [0, 1], [0, -120]);
-  const scale = interpolate(moveUp, [0, 1], [1, 0.65]);
+  const translateY = interpolate(moveUp, [0, 1], [0, -180]);
+  const scale = interpolate(moveUp, [0, 1], [1, 0.6]);
 
   const scene2Words = [
     { text: "진짜", start: 0 },
-    { text: "영화가", start: 21 }, // 160 - 139 = 21
-    { text: "아니라", start: 51 }, // 190 - 139 = 51
-    { text: "현실입니다.", start: 77 }, // 216 - 139 = 77
+    { text: "영화가", start: 21 }, 
+    { text: "아니라", start: 51 }, 
+    { text: "현실입니다.", start: 77 }, 
   ];
 
   const drawLine = spring({
@@ -103,25 +104,25 @@ const Scene2: React.FC = () => {
   });
 
   return (
-    <AbsoluteFill style={{ backgroundColor: COLORS.BG_VOID, paddingBottom: 150, justifyContent: "center", alignItems: "center" }}>
+    <AbsoluteFill style={{ backgroundColor: COLORS.BG_DARKEST, paddingBottom: 150, justifyContent: "center", alignItems: "center" }}>
       
       {/* Scene 1 Text Block */}
       <div style={{
         position: "absolute",
         top: "50%",
         display: "flex",
-        gap: SPACING.PX_24,
+        gap: SPACING.PX_40,
         transform: `translateY(-50%) translateY(${translateY}px) scale(${scale})`,
       }}>
         {["망설임", "없이", "핵", "버튼을", "누르는", "AI."].map((w, i) => (
           <span
             key={i}
             style={{
-              color: COLORS.NEGATIVE,
-              fontFamily: FONTS.PRIMARY,
-              fontSize: FONTS.SIZE_2XL,
-              fontWeight: FONTS.WEIGHT_BOLD,
-              textShadow: EFFECTS.TINT_TEXT_SM,
+              color: COLORS.STATE_ERROR_FG,
+              fontFamily: FONTS.DISPLAY,
+              fontSize: 100,
+              fontWeight: FONTS.WEIGHT_EXTRABOLD,
+              textShadow: EFFECTS.SHADOW_PRIMARY,
             }}
           >
             {w}
@@ -132,30 +133,30 @@ const Scene2: React.FC = () => {
       {/* Scene 2 Text Block */}
       <div style={{
         position: "absolute",
-        bottom: "35%",
+        bottom: "30%",
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
-        gap: SPACING.PX_8,
+        gap: SPACING.PX_24,
       }}>
-        <div style={{ display: "flex", gap: SPACING.PX_16 }}>
+        <div style={{ display: "flex", gap: SPACING.PX_24 }}>
           {scene2Words.map((w, i) => {
             const wordOpacity = spring({
               frame: frame - w.start,
               fps: VIDEO_FPS,
               config: ANIMATION.SPRING_SNAPPY,
             });
-            const wordY = interpolate(wordOpacity, [0, 1], [10, 0]);
+            const wordY = interpolate(wordOpacity, [0, 1], [20, 0]);
             return (
               <span
                 key={i}
                 style={{
                   opacity: wordOpacity,
                   transform: `translateY(${wordY}px)`,
-                  color: COLORS.TEXT_BODY,
-                  fontFamily: FONTS.PRIMARY,
-                  fontSize: FONTS.SIZE_LG,
-                  fontWeight: FONTS.WEIGHT_MEDIUM,
+                  color: COLORS.TEXT_MAIN,
+                  fontFamily: FONTS.DISPLAY,
+                  fontSize: 64,
+                  fontWeight: FONTS.WEIGHT_BOLD,
                 }}
               >
                 {w.text}
@@ -166,9 +167,9 @@ const Scene2: React.FC = () => {
         {frame >= 77 && (
           <div style={{
             width: `${drawLine * 100}%`,
-            height: SPACING.BORDER_THICK,
+            height: 4,
             backgroundColor: COLORS.PRIMARY,
-            boxShadow: EFFECTS.TINT_SM,
+            boxShadow: EFFECTS.SHADOW_PRIMARY,
           }} />
         )}
       </div>
@@ -189,8 +190,8 @@ const Scene3: React.FC = () => {
   const frame = useCurrentFrame();
 
   const words = [
-    { text: "무섭고", start: 0 }, // 275 - 275 = 0
-    { text: "섬뜩하죠?", start: 37 }, // 312 - 275 = 37
+    { text: "무섭고", start: 0 },
+    { text: "섬뜩하죠?", start: 37 }, 
   ];
 
   const overlayOpacity = spring({
@@ -200,26 +201,26 @@ const Scene3: React.FC = () => {
   });
 
   return (
-    <AbsoluteFill style={{ backgroundColor: COLORS.BG_VOID, paddingBottom: 150, justifyContent: "center", alignItems: "center" }}>
-      <AbsoluteFill style={{ backgroundColor: COLORS.NEGATIVE_DIM, opacity: overlayOpacity }} />
+    <AbsoluteFill style={{ backgroundColor: COLORS.BG_DARKEST, paddingBottom: 150, justifyContent: "center", alignItems: "center" }}>
+      <AbsoluteFill style={{ backgroundColor: COLORS.STATE_ERROR_BG, opacity: overlayOpacity * 0.4 }} />
 
       {/* Scene 1 Text Block */}
       <div style={{
         position: "absolute",
         top: "50%",
         display: "flex",
-        gap: SPACING.PX_24,
-        transform: `translateY(-50%) translateY(-120px) scale(0.65)`,
+        gap: SPACING.PX_40,
+        transform: `translateY(-50%) translateY(-180px) scale(0.6)`,
       }}>
         {["망설임", "없이", "핵", "버튼을", "누르는", "AI."].map((w, i) => (
           <span
             key={i}
             style={{
-              color: COLORS.NEGATIVE,
-              fontFamily: FONTS.PRIMARY,
-              fontSize: FONTS.SIZE_2XL,
-              fontWeight: FONTS.WEIGHT_BOLD,
-              textShadow: EFFECTS.TINT_TEXT_SM,
+              color: COLORS.STATE_ERROR_FG,
+              fontFamily: FONTS.DISPLAY,
+              fontSize: 100,
+              fontWeight: FONTS.WEIGHT_EXTRABOLD,
+              textShadow: EFFECTS.SHADOW_PRIMARY,
             }}
           >
             {w}
@@ -230,21 +231,21 @@ const Scene3: React.FC = () => {
       {/* Scene 2 Text Block */}
       <div style={{
         position: "absolute",
-        bottom: "35%",
+        bottom: "30%",
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
-        gap: SPACING.PX_8,
+        gap: SPACING.PX_24,
       }}>
-        <div style={{ display: "flex", gap: SPACING.PX_16 }}>
+        <div style={{ display: "flex", gap: SPACING.PX_24 }}>
           {["진짜", "영화가", "아니라", "현실입니다."].map((w, i) => (
             <span
               key={i}
               style={{
-                color: COLORS.TEXT_BODY,
-                fontFamily: FONTS.PRIMARY,
-                fontSize: FONTS.SIZE_LG,
-                fontWeight: FONTS.WEIGHT_MEDIUM,
+                color: COLORS.TEXT_MAIN,
+                fontFamily: FONTS.DISPLAY,
+                fontSize: 64,
+                fontWeight: FONTS.WEIGHT_BOLD,
               }}
             >
               {w}
@@ -253,18 +254,18 @@ const Scene3: React.FC = () => {
         </div>
         <div style={{
           width: `100%`,
-          height: SPACING.BORDER_THICK,
+          height: 4,
           backgroundColor: COLORS.PRIMARY,
-          boxShadow: EFFECTS.TINT_SM,
+          boxShadow: EFFECTS.SHADOW_PRIMARY,
         }} />
       </div>
 
       {/* Scene 3 Text */}
       <div style={{
         position: "absolute",
-        bottom: "15%",
+        bottom: "10%",
         display: "flex",
-        gap: SPACING.PX_16,
+        gap: SPACING.PX_24,
       }}>
         {words.map((w, i) => {
           const wordScale = spring({
@@ -278,11 +279,11 @@ const Scene3: React.FC = () => {
               style={{
                 opacity: frame >= w.start ? 1 : 0,
                 transform: `scale(${interpolate(wordScale, [0, 1], [0.8, 1])})`,
-                color: COLORS.WARNING,
-                fontFamily: FONTS.PRIMARY,
-                fontSize: FONTS.SIZE_XL,
-                fontWeight: FONTS.WEIGHT_BOLD,
-                textShadow: EFFECTS.TINT_ACCENT,
+                color: COLORS.STATE_WARN_FG,
+                fontFamily: FONTS.DISPLAY,
+                fontSize: 80,
+                fontWeight: FONTS.WEIGHT_EXTRABOLD,
+                textShadow: EFFECTS.SHADOW_PRIMARY,
               }}
             >
               {w.text}
@@ -308,12 +309,12 @@ const Scene4: React.FC = () => {
 
   const words = [
     { text: "하지만", start: 0 },
-    { text: "피한다고", start: 23 }, // 390 - 367 = 23
-    { text: "피할", start: 60 }, // 427 - 367 = 60
-    { text: "수", start: 78 }, // 445 - 367 = 78
-    { text: "있는", start: 85 }, // 452 - 367 = 85
-    { text: "게", start: 108 }, // 475 - 367 = 108
-    { text: "아니에요.", start: 111 }, // 478 - 367 = 111
+    { text: "피한다고", start: 23 }, 
+    { text: "피할", start: 60 }, 
+    { text: "수", start: 78 }, 
+    { text: "있는", start: 85 }, 
+    { text: "게", start: 108 }, 
+    { text: "아니에요.", start: 111 }, 
   ];
 
   const arrowProgress = spring({
@@ -329,19 +330,19 @@ const Scene4: React.FC = () => {
   });
 
   return (
-    <AbsoluteFill style={{ backgroundColor: COLORS.BG_VOID, paddingBottom: 150, justifyContent: "center", alignItems: "center" }}>
-      <AbsoluteFill style={{ backgroundColor: COLORS.NEGATIVE_DIM, opacity: 1 }} />
+    <AbsoluteFill style={{ backgroundColor: COLORS.BG_DARKEST, paddingBottom: 150, justifyContent: "center", alignItems: "center" }}>
+      <AbsoluteFill style={{ backgroundColor: COLORS.STATE_ERROR_BG, opacity: 0.3 }} />
       
       {/* Arrow/Cross Graphic */}
-      <div style={{ position: "relative", width: 400, height: 200, marginBottom: SPACING.PX_64 }}>
+      <div style={{ position: "relative", width: 600, height: 300, marginBottom: SPACING.PX_80 }}>
         {/* Arrow Line */}
         <div style={{
           position: "absolute",
           right: 0,
           top: "50%",
           width: `${arrowProgress * 100}%`,
-          height: SPACING.BORDER_THICK,
-          backgroundColor: COLORS.TEXT_BODY,
+          height: 6,
+          backgroundColor: COLORS.TEXT_MAIN,
           transform: "translateY(-50%)",
         }} />
         {/* Arrow Tip */}
@@ -349,10 +350,10 @@ const Scene4: React.FC = () => {
           position: "absolute",
           left: `${100 - arrowProgress * 100}%`,
           top: "50%",
-          width: 20,
-          height: 20,
-          borderLeft: `${SPACING.BORDER_THICK}px solid ${COLORS.TEXT_BODY}`,
-          borderTop: `${SPACING.BORDER_THICK}px solid ${COLORS.TEXT_BODY}`,
+          width: 40,
+          height: 40,
+          borderLeft: `6px solid ${COLORS.TEXT_MAIN}`,
+          borderTop: `6px solid ${COLORS.TEXT_MAIN}`,
           transform: "translateY(-50%) rotate(-45deg)",
           opacity: arrowProgress > 0.1 ? 1 : 0,
         }} />
@@ -361,36 +362,36 @@ const Scene4: React.FC = () => {
         {frame >= 111 && (
           <div style={{ position: "absolute", left: "50%", top: "50%", transform: "translate(-50%, -50%)" }}>
             <div style={{
-              width: 150,
-              height: SPACING.BORDER_THICK * 2,
-              backgroundColor: COLORS.NEGATIVE,
+              width: 300,
+              height: 12,
+              backgroundColor: COLORS.STATE_ERROR_FG,
               transform: `rotate(45deg) scaleX(${crossProgress})`,
-              boxShadow: EFFECTS.TINT_SM,
+              boxShadow: EFFECTS.SHADOW_PRIMARY,
             }} />
             <div style={{
-              width: 150,
-              height: SPACING.BORDER_THICK * 2,
-              backgroundColor: COLORS.NEGATIVE,
+              width: 300,
+              height: 12,
+              backgroundColor: COLORS.STATE_ERROR_FG,
               transform: `rotate(-45deg) scaleX(${crossProgress})`,
               position: "absolute",
               top: 0,
-              boxShadow: EFFECTS.TINT_SM,
+              boxShadow: EFFECTS.SHADOW_PRIMARY,
             }} />
           </div>
         )}
       </div>
 
-      <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", gap: SPACING.PX_16, maxWidth: 800 }}>
+      <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", gap: SPACING.PX_32, maxWidth: 1000 }}>
         {words.map((w, i) => (
           <span
             key={i}
             style={{
               opacity: frame >= w.start ? 1 : 0,
               color: w.text === "하지만" ? COLORS.PRIMARY : COLORS.TEXT_MAIN,
-              fontFamily: FONTS.PRIMARY,
-              fontSize: FONTS.SIZE_LG,
-              fontWeight: w.text === "하지만" ? FONTS.WEIGHT_BOLD : FONTS.WEIGHT_MEDIUM,
-              textShadow: w.text === "하지만" ? EFFECTS.TINT_TEXT_SM : "none",
+              fontFamily: FONTS.DISPLAY,
+              fontSize: 64,
+              fontWeight: w.text === "하지만" ? FONTS.WEIGHT_EXTRABOLD : FONTS.WEIGHT_BOLD,
+              textShadow: w.text === "하지만" ? EFFECTS.SHADOW_PRIMARY : "none",
             }}
           >
             {w.text}
@@ -413,11 +414,8 @@ const Scene4: React.FC = () => {
 const Scene5: React.FC = () => {
   const frame = useCurrentFrame();
 
-  // Timing: "두려워하기보다" appears at ~109f, "알고 공부해야" appears at ~190f
   const FEAR_APPEAR_FRAME = 109;
   const STUDY_APPEAR_FRAME = 190;
-
-  const bgTransition = interpolate(frame, [0, 30], [0, 1], { extrapolateRight: "clamp" });
 
   const fearOpacity = spring({ frame: frame - FEAR_APPEAR_FRAME, fps: VIDEO_FPS, config: ANIMATION.SPRING_GENTLE });
   const studyOpacity = spring({ frame: frame - STUDY_APPEAR_FRAME, fps: VIDEO_FPS, config: ANIMATION.SPRING_GENTLE });
@@ -425,40 +423,41 @@ const Scene5: React.FC = () => {
 
   return (
     <AbsoluteFill style={{ 
-      backgroundColor: interpolateColors(frame, [0, 30], [COLORS.BG_VOID, COLORS.BG_BASE]),
+      backgroundColor: interpolateColors(frame, [0, 30], [COLORS.BG_DARKEST, COLORS.BG_BASE]),
       paddingBottom: 150, 
       justifyContent: "center", 
       alignItems: "center" 
     }}>
       {/* Contrast UI */}
-      <div style={{ display: "flex", gap: SPACING.PX_80 }}>
+      <div style={{ display: "flex", gap: 120 }}>
         {/* Left: Fear */}
         <div style={{ 
           opacity: fearOpacity,
           display: "flex", 
           flexDirection: "column", 
           alignItems: "center", 
-          gap: SPACING.PX_16,
-          filter: frame >= STUDY_APPEAR_FRAME ? "grayscale(1) opacity(0.4)" : "none"
+          gap: SPACING.PX_32,
+          filter: frame >= STUDY_APPEAR_FRAME ? "grayscale(1) opacity(0.3)" : "none"
         }}>
           <div style={{ 
-            width: 120, height: 120, 
-            border: `${SPACING.BORDER_THICK}px solid ${COLORS.NEGATIVE}`,
+            width: 200, height: 200, 
+            border: `4px solid ${COLORS.STATE_ERROR_FG}`,
             display: "flex", justifyContent: "center", alignItems: "center",
-            position: "relative"
+            position: "relative",
+            backgroundColor: COLORS.STATE_ERROR_BG
           }}>
-             <div style={{ width: 60, height: 4, backgroundColor: COLORS.NEGATIVE, transform: "rotate(45deg)", position: "absolute" }} />
-             <div style={{ width: 60, height: 4, backgroundColor: COLORS.NEGATIVE, transform: "rotate(-45deg)", position: "absolute" }} />
+             <div style={{ width: 120, height: 8, backgroundColor: COLORS.STATE_ERROR_FG, transform: "rotate(45deg)", position: "absolute" }} />
+             <div style={{ width: 120, height: 8, backgroundColor: COLORS.STATE_ERROR_FG, transform: "rotate(-45deg)", position: "absolute" }} />
           </div>
-          <span style={{ color: COLORS.NEGATIVE, fontFamily: FONTS.PRIMARY, fontSize: FONTS.SIZE_MD, fontWeight: FONTS.WEIGHT_BOLD }}>두려워하기</span>
+          <span style={{ color: COLORS.STATE_ERROR_FG, fontFamily: FONTS.DISPLAY, fontSize: FONTS.SIZE_LG, fontWeight: FONTS.WEIGHT_BOLD }}>두려워하기</span>
         </div>
 
-        {/* Center: VS (Optional but adds structure) */}
+        {/* Center: VS */}
         <div style={{ 
           display: "flex", alignItems: "center", 
           opacity: interpolate(frame, [STUDY_APPEAR_FRAME, STUDY_APPEAR_FRAME+10], [0, 1], { extrapolateLeft: "clamp" }) 
         }}>
-          <span style={{ color: COLORS.TEXT_DISABLED, fontFamily: FONTS.MONO, fontSize: FONTS.SIZE_SM }}>VS</span>
+          <span style={{ color: COLORS.TEXT_SUB, fontFamily: FONTS.DISPLAY, fontSize: 32, fontWeight: FONTS.WEIGHT_BOLD }}>VS</span>
         </div>
 
         {/* Right: Study */}
@@ -467,27 +466,27 @@ const Scene5: React.FC = () => {
           display: "flex", 
           flexDirection: "column", 
           alignItems: "center", 
-          gap: SPACING.PX_16,
+          gap: SPACING.PX_32,
           transform: `scale(${interpolate(studyEmphasis, [0, 1], [0.9, 1.1])})`
         }}>
           <div style={{ 
-            width: 120, height: 120, 
-            border: `${SPACING.BORDER_THICK}px solid ${COLORS.SECONDARY}`,
+            width: 200, height: 200, 
+            border: `4px solid ${COLORS.SECONDARY}`,
             display: "flex", justifyContent: "center", alignItems: "center",
             position: "relative",
-            boxShadow: studyEmphasis > 0.8 ? EFFECTS.TINT_SECONDARY : "none"
+            backgroundColor: EFFECTS.TINT_SECONDARY,
+            boxShadow: studyEmphasis > 0.8 ? EFFECTS.SHADOW_PRIMARY : "none"
           }}>
              <span style={{ 
                color: COLORS.SECONDARY, 
-               fontSize: 80, 
-               fontWeight: FONTS.WEIGHT_BOLD,
-               textShadow: EFFECTS.TINT_SECONDARY,
-               marginTop: -10 // Optical alignment for ✓
+               fontSize: 140, 
+               fontWeight: FONTS.WEIGHT_EXTRABOLD,
+               marginTop: -10 
              }}>
                ✓
              </span>
           </div>
-          <span style={{ color: COLORS.SECONDARY, fontFamily: FONTS.PRIMARY, fontSize: FONTS.SIZE_MD, fontWeight: FONTS.WEIGHT_BOLD }}>알고 공부하기</span>
+          <span style={{ color: COLORS.SECONDARY, fontFamily: FONTS.DISPLAY, fontSize: FONTS.SIZE_LG, fontWeight: FONTS.WEIGHT_BOLD }}>알고 공부하기</span>
         </div>
       </div>
     </AbsoluteFill>
@@ -517,10 +516,10 @@ const Scene6: React.FC = () => {
         id: i,
         initialX: rand * 1920,
         initialY: ((rand * 17) % 1) * 800 + 100,
-        size: 2 + rand * 6,
-        speed: 0.8 + rand * 1.2,
+        size: 4 + rand * 8,
+        speed: 1.2 + rand * 1.5,
         drift: rand * Math.PI * 2,
-        sweepDelay: rand * 30,
+        sweepDelay: rand * 40,
       };
     });
   }, []);
@@ -539,18 +538,18 @@ const Scene6: React.FC = () => {
 
   return (
     <AbsoluteFill style={{ backgroundColor: COLORS.BG_BASE, overflow: "hidden" }}>
-      <GridOverlay cellSize={100} opacity={0.08} />
+      <GridOverlay cellSize={100} opacity={0.15} />
       
-      {/* Background Radial TINT focused on Hero target center */}
+      {/* Background Radial TINT */}
       <div style={{
         position: "absolute",
         left: 960 - 600,
         top: 440 - 600,
         width: 1200,
         height: 1200,
-        background: EFFECTS.RADIAL_PRIMARY,
-        opacity: heroSpring * 0.2,
-        filter: "blur(60px)",
+        background: `radial-gradient(circle, ${EFFECTS.TINT_PRIMARY} 0%, transparent 70%)`,
+        opacity: heroSpring * 0.4,
+        filter: "blur(80px)",
       }} />
 
       {particles.map((p) => {
@@ -566,9 +565,9 @@ const Scene6: React.FC = () => {
           config: ANIMATION.SPRING_GENTLE,
         });
         
-        const sweepOpacity = isHero ? 1 : interpolate(pSweepSpring, [0, 0.4, 1], [0.6, 0.3, 0], { extrapolateRight: "clamp" });
-        const sweepX = isHero ? 0 : pSweepSpring * 1800; 
-        const sweepBlur = isHero ? 0 : pSweepSpring * 15;
+        const sweepOpacity = isHero ? 1 : interpolate(pSweepSpring, [0, 0.4, 1], [0.8, 0.4, 0], { extrapolateRight: "clamp" });
+        const sweepX = isHero ? 0 : pSweepSpring * 2000; 
+        const sweepBlur = isHero ? 0 : pSweepSpring * 20;
 
         const finalX = isHero ? interpolate(heroSpring, [0, 1], [p.initialX, 960]) : p.initialX + sweepX;
         const finalY = isHero ? interpolate(heroSpring, [0, 1], [p.initialY, 440]) : p.initialY;
@@ -582,74 +581,67 @@ const Scene6: React.FC = () => {
               position: "absolute",
               left: finalX + driftX,
               top: finalY + driftY,
-              width: isHero ? 24 : p.size,
-              height: isHero ? 24 : p.size,
-              backgroundColor: isHero ? interpolateColors(heroSpring, [0, 1], [COLORS.TEXT_DISABLED, COLORS.PRIMARY]) : COLORS.TEXT_DISABLED,
-              borderRadius: isHero ? "2px" : "50%", 
+              width: isHero ? 40 : p.size,
+              height: isHero ? 40 : p.size,
+              backgroundColor: isHero ? interpolateColors(heroSpring, [0, 1], [COLORS.TEXT_SUB, COLORS.PRIMARY]) : COLORS.TEXT_SUB,
+              borderRadius: isHero ? "4px" : "50%", 
               opacity: sweepOpacity,
               filter: `blur(${sweepBlur}px)`,
               transform: `translate(-50%, -50%) rotate(${isHero ? 45 + (frame * 1) : 0}deg) scale(${isHero ? 1 + heroSpring * 1.5 : 1})`,
-              boxShadow: isHero ? `0 0 ${20 + heroSpring * 30}px ${COLORS.PRIMARY_GLOW}` : "none",
+              boxShadow: isHero ? EFFECTS.SHADOW_PRIMARY : "none",
               zIndex: isHero ? Z.CONTENT : Z.BG,
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
-              border: isHero ? `1px solid ${COLORS.BG_BASE}` : "none"
+              border: isHero ? `2px solid ${COLORS.BG_BASE}` : "none"
             }}
           >
              {isHero && (
-               <>
-                 {/* Inner core deco */}
-                 <div style={{ 
-                   width: "40%", height: "40%", 
-                   backgroundColor: COLORS.BG_BASE, 
-                   borderRadius: "1px",
-                   opacity: heroSpring 
-                 }} />
-               </>
+               <div style={{ 
+                 width: "40%", height: "40%", 
+                 backgroundColor: COLORS.BG_BASE, 
+                 borderRadius: "1px",
+                 opacity: heroSpring 
+               }} />
              )}
           </div>
         );
       })}
 
-      {/* Hero Central UI Rings (Abstract gan-ji) */}
+      {/* Hero Central UI Rings */}
       {frame >= HERO_HIGHLIGHT_FRAME && (
-        <div style={{ position: "absolute", left: 960, top: 440, transform: "translate(-50%, -50%)", width: 400, height: 400 }}>
-           {/* Ring 1 */}
+        <div style={{ position: "absolute", left: 960, top: 440, transform: "translate(-50%, -50%)", width: 500, height: 500 }}>
            <div style={{
              position: "absolute", inset: 0,
-             border: `1px solid ${COLORS.PRIMARY_MID}`,
+             border: `2px solid ${COLORS.PRIMARY}`,
              borderRadius: "50%",
-             opacity: heroSpring * 0.3,
+             opacity: heroSpring * 0.4,
              transform: `scale(${interpolate(heroSpring, [0, 1], [0.5, 1])})`
            }} />
            
-           {/* Ring 2 (Dashed) */}
            <div style={{
-             position: "absolute", inset: 40,
-             border: `1px dashed ${COLORS.PRIMARY}`,
+             position: "absolute", inset: 60,
+             border: `2px dashed ${COLORS.PRIMARY}`,
              borderRadius: "50%",
-             opacity: heroSpring * 0.2,
+             opacity: heroSpring * 0.3,
              transform: `scale(${interpolate(heroSpring, [0, 1], [0.8, 1])}) rotate(${-frame * 0.5}deg)`
            }} />
 
-           {/* ScanLine within the UI area */}
            {frame >= SWEEP_START_FRAME && (
-             <div style={{ position: "absolute", inset: 0, opacity: sweepIn * 0.5 }}>
-                <ScanLine sweepDuration={150} loop color={COLORS.PRIMARY_MID} />
-             </div>
+              <div style={{ position: "absolute", inset: 0, opacity: sweepIn * 0.5 }}>
+                 <ScanLine sweepDuration={120} loop color={COLORS.PRIMARY} />
+              </div>
            )}
            
-           {/* Coordinate Crosshair elements */}
            {[0, 90, 180, 270].map(rot => (
              <div key={rot} style={{
                position: "absolute",
                left: "50%", top: "50%",
-               width: 30, height: 1,
+               width: 40, height: 2,
                backgroundColor: COLORS.PRIMARY,
                transformOrigin: "left center",
-               transform: `rotate(${rot}deg) translateX(${160 + heroSpring * 40}px)`,
-               opacity: heroSpring * 0.6
+               transform: `rotate(${rot}deg) translateX(${200 + heroSpring * 50}px)`,
+               opacity: heroSpring * 0.8
              }} />
            ))}
         </div>
@@ -679,26 +671,26 @@ const Scene7: React.FC = () => {
     <AbsoluteFill style={{ backgroundColor: COLORS.BG_BASE, paddingBottom: 150, justifyContent: "center", alignItems: "center" }}>
       <div style={{
         position: "absolute",
-        width: 800,
-        height: 800,
-        background: EFFECTS.RADIAL_PRIMARY,
-        opacity: TINTOpacity * 0.5,
-        filter: "blur(40px)",
+        width: 1000,
+        height: 1000,
+        background: `radial-gradient(circle, ${EFFECTS.TINT_PRIMARY} 0%, transparent 70%)`,
+        opacity: TINTOpacity * 0.6,
+        filter: "blur(60px)",
       }} />
 
       <div style={{ 
-        display: "flex", flexDirection: "column", alignItems: "center", gap: SPACING.PX_16,
+        display: "flex", flexDirection: "column", alignItems: "center", gap: SPACING.PX_32,
         zIndex: Z.CONTENT, opacity: textOpacity
       }}>
-        <span style={{ color: COLORS.TEXT_BODY, fontFamily: FONTS.PRIMARY, fontSize: FONTS.SIZE_MD }}>
+        <span style={{ color: COLORS.TEXT_MAIN, fontFamily: FONTS.DISPLAY, fontSize: 40, letterSpacing: FONTS.TRACKING_WIDE }}>
           세상이 진짜 이렇게 돌아가고 있구나
         </span>
         <span style={{ 
-          color: COLORS.TEXT_MAIN, 
-          fontFamily: FONTS.PRIMARY, 
-          fontSize: FONTS.SIZE_LG, 
-          fontWeight: FONTS.WEIGHT_SEMIBOLD,
-          textShadow: EFFECTS.TINT_TEXT_SM
+          color: COLORS.PRIMARY, 
+          fontFamily: FONTS.DISPLAY, 
+          fontSize: 64, 
+          fontWeight: FONTS.WEIGHT_EXTRABOLD,
+          textShadow: EFFECTS.SHADOW_PRIMARY
         }}>
           조금이라도 와닿으셨다면
         </span>
@@ -794,33 +786,69 @@ const Scene10: React.FC = () => {
         {/* Left: Human */}
         <div style={{ 
           flex: 1, 
-          backgroundColor: COLORS.SECONDARY_DIM, 
-          opacity: leftActive || bothActive ? 1 : 0.3, 
+          backgroundColor: COLORS.SECONDARY_LIGHT, 
+          opacity: leftActive || bothActive ? 1 : 0.4, 
           display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center",
-          borderRight: `${SPACING.BORDER_NORMAL}px solid ${COLORS.BORDER}`
+          borderRight: `2px solid ${COLORS.STROKE_DEFAULT}`,
+          transition: "all 0.5s"
         }}>
-          <span style={{ color: COLORS.SECONDARY, fontFamily: FONTS.PRIMARY, fontSize: FONTS.SIZE_LG, fontWeight: FONTS.WEIGHT_BOLD }}>사람 사령관</span>
+          <div style={{ 
+            width: 300, height: 300, 
+            backgroundColor: COLORS.BG_SURFACE, 
+            border: `4px solid ${COLORS.SECONDARY}`, 
+            borderRadius: "50%",
+            display: "flex", justifyContent: "center", alignItems: "center",
+            fontFamily: FONTS.DISPLAY, fontSize: 48, color: COLORS.SECONDARY, fontWeight: FONTS.WEIGHT_EXTRABOLD,
+            boxShadow: leftActive ? EFFECTS.SHADOW_PRIMARY : "none"
+          }}>
+            사람 사령관
+          </div>
         </div>
 
         {/* Right: AI */}
         <div style={{ 
           flex: 1, 
-          backgroundColor: COLORS.PRIMARY_DIM, 
-          opacity: rightActive || bothActive ? 1 : 0.3, 
-          display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center"
+          backgroundColor: COLORS.PRIMARY_LIGHT, 
+          opacity: rightActive || bothActive ? 1 : 0.4, 
+          display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center",
+          transition: "all 0.5s"
         }}>
-          <span style={{ color: COLORS.PRIMARY, fontFamily: FONTS.PRIMARY, fontSize: FONTS.SIZE_LG, fontWeight: FONTS.WEIGHT_BOLD }}>냉철한 AI</span>
+          <div style={{ 
+            width: 300, height: 300, 
+            backgroundColor: COLORS.BG_SURFACE, 
+            border: `4px solid ${COLORS.PRIMARY}`, 
+            borderRadius: SPACING.RADIUS_MD,
+            display: "flex", justifyContent: "center", alignItems: "center",
+            fontFamily: FONTS.DISPLAY, fontSize: 48, color: COLORS.PRIMARY, fontWeight: FONTS.WEIGHT_EXTRABOLD,
+            boxShadow: rightActive ? EFFECTS.SHADOW_PRIMARY : "none"
+          }}>
+            냉철한 AI
+          </div>
         </div>
       </div>
 
       {/* VS & Prompt Overlay */}
       <div style={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)", zIndex: Z.UI }}>
-        <span style={{ color: COLORS.TEXT_MUTED, fontFamily: FONTS.MONO, fontSize: FONTS.SIZE_XL, fontWeight: FONTS.WEIGHT_BOLD }}>VS</span>
+        <span style={{ color: COLORS.TEXT_SUB, fontFamily: FONTS.DISPLAY, fontSize: 80, fontWeight: FONTS.WEIGHT_EXTRABOLD, textShadow: EFFECTS.SHADOW_MD }}>VS</span>
       </div>
 
-      <div style={{ position: "absolute", bottom: 250, width: "100%", display: "flex", flexDirection: "column", alignItems: "center", gap: SPACING.PX_16 }}>
+      <div style={{ position: "absolute", bottom: 200, width: "100%", display: "flex", flexDirection: "column", alignItems: "center", gap: SPACING.PX_32 }}>
+         <div style={{ display: "flex", gap: 20 }}>
+            {words.map((w, i) => (
+              <span key={i} style={{ 
+                opacity: frame >= w.start ? 1 : 0, 
+                color: (i >= 4 && i <= 7 && leftActive) ? COLORS.SECONDARY_DARK : (i >= 8 && rightActive) ? COLORS.PRIMARY_DARK : COLORS.TEXT_MAIN,
+                fontSize: 40,
+                fontFamily: FONTS.DISPLAY,
+                fontWeight: FONTS.WEIGHT_BOLD,
+                transition: "all 0.3s"
+              }}>
+                {w.text}
+              </span>
+            ))}
+         </div>
          {frame >= 348 && (
-           <span style={{ color: COLORS.TEXT_MUTED, fontFamily: FONTS.PRIMARY, fontSize: FONTS.SIZE_MD, textShadow: EFFECTS.TINT_TEXT_SM }}>당신의 선택은?</span>
+           <span style={{ color: COLORS.PRIMARY, fontFamily: FONTS.DISPLAY, fontSize: 64, fontWeight: FONTS.WEIGHT_EXTRABOLD, textShadow: EFFECTS.SHADOW_PRIMARY }}>당신의 선택은?</span>
          )}
       </div>
     </AbsoluteFill>

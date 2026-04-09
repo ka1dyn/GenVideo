@@ -60,14 +60,14 @@ export const CaptionOverlay: React.FC<Props> = ({ captions }) => {
         zIndex: 9999,
         justifyContent: 'flex-end',
         alignItems: 'center',
-        paddingBottom: '80px',
+        paddingBottom: '50px',
         pointerEvents: 'none',
         opacity,
       }}
     >
         <div
           style={{
-            fontSize: 32,
+            fontSize: 48,
             fontWeight: 600,
             color: '#FFFFFF',
             backgroundColor: 'rgba(0,0,0,0.8)',

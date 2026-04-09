@@ -57,7 +57,7 @@ const Scene1: React.FC = () => {
 
   return (
     <AbsoluteFill style={{ backgroundColor: COLORS.BG_BASE, opacity: bgOpacity }}>
-      {/* Scanline pattern background */}
+      {/* Scanline pattern background — subtle texture in new theme */}
       <div
         style={{
           position: "absolute",
@@ -76,8 +76,8 @@ const Scene1: React.FC = () => {
               left: 0,
               width: "100%",
               height: 1,
-              backgroundColor: COLORS.PRIMARY,
-              opacity: 0.04,
+              backgroundColor: COLORS.STROKE_DEFAULT,
+              opacity: 0.1,
             }}
           />
         ))}
@@ -108,9 +108,9 @@ const Scene1: React.FC = () => {
           {/* Status dot */}
           <div
             style={{
-              width: 8,
-              height: 8,
-              backgroundColor: COLORS.POSITIVE,
+              width: 12,
+              height: 12,
+              backgroundColor: COLORS.STATE_SUCCESS_FG,
               opacity: statusOpacity * (timecodeBlink ? 1 : 0.3),
             }}
           />
@@ -118,9 +118,9 @@ const Scene1: React.FC = () => {
             text="DRONE FEED ACTIVE"
             startFrame={labelStartFrame}
             framesPerChar={2}
-            color={COLORS.PRIMARY}
+            color={COLORS.PRIMARY_DARK}
             fontSize={FONTS.SIZE_LG}
-            fontWeight={FONTS.WEIGHT_SEMIBOLD}
+            fontWeight={FONTS.WEIGHT_BOLD}
             fontFamily={FONTS.MONO}
             letterSpacing={`${FONTS.TRACKING_WIDER}em`}
             cursorColor={COLORS.PRIMARY}
@@ -132,9 +132,9 @@ const Scene1: React.FC = () => {
         <div
           style={{
             marginTop: SPACING.PX_16,
-            opacity: statusOpacity,
-            color: COLORS.TEXT_MUTED,
-            fontSize: FONTS.SIZE_SM,
+            opacity: statusOpacity * 0.8,
+            color: COLORS.TEXT_SUB,
+            fontSize: FONTS.SIZE_MD,
             fontFamily: FONTS.MONO,
             letterSpacing: `${FONTS.TRACKING_WIDE}em`,
           }}
@@ -156,7 +156,7 @@ const Scene1: React.FC = () => {
         <div
           style={{
             color: timecodeBlink ? COLORS.TEXT_BODY : COLORS.TEXT_DISABLED,
-            fontSize: FONTS.SIZE_SM,
+            fontSize: FONTS.SIZE_MD,
             fontFamily: FONTS.MONO,
             fontWeight: FONTS.WEIGHT_MEDIUM,
             letterSpacing: `${FONTS.TRACKING_WIDE}em`,
@@ -178,13 +178,14 @@ const Scene1: React.FC = () => {
       >
         <div
           style={{
-            color: COLORS.NEGATIVE,
-            fontSize: FONTS.SIZE_XS,
+            color: COLORS.STATE_ERROR_FG,
+            fontSize: FONTS.SIZE_MD,
             fontFamily: FONTS.MONO,
-            fontWeight: FONTS.WEIGHT_SEMIBOLD,
+            fontWeight: FONTS.WEIGHT_BOLD,
             letterSpacing: `${FONTS.TRACKING_WIDER}em`,
-            border: `1px solid ${COLORS.NEGATIVE_DIM}`,
-            padding: `${SPACING.PX_4}px ${SPACING.PX_12}px`,
+            border: `2px solid ${COLORS.STROKE_DEFAULT}`,
+            padding: `${SPACING.PX_8}px ${SPACING.PX_16}px`,
+            backgroundColor: COLORS.BG_SURFACE,
           }}
         >
           기밀
@@ -256,9 +257,9 @@ const Scene2: React.FC = () => {
                 position: "absolute",
                 left: p.x + drift,
                 top: p.y + drift * 0.5,
-                width: p.size,
-                height: p.size,
-                backgroundColor: COLORS.PRIMARY,
+                width: p.size * 2,
+                height: p.size * 2,
+                backgroundColor: COLORS.PRIMARY_SOFT,
                 opacity: pOpacity,
               }}
             />
@@ -271,7 +272,7 @@ const Scene2: React.FC = () => {
         style={{
           position: "absolute",
           inset: 0,
-          background: EFFECTS.RADIAL_PRIMARY,
+          background: `radial-gradient(circle, ${COLORS.PRIMARY_LIGHT}44 0%, transparent 70%)`,
           opacity: glowOpacity,
           zIndex: Z.BG,
         }}
@@ -310,7 +311,7 @@ const Scene2: React.FC = () => {
             fontWeight: FONTS.WEIGHT_BOLD,
             fontFamily: FONTS.DISPLAY,
             lineHeight: FONTS.LEADING_TIGHT,
-            textShadow: EFFECTS.GLOW_TEXT_SM,
+            textShadow: EFFECTS.SHADOW_SM,
           }}
         >
           지금 이 순간에도요.
@@ -356,7 +357,7 @@ const Scene3: React.FC = () => {
   const aiBlinkPhase = aiActivated ? Math.floor((frame - AI_WORD_FRAME) / 8) % 2 : 0;
   const aiBgColor = aiActivated
     ? aiBlinkPhase === 0
-      ? COLORS.PRIMARY_DIM
+      ? COLORS.OVERLAY_PRIMARY
       : "transparent"
     : "transparent";
 
@@ -397,7 +398,7 @@ const Scene3: React.FC = () => {
         <div
           style={{
             flex: 1,
-            border: `${SPACING.BORDER_THIN}px solid ${COLORS.BORDER}`,
+            border: `2px solid ${COLORS.STROKE_DEFAULT}`,
             position: "relative",
             overflow: "hidden",
             opacity: leftPanelIn,
@@ -408,7 +409,7 @@ const Scene3: React.FC = () => {
           <div
             style={{
               padding: `${SPACING.PX_12}px ${SPACING.PX_16}px`,
-              borderBottom: `${SPACING.BORDER_THIN}px solid ${COLORS.BORDER}`,
+              borderBottom: `${SPACING.BORDER_THIN}px solid ${COLORS.STROKE_DEFAULT}`,
               display: "flex",
               alignItems: "center",
               justifyContent: "space-between",
@@ -416,10 +417,10 @@ const Scene3: React.FC = () => {
           >
             <span
               style={{
-                color: COLORS.TEXT_MUTED,
-                fontSize: FONTS.SIZE_XS,
+                color: COLORS.TEXT_SUB,
+                fontSize: FONTS.SIZE_MD,
                 fontFamily: FONTS.MONO,
-                fontWeight: FONTS.WEIGHT_MEDIUM,
+                fontWeight: FONTS.WEIGHT_BOLD,
                 letterSpacing: `${FONTS.TRACKING_WIDER}em`,
               }}
             >
@@ -429,7 +430,7 @@ const Scene3: React.FC = () => {
               style={{
                 width: 6,
                 height: 6,
-                backgroundColor: COLORS.POSITIVE,
+                backgroundColor: COLORS.STATE_SUCCESS_FG,
                 opacity: Math.floor(frame / 30) % 2 === 0 ? 1 : 0.3,
               }}
             />
@@ -438,9 +439,9 @@ const Scene3: React.FC = () => {
           {/* Grid overlay content area */}
           <div style={{ position: "relative", flex: 1, height: "100%" }}>
             <GridOverlay
-              cellSize={48}
-              color={COLORS.PRIMARY_DIM}
-              opacity={0.5}
+              cellSize={60}
+              color={COLORS.PRIMARY_SOFT}
+              opacity={0.15}
             />
             {/* Crosshair center */}
             <div
@@ -512,7 +513,7 @@ const Scene3: React.FC = () => {
         <div
           style={{
             flex: 1,
-            border: `${SPACING.BORDER_THIN}px solid ${aiActivated ? COLORS.BORDER_PRIMARY : COLORS.BORDER}`,
+            border: `2px solid ${aiActivated ? COLORS.STROKE_PRIMARY : COLORS.STROKE_DEFAULT}`,
             position: "relative",
             overflow: "hidden",
             opacity: rightPanelIn,
@@ -524,7 +525,7 @@ const Scene3: React.FC = () => {
           <div
             style={{
               padding: `${SPACING.PX_12}px ${SPACING.PX_16}px`,
-              borderBottom: `${SPACING.BORDER_THIN}px solid ${COLORS.BORDER}`,
+              borderBottom: `${SPACING.BORDER_THIN}px solid ${COLORS.STROKE_DEFAULT}`,
               display: "flex",
               alignItems: "center",
               justifyContent: "space-between",
@@ -532,10 +533,10 @@ const Scene3: React.FC = () => {
           >
             <span
               style={{
-                color: aiActivated ? COLORS.PRIMARY : COLORS.TEXT_MUTED,
-                fontSize: FONTS.SIZE_XS,
+                color: aiActivated ? COLORS.PRIMARY_BOLD : COLORS.TEXT_SUB,
+                fontSize: FONTS.SIZE_MD,
                 fontFamily: FONTS.MONO,
-                fontWeight: FONTS.WEIGHT_MEDIUM,
+                fontWeight: FONTS.WEIGHT_BOLD,
                 letterSpacing: `${FONTS.TRACKING_WIDER}em`,
               }}
             >
@@ -544,7 +545,7 @@ const Scene3: React.FC = () => {
             <span
               style={{
                 color: COLORS.TEXT_DISABLED,
-                fontSize: FONTS.SIZE_XS,
+                fontSize: FONTS.SIZE_MD,
                 fontFamily: FONTS.MONO,
               }}
             >
@@ -558,9 +559,9 @@ const Scene3: React.FC = () => {
             <div
               style={{
                 color: COLORS.PRIMARY,
-                fontSize: FONTS.SIZE_SM,
+                fontSize: FONTS.SIZE_MD,
                 fontFamily: FONTS.MONO,
-                fontWeight: FONTS.WEIGHT_MEDIUM,
+                fontWeight: FONTS.WEIGHT_BOLD,
                 letterSpacing: `${FONTS.TRACKING_WIDE}em`,
                 marginBottom: SPACING.PX_24,
               }}
@@ -579,8 +580,8 @@ const Scene3: React.FC = () => {
               >
                 <span
                   style={{
-                    color: COLORS.TEXT_MUTED,
-                    fontSize: FONTS.SIZE_XS,
+                    color: COLORS.TEXT_SUB,
+                    fontSize: FONTS.SIZE_MD,
                     fontFamily: FONTS.MONO,
                   }}
                 >
@@ -589,7 +590,7 @@ const Scene3: React.FC = () => {
                 <span
                   style={{
                     color: COLORS.TEXT_BODY,
-                    fontSize: FONTS.SIZE_XS,
+                    fontSize: FONTS.SIZE_MD,
                     fontFamily: FONTS.MONO,
                   }}
                 >
@@ -598,8 +599,8 @@ const Scene3: React.FC = () => {
               </div>
               <div
                 style={{
-                  height: 3,
-                  backgroundColor: COLORS.BG_ELEVATED,
+                  height: 6,
+                  backgroundColor: COLORS.BG_MUTED,
                   width: "100%",
                   position: "relative",
                 }}
@@ -609,7 +610,7 @@ const Scene3: React.FC = () => {
                     height: "100%",
                     width: `${progressWidth}%`,
                     backgroundColor: COLORS.PRIMARY,
-                    boxShadow: EFFECTS.GLOW_SM,
+                    boxShadow: EFFECTS.SHADOW_SM,
                   }}
                 />
               </div>
@@ -639,13 +640,13 @@ const Scene3: React.FC = () => {
                       width: 4,
                       height: 4,
                       backgroundColor:
-                        i === 2 ? COLORS.WARNING : COLORS.PRIMARY,
+                        i === 2 ? COLORS.STATE_WARN_FG : COLORS.PRIMARY,
                     }}
                   />
                   <span
                     style={{
                       color: COLORS.TEXT_BODY,
-                      fontSize: FONTS.SIZE_XS,
+                      fontSize: FONTS.SIZE_MD,
                       fontFamily: FONTS.MONO,
                       letterSpacing: `${FONTS.TRACKING_WIDE}em`,
                     }}
@@ -655,7 +656,7 @@ const Scene3: React.FC = () => {
                   <span
                     style={{
                       color: COLORS.TEXT_DISABLED,
-                      fontSize: FONTS.SIZE_XS,
+                      fontSize: FONTS.SIZE_MD,
                       fontFamily: FONTS.MONO,
                       marginLeft: "auto",
                     }}
@@ -723,20 +724,20 @@ const Scene4: React.FC = () => {
       >
         <div
           style={{
-            width: 720,
-            minHeight: 320,
-            border: `${SPACING.BORDER_NORMAL}px solid ${COLORS.BORDER_PRIMARY}`,
+            width: 800,
+            minHeight: 400,
+            border: `3px solid ${COLORS.STROKE_PRIMARY}`,
             backgroundColor: COLORS.BG_SURFACE,
             opacity: boxOpacity,
             transform: `translateY(${boxY}px)`,
-            boxShadow: EFFECTS.GLOW_MD,
+            boxShadow: EFFECTS.SHADOW_MD,
           }}
         >
           {/* Terminal header */}
           <div
             style={{
-              padding: `${SPACING.PX_12}px ${SPACING.PX_24}px`,
-              borderBottom: `${SPACING.BORDER_THIN}px solid ${COLORS.BORDER}`,
+              padding: `${SPACING.PX_16}px ${SPACING.PX_32}px`,
+              borderBottom: `2px solid ${COLORS.STROKE_SUBTLE}`,
               display: "flex",
               alignItems: "center",
               justifyContent: "space-between",
@@ -745,10 +746,10 @@ const Scene4: React.FC = () => {
           >
             <span
               style={{
-                color: COLORS.PRIMARY,
-                fontSize: FONTS.SIZE_XS,
+                color: COLORS.PRIMARY_BOLD,
+                fontSize: FONTS.SIZE_MD,
                 fontFamily: FONTS.MONO,
-                fontWeight: FONTS.WEIGHT_SEMIBOLD,
+                fontWeight: FONTS.WEIGHT_BOLD,
                 letterSpacing: `${FONTS.TRACKING_WIDER}em`,
               }}
             >
@@ -757,7 +758,7 @@ const Scene4: React.FC = () => {
             <span
               style={{
                 color: COLORS.TEXT_DISABLED,
-                fontSize: FONTS.SIZE_XS,
+                fontSize: FONTS.SIZE_MD,
                 fontFamily: FONTS.MONO,
               }}
             >
@@ -777,7 +778,7 @@ const Scene4: React.FC = () => {
               <span
                 style={{
                   color: COLORS.TEXT_DISABLED,
-                  fontSize: FONTS.SIZE_SM,
+                  fontSize: FONTS.SIZE_MD,
                   fontFamily: FONTS.MONO,
                 }}
               >
@@ -786,9 +787,9 @@ const Scene4: React.FC = () => {
               {cursorVisible && (
                 <div
                   style={{
-                    width: 2,
-                    height: FONTS.SIZE_SM * 0.85,
-                    backgroundColor: COLORS.ACCENT,
+                    width: 3,
+                    height: FONTS.SIZE_MD * 0.8,
+                    backgroundColor: COLORS.PRIMARY_BOLD,
                   }}
                 />
               )}
@@ -834,7 +835,7 @@ const Scene5: React.FC = () => {
   return (
     <AbsoluteFill style={{ backgroundColor: COLORS.BG_BASE }}>
       {/* Grid overlay background */}
-      <GridOverlay cellSize={80} color={COLORS.PRIMARY} opacity={gridBlink} />
+      <GridOverlay cellSize={100} color={COLORS.PRIMARY_SOFT} opacity={gridBlink} />
 
       {/* Terminal box — same structure as Scene4 */}
       <div
@@ -854,16 +855,16 @@ const Scene5: React.FC = () => {
           style={{
             width: 720,
             minHeight: 320,
-            border: `${SPACING.BORDER_NORMAL}px solid ${COLORS.BORDER_PRIMARY}`,
+            border: `${SPACING.BORDER_NORMAL}px solid ${COLORS.STROKE_PRIMARY}`,
             backgroundColor: COLORS.BG_SURFACE,
-            boxShadow: EFFECTS.GLOW_MD,
+            boxShadow: EFFECTS.TINT_PRIMARY,
           }}
         >
           {/* Terminal header */}
           <div
             style={{
               padding: `${SPACING.PX_12}px ${SPACING.PX_24}px`,
-              borderBottom: `${SPACING.BORDER_THIN}px solid ${COLORS.BORDER}`,
+              borderBottom: `${SPACING.BORDER_THIN}px solid ${COLORS.STROKE_DEFAULT}`,
               display: "flex",
               alignItems: "center",
               justifyContent: "space-between",
@@ -872,7 +873,7 @@ const Scene5: React.FC = () => {
             <span
               style={{
                 color: COLORS.PRIMARY,
-                fontSize: FONTS.SIZE_XS,
+                fontSize: 24,
                 fontFamily: FONTS.MONO,
                 fontWeight: FONTS.WEIGHT_SEMIBOLD,
                 letterSpacing: `${FONTS.TRACKING_WIDER}em`,
@@ -883,7 +884,7 @@ const Scene5: React.FC = () => {
             <span
               style={{
                 color: COLORS.TEXT_DISABLED,
-                fontSize: FONTS.SIZE_XS,
+                fontSize: 24,
                 fontFamily: FONTS.MONO,
               }}
             >
@@ -905,7 +906,7 @@ const Scene5: React.FC = () => {
               <span
                 style={{
                   color: COLORS.TEXT_DISABLED,
-                  fontSize: FONTS.SIZE_SM,
+                  fontSize: 24,
                   fontFamily: FONTS.MONO,
                 }}
               >
@@ -919,7 +920,7 @@ const Scene5: React.FC = () => {
                 fontSize={FONTS.SIZE_MD}
                 fontWeight={FONTS.WEIGHT_MEDIUM}
                 fontFamily={FONTS.MONO}
-                cursorColor={COLORS.ACCENT}
+                cursorColor={COLORS.PRIMARY}
                 showCursor={frame < THREAT_FRAME + 20}
               />
 
@@ -930,14 +931,14 @@ const Scene5: React.FC = () => {
                     opacity: threatEntrance,
                     transform: `scale(${interpolate(threatEntrance, [0, 1], [ANIMATION.SCALE_ENTER, 1])})`,
                     padding: `${SPACING.PX_4}px ${SPACING.PX_12}px`,
-                    backgroundColor: COLORS.NEGATIVE_DIM,
-                    border: `1px solid ${COLORS.NEGATIVE}`,
+                    backgroundColor: COLORS.STATE_ERROR_BG,
+                    border: `1px solid ${COLORS.STATE_ERROR_FG}`,
                   }}
                 >
                   <span
                     style={{
-                      color: COLORS.NEGATIVE,
-                      fontSize: FONTS.SIZE_XS,
+                      color: COLORS.STATE_ERROR_FG,
+                      fontSize: 24,
                       fontFamily: FONTS.MONO,
                       fontWeight: FONTS.WEIGHT_BOLD,
                       letterSpacing: `${FONTS.TRACKING_WIDER}em`,
@@ -1009,16 +1010,16 @@ const Scene6: React.FC = () => {
           style={{
             width: 720,
             minHeight: 320,
-            border: `${SPACING.BORDER_NORMAL}px solid ${COLORS.BORDER_PRIMARY}`,
+            border: `${SPACING.BORDER_NORMAL}px solid ${COLORS.STROKE_PRIMARY}`,
             backgroundColor: COLORS.BG_SURFACE,
-            boxShadow: EFFECTS.GLOW_MD,
+            boxShadow: EFFECTS.TINT_PRIMARY,
           }}
         >
           {/* Terminal header */}
           <div
             style={{
               padding: `${SPACING.PX_12}px ${SPACING.PX_24}px`,
-              borderBottom: `${SPACING.BORDER_THIN}px solid ${COLORS.BORDER}`,
+              borderBottom: `${SPACING.BORDER_THIN}px solid ${COLORS.STROKE_DEFAULT}`,
               display: "flex",
               alignItems: "center",
               justifyContent: "space-between",
@@ -1027,7 +1028,7 @@ const Scene6: React.FC = () => {
             <span
               style={{
                 color: COLORS.PRIMARY,
-                fontSize: FONTS.SIZE_XS,
+                fontSize: 24,
                 fontFamily: FONTS.MONO,
                 fontWeight: FONTS.WEIGHT_SEMIBOLD,
                 letterSpacing: `${FONTS.TRACKING_WIDER}em`,
@@ -1038,7 +1039,7 @@ const Scene6: React.FC = () => {
             <span
               style={{
                 color: COLORS.TEXT_DISABLED,
-                fontSize: FONTS.SIZE_XS,
+                fontSize: 24,
                 fontFamily: FONTS.MONO,
               }}
             >
@@ -1060,7 +1061,7 @@ const Scene6: React.FC = () => {
               <span
                 style={{
                   color: COLORS.TEXT_DISABLED,
-                  fontSize: FONTS.SIZE_SM,
+                  fontSize: 24,
                   fontFamily: FONTS.MONO,
                 }}
               >
@@ -1079,14 +1080,14 @@ const Scene6: React.FC = () => {
               <div
                 style={{
                   padding: `${SPACING.PX_4}px ${SPACING.PX_12}px`,
-                  backgroundColor: COLORS.NEGATIVE_DIM,
-                  border: `1px solid ${COLORS.NEGATIVE}`,
+                  backgroundColor: COLORS.STATE_ERROR_BG,
+                  border: `1px solid ${COLORS.STATE_ERROR_FG}`,
                 }}
               >
                 <span
                   style={{
-                    color: COLORS.NEGATIVE,
-                    fontSize: FONTS.SIZE_XS,
+                    color: COLORS.STATE_ERROR_FG,
+                    fontSize: 24,
                     fontFamily: FONTS.MONO,
                     fontWeight: FONTS.WEIGHT_BOLD,
                     letterSpacing: `${FONTS.TRACKING_WIDER}em`,
@@ -1109,7 +1110,7 @@ const Scene6: React.FC = () => {
               <span
                 style={{
                   color: COLORS.TEXT_DISABLED,
-                  fontSize: FONTS.SIZE_SM,
+                  fontSize: 24,
                   fontFamily: FONTS.MONO,
                 }}
               >
@@ -1119,11 +1120,11 @@ const Scene6: React.FC = () => {
                 text="STRUCTURE: WEAPONS FACILITY (est.)"
                 startFrame={8}
                 framesPerChar={2}
-                color={COLORS.WARNING}
+                color={COLORS.STATE_WARN_FG}
                 fontSize={FONTS.SIZE_MD}
                 fontWeight={FONTS.WEIGHT_MEDIUM}
                 fontFamily={FONTS.MONO}
-                cursorColor={COLORS.ACCENT}
+                cursorColor={COLORS.PRIMARY}
                 showCursor={true}
               />
             </div>
@@ -1140,8 +1141,8 @@ const Scene6: React.FC = () => {
               >
                 <span
                   style={{
-                    color: COLORS.TEXT_MUTED,
-                    fontSize: FONTS.SIZE_XS,
+                    color: COLORS.TEXT_SUB,
+                    fontSize: 24,
                     fontFamily: FONTS.MONO,
                     letterSpacing: `${FONTS.TRACKING_WIDE}em`,
                   }}
@@ -1150,8 +1151,8 @@ const Scene6: React.FC = () => {
                 </span>
                 <span
                   style={{
-                    color: COLORS.WARNING,
-                    fontSize: FONTS.SIZE_SM,
+                    color: COLORS.PRIMARY,
+                    fontSize: 24,
                     fontFamily: FONTS.MONO,
                     fontWeight: FONTS.WEIGHT_BOLD,
                   }}
@@ -1162,7 +1163,7 @@ const Scene6: React.FC = () => {
               <div
                 style={{
                   height: 4,
-                  backgroundColor: COLORS.BG_ELEVATED,
+                  backgroundColor: COLORS.BG_SURFACE,
                   width: "100%",
                 }}
               >
@@ -1170,8 +1171,8 @@ const Scene6: React.FC = () => {
                   style={{
                     height: "100%",
                     width: `${gaugeProgress}%`,
-                    backgroundColor: COLORS.WARNING,
-                    boxShadow: EFFECTS.GLOW_ACCENT,
+                    backgroundColor: COLORS.STATE_WARN_FG,
+                    boxShadow: EFFECTS.SHADOW_PRIMARY,
                   }}
                 />
               </div>
@@ -1209,13 +1210,13 @@ const Scene7: React.FC = () => {
   });
 
   return (
-    <AbsoluteFill style={{ backgroundColor: COLORS.BG_VOID }}>
+    <AbsoluteFill style={{ backgroundColor: COLORS.BG_DARKEST }}>
       {/* Darkening flash overlay */}
       <div
         style={{
           position: "absolute",
           inset: 0,
-          backgroundColor: COLORS.BG_VOID,
+          backgroundColor: COLORS.BG_DARKEST,
           opacity: flashOpacity,
           zIndex: Z.TOP,
         }}
@@ -1238,7 +1239,7 @@ const Scene7: React.FC = () => {
         <div
           style={{
             opacity: textOpacity,
-            color: COLORS.TEXT_MUTED,
+            color: COLORS.TEXT_SUB,
             fontSize: FONTS.SIZE_LG,
             fontWeight: FONTS.WEIGHT_MEDIUM,
             fontFamily: FONTS.PRIMARY,
@@ -1327,7 +1328,7 @@ const Scene8: React.FC = () => {
             left: 0,
             width: "141%",
             height: 1,
-            backgroundColor: COLORS.NEGATIVE,
+            backgroundColor: COLORS.STATE_ERROR_FG,
             opacity: 0.6,
             transform: `rotate(35deg) scaleX(${crossOutProgress})`,
             transformOrigin: "left center",
@@ -1356,7 +1357,7 @@ const Scene8: React.FC = () => {
               opacity: interpolate(textEntrance, [0, 1], [0, 1]),
               transform: `translateY(${interpolate(textEntrance, [0, 1], [ANIMATION.ENTER_Y_SM, 0])}px)`,
               color: COLORS.TEXT_MAIN,
-              fontSize: FONTS.SIZE_XL,
+              fontSize: FONTS.SIZE_LG,
               fontWeight: FONTS.WEIGHT_BOLD,
               fontFamily: FONTS.DISPLAY,
               lineHeight: FONTS.LEADING_TIGHT,
@@ -1372,10 +1373,10 @@ const Scene8: React.FC = () => {
               right: 0,
               width: 200,
               height: 1,
-              backgroundColor: COLORS.NEGATIVE,
+              backgroundColor: COLORS.STATE_ERROR_FG,
               transform: `scaleX(${underlineProgress})`,
               transformOrigin: "right center",
-              boxShadow: `0 0 8px ${COLORS.NEGATIVE}`,
+              boxShadow: `0 0 8px ${COLORS.STATE_ERROR_FG}`,
             }}
           />
         </div>
@@ -1435,14 +1436,14 @@ const Scene9: React.FC = () => {
         {/* BREAKING badge */}
         <div
           style={{
-            backgroundColor: COLORS.ACCENT,
+            backgroundColor: COLORS.PRIMARY,
             padding: `${SPACING.PX_8}px ${SPACING.PX_24}px`,
           }}
         >
           <span
             style={{
               color: COLORS.BG_BASE,
-              fontSize: FONTS.SIZE_SM,
+              fontSize: 24,
               fontWeight: FONTS.WEIGHT_BOLD,
               fontFamily: FONTS.MONO,
               letterSpacing: `${FONTS.TRACKING_WIDER}em`,
@@ -1457,7 +1458,7 @@ const Scene9: React.FC = () => {
           style={{
             width: 40,
             height: 1,
-            backgroundColor: COLORS.ACCENT,
+            backgroundColor: COLORS.PRIMARY,
             opacity: 0.5,
           }}
         />
@@ -1477,7 +1478,7 @@ const Scene9: React.FC = () => {
         <div
           style={{
             color: COLORS.TEXT_MAIN,
-            fontSize: FONTS.SIZE_XL,
+            fontSize: FONTS.SIZE_LG,
             fontWeight: FONTS.WEIGHT_BOLD,
             fontFamily: FONTS.DISPLAY,
             letterSpacing: `${FONTS.TRACKING_WIDER}em`,
@@ -1489,8 +1490,8 @@ const Scene9: React.FC = () => {
         <div
           style={{
             marginTop: SPACING.PX_16,
-            color: COLORS.TEXT_MUTED,
-            fontSize: FONTS.SIZE_SM,
+            color: COLORS.TEXT_SUB,
+            fontSize: 24,
             fontFamily: FONTS.MONO,
             letterSpacing: `${FONTS.TRACKING_WIDE}em`,
           }}
@@ -1628,8 +1629,8 @@ const Scene10: React.FC = () => {
           >
             <div
               style={{
-                width: 64,
-                height: 64,
+                width: 80,
+                height: 80,
                 border: `${SPACING.BORDER_NORMAL}px solid ${COLORS.PRIMARY}`,
                 display: "flex",
                 alignItems: "center",
@@ -1640,7 +1641,7 @@ const Scene10: React.FC = () => {
               <span
                 style={{
                   color: COLORS.PRIMARY,
-                  fontSize: FONTS.SIZE_MD,
+                  fontSize: FONTS.SIZE_LG,
                   fontFamily: FONTS.MONO,
                   fontWeight: FONTS.WEIGHT_BOLD,
                 }}
@@ -1650,8 +1651,8 @@ const Scene10: React.FC = () => {
             </div>
             <span
               style={{
-                color: COLORS.TEXT_MUTED,
-                fontSize: FONTS.SIZE_XS,
+                color: COLORS.TEXT_SUB,
+                fontSize: FONTS.SIZE_LG,
                 fontFamily: FONTS.MONO,
                 letterSpacing: `${FONTS.TRACKING_WIDE}em`,
               }}
@@ -1680,7 +1681,7 @@ const Scene10: React.FC = () => {
                 opacity: 0.6,
                 transform: `scaleX(${lineProgress})`,
                 transformOrigin: "left center",
-                boxShadow: EFFECTS.GLOW_SM,
+                boxShadow: EFFECTS.SHADOW_SM,
               }}
             />
 
@@ -1702,8 +1703,8 @@ const Scene10: React.FC = () => {
                 <div
                   style={{
                     position: "absolute",
-                    width: 40,
-                    height: 40,
+                    width: 80,
+                    height: 80,
                     border: `1px solid ${COLORS.PRIMARY}`,
                     opacity: 0.3,
                     transform: `scale(${pulseRingScale})`,
@@ -1716,7 +1717,7 @@ const Scene10: React.FC = () => {
                     height: 12,
                     backgroundColor: COLORS.PRIMARY,
                     opacity: aiPulse,
-                    boxShadow: EFFECTS.GLOW_MD,
+                    boxShadow: EFFECTS.SHADOW_MD,
                   }}
                 />
                 {/* AI label */}
@@ -1725,7 +1726,7 @@ const Scene10: React.FC = () => {
                     position: "absolute",
                     top: 24,
                     color: COLORS.PRIMARY,
-                    fontSize: FONTS.SIZE_XS,
+                    fontSize: 24,
                     fontFamily: FONTS.MONO,
                     fontWeight: FONTS.WEIGHT_BOLD,
                     letterSpacing: `${FONTS.TRACKING_WIDER}em`,
@@ -1753,9 +1754,9 @@ const Scene10: React.FC = () => {
           >
             <div
               style={{
-                width: 64,
-                height: 64,
-                border: `${SPACING.BORDER_NORMAL}px solid ${COLORS.NEGATIVE}`,
+                width: 80,
+                height: 80,
+                border: `${SPACING.BORDER_NORMAL}px solid ${COLORS.STATE_ERROR_FG}`,
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
@@ -1764,8 +1765,8 @@ const Scene10: React.FC = () => {
             >
               <span
                 style={{
-                  color: COLORS.NEGATIVE,
-                  fontSize: FONTS.SIZE_MD,
+                  color: COLORS.STATE_ERROR_FG,
+                  fontSize: FONTS.SIZE_LG,
                   fontFamily: FONTS.MONO,
                   fontWeight: FONTS.WEIGHT_BOLD,
                 }}
@@ -1775,8 +1776,8 @@ const Scene10: React.FC = () => {
             </div>
             <span
               style={{
-                color: COLORS.TEXT_MUTED,
-                fontSize: FONTS.SIZE_XS,
+                color: COLORS.TEXT_SUB,
+                fontSize: FONTS.SIZE_LG,
                 fontFamily: FONTS.MONO,
                 letterSpacing: `${FONTS.TRACKING_WIDE}em`,
               }}
@@ -1799,7 +1800,7 @@ const Scene10: React.FC = () => {
         <div
           style={{
             color: COLORS.TEXT_DISABLED,
-            fontSize: FONTS.SIZE_XS,
+            fontSize: 24,
             fontFamily: FONTS.MONO,
             letterSpacing: `${FONTS.TRACKING_WIDER}em`,
             opacity: interpolate(frame, [0, 20], [0, 1], {
@@ -1845,13 +1846,13 @@ const Scene11: React.FC = () => {
   });
 
   return (
-    <AbsoluteFill style={{ backgroundColor: COLORS.BG_VOID }}>
+    <AbsoluteFill style={{ backgroundColor: COLORS.BG_DARKEST }}>
       {/* Radial glow */}
       <div
         style={{
           position: "absolute",
           inset: 0,
-          background: EFFECTS.RADIAL_PRIMARY,
+          background: `radial-gradient(circle, ${COLORS.PRIMARY_LIGHT}44 0%, transparent 70%)`,
           opacity: glowOpacity,
           zIndex: Z.BG,
         }}
@@ -1882,7 +1883,7 @@ const Scene11: React.FC = () => {
             fontFamily: FONTS.DISPLAY,
             letterSpacing: `${FONTS.TRACKING_WIDER}em`,
             lineHeight: FONTS.LEADING_TIGHT,
-            textShadow: EFFECTS.GLOW_TEXT_LG,
+            textShadow: EFFECTS.SHADOW_PRIMARY,
           }}
         >
           PROJECT MAVEN
@@ -1941,13 +1942,13 @@ const Scene12: React.FC = () => {
   ];
 
   return (
-    <AbsoluteFill style={{ backgroundColor: COLORS.BG_VOID }}>
+    <AbsoluteFill style={{ backgroundColor: COLORS.BG_DARKEST }}>
       {/* Radial glow (persistent) */}
       <div
         style={{
           position: "absolute",
           inset: 0,
-          background: EFFECTS.RADIAL_PRIMARY,
+          background: `radial-gradient(circle, ${COLORS.PRIMARY_LIGHT}44 0%, transparent 70%)`,
           opacity: 0.3,
           zIndex: Z.BG,
         }}
@@ -1977,7 +1978,7 @@ const Scene12: React.FC = () => {
             fontFamily: FONTS.DISPLAY,
             letterSpacing: `${FONTS.TRACKING_WIDER}em`,
             lineHeight: FONTS.LEADING_TIGHT,
-            textShadow: EFFECTS.GLOW_TEXT_SM,
+            textShadow: EFFECTS.SHADOW_PRIMARY,
             flexShrink: 0,
           }}
         >
@@ -1991,8 +1992,8 @@ const Scene12: React.FC = () => {
           style={{
             opacity: panelIn,
             transform: `translateX(${interpolate(panelIn, [0, 1], [40, 0])}px)`,
-            backgroundColor: EFFECTS.GLASS_BG,
-            border: `1px solid ${EFFECTS.GLASS_BORDER}`,
+            backgroundColor: COLORS.BG_SURFACE,
+            border: `2px solid ${COLORS.STROKE_DEFAULT}`,
             padding: `${SPACING.PX_32}px ${SPACING.PX_40}px`,
             minWidth: 320,
           }}
@@ -2018,7 +2019,7 @@ const Scene12: React.FC = () => {
                 <span
                   style={{
                     color: COLORS.PRIMARY,
-                    fontSize: FONTS.SIZE_XS,
+                    fontSize: 24,
                     fontFamily: FONTS.MONO,
                     fontWeight: FONTS.WEIGHT_BOLD,
                     letterSpacing: `${FONTS.TRACKING_WIDER}em`,
@@ -2030,7 +2031,7 @@ const Scene12: React.FC = () => {
                   style={{
                     width: 24,
                     height: 1,
-                    backgroundColor: COLORS.BORDER_STRONG,
+                    backgroundColor: COLORS.STROKE_STRONG,
                   }}
                 />
                 <span
@@ -2101,7 +2102,7 @@ const Scene13: React.FC = () => {
         style={{
           position: "absolute",
           inset: 0,
-          backgroundColor: COLORS.NEGATIVE,
+          backgroundColor: COLORS.STATE_ERROR_FG,
           opacity: warningFlashOpacity,
           zIndex: Z.OVERLAY,
           pointerEvents: "none",
@@ -2167,7 +2168,7 @@ const Scene13: React.FC = () => {
         <span
           style={{
             color: COLORS.PRIMARY,
-            fontSize: FONTS.SIZE_XS,
+            fontSize: 24,
             fontFamily: FONTS.MONO,
             fontWeight: FONTS.WEIGHT_SEMIBOLD,
             letterSpacing: `${FONTS.TRACKING_WIDER}em`,

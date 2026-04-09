@@ -53,7 +53,7 @@ export const CounterText: React.FC<CounterTextProps> = ({
     {
       extrapolateLeft: "clamp",
       extrapolateRight: "clamp",
-      easing: easing ? Easing.bezier(...easing) : undefined,
+      easing: easing ? Easing.bezier(easing[0], easing[1], easing[2], easing[3]) : undefined,
     }
   );
 

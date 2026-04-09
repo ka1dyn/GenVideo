@@ -20,7 +20,7 @@ const Scene1: React.FC = () => {
   const bgInterpolation = interpolateColors(
     frame,
     [0, 20],
-    [COLORS.BG_VOID, COLORS.BG_BASE]
+    [COLORS.BG_DARKEST, COLORS.BG_BASE]
   );
 
   const breakingEnter = spring({ frame: frame - 0, fps, config: ANIMATION.SPRING_SNAPPY });
@@ -31,9 +31,9 @@ const Scene1: React.FC = () => {
       {/* Top Section */}
       <div style={{ position: "absolute", top: 100, left: 0, right: 0, display: "flex", flexDirection: "column", alignItems: "center", gap: SPACING.PX_16 }}>
         <div style={{ transform: `translateX(${(1 - breakingEnter) * -100}px)`, opacity: breakingEnter }}>
-          <StatusTag label="속보" bgColor={COLORS.ACCENT} textColor={COLORS.BG_VOID} borderColor={COLORS.ACCENT} showDot dotColor={COLORS.BG_VOID} startFrame={0} />
+          <StatusTag label="속보" bgColor={COLORS.PRIMARY} textColor={COLORS.BG_DARKEST} borderColor={COLORS.PRIMARY} showDot dotColor={COLORS.BG_DARKEST} startFrame={0} />
         </div>
-        <div style={{ transform: `translateY(${(1 - dateEnter) * 10}px)`, opacity: dateEnter, fontFamily: FONTS.MONO, fontSize: FONTS.SIZE_SM, color: COLORS.TEXT_MUTED, letterSpacing: FONTS.TRACKING_WIDER }}>
+        <div style={{ transform: `translateY(${(1 - dateEnter) * 10}px)`, opacity: dateEnter, fontFamily: FONTS.DISPLAY, fontSize: 32, color: COLORS.TEXT_SUB, letterSpacing: FONTS.TRACKING_WIDER }}>
           2025.02
         </div>
       </div>
@@ -44,14 +44,14 @@ const Scene1: React.FC = () => {
           <FlowBox title="미국" subtitle="US" borderColor={COLORS.PRIMARY} isActive={false} delay={47} />
         </div>
         <div style={{ width: 250, display: "flex", alignItems: "center", margin: "0 -20px", zIndex: Z.CONTENT }}>
-           <DrawLine startFrame={47} durationInFrames={36} color={COLORS.TEXT_MUTED} thickness={SPACING.BORDER_THICK} direction="ltr" />
+           <DrawLine startFrame={47} durationInFrames={36} color={COLORS.STROKE_DEFAULT} thickness={SPACING.BORDER_THICK} direction="ltr" />
         </div>
         <div style={{ zIndex: Z.CONTENT + 1 }}>
-          <FlowBox title="이란" subtitle="IR" borderColor={COLORS.NEGATIVE} isActive={frame >= 109} delay={83} glowColor={COLORS.NEGATIVE_DIM} />
+          <FlowBox title="이란" subtitle="IR" borderColor={COLORS.STATE_ERROR_FG} isActive={frame >= 109} delay={83} glowColor={COLORS.STATE_ERROR_BG} />
         </div>
       </div>
 
-      {frame >= 109 && <FlashOverlay startFrame={109} durationInFrames={15} color={COLORS.NEGATIVE} maxOpacity={0.15} />}
+      {frame >= 109 && <FlashOverlay startFrame={109} durationInFrames={15} color={COLORS.STATE_ERROR_FG} maxOpacity={0.15} />}
     </AbsoluteFill>
   );
 };
@@ -72,22 +72,22 @@ const Scene2: React.FC = () => {
     <AbsoluteFill style={{ backgroundColor: COLORS.BG_BASE }}>
       {/* Top Timer Bar */}
       <div style={{ position: "absolute", top: 60, width: "100%", display: "flex", justifyContent: "center", transform: `translateY(${(1 - timerEnter) * -20}px)`, opacity: timerEnter }}>
-         <StatusTag label="1H 카운트다운" borderColor={COLORS.NEGATIVE} textColor={COLORS.NEGATIVE} showDot dotColor={COLORS.NEGATIVE} bgColor={COLORS.NEGATIVE_DIM} />
+         <StatusTag label="1H 카운트다운" borderColor={COLORS.STATE_ERROR_FG} textColor={COLORS.STATE_ERROR_FG} showDot dotColor={COLORS.STATE_ERROR_FG} bgColor={COLORS.STATE_ERROR_BG} />
       </div>
 
       <div style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", height: "100%", transform: `translateY(-30px)` }}>
-        <div style={{ transform: `scale(${counterEnter})`, opacity: counterEnter, textShadow: EFFECTS.TINT_ACCENT }}>
-          <CounterText from={0} to={1000} startFrame={117} durationInFrames={88} suffix="+" color={COLORS.NEGATIVE} fontSize={FONTS.SIZE_4XL} fontWeight={FONTS.WEIGHT_EXTRABOLD} />
+        <div style={{ transform: `scale(${counterEnter})`, opacity: counterEnter, boxShadow: EFFECTS.SHADOW_PRIMARY }}>
+          <CounterText from={0} to={1000} startFrame={117} durationInFrames={88} suffix="+" color={COLORS.STATE_ERROR_FG} fontSize={FONTS.SIZE_4XL} fontWeight={FONTS.WEIGHT_EXTRABOLD} />
         </div>
         
-        <div style={{ transform: `translateY(${(1 - counterEnter) * 10}px)`, opacity: counterEnter, fontFamily: FONTS.PRIMARY, fontSize: FONTS.SIZE_SM, color: COLORS.TEXT_MUTED, letterSpacing: FONTS.TRACKING_WIDER, marginTop: SPACING.PX_16 }}>
+        <div style={{ transform: `translateY(${(1 - counterEnter) * 10}px)`, opacity: counterEnter, fontFamily: FONTS.DISPLAY, fontSize: 32, color: COLORS.TEXT_SUB, letterSpacing: FONTS.TRACKING_WIDER, marginTop: SPACING.PX_16 }}>
           타격된 표적
         </div>
       </div>
 
       {/* Source */}
       <div style={{ position: "absolute", bottom: 180, right: 60, opacity: labelEnter }}>
-        <div style={{ fontFamily: FONTS.MONO, fontSize: FONTS.SIZE_XS, color: COLORS.TEXT_DISABLED }}>
+        <div style={{ fontFamily: FONTS.DISPLAY, fontSize: 24, color: COLORS.TEXT_SUB }}>
           출처: 외신 보도
         </div>
       </div>
@@ -109,13 +109,13 @@ const Scene3: React.FC = () => {
   return (
     <AbsoluteFill style={{ backgroundColor: COLORS.BG_BASE }}>
       <div style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", height: "100%", transform: `translateY(-30px)` }}>
-        <div style={{ textShadow: EFFECTS.TINT_ACCENT, color: COLORS.NEGATIVE, fontSize: FONTS.SIZE_4XL, fontWeight: FONTS.WEIGHT_EXTRABOLD, fontFamily: FONTS.DISPLAY }}>
+        <div style={{ boxShadow: EFFECTS.SHADOW_PRIMARY, color: COLORS.STATE_ERROR_FG, fontSize: FONTS.SIZE_4XL, fontWeight: FONTS.WEIGHT_EXTRABOLD, fontFamily: FONTS.DISPLAY }}>
           1000+
         </div>
-        <div style={{ transform: `translateY(${(1 - divisionEnter) * 10}px)`, opacity: divisionEnter, fontFamily: FONTS.MONO, fontSize: FONTS.SIZE_MD, color: COLORS.TEXT_MUTED, marginTop: SPACING.PX_16 }}>
+        <div style={{ transform: `translateY(${(1 - divisionEnter) * 10}px)`, opacity: divisionEnter, fontFamily: FONTS.DISPLAY, fontSize: FONTS.SIZE_MD, color: COLORS.TEXT_SUB, marginTop: SPACING.PX_16 }}>
           ÷ 24H
         </div>
-        <div style={{ transform: `translateY(${(1 - resultEnter) * 10}px) scale(${resultEnter})`, opacity: resultEnter, fontFamily: FONTS.PRIMARY, fontSize: FONTS.SIZE_XL, color: COLORS.PRIMARY, fontWeight: FONTS.WEIGHT_BOLD, marginTop: SPACING.PX_24, textShadow: EFFECTS.TINT_LG }}>
+        <div style={{ transform: `translateY(${(1 - resultEnter) * 10}px) scale(${resultEnter})`, opacity: resultEnter, fontFamily: FONTS.DISPLAY, fontSize: FONTS.SIZE_XL, color: COLORS.PRIMARY, fontWeight: FONTS.WEIGHT_BOLD, marginTop: SPACING.PX_24, textShadow: EFFECTS.SHADOW_PRIMARY }}>
           = 41+ / hr
         </div>
       </div>
@@ -134,8 +134,8 @@ const Scene4: React.FC = () => {
   const textEnter = spring({ frame: frame - 0, fps, config: ANIMATION.SPRING_GENTLE });
 
   return (
-    <AbsoluteFill style={{ backgroundColor: COLORS.BG_ELEVATED, display: "flex", justifyContent: "center", alignItems: "center" }}>
-      <div style={{ opacity: textEnter, transform: `translateY(${(1 - textEnter) * 10}px)`, fontFamily: FONTS.PRIMARY, fontSize: FONTS.SIZE_XL, color: COLORS.TEXT_BODY, fontWeight: FONTS.WEIGHT_MEDIUM }}>
+    <AbsoluteFill style={{ backgroundColor: COLORS.BG_MUTED, display: "flex", justifyContent: "center", alignItems: "center" }}>
+      <div style={{ opacity: textEnter, transform: `translateY(${(1 - textEnter) * 10}px)`, fontFamily: FONTS.DISPLAY, fontSize: FONTS.SIZE_XL, color: COLORS.TEXT_MAIN, fontWeight: FONTS.WEIGHT_MEDIUM }}>
         예전이라면요?
       </div>
     </AbsoluteFill>
@@ -155,7 +155,7 @@ const Scene5: React.FC = () => {
           delay={0}
           expandDelay={91}
           duration={27}
-          color={COLORS.WARNING}
+          color={COLORS.STATE_WARN_FG}
           maxWidth={700}
         />
       </div>
@@ -175,27 +175,27 @@ const Scene6: React.FC = () => {
       <div style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "100%", gap: 0, transform: "translateY(-30px)" }}>
         {/* 데이터 검토 (35f) */}
         <div style={{ zIndex: Z.CONTENT + 1 }}>
-          <FlowBox title="데이터 검토" borderColor={COLORS.TEXT_DISABLED} isActive={false} delay={35} />
+          <FlowBox title="데이터 검토" borderColor={COLORS.BG_MUTED} isActive={false} delay={35} />
         </div>
         
         {/* 연결 지연 */}
         <div style={{ width: 140, display: "flex", alignItems: "center", margin: "0 -20px", zIndex: Z.CONTENT }}>
-           <DrawLine startFrame={72} durationInFrames={25} color={COLORS.TEXT_DISABLED} thickness={2} direction="ltr" />
+           <DrawLine startFrame={72} durationInFrames={25} color={COLORS.STROKE_DEFAULT} thickness={2} direction="ltr" />
         </div>
 
         {/* 회의 (97f) */}
         <div style={{ zIndex: Z.CONTENT + 1 }}>
-          <FlowBox title="회의" borderColor={COLORS.TEXT_DISABLED} isActive={false} delay={97} />
+          <FlowBox title="회의" borderColor={COLORS.BG_MUTED} isActive={false} delay={97} />
         </div>
 
         {/* 연결 지연 */}
         <div style={{ width: 140, display: "flex", alignItems: "center", margin: "0 -20px", zIndex: Z.CONTENT }}>
-           <DrawLine startFrame={120} durationInFrames={24} color={COLORS.TEXT_DISABLED} thickness={2} direction="ltr" />
+           <DrawLine startFrame={120} durationInFrames={24} color={COLORS.STROKE_DEFAULT} thickness={2} direction="ltr" />
         </div>
 
         {/* 결재 (144f) */}
         <div style={{ zIndex: Z.CONTENT + 1 }}>
-          <FlowBox title="결재" borderColor={COLORS.TEXT_DISABLED} isActive={false} delay={144} />
+          <FlowBox title="결재" borderColor={COLORS.BG_MUTED} isActive={false} delay={144} />
         </div>
       </div>
     </AbsoluteFill>
@@ -215,8 +215,8 @@ const Scene7: React.FC = () => {
 
   return (
     <AbsoluteFill style={{ backgroundColor: COLORS.BG_BASE, display: "flex", justifyContent: "center", alignItems: "center" }}>
-      <div style={{ position: "absolute", inset: 0, background: EFFECTS.RADIAL_PRIMARY, opacity: bgTINT * 0.5 }} />
-      <div style={{ zIndex: 1, opacity: textEnter, transform: `scale(${textEnter})`, fontFamily: FONTS.PRIMARY, fontSize: FONTS.SIZE_LG, color: COLORS.PRIMARY, fontWeight: FONTS.WEIGHT_BOLD, textShadow: EFFECTS.TINT_LG }}>
+      <div style={{ position: "absolute", inset: 0, backgroundColor: COLORS.PRIMARY, opacity: bgTINT * 0.1 }} />
+      <div style={{ zIndex: 1, opacity: textEnter, transform: `scale(${textEnter})`, fontFamily: FONTS.DISPLAY, fontSize: 48, color: COLORS.PRIMARY, fontWeight: FONTS.WEIGHT_BOLD, boxShadow: EFFECTS.SHADOW_PRIMARY }}>
         달랐다는 거예요.
       </div>
     </AbsoluteFill>
@@ -237,16 +237,16 @@ const Scene8: React.FC = () => {
 
   return (
     <AbsoluteFill style={{ backgroundColor: COLORS.BG_BASE }}>
-      <div style={{ position: "absolute", top: 100, left: 100, background: EFFECTS.GLASS_BG, backdropFilter: EFFECTS.GLASS_BLUR, padding: SPACING.PX_24, borderRadius: SPACING.RADIUS_MD, border: `1px solid ${EFFECTS.GLASS_BORDER}`, display: "flex", flexDirection: "column", gap: SPACING.PX_16, opacity: sourceEnter, transform: `translateX(${(1 - sourceEnter) * -20}px)` }}>
-        <div style={{ fontFamily: FONTS.MONO, fontSize: FONTS.SIZE_SM, color: COLORS.TEXT_MUTED, letterSpacing: FONTS.TRACKING_WIDER }}>
+      <div style={{ position: "absolute", top: 100, left: 100, backgroundColor: COLORS.BG_SURFACE, padding: SPACING.PX_24, borderRadius: SPACING.RADIUS_MD, border: `2px solid ${COLORS.STROKE_DEFAULT}`, display: "flex", flexDirection: "column", gap: SPACING.PX_16, opacity: sourceEnter, transform: `translateX(${(1 - sourceEnter) * -20}px)` }}>
+        <div style={{ fontFamily: FONTS.DISPLAY, fontSize: 32, color: COLORS.TEXT_SUB, letterSpacing: FONTS.TRACKING_WIDER }}>
           출처
         </div>
         <div style={{ display: "flex", gap: SPACING.PX_12 }}>
           <div style={{ opacity: reutersEnter, transform: `scale(${reutersEnter})` }}>
-            <StatusTag label="REUTERS" bgColor={COLORS.BG_ELEVATED} textColor={COLORS.TEXT_MAIN} />
+            <StatusTag label="REUTERS" bgColor={COLORS.BG_MUTED} textColor={COLORS.TEXT_MAIN} />
           </div>
           <div style={{ opacity: apEnter, transform: `scale(${apEnter})` }}>
-            <StatusTag label="AP NEWS" bgColor={COLORS.BG_ELEVATED} textColor={COLORS.TEXT_MAIN} />
+            <StatusTag label="AP NEWS" bgColor={COLORS.BG_MUTED} textColor={COLORS.TEXT_MAIN} />
           </div>
         </div>
       </div>
@@ -267,15 +267,15 @@ const Scene9: React.FC = () => {
 
   return (
     <AbsoluteFill style={{ backgroundColor: COLORS.BG_BASE }}>
-      <div style={{ position: "absolute", inset: 0, backgroundColor: COLORS.PRIMARY_DIM, opacity: aiTINT * 0.3 }} />
+      <div style={{ position: "absolute", inset: 0, backgroundColor: COLORS.PRIMARY_LIGHT, opacity: aiTINT * 0.3 }} />
 
       <div style={{ position: "absolute", top: 80, width: "100%", display: "flex", justifyContent: "center", opacity: aiTag, transform: `translateY(${(1 - aiTag) * -20}px)` }}>
-         <StatusTag label="AI-DRIVEN" bgColor={COLORS.PRIMARY_DIM} textColor={COLORS.PRIMARY} borderColor={COLORS.PRIMARY} showDot dotColor={COLORS.PRIMARY} />
+         <StatusTag label="AI-DRIVEN" bgColor={COLORS.PRIMARY_LIGHT} textColor={COLORS.PRIMARY} borderColor={COLORS.PRIMARY} showDot dotColor={COLORS.PRIMARY} />
       </div>
 
       <div style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "100%", gap: 0, transform: "translateY(-30px)" }}>
         <div style={{ zIndex: Z.CONTENT + 1 }}>
-          <FlowBox title="정보 수집" borderColor={COLORS.PRIMARY} isActive={true} delay={0} glowColor={COLORS.PRIMARY_GLOW} />
+          <FlowBox title="정보 수집" borderColor={COLORS.PRIMARY} isActive={true} delay={0} glowColor={COLORS.PRIMARY} />
         </div>
         
         <div style={{ width: 140, display: "flex", alignItems: "center", margin: "0 -20px", zIndex: Z.CONTENT }}>
@@ -284,7 +284,7 @@ const Scene9: React.FC = () => {
 
         {frame >= 66 && (
           <div style={{ zIndex: Z.CONTENT + 1 }}>
-            <FlowBox title="표적 선정" borderColor={COLORS.PRIMARY} isActive={true} delay={66} glowColor={COLORS.PRIMARY_GLOW} />
+            <FlowBox title="표적 선정" borderColor={COLORS.PRIMARY} isActive={true} delay={66} glowColor={COLORS.PRIMARY} />
           </div>
         )}
       </div>
@@ -311,7 +311,7 @@ const Scene10: React.FC = () => {
         <div style={{ width: 140, display: "flex", alignItems: "center", justifyContent: "flex-end", zIndex: Z.CONTENT }}>
           {droneDataEnter && (
             <div style={{ marginRight: SPACING.PX_16 }}>
-              <StatusTag label="드론 데이터" bgColor={COLORS.BG_ELEVATED} />
+              <StatusTag label="드론 데이터" bgColor={COLORS.BG_MUTED} />
             </div>
           )}
         </div>
@@ -331,8 +331,8 @@ const Scene10: React.FC = () => {
         <div style={{ width: 200, display: "flex", alignItems: "center", justifyContent: "flex-start", zIndex: Z.CONTENT, paddingLeft: SPACING.PX_16 }}>
           {priorityEnter && (
              <div style={{ display: "flex", flexDirection: "column", gap: SPACING.PX_8 }}>
-               <StatusTag label="#1 우선순위 목록" borderColor={COLORS.SECONDARY} textColor={COLORS.SECONDARY} startFrame={161} />
-               {frame >= 180 && <StatusTag label="#2 표적 데이터" borderColor={COLORS.TEXT_MUTED} textColor={COLORS.TEXT_BODY} startFrame={180} />}
+                <StatusTag label="#1 우선순위 목록" borderColor={COLORS.SECONDARY} textColor={COLORS.SECONDARY} startFrame={161} />
+                {frame >= 180 && <StatusTag label="#2 표적 데이터" borderColor={COLORS.STROKE_DEFAULT} textColor={COLORS.TEXT_MAIN} startFrame={180} />}
              </div>
           )}
         </div>
@@ -355,7 +355,7 @@ const Scene11: React.FC = () => {
     <AbsoluteFill style={{ backgroundColor: COLORS.BG_BASE }}>
       {/* Same Palantir flow from Scene 10 but dimmed/moved up */}
       <div style={{ display: "flex", justifyContent: "center", alignItems: "center", gap: 0, position: "absolute", top: "30%", width: "100%", opacity: 0.4 }}>
-        <div style={{ width: 140, display: "flex", justifyContent: "flex-end", marginRight: SPACING.PX_16 }}><StatusTag label="드론 데이터" bgColor={COLORS.BG_ELEVATED} /></div>
+        <div style={{ width: 140, display: "flex", justifyContent: "flex-end", marginRight: SPACING.PX_16 }}><StatusTag label="드론 데이터" bgColor={COLORS.BG_MUTED} /></div>
         <div style={{ width: 100, margin: "0 -20px" }}><DrawLine color={COLORS.PRIMARY} /></div>
         <div style={{ zIndex: Z.CONTENT + 1 }}><FlowBox title="Palantir" borderColor={COLORS.PRIMARY} isActive={false} /></div>
         <div style={{ width: 100, margin: "0 -20px" }}><DrawLine color={COLORS.PRIMARY} /></div>
@@ -368,7 +368,7 @@ const Scene11: React.FC = () => {
         <div style={{ width: 140, display: "flex", alignItems: "center", justifyContent: "flex-end", zIndex: Z.CONTENT }}>
           {frame >= 53 && (
             <div style={{ marginRight: SPACING.PX_16, display: "flex", flexDirection: "column", alignItems: "flex-end", gap: SPACING.PX_4 }}>
-              <div style={{ fontFamily: FONTS.MONO, fontSize: FONTS.SIZE_XS, color: COLORS.TEXT_MUTED }}>시나리오</div>
+              <div style={{ fontFamily: FONTS.DISPLAY, fontSize: 14, color: COLORS.TEXT_SUB }}>시나리오</div>
               <CounterText from={0} to={50000} startFrame={53} durationInFrames={40} suffix="+" color={COLORS.TEXT_MAIN} fontSize={FONTS.SIZE_MD} fontWeight={FONTS.WEIGHT_BOLD} />
             </div>
           )}
@@ -388,7 +388,7 @@ const Scene11: React.FC = () => {
         </div>
         <div style={{ width: 200, display: "flex", alignItems: "center", justifyContent: "flex-start", zIndex: Z.CONTENT, paddingLeft: SPACING.PX_16 }}>
           {frame >= 213 && (
-             <StatusTag label="최적의 시나리오" borderColor={COLORS.SECONDARY} textColor={COLORS.SECONDARY} startFrame={213} bgColor={COLORS.SECONDARY_DIM} />
+             <StatusTag label="최적의 시나리오" borderColor={COLORS.SECONDARY} textColor={COLORS.SECONDARY} startFrame={213} bgColor={COLORS.PRIMARY_LIGHT} />
           )}
         </div>
       </div>
@@ -396,7 +396,7 @@ const Scene11: React.FC = () => {
       {/* Target 지휘부 */}
       {frame >= 213 && (
          <div style={{ position: "absolute", top: "50%", right: "8%", transform: "translateY(-50%)" }}>
-           <FlowBox title="지휘부" subtitle="COMMAND" borderColor={COLORS.TEXT_DISABLED} isActive={false} delay={213} />
+           <FlowBox title="지휘부" subtitle="COMMAND" borderColor={COLORS.STROKE_DEFAULT} isActive={false} delay={213} />
          </div>
       )}
     </AbsoluteFill>
@@ -416,18 +416,18 @@ const Scene12: React.FC = () => {
   return (
     <AbsoluteFill style={{ backgroundColor: COLORS.BG_BASE }}>
       {/* Background frozen from previous - just a dim overlay over it */}
-      <div style={{ position: "absolute", inset: 0, backgroundColor: COLORS.BG_VOID, opacity: 0.8 }} />
+      <div style={{ position: "absolute", inset: 0, backgroundColor: COLORS.BG_DARKEST, opacity: 0.8 }} />
       
       <div style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "100%" }}>
         <div style={{ 
           transform: `scale(${flashEnter})`,
           opacity: flashEnter,
-          border: `2px solid ${COLORS.WARNING}`,
-          backgroundColor: COLORS.BG_ELEVATED,
+          border: `2px solid ${COLORS.STATE_WARN_FG}`,
+          backgroundColor: COLORS.BG_SURFACE,
           padding: `${SPACING.PX_32}px ${SPACING.PX_64}px`,
           borderRadius: SPACING.RADIUS_MD,
-          boxShadow: EFFECTS.TINT_ACCENT,
-          fontFamily: FONTS.PRIMARY, 
+          boxShadow: EFFECTS.SHADOW_PRIMARY,
+          fontFamily: FONTS.DISPLAY, 
           fontSize: FONTS.SIZE_XL, 
           color: COLORS.TEXT_MAIN, 
           fontWeight: FONTS.WEIGHT_BOLD 
@@ -446,7 +446,7 @@ const Scene12: React.FC = () => {
 const Scene13: React.FC = () => {
   return (
     <AbsoluteFill style={{ backgroundColor: COLORS.BG_BASE, display: "flex", justifyContent: "center", alignItems: "center" }}>
-      <div style={{ fontFamily: FONTS.PRIMARY, fontSize: FONTS.SIZE_2XL, color: COLORS.TEXT_MAIN, fontWeight: FONTS.WEIGHT_EXTRABOLD }}>
+      <div style={{ fontFamily: FONTS.DISPLAY, fontSize: FONTS.SIZE_2XL, color: COLORS.TEXT_MAIN, fontWeight: FONTS.WEIGHT_EXTRABOLD }}>
         네.
       </div>
     </AbsoluteFill>
@@ -471,9 +471,9 @@ const Scene14: React.FC = () => {
         {/* Left */}
         <div style={{ transform: `scale(${leftEnter})`, opacity: leftEnter, zIndex: Z.CONTENT + 1, position: "relative" }}>
           <div style={{ position: "absolute", top: -40, width: "100%", textAlign: "center" }}>
-            <StatusTag label="일상 AI" bgColor={COLORS.SECONDARY_DIM} textColor={COLORS.SECONDARY} borderColor="transparent" />
+            <StatusTag label="일상 AI" bgColor={COLORS.PRIMARY_LIGHT} textColor={COLORS.PRIMARY} borderColor="transparent" />
           </div>
-          <FlowBox title="Claude" borderColor={COLORS.SECONDARY} isActive={false} />
+          <FlowBox title="Claude" borderColor={COLORS.PRIMARY} isActive={false} />
         </div>
 
         {/* Line connection */}
@@ -484,9 +484,9 @@ const Scene14: React.FC = () => {
         {/* Right */}
         <div style={{ transform: `scale(${rightEnter})`, opacity: rightEnter, zIndex: Z.CONTENT + 1, position: "relative" }}>
            <div style={{ position: "absolute", top: -40, width: "100%", textAlign: "center" }}>
-            <StatusTag label="군사 AI" bgColor={COLORS.NEGATIVE_DIM} textColor={COLORS.NEGATIVE} borderColor="transparent" />
+             <StatusTag label="군사 AI" bgColor={COLORS.STATE_ERROR_BG} textColor={COLORS.STATE_ERROR_FG} borderColor="transparent" />
           </div>
-          <FlowBox title="Claude" borderColor={COLORS.NEGATIVE} isActive={false} />
+          <FlowBox title="Claude" borderColor={COLORS.STATE_ERROR_FG} isActive={false} />
         </div>
 
       </div>
@@ -504,7 +504,7 @@ const Scene15: React.FC = () => {
   const bgInterp = interpolateColors(
     frame,
     [0, 73],
-    [COLORS.BG_BASE, COLORS.BG_VOID]
+    [COLORS.BG_BASE, COLORS.BG_DARKEST]
   );
   
   const opacityInterp = interpolate(frame, [0, 73], [1, 0], { extrapolateRight: "clamp" });
@@ -516,17 +516,17 @@ const Scene15: React.FC = () => {
     <AbsoluteFill style={{ backgroundColor: bgInterp, display: "flex", justifyContent: "center", alignItems: "center" }}>
       <div style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "100%", gap: 0, opacity: opacityInterp }}>
         <div style={{ position: "relative" }}>
-          <div style={{ position: "absolute", top: -40, width: "100%", textAlign: "center" }}><StatusTag label="일상 AI" bgColor={COLORS.SECONDARY_DIM} textColor={COLORS.SECONDARY} borderColor="transparent" /></div>
-          <FlowBox title="Claude" borderColor={COLORS.SECONDARY} isActive={false} />
+          <div style={{ position: "absolute", top: -40, width: "100%", textAlign: "center" }}><StatusTag label="일상 AI" bgColor={COLORS.PRIMARY_LIGHT} textColor={COLORS.PRIMARY} borderColor="transparent" /></div>
+          <FlowBox title="Claude" borderColor={COLORS.PRIMARY} isActive={false} />
         </div>
         <div style={{ width: 150, margin: "0 -20px" }}><DrawLine color={COLORS.PRIMARY} thickness={SPACING.BORDER_THICK} /></div>
         <div style={{ position: "relative" }}>
-          <div style={{ position: "absolute", top: -40, width: "100%", textAlign: "center" }}><StatusTag label="군사 AI" bgColor={COLORS.NEGATIVE_DIM} textColor={COLORS.NEGATIVE} borderColor="transparent" /></div>
-          <FlowBox title="Claude" borderColor={COLORS.NEGATIVE} isActive={false} />
+          <div style={{ position: "absolute", top: -40, width: "100%", textAlign: "center" }}><StatusTag label="군사 AI" bgColor={COLORS.STATE_ERROR_BG} textColor={COLORS.STATE_ERROR_FG} borderColor="transparent" /></div>
+          <FlowBox title="Claude" borderColor={COLORS.STATE_ERROR_FG} isActive={false} />
         </div>
       </div>
 
-      <div style={{ position: "absolute", opacity: cursorOpacity, fontFamily: FONTS.MONO, fontSize: FONTS.SIZE_2XL, color: COLORS.TEXT_MAIN, top: "50%", left: "50%", transform: "translate(-50%, -50%)" }}>
+      <div style={{ position: "absolute", opacity: cursorOpacity, fontFamily: FONTS.DISPLAY, fontSize: FONTS.SIZE_2XL, color: COLORS.TEXT_MAIN, top: "50%", left: "50%", transform: "translate(-50%, -50%)" }}>
         |
       </div>
     </AbsoluteFill>
@@ -547,24 +547,25 @@ const Scene16: React.FC = () => {
   return (
     <AbsoluteFill style={{ backgroundColor: COLORS.BG_BASE, display: "flex", flexDirection: "row" }}>
       {/* Left: 일상 */}
-      <div style={{ flex: 1, height: "100%", backgroundColor: COLORS.SECONDARY_DIM, opacity: leftEnter, display: "flex", justifyContent: "center", alignItems: "center" }}>
-        <StatusTag label="일상" bgColor="transparent" textColor={COLORS.SECONDARY} borderColor="transparent" fontSize={FONTS.SIZE_LG} />
+      <div style={{ flex: 1, height: "100%", backgroundColor: COLORS.PRIMARY_LIGHT, opacity: leftEnter, display: "flex", justifyContent: "center", alignItems: "center" }}>
+        <StatusTag label="일상" bgColor="transparent" textColor={COLORS.PRIMARY} borderColor="transparent" fontSize={FONTS.SIZE_LG} />
       </div>
 
       {/* Right: 전쟁 */}
       <div style={{ 
         flex: 1, 
         height: "100%", 
-        backgroundColor: COLORS.NEGATIVE_DIM, 
+        backgroundColor: COLORS.STATE_ERROR_BG, 
         opacity: rightEnter, 
-        boxShadow: frame >= 108 ? `inset 0 0 0 4px ${COLORS.WARNING}` : "none",
+        boxShadow: frame >= 108 ? `inset 0 0 0 6px ${COLORS.STATE_WARN_FG}` : "none",
+        borderLeft: `2px solid ${COLORS.STROKE_DEFAULT}`,
         display: "flex", justifyContent: "center", alignItems: "center" 
       }}>
-        <StatusTag label="전쟁" bgColor="transparent" textColor={COLORS.NEGATIVE} borderColor="transparent" fontSize={FONTS.SIZE_LG} />
+        <StatusTag label="전쟁" bgColor="transparent" textColor={COLORS.STATE_ERROR_FG} borderColor="transparent" fontSize={FONTS.SIZE_LG} />
       </div>
 
       <div style={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)", zIndex: Z.CONTENT }}>
-         <FlowBox title="Claude" borderColor={COLORS.TEXT_DISABLED} isActive={false} />
+         <FlowBox title="Claude" borderColor={COLORS.BG_SURFACE} isActive={false} />
       </div>
     </AbsoluteFill>
   );
@@ -587,10 +588,11 @@ const Scene17: React.FC = () => {
         <div style={{ 
           transform: `scale(${labelEnter})`, 
           opacity: labelEnter, 
-          border: `2px solid ${COLORS.WARNING}`, 
+          border: `2px solid ${COLORS.STATE_WARN_FG}`, 
+          backgroundColor: COLORS.BG_SURFACE,
           padding: `${SPACING.PX_16}px ${SPACING.PX_32}px`,
-          fontFamily: FONTS.MONO,
-          fontSize: FONTS.SIZE_LG,
+          fontFamily: FONTS.DISPLAY,
+          fontSize: 48,
           color: COLORS.TEXT_MAIN,
           letterSpacing: FONTS.TRACKING_WIDER,
           textTransform: "uppercase"
@@ -600,9 +602,9 @@ const Scene17: React.FC = () => {
         <div style={{ 
           transform: `translateY(${(1 - textEnter) * 10}px)`, 
           opacity: textEnter, 
-          fontFamily: FONTS.PRIMARY,
-          fontSize: FONTS.SIZE_MD,
-          color: COLORS.TEXT_MUTED
+          fontFamily: FONTS.DISPLAY,
+          fontSize: 32,
+          color: COLORS.TEXT_SUB
         }}>
           공식 확인되지 않은 정보입니다
         </div>
@@ -627,7 +629,7 @@ const Scene18: React.FC = () => {
       <div style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "100%" }}>
         <QuotePanel startFrame={0} showQuoteMark={true}>
           <div style={{ display: "flex", alignItems: "center", gap: SPACING.PX_16 }}>
-             <div style={{ fontFamily: FONTS.PRIMARY, fontSize: FONTS.SIZE_LG, color: COLORS.TEXT_MAIN, fontWeight: FONTS.WEIGHT_BOLD }}>
+             <div style={{ fontFamily: FONTS.DISPLAY, fontSize: FONTS.SIZE_LG, color: COLORS.TEXT_MAIN, fontWeight: FONTS.WEIGHT_BOLD }}>
                외신 보도에 따르면
              </div>
           </div>
@@ -651,13 +653,13 @@ const Scene19: React.FC = () => {
 
   return (
     <AbsoluteFill style={{ backgroundColor: COLORS.BG_BASE, display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center" }}>
-      <div style={{ position: "absolute", inset: 0, background: EFFECTS.RADIAL_PRIMARY, opacity: bgTINT * 0.4 }} />
+      <div style={{ position: "absolute", inset: 0, backgroundColor: COLORS.PRIMARY, opacity: bgTINT * 0.1 }} />
       
       <div style={{ zIndex: 1, display: "flex", flexDirection: "column", alignItems: "center", gap: SPACING.PX_16 }}>
         <div style={{ 
           opacity: asIsEnter, 
           transform: `translateY(${(1 - asIsEnter) * 10}px)`, 
-          fontFamily: FONTS.PRIMARY, 
+          fontFamily: FONTS.DISPLAY, 
           fontSize: FONTS.SIZE_XL, 
           color: COLORS.TEXT_MAIN, 
           fontWeight: FONTS.WEIGHT_BOLD 
@@ -667,9 +669,9 @@ const Scene19: React.FC = () => {
         <div style={{ 
           opacity: conveyEnter, 
           transform: `translateY(${(1 - conveyEnter) * 10}px)`, 
-          fontFamily: FONTS.PRIMARY, 
+          fontFamily: FONTS.DISPLAY, 
           fontSize: FONTS.SIZE_MD, 
-          color: COLORS.TEXT_BODY 
+          color: COLORS.TEXT_MAIN 
         }}>
           전달드리는 거예요.
         </div>

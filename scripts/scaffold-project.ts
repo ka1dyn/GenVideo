@@ -70,7 +70,7 @@ async function main() {
   const args = process.argv.slice(2);
   if (args.length < 2) {
     console.error(
-      "Usage: npx ts-node scripts/scaffold-project.ts [extract|process|all] <project_id>"
+      "Usage: npx tsx scripts/scaffold-project.ts [extract|process|all] <project_id>"
     );
     process.exit(1);
   }
@@ -119,7 +119,7 @@ async function main() {
       console.log(`\n✅ Extract complete for ${projectId}!`);
       console.log(`\n📌 Next steps:`);
       console.log(`   1. Edit audio files in public/${projectId}/*/ if necessary.`);
-      console.log(`   2. Run: npx ts-node scripts/scaffold-project.ts process ${projectId}`);
+      console.log(`   2. Run: npx tsx scripts/scaffold-project.ts process ${projectId}`);
       return;
     }
   }

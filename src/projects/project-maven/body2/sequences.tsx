@@ -55,17 +55,17 @@ const AICore: React.FC<{ frame: number; pulseStart: number }> = ({ frame, pulseS
         width: 160,
         height: 160,
         borderRadius: "50%",
-        backgroundColor: COLORS.BG_ELEVATED,
+        backgroundColor: COLORS.BG_SURFACE,
         border: `2px solid ${COLORS.PRIMARY}`,
         display: "flex",
         flexDirection: "column",
         justifyContent: "center",
         alignItems: "center",
         transform: `scale(${pulse * analysisProgress})`,
-        boxShadow: `0 0 ${TINTIntensity}px ${COLORS.PRIMARY_GLOW}`,
+        boxShadow: EFFECTS.SHADOW_PRIMARY,
         zIndex: Z.CONTENT,
       }}>
-        <div style={{ color: COLORS.PRIMARY, fontSize: FONTS.SIZE_XS, letterSpacing: FONTS.TRACKING_WIDER, opacity: 0.7 }}>ANALYSIS</div>
+        <div style={{ color: COLORS.PRIMARY, fontSize: 14, letterSpacing: FONTS.TRACKING_WIDER, opacity: 0.7 }}>ANALYSIS</div>
         <div style={{ color: COLORS.PRIMARY, fontSize: FONTS.SIZE_MD, fontWeight: FONTS.WEIGHT_EXTRABOLD, letterSpacing: FONTS.TRACKING_WIDE }}>AI CORE</div>
       </div>
       
@@ -139,15 +139,15 @@ const PhaseOverview: React.FC<{
     fps: 30,
     config: ANIMATION.SPRING_SNAPPY,
   });
-  const highlightTINT = interpolateColors(highlightIn, [0, 1], ["transparent", COLORS.PRIMARY_DIM]);
-  const highlightBorder = interpolateColors(highlightIn, [0, 1], [COLORS.BORDER_STRONG, COLORS.PRIMARY]);
+  const highlightTINT = interpolateColors(highlightIn, [0, 1], ["transparent", COLORS.PRIMARY_LIGHT]);
+  const highlightBorder = interpolateColors(highlightIn, [0, 1], [COLORS.STROKE_DEFAULT, COLORS.PRIMARY]);
 
   return (
     <AbsoluteFill style={{ backgroundColor: COLORS.BG_BASE, justifyContent: "center", alignItems: "center" }}>
       {/* Title section */}
       <div style={{ position: "absolute", top: 180, display: "flex", flexDirection: "column", alignItems: "center", width: "100%" }}>
         <h2 style={{ 
-          color: COLORS.TEXT_MUTED, 
+          color: COLORS.TEXT_SUB, 
           fontSize: FONTS.SIZE_LG, 
           fontWeight: FONTS.WEIGHT_SEMIBOLD, 
           letterSpacing: FONTS.TRACKING_WIDER,
@@ -160,7 +160,7 @@ const PhaseOverview: React.FC<{
         <div style={{ 
           width: 800, 
           height: 2, 
-          backgroundColor: COLORS.BORDER_STRONG,
+          backgroundColor: COLORS.STROKE_DEFAULT,
           transform: `scaleX(${lineProgress})`,
           transformOrigin: "left",
           opacity: lineProgress > 0 ? 1 : 0
@@ -184,11 +184,11 @@ const PhaseOverview: React.FC<{
             }}>
               <div style={{ 
                 width: 140, height: 140, 
-                backgroundColor: isHighlighted ? highlightTINT : COLORS.BG_ELEVATED, 
-                border: `2px solid ${isHighlighted ? highlightBorder : COLORS.BORDER_STRONG}`,
+                backgroundColor: isHighlighted ? highlightTINT : COLORS.BG_SURFACE, 
+                border: `2px solid ${isHighlighted ? highlightBorder : COLORS.STROKE_STRONG}`,
                 display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center",
                 gap: SPACING.PX_8,
-                boxShadow: isHighlighted ? `0 0 30px ${COLORS.PRIMARY_DIM}` : EFFECTS.SHADOW_MD,
+                boxShadow: isHighlighted ? EFFECTS.SHADOW_PRIMARY : EFFECTS.SHADOW_SM,
                 transition: "background-color 0.2s, box-shadow 0.2s"
               }}>
                 <div style={{ color: isHighlighted ? COLORS.PRIMARY : COLORS.TEXT_DISABLED, fontSize: FONTS.SIZE_LG, fontWeight: FONTS.WEIGHT_BOLD }}>{step.num}</div>
@@ -277,10 +277,9 @@ const Scene4: React.FC = () => {
       {/* Background Decorative TINT */}
       <div style={{
         position: "absolute",
-        width: 1200,
-        height: 600,
-        background: EFFECTS.RADIAL_PRIMARY,
-        opacity: interpolate(frame, [analyzeStart, analyzeStart + 30], [0, 0.4], { extrapolateRight: "clamp" }),
+        inset: 0,
+        backgroundColor: COLORS.PRIMARY,
+        opacity: interpolate(frame, [analyzeStart, analyzeStart + 30], [0, 0.05], { extrapolateRight: "clamp" }),
       }} />
 
       <div style={{ 
@@ -298,10 +297,9 @@ const Scene4: React.FC = () => {
             <div key={i} style={{ 
               width: 380,
               height: 480,
-              backgroundColor: EFFECTS.GLASS_BG, 
-              backdropFilter: EFFECTS.GLASS_BLUR,
-              border: `1px solid ${isAnalysisActive ? COLORS.PRIMARY : COLORS.BORDER_STRONG}`,
-              borderRadius: SPACING.RADIUS_LG,
+              backgroundColor: COLORS.BG_SURFACE, 
+              border: `2px solid ${isAnalysisActive ? COLORS.PRIMARY : COLORS.STROKE_DEFAULT}`,
+              borderRadius: SPACING.RADIUS_MD,
               transform: `translateY(${interpolate(appear, [0, 1], [40, 0])}px) scale(${appear})`,
               opacity: appear,
               display: "flex", 
@@ -310,7 +308,7 @@ const Scene4: React.FC = () => {
               alignItems: "center",
               padding: SPACING.PX_40,
               gap: SPACING.PX_32,
-              boxShadow: isAnalysisActive ? EFFECTS.TINT_MD : EFFECTS.SHADOW_LG,
+              boxShadow: isAnalysisActive ? EFFECTS.SHADOW_PRIMARY : EFFECTS.SHADOW_MD,
               transition: "all 0.5s ease-out"
             }}>
               {/* Type label at top */}
@@ -330,7 +328,7 @@ const Scene4: React.FC = () => {
               {/* Central Icon */}
               <div style={{ 
                 fontSize: 100, 
-                filter: isAnalysisActive ? `drop-shadow(0 0 20px ${COLORS.PRIMARY_GLOW})` : "none",
+                filter: isAnalysisActive ? `drop-shadow(0 0 20px ${COLORS.PRIMARY})` : "none",
                 transform: isAnalysisActive ? `scale(${1 + Math.sin(frame * 0.1) * 0.05})` : "none",
                 transition: "all 0.3s"
               }}>
@@ -349,7 +347,7 @@ const Scene4: React.FC = () => {
                   {source.label}
                 </div>
                 <div style={{ 
-                  color: COLORS.TEXT_MUTED, 
+                  color: COLORS.TEXT_SUB, 
                   fontSize: 16, 
                   fontFamily: FONTS.MONO,
                   letterSpacing: 1
@@ -362,7 +360,7 @@ const Scene4: React.FC = () => {
               <div style={{ 
                 width: "100%", 
                 height: 2, 
-                backgroundColor: COLORS.BORDER_STRONG,
+                backgroundColor: COLORS.STROKE_SUBTLE,
                 position: "relative",
                 overflow: "hidden"
               }}>
@@ -387,7 +385,7 @@ const Scene4: React.FC = () => {
       </div>
 
       {/* Subtle bottom gradient */}
-      <div style={{ position: "absolute", bottom: 0, width: "100%", height: 200, background: EFFECTS.FADE_UP, opacity: 0.5, pointerEvents: "none" }} />
+      <div style={{ position: "absolute", bottom: 0, width: "100%", height: 200, background: `linear-gradient(to top, ${COLORS.PRIMARY_LIGHT}, transparent)`, opacity: 0.3, pointerEvents: "none" }} />
     </AbsoluteFill>
   );
 };
@@ -412,7 +410,7 @@ const Scene5: React.FC = () => {
   return (
     <AbsoluteFill style={{ backgroundColor: COLORS.BG_BASE, justifyContent: "center", alignItems: "center" }}>
       <QuotePanel startFrame={0}>
-        <div style={{ width: 600, color: COLORS.TEXT_MUTED, fontSize: FONTS.SIZE_SM, letterSpacing: FONTS.TRACKING_WIDER, marginBottom: SPACING.PX_16 }}>
+        <div style={{ width: 600, color: COLORS.TEXT_SUB, fontSize: 32, letterSpacing: FONTS.TRACKING_WIDER, marginBottom: SPACING.PX_16 }}>
           질의 1:
         </div>
         <div style={{ color: COLORS.TEXT_MAIN, fontSize: FONTS.SIZE_MD, fontWeight: FONTS.WEIGHT_MEDIUM, lineHeight: FONTS.LEADING_LOOSE }}>
@@ -444,7 +442,7 @@ const Scene6: React.FC = () => {
       <QuotePanel startFrame={0}>
         <div style={{ width: 600, display: "flex", justifyContent: "space-between", alignItems: "flex-end", gap: SPACING.PX_32 }}>
           <div>
-            <div style={{ color: COLORS.TEXT_MUTED, fontSize: FONTS.SIZE_SM, letterSpacing: FONTS.TRACKING_WIDER, marginBottom: SPACING.PX_16 }}>
+            <div style={{ color: COLORS.TEXT_SUB, fontSize: 32, letterSpacing: FONTS.TRACKING_WIDER, marginBottom: SPACING.PX_16 }}>
               질의 2:
             </div>
             <div style={{ color: COLORS.TEXT_MAIN, fontSize: FONTS.SIZE_MD, fontWeight: FONTS.WEIGHT_MEDIUM, lineHeight: FONTS.LEADING_LOOSE }}>
@@ -479,8 +477,9 @@ const Scene7: React.FC = () => {
           fontSize: FONTS.SIZE_4XL, 
           fontWeight: FONTS.WEIGHT_EXTRABOLD, 
           color: COLORS.PRIMARY, 
-          fontFamily: FONTS.MONO,
-          textShadow: EFFECTS.TINT_LG
+          fontFamily: FONTS.DISPLAY,
+          borderBottom: `8px solid ${COLORS.PRIMARY}`,
+          paddingBottom: 10
         }}>
           {isLooping ? (
              <div style={{ display: "flex", overflow: "hidden", height: 160 }}>
@@ -494,8 +493,8 @@ const Scene7: React.FC = () => {
         </div>
         <div style={{ 
           marginTop: SPACING.PX_16, 
-          color: COLORS.TEXT_MUTED, 
-          fontSize: FONTS.SIZE_SM, 
+          color: COLORS.TEXT_SUB, 
+          fontSize: 32, 
           letterSpacing: FONTS.TRACKING_WIDER,
           opacity: isLooping ? 1 : 0.5
         }}>
@@ -536,7 +535,7 @@ const Scene9: React.FC = () => {
 
   return (
     <AbsoluteFill style={{ backgroundColor: COLORS.BG_BASE, justifyContent: "center", alignItems: "center" }}>
-      <div style={{ position: "relative", padding: SPACING.PX_48, border: `2px solid ${COLORS.BORDER_STRONG}`, backgroundColor: COLORS.BG_SURFACE, display: "flex", alignItems: "center", justifyContent: "center" }}>
+      <div style={{ position: "relative", padding: SPACING.PX_48, border: `2px solid ${COLORS.STROKE_DEFAULT}`, backgroundColor: COLORS.BG_SURFACE, display: "flex", alignItems: "center", justifyContent: "center" }}>
         <span style={{ color: COLORS.TEXT_MAIN, fontSize: FONTS.SIZE_LG, fontWeight: FONTS.WEIGHT_BOLD, letterSpacing: FONTS.TRACKING_WIDER }}>
           영상 데이터
         </span>
@@ -546,9 +545,9 @@ const Scene9: React.FC = () => {
           position: "absolute", 
           width: `${crossWidth * 120}%`, 
           height: 6, 
-          backgroundColor: COLORS.NEGATIVE,
+          backgroundColor: COLORS.STATE_ERROR_FG,
           transform: "rotate(15deg)",
-          boxShadow: EFFECTS.TINT_ACCENT,
+          boxShadow: EFFECTS.SHADOW_PRIMARY,
         }} />
       </div>
     </AbsoluteFill>
@@ -603,8 +602,8 @@ const Scene10: React.FC = () => {
         top: centerY - 400,
         width: 800,
         height: 800,
-        background: EFFECTS.RADIAL_PRIMARY,
-        opacity: interpolate(frame, [analyzeStart, analyzeStart + 30], [0, 0.4], { extrapolateRight: "clamp" }),
+        backgroundColor: COLORS.PRIMARY,
+        opacity: interpolate(frame, [analyzeStart, analyzeStart + 30], [0, 0.05], { extrapolateRight: "clamp" }),
       }} />
 
       <div style={{ position: "relative", width: "100%", height: "100%" }}>
@@ -675,20 +674,19 @@ const Scene10: React.FC = () => {
               <div key={i} style={{ 
                 width: NODE_WIDTH,
                 height: 90,
-                backgroundColor: EFFECTS.GLASS_BG, 
-                backdropFilter: EFFECTS.GLASS_BLUR,
-                border: `1px solid ${COLORS.BORDER_STRONG}`,
+                backgroundColor: COLORS.BG_SURFACE, 
+                border: `1px solid ${COLORS.STROKE_DEFAULT}`,
                 borderRadius: SPACING.RADIUS_MD,
                 transform: `translateX(${interpolate(appear, [0, 1], [-40, 0])}px) scale(${appear})`,
                 opacity: appear,
                 display: "flex", alignItems: "center",
                 padding: "0 28px",
                 gap: 20,
-                boxShadow: isScanned ? `0 0 20px ${COLORS.PRIMARY_DIM}` : EFFECTS.SHADOW_MD,
+                boxShadow: isScanned ? EFFECTS.SHADOW_PRIMARY : EFFECTS.SHADOW_MD,
               }}>
                 <div style={{ fontSize: 36, opacity: 0.9 }}>{source.icon}</div>
                 <div style={{ display: "flex", flexDirection: "column" }}>
-                  <div style={{ color: COLORS.TEXT_MUTED, fontSize: 14, letterSpacing: 1.5, fontFamily: FONTS.MONO }}>SOURCE_0{i+1}</div>
+                  <div style={{ color: COLORS.TEXT_SUB, fontSize: 14, letterSpacing: 1.5, fontFamily: FONTS.MONO }}>SOURCE_0{i+1}</div>
                   <div style={{ color: COLORS.TEXT_MAIN, fontSize: 28, fontWeight: FONTS.WEIGHT_BOLD }}>
                     {source.label}
                   </div>
@@ -726,7 +724,7 @@ const Scene10: React.FC = () => {
       <div style={{ 
         position: "absolute", 
         inset: 0, 
-        background: "radial-gradient(circle at center, transparent 40%, rgba(5,8,16,0.4) 100%)",
+        background: `radial-gradient(circle at center, transparent 40%, ${COLORS.BG_DARKEST}66 100%)`,
         pointerEvents: "none" 
       }} />
     </AbsoluteFill>
@@ -751,9 +749,9 @@ const Scene11: React.FC = () => {
     <AbsoluteFill style={{ backgroundColor: COLORS.BG_BASE, justifyContent: "center", alignItems: "center" }}>
       <div style={{ 
         padding: SPACING.PX_64, 
-        backgroundColor: EFFECTS.GLASS_BG, 
-        backdropFilter: EFFECTS.GLASS_BLUR,
-        border: `1px solid ${EFFECTS.GLASS_BORDER}`,
+        backgroundColor: COLORS.BG_SURFACE, 
+        backdropFilter: "blur(12px)",
+        border: `1px solid ${COLORS.STROKE_DEFAULT}`,
         display: "flex", flexDirection: "column", alignItems: "center", gap: SPACING.PX_32
       }}>
         <div style={{ color: COLORS.TEXT_BODY, fontSize: FONTS.SIZE_MD, letterSpacing: FONTS.TRACKING_WIDER }}>
@@ -766,8 +764,8 @@ const Scene11: React.FC = () => {
         }}>
           <div style={{ width: 60, height: 2, backgroundColor: COLORS.PRIMARY }} />
           <div style={{ 
-            color: COLORS.PRIMARY, fontSize: FONTS.SIZE_SM, fontWeight: FONTS.WEIGHT_BOLD,
-            textShadow: frame >= wordHighlight ? EFFECTS.TINT_MD : "none"
+            color: COLORS.PRIMARY, fontSize: 32, fontWeight: FONTS.WEIGHT_BOLD,
+            textShadow: frame >= wordHighlight ? EFFECTS.SHADOW_MD : "none"
           }}>
             상관관계 감지됨
           </div>
@@ -804,7 +802,7 @@ const Scene12: React.FC = () => {
 
   return (
     <AbsoluteFill style={{ 
-      backgroundColor: frame > endStart ? COLORS.PRIMARY_DIM : COLORS.BG_BASE,
+      backgroundColor: frame > endStart ? COLORS.PRIMARY_LIGHT : COLORS.BG_BASE,
       justifyContent: "center", alignItems: "center",
       transition: "background-color 0.5s" 
     }}>
@@ -839,8 +837,8 @@ const Scene12: React.FC = () => {
               top: 200 + n.y - 10,
               width: 20, height: 20,
               borderRadius: "50%",
-              backgroundColor: isConnected ? COLORS.PRIMARY : COLORS.TEXT_DISABLED,
-              boxShadow: isConnected ? EFFECTS.TINT_SM : "none",
+              backgroundColor: isConnected ? COLORS.PRIMARY : COLORS.BG_MUTED,
+              boxShadow: isConnected ? EFFECTS.SHADOW_PRIMARY : "none",
               transition: "all 0.3s"
             }} />
           )
@@ -883,28 +881,27 @@ const Scene14: React.FC = () => {
     <AbsoluteFill style={{ backgroundColor: COLORS.BG_BASE, justifyContent: "center", alignItems: "center" }}>
       <div style={{
         width: 700,
-        backgroundColor: EFFECTS.GLASS_BG,
-        backdropFilter: EFFECTS.GLASS_BLUR,
-        border: `1px solid ${EFFECTS.GLASS_BORDER}`,
+        backgroundColor: COLORS.BG_SURFACE,
+        border: `2px solid ${COLORS.STROKE_DEFAULT}`,
         padding: SPACING.PX_64,
         display: "flex", flexDirection: "column"
       }}>
-        <div style={{ color: COLORS.TEXT_MUTED, fontSize: FONTS.SIZE_SM, letterSpacing: FONTS.TRACKING_WIDER, marginBottom: SPACING.PX_32, borderBottom: `1px solid ${COLORS.BORDER_STRONG}`, paddingBottom: SPACING.PX_16 }}>
+        <div style={{ color: COLORS.TEXT_SUB, fontSize: 32, letterSpacing: FONTS.TRACKING_WIDER, marginBottom: SPACING.PX_32, borderBottom: `1px solid ${COLORS.STROKE_STRONG}`, paddingBottom: SPACING.PX_16 }}>
           AI 보고서
         </div>
 
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: SPACING.PX_48 }}>
           <div>
-            <div style={{ color: COLORS.TEXT_MUTED, fontSize: FONTS.SIZE_SM }}>분류</div>
+            <div style={{ color: COLORS.TEXT_SUB, fontSize: 24, fontWeight: FONTS.WEIGHT_BOLD }}>분류</div>
             <div style={{ color: COLORS.TEXT_MAIN, fontSize: FONTS.SIZE_MD, fontWeight: FONTS.WEIGHT_BOLD }}>군사 시설</div>
           </div>
           <div style={{ textAlign: "right" }}>
-            <div style={{ color: COLORS.TEXT_MUTED, fontSize: FONTS.SIZE_SM }}>확률</div>
+            <div style={{ color: COLORS.TEXT_SUB, fontSize: 24, fontWeight: FONTS.WEIGHT_BOLD }}>확률</div>
             <div style={{ 
               color: showPercent ? COLORS.PRIMARY : COLORS.TEXT_BODY, 
               fontSize: FONTS.SIZE_3XL, 
               fontWeight: FONTS.WEIGHT_EXTRABOLD,
-              textShadow: showPercent ? EFFECTS.TINT_LG : "none",
+              textShadow: showPercent ? EFFECTS.SHADOW_LG : "none",
               fontFamily: FONTS.MONO
             }}>
               <CounterText from={0} to={98} durationInFrames={30} suffix="%" />
@@ -913,8 +910,8 @@ const Scene14: React.FC = () => {
         </div>
 
         <div style={{ 
-          color: COLORS.ACCENT, 
-          fontSize: FONTS.SIZE_SM, 
+          color: COLORS.PRIMARY, 
+          fontSize: 32, 
           fontWeight: FONTS.WEIGHT_BOLD, 
           letterSpacing: FONTS.TRACKING_WIDER,
           opacity: blink ? 1 : 0.3
@@ -955,9 +952,8 @@ const Scene15: React.FC = () => {
       }}>
         <div style={{
           width: 500,
-          backgroundColor: EFFECTS.GLASS_BG,
-          backdropFilter: EFFECTS.GLASS_BLUR,
-          border: `1px solid ${EFFECTS.GLASS_BORDER}`,
+          backgroundColor: COLORS.BG_SURFACE,
+          border: `2px solid ${COLORS.STROKE_DEFAULT}`,
           padding: SPACING.PX_40,
           display: "flex", flexDirection: "column", gap: SPACING.PX_16
         }}>
@@ -967,8 +963,8 @@ const Scene15: React.FC = () => {
               <div key={i} style={{ 
                 display: "flex", justifyContent: "space-between", 
                 padding: SPACING.PX_16,
-                backgroundColor: COLORS.BG_SURFACE,
-                borderLeft: `4px solid ${i === 0 ? COLORS.PRIMARY : COLORS.BORDER_STRONG}`,
+                backgroundColor: COLORS.BG_EMPHASIS,
+                borderLeft: `4px solid ${i === 0 ? COLORS.PRIMARY : COLORS.STROKE_STRONG}`,
                 opacity: interpolate(itemAppear, [0, 1], [0, 1]),
                 transform: `translateX(${interpolate(itemAppear, [0, 1], [-20, 0])}px)`
               }}>
@@ -981,7 +977,7 @@ const Scene15: React.FC = () => {
 
         {frame > slideOutStart - 10 && (
           <div style={{ 
-            color: COLORS.TEXT_MUTED, 
+            color: COLORS.TEXT_SUB, 
             fontSize: FONTS.SIZE_MD, 
             fontWeight: FONTS.WEIGHT_BOLD, 
             letterSpacing: FONTS.TRACKING_WIDER,
@@ -1026,21 +1022,21 @@ const Scene16: React.FC = () => {
       <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: SPACING.PX_32 }}>
         <div style={{ 
           fontSize: FONTS.SIZE_4XL, 
-          fontFamily: FONTS.MONO, 
+          fontFamily: FONTS.DISPLAY, 
           fontWeight: FONTS.WEIGHT_EXTRABOLD,
-          color: frame >= speedUpStart ? COLORS.WARNING : COLORS.PRIMARY,
-          textShadow: frame >= speedUpStart ? EFFECTS.TINT_ACCENT : EFFECTS.TINT_LG,
+          color: frame >= speedUpStart ? COLORS.STATE_WARN_FG : COLORS.PRIMARY,
+          textShadow: frame >= speedUpStart ? EFFECTS.SHADOW_PRIMARY : EFFECTS.SHADOW_PRIMARY,
           fontVariantNumeric: "tabular-nums"
         }}>
           {pad(m, 2)}:{pad(s, 2)}:{pad(ms, 3)}
         </div>
         <div style={{ 
-          color: COLORS.TEXT_MUTED, 
+          color: COLORS.TEXT_SUB, 
           fontSize: FONTS.SIZE_MD, 
           letterSpacing: FONTS.TRACKING_WIDER,
           fontWeight: FONTS.WEIGHT_BOLD
         }}>
-          속도: {frame >= speedUpStart ? <span style={{ color: COLORS.WARNING }}>!!!</span> : "?"}
+          속도: {frame >= speedUpStart ? <span style={{ color: COLORS.STATE_WARN_FG }}>!!!</span> : "?"}
         </div>
       </div>
     </AbsoluteFill>
@@ -1064,19 +1060,18 @@ const Scene17: React.FC = () => {
     <AbsoluteFill style={{ backgroundColor: COLORS.BG_BASE, justifyContent: "center", alignItems: "center" }}>
       <div style={{
         width: 800,
-        backgroundColor: EFFECTS.GLASS_BG,
-        backdropFilter: EFFECTS.GLASS_BLUR,
-        border: `1px solid ${EFFECTS.GLASS_BORDER}`,
+        backgroundColor: COLORS.BG_SURFACE,
+        border: `2px solid ${COLORS.STROKE_STRONG}`,
         padding: SPACING.PX_64,
         display: "flex", flexDirection: "column"
       }}>
-        <div style={{ color: COLORS.TEXT_MUTED, fontSize: FONTS.SIZE_SM, letterSpacing: FONTS.TRACKING_WIDER, marginBottom: SPACING.PX_32, display: "flex", alignItems: "center", gap: SPACING.PX_16 }}>
+        <div style={{ color: COLORS.TEXT_SUB, fontSize: 32, letterSpacing: FONTS.TRACKING_WIDER, marginBottom: SPACING.PX_32, display: "flex", alignItems: "center", gap: SPACING.PX_16 }}>
           <div style={{ width: 12, height: 12, backgroundColor: COLORS.PRIMARY, borderRadius: "50%" }} />
           미 육군 장교 — 공식 브리핑
         </div>
         
         <div style={{ color: COLORS.TEXT_MAIN, fontSize: FONTS.SIZE_MD, minHeight: 60, display: "flex", alignItems: "center" }}>
-          {blink && <div style={{ width: 15, height: 30, backgroundColor: COLORS.ACCENT }} />}
+          {blink && <div style={{ width: 15, height: 30, backgroundColor: COLORS.PRIMARY }} />}
         </div>
       </div>
     </AbsoluteFill>
@@ -1098,10 +1093,11 @@ const Scene18: React.FC = () => {
 
   return (
     <AbsoluteFill style={{ backgroundColor: COLORS.BG_BASE, justifyContent: "center", alignItems: "center" }}>
+      {/* Subtle Background TINT */}
       <div style={{ 
         position: "absolute", inset: 0, 
-        background: EFFECTS.RADIAL_PRIMARY, 
-        opacity: interpolate(frame, [0, 30], [0, 0.5]) 
+        backgroundColor: COLORS.PRIMARY_LIGHT,
+        opacity: interpolate(frame, [0, 30], [0, 0.2]) 
       }} />
 
       <div style={{ display: "flex", flexDirection: "column", alignItems: "center", zIndex: Z.CONTENT }}>
@@ -1109,9 +1105,10 @@ const Scene18: React.FC = () => {
           fontSize: FONTS.SIZE_4XL * 2, 
           fontWeight: FONTS.WEIGHT_EXTRABOLD, 
           color: COLORS.PRIMARY, 
-          fontFamily: FONTS.MONO,
-          textShadow: EFFECTS.TINT_LG,
-          lineHeight: 1
+          fontFamily: FONTS.DISPLAY,
+          borderBottom: `10px solid ${COLORS.PRIMARY}`,
+          lineHeight: 1,
+          paddingBottom: 20
         }}>
           {frame < stopFrame ? (
             <CounterText from={0} to={80} durationInFrames={stopFrame} />
@@ -1119,7 +1116,7 @@ const Scene18: React.FC = () => {
             "80"
           )}
         </div>
-        <div style={{ color: COLORS.TEXT_MUTED, fontSize: FONTS.SIZE_LG, letterSpacing: FONTS.TRACKING_WIDER, marginTop: SPACING.PX_16 }}>
+        <div style={{ color: COLORS.TEXT_SUB, fontSize: FONTS.SIZE_LG, letterSpacing: FONTS.TRACKING_WIDER, marginTop: SPACING.PX_16 }}>
           표적 / 1시간
         </div>
       </div>
@@ -1151,10 +1148,10 @@ const Scene19: React.FC = () => {
         <div>
           <div style={{ display: "flex", justifyContent: "space-between", marginBottom: SPACING.PX_16 }}>
             <span style={{ color: COLORS.TEXT_BODY, fontWeight: FONTS.WEIGHT_BOLD }}>사람</span>
-            <span style={{ color: COLORS.TEXT_MUTED, fontFamily: FONTS.MONO }}>~수일</span>
+            <span style={{ color: COLORS.TEXT_SUB, fontFamily: FONTS.DISPLAY }}>~수일</span>
           </div>
-          <div style={{ width: "100%", height: 16, backgroundColor: COLORS.BG_SURFACE, border: `1px solid ${COLORS.BORDER_STRONG}`, overflow: "hidden" }}>
-            <div style={{ width: `${humanProgress}%`, height: "100%", backgroundColor: COLORS.TEXT_DISABLED }} />
+          <div style={{ width: "100%", height: 16, backgroundColor: COLORS.BG_MUTED, border: `1px solid ${COLORS.STROKE_DEFAULT}`, overflow: "hidden" }}>
+            <div style={{ width: `${humanProgress}%`, height: "100%", backgroundColor: COLORS.BG_EMPHASIS }} />
           </div>
         </div>
 
@@ -1162,10 +1159,10 @@ const Scene19: React.FC = () => {
         <div>
           <div style={{ display: "flex", justifyContent: "space-between", marginBottom: SPACING.PX_16 }}>
             <span style={{ color: COLORS.PRIMARY, fontWeight: FONTS.WEIGHT_BOLD }}>AI</span>
-            <span style={{ color: COLORS.PRIMARY, fontFamily: FONTS.MONO }}>80개/시간</span>
+            <span style={{ color: COLORS.PRIMARY, fontFamily: FONTS.DISPLAY }}>80개/시간</span>
           </div>
-          <div style={{ width: "100%", height: 16, backgroundColor: COLORS.BG_SURFACE, border: `1px solid ${COLORS.BORDER_PRIMARY}`, overflow: "hidden", boxShadow: frame >= aiStart ? EFFECTS.TINT_SM : "none" }}>
-            <div style={{ width: `${aiProgress}%`, height: "100%", backgroundColor: COLORS.PRIMARY, boxShadow: EFFECTS.TINT_MD }} />
+          <div style={{ width: "100%", height: 16, backgroundColor: COLORS.BG_MUTED, border: `1px solid ${COLORS.PRIMARY}`, overflow: "hidden", boxShadow: frame >= aiStart ? EFFECTS.SHADOW_PRIMARY : "none" }}>
+            <div style={{ width: `${aiProgress}%`, height: "100%", backgroundColor: COLORS.PRIMARY, boxShadow: EFFECTS.SHADOW_PRIMARY }} />
           </div>
         </div>
 
@@ -1205,11 +1202,11 @@ const Scene20: React.FC = () => {
       </div>
 
       <div style={{ zIndex: Z.CONTENT, color: COLORS.TEXT_MAIN, fontSize: FONTS.SIZE_LG, fontWeight: FONTS.WEIGHT_BOLD, letterSpacing: FONTS.TRACKING_WIDER }}>
-        속도 = <span style={{ color: isFlashed ? COLORS.WARNING : COLORS.PRIMARY, transition: "color 0.2s" }}>전쟁의 주도권</span>
+        속도 = <span style={{ color: isFlashed ? COLORS.STATE_WARN_FG : COLORS.PRIMARY, transition: "color 0.2s" }}>전쟁의 주도권</span>
       </div>
 
       {isFlashed && flashOpacity > 0 && (
-        <div style={{ position: "absolute", inset: 0, backgroundColor: COLORS.WARNING, opacity: flashOpacity * 0.3, zIndex: Z.OVERLAY }} />
+        <div style={{ position: "absolute", inset: 0, backgroundColor: COLORS.STATE_WARN_FG, opacity: flashOpacity * 0.3, zIndex: Z.OVERLAY }} />
       )}
     </AbsoluteFill>
   );
@@ -1233,14 +1230,13 @@ const Scene21: React.FC = () => {
 
   return (
     <AbsoluteFill style={{ backgroundColor: COLORS.BG_BASE, justifyContent: "center", alignItems: "center" }}>
-      <div style={{ position: "absolute", inset: 0, backgroundColor: COLORS.WARNING, opacity: 0.05, zIndex: Z.BG }} />
+      <div style={{ position: "absolute", inset: 0, backgroundColor: COLORS.STATE_WARN_FG, opacity: 0.05, zIndex: Z.BG }} />
       
       <div style={{ 
         padding: SPACING.PX_64,
-        backgroundColor: EFFECTS.GLASS_BG,
-        backdropFilter: EFFECTS.GLASS_BLUR,
-        border: `1px solid ${EFFECTS.GLASS_BORDER}`,
-        borderRadius: SPACING.RADIUS_XL,
+        backgroundColor: COLORS.BG_SURFACE,
+        border: `2px solid ${COLORS.STROKE_DEFAULT}`,
+        borderRadius: SPACING.RADIUS_MD,
         zIndex: Z.CONTENT
       }}>
         <div style={{ 
@@ -1255,9 +1251,9 @@ const Scene21: React.FC = () => {
             {showLine && (
               <div style={{ 
                 position: "absolute", bottom: -5, left: 0, height: 4, 
-                backgroundColor: COLORS.NEGATIVE, 
+                backgroundColor: COLORS.STATE_ERROR_FG, 
                 width: `${lineScale * 100}%`,
-                boxShadow: EFFECTS.TINT_ACCENT
+                boxShadow: EFFECTS.SHADOW_PRIMARY
               }} />
             )}
           </span>"
@@ -1292,7 +1288,7 @@ const Scene22: React.FC = () => {
           backgroundColor: COLORS.PRIMARY, 
           borderRadius: "50%",
           transform: `scale(${dotScale})`,
-          boxShadow: `0 0 ${20 + pulse * 20}px ${COLORS.PRIMARY_GLOW}`
+          boxShadow: EFFECTS.SHADOW_PRIMARY
         }} />
         <div style={{ 
           color: COLORS.TEXT_MAIN, 
@@ -1331,9 +1327,9 @@ const Scene23: React.FC = () => {
       
       {/* AI RECOMMENDS */}
       <div style={{ 
-        flex: 1, height: "100%", backgroundColor: COLORS.BG_ELEVATED, 
+        flex: 1, height: "100%", backgroundColor: COLORS.BG_MUTED, 
         display: "flex", justifyContent: "center", alignItems: "center",
-        borderRight: `2px solid ${COLORS.BORDER_STRONG}`,
+        borderRight: `2px solid ${COLORS.STROKE_STRONG}`,
         transform: `translateY(${interpolate(aiProgress, [0, 1], [100, 0])}px)`,
         opacity: aiProgress
       }}>
@@ -1346,10 +1342,10 @@ const Scene23: React.FC = () => {
         position: "absolute", left: "50%", top: "50%", 
         transform: "translate(-50%, -50%)", zIndex: Z.UI,
         backgroundColor: COLORS.BG_BASE, padding: SPACING.PX_16, borderRadius: "50%",
-        border: `2px solid ${COLORS.BORDER_STRONG}`,
+        border: `2px solid ${COLORS.STROKE_STRONG}`,
         opacity: humanProgress
       }}>
-        <span style={{ fontSize: FONTS.SIZE_LG, color: COLORS.TEXT_MUTED, fontWeight: FONTS.WEIGHT_BOLD }}>+</span>
+        <span style={{ fontSize: FONTS.SIZE_LG, color: COLORS.TEXT_SUB, fontWeight: FONTS.WEIGHT_BOLD }}>+</span>
       </div>
 
       {/* HUMAN DECIDES */}
@@ -1399,12 +1395,12 @@ const Scene24: React.FC = () => {
             <React.Fragment key={i}>
               <div style={{
                 padding: `${SPACING.PX_24}px ${SPACING.PX_40}px`,
-                backgroundColor: step.primary ? COLORS.PRIMARY_DIM : COLORS.BG_SURFACE,
-                border: `2px solid ${step.primary ? COLORS.PRIMARY : COLORS.BORDER_STRONG}`,
+                backgroundColor: step.primary ? COLORS.PRIMARY_LIGHT : COLORS.BG_SURFACE,
+                border: `2px solid ${step.primary ? COLORS.PRIMARY : COLORS.STROKE_STRONG}`,
                 borderRadius: SPACING.RADIUS_MD,
                 opacity: itemAppear,
                 transform: `scale(${interpolate(itemAppear, [0, 1], [0.8, 1])})`,
-                boxShadow: step.primary ? `0 0 ${20 + pulse * 20}px ${COLORS.PRIMARY_GLOW}` : "none",
+                boxShadow: step.primary ? EFFECTS.SHADOW_PRIMARY : "none",
                 zIndex: Z.CONTENT
               }}>
                 <div style={{ color: step.primary ? COLORS.PRIMARY : COLORS.TEXT_MAIN, fontSize: FONTS.SIZE_MD, fontWeight: FONTS.WEIGHT_BOLD }}>
@@ -1416,12 +1412,12 @@ const Scene24: React.FC = () => {
               {i < flow.length - 1 && (
                 <div style={{
                   width: 60, height: 2, 
-                  backgroundColor: COLORS.BORDER_PRIMARY,
+                  backgroundColor: COLORS.PRIMARY,
                   margin: `0 ${SPACING.PX_16}px`,
                   opacity: spring({ frame: Math.max(0, frame - flow[i + 1].time + 5), fps: 30, config: ANIMATION.SPRING_GENTLE }),
                   position: "relative"
                 }}>
-                  <div style={{ position: "absolute", right: -5, top: -4, borderTop: "5px solid transparent", borderBottom: "5px solid transparent", borderLeft: `5px solid ${COLORS.BORDER_PRIMARY}` }} />
+                  <div style={{ position: "absolute", right: -5, top: -4, borderTop: "5px solid transparent", borderBottom: "5px solid transparent", borderLeft: `5px solid ${COLORS.PRIMARY}` }} />
                 </div>
               )}
             </React.Fragment>
@@ -1460,20 +1456,20 @@ const Scene26: React.FC = () => {
 
   return (
     <AbsoluteFill style={{ backgroundColor: COLORS.BG_BASE, justifyContent: "center", alignItems: "center" }}>
-      <QuotePanel startFrame={0} style={{ border: `2px solid ${COLORS.BORDER_STRONG}`, width: 900, maxWidth: "none" }}>
+      <QuotePanel startFrame={0} style={{ border: `2px solid ${COLORS.STROKE_STRONG}`, width: 900, maxWidth: "none" }}>
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: SPACING.PX_32 }}>
-          <div style={{ color: COLORS.TEXT_MUTED, fontSize: FONTS.SIZE_SM, letterSpacing: FONTS.TRACKING_WIDER, fontWeight: FONTS.WEIGHT_BOLD }}>
+          <div style={{ color: COLORS.TEXT_SUB, fontSize: 32, letterSpacing: FONTS.TRACKING_WIDER, fontWeight: FONTS.WEIGHT_BOLD }}>
             미 국방부 공식 명령 2023
           </div>
           {/* 공식 도장 그래픽 */}
           <div style={{ 
             width: 80, height: 80, 
-            border: `4px solid ${COLORS.NEGATIVE}`, borderRadius: "50%",
+            border: `4px solid ${COLORS.STATE_ERROR_FG}`, borderRadius: "50%",
             display: "flex", justifyContent: "center", alignItems: "center",
             opacity: spring({ frame: frame - 20, fps: 30, config: ANIMATION.SPRING_BOUNCY }),
             transform: `rotate(-15deg) scale(${spring({ frame: frame - 20, fps: 30, config: ANIMATION.SPRING_BOUNCY })})`
           }}>
-             <div style={{ color: COLORS.NEGATIVE, fontSize: 14, fontWeight: FONTS.WEIGHT_EXTRABOLD, letterSpacing: -1, textAlign: "center", lineHeight: 1.1 }}>
+             <div style={{ color: COLORS.STATE_ERROR_FG, fontSize: 14, fontWeight: FONTS.WEIGHT_EXTRABOLD, letterSpacing: -1, textAlign: "center", lineHeight: 1.1 }}>
                DOD<br/>APPROVED
              </div>
           </div>
@@ -1487,7 +1483,7 @@ const Scene26: React.FC = () => {
                 position: "absolute", bottom: -8, left: 0, height: 6, 
                 backgroundColor: COLORS.PRIMARY, 
                 width: `${spring({ frame: frame - mustKeywordStart, fps: 30, config: ANIMATION.SPRING_SNAPPY }) * 100}%`,
-                boxShadow: EFFECTS.TINT_SM
+                boxShadow: EFFECTS.SHADOW_PRIMARY
               }} />
             )}
           </span> 감독하고 개입한다."
@@ -1553,7 +1549,7 @@ const Scene28: React.FC = () => {
         </div>
         <div style={{ display: "flex", alignItems: "center", gap: SPACING.PX_16 }}>
           <div style={{ 
-            color: COLORS.TEXT_MUTED, 
+            color: COLORS.TEXT_SUB, 
             fontSize: FONTS.SIZE_LG, 
             fontWeight: FONTS.WEIGHT_MEDIUM, 
             letterSpacing: FONTS.TRACKING_WIDER,
@@ -1563,9 +1559,9 @@ const Scene28: React.FC = () => {
           </div>
           <div style={{ 
             width: 8, height: 8, 
-            backgroundColor: COLORS.WARNING, 
+            backgroundColor: COLORS.STATE_WARN_FG, 
             borderRadius: "50%",
-            boxShadow: `0 0 ${10 + pulse * 15}px ${COLORS.WARNING}`,
+            boxShadow: `0 0 ${10 + pulse * 15}px ${COLORS.STATE_WARN_FG}`,
             opacity: textOpacity
           }} />
         </div>

@@ -33,8 +33,8 @@ interface QuotePanelProps {
 export const QuotePanel: React.FC<QuotePanelProps> = ({
   children,
   startFrame = 5,
-  bgColor = EFFECTS.GLASS_BG,
-  quoteColor = COLORS.ACCENT,
+  bgColor = COLORS.BG_SURFACE,
+  quoteColor = COLORS.PRIMARY,
   source,
   sourceColor = COLORS.TEXT_DISABLED,
   sourceOpacity = 1,
@@ -54,8 +54,8 @@ export const QuotePanel: React.FC<QuotePanelProps> = ({
         gap: SPACING.PX_24,
         position: "relative",
         overflow: "hidden",
-        backdropFilter: EFFECTS.GLASS_BLUR,
-        border: `1px solid ${EFFECTS.GLASS_BORDER}`,
+        backdropFilter: "blur(12px)",
+        border: `1px solid ${COLORS.STROKE_DEFAULT}`,
         ...style,
       }}
     >
@@ -99,7 +99,7 @@ export const QuotePanel: React.FC<QuotePanelProps> = ({
               opacity: sourceOpacity,
               marginTop: SPACING.PX_32,
               color: sourceColor,
-              fontSize: FONTS.SIZE_SM,
+              fontSize: 24,
               fontFamily: FONTS.MONO,
               letterSpacing: `${FONTS.TRACKING_WIDE}em`,
               display: "flex",

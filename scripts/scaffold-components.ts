@@ -27,6 +27,7 @@ export function generateComponents(
 
     const componentCode = `import React from 'react';
 import { AbsoluteFill, Audio, staticFile } from 'remotion';
+import { COLORS } from "../theme";
 
 /**
  * Section: ${meta.name}
@@ -42,7 +43,7 @@ export const ${compName}: React.FC = () => {
   return (
     <AbsoluteFill
       style={{
-        backgroundColor: '#0a0a0a',
+        backgroundColor: COLORS.BG_BASE,
         justifyContent: 'center',
         alignItems: 'center',
       }}
