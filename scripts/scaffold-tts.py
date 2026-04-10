@@ -3,6 +3,7 @@ import sys
 import asyncio
 from gradio_client import Client
 from pydub import AudioSegment
+from text_processor import process_txt
 
 LANGUAGE = "Korean"
 GRADIO_URL = "http://localhost:8000"
@@ -15,14 +16,22 @@ except Exception as e:
     print(f"❌ Gradio 서버에 연결할 수 없습니다. URL({GRADIO_URL})이 올바른지 확인하세요.\n에러: {e}")
     sys.exit(1)
 
-async def generate_tts(text: str, output_path: str):
+async def generate_tts(text: str, output_path: str, pronunciation_path: str = None):
     clean_text = text.strip()
 
+    print(f"🔄 발음 전처리 중...")
+    phonetic_text = process_txt(clean_text, engtrans=True)
+    
+    if pronunciation_path:
+        with open(pronunciation_path, "w", encoding="utf-8") as f:
+            f.write(phonetic_text)
+        print(f"📄 변환된 발음 텍스트 저장 됨: {pronunciation_path}")
+
     valid_punctuations = ('.', '!', '?')
-    if not clean_text.endswith(valid_punctuations):
-        processed_text = clean_text + "."
+    if not phonetic_text.endswith(valid_punctuations):
+        processed_text = phonetic_text + "."
     else:
-        processed_text = clean_text
+        processed_text = phonetic_text
     
     def call_gradio():
         return client.predict(
@@ -56,16 +65,19 @@ async def generate_tts(text: str, output_path: str):
 
 async def main():
     if len(sys.argv) < 3:
-        print("Usage: python scaffold-tts.py <text> <output_path>")
+        print("Usage: python scaffold-tts.py <text> <output_path> [pronunciation_txt_path]")
         sys.exit(1)
     
     text = sys.argv[1]
     output_path = sys.argv[2]
+    pronunciation_path = sys.argv[3] if len(sys.argv) > 3 else None
     
     # Ensure output directory exists
     os.makedirs(os.path.dirname(output_path), exist_ok=True)
+    if pronunciation_path:
+         os.makedirs(os.path.dirname(pronunciation_path), exist_ok=True)
     
-    await generate_tts(text, output_path)
+    await generate_tts(text, output_path, pronunciation_path)
 
 if __name__ == "__main__":
     asyncio.run(main())

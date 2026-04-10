@@ -65,6 +65,7 @@ export async function extractMedia(
       `public/${projectId}/${doc.name}`
     );
     const wavPath = path.join(publicDir, `${doc.name}.wav`);
+    const pronunciationTxtPath = path.join(publicDir, `${doc.name}_pronunciation.txt`);
 
     if (fs.existsSync(wavPath)) {
       console.log(`🎙️ Skipping TTS for [${doc.name}] (wav already exists)`);
@@ -75,7 +76,7 @@ export async function extractMedia(
     try {
       const safeText = doc.text.replace(/"/g, '\\"');
       execSync(
-        `python3 scripts/scaffold-tts.py "${safeText}" "${wavPath}"`,
+        `python3 scripts/scaffold-tts.py "${safeText}" "${wavPath}" "${pronunciationTxtPath}"`,
         { stdio: "inherit" }
       );
     } catch (e) {
