@@ -27,7 +27,7 @@ export function generateComponents(
 
     const componentCode = `import React from 'react';
 import { AbsoluteFill, Audio, staticFile } from 'remotion';
-import { COLORS } from "../theme";
+import { COLORS } from "../../../constants/theme";
 
 /**
  * Section: ${meta.name}

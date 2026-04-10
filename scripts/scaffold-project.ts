@@ -15,7 +15,7 @@ function generateContextFile(projectId: string, meta: SectionMeta) {
 
   // Parse original script into sentences
   const originalSentences = meta.text
-    .split(/(?<=[.!?。])\s*/)
+    .split(/\r?\n/)
     .map((s) => s.trim())
     .filter((s) => s.length > 0);
 
@@ -56,10 +56,9 @@ ${timestampTable}
 
 원본 대본의 각 문장과 타임스탬프를 대응시킬 때:
 1. **원본 대본의 문장**을 기준으로 삼으세요
-2. 타임스탬프의 startFrame/endFrame은 가장 유사한 문장에 매핑하세요
+2. 타임스탬프의 startFrame/endFrame은 가장 유사한 단어에 매핑하세요
 3. Whisper가 추가한 환각 텍스트는 무시하세요
-4. 여러 타임스탬프가 하나의 대본 문장에 대응될 수 있습니다 (시작~끝 범위로 묶기)
-5. 하나의 타임스탬프가 여러 대본 문장에 걸칠 수도 있습니다
+4. 원본 문장에 대응되는 타임스탬프가 없으면, 사용자에게 즉각 알리세요
 `;
 
   fs.writeFileSync(contextPath, content, "utf-8");

@@ -1,0 +1,957 @@
+[
+  {
+    "text": "AI한테",
+    "startFrame": 0,
+    "endFrame": 20
+  },
+  {
+    "text": "전쟁",
+    "startFrame": 20,
+    "endFrame": 30
+  },
+  {
+    "text": "시뮬레이션을",
+    "startFrame": 30,
+    "endFrame": 68
+  },
+  {
+    "text": "시켰습니다.",
+    "startFrame": 68,
+    "endFrame": 106
+  },
+  {
+    "text": "GPT,",
+    "startFrame": 106,
+    "endFrame": 116
+  },
+  {
+    "text": "클로드,",
+    "startFrame": 116,
+    "endFrame": 138
+  },
+  {
+    "text": "제미나이,",
+    "startFrame": 138,
+    "endFrame": 158
+  },
+  {
+    "text": "가상의",
+    "startFrame": 158,
+    "endFrame": 170
+  },
+  {
+    "text": "국가",
+    "startFrame": 170,
+    "endFrame": 186
+  },
+  {
+    "text": "지도자",
+    "startFrame": 186,
+    "endFrame": 194
+  },
+  {
+    "text": "역할을",
+    "startFrame": 194,
+    "endFrame": 209
+  },
+  {
+    "text": "맡긴",
+    "startFrame": 209,
+    "endFrame": 218
+  },
+  {
+    "text": "거예요.",
+    "startFrame": 218,
+    "endFrame": 244
+  },
+  {
+    "text": "영토",
+    "startFrame": 244,
+    "endFrame": 250
+  },
+  {
+    "text": "분쟁,",
+    "startFrame": 250,
+    "endFrame": 268
+  },
+  {
+    "text": "자원",
+    "startFrame": 268,
+    "endFrame": 278
+  },
+  {
+    "text": "전쟁,",
+    "startFrame": 278,
+    "endFrame": 296
+  },
+  {
+    "text": "현실에서",
+    "startFrame": 296,
+    "endFrame": 312
+  },
+  {
+    "text": "충분히",
+    "startFrame": 312,
+    "endFrame": 328
+  },
+  {
+    "text": "일어날",
+    "startFrame": 328,
+    "endFrame": 343
+  },
+  {
+    "text": "법한",
+    "startFrame": 343,
+    "endFrame": 354
+  },
+  {
+    "text": "시나리오들이에요.",
+    "startFrame": 354,
+    "endFrame": 406
+  },
+  {
+    "text": "결과가",
+    "startFrame": 406,
+    "endFrame": 428
+  },
+  {
+    "text": "어땠냐면요.",
+    "startFrame": 428,
+    "endFrame": 461
+  },
+  {
+    "text": "21번",
+    "startFrame": 461,
+    "endFrame": 479
+  },
+  {
+    "text": "중",
+    "startFrame": 479,
+    "endFrame": 486
+  },
+  {
+    "text": "20번.",
+    "startFrame": 486,
+    "endFrame": 511
+  },
+  {
+    "text": "95%에서",
+    "startFrame": 511,
+    "endFrame": 539
+  },
+  {
+    "text": "핵무기를",
+    "startFrame": 539,
+    "endFrame": 560
+  },
+  {
+    "text": "선택했습니다.",
+    "startFrame": 560,
+    "endFrame": 601
+  },
+  {
+    "text": "협상도",
+    "startFrame": 601,
+    "endFrame": 628
+  },
+  {
+    "text": "아니고",
+    "startFrame": 628,
+    "endFrame": 635
+  },
+  {
+    "text": "외교도",
+    "startFrame": 635,
+    "endFrame": 655
+  },
+  {
+    "text": "아니고",
+    "startFrame": 655,
+    "endFrame": 670
+  },
+  {
+    "text": "핵버튼이에요.",
+    "startFrame": 670,
+    "endFrame": 712
+  },
+  {
+    "text": "올해",
+    "startFrame": 719,
+    "endFrame": 728
+  },
+  {
+    "text": "2월",
+    "startFrame": 728,
+    "endFrame": 739
+  },
+  {
+    "text": "영국",
+    "startFrame": 739,
+    "endFrame": 746
+  },
+  {
+    "text": "킹스칼리지",
+    "startFrame": 746,
+    "endFrame": 770
+  },
+  {
+    "text": "런던",
+    "startFrame": 770,
+    "endFrame": 777
+  },
+  {
+    "text": "연구팀이",
+    "startFrame": 777,
+    "endFrame": 795
+  },
+  {
+    "text": "이",
+    "startFrame": 795,
+    "endFrame": 800
+  },
+  {
+    "text": "결과를",
+    "startFrame": 800,
+    "endFrame": 813
+  },
+  {
+    "text": "발표하면서",
+    "startFrame": 813,
+    "endFrame": 836
+  },
+  {
+    "text": "이렇게",
+    "startFrame": 836,
+    "endFrame": 853
+  },
+  {
+    "text": "말했어요.",
+    "startFrame": 853,
+    "endFrame": 874
+  },
+  {
+    "text": "핵무기에",
+    "startFrame": 874,
+    "endFrame": 898
+  },
+  {
+    "text": "대한",
+    "startFrame": 898,
+    "endFrame": 904
+  },
+  {
+    "text": "금기는",
+    "startFrame": 904,
+    "endFrame": 920
+  },
+  {
+    "text": "인간",
+    "startFrame": 920,
+    "endFrame": 930
+  },
+  {
+    "text": "사회에서만큼",
+    "startFrame": 930,
+    "endFrame": 960
+  },
+  {
+    "text": "AI에겐",
+    "startFrame": 960,
+    "endFrame": 974
+  },
+  {
+    "text": "작동하지",
+    "startFrame": 974,
+    "endFrame": 994
+  },
+  {
+    "text": "않는다.",
+    "startFrame": 994,
+    "endFrame": 1019
+  },
+  {
+    "text": "왜냐하면",
+    "startFrame": 1019,
+    "endFrame": 1040
+  },
+  {
+    "text": "AI는",
+    "startFrame": 1040,
+    "endFrame": 1048
+  },
+  {
+    "text": "두렵지",
+    "startFrame": 1048,
+    "endFrame": 1063
+  },
+  {
+    "text": "않으니까요.",
+    "startFrame": 1063,
+    "endFrame": 1095
+  },
+  {
+    "text": "사람은",
+    "startFrame": 1095,
+    "endFrame": 1109
+  },
+  {
+    "text": "핵전쟁이",
+    "startFrame": 1109,
+    "endFrame": 1127
+  },
+  {
+    "text": "어떤",
+    "startFrame": 1127,
+    "endFrame": 1136
+  },
+  {
+    "text": "건지",
+    "startFrame": 1136,
+    "endFrame": 1145
+  },
+  {
+    "text": "역사로,",
+    "startFrame": 1145,
+    "endFrame": 1162
+  },
+  {
+    "text": "감정으로,",
+    "startFrame": 1162,
+    "endFrame": 1183
+  },
+  {
+    "text": "몸으로",
+    "startFrame": 1183,
+    "endFrame": 1196
+  },
+  {
+    "text": "알아요.",
+    "startFrame": 1196,
+    "endFrame": 1217
+  },
+  {
+    "text": "근데",
+    "startFrame": 1217,
+    "endFrame": 1228
+  },
+  {
+    "text": "AI한테는",
+    "startFrame": 1228,
+    "endFrame": 1246
+  },
+  {
+    "text": "그냥",
+    "startFrame": 1246,
+    "endFrame": 1256
+  },
+  {
+    "text": "목표",
+    "startFrame": 1256,
+    "endFrame": 1267
+  },
+  {
+    "text": "달성의",
+    "startFrame": 1267,
+    "endFrame": 1283
+  },
+  {
+    "text": "가장",
+    "startFrame": 1283,
+    "endFrame": 1292
+  },
+  {
+    "text": "효율적인",
+    "startFrame": 1292,
+    "endFrame": 1313
+  },
+  {
+    "text": "옵션인",
+    "startFrame": 1313,
+    "endFrame": 1327
+  },
+  {
+    "text": "거예요.",
+    "startFrame": 1327,
+    "endFrame": 1349
+  },
+  {
+    "text": "도덕적",
+    "startFrame": 1349,
+    "endFrame": 1370
+  },
+  {
+    "text": "고뇌",
+    "startFrame": 1370,
+    "endFrame": 1373
+  },
+  {
+    "text": "없이,",
+    "startFrame": 1373,
+    "endFrame": 1387
+  },
+  {
+    "text": "망설임",
+    "startFrame": 1387,
+    "endFrame": 1401
+  },
+  {
+    "text": "없이,",
+    "startFrame": 1401,
+    "endFrame": 1414
+  },
+  {
+    "text": "최적화의",
+    "startFrame": 1414,
+    "endFrame": 1433
+  },
+  {
+    "text": "결과로",
+    "startFrame": 1433,
+    "endFrame": 1450
+  },
+  {
+    "text": "핵을",
+    "startFrame": 1450,
+    "endFrame": 1458
+  },
+  {
+    "text": "선택하는",
+    "startFrame": 1458,
+    "endFrame": 1478
+  },
+  {
+    "text": "겁니다.",
+    "startFrame": 1478,
+    "endFrame": 1501
+  },
+  {
+    "text": "상당히",
+    "startFrame": 1501,
+    "endFrame": 1525
+  },
+  {
+    "text": "무섭죠.",
+    "startFrame": 1525,
+    "endFrame": 1549
+  },
+  {
+    "text": "근데",
+    "startFrame": 1549,
+    "endFrame": 1556
+  },
+  {
+    "text": "이게",
+    "startFrame": 1556,
+    "endFrame": 1570
+  },
+  {
+    "text": "그냥",
+    "startFrame": 1570,
+    "endFrame": 1574
+  },
+  {
+    "text": "실험실",
+    "startFrame": 1574,
+    "endFrame": 1585
+  },
+  {
+    "text": "얘기가",
+    "startFrame": 1585,
+    "endFrame": 1597
+  },
+  {
+    "text": "아니에요.",
+    "startFrame": 1597,
+    "endFrame": 1618
+  },
+  {
+    "text": "실제",
+    "startFrame": 1618,
+    "endFrame": 1628
+  },
+  {
+    "text": "전쟁에서도",
+    "startFrame": 1628,
+    "endFrame": 1653
+  },
+  {
+    "text": "AI가",
+    "startFrame": 1653,
+    "endFrame": 1660
+  },
+  {
+    "text": "이미",
+    "startFrame": 1660,
+    "endFrame": 1670
+  },
+  {
+    "text": "쓰이고",
+    "startFrame": 1670,
+    "endFrame": 1684
+  },
+  {
+    "text": "있다는",
+    "startFrame": 1684,
+    "endFrame": 1699
+  },
+  {
+    "text": "거,",
+    "startFrame": 1699,
+    "endFrame": 1709
+  },
+  {
+    "text": "알고",
+    "startFrame": 1709,
+    "endFrame": 1717
+  },
+  {
+    "text": "계셨나요?",
+    "startFrame": 1717,
+    "endFrame": 1738
+  },
+  {
+    "text": "올해",
+    "startFrame": 1738,
+    "endFrame": 1746
+  },
+  {
+    "text": "초,",
+    "startFrame": 1746,
+    "endFrame": 1753
+  },
+  {
+    "text": "미국이",
+    "startFrame": 1753,
+    "endFrame": 1770
+  },
+  {
+    "text": "이란을",
+    "startFrame": 1770,
+    "endFrame": 1777
+  },
+  {
+    "text": "공격했어요.",
+    "startFrame": 1777,
+    "endFrame": 1828
+  },
+  {
+    "text": "작전",
+    "startFrame": 1828,
+    "endFrame": 1843
+  },
+  {
+    "text": "시작",
+    "startFrame": 1843,
+    "endFrame": 1850
+  },
+  {
+    "text": "첫",
+    "startFrame": 1850,
+    "endFrame": 1855
+  },
+  {
+    "text": "24시간",
+    "startFrame": 1855,
+    "endFrame": 1877
+  },
+  {
+    "text": "안에",
+    "startFrame": 1877,
+    "endFrame": 1888
+  },
+  {
+    "text": "1,000개가",
+    "startFrame": 1888,
+    "endFrame": 1913
+  },
+  {
+    "text": "넘는",
+    "startFrame": 1913,
+    "endFrame": 1920
+  },
+  {
+    "text": "표적이",
+    "startFrame": 1920,
+    "endFrame": 1931
+  },
+  {
+    "text": "타격됐고,",
+    "startFrame": 1931,
+    "endFrame": 1957
+  },
+  {
+    "text": "이후",
+    "startFrame": 1957,
+    "endFrame": 1960
+  },
+  {
+    "text": "하루",
+    "startFrame": 1960,
+    "endFrame": 1963
+  },
+  {
+    "text": "300,",
+    "startFrame": 1963,
+    "endFrame": 1974
+  },
+  {
+    "text": "500개",
+    "startFrame": 1974,
+    "endFrame": 1986
+  },
+  {
+    "text": "표적을",
+    "startFrame": 1986,
+    "endFrame": 1997
+  },
+  {
+    "text": "타격하는",
+    "startFrame": 1997,
+    "endFrame": 2008
+  },
+  {
+    "text": "속도로",
+    "startFrame": 2008,
+    "endFrame": 2017
+  },
+  {
+    "text": "이어졌어요.",
+    "startFrame": 2017,
+    "endFrame": 2038
+  },
+  {
+    "text": "이렇게",
+    "startFrame": 2038,
+    "endFrame": 2050
+  },
+  {
+    "text": "빠른",
+    "startFrame": 2050,
+    "endFrame": 2066
+  },
+  {
+    "text": "타격",
+    "startFrame": 2066,
+    "endFrame": 2076
+  },
+  {
+    "text": "작전의",
+    "startFrame": 2076,
+    "endFrame": 2093
+  },
+  {
+    "text": "중심에는",
+    "startFrame": 2093,
+    "endFrame": 2114
+  },
+  {
+    "text": "AI가",
+    "startFrame": 2114,
+    "endFrame": 2123
+  },
+  {
+    "text": "있었습니다.",
+    "startFrame": 2123,
+    "endFrame": 2158
+  },
+  {
+    "text": "미군",
+    "startFrame": 2158,
+    "endFrame": 2171
+  },
+  {
+    "text": "중부사령부",
+    "startFrame": 2171,
+    "endFrame": 2188
+  },
+  {
+    "text": "사령관은",
+    "startFrame": 2188,
+    "endFrame": 2205
+  },
+  {
+    "text": "이렇게",
+    "startFrame": 2205,
+    "endFrame": 2219
+  },
+  {
+    "text": "직접",
+    "startFrame": 2219,
+    "endFrame": 2228
+  },
+  {
+    "text": "밝혔어요.",
+    "startFrame": 2228,
+    "endFrame": 2248
+  },
+  {
+    "text": "우리",
+    "startFrame": 2248,
+    "endFrame": 2264
+  },
+  {
+    "text": "전투원들은",
+    "startFrame": 2264,
+    "endFrame": 2285
+  },
+  {
+    "text": "다양한",
+    "startFrame": 2285,
+    "endFrame": 2300
+  },
+  {
+    "text": "첨단",
+    "startFrame": 2300,
+    "endFrame": 2310
+  },
+  {
+    "text": "AI",
+    "startFrame": 2310,
+    "endFrame": 2316
+  },
+  {
+    "text": "도구를",
+    "startFrame": 2316,
+    "endFrame": 2329
+  },
+  {
+    "text": "활용하고",
+    "startFrame": 2329,
+    "endFrame": 2349
+  },
+  {
+    "text": "있다.",
+    "startFrame": 2349,
+    "endFrame": 2368
+  },
+  {
+    "text": "이",
+    "startFrame": 2368,
+    "endFrame": 2371
+  },
+  {
+    "text": "시스템들은",
+    "startFrame": 2371,
+    "endFrame": 2393
+  },
+  {
+    "text": "방대한",
+    "startFrame": 2393,
+    "endFrame": 2406
+  },
+  {
+    "text": "데이터를",
+    "startFrame": 2406,
+    "endFrame": 2422
+  },
+  {
+    "text": "수초",
+    "startFrame": 2422,
+    "endFrame": 2431
+  },
+  {
+    "text": "안에",
+    "startFrame": 2431,
+    "endFrame": 2439
+  },
+  {
+    "text": "분석해서",
+    "startFrame": 2439,
+    "endFrame": 2458
+  },
+  {
+    "text": "적보다",
+    "startFrame": 2458,
+    "endFrame": 2463
+  },
+  {
+    "text": "더",
+    "startFrame": 2463,
+    "endFrame": 2463
+  },
+  {
+    "text": "빠르고",
+    "startFrame": 2463,
+    "endFrame": 2469
+  },
+  {
+    "text": "스마트한",
+    "startFrame": 2469,
+    "endFrame": 2472
+  },
+  {
+    "text": "결정을",
+    "startFrame": 2472,
+    "endFrame": 2476
+  },
+  {
+    "text": "만들고",
+    "startFrame": 2476,
+    "endFrame": 2480
+  },
+  {
+    "text": "있습니다.",
+    "startFrame": 2480,
+    "endFrame": 2488
+  },
+  {
+    "text": "프로젝트",
+    "startFrame": 2488,
+    "endFrame": 2522
+  },
+  {
+    "text": "메이븐은",
+    "startFrame": 2522,
+    "endFrame": 2566
+  },
+  {
+    "text": "이번",
+    "startFrame": 2566,
+    "endFrame": 2567
+  },
+  {
+    "text": "전쟁에",
+    "startFrame": 2567,
+    "endFrame": 2586
+  },
+  {
+    "text": "투입된",
+    "startFrame": 2586,
+    "endFrame": 2605
+  },
+  {
+    "text": "핵심",
+    "startFrame": 2605,
+    "endFrame": 2618
+  },
+  {
+    "text": "AI",
+    "startFrame": 2618,
+    "endFrame": 2622
+  },
+  {
+    "text": "시스템입니다.",
+    "startFrame": 2622,
+    "endFrame": 2668
+  },
+  {
+    "text": "그리고",
+    "startFrame": 2668,
+    "endFrame": 2685
+  },
+  {
+    "text": "이",
+    "startFrame": 2685,
+    "endFrame": 2690
+  },
+  {
+    "text": "AI",
+    "startFrame": 2690,
+    "endFrame": 2693
+  },
+  {
+    "text": "시스템",
+    "startFrame": 2693,
+    "endFrame": 2708
+  },
+  {
+    "text": "안에",
+    "startFrame": 2708,
+    "endFrame": 2718
+  },
+  {
+    "text": "여러분이",
+    "startFrame": 2718,
+    "endFrame": 2739
+  },
+  {
+    "text": "아주",
+    "startFrame": 2739,
+    "endFrame": 2750
+  },
+  {
+    "text": "잘",
+    "startFrame": 2750,
+    "endFrame": 2755
+  },
+  {
+    "text": "아는",
+    "startFrame": 2755,
+    "endFrame": 2765
+  },
+  {
+    "text": "그",
+    "startFrame": 2765,
+    "endFrame": 2772
+  },
+  {
+    "text": "이름,",
+    "startFrame": 2772,
+    "endFrame": 2787
+  },
+  {
+    "text": "클로드가",
+    "startFrame": 2787,
+    "endFrame": 2799
+  },
+  {
+    "text": "있었습니다.",
+    "startFrame": 2799,
+    "endFrame": 2818
+  },
+  {
+    "text": "그럼",
+    "startFrame": 2818,
+    "endFrame": 2826
+  },
+  {
+    "text": "프로젝트",
+    "startFrame": 2826,
+    "endFrame": 2842
+  },
+  {
+    "text": "메이븐이",
+    "startFrame": 2842,
+    "endFrame": 2858
+  },
+  {
+    "text": "대체",
+    "startFrame": 2858,
+    "endFrame": 2866
+  },
+  {
+    "text": "뭔지,",
+    "startFrame": 2866,
+    "endFrame": 2878
+  },
+  {
+    "text": "어떻게",
+    "startFrame": 2878,
+    "endFrame": 2900
+  },
+  {
+    "text": "전쟁에",
+    "startFrame": 2900,
+    "endFrame": 2913
+  },
+  {
+    "text": "사용됐는지,",
+    "startFrame": 2913,
+    "endFrame": 2941
+  },
+  {
+    "text": "지금부터",
+    "startFrame": 2941,
+    "endFrame": 2958
+  },
+  {
+    "text": "제대로",
+    "startFrame": 2958,
+    "endFrame": 2971
+  },
+  {
+    "text": "뜯어볼게요.",
+    "startFrame": 2971,
+    "endFrame": 2998
+  }
+]
