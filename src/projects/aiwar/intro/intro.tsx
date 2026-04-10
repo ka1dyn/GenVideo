@@ -1,6 +1,8 @@
 import React from 'react';
 import { AbsoluteFill, Audio, staticFile } from 'remotion';
 import { COLORS } from "../../../constants/theme";
+import { CaptionOverlay } from '../../../shared-components/CaptionOverlay';
+import { captions } from './captions';
 
 /**
  * Section: intro
@@ -25,6 +27,8 @@ export const Intro: React.FC = () => {
       <h1 style={{ color: COLORS.TEXT_MAIN, fontSize: 48 }}>
         INTRO Scene
       </h1>
+
+      <CaptionOverlay captions={captions} />
     </AbsoluteFill>
   );
 };

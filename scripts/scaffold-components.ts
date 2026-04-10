@@ -28,6 +28,8 @@ export function generateComponents(
     const componentCode = `import React from 'react';
 import { AbsoluteFill, Audio, staticFile } from 'remotion';
 import { COLORS } from "../../../constants/theme";
+import { CaptionOverlay } from '../../../shared-components/CaptionOverlay';
+import { captions } from './captions';
 
 /**
  * Section: ${meta.name}
@@ -52,6 +54,7 @@ export const ${compName}: React.FC = () => {
       <h1 style={{ color: '#ffffff', fontSize: 48 }}>
         ${meta.name.toUpperCase()} Scene
       </h1>
+      <CaptionOverlay captions={captions} />
     </AbsoluteFill>
   );
 };

@@ -2,8 +2,6 @@ import React from 'react';
 import {
   AbsoluteFill,
   useCurrentFrame,
-  useVideoConfig,
-  interpolate,
 } from 'remotion';
 
 // _final_timeline.json의 sentence 구조 (신규 방식)
@@ -45,15 +43,6 @@ export const CaptionOverlay: React.FC<Props> = ({ captions }) => {
     return null;
   }
 
-  // Animation: subtle fade in when a new caption starts
-  const entryFrame = activeSubtitle.startFrame;
-  const opacity = interpolate(
-    frame,
-    [entryFrame, entryFrame + 5],
-    [0, 1],
-    { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' }
-  );
-
   return (
     <AbsoluteFill
       style={{
@@ -62,7 +51,6 @@ export const CaptionOverlay: React.FC<Props> = ({ captions }) => {
         alignItems: 'center',
         paddingBottom: '50px',
         pointerEvents: 'none',
-        opacity,
       }}
     >
         <div
@@ -75,6 +63,7 @@ export const CaptionOverlay: React.FC<Props> = ({ captions }) => {
             borderRadius: 10,
             display: 'inline-block',
             whiteSpace: 'pre-line',
+            textAlign: 'center',
           }}
         >
           {getCaptionText(activeSubtitle)}

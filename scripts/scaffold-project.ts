@@ -1,5 +1,6 @@
 import fs from "fs";
 import path from "path";
+import { execSync } from "child_process";
 import { Section, SectionMeta } from "./scaffold-types";
 import { extractMedia, generateTimestamps } from "./scaffold-media";
 import { generateComponents } from "./scaffold-components";
@@ -136,10 +137,34 @@ async function main() {
       generateContextFile(projectId, meta);
     }
 
+    // Step 5: Automatically generate the final timeline JSONs
+    console.log("\n=== Phase 5: Generating Final Timelines ===");
+    try {
+      execSync(`python3 scripts/generate-timeline.py ${projectId}`, {
+        stdio: "inherit",
+      });
+    } catch (e) {
+      console.error(
+        `\n❌ Timeline generation failed. Please check the python script output.`
+      );
+    }
+
+    // Step 6: Automatically generate captions.ts
+    console.log("\n=== Phase 6: Generating Captions ===");
+    try {
+      execSync(`python3 scripts/generate-captions.py ${projectId}`, {
+        stdio: "inherit",
+      });
+    } catch (e) {
+      console.error(
+        `\n❌ Captions generation failed. Please check the python script output.`
+      );
+    }
+
     console.log(`\n✅ Scaffold complete for ${projectId}!`);
     console.log(`\n📌 Next steps:`);
     console.log(
-      `   1. Review context files in public/${projectId}/*/`
+      `   1. Review timeline_report.md and context files in public/${projectId}/`
     );
     console.log(
       `   2. Run /plan-animations ${projectId} to generate animation plans`

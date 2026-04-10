@@ -1,5 +1,5 @@
 """
-generate_timeline.py — Final Timeline Generator (v2)
+generate-timeline.py — Final Timeline Generator (v2)
 
 순차 위치 기반(Sequential Position) 매핑을 사용하여
 원본 대본과 Whisper 타임스탬프를 정확하게 대응시킵니다.
@@ -618,8 +618,8 @@ def main():
     import sys
 
     if len(sys.argv) < 2:
-        print("사용법: python3 scripts/generate_timeline.py {project_id}")
-        print("예시:   python3 scripts/generate_timeline.py aiwar")
+        print("사용법: python3 scripts/generate-timeline.py {project_id}")
+        print("예시:   python3 scripts/generate-timeline.py aiwar")
         sys.exit(1)
 
     project_id = sys.argv[1]
