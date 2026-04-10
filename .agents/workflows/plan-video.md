@@ -21,19 +21,17 @@ public/{project_id}/
     {section}/
         {section}.txt               <--- 대본에서 추출된 해당 섹션 원본 텍스트
         {section}.wav               <--- 원본 텍스트를 바탕으로 생성된 TTS 오디오
-        {section}_timestamp.json    <--- 오디오를 기반으로 생성된 단어 타임스탬프 (Whisper AI)
-        {section}_context.md        <--- 원본 대본과 타임스탬프 간 매핑 가이드가 포함된 종합 컨텍스트 요약본
-        {section}_final_timeline.json  <--- (Phase 2에서 생성 예정), 최종 타임라인
-        {section}_plan.md           <--- (Phase 3에서 생성 예정) 애니메이션 및 시퀀스 기획서
+        {section}_final_timeline.json  <--- 오디오를 기반으로 생성된 최종 타임라인
+        {section}_plan.md           <--- (Phase 1에서 생성 예정) 애니메이션 및 시퀀스 기획서
 
 src/constants/
-    video-config.ts                 <--- 60fps 해상도 등 전체 프로젝트의 기준이 되는 동적 상수 설정 (읽기 전용 참조)
-    theme.ts                        <--- 디자인 시스템의 상수 모음
+    video-config.ts                 <--- 30fps 해상도 등 전체 프로젝트의 기준이 되는 동적 상수 설정 (읽기 전용 참조)
+    theme.ts                        <--- 디자인 시스템의 상수 모음 (읽기 전용 참조)
 
 src/projects/{project_id}/
     {section}/
-        sequences.tsx               <--- (Phase 4에서 생성 예정) 해당 섹션의 씬 시퀀스 코드
-        {section}.tsx               <--- (Phase 4에서 수정 예정) 해당 섹션의 최상위 래퍼 및 Audio 컴포넌트
+        sequences.tsx               <--- (Phase 2에서 생성 예정) 해당 섹션의 씬 시퀀스 코드
+        {section}.tsx               <--- (Phase 2에서 수정 예정) 해당 섹션의 최상위 래퍼 및 Audio 컴포넌트
     {project_id}.tsx                <--- 해당 프로젝트의 루트 컴포넌트
 ```
 
