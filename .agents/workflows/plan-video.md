@@ -4,32 +4,20 @@ description: remotion 기반 영상을 작성하기 전 영상을 기획, 준비
 
 # /plan-video {project_id}
 
-대본 파일(`src/ref/{project_id}.txt`)로부터 Remotion 영상 프로젝트 기획서와 스켈레톤 코드(뼈대 코드)를 작성하는 전체 워크플로우입니다.
+Remotion 영상 프로젝트 기획서와 스켈레톤 코드(뼈대 코드)를 작성하는 워크플로우 입니다.
 
 ## 전체 흐름
 
-- **Phase 1: Scaffold** → (사용자가 사전 실행 완료) 폴더 구조, TTS 음성, 타임스탬프, 컨텍스트 파일 생성
-- **Phase 2: Set Timeline** → 원본 대본, 타임스탬프 값을 기반으로 최종 타임라인을 완성
-- **Phase 3: Plan** → 모델 기반으로 각 섹션별 애니메이션 기획서 작성
-- **Phase 4: Skeleton Code Generation** → 각 섹션별로 뼈대 코드 생성
-- **Phase 5: Root Component Assembly** → 각 섹션별로 루트 컴포넌트 조립
-
-## 사전 조건
-
-`public/{project_id}/design-system.md` 파일이 존재해야 합니다.
-
-파일이 없다면 사용자에게 요청하고 대기합니다.
+- **Phase 1: Plan** → 각 섹션별 애니메이션 기획서 작성
+- **Phase 2: Skeleton Code Generation** → 각 섹션별로 뼈대 코드 생성
+- **Phase 3: Root Component Assembly** → 각 섹션별로 루트 컴포넌트 조립
 
 ## 프로젝트 예상 구조
-
-`public/{project_id}/` 와 `src/projects/{project_id}/` 하위에
-대본(`---` 구분자)을 바탕으로 동적으로 n개의 섹션 디렉토리(예: intro, body1, outro 등)가 생성됩니다.
 
 이 워크플로우 엔진이 각 파일의 맥락을 이해할 수 있도록 구성된 템플릿입니다:
 
 ```text
 public/{project_id}/
-    design-system.md                <--- 브랜드 디자인 규약
     {section}/
         {section}.txt               <--- 대본에서 추출된 해당 섹션 원본 텍스트
         {section}.wav               <--- 원본 텍스트를 바탕으로 생성된 TTS 오디오
@@ -40,12 +28,13 @@ public/{project_id}/
 
 src/constants/
     video-config.ts                 <--- 60fps 해상도 등 전체 프로젝트의 기준이 되는 동적 상수 설정 (읽기 전용 참조)
+    theme.ts                        <--- 디자인 시스템의 상수 모음
 
 src/projects/{project_id}/
-    theme.ts                        <--- 디자인 시스템의 상수 모음
     {section}/
         sequences.tsx               <--- (Phase 4에서 생성 예정) 해당 섹션의 씬 시퀀스 코드
         {section}.tsx               <--- (Phase 4에서 수정 예정) 해당 섹션의 최상위 래퍼 및 Audio 컴포넌트
+    {project_id}.tsx                <--- 해당 프로젝트의 루트 컴포넌트
 ```
 
 ## 프로젝트 구조 (분석 대상) 동적 파악

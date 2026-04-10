@@ -215,6 +215,7 @@ export type EffectToken = keyof typeof EFFECTS;
 export const FONTS = {
   DISPLAY: "'Pretendard Variable', 'Inter', sans-serif",
   PRIMARY: "'Pretendard Variable', sans-serif",
+  HANDWRITING: "'Nanum Pen Script', cursive",
   MONO: "'JetBrains Mono', 'Fira Code', monospace",
 
   SIZE_MD: 48,

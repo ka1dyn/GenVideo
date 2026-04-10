@@ -1,6 +1,6 @@
 import React, { useRef, useEffect } from "react";
 import { useCurrentFrame, useVideoConfig, interpolate } from "remotion";
-import { COLORS } from "../theme";
+import { COLORS, FONTS } from "../theme";
 
 interface RoughCanvasAIProps {
   width: number;
@@ -85,23 +85,24 @@ export const RoughCanvasAI: React.FC<RoughCanvasAIProps> = ({
     // 2. 내부 데이터 텍스트 (마커 느낌)
     if (localFrame > 45) {
       ctx.fillStyle = COLORS.PRIMARY;
-      ctx.font = "bold 32px 'Arial'"; // 폰트가 로드되었다면 'Pretendard' 등 사용 가능
+      ctx.font = `bold 40px ${FONTS.DISPLAY}`; 
       
       const textProgress = interpolate(localFrame, [45, 60], [0, 1], { extrapolateRight: "clamp" });
       ctx.globalAlpha = textProgress;
       
-      ctx.fillText("[ AI ANALYSIS ]", bx + 20, by + 50);
+      ctx.fillText("[ AI 분석 결과 ]", bx + 20, by + 50);
       
       ctx.fillStyle = COLORS.TEXT_BODY;
-      ctx.font = "24px 'Arial'";
-      if (localFrame > 60) ctx.fillText("- OBJECT: VEHICLE", bx + 20, by + 100);
-      if (localFrame > 75) ctx.fillText("- TYPE: MILITARY", bx + 20, by + 140);
+      ctx.font = `32px ${FONTS.PRIMARY}`;
+      if (localFrame > 60) ctx.fillText("- 탐지 객체: 차량", bx + 20, by + 100);
+      if (localFrame > 75) ctx.fillText("- 유형: 군용", bx + 20, by + 140);
       if (localFrame > 90) {
         ctx.strokeStyle = COLORS.STATE_WARN_FG;
         ctx.setLineDash([5, 5]);
         ctx.strokeRect(bx + 15, by + 115, 200, 40);
         ctx.setLineDash([]);
-        ctx.fillText("(!) CONFIDENCE: 92%", bx + 20, by + 180);
+        ctx.font = `bold 28px ${FONTS.PRIMARY}`;
+        ctx.fillText("(!) 신뢰도: 92%", bx + 20, by + 180);
       }
       ctx.globalAlpha = 1;
     }
