@@ -20,7 +20,6 @@ Remotion 영상 프로젝트 기획서와 스켈레톤 코드(뼈대 코드)를 
 public/{project_id}/
     {section}/
         {section}.txt               <--- 대본에서 추출된 해당 섹션 원본 텍스트
-        {section}.wav               <--- 원본 텍스트를 바탕으로 생성된 TTS 오디오
         {section}_final_timeline.json  <--- 오디오를 기반으로 생성된 최종 타임라인
         {section}_plan.md           <--- (Phase 1에서 생성 예정) 애니메이션 및 시퀀스 기획서
 
@@ -41,24 +40,22 @@ src/projects/{project_id}/
 
 ---
 
-## Phase 1: Scaffold
-
-**주의**: 이 단계는 AI가 실행하지 않으며 사용자가 환경을 구성하기 위해 수행하는 준비 단계입니다. 탐색 결과 해당 프로젝트 ID의 파일 구조가 누락되어 있다면 즉시 작업을 멈추고 사용자에게 알려주세요.
-
-## Phase 2: Set Timeline
-
-`.agents/workflows/set-timeline.md` 경로의 워크플로우 문서를 읽고 지시사항에 따라 타임라인을 구성하세요.
-해당 단계를 바탕으로 탐색된 모든 섹션의 `_final_timeline.json` 파일을 자동 생성합니다.
-
-## Phase 3: Plan
+## Phase 1: Plan
 
 각 섹션별로 기획서를 작성하는 단계입니다.
 
-탐색 된 각 섹션 폴더를 하나씩 돌면서 `.agents/templates/section-plan-template.md` 템플릿 가이드에 맞춰 `public/{project_id}/{section}/{section}_plan.md` 파일을 생성하고 내용을 적어주세요.
+1. **기획서 뼈대 자동 생성**
+   // turbo
+   터미널 명령어 `python3 scripts/generate-plan.py {project_id}` 를 실행합니다.
+   이 스크립트는 `json` 타임라인 파일을 기반으로 정확한 프레임과 Scene 개수 등이 기록된 `_plan.md` 초안을 각 섹션 폴더에 일괄 자동 생성합니다.
+
+2. **비주얼 기획 및 디자인 도출**
+   탐색된 각 섹션 폴더를 하나씩 돌면서, 방금 파이썬이 생성한 `public/{project_id}/{section}/{section}_plan.md` 파일을 엽니다.
+   파일의 형태는 절대로 건드리지 말고, 내부의 `{FILL: ...}`로 비워진 부분(주제, 비주얼 컨셉, 필요한 그림 컴포넌트 등)만 AI가 맥락을 분석하여 창의적으로 채워 넣어 주세요.
 
 **계획 승인 요청**: 모든 기획서 작성이 완료되면 사용자에게 최종 검토 및 승인을 요청하세요. <--- 반드시 멈춤
 
-## Phase 4: Skeleton Code Generation
+## Phase 2: Skeleton Code Generation
 
 각 section을 loop로 돌면서 아래 사항을 수정합니다.
 
@@ -123,7 +120,7 @@ export const Sequences: React.FC = () => {
 };
 ```
 
-#### Phase 5. Root Component Assembly
+#### Phase 3. Root Component Assembly
 
 - 최상위 섹션 파일(`src/projects/{project_id}/{section}/{section}.tsx`)을 수정하여 오디오, 화면(Sequences), 자막을 조립합니다.
 - `_final_timeline.json`을 직접 import하여 `CaptionOverlay`에 전달합니다.
