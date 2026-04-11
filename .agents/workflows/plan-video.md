@@ -10,7 +10,6 @@ Remotion 영상 프로젝트 기획서와 스켈레톤 코드(뼈대 코드)를 
 
 - **Phase 1: Plan** → 각 섹션별 애니메이션 기획서 작성
 - **Phase 2: Skeleton Code Generation** → 각 섹션별로 뼈대 코드 생성
-- **Phase 3: Root Component Assembly** → 각 섹션별로 루트 컴포넌트 조립
 
 ## 프로젝트 예상 구조
 
@@ -29,7 +28,7 @@ src/constants/
 
 src/projects/{project_id}/
     {section}/
-        sequences.tsx               <--- (Phase 2에서 생성 예정) 해당 섹션의 씬 시퀀스 코드
+        sequences.tsx               <--- (Phase 2에서 수정 예정) 해당 섹션의 씬 시퀀스 코드
         {section}.tsx               <--- (Phase 2에서 수정 예정) 해당 섹션의 최상위 래퍼 및 Audio 컴포넌트
     {project_id}.tsx                <--- 해당 프로젝트의 루트 컴포넌트
 ```
@@ -57,93 +56,13 @@ src/projects/{project_id}/
 
 ## Phase 2: Skeleton Code Generation
 
-각 section을 loop로 돌면서 아래 사항을 수정합니다.
+// turbo-all
+터미널 명령어 \`python3 scripts/generate-sequences.py {project_id}\` 를 실행합니다.
 
-`src/projects/{project_id}/{section}/sequences.tsx` 파일을 생성하고 아래와 같이 뼈대를 잡습니다.
+이 스크립트는 다음을 자동화합니다:
 
-- [매우중요] 각 Scene 컴포넌트 바로 위에 JSDoc(/\*\* \*/)을 열고, {section}\_plan.md에 있는 해당 씬의 '원본 텍스트'와 '단어 등장 프레임', '비주얼 컨셉'을 그대로 복사하여 주석으로 삽입하세요.
-- 최하단 Sequences 컴포넌트에는 <Series>를 절대 사용하지 말고, `public/{project_id}/{section}/{section}_final_timeline.json`에 명시된 startFrame과 durationInFrames 값을 가져와 **절대 좌표 <Sequence>**로 렌더링하세요.
-- 아래 예시 스켈레톤 코드를 적극 참고하고, 모든 주석을 각 씬에 추가해서 맥락을 잃지 않도록 합니다.
+1. \`public/{project_id}/{section}/{section}\_final_timeline.json\` 의 정확한 \`startFrame\` 과 \`durationInFrames\` 값을 가져와 지연 없는 **절대 좌표 <Sequence>** 스켈레톤 코드를 구성합니다.
+2. 각 Scene 컴포넌트 바로 위 JSDoc(\`/\*\* \*/\`)에, 방금 작성된 \`{section}\_plan.md\` 의 기획안과 텍스트를 정확하게 복사해 넣습니다.
+3. 이를 통해 AI가 향후 코드를 구현할 때 타임라인 오차, 파일 이동으로 인한 컨텍스트 손실 등을 완벽하게 방지합니다.
 
-```tsx
-import React from "react";
-import {
-  AbsoluteFill,
-  Sequence,
-  useCurrentFrame,
-  useVideoConfig,
-  interpolate,
-  spring,
-} from "remotion";
-import { BRAND, COLORS, EFFECTS, FONTS, SPACING, ANIMATION, Z } from "../theme"; // 테마 임포트
-
-/**
- * [Scene 1 기획안]
- * 원본 텍스트: (plan.md의 해당 scene 텍스트를 그대로 복사하여 삽입) <--- 주석 반드시 추가
- * 단어 등장 타이밍: (plan.md의 해당 scene 텍스트를 그대로 복사하여 삽입) <--- 주석 반드시 추가
- * 비주얼 컨셉: (plan.md의 내용을 그대로 복사하여 삽입) <--- 주석 반드시 추가
- * 하단 150px은 자막 영역이므로, 텍스트와 핵심 그래픽은 이 영역을 침범하지 않도록 주의하세요. <--- 이 내용도 컨텍스트 유지를 위해 완벽하게 복사해서 각 Scene에 주석으로 넣어야함.
- * 화면에 노출되는 UI 텍스트는 프로그래밍 용어/회사명 등을 제외하고 모두 한국어 단어로 작성합니다. <--- 이 내용도 컨텍스트 유지를 위해 완벽하게 복사해서 각 Scene에 주석으로 넣어야함.
- * In-Scene Animation 구성: 각 씬의 프레임 내에서 여러 단계로 애니메이션을 분할하여 구현합니다. <--- 이 내용도 컨텍스트 유지를 위해 완벽하게 복사해서 각 Scene에 주석으로 넣어야함.
- */
-const Scene1: React.FC = () => {
-  // TODO: 주석 내용에 맞게 구현
-  return <AbsoluteFill></AbsoluteFill>;
-};
-
-/**
- * [Scene 2 기획안]
- * 원본 텍스트: (plan.md의 해당 scene 텍스트를 그대로 복사하여 삽입)
- * 단어 등장 타이밍: (plan.md의 해당 scene 텍스트를 그대로 복사하여 삽입)
- * 비주얼 컨셉: (plan.md의 내용을 그대로 복사하여 삽입)
- * 하단 150px은 자막 영역이므로, 텍스트와 핵심 그래픽은 이 영역을 침범하지 않도록 주의하세요.
- * 화면에 노출되는 UI 텍스트는 프로그래밍 용어/회사명 등을 제외하고 모두 한국어 단어로 작성합니다.
- * In-Scene Animation 구성: 각 씬의 프레임 내에서 여러 단계로 애니메이션을 분할하여 구현합니다.
- */
-const Scene2: React.FC = () => {
-  // TODO: 주석 내용에 맞게 구현
-  return <AbsoluteFill></AbsoluteFill>;
-};
-
-export const Sequences: React.FC = () => {
-  return (
-    <AbsoluteFill>
-      {/* json의 startFrame과 durationInFrames 값을 하드코딩 매핑 */}
-      <Sequence from={0} durationInFrames={94}>
-        <Scene1 />
-      </Sequence>
-      <Sequence from={94} durationInFrames={178}>
-        <Scene2 />
-      </Sequence>
-    </AbsoluteFill>
-  );
-};
-```
-
-#### Phase 3. Root Component Assembly
-
-- 최상위 섹션 파일(`src/projects/{project_id}/{section}/{section}.tsx`)을 수정하여 오디오, 화면(Sequences), 자막을 조립합니다.
-- `_final_timeline.json`을 직접 import하여 `CaptionOverlay`에 전달합니다.
-
-```tsx
-import React from "react";
-import { AbsoluteFill, Audio, staticFile } from "remotion";
-import { CaptionOverlay } from "../../../shared-components/CaptionOverlay";
-import introTimeline from "../../../../public/{project_id}/intro/intro_final_timeline.json";
-import { Sequences } from "./sequences";
-
-export const Intro: React.FC = () => {
-  return (
-    <AbsoluteFill>
-      {/* 1. 오디오 단일 선언 */}
-      <Audio src={staticFile(`{project_id}/intro/intro.wav`)} />
-
-      {/* 2. 절대 프레임 좌표로 배치된 하위 씬들의 묶음 렌더링 */}
-      <Sequences />
-
-      {/* 3. 화면 최상단 자막 오버레이 — JSON을 직접 소비 */}
-      <CaptionOverlay captions={introTimeline.sentences} />
-    </AbsoluteFill>
-  );
-};
-```
+> 스켈레톤 코드 생성이 완료되면, 이제 각 Scene별로 세부 애니메이션을 구현하는 \`/implement-scenes\` 워크플로우로 넘어갈 준비가 된 것입니다.

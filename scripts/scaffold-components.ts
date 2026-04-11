@@ -30,6 +30,7 @@ import { AbsoluteFill, Audio, staticFile } from 'remotion';
 import { COLORS } from "../../../constants/theme";
 import { CaptionOverlay } from '../../../shared-components/CaptionOverlay';
 import { captions } from './captions';
+import { Sequences } from "./sequences";
 
 /**
  * Section: ${meta.name}
@@ -50,16 +51,41 @@ export const ${compName}: React.FC = () => {
         alignItems: 'center',
       }}
     >
+      {/* 1. 오디오 단일 선언 */}
       <Audio src={staticFile('${audioStaticPath}')} />
-      <h1 style={{ color: '#ffffff', fontSize: 48 }}>
-        ${meta.name.toUpperCase()} Scene
-      </h1>
+
+      {/* 2. 절대 프레임 좌표로 배치된 하위 씬들의 묶음 렌더링 */}
+      <Sequences />
+
+      {/* 3. 자막 오버레이 */}
       <CaptionOverlay captions={captions} />
     </AbsoluteFill>
   );
 };
 `;
     fs.writeFileSync(path.join(srcDir, `${meta.name}.tsx`), componentCode);
+
+    // 스캘폴딩 시 빈 sequences.tsx 파일을 미리 생성해두어 Module Not Found 에러 방지
+    const sequencesCode = `import React from "react";
+import { AbsoluteFill } from "remotion";
+
+export const Sequences: React.FC = () => {
+  return (
+    <AbsoluteFill
+      style={{
+        justifyContent: "center",
+        alignItems: "center",
+        fontSize: 80,
+        color: "rgba(0,0,0,0.3)",
+      }}
+    >
+      ${meta.name.toUpperCase()} - Planning in progress...
+    </AbsoluteFill>
+  );
+};
+`;
+    fs.writeFileSync(path.join(srcDir, "sequences.tsx"), sequencesCode);
+
     console.log(
       `   📦 ${compName} (${meta.durationInFrames} frames, ${meta.audioDurationMs}ms)`
     );
