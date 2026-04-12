@@ -22,80 +22,75 @@ from difflib import SequenceMatcher
 # 1. Context 파일 파싱
 # ─────────────────────────────────────────────
 
-def parse_context(content: str):
+def parse_source_files(project_id: str, section: str):
     """
-    context.md에서 오디오 정보, 원본 대본, 타임스탬프를 파싱합니다.
-    테이블 헤더를 동적으로 감지하여 컬럼 순서에 의존하지 않습니다.
+    원본 파일들을 직접 읽어 타임라인 생성에 필요한 데이터를 반환합니다.
+    context.md 파싱 대신 원본 소스를 직접 참조하여 안정성을 확보합니다.
+    
+    Returns: (total_duration_ms, total_frames, script_lines, timestamps)
     """
-    content = content.replace('\r\n', '\n')
-
-    # 오디오 메타데이터
-    duration_match = re.search(
-        r'- \*\*Audio Duration\*\*: (\d+)ms \((\d+) frames', content
-    )
-    total_duration = int(duration_match.group(1)) if duration_match else 0
-    total_frames = int(duration_match.group(2)) if duration_match else 0
-
-    # 원본 대본
+    import subprocess
+    
+    base_dir = f'public/{project_id}/{section}'
+    txt_path = os.path.join(base_dir, f'{section}.txt')
+    ts_path = os.path.join(base_dir, f'{section}_timestamp.json')
+    wav_path = os.path.join(base_dir, f'{section}.wav')
+    
+    # 1. 원본 대본 읽기
     script_lines = []
-    script_section = re.search(
-        r'## 원본 대본 \(정본\)(.*?)(?=## 타임스탬프|$)', content, re.DOTALL
-    )
-    if script_section:
-        for line in script_section.group(1).strip().split('\n'):
-            line = line.strip()
-            m = re.match(r'^\d+\.\s*(.*)', line)
-            if m:
-                script_lines.append(m.group(1).strip())
-
-    # 타임스탬프 테이블 — 헤더 기반 컬럼 감지
+    if os.path.exists(txt_path):
+        with open(txt_path, 'r', encoding='utf-8') as f:
+            script_lines = [line.strip() for line in f if line.strip()]
+    else:
+        print(f"  ❌ 대본 파일 없음: {txt_path}")
+        return 0, 0, [], []
+    
+    # 2. 타임스탬프 JSON 읽기
     timestamps = []
-    lines = content.split('\n')
-    header_idx = None
-    col_map = {}
-
-    for i, line in enumerate(lines):
-        stripped = line.strip()
-        if stripped.startswith('|') and 'startFrame' in stripped:
-            header_idx = i
-            cols = [c.strip().lower() for c in stripped.split('|')]
-            cols = [c for c in cols if c]  # 빈 문자열 제거
-            for j, col_name in enumerate(cols):
-                if 'startframe' in col_name:
-                    col_map['start'] = j
-                elif 'endframe' in col_name:
-                    col_map['end'] = j
-                elif 'whisper' in col_name or '텍스트' in col_name:
-                    col_map['text'] = j
-            break
-
-    if header_idx is None or 'start' not in col_map:
-        print("  ⚠️ 타임스탬프 테이블 헤더를 찾을 수 없습니다.")
-        return total_duration, total_frames, script_lines, []
-
-    for line in lines[header_idx + 1:]:
-        stripped = line.strip()
-        if not stripped.startswith('|'):
-            continue
-        if '---' in stripped:
-            continue
-
-        cols = [c.strip() for c in stripped.split('|')]
-        cols = [c for c in cols if c != '']
-
+    if os.path.exists(ts_path):
+        with open(ts_path, 'r', encoding='utf-8') as f:
+            timestamps = json.load(f)
+    else:
+        print(f"  ❌ 타임스탬프 파일 없음: {ts_path}")
+        return 0, 0, script_lines, []
+    
+    # 3. 오디오 duration (ffprobe 직접 호출)
+    total_duration_ms = 0
+    total_frames = 0
+    FPS = 30  # 기본값
+    
+    # video-config에서 FPS 읽기 시도
+    config_path = 'src/constants/video-config.ts'
+    if os.path.exists(config_path):
+        with open(config_path, 'r') as f:
+            config_content = f.read()
+            fps_match = re.search(r'VIDEO_FPS\s*=\s*(\d+)', config_content)
+            if fps_match:
+                FPS = int(fps_match.group(1))
+    
+    if os.path.exists(wav_path):
         try:
-            start = int(cols[col_map['start']])
-            end = int(cols[col_map['end']])
-            text = cols[col_map.get('text', -1)] if 'text' in col_map and col_map['text'] < len(cols) else ""
-            timestamps.append({
-                "startFrame": start,
-                "endFrame": end,
-                "text": text.strip()
-            })
-        except (ValueError, IndexError):
-            continue
-
-    return total_duration, total_frames, script_lines, timestamps
+            result = subprocess.run(
+                ['ffprobe', '-v', 'error', '-show_entries', 'format=duration',
+                 '-of', 'csv=p=0', wav_path],
+                capture_output=True, text=True, timeout=10
+            )
+            duration_sec = float(result.stdout.strip())
+            total_duration_ms = round(duration_sec * 1000)
+            total_frames = math.ceil(duration_sec * FPS)
+        except Exception as e:
+            print(f"  ⚠️ ffprobe 실패: {e}")
+            # 타임스탬프의 마지막 endFrame으로 추정
+            if timestamps:
+                total_frames = max(ts.get('endFrame', 0) for ts in timestamps)
+                total_duration_ms = round(total_frames / FPS * 1000)
+    else:
+        print(f"  ⚠️ WAV 파일 없음: {wav_path}, 타임스탬프 기반으로 추정")
+        if timestamps:
+            total_frames = max(ts.get('endFrame', 0) for ts in timestamps)
+            total_duration_ms = round(total_frames / FPS * 1000)
+    
+    return total_duration_ms, total_frames, script_lines, timestamps
 
 
 # ─────────────────────────────────────────────
@@ -559,15 +554,7 @@ def generate_report(section: str, report: dict, sentences: list[dict],
 
 def process_section(project_id: str, section: str) -> str | None:
     """한 섹션의 final_timeline.json을 생성합니다."""
-    path = f'public/{project_id}/{section}/{section}_context.md'
-    if not os.path.exists(path):
-        print(f"  ⚠️ 파일 없음: {path}")
-        return None
-
-    with open(path, 'r', encoding='utf-8') as f:
-        content = f.read()
-
-    total_dur, total_frames, script_lines, whisper_ts = parse_context(content)
+    total_dur, total_frames, script_lines, whisper_ts = parse_source_files(project_id, section)
 
     if not script_lines:
         print(f"  ❌ 원본 대본을 파싱할 수 없습니다.")

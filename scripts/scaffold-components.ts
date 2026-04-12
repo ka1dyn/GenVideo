@@ -65,8 +65,10 @@ export const ${compName}: React.FC = () => {
 `;
     fs.writeFileSync(path.join(srcDir, `${meta.name}.tsx`), componentCode);
 
-    // 스캘폴딩 시 빈 sequences.tsx 파일을 미리 생성해두어 Module Not Found 에러 방지
-    const sequencesCode = `import React from "react";
+    // 빈 sequences.tsx stub — 이미 존재하면 건너뜀 (generate-sequences.py가 기획 주석 포함 버전을 생성)
+    const sequencesPath = path.join(srcDir, "sequences.tsx");
+    if (!fs.existsSync(sequencesPath)) {
+      const sequencesCode = `import React from "react";
 import { AbsoluteFill } from "remotion";
 
 export const Sequences: React.FC = () => {
@@ -84,7 +86,10 @@ export const Sequences: React.FC = () => {
   );
 };
 `;
-    fs.writeFileSync(path.join(srcDir, "sequences.tsx"), sequencesCode);
+      fs.writeFileSync(sequencesPath, sequencesCode);
+    } else {
+      console.log(`   ⏭️ sequences.tsx already exists for [${meta.name}], skipping stub generation`);
+    }
 
     console.log(
       `   📦 ${compName} (${meta.durationInFrames} frames, ${meta.audioDurationMs}ms)`
@@ -135,11 +140,25 @@ function updateRootTsx(
   }
 
   const importStatement = `import { ${componentName} } from "./projects/${projectId}/${projectId}";`;
+
+  // Import 추가 — remotion import 라인 뒤에 삽입
   if (!content.includes(importStatement)) {
-    content = content.replace(
-      /import \{ Folder(.*?)?\} from "remotion";(\r?\n)/,
-      `import { Folder, Composition } from "remotion";\n${importStatement}\n`
-    );
+    // remotion import 라인 찾기 (Folder, Composition 등 어떤 조합이든)
+    const remotionImportRegex = /^(import\s+\{[^}]*\}\s+from\s+["']remotion["'];?\s*\n)/m;
+    const match = content.match(remotionImportRegex);
+    if (match) {
+      // Composition이 import되어 있는지 확인
+      if (!match[1].includes("Composition")) {
+        const fixedImport = match[1].replace("{", "{ Composition,");
+        content = content.replace(match[1], fixedImport);
+      }
+      // remotion import 라인 바로 뒤에 프로젝트 import 추가
+      const insertPoint = content.indexOf(match[0]) + match[0].length;
+      content = content.slice(0, insertPoint) + importStatement + "\n" + content.slice(insertPoint);
+    } else {
+      // remotion import를 못 찾으면 파일 상단에 추가
+      content = `import { Composition } from "remotion";\n${importStatement}\n${content}`;
+    }
   }
 
   const compositionComponent = `      <Composition\n        id="${projectId}"\n        component={${componentName}}\n        durationInFrames={${totalDuration}}\n        fps={VIDEO_FPS}\n        width={VIDEO_WIDTH}\n        height={VIDEO_HEIGHT}\n      />\n`;

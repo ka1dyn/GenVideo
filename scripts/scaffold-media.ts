@@ -74,11 +74,15 @@ export async function extractMedia(
 
     console.log(`🎙️ Generating TTS for [${doc.name}]...`);
     try {
-      const safeText = doc.text.replace(/"/g, '\\"');
+      // 쉘 특수문자 인젝션 방지를 위해 임시 파일로 텍스트 전달
+      const tmpTextPath = path.join(publicDir, `${doc.name}_tts_input.tmp`);
+      fs.writeFileSync(tmpTextPath, doc.text, "utf-8");
       execSync(
-        `python3 scripts/scaffold-tts.py "${safeText}" "${wavPath}" "${pronunciationTxtPath}"`,
+        `python3 scripts/scaffold-tts.py --file "${tmpTextPath}" "${wavPath}" "${pronunciationTxtPath}"`,
         { stdio: "inherit" }
       );
+      // 임시 파일 정리
+      if (fs.existsSync(tmpTextPath)) fs.unlinkSync(tmpTextPath);
     } catch (e) {
       console.error(`❌ TTS generation failed for ${doc.name}`, e);
     }

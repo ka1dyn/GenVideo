@@ -64,13 +64,31 @@ async def generate_tts(text: str, output_path: str, pronunciation_path: str = No
         sys.exit(1)
 
 async def main():
-    if len(sys.argv) < 3:
-        print("Usage: python scaffold-tts.py <text> <output_path> [pronunciation_txt_path]")
-        sys.exit(1)
+    import argparse
     
-    text = sys.argv[1]
-    output_path = sys.argv[2]
-    pronunciation_path = sys.argv[3] if len(sys.argv) > 3 else None
+    parser = argparse.ArgumentParser(description="Generate TTS audio")
+    parser.add_argument("--file", help="Read text from file instead of argument")
+    parser.add_argument("args", nargs="*", help="[text] output_path [pronunciation_path]")
+    
+    parsed = parser.parse_args()
+    
+    if parsed.file:
+        # --file 모드: text를 파일에서 읽음
+        with open(parsed.file, "r", encoding="utf-8") as f:
+            text = f.read()
+        if len(parsed.args) < 1:
+            print("Usage: python scaffold-tts.py --file <text_file> <output_path> [pronunciation_path]")
+            sys.exit(1)
+        output_path = parsed.args[0]
+        pronunciation_path = parsed.args[1] if len(parsed.args) > 1 else None
+    else:
+        # 기존 호환: positional argument 모드
+        if len(parsed.args) < 2:
+            print("Usage: python scaffold-tts.py <text> <output_path> [pronunciation_txt_path]")
+            sys.exit(1)
+        text = parsed.args[0]
+        output_path = parsed.args[1]
+        pronunciation_path = parsed.args[2] if len(parsed.args) > 2 else None
     
     # Ensure output directory exists
     os.makedirs(os.path.dirname(output_path), exist_ok=True)
