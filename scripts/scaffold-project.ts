@@ -7,64 +7,6 @@ import { generateComponents } from "./scaffold-components";
 
 import { VIDEO_FPS as FPS } from "../src/constants/video-config";
 
-function generateContextFile(projectId: string, meta: SectionMeta) {
-  const publicDir = path.join(
-    process.cwd(),
-    `public/${projectId}/${meta.name}`
-  );
-  const contextPath = path.join(publicDir, `${meta.name}_context.md`);
-
-  // Parse original script into sentences
-  const originalSentences = meta.text
-    .split(/\r?\n/)
-    .map((s) => s.trim())
-    .filter((s) => s.length > 0);
-
-  // Build timestamp table
-  let timestampTable =
-    "| # | startFrame | endFrame | 길이(frames) | Whisper 텍스트 |\n";
-  timestampTable +=
-    "|---|------------|----------|--------------|---------------|\n";
-  meta.timestamps.forEach((ts, i) => {
-    const durationFrames = ts.endFrame - ts.startFrame;
-    timestampTable += `| ${i + 1} | ${ts.startFrame} | ${ts.endFrame} | ${durationFrames} | ${ts.text} |\n`;
-  });
-
-  const content = `# Section Context: ${meta.name}
-
-- **Project**: ${projectId}
-- **Audio Duration**: ${meta.audioDurationMs}ms (${meta.durationInFrames} frames @${FPS}fps)
-- **Assets**:
-  - Audio: \`${projectId}/${meta.name}/${meta.name}.wav\`
-  - Script: \`${projectId}/${meta.name}/${meta.name}.txt\`
-  - Timestamps: \`${projectId}/${meta.name}/${meta.name}_timestamp.json\`
-
-## 원본 대본 (정본)
-
-> ⚠️ 아래 대본이 정본입니다. 타임스탬프의 텍스트와 다를 수 있으니, 대본 내용을 기준으로 작업하세요.
-
-${originalSentences.map((s, i) => `${i + 1}. ${s}`).join("\n")}
-
-## 타임스탬프 (타이밍 참조용)
-
-> ⚠️ 아래 텍스트는 Whisper AI가 인식한 결과이며 원본과 다를 수 있습니다.
-> **타이밍(startFrame, endFrame)만 참조**하고, 텍스트 내용은 위 원본 대본을 기준으로 하세요.
-> Whisper가 추가한 환각 텍스트(예: "감사합니다", "MBC 뉴스..." 등 원본에 없는 텍스트)는 무시하세요.
-
-${timestampTable}
-
-## 대본-타임스탬프 매핑 가이드
-
-원본 대본의 각 문장과 타임스탬프를 대응시킬 때:
-1. **원본 대본의 문장**을 기준으로 삼으세요
-2. 타임스탬프의 startFrame/endFrame은 가장 유사한 단어에 매핑하세요
-3. Whisper가 추가한 환각 텍스트는 무시하세요
-4. 원본 문장에 대응되는 타임스탬프가 없으면, 사용자에게 즉각 알리세요
-`;
-
-  fs.writeFileSync(contextPath, content, "utf-8");
-  console.log(`📋 Generated context file: ${contextPath}`);
-}
 
 async function main() {
   const args = process.argv.slice(2);
@@ -131,14 +73,9 @@ async function main() {
     // Step 3: Handle React Component generation and Root.tsx registration
     generateComponents(projectId, sectionMetas);
 
-    // Step 4: Generate context files for AI planning
-    console.log("\n=== Phase 4: Generating Context Files ===");
-    for (const meta of sectionMetas) {
-      generateContextFile(projectId, meta);
-    }
 
-    // Step 5: Automatically generate the final timeline JSONs
-    console.log("\n=== Phase 5: Generating Final Timelines ===");
+    // Step 4: Automatically generate the final timeline JSONs
+    console.log("\n=== Phase 4: Generating Final Timelines ===");
     try {
       execSync(`python3 scripts/generate-timeline.py ${projectId}`, {
         stdio: "inherit",
@@ -149,8 +86,8 @@ async function main() {
       );
     }
 
-    // Step 6: Automatically generate captions.ts
-    console.log("\n=== Phase 6: Generating Captions ===");
+    // Step 5: Automatically generate captions.ts
+    console.log("\n=== Phase 5: Generating Captions ===");
     try {
       execSync(`python3 scripts/generate-captions.py ${projectId}`, {
         stdio: "inherit",
@@ -164,7 +101,7 @@ async function main() {
     console.log(`\n✅ Scaffold complete for ${projectId}!`);
     console.log(`\n📌 Next steps:`);
     console.log(
-      `   1. Review timeline_report.md and context files in public/${projectId}/`
+      `   1. Review timeline_report.md in public/${projectId}/`
     );
     console.log(
       `   2. Run /plan-animations ${projectId} to generate animation plans`

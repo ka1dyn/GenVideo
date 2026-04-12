@@ -2,7 +2,6 @@ import "./index.css";
 
 import React from "react";
 import { Folder, Composition, Still, staticFile } from "remotion";
-import { Aiwar } from "./projects/aiwar/aiwar";
 import { ProjectMaven } from "./projects/project-maven/project-maven";
 import { WebParadiam } from "./projects/web-paradiam/web-paradiam";
 import { Thumbnail, ThumbnailSchema } from "./projects/thumbnail/Thumbnail";
@@ -13,15 +12,6 @@ export const RemotionRoot: React.FC = () => {
   return (
     <>
       <Folder name="Projects">
-        <Composition
-          id="aiwar"
-          component={Aiwar}
-          durationInFrames={10613}
-          fps={VIDEO_FPS}
-          width={VIDEO_WIDTH}
-          height={VIDEO_HEIGHT}
-        />
-
         <Composition
           id="project-maven"
           component={ProjectMaven}
@@ -57,8 +47,7 @@ export const RemotionRoot: React.FC = () => {
             titleLine1: "미국, 이란 전쟁 클로드 참전?",
             titleLine2: "표적 직접 추적한다",
             highlightWords: ["클로드 참전", "추적한다"],
-            // subtitle: "초압축 전쟁설명회",
-            preset: "minimal",
+            preset: "minimal" as const,
           }}
         />
       </Folder>
