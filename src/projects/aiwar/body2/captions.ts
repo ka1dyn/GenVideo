@@ -21,23 +21,23 @@ export const captions = [
     endFrame: 487
   },
   {
-    text: "그럼 자연스럽게 드는 질문이 있죠.\n빠른 건 알겠는데. 그만큼 정확하기도 한 걸까요?",
+    text: "그럼 자연스럽게 드는 질문이 있죠.\n빠른 건 알겠는데.",
     startFrame: 487,
-    endFrame: 697
+    endFrame: 635
   },
   {
-    text: "중동 사막 환경에서 실험했을 때예요.",
-    startFrame: 697,
+    text: "그만큼 정확하기도 한 걸까요?\n중동 사막 환경에서 실험했을 때예요.",
+    startFrame: 635,
     endFrame: 772
   },
   {
-    text: "사람은 84% 확률로 맞는 판단을 했어요.\n메이븐은요? 60%였어요.",
+    text: "사람은 84% 확률로 맞는 판단을 했어요.",
     startFrame: 772,
-    endFrame: 972
+    endFrame: 871
   },
   {
-    text: "AI는 트럭이랑 나무를 혼동했고,\n계곡이랑 장갑차를 혼동했습니다.",
-    startFrame: 972,
+    text: "메이븐은요? 60%였어요. AI는 트럭이랑 나무를\n혼동했고, 계곡이랑 장갑차를 혼동했습니다.",
+    startFrame: 898,
     endFrame: 1109
   },
   {
@@ -46,8 +46,13 @@ export const captions = [
     endFrame: 1253
   },
   {
-    text: "군 관계자도 인정했어요. \"메이븐의 장점은\n어디까지나 속도다. 전술적 판단 수준엔 아직 못 미친다.\"",
+    text: "군 관계자도 인정했어요.\n\"메이븐의 장점은 어디까지나 속도다.",
     startFrame: 1253,
+    endFrame: 1411
+  },
+  {
+    text: "전술적 판단 수준엔 아직 못 미친다.\"",
+    startFrame: 1411,
     endFrame: 1493
   },
   {
@@ -71,7 +76,7 @@ export const captions = [
     endFrame: 2130
   },
   {
-    text: "메이븐이 이 타격에 관여했는지는 아직 조사\n중이라고 하지만, 만약에라도 AI가 이 사건에 개입했다면",
+    text: "메이븐이 이 타격에 관여했는지는 아직 조사 중이라고\n하지만, 만약에라도 AI가 이 사건에 개입했다면",
     startFrame: 2130,
     endFrame: 2323
   },

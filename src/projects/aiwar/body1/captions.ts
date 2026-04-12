@@ -16,18 +16,18 @@ export const captions = [
     endFrame: 435
   },
   {
-    text: "없어요.",
+    text: "없어요. \"이거 군사 차량이야, 민간 차량이야?\",\n\"저 건물에 뭐가 있는 거야?\"",
     startFrame: 435,
-    endFrame: 454
-  },
-  {
-    text: "\"이거 군사 차량이야, 민간 차량이야?\",\n\"저 건물에 뭐가 있는 거야?\"",
-    startFrame: 454,
     endFrame: 612
   },
   {
-    text: "하루 종일 화면만 들여다봐도 감당이 안 돼요.\n그래서 AI가 대신 보기 시작한 겁니다.",
+    text: "하루 종일 화면만 들여다봐도 감당이 안 돼요.",
     startFrame: 612,
+    endFrame: 705
+  },
+  {
+    text: "그래서 AI가 대신 보기 시작한 겁니다.",
+    startFrame: 705,
     endFrame: 797
   },
   {
@@ -36,28 +36,18 @@ export const captions = [
     endFrame: 894
   },
   {
-    text: "첫 번째, 사물을 식별해요.",
+    text: "첫 번째, 사물을 식별해요. 드론 영상, 위성\n사진, 열감지 레이더까지 전부 끌어모아서 분석해요.",
     startFrame: 894,
-    endFrame: 978
-  },
-  {
-    text: "드론 영상, 위성 사진,\n열감지 레이더까지 전부 끌어모아서 분석해요.",
-    startFrame: 978,
     endFrame: 1150
   },
   {
-    text: "\"저 물체 탱크야, 트럭이야?\", \"저 건물에서\n사람 움직임이 감지되는데?\" 이걸 1초도 안 걸려서",
+    text: "\"저 물체 탱크야, 트럭이야?\",\n\"저 건물에서 사람 움직임이 감지되는데?\"",
     startFrame: 1150,
-    endFrame: 1361
+    endFrame: 1319
   },
   {
-    text: "판단해요.",
-    startFrame: 1361,
-    endFrame: 1387
-  },
-  {
-    text: "두 번째, 표적을 추적해요.",
-    startFrame: 1387,
+    text: "이걸 1초도 안 걸려서 판단해요. 두 번째,\n표적을 추적해요.",
+    startFrame: 1319,
     endFrame: 1471
   },
   {
@@ -71,13 +61,8 @@ export const captions = [
     endFrame: 1740
   },
   {
-    text: "예를 들면 이런 거예요.",
+    text: "예를 들면 이런 거예요.\n드론이 수상한 차량 한 대를 포착했어요.",
     startFrame: 1740,
-    endFrame: 1793
-  },
-  {
-    text: "드론이 수상한 차량 한 대를 포착했어요.",
-    startFrame: 1793,
     endFrame: 1891
   },
   {
@@ -103,7 +88,7 @@ export const captions = [
   {
     text: "\"이 건물, 무기 시설일 확률 98%입니다.\",\n\"이 차량, 군사 지휘 차량으로 추정됩니다.\"",
     startFrame: 2426,
-    endFrame: 2638
+    endFrame: 2646
   },
   {
     text: "이렇게 리스트를 만들어서 사람한테 올리는 거예요.",

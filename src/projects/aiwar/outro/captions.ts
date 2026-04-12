@@ -11,13 +11,8 @@ export const captions = [
     endFrame: 289
   },
   {
-    text: "아니에요.",
+    text: "아니에요. 이미 현실이에요.",
     startFrame: 289,
-    endFrame: 309
-  },
-  {
-    text: "이미 현실이에요.",
-    startFrame: 309,
     endFrame: 355
   },
   {
@@ -31,22 +26,17 @@ export const captions = [
     endFrame: 703
   },
   {
-    text: "오늘 제 얘기가 '아, 세상이 진짜 이렇게\n돌아가고 있구나' 하고 조금이라도 와닿으셨다면 구독 한번",
+    text: "오늘 제 얘기가 '아, 세상이 진짜 이렇게 돌아가고\n있구나' 하고 조금이라도 와닿으셨다면 구독 한번",
     startFrame: 731,
     endFrame: 946
   },
   {
-    text: "꾹 눌러주세요.",
+    text: "꾹 눌러주세요. 아, 그리고 영상 끄기 전에 이거\n하나만 댓글로 남겨주세요.",
     startFrame: 946,
-    endFrame: 983
-  },
-  {
-    text: "아,\n그리고 영상 끄기 전에 이거 하나만 댓글로 남겨주세요.",
-    startFrame: 983,
     endFrame: 1133
   },
   {
-    text: "'내 목숨이 걸린 전쟁터,\n사람 사령관을 믿을 것인가, 냉철한 AI를 믿을 것인가?'",
+    text: "'내 목숨이 걸린 전쟁터, 사람 사령관을 믿을\n것인가, 냉철한 AI를 믿을 것인가?'",
     startFrame: 1133,
     endFrame: 1315
   },

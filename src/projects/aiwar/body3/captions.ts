@@ -6,12 +6,12 @@ export const captions = [
     endFrame: 110
   },
   {
-    text: "메이븐은 학습 데이터에 의존해요.\n그 데이터가 오염되면, AI 판단 자체가 오염되는겁니다.",
+    text: "메이븐은 학습 데이터에 의존해요. 그 데이터가\n오염되면, AI 판단 자체가 오염되는겁니다.",
     startFrame: 125,
     endFrame: 301
   },
   {
-    text: "만약 적대국이 학습 데이터에 슬쩍 오류를\n심어놓으면 어떻게 될까요?",
+    text: "만약 적대국이 학습 데이터에 슬쩍 오류를 심어놓으면\n어떻게 될까요?",
     startFrame: 301,
     endFrame: 463
   },
@@ -21,8 +21,13 @@ export const captions = [
     endFrame: 618
   },
   {
-    text: "사령관은 AI를 믿고 결정을 내리고요.\nAI를 무력화하는 게 아니라, AI를 틀리게 만드는 거예요.",
+    text: "사령관은 AI를 믿고 결정을 내리고요.",
     startFrame: 618,
+    endFrame: 733
+  },
+  {
+    text: "AI를 무력화하는 게 아니라,\nAI를 틀리게 만드는 거예요.",
+    startFrame: 733,
     endFrame: 860
   },
   {

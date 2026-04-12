@@ -11,23 +11,23 @@ export const captions = [
     endFrame: 244
   },
   {
-    text: "영토 분쟁, 자원 전쟁. 현실에서 충분히 일어날\n법한 시나리오들이에요. 결과가 어땠냐면요.",
+    text: "영토 분쟁, 자원 전쟁.\n현실에서 충분히 일어날 법한 시나리오들이에요.",
     startFrame: 244,
-    endFrame: 461
+    endFrame: 406
   },
   {
-    text: "21번 중 20번.\n95%에서 핵무기를 선택했습니다.",
-    startFrame: 461,
-    endFrame: 601
+    text: "결과가 어땠냐면요. 21번 중 20번.",
+    startFrame: 406,
+    endFrame: 511
   },
   {
-    text: "협상도 아니고, 외교도 아니고. 핵 버튼이에요.",
-    startFrame: 601,
-    endFrame: 712
+    text: "95%에서 핵무기를 선택했습니다. 협상도 아니고,\n외교도 아니고.",
+    startFrame: 511,
+    endFrame: 670
   },
   {
-    text: "올해 2월, 영국 킹스칼리지 런던 연구팀이 이\n결과를 발표하면서 이렇게 말했어요.",
-    startFrame: 719,
+    text: "핵 버튼이에요. 올해 2월, 영국 킹스칼리지 런던\n연구팀이 이 결과를 발표하면서 이렇게 말했어요.",
+    startFrame: 670,
     endFrame: 874
   },
   {
@@ -36,13 +36,8 @@ export const captions = [
     endFrame: 1019
   },
   {
-    text: "왜냐면 AI는 두렵지 않으니까요.",
+    text: "왜냐면 AI는 두렵지 않으니까요. 사람은 핵전쟁이\n어떤 건지 역사로, 감정으로, 몸으로 알아요.",
     startFrame: 1019,
-    endFrame: 1095
-  },
-  {
-    text: "사람은 핵전쟁이 어떤 건지 역사로, 감정으로,\n몸으로 알아요.",
-    startFrame: 1095,
     endFrame: 1217
   },
   {
@@ -51,13 +46,13 @@ export const captions = [
     endFrame: 1349
   },
   {
-    text: "도덕적 고뇌 없이, 망설임 없이.\n최적화의 결과로 핵을 선택하는 겁니다. 상당히 무섭죠.",
+    text: "도덕적 고뇌 없이, 망설임 없이.\n최적화의 결과로 핵을 선택하는 겁니다.",
     startFrame: 1349,
-    endFrame: 1549
+    endFrame: 1501
   },
   {
-    text: "근데 이게 그냥 실험실 얘기가 아니에요.",
-    startFrame: 1549,
+    text: "상당히 무섭죠.\n근데 이게 그냥 실험실 얘기가 아니에요.",
+    startFrame: 1501,
     endFrame: 1618
   },
   {
@@ -76,7 +71,7 @@ export const captions = [
     endFrame: 1997
   },
   {
-    text: "타격하는 속도로 이어졌어요.\n이렇게 빠른 타격 작전의 중심에는 AI가 있었습니다.",
+    text: "타격하는 속도로 이어졌어요. 이렇게 빠른 타격\n작전의 중심에는 AI가 있었습니다.",
     startFrame: 1997,
     endFrame: 2158
   },
@@ -86,7 +81,7 @@ export const captions = [
     endFrame: 2248
   },
   {
-    text: "\"우리 전투원들은 다양한 첨단 AI 도구를\n활용하고 있다.",
+    text: "\"우리 전투원들은 다양한 첨단 AI 도구를 활용하고\n있다.",
     startFrame: 2248,
     endFrame: 2368
   },
@@ -96,22 +91,17 @@ export const captions = [
     endFrame: 2496
   },
   {
-    text: "해준다.\"",
+    text: "해준다.\" 프로젝트 메이븐,\n이번 전쟁에 투입된 핵심 AI 시스템입니다.",
     startFrame: 2496,
-    endFrame: 2507
-  },
-  {
-    text: "프로젝트 메이븐,\n이번 전쟁에 투입된 핵심 AI 시스템입니다.",
-    startFrame: 2507,
     endFrame: 2668
   },
   {
-    text: "그리고 이 AI 시스템 안에,\n여러분이 아주 잘 아는 그 이름. 클로드가 있었습니다.",
+    text: "그리고 이 AI 시스템 안에, 여러분이 아주 잘\n아는 그 이름. 클로드가 있었습니다.",
     startFrame: 2668,
     endFrame: 2818
   },
   {
-    text: "그럼 프로젝트 메이븐이 대체 뭔지,\n어떻게 전쟁에 사용됐는지, 지금부터 제대로 뜯어볼게요.",
+    text: "그럼 프로젝트 메이븐이 대체 뭔지, 어떻게 전쟁에\n사용됐는지, 지금부터 제대로 뜯어볼게요.",
     startFrame: 2818,
     endFrame: 2998
   },
