@@ -1,6 +1,6 @@
 {
-  "totalDuration": 43833,
-  "totalFrames": 1315,
+  "totalDuration": 44323,
+  "totalFrames": 1330,
   "sentences": [
     {
       "sentence": "다시 처음으로 돌아올게요.",
@@ -458,8 +458,8 @@
           "endFrame": 1315
         }
       ],
-      "endFrame": 1315,
-      "durationInFrames": 182
+      "endFrame": 1330,
+      "durationInFrames": 197
     }
   ]
 }

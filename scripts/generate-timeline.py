@@ -1,5 +1,5 @@
 """
-generate-timeline.py — Final Timeline Generator (v2)
+generate-timeline.py — Final Timeline Generator (v3)
 
 순차 위치 기반(Sequential Position) 매핑을 사용하여
 원본 대본과 Whisper 타임스탬프를 정확하게 대응시킵니다.
@@ -9,6 +9,7 @@ generate-timeline.py — Final Timeline Generator (v2)
   2. 1:N 매핑 시 글자 수 비율로 시간 분배
   3. 매핑 불가 단어는 스마트 보간 + 리포트 경고
   4. 0-duration 단어 절대 금지
+  5. 연속 환각 복구를 위한 확장 lookahead (최대 3)
 """
 
 import json
@@ -197,30 +198,46 @@ def map_words_to_timestamps(script_words: list[str], whisper_words: list[dict], 
         if split_found:
             continue
 
-        # Case 4: 매핑 실패
-        # Whisper 환각이거나 원본과 완전히 다른 단어
-        # 전략: Whisper 쪽을 한 칸 앞으로 보내고, 다음 Whisper 단어와 재시도
-        # 단, 원본 측도 한 번도 매칭 못 한 채 뒤처지지 않도록 관리
-
-        # 먼저 다음 Whisper 단어가 현재 원본 단어와 매칭되는지 확인
-        if w_idx + 1 < n_whisper and char_similarity(sw, whisper_words[w_idx + 1]["text"]) >= 0.5:
-            # 현재 Whisper 단어는 환각 → 건너뜀
-            report["hallucinations"].append({
-                "whisper_idx": w_idx,
-                "whisper_text": ww["text"],
-                "startFrame": ww["startFrame"],
-                "endFrame": ww["endFrame"],
-            })
-            w_idx += 1
-            continue
-
-        # 다음 원본 단어가 현재 Whisper 단어와 매칭되는지 확인
-        if s_idx + 1 < n_script and char_similarity(script_words[s_idx + 1], ww["text"]) >= 0.5:
-            # 현재 원본 단어는 매칭 불가 → 나중에 보간
-            s_idx += 1
-            continue
-
-        # 둘 다 안 되면 양쪽 다 한 칸씩 전진
+        # Case 4: 매핑 실패 — 확장 lookahead로 연속 환각 복구
+        # Whisper 환각이 2~3개 연속 발생해도 정상 단어를 놓치지 않도록
+        # 최대 LOOKAHEAD 범위까지 스캔하여 매칭 가능한 위치를 찾음
+        LOOKAHEAD = 3
+        
+        # 전략 A: 현재 원본 단어(sw)가 Whisper의 뒤쪽 단어와 매칭되는지 확인
+        # → Whisper 쪽에 연속 환각이 있는 케이스
+        whisper_skip = 0
+        for skip in range(1, min(LOOKAHEAD + 1, n_whisper - w_idx)):
+            if char_similarity(sw, whisper_words[w_idx + skip]["text"]) >= 0.5:
+                whisper_skip = skip
+                break
+        
+        if whisper_skip > 0:
+            # w_idx ~ w_idx+whisper_skip-1 은 전부 환각으로 기록
+            for h in range(whisper_skip):
+                report["hallucinations"].append({
+                    "whisper_idx": w_idx + h,
+                    "whisper_text": whisper_words[w_idx + h]["text"],
+                    "startFrame": whisper_words[w_idx + h]["startFrame"],
+                    "endFrame": whisper_words[w_idx + h]["endFrame"],
+                })
+            w_idx += whisper_skip
+            continue  # sw를 다시 매칭 시도 (w_idx가 이동했으므로)
+        
+        # 전략 B: 현재 Whisper 단어(ww)가 원본의 뒤쪽 단어와 매칭되는지 확인
+        # → 원본에 Whisper가 인식 못 한 단어가 있는 케이스
+        script_skip = 0
+        for skip in range(1, min(LOOKAHEAD + 1, n_script - s_idx)):
+            if char_similarity(script_words[s_idx + skip], ww["text"]) >= 0.5:
+                script_skip = skip
+                break
+        
+        if script_skip > 0:
+            # s_idx ~ s_idx+script_skip-1 은 매칭 불가 → 나중에 보간
+            s_idx += script_skip
+            continue  # ww를 다시 매칭 시도
+        
+        # 전략 C: 양쪽 모두 lookahead 범위 내에서 매칭 불가
+        # → 양쪽 다 한 칸 전진 (최후 수단)
         report["hallucinations"].append({
             "whisper_idx": w_idx,
             "whisper_text": ww["text"],
@@ -301,19 +318,37 @@ def interpolate_unmatched(result: list, report: dict):
         if gap_end < n:
             next_start = result[gap_end]["startFrame"]
 
-        # 가용 시간 범위 결정
+        # 가용 시간 범위 결정 (매핑 성공 단어와 겹치지 않도록)
         if prev_end is not None and next_start is not None:
             avail_start = prev_end
             avail_end = next_start
         elif prev_end is not None:
+            # 뒤에 매핑 성공 단어가 없으면, 전체 결과에서 찾기
+            next_matched = None
+            for k in range(gap_end, n):
+                if result[k]["startFrame"] is not None:
+                    next_matched = result[k]["startFrame"]
+                    break
             avail_start = prev_end
-            avail_end = prev_end + (gap_end - gap_start) * 2  # 최소 추정
+            avail_end = next_matched if next_matched is not None else prev_end + (gap_end - gap_start) * 2
         elif next_start is not None:
+            # 앞에 매핑 성공 단어가 없으면, 전체 결과에서 찾기
+            prev_matched = None
+            for k in range(gap_start - 1, -1, -1):
+                if result[k]["endFrame"] is not None:
+                    prev_matched = result[k]["endFrame"]
+                    break
             avail_end = next_start
-            avail_start = max(0, next_start - (gap_end - gap_start) * 2)
+            avail_start = prev_matched if prev_matched is not None else max(0, next_start - (gap_end - gap_start) * 2)
         else:
+            # 전체에서 첫 번째 매핑 성공 단어 탐색
+            first_matched = None
+            for k in range(n):
+                if result[k]["startFrame"] is not None:
+                    first_matched = result[k]["startFrame"]
+                    break
             avail_start = 0
-            avail_end = (gap_end - gap_start) * 2
+            avail_end = first_matched if first_matched is not None else (gap_end - gap_start) * 2
 
         gap_count = gap_end - gap_start
         avail_time = avail_end - avail_start
@@ -365,6 +400,13 @@ def assemble_sentences(script_lines: list[str], mapped_words: list[dict],
     - 마지막 문장의 endFrame = totalFrames
     - 첫 문장의 startFrame = 0
     """
+    # 단어 수 검증
+    total_script_words = sum(len(line.split()) for line in script_lines)
+    if total_script_words != len(mapped_words):
+        report["errors"].append(
+            f"단어 수 불일치: 원본 대본 {total_script_words}단어 ≠ 매핑 결과 {len(mapped_words)}단어"
+        )
+
     # 문장별 단어 분배
     word_idx = 0
     sentences = []
@@ -372,8 +414,10 @@ def assemble_sentences(script_lines: list[str], mapped_words: list[dict],
     for i, s_text in enumerate(script_lines):
         words_in_line = s_text.split()
         n_words = len(words_in_line)
-        sentence_words = mapped_words[word_idx:word_idx + n_words]
-        word_idx += n_words
+        # 범위 초과 방지
+        available = min(n_words, len(mapped_words) - word_idx)
+        sentence_words = mapped_words[word_idx:word_idx + available]
+        word_idx += available
 
         # 단어에서 interpolated 플래그 제거 (출력용)
         clean_words = [

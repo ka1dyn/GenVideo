@@ -1,6 +1,6 @@
 {
-  "totalDuration": 99933,
-  "totalFrames": 2998,
+  "totalDuration": 100123,
+  "totalFrames": 3004,
   "sentences": [
     {
       "sentence": "AI한테 전쟁 시뮬레이션을 시켰습니다.",
@@ -1081,8 +1081,8 @@
           "endFrame": 2998
         }
       ],
-      "endFrame": 2998,
-      "durationInFrames": 180
+      "endFrame": 3004,
+      "durationInFrames": 186
     }
   ]
 }

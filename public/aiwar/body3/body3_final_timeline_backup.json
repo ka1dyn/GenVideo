@@ -1,6 +1,6 @@
 {
-  "totalDuration": 37733,
-  "totalFrames": 1132,
+  "totalDuration": 38404,
+  "totalFrames": 1153,
   "sentences": [
     {
       "sentence": "AI가 잘못 판단하게 만드는 방법들도 점점 더 발전하고있어요.",
@@ -379,8 +379,8 @@
           "endFrame": 1132
         }
       ],
-      "endFrame": 1132,
-      "durationInFrames": 247
+      "endFrame": 1153,
+      "durationInFrames": 268
     }
   ]
 }

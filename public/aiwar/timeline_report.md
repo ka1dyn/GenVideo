@@ -62,7 +62,7 @@
 
 - 문장 수: 원본 5 / 타임라인 5 ✅
 - 첫 문장 startFrame: 0 ✅
-- 마지막 문장 endFrame: 1153 == totalFrames(1153) ✅
+- 마지막 문장 endFrame: 1132 == totalFrames(1132) ✅
 - 문장 연속성: 모두 통과 ✅
 - 0-duration 단어: 0건 ✅
 
@@ -82,7 +82,7 @@
 
 - 문장 수: 원본 14 / 타임라인 14 ✅
 - 첫 문장 startFrame: 0 ✅
-- 마지막 문장 endFrame: 3004 == totalFrames(3004) ✅
+- 마지막 문장 endFrame: 2998 == totalFrames(2998) ✅
 - 문장 연속성: 모두 통과 ✅
 - 0-duration 단어: 0건 ✅
 
@@ -119,7 +119,7 @@
 
 - 문장 수: 원본 8 / 타임라인 8 ✅
 - 첫 문장 startFrame: 0 ✅
-- 마지막 문장 endFrame: 1330 == totalFrames(1330) ✅
+- 마지막 문장 endFrame: 1315 == totalFrames(1315) ✅
 - 문장 연속성: 모두 통과 ✅
 - 0-duration 단어: 0건 ✅
 
