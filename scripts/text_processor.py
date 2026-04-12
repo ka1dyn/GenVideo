@@ -131,6 +131,7 @@ def eng2txt(text):
         "IP": "아이피",
         "GPS": "지피에스",
         "USA": "유에스에이",
+        "GEMINI": "제미나이",
     }
     if text.upper() in acronyms:
         return acronyms[text.upper()]

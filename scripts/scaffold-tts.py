@@ -1,9 +1,17 @@
 import os
 import sys
+import signal
 import asyncio
 from gradio_client import Client
 from pydub import AudioSegment
 from text_processor import process_txt
+
+# 사용자의 Ctrl+C 요청 시 백그라운드 스레드 대기 없이 즉각 종료하기 위한 시그널 핸들러
+def force_exit(signum, frame):
+    print("\n🚨 사용자에 의해 취소되었습니다. 대기 중인 모든 스레드를 무시하고 강제로 즉시 종료합니다...")
+    os._exit(1)
+
+signal.signal(signal.SIGINT, force_exit)
 
 LANGUAGE = "Korean"
 GRADIO_URL = "http://localhost:8000"
