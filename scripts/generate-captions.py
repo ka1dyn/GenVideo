@@ -5,7 +5,7 @@ final_timeline.json의 sentences/words 데이터를 읽어
 화면에 표시할 자막 박스로 분할합니다.
 
 핵심 원칙:
-  1. 한 줄 최대 28자, 최대 2줄
+  1. 한 줄 최대 28자, 1줄만 표시
   2. 구두점에서 적극적으로 분할 (SOFT_LIMIT 이상이면 즉시)
   3. 최소 자막 길이 미달 시 이전 박스에 병합
   4. 최소 표시 시간(MIN_DISPLAY_FRAMES) 보장
@@ -17,12 +17,12 @@ import sys
 import os
 
 # ─── 상수 ───
-MAX_CHARS_PER_LINE = 28
-MAX_LINES_PER_CAPTION = 2
-MAX_BOX_CHARS = MAX_CHARS_PER_LINE * MAX_LINES_PER_CAPTION  # 56
+MAX_CHARS_PER_LINE = 32
+MAX_LINES_PER_CAPTION = 1
+MAX_BOX_CHARS = MAX_CHARS_PER_LINE * MAX_LINES_PER_CAPTION  # 32
 
 # 이 글자 수 이상 채운 상태에서 구두점을 만나면 즉시 split
-SOFT_LIMIT = 20
+SOFT_LIMIT = 15
 
 # 이 글자 수 또는 단어 수 미만이면 이전 박스에 병합
 MIN_CAPTION_CHARS = 8
@@ -67,13 +67,14 @@ def split_into_boxes(words):
             
             # 강한 구두점 감지
             is_punctuation = any(word_text.endswith(p) for p in STRONG_PUNCTUATION)
-            # 따옴표로 끝나는 경우도 체크 (예: 겁니다.", 있어요.")
+            # 따옴표로 끝나는 경우도 체크
             if word_text.endswith('."') or word_text.endswith('!"') or word_text.endswith('?"'):
                 is_punctuation = True
-            if word_text.endswith('."') or word_text.endswith('!"') or word_text.endswith('?"'):
-                is_punctuation = True
+                
+            # 쉼표 등 약한 구두점 체크
+            is_weak_punctuation = word_text.endswith(',')
             
-            if is_punctuation and current_count <= MAX_BOX_CHARS:
+            if (is_punctuation or is_weak_punctuation) and current_count <= MAX_BOX_CHARS:
                 best_split = j
                 # SOFT_LIMIT 적극 활용: 충분히 채웠으면 여기서 즉시 split
                 if current_count >= SOFT_LIMIT:
@@ -107,7 +108,7 @@ def split_into_boxes(words):
 
 
 def merge_short_boxes(boxes):
-    """최소 길이 미달 박스를 이전 박스에 병합합니다."""
+    """최소 길이 미달 박스를 이전 박스에 병합하거나 밸런스를 맞춥니다."""
     if not boxes:
         return boxes
     
@@ -118,15 +119,36 @@ def merge_short_boxes(boxes):
         box_chars = len(box_text)
         box_words = len(box)
         
-        # 최소 기준 미달?
-        if box_chars < MIN_CAPTION_CHARS or box_words < MIN_CAPTION_WORDS:
-            # 이전 박스와 합쳤을 때 MAX_BOX_CHARS 이내인지 확인
-            prev_text = " ".join(w['text'] for w in merged[-1])
+        # 최소 기준 미달 혹은 2단어 이하인지 확인
+        if box_chars < MIN_CAPTION_CHARS or box_words <= 2:
+            prev = merged[-1]
+            prev_text = " ".join(w['text'] for w in prev)
             combined_len = len(prev_text) + 1 + box_chars
             
+            # 1. 이전 박스와 합쳤을 때 MAX_BOX_CHARS 이내라면 병합
             if combined_len <= MAX_BOX_CHARS:
-                merged[-1] = merged[-1] + box
+                merged[-1] = prev + box
                 continue
+            
+            # 2. 병합할 수 없는데 현재 박스가 2단어 이하로 너무 짧다면
+            # 이전 박스의 뒷부분을 떼어와서 현재 박스에 밸런싱(단어 옮기기)
+            if box_words <= 2 and len(prev) > 2:
+                # 현재 박스가 3단어가 되도록 얼마나 떼어올지 계산 (하지만 이전 박스도 2단어 이상 유지)
+                needed = 3 - box_words
+                available = len(prev) - 2
+                shift_max = min(needed, available)
+                
+                if shift_max > 0:
+                    for s in range(shift_max, 0, -1):
+                        shifted_words = prev[-s:]
+                        new_box = shifted_words + box
+                        new_box_text = " ".join(w['text'] for w in new_box)
+                        
+                        # 떼어온 새 박스가 MAX_BOX_CHARS 한도를 준수하는지 확인
+                        if len(new_box_text) <= MAX_BOX_CHARS:
+                            merged[-1] = prev[:-s]
+                            box = new_box
+                            break
         
         merged.append(box)
     
@@ -134,61 +156,8 @@ def merge_short_boxes(boxes):
 
 
 def format_box_text(words):
-    """박스의 단어들을 1~2줄로 포맷합니다.
-    
-    전략:
-    1. 구두점 기반 줄바꿈 시도 (line1 범위 내에서)
-    2. 실패 시 글자 수 기반 줄바꿈
-    3. line2도 MAX_CHARS_PER_LINE 검증
-    """
-    full_text = " ".join(w['text'] for w in words)
-    
-    # 한 줄에 들어가면 그대로 반환
-    if len(full_text) <= MAX_CHARS_PER_LINE:
-        return full_text
-    
-    # 구두점 기반 줄바꿈 시도
-    best_split = -1
-    line1_len = 0
-    
-    for i in range(len(words)):
-        w_text = words[i]['text']
-        line1_len += len(w_text) + (1 if i > 0 else 0)
-        
-        if line1_len > MAX_CHARS_PER_LINE:
-            break
-        
-        # 구두점에서 split 후보 기록
-        if w_text.endswith((',', '.', '!', '?', '"', '."', '!"', '?"')):
-            best_split = i
-    
-    if best_split != -1 and best_split < len(words) - 1:
-        line1 = " ".join(w['text'] for w in words[:best_split + 1])
-        line2 = " ".join(w['text'] for w in words[best_split + 1:])
-        
-        # line2가 MAX_CHARS_PER_LINE 이내인지 확인
-        if len(line2) <= MAX_CHARS_PER_LINE:
-            return f"{line1}\n{line2}"
-    
-    # 글자 수 기반 줄바꿈 (fallback)
-    line1_words = []
-    line1_len = 0
-    
-    for w in words:
-        next_len = line1_len + len(w['text']) + (1 if line1_words else 0)
-        if next_len > MAX_CHARS_PER_LINE:
-            break
-        line1_words.append(w)
-        line1_len = next_len
-    
-    line1 = " ".join(w['text'] for w in line1_words)
-    remaining = words[len(line1_words):]
-    
-    if remaining:
-        line2 = " ".join(w['text'] for w in remaining)
-        return f"{line1}\n{line2}"
-    
-    return line1
+    """박스의 단어들을 1줄로 포맷합니다."""
+    return " ".join(w['text'] for w in words)
 
 
 def generate_captions(project_id, section_id):

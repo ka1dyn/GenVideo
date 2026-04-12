@@ -1,0 +1,687 @@
+[
+  {
+    "text": "자",
+    "startFrame": 4,
+    "endFrame": 5
+  },
+  {
+    "text": "그럼",
+    "startFrame": 5,
+    "endFrame": 12
+  },
+  {
+    "text": "이제",
+    "startFrame": 12,
+    "endFrame": 20
+  },
+  {
+    "text": "클로드가",
+    "startFrame": 20,
+    "endFrame": 35
+  },
+  {
+    "text": "거기서",
+    "startFrame": 35,
+    "endFrame": 46
+  },
+  {
+    "text": "뭘",
+    "startFrame": 46,
+    "endFrame": 50
+  },
+  {
+    "text": "하는",
+    "startFrame": 50,
+    "endFrame": 58
+  },
+  {
+    "text": "건지",
+    "startFrame": 58,
+    "endFrame": 65
+  },
+  {
+    "text": "한번",
+    "startFrame": 65,
+    "endFrame": 73
+  },
+  {
+    "text": "알아봅시다.",
+    "startFrame": 73,
+    "endFrame": 101
+  },
+  {
+    "text": "메이븐이",
+    "startFrame": 101,
+    "endFrame": 130
+  },
+  {
+    "text": "데이터를",
+    "startFrame": 130,
+    "endFrame": 159
+  },
+  {
+    "text": "끌어오면",
+    "startFrame": 159,
+    "endFrame": 190
+  },
+  {
+    "text": "클로드가",
+    "startFrame": 190,
+    "endFrame": 207
+  },
+  {
+    "text": "그걸",
+    "startFrame": 207,
+    "endFrame": 215
+  },
+  {
+    "text": "일단",
+    "startFrame": 215,
+    "endFrame": 224
+  },
+  {
+    "text": "분석하고",
+    "startFrame": 224,
+    "endFrame": 241
+  },
+  {
+    "text": "봅니다.",
+    "startFrame": 241,
+    "endFrame": 262
+  },
+  {
+    "text": "위성사진,",
+    "startFrame": 262,
+    "endFrame": 296
+  },
+  {
+    "text": "드론",
+    "startFrame": 296,
+    "endFrame": 304
+  },
+  {
+    "text": "영상,",
+    "startFrame": 304,
+    "endFrame": 320
+  },
+  {
+    "text": "레이더,",
+    "startFrame": 320,
+    "endFrame": 344
+  },
+  {
+    "text": "신호정보까지.",
+    "startFrame": 344,
+    "endFrame": 382
+  },
+  {
+    "text": "160개가",
+    "startFrame": 382,
+    "endFrame": 416
+  },
+  {
+    "text": "넘는",
+    "startFrame": 416,
+    "endFrame": 424
+  },
+  {
+    "text": "정보",
+    "startFrame": 424,
+    "endFrame": 436
+  },
+  {
+    "text": "채널이",
+    "startFrame": 436,
+    "endFrame": 453
+  },
+  {
+    "text": "실시간으로",
+    "startFrame": 453,
+    "endFrame": 483
+  },
+  {
+    "text": "들어오고",
+    "startFrame": 483,
+    "endFrame": 512
+  },
+  {
+    "text": "그",
+    "startFrame": 512,
+    "endFrame": 514
+  },
+  {
+    "text": "데이터를",
+    "startFrame": 514,
+    "endFrame": 527
+  },
+  {
+    "text": "보면서",
+    "startFrame": 527,
+    "endFrame": 539
+  },
+  {
+    "text": "클로드는",
+    "startFrame": 539,
+    "endFrame": 554
+  },
+  {
+    "text": "이런",
+    "startFrame": 554,
+    "endFrame": 562
+  },
+  {
+    "text": "걸",
+    "startFrame": 562,
+    "endFrame": 566
+  },
+  {
+    "text": "해요.",
+    "startFrame": 566,
+    "endFrame": 579
+  },
+  {
+    "text": "수상한",
+    "startFrame": 579,
+    "endFrame": 596
+  },
+  {
+    "text": "차량",
+    "startFrame": 596,
+    "endFrame": 607
+  },
+  {
+    "text": "한",
+    "startFrame": 607,
+    "endFrame": 620
+  },
+  {
+    "text": "대를",
+    "startFrame": 620,
+    "endFrame": 624
+  },
+  {
+    "text": "드론이",
+    "startFrame": 624,
+    "endFrame": 641
+  },
+  {
+    "text": "포착했다고",
+    "startFrame": 641,
+    "endFrame": 671
+  },
+  {
+    "text": "해볼게요.",
+    "startFrame": 671,
+    "endFrame": 700
+  },
+  {
+    "text": "클로드가",
+    "startFrame": 700,
+    "endFrame": 720
+  },
+  {
+    "text": "그",
+    "startFrame": 720,
+    "endFrame": 732
+  },
+  {
+    "text": "차량의",
+    "startFrame": 732,
+    "endFrame": 740
+  },
+  {
+    "text": "이동",
+    "startFrame": 740,
+    "endFrame": 753
+  },
+  {
+    "text": "경로를",
+    "startFrame": 753,
+    "endFrame": 766
+  },
+  {
+    "text": "뒤지다가",
+    "startFrame": 766,
+    "endFrame": 786
+  },
+  {
+    "text": "어제",
+    "startFrame": 786,
+    "endFrame": 797
+  },
+  {
+    "text": "특정",
+    "startFrame": 797,
+    "endFrame": 812
+  },
+  {
+    "text": "통신",
+    "startFrame": 812,
+    "endFrame": 817
+  },
+  {
+    "text": "신호가",
+    "startFrame": 817,
+    "endFrame": 833
+  },
+  {
+    "text": "잡힌",
+    "startFrame": 833,
+    "endFrame": 842
+  },
+  {
+    "text": "위치랑",
+    "startFrame": 842,
+    "endFrame": 858
+  },
+  {
+    "text": "겹친",
+    "startFrame": 858,
+    "endFrame": 868
+  },
+  {
+    "text": "거예요.",
+    "startFrame": 868,
+    "endFrame": 895
+  },
+  {
+    "text": "심지어",
+    "startFrame": 895,
+    "endFrame": 914
+  },
+  {
+    "text": "그",
+    "startFrame": 914,
+    "endFrame": 920
+  },
+  {
+    "text": "근처에서",
+    "startFrame": 920,
+    "endFrame": 946
+  },
+  {
+    "text": "올라온",
+    "startFrame": 946,
+    "endFrame": 964
+  },
+  {
+    "text": "소셜미디어",
+    "startFrame": 964,
+    "endFrame": 999
+  },
+  {
+    "text": "게시물도",
+    "startFrame": 999,
+    "endFrame": 1021
+  },
+  {
+    "text": "있다.",
+    "startFrame": 1021,
+    "endFrame": 1040
+  },
+  {
+    "text": "이런",
+    "startFrame": 1040,
+    "endFrame": 1058
+  },
+  {
+    "text": "식으로",
+    "startFrame": 1058,
+    "endFrame": 1062
+  },
+  {
+    "text": "판단해서",
+    "startFrame": 1062,
+    "endFrame": 1079
+  },
+  {
+    "text": "표적",
+    "startFrame": 1079,
+    "endFrame": 1087
+  },
+  {
+    "text": "후보를",
+    "startFrame": 1087,
+    "endFrame": 1100
+  },
+  {
+    "text": "올려버리는",
+    "startFrame": 1100,
+    "endFrame": 1121
+  },
+  {
+    "text": "겁니다.",
+    "startFrame": 1121,
+    "endFrame": 1142
+  },
+  {
+    "text": "그리고",
+    "startFrame": 1142,
+    "endFrame": 1157
+  },
+  {
+    "text": "이렇게",
+    "startFrame": 1157,
+    "endFrame": 1173
+  },
+  {
+    "text": "뽑힌",
+    "startFrame": 1173,
+    "endFrame": 1183
+  },
+  {
+    "text": "표적들에",
+    "startFrame": 1183,
+    "endFrame": 1203
+  },
+  {
+    "text": "대해서",
+    "startFrame": 1203,
+    "endFrame": 1221
+  },
+  {
+    "text": "리스트를",
+    "startFrame": 1221,
+    "endFrame": 1239
+  },
+  {
+    "text": "만들어요.",
+    "startFrame": 1239,
+    "endFrame": 1267
+  },
+  {
+    "text": "GPS",
+    "startFrame": 1267,
+    "endFrame": 1272
+  },
+  {
+    "text": "좌표,",
+    "startFrame": 1272,
+    "endFrame": 1297
+  },
+  {
+    "text": "추천",
+    "startFrame": 1297,
+    "endFrame": 1299
+  },
+  {
+    "text": "무기,",
+    "startFrame": 1299,
+    "endFrame": 1314
+  },
+  {
+    "text": "그리고",
+    "startFrame": 1314,
+    "endFrame": 1331
+  },
+  {
+    "text": "심지어",
+    "startFrame": 1331,
+    "endFrame": 1348
+  },
+  {
+    "text": "법적",
+    "startFrame": 1348,
+    "endFrame": 1359
+  },
+  {
+    "text": "정당화",
+    "startFrame": 1359,
+    "endFrame": 1378
+  },
+  {
+    "text": "문서까지",
+    "startFrame": 1378,
+    "endFrame": 1399
+  },
+  {
+    "text": "자동으로요.",
+    "startFrame": 1399,
+    "endFrame": 1437
+  },
+  {
+    "text": "분석관이",
+    "startFrame": 1437,
+    "endFrame": 1464
+  },
+  {
+    "text": "말로",
+    "startFrame": 1464,
+    "endFrame": 1467
+  },
+  {
+    "text": "이",
+    "startFrame": 1467,
+    "endFrame": 1472
+  },
+  {
+    "text": "지역",
+    "startFrame": 1472,
+    "endFrame": 1482
+  },
+  {
+    "text": "위협",
+    "startFrame": 1482,
+    "endFrame": 1492
+  },
+  {
+    "text": "요소",
+    "startFrame": 1492,
+    "endFrame": 1505
+  },
+  {
+    "text": "요약해줘",
+    "startFrame": 1505,
+    "endFrame": 1523
+  },
+  {
+    "text": "하면",
+    "startFrame": 1523,
+    "endFrame": 1533
+  },
+  {
+    "text": "바로",
+    "startFrame": 1533,
+    "endFrame": 1543
+  },
+  {
+    "text": "전술",
+    "startFrame": 1543,
+    "endFrame": 1556
+  },
+  {
+    "text": "브리핑을",
+    "startFrame": 1556,
+    "endFrame": 1573
+  },
+  {
+    "text": "뽑아줘요.",
+    "startFrame": 1573,
+    "endFrame": 1602
+  },
+  {
+    "text": "전쟁터에서",
+    "startFrame": 1602,
+    "endFrame": 1634
+  },
+  {
+    "text": "AI한테",
+    "startFrame": 1634,
+    "endFrame": 1646
+  },
+  {
+    "text": "말로",
+    "startFrame": 1646,
+    "endFrame": 1657
+  },
+  {
+    "text": "보고서를",
+    "startFrame": 1657,
+    "endFrame": 1679
+  },
+  {
+    "text": "받는",
+    "startFrame": 1679,
+    "endFrame": 1691
+  },
+  {
+    "text": "겁니다.",
+    "startFrame": 1691,
+    "endFrame": 1716
+  },
+  {
+    "text": "그래도",
+    "startFrame": 1716,
+    "endFrame": 1723
+  },
+  {
+    "text": "아직",
+    "startFrame": 1723,
+    "endFrame": 1739
+  },
+  {
+    "text": "마지막",
+    "startFrame": 1739,
+    "endFrame": 1752
+  },
+  {
+    "text": "결정이었습니다.",
+    "startFrame": 1752,
+    "endFrame": 1788
+  },
+  {
+    "text": "마지막",
+    "startFrame": 1788,
+    "endFrame": 1802
+  },
+  {
+    "text": "결정은",
+    "startFrame": 1802,
+    "endFrame": 1812
+  },
+  {
+    "text": "사람이",
+    "startFrame": 1812,
+    "endFrame": 1825
+  },
+  {
+    "text": "내리고",
+    "startFrame": 1825,
+    "endFrame": 1835
+  },
+  {
+    "text": "AI는",
+    "startFrame": 1835,
+    "endFrame": 1842
+  },
+  {
+    "text": "그",
+    "startFrame": 1842,
+    "endFrame": 1847
+  },
+  {
+    "text": "직전",
+    "startFrame": 1847,
+    "endFrame": 1853
+  },
+  {
+    "text": "단계까지만",
+    "startFrame": 1853,
+    "endFrame": 1873
+  },
+  {
+    "text": "관여한다고",
+    "startFrame": 1873,
+    "endFrame": 1892
+  },
+  {
+    "text": "합니다.",
+    "startFrame": 1892,
+    "endFrame": 1912
+  },
+  {
+    "text": "과거",
+    "startFrame": 1912,
+    "endFrame": 1922
+  },
+  {
+    "text": "전쟁에서는",
+    "startFrame": 1922,
+    "endFrame": 1952
+  },
+  {
+    "text": "이",
+    "startFrame": 1952,
+    "endFrame": 1962
+  },
+  {
+    "text": "작업에",
+    "startFrame": 1962,
+    "endFrame": 1975
+  },
+  {
+    "text": "분석관",
+    "startFrame": 1975,
+    "endFrame": 1992
+  },
+  {
+    "text": "2000명이",
+    "startFrame": 1992,
+    "endFrame": 2026
+  },
+  {
+    "text": "필요했는데",
+    "startFrame": 2026,
+    "endFrame": 2057
+  },
+  {
+    "text": "지금은",
+    "startFrame": 2057,
+    "endFrame": 2074
+  },
+  {
+    "text": "겨우",
+    "startFrame": 2074,
+    "endFrame": 2081
+  },
+  {
+    "text": "20명이에요.",
+    "startFrame": 2081,
+    "endFrame": 2114
+  },
+  {
+    "text": "AI",
+    "startFrame": 2114,
+    "endFrame": 2119
+  },
+  {
+    "text": "덕분에",
+    "startFrame": 2119,
+    "endFrame": 2138
+  },
+  {
+    "text": "효율이",
+    "startFrame": 2138,
+    "endFrame": 2156
+  },
+  {
+    "text": "100배",
+    "startFrame": 2156,
+    "endFrame": 2182
+  },
+  {
+    "text": "뻥튀기",
+    "startFrame": 2182,
+    "endFrame": 2201
+  },
+  {
+    "text": "된",
+    "startFrame": 2201,
+    "endFrame": 2207
+  },
+  {
+    "text": "거죠.",
+    "startFrame": 2207,
+    "endFrame": 2226
+  }
+]
