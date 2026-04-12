@@ -28,11 +28,30 @@ def generate_sequences_for_section(project_id, section):
     parts = re.split(r'(?m)^\s*#*\s*Scene\s+\d+\s*$', plan_text)
     
     global_context = parts[0].strip() if len(parts) > 0 else ""
+    
+    # [불필요한 컨텍스트 제거]
+    # '2. 섹션 개요' 부터 '### 🚨 페르소나' 내용까지만 남기고 나머지는 제거합니다.
+    start_marker = "2. 섹션 개요"
+    end_marker = "### Scene 작성 형식"
+    
+    start_idx = global_context.find(start_marker)
+    end_idx = global_context.find(end_marker)
+    
+    if start_idx != -1:
+        if end_idx != -1:
+            global_context = global_context[start_idx:end_idx].strip()
+        else:
+            global_context = global_context[start_idx:].strip()
+    elif end_idx != -1:
+        global_context = global_context[:end_idx].strip()
+
     scene_texts = parts[1:] if len(parts) > 1 else []
+
 
     sentences = data.get('sentences', [])
     
     os.makedirs(out_dir, exist_ok=True)
+
 
     tsx_lines = []
     

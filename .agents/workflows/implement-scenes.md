@@ -6,37 +6,10 @@ description: 기획서를 바탕으로 Remotion 씬을 순차적으로 구현하
 
 섹션별 Remotion 영상 계확서를 바탕으로 실제 코드로 영상을 구현하는 워크플로우입니다.
 
-## 최종 프로젝트 구조
-
-```
-public/{project_id}/
-    design-system.md
-    {section}/
-        {section}.txt
-        {section}.wav
-        {section}_timestamp.json
-        {section}_context.md
-        {section}_final_timeline.json
-        {section}_plan.md
-
-src/constants/
-    video-config.ts
-
-src/projects/{project_id}/
-    theme.ts                        <--- 디자인 시스템의 상수 모음 (여기서 import 하여 사용)
-    {section}/
-        {section}.tsx               <--- 해당 섹션의 최상위 Series 래퍼 및 Audio 컴포넌트
-        sequences.tsx               <--- 각 section의 시퀀스 컴포넌트 모음
-
-src/shared-components/
-    CaptionOverlay.tsx
-
-```
-
 ## 사전 조건
 
-- 각 섹션의 기획서 작성 완료 (`public/{project_id}/{section}/{section}_plan.md`)
-- 디자인 테마 파일 생성 완료 (`src/projects/{project_id}/theme.ts`)
+- 디자인 테마 파일 생성 완료 (`src/constants/theme.ts`)
+- 시퀀스 파일 생성 완료 (`src/projects/{project_id}/{section}/sequences.tsx`)
 
 ## 워크플로우 단계
 
@@ -56,33 +29,22 @@ src/shared-components/
 
 ### 2. 섹션 순차 구현(Loop)
 
-디렉토리 탐색(list_dir 등)의 파일 목록을 바탕으로, 순차적으로 구현을 진행합니다.
+`src/projects/{project_id}/` 디렉토리 탐색(list_dir 등)의 파일 목록을 바탕으로, 순차적으로 구현을 진행합니다.
 모든 섹션을 **하나씩** 완료한 후 다음 섹션으로 이동합니다 (예: intro → body1 → outro).
 
 각 섹션 구현 완료 후 반드시 사용자에게 검토를 요청하세요 <--- 반드시 멈춤
 
 각각의 독립된 `{section}`별로 다음을 수행합니다:
 
-#### 2-1. 기획서 확인
+#### 2-1. 기획 컨텍스트 파악 (Inline Prompting)
 
-- 각 섹션의 대본(`public/{project_id}/{section}/{section}.txt`)과 기획서(`public/{project_id}/{section}/{section}_plan.md`)를 확인하고 주제, 내용, 맥락을 이해합니다.
+- 별도의 외부 기획 문서(`plan.md` 등)나 타임라인 문서를 찾아 읽을 필요가 **전혀 없습니다.**
+- `view_file` 도구로 `src/projects/{project_id}/{section}/sequences.tsx` 파일을 엽니다.
+- 파일 최상단의 `[Section Global Context]` 주석을 반드시 먼저 읽고, 해당 섹션 전반에 적용할 테마와 페르소나를 파악합니다.
 
-- `src/projects/{project_id}/{section}/sequences.tsx` 파일을 확인하고 구현할 부분을 파악합니다.
+#### 2-2. 공통 UI/애니메이션 컴포넌트 선행 생성 (Componentize)
 
-- `public/{project_id}/design-system.md`과 `src/projects/{project_id}/theme.ts` 파일을 비교, 확인하고 디자인 시스템을 이해합니다.
-
-#### 2-2. 구현 전 필수 준수 규칙
-
-> 당신은 지금부터 Apple, Vercel, Toss와 같은 최고 수준의 IT 기업에서 일하는 수석 UI/UX 모션 디자이너이자 'React Remotion 개발자'입니다. 복잡하고 유치한 연출을 철저히 배제하고, 깔끔하고 구조적인 코드로 세련미를 극대화하세요.
-
-- 미니멀리즘과 구조적 레이아웃: 뻔한 중앙 정렬이나 예술적인 기교보다는 타이포그래피, 여백, 정교한 Grid/Flexbox 정렬을 사용하여 전문적이고 신뢰감 있는 UI를 구성하세요.
-- 클리셰 메타포 절대 금지 & 이모지 사용 금지: 가위, 전구, 돋보기 등 단어를 일차원적으로 표현하는 촌스러운 아이콘을 절대 사용하지 마세요. 또한 시스템 이모지(✅ 등) 사용을 엄격히 금지하며, 대신 순수 CSS나 SVG 패스를 활용해 직접 드로잉하세요. 화려함보다는 깔끔함, 트렌디함을 중시합니다.
-- 그래픽 요소를 구현할 때, 곡선을 지양하고 직선적인 느낌으로 깔끔함과 트렌디함을 추구합니다. round를 과하게 사용하지 마세요.
-- 디자인 시스템 강제: 색상, 그림자, 글로우 효과 등은 반드시 `src/projects/{project_id}/theme.ts`에 정의된 상수만 가져와서 사용해야 합니다.
-
-#### 2-3. 공통 UI/애니메이션 컴포넌트 선행 생성 (Componentize)
-
-본격적인 씬 구현에 앞서, 기획서를 분석하여 반복적으로 등장하는 UI 패턴이나 특수 애니메이션을 독립된 공용 컴포넌트로 먼저 추출하세요.
+본격적인 씬 구현에 앞서, 반복적으로 등장하는 UI 패턴이나 특수 애니메이션을 독립된 공용 컴포넌트로 먼저 추출하세요.
 
 - **생성 경로:** `src/projects/{project_id}/components/`
 - **설계 원칙 (Separation of Concerns):**
@@ -91,11 +53,13 @@ src/shared-components/
   3. **순수성 유지:** 컴포넌트 파일 자체에서 `theme.ts`를 직접 참조(Import)하는 것을 지양하고, **사용하는 쪽(Scene)에서 `theme.ts`의 상수를 Prop으로 넘겨주도록** 유도하여 재사용성을 극대화하세요.
 - **중복 방지:** 이미 `components/` 폴더에 생성된 동일한 목적의 컴포넌트가 있다면 새로 만들지 말고 적극적으로 재사용하세요.
 
-#### 2-4. 디테일 구현(Chunking & Iteration)
+#### 2-3. 디테일 구현(Chunking & Iteration - 매우 중요)
 
-- 규칙 숙지가 끝났다면, 스켈레톤 파일(`src/projects/{project_id}/{section}/sequences.tsx`)의 빈 컴포넌트를 최대 3개 단위(Chunk)로 묶어서 순차적으로 내부 UI와 애니메이션 로직을 채워 넣습니다.
-- 다른 문서를 다시 열람할 필요 없이, 컴포넌트 바로 위에 적힌 기획 주석(JSDoc)에만 100% 의존하여 구현에 집중하세요.
-- 모든 Scene의 TODO 코드를 완벽하게 채울 때까지 이 작업을 반복 수행합니다.
+- 🚨 AI 출력 제한 초과 및 기존 코드 삭제 빈발을 막기 위해, 전체 `sequences.tsx` 파일을 절대 한 번에 통째로 수정하지 마세요.
+- **최대 3개의 씬(Chunk 단위)** 단위로 묶어서 하나씩 순차적으로 구현을 진행합니다. (예: "Scene1~Scene3 먼저 구현 -> 확인 -> Scene4~Scene6 구현")
+- 파일을 통째로 덮어쓰지 말고, `multi_replace_file_content` 혹은 `replace_file_content` 도구를 사용하여 작업 중인 대상 Scene 함수 블록만 정밀하게 교체(Patch) 하세요.
+- 다른 문서를 다시 열람할 필요 없이, 컴포넌트 바로 위에 적힌 기획 주석(JSDoc)에만 100% 의존하여 내부 UI와 애니메이션 로직을 채워 넣습니다.
+- 모든 Scene의 `// TODO: 구현`이 완벽하게 채워질 때까지 이 작업을 반복 수행합니다.
 
 ### 3. 린트 (결함 점검)
 
