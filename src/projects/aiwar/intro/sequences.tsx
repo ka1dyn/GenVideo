@@ -78,6 +78,10 @@ const Scene2: React.FC = () => {
  * - 타임라인: 259f 부터 시작 (총 235f 지속)
  * - 비주얼 컨셉: `BG_DARKEST` 배경 속으로 카메라가 빨려 들어가는 듯한 3D 매트릭스 터널 효과를 캔버스로 구현합니다. 무수한 연산 노드들이 스쳐 지나가고, 터널의 끝에서 'Claude' 로고가 `PRIMARY` 빛을 발하며 극적으로 등장합니다. AI의 거대한 지능 시스템 내부에 숨겨진 핵심 엔진을 발견하는 듯한 미스테리하고 강력한reveal 영상을 연출합니다.
  * - 필요한 그림(svg) 컴포넌트: ClaudeLogo (SVG)
+ * ─── SIMPLIFIED ──────────────────────────────
+ * - 사용 컴포넌트: <BrandLogo type="Claude" progress={p} />
+ * - 변경 이유: BrandLogo 공통 컴포넌트로 통합
+ * ─────────────────────────────────────────────
  */
 const Scene3: React.FC = () => {
   const frame = useCurrentFrame();
@@ -122,6 +126,10 @@ const Scene4: React.FC = () => {
  * - 타임라인: 733f 부터 시작 (총 318f 지속)
  * - 비주얼 컨셉: GPT, GEMINI, Claude 로고가 긴박한 심장 박동 소리에 맞춰 화면에서 크게 펌핑(Pumping)됩니다. 화면 전체에 적색 경보(`STATE_ERROR_BG`)가 점멸하며, 'NUCLEAR SIMULATION 95%'라는 경고 문구가 거대한 진동과 함께 화면을 덮습니다. 마지막 순간에 모든 그래픽이 암전(Blackout)되며 시청자의 몰입을 최고조로 끌어올립니다.
  * - 필요한 그림(svg) 컴포넌트: AIModelGrid (SVG)
+ * ─── SIMPLIFIED ──────────────────────────────
+ * - 사용 컴포넌트: <DataNetwork type="grid" progress={p} />
+ * - 변경 이유: DataNetwork 공통 컴포넌트로 통합
+ * ─────────────────────────────────────────────
  */
 const Scene5: React.FC = () => {
   const frame = useCurrentFrame();

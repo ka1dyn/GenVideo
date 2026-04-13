@@ -56,6 +56,10 @@ const Scene1: React.FC = () => {
  * - 타임라인: 221f 부터 시작 (총 306f 지속)
  * - 비주얼 컨셉: '60% (AI)'와 '84% (Human)'라는 두 숫자가 화면 좌우에 거대하게 배치되어 대비를 이룹니다. 60% 숫자는 `STATE_WARN_FG` 색상으로 불안정하게 흔들리고, 84% 숫자는 `SECONDARY_BOLD` 색상으로 견고하게 유지됩니다. 두 수치를 비교하는 막대 그래프 다이어그램이 중앙에서 생성됩니다.
  * - 필요한 그림(svg) 컴포넌트: AccuracyComparison (SVG)
+ * ─── SIMPLIFIED ──────────────────────────────
+ * - 사용 컴포넌트: <StatChart type="accuracy" progress={p} />
+ * - 변경 이유: StatChart 공통 컴포넌트로 통합
+ * ─────────────────────────────────────────────
  */
 const Scene2: React.FC = () => {
   const frame = useCurrentFrame();
@@ -122,6 +126,10 @@ const Scene4: React.FC = () => {
  * - 타임라인: 793f 부터 시작 (총 215f 지속)
  * - 비주얼 컨셉: 도시의 평화로운 등굣길 풍경을 상징하는 기하학적 도형(집, 학교 모양)들이 `SECONDARY_LIGHT` 색상으로 단정하게 배치됩니다. 아이들을 학교에 데려다주는 부모와 아이들을 상징하는 페어(Pair) 아이콘들이 리드미컬하게 움직이며 평범한 아침의 활기를 표현합니다.
  * - 필요한 그림(svg) 컴포넌트: TragedyTimeline (SVG)
+ * ─── SIMPLIFIED ──────────────────────────────
+ * - 사용 컴포넌트: <EventTimeline type="tragedy" progress={p} />
+ * - 변경 이유: EventTimeline 공통 컴포넌트로 통합
+ * ─────────────────────────────────────────────
  */
 const Scene5: React.FC = () => {
   const frame = useCurrentFrame();
@@ -188,6 +196,10 @@ const Scene7: React.FC = () => {
  * - 타임라인: 1504f 부터 시작 (총 182f 지속)
  * - 비주얼 컨셉: 시간의 흐름에 따른 지도 변화를 보여줍니다. 2013년에서 2016년 사이, 두 공간을 완전히 분리하는 굵은 '담장' 라인이 `STROKE_INK` 색상으로 명확하게 그어집니다. 캔버스를 활용하여 연도 슬라이더가 움직임에 따라 분리되는 과정을 역동적으로 보여줍니다.
  * - 필요한 그림(svg) 컴포넌트: DataMismatch (SVG)
+ * ─── SIMPLIFIED ──────────────────────────────
+ * - 사용 컴포넌트: <EventTimeline type="mismatch" progress={p} />
+ * - 변경 이유: EventTimeline 공통 컴포넌트로 통합
+ * ─────────────────────────────────────────────
  */
 const Scene8: React.FC = () => {
   const frame = useCurrentFrame();
@@ -254,6 +266,10 @@ const Scene10: React.FC = () => {
  * - 타임라인: 2287f 부터 시작 (총 218f 지속)
  * - 비주얼 컨셉: 미국 의사당 건물을 연상시키는 추상적인 건물 아이콘 위에 '120+ Letters' 텍스트 카드가 리드미컬하게 배치됩니다. 화면 중앙에는 질문이 적힌 서한이 펼쳐지며, "Did AI target the school?" 문구가 강하게 부각됩니다.
  * - 필요한 그림(svg) 컴포넌트: CongressionalLetter (SVG)
+ * ─── SIMPLIFIED ──────────────────────────────
+ * - 사용 컴포넌트: <StatedDocument type="letter" progress={p} />
+ * - 변경 이유: StatedDocument 공통 컴포넌트로 통합
+ * ─────────────────────────────────────────────
  */
 const Scene11: React.FC = () => {
   const frame = useCurrentFrame();
@@ -320,6 +336,10 @@ const Scene13: React.FC = () => {
  * - 타임라인: 2865f 부터 시작 (총 163f 지속)
  * - 비주얼 컨셉: 'Training Data' 패키지 박스들이 컨베이어 벨트 위를 지나가는 듯한 데이터 흐름도를 보여줍니다. 그중 일부 박스에 보라색(`STATE_WARN_FG`) 독극물 표시가 나타나며, 데이터가 주입됨에 따라 시스템 전체 색상이 오염되는 캔버스 효과를 구현합니다.
  * - 필요한 그림(svg) 컴포넌트: DataPoisoning (SVG)
+ * ─── SIMPLIFIED ──────────────────────────────
+ * - 사용 컴포넌트: <DataNetwork type="poisoning" progress={p} />
+ * - 변경 이유: DataNetwork 공통 컴포넌트로 통합
+ * ─────────────────────────────────────────────
  */
 const Scene14: React.FC = () => {
   const frame = useCurrentFrame();

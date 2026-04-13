@@ -34,6 +34,10 @@ import { PaperTexture } from '../../../shared-components/PaperTexture';
  * - 타임라인: 0f 부터 시작 (총 230f 지속)
  * - 비주얼 컨셉: `BG_DARK` 배경 중앙을 기준으로 앤트로픽 로고와 미국 국방부 로고가 대립하는 레이아웃을 구성합니다. 앤트로픽 로고 옆에 'No Military Use'라는 텍스트가 `PRIMARY_BOLD` 색상의 엑스표(`X`)와 함께 강하게 나타나며 화면에 긴장감 있는 진동 효과를 줍니다.
  * - 필요한 그림(svg) 컴포넌트: AnthropicVsPentagon (SVG)
+ * ─── SIMPLIFIED ──────────────────────────────
+ * - 사용 컴포넌트: <BrandLogo type="AnthropicVsPentagon" progress={p} />
+ * - 변경 이유: BrandLogo 공통 컴포넌트로 통합
+ * ─────────────────────────────────────────────
  */
 const Scene1: React.FC = () => {
   const frame = useCurrentFrame();
@@ -56,6 +60,10 @@ const Scene1: React.FC = () => {
  * - 타임라인: 230f 부터 시작 (총 281f 지속)
  * - 비주얼 컨셉: `BG_BASE` 배경 위에 정갈한 '사용 조건 계약서' UI가 스크롤되듯 나타납니다. '자율 무기 사용 금지', '대량 감시 금지' 두 조항에 `SECONDARY` 색상의 굵은 하이라이트가 그어지며 강조됩니다. 계약서 주변으로 `STROKE_INK`로 그려진 법적 보호막 아이콘이 리드미컬하게 회전합니다.
  * - 필요한 그림(svg) 컴포넌트: TermsOfUse (SVG)
+ * ─── SIMPLIFIED ──────────────────────────────
+ * - 사용 컴포넌트: <StatedDocument type="terms" progress={p} />
+ * - 변경 이유: StatedDocument 공통 컴포넌트로 통합
+ * ─────────────────────────────────────────────
  */
 const Scene2: React.FC = () => {
   const frame = useCurrentFrame();
@@ -78,6 +86,10 @@ const Scene2: React.FC = () => {
  * - 타임라인: 511f 부터 시작 (총 406f 지속)
  * - 비주얼 컨셉: `BG_MUTED` 배경으로 전환되며 빨간색(`STATE_ERROR_FG`) 'RISK' 도장이 화면 중앙을 강하게 타격합니다. 앤트로픽 로고를 향해 공격적인 붉은색 화살표들이 마구 쏟아지는 배경 속에서, 화면 하단에는 법원을 상징하는 망치 아이콘이 나타나며 소송의 시작을 알리는 집중선 효과를 줍니다.
  * - 필요한 그림(svg) 컴포넌트: LawsuitImpact (SVG)
+ * ─── SIMPLIFIED ──────────────────────────────
+ * - 사용 컴포넌트: <StatedDocument type="lawsuit" progress={p} />
+ * - 변경 이유: StatedDocument 공통 컴포넌트로 통합
+ * ─────────────────────────────────────────────
  */
 const Scene3: React.FC = () => {
   const frame = useCurrentFrame();

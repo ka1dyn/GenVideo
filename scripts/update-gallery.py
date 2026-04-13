@@ -29,7 +29,7 @@ __IMPORTS__
 const GALLERY_ITEMS: Array<{ label: string; element: (p: number) => React.ReactNode }> = [
 __ITEMS__];
 
-const CARD_H = 320;
+const CARD_H = 600;
 const LABEL_H = 36;
 
 export const ComponentGallery: React.FC = () => {
@@ -98,7 +98,7 @@ export const ComponentGallery: React.FC = () => {
             alignItems: 'center',
             padding: 16,
             position: 'relative',
-            overflow: 'hidden',
+            overflow: 'auto',
           }}>
             {element(p)}
           </div>
@@ -109,8 +109,8 @@ export const ComponentGallery: React.FC = () => {
 };
 """
 
-# @gallery 주석 패턴
-GALLERY_ANNOTATION = re.compile(r'//\s*@gallery:\s*(.+)')
+# @gallery 주석 패턴 (// 또는 * 로 시작하는 주석 지원)
+GALLERY_ANNOTATION = re.compile(r'[\/\*]\s*@gallery:\s*(.+)')
 
 # export const ComponentName 패턴
 EXPORT_NAME = re.compile(r'export\s+const\s+(\w+)\s*[=:]')

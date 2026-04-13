@@ -44,6 +44,7 @@ description: 기획서를 바탕으로 Remotion 씬을 순차적으로 구현하
 - 별도의 외부 기획 문서(`plan.md` 등)나 타임라인 문서를 찾아 읽을 필요가 **전혀 없습니다.**
 - `view_file` 도구로 `src/projects/{project_id}/{section}/sequences.tsx` 파일을 엽니다.
 - 파일 최상단의 `[Section Global Context]` 주석을 반드시 먼저 읽고, 해당 섹션 전반에 적용할 테마와 페르소나를 파악합니다.
+- `src/projects/{project_id}/components/index.ts` 파일을 열어, 해당 섹션에서 사용할 수 있는 이미지 컴포넌트들을 확인합니다.
 
 #### 2-2. 공통 UI/애니메이션 컴포넌트 선행 생성 (Componentize)
 
@@ -59,7 +60,7 @@ description: 기획서를 바탕으로 Remotion 씬을 순차적으로 구현하
 #### 2-3. 디테일 구현(Chunking & Iteration - 매우 중요)
 
 - 🚨 AI 출력 제한 초과 및 기존 코드 삭제 빈발을 막기 위해, 전체 `sequences.tsx` 파일을 절대 한 번에 통째로 수정하지 마세요.
-- **최대 3개의 씬(Chunk 단위)** 단위로 묶어서 하나씩 순차적으로 구현을 진행합니다. (예: "Scene1~Scene3 먼저 구현 -> 확인 -> Scene4~Scene6 구현")
+- **최대 2개의 씬(Chunk 단위)** 단위로 묶어서 하나씩 순차적으로 구현을 진행합니다. (예: "Scene1~Scene2 먼저 구현 -> 확인 -> Scene3~Scene4 구현")
 - 파일을 통째로 덮어쓰지 말고, `multi_replace_file_content` 혹은 `replace_file_content` 도구를 사용하여 작업 중인 대상 Scene 함수 블록만 정밀하게 교체(Patch) 하세요.
 - 다른 문서를 다시 열람할 필요 없이, 컴포넌트 바로 위에 적힌 기획 주석(JSDoc)에만 100% 의존하여 내부 UI와 애니메이션 로직을 채워 넣습니다.
 - 🚨 **FILL 마커 가드**: 주석에 `{FILL_` 로 시작하는 미작성 마커가 남아있으면, 해당 Scene은 구현하지 말고 사용자에게 "이 Scene의 기획이 미완성입니다"라고 알리고 중단하세요.

@@ -78,6 +78,10 @@ const Scene2: React.FC = () => {
  * - 타임라인: 332f 부터 시작 (총 166f 지속)
  * - 비주얼 컨셉: GPT, Claude, Gemini 세 AI의 로고가 원형 지도자 배지 디자인으로 변환되어 삼각형 구도로 배치됩니다. 각 배지 위에는 'Digital Leader'라는 칭호가 붙으며, 각 AI가 가상의 국가를 통제하는 듯한 추상적인 네트워크 라인이 화면 전역으로 뻗어 나갑니다.
  * - 필요한 그림(svg) 컴포넌트: LeaderCards (SVG)
+ * ─── SIMPLIFIED ──────────────────────────────
+ * - 사용 컴포넌트: <BrandLogo variant="cards" progress={p} />
+ * - 변경 이유: BrandLogo 공통 컴포넌트로 통합
+ * ─────────────────────────────────────────────
  */
 const Scene3: React.FC = () => {
   const frame = useCurrentFrame();
@@ -122,6 +126,10 @@ const Scene4: React.FC = () => {
  * - 타임라인: 781f 부터 시작 (총 257f 지속)
  * - 비주얼 컨셉: 화면 전체가 칠흑 같은 다크 톤으로 변하며 '95%'라는 거대 숫자가 정중앙에 화이트 텍스트로 강렬하게 박힙니다. 숫자 내부에서 핵무기 발사를 상징하는 'Red Button' 아이콘이 `STATE_ERROR_FG` 색상의 경고등과 함께 빠르게 깜빡입니다. 외교와 협상이 거부되는(X자 표시) 애니메이션을 추가합니다.
  * - 필요한 그림(svg) 컴포넌트: NuclearChoice (SVG)
+ * ─── SIMPLIFIED ──────────────────────────────
+ * - 사용 컴포넌트: <NuclearControl progress={p} />
+ * - 변경 이유: NuclearControl 공통 컴포넌트로 통합
+ * ─────────────────────────────────────────────
  */
 const Scene5: React.FC = () => {
   const frame = useCurrentFrame();
@@ -276,6 +284,10 @@ const Scene11: React.FC = () => {
  * - 타임라인: 2067f 부터 시작 (총 201f 지속)
  * - 비주얼 컨셉: `BG_BASE` 배경 위에 '공부해야 할 키워드' 리스트가 책갈피 UI 형태로 하나씩 꽂힙니다. 그중 하나가 `PRIMARY` 빛을 발하며 시청자가 나아가야 할 방향을 제시합니다. 캔버스를 활용하여 지식의 파동이 화면 전체로 퍼져 나가는 애니메이션을 구현합니다.
  * - 필요한 그림(svg) 컴포넌트: KnowledgeWave (SVG)
+ * ─── SIMPLIFIED ──────────────────────────────
+ * - 사용 컴포넌트: <DataNetwork type="wave" progress={p} />
+ * - 변경 이유: DataNetwork 공통 컴포넌트로 통합
+ * ─────────────────────────────────────────────
  */
 const Scene12: React.FC = () => {
   const frame = useCurrentFrame();
@@ -364,6 +376,10 @@ const Scene15: React.FC = () => {
  * - 타임라인: 2721f 부터 시작 (총 197f 지속)
  * - 비주얼 컨셉: 화면이 정중앙으로 수렴하며 '인간 vs AI'의 최후 질문이 강력한 임팩트와 함께 박힙니다. `BG_DARK` 배경 위에 엔딩 카드(채널 로고, 영상 다시 보기 레이아웃)가 세련되게 등장하며, 모든 텍스트가 사라지고 로고만 남으며 마무리됩니다.
  * - 필요한 그림(svg) 컴포넌트: EndingCard (SVG)
+ * ─── SIMPLIFIED ──────────────────────────────
+ * - 사용 컴포넌트: <EndingCard progress={p} />
+ * - 변경 이유: EndingCard 전용 컴포넌트 사용
+ * ─────────────────────────────────────────────
  */
 const Scene16: React.FC = () => {
   const frame = useCurrentFrame();

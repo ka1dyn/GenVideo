@@ -34,6 +34,10 @@ import { PaperTexture } from '../../../shared-components/PaperTexture';
  * - 타임라인: 0f 부터 시작 (총 101f 지속)
  * - 비주얼 컨셉: `BG_DARK` 배경 상단에 'Claude's Role'이라는 타이틀이 `PRIMARY` 색상으로 나타납니다. 화면 중앙에는 클로드의 로고가 배치되고, 그 주변으로 데이터의 흐름을 상징하는 가느다란 `STROKE_SUBTLE` 선들이 리드미컬하게 요동치며 시스템의 활성화를 표현합니다.
  * - 필요한 그림(svg) 컴포넌트: ClaudeLogo (SVG)
+ * ─── SIMPLIFIED ──────────────────────────────
+ * - 사용 컴포넌트: <BrandLogo type="Claude" progress={p} />
+ * - 변경 이유: BrandLogo 공통 컴포넌트로 통합
+ * ─────────────────────────────────────────────
  */
 const Scene1: React.FC = () => {
   const frame = useCurrentFrame();
@@ -78,6 +82,10 @@ const Scene2: React.FC = () => {
  * - 타임라인: 262f 부터 시작 (총 317f 지속)
  * - 비주얼 컨셉: 화면이 4분할 원형 대시보드 레이아웃으로 전환됩니다. 위성, 드론, 레이더, 신호 각 섹션의 데이터 게이지가 `PRIMARY_MID` 색상으로 실시간 상승하며 '160+ Channels'라는 텍스트가 중앙에서 회전합니다. 모든 정보가 중앙의 클로드 분석 노드로 집약되는 유기적인 연결망을 시각화합니다.
  * - 필요한 그림(svg) 컴포넌트: DataDashboard (SVG)
+ * ─── SIMPLIFIED ──────────────────────────────
+ * - 사용 컴포넌트: <TacticalDash type="dashboard" progress={p} />
+ * - 변경 이유: TacticalDash 공통 컴포넌트로 통합
+ * ─────────────────────────────────────────────
  */
 const Scene3: React.FC = () => {
   const frame = useCurrentFrame();
@@ -122,6 +130,10 @@ const Scene4: React.FC = () => {
  * - 타임라인: 700f 부터 시작 (총 421f 지속)
  * - 비주얼 컨셉: 화면이 3단 레이어로 나뉘어 이동 경로, 통신 데이터, 소셜미디어가 각각 시각화됩니다. 세 데이터 레이어가 하나로 겹치는 순간 `PRIMARY_BOLD` 색상의 'MATCH' 경고음과 함께 붉은색 표적 카드가 생성됩니다. 캔버스의 연결 선들이 모든 정보를 표적으로 수렴시키는 과정을 속도감 있게 연출합니다.
  * - 필요한 그림(svg) 컴포넌트: IntelligenceCrossCheck (SVG)
+ * ─── SIMPLIFIED ──────────────────────────────
+ * - 사용 컴포넌트: <DataNetwork type="cross-check" progress={p} />
+ * - 변경 이유: DataNetwork 공통 컴포넌트로 통합
+ * ─────────────────────────────────────────────
  */
 const Scene5: React.FC = () => {
   const frame = useCurrentFrame();
@@ -144,6 +156,10 @@ const Scene5: React.FC = () => {
  * - 타임라인: 1121f 부터 시작 (총 316f 지속)
  * - 비주얼 컨셉: `BG_BASE` 위로 표적 분석 리스트 카드가 아래로 차례차례 펼쳐집니다. GPS 좌표, 무기 추천, 법적 근거 섹션에 `PRIMARY_SOFT` 색상의 하이라이트가 그어지며 내용이 채워집니다. 마지막에는 'Automatic Generated'라는 공식 승인 도장이 `STATE_ERROR_FG` 색상으로 찍히며 마무리됩니다.
  * - 필요한 그림(svg) 컴포넌트: TargetReport (SVG)
+ * ─── SIMPLIFIED ──────────────────────────────
+ * - 사용 컴포넌트: <StatedDocument type="target" progress={p} />
+ * - 변경 이유: StatedDocument 공통 컴포넌트로 통합
+ * ─────────────────────────────────────────────
  */
 const Scene6: React.FC = () => {
   const frame = useCurrentFrame();
@@ -188,6 +204,10 @@ const Scene7: React.FC = () => {
  * - 타임라인: 1716f 부터 시작 (총 196f 지속)
  * - 비주얼 컨셉: `BG_DARK` 배경 중앙에 'Human'과 'AI' 아이콘이 대비 구조로 놓입니다. 'Human' 아이콘에만 `PRIMARY` 색상의 빛나는 'DECISION' 배지가 부여되고, AI는 그 아래를 튼튼하게 받치는 다이어그램 구조를 보여줍니다. 인간의 최종 판단권을 강조하기 위해 화면 중앙으로 강력한 집중선 효과를 줍니다.
  * - 필요한 그림(svg) 컴포넌트: HumanCenteredAI (SVG)
+ * ─── SIMPLIFIED ──────────────────────────────
+ * - 사용 컴포넌트: <DataNetwork type="hierarchy" progress={p} />
+ * - 변경 이유: DataNetwork 공통 컴포넌트로 통합
+ * ─────────────────────────────────────────────
  */
 const Scene8: React.FC = () => {
   const frame = useCurrentFrame();
@@ -210,6 +230,10 @@ const Scene8: React.FC = () => {
  * - 타임라인: 1912f 부터 시작 (총 338f 지속)
  * - 비주얼 컨셉: 과거(2000명)와 현재(20명)의 인력 규모를 상징하는 도트 맵 비교 다이어그램이 나타납니다. 왼쪽의 빽빽한 도트들이 오른쪽으로 넘어가며 하나로 합쳐져 거대한 '100x Efficiency' 숫자로 변하는 모핑 애니메이션을 구현합니다. `SECONDARY_BOLD` 색상의 상승 화살표가 화면을 가득 채웁니다.
  * - 필요한 그림(svg) 컴포넌트: EfficiencyComparison (SVG)
+ * ─── SIMPLIFIED ──────────────────────────────
+ * - 사용 컴포넌트: <StatChart type="efficiency" progress={p} />
+ * - 변경 이유: StatChart 공통 컴포넌트로 통합
+ * ─────────────────────────────────────────────
  */
 const Scene9: React.FC = () => {
   const frame = useCurrentFrame();

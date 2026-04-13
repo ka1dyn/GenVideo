@@ -78,6 +78,10 @@ const Scene2: React.FC = () => {
  * - 타임라인: 256f 부터 시작 (총 100f 지속)
  * - 비주얼 컨셉: 미국 국방부 본청 건물을 연상시키는 추상적인 육각형 문양이 중앙에 배치됩니다. 주변에 '고민'을 상징하는 물음표 파티클들이 `PRIMARY` 색상의 도트 형태로 떠다닙니다. 문양 내부에서 데이터 과부하를 나타내는 붉은색(`STATE_ERROR_FG`) 경고 바가 차오르며 문제의 심각성을 표현합니다.
  * - 필요한 그림(svg) 컴포넌트: PentagonAbstract (SVG)
+ * ─── SIMPLIFIED ──────────────────────────────
+ * - 사용 컴포넌트: <BrandLogo type="Pentagon" progress={p} />
+ * - 변경 이유: BrandLogo 공통 컴포넌트로 통합
+ * ─────────────────────────────────────────────
  */
 const Scene3: React.FC = () => {
   const frame = useCurrentFrame();
@@ -122,6 +126,10 @@ const Scene4: React.FC = () => {
  * - 타임라인: 585f 부터 시작 (총 164f 지속)
  * - 비주얼 컨셉: 드론의 타겟팅 UI가 두 가지 대상(군사 vs 민간) 사이에서 갈팡질팡하며 흔들립니다. 타겟팅 박스는 `STATE_WARN_FG` 색상으로 깜빡거리며, 두 명칭이 화면 좌우에서 빠르게 충돌하는 연출을 합니다. 결정의 불확실성을 표현하기 위해 화면 전체에 가벼운 글리치(Glitch) 효과를 줍니다.
  * - 필요한 그림(svg) 컴포넌트: DroneHUD (SVG)
+ * ─── SIMPLIFIED ──────────────────────────────
+ * - 사용 컴포넌트: <TacticalDash type="drone" progress={p} />
+ * - 변경 이유: TacticalDash 공통 컴포넌트로 통합
+ * ─────────────────────────────────────────────
  */
 const Scene5: React.FC = () => {
   const frame = useCurrentFrame();
@@ -144,6 +152,10 @@ const Scene5: React.FC = () => {
  * - 타임라인: 749f 부터 시작 (총 58f 지속)
  * - 비주얼 컨셉: 복잡했던 화면이 한순간에 정리되고 `SECONDARY_SOFT` 배경 위에 'MAVEN' 로고가 정갈하게 중앙에 배치됩니다. 로고 주변으로 깔끔한 경계선들이 사각형으로 그어지며 혼돈이 정리되는 질서 정연한 느낌을 줍니다. '해결책'으로서의 확고한 브랜딩 이미지를 강화합니다.
  * - 필요한 그림(svg) 컴포넌트: MavenLogo (SVG)
+ * ─── SIMPLIFIED ──────────────────────────────
+ * - 사용 컴포넌트: <BrandLogo type="Maven" progress={p} />
+ * - 변경 이유: BrandLogo 공통 컴포넌트로 통합
+ * ─────────────────────────────────────────────
  */
 const Scene6: React.FC = () => {
   const frame = useCurrentFrame();
@@ -210,6 +222,10 @@ const Scene8: React.FC = () => {
  * - 타임라인: 1260f 부터 시작 (총 218f 지속)
  * - 비주얼 컨셉: 화면 왼쪽의 작은 점(2017)에서 시작하여 오른쪽의 거대한 네트워크 허브(2025)로 커지는 진화 다이어그램이 그려집니다. 단순 분석 캔버스에서 전쟁 전체를 운영하는 관제 시스템 UI로 모핑(Morphing)되며 규모의 확장을 상징합니다. 캔버스의 연결 선들이 점점 더 빽빽하고 유기적으로 바뀝니다.
  * - 필요한 그림(svg) 컴포넌트: GrowthChart (SVG)
+ * ─── SIMPLIFIED ──────────────────────────────
+ * - 사용 컴포넌트: <StatChart type="growth" progress={p} />
+ * - 변경 이유: StatChart 공통 컴포넌트로 통합
+ * ─────────────────────────────────────────────
  */
 const Scene9: React.FC = () => {
   const frame = useCurrentFrame();
@@ -232,6 +248,10 @@ const Scene9: React.FC = () => {
  * - 타임라인: 1478f 부터 시작 (총 156f 지속)
  * - 비주얼 컨셉: `BG_DARK` 배경으로 전환되며 시스템의 중심 핵(Core)으로 빨려 들어가는 듯한 줌인 효과를 줍니다. 중심에 'Claude'가 나타나고, 사방에서 메이븐의 데이터 관들이 이 중심핵을 향해 연결되는 연결 구조를 보여줍니다. '핵심 기능' 텍스트에 `PRIMARY` 빛을 발하는 글로우(Glow) 효과를 추가합니다.
  * - 필요한 그림(svg) 컴포넌트: ClaudeCore (SVG)
+ * ─── SIMPLIFIED ──────────────────────────────
+ * - 사용 컴포넌트: <DataNetwork type="core" progress={p} />
+ * - 변경 이유: DataNetwork 공통 컴포넌트로 통합
+ * ─────────────────────────────────────────────
  */
 const Scene10: React.FC = () => {
   const frame = useCurrentFrame();
