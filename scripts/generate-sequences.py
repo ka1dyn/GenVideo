@@ -152,6 +152,8 @@ def generate_sequences_for_section(project_id, section, force=False):
     tsx_lines.append(" * - 이미 import된 Wobble, DrawLine, PaperTexture를 적극 활용하세요.")
     tsx_lines.append(" * - 화면에 표시되는 텍스트는 단어나 짧은 구절 수준으로만 표현합니다 (나레이션 문장 전체를 화면에 옮기지 마세요).")
     tsx_lines.append(" * - 배경·장식·파티클은 전체 화면을 자유롭게 사용하되, 핵심 텍스트와 정보 요소만 하단 150px 자막 영역을 피하세요.")
+    tsx_lines.append(" * - Scene이 끝날 때까지 화면이 정적으로 남아 지루함을 느끼지 않도록 애니메이션이 최대한 끊기지 않게 하세요. 난잡하고 화려하라는 뜻이 아니며, 은은하게 지속되도록 하세요.")
+    tsx_lines.append(" * - 대략 8개의 Scene 중에 하나는 Killing Scene으로 만들어 canvas나 3d등을 사용해 정교한 애니메이션을 구사하세요")
     tsx_lines.append(" */")
     tsx_lines.append("import React from 'react';")
     tsx_lines.append("import { AbsoluteFill, Sequence, useCurrentFrame, interpolate, spring, useVideoConfig } from 'remotion';")
