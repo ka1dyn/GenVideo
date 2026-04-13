@@ -21,8 +21,8 @@ description: 기획서 기반으로 SVG/Canvas 그래픽 컴포넌트를 사전 
 
 ## 사전 준비
 
-터미널 명령어 `python3 scripts/generate-sequences.py {project_id}` 를 실행하여 스켈레톤 코드를 생성합니다.
-`src/projects/{project_id}/` 하위에 섹션별 `sequences.tsx` 뼈대가 생성되었는지 확인.
+- 터미널 명령어 `python3 scripts/generate-sequences.py {project_id}` 를 실행하여 스켈레톤 코드를 생성합니다.
+- 이후 `src/projects/{project_id}/` 하위에 섹션별 `sequences.tsx` 뼈대가 생성되었는지 확인합니다.
 
 ---
 
@@ -48,6 +48,7 @@ description: 기획서 기반으로 SVG/Canvas 그래픽 컴포넌트를 사전 
 ### 1-3. 공통 컴포넌트 자동 추출
 
 수집한 컴포넌트 중 **2개 이상의 씬에서 동일하게 요청된 것**을 공통 컴포넌트로 그룹핑합니다.
+컴포넌트 이름이 달라도 거의 같은 목적으로 쓰이는 경우 하나로 통일합니다.
 
 > 공통 컴포넌트 목록은 하드코딩하지 않습니다. **반드시 스캔 결과에서 빈도 기반으로 도출**하세요.
 
@@ -73,7 +74,8 @@ description: 기획서 기반으로 SVG/Canvas 그래픽 컴포넌트를 사전 
 
 ### 1-5. 단순화 확정 → sequences.tsx JSDoc 즉시 업데이트
 
-사용자 확인 후, 단순화가 확정된 씬의 JSDoc에 `SIMPLIFIED` 블록을 **즉시** 씁니다:
+사용자 확인 후, 단순화가 확정된 씬의 JSDoc에 `SIMPLIFIED` 블록을 **즉시** 씁니다.
+만약 컴포넌트 이름이 변경되었다면 주석에 반영합니다.
 
 ```tsx
 /**
@@ -81,7 +83,7 @@ description: 기획서 기반으로 SVG/Canvas 그래픽 컴포넌트를 사전 
  * - 필요한 그림: 잉크 번짐 이펙트
  * ─── SIMPLIFIED ──────────────────────────────
  * - 사용 컴포넌트: <ClipPathExpand progress={p} color={color} />
- * - 단순화 이유: 2초 배경 등장, clip-path circle 확장으로 동일 효과
+ * - 단순화, 변경 이유: 2초 배경 등장, clip-path circle 확장으로 동일 효과
  * ─────────────────────────────────────────────
  */
 ```
