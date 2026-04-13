@@ -27,7 +27,6 @@ Remotion 영상 프로젝트 기획서와 스켈레톤 코드(뼈대 코드)를 
    - `{FILL_TOPIC: ...}` — 섹션 주제
    - `{FILL_SUMMARY: ...}` — 섹션 내용 요약
    - `{FILL_S1_VISUAL: ...}` — Scene 1 비주얼 컨셉
-   - `{FILL_S1_COMPONENT: ...}` — Scene 1 필요한 그림 컴포넌트
    - (Scene 번호별로 반복)
 
    **작업 규칙**:
@@ -40,7 +39,11 @@ Remotion 영상 프로젝트 기획서와 스켈레톤 코드(뼈대 코드)를 
    1. `view_file`로 `{section}_plan.md` 열기
    2. `view_file`로 `{section}.txt` (원본 대본) 열기
    3. `FILL_TOPIC`과 `FILL_SUMMARY` 먼저 채우기 (섹션 전체 맥락 파악 후)
-   4. Scene을 최대 3개씩 Chunk로 묶어 `FILL_S{i}_VISUAL`과 `FILL_S{i}_COMPONENT` 채우기
+   4. Scene을 최대 3개씩 Chunk로 묶어 `FILL_S{i}_VISUAL` 채우기
    5. 다음 Chunk로 이동, 모든 FILL 마커가 채워질 때까지 반복
 
-**계획 승인 요청**: 모든 기획서 작성이 완료되면 사용자에게 최종 검토 및 승인을 요청하고, 확인이 완료되면 세션을 종료합니다.
+**계획 승인 요청**: 모든 기획서 작성이 완료되면 사용자에게 최종 검토 및 승인을 요청합니다.
+
+3. 스켈레톤 코드 생성
+
+터미널 명령어 `python3 scripts/generate-sequences.py {project_id}` 를 실행하여 스켈레톤 코드를 생성한 뒤, 세션을 종료합니다.
