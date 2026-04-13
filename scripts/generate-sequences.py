@@ -157,7 +157,7 @@ def generate_sequences_for_section(project_id, section, force=False):
     tsx_lines.append(" */")
     tsx_lines.append("import React from 'react';")
     tsx_lines.append("import { AbsoluteFill, Sequence, useCurrentFrame, interpolate, spring, useVideoConfig } from 'remotion';")
-    tsx_lines.append("import { BRAND, COLORS, EFFECTS, FONTS, SPACING, ANIMATION, Z } from '../../../constants/theme';")
+    tsx_lines.append("import { COLORS, EFFECTS, FONTS, SPACING, ANIMATION, Z } from '../../../constants/theme';")
     tsx_lines.append("import { Wobble } from '../../../shared-components/Wobble';")
     tsx_lines.append("import { DrawLine } from '../../../shared-components/DrawLine';")
     tsx_lines.append("import { PaperTexture } from '../../../shared-components/PaperTexture';")
