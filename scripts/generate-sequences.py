@@ -27,6 +27,12 @@ GLOBAL_FILTER_RE = [re.compile(p) for p in GLOBAL_CONTEXT_FILTER_PATTERNS]
 
 def filter_global_context(text: str) -> str:
     """Global Context에서 implement-scenes에 불필요한 줄을 제거"""
+    
+    # 🚨 페르소나 섹션 이후의 모든 텍스트를 제거합니다 (별도로 하드코딩해서 주입하기 위함)
+    persona_idx = text.find('### 🚨 페르소나')
+    if persona_idx != -1:
+        text = text[:persona_idx]
+
     lines = text.split('\n')
     filtered = []
     for line in lines:
@@ -146,14 +152,12 @@ def generate_sequences_for_section(project_id, section, force=False):
         safe_line = line.strip().replace('*/', '* /')
         tsx_lines.append(f" * {safe_line}")
     tsx_lines.append(" *")
-    tsx_lines.append(" * ### 🛠️ 구현 페르소나")
-    tsx_lines.append(" * 당신은 최고의 IT 기업의 수석 UI/UX 모션 디자이너이자 React Remotion 개발자입니다.")
-    tsx_lines.append(" * 위 기획 의도를 코드로 구현할 때 다음을 기억하세요:")
-    tsx_lines.append(" * - 이미 import된 Wobble, DrawLine, PaperTexture를 적극 활용하세요.")
-    tsx_lines.append(" * - 화면에 표시되는 텍스트는 단어나 짧은 구절 수준으로만 표현합니다 (나레이션 문장 전체를 화면에 옮기지 마세요).")
-    tsx_lines.append(" * - 배경·장식·파티클은 전체 화면을 자유롭게 사용하되, 핵심 텍스트와 정보 요소만 하단 150px 자막 영역을 피하세요.")
-    tsx_lines.append(" * - Scene이 끝날 때까지 화면이 정적으로 남아 지루함을 느끼지 않도록 애니메이션이 최대한 끊기지 않게 하세요. 난잡하고 화려하라는 뜻이 아니며, 은은하게 지속되도록 하세요.")
-    tsx_lines.append(" * - 대략 8개의 Scene 중에 하나는 Killing Scene으로 만들어 canvas나 3d등을 사용해 정교한 애니메이션을 구사하세요")
+    tsx_lines.append(" * ### 🚨 페르소나 및 디자인 가이드")
+    tsx_lines.append(" * [역할] 당신은 유튜브 채널을 운영하는 트렌디한 IT 기업의 수석 UI/UX 모션그래픽 전문가이자 'React Remotion 개발자'입니다.")
+    tsx_lines.append(" * [채널명] 나만빼고 AI")
+    tsx_lines.append(" * [채널설명] AI 트렌드를 따라가고 싶은 일반인들을 위해 친근하게 스케치 느낌의 영상으로 이해하기 쉽게 설명하는 채널")
+    tsx_lines.append(" * [영상 분위기]")
+    tsx_lines.append(" * 매우중요: 이미 import된 컴포넌트(Wobble, DrawLine, PaperTexture 등)를 적극 활용해 스케치 느낌을 내지만, 주석 설명에 따라 깔끔하게 구현합니다.")
     tsx_lines.append(" */")
     tsx_lines.append("import React from 'react';")
     tsx_lines.append("import { AbsoluteFill, Sequence, useCurrentFrame, interpolate, spring, useVideoConfig } from 'remotion';")
@@ -182,12 +186,13 @@ def generate_sequences_for_section(project_id, section, force=False):
         tsx_lines.append(f"const Scene{i}: React.FC = () => {{")
         tsx_lines.append("  const frame = useCurrentFrame();")
         tsx_lines.append("  const { fps } = useVideoConfig();")
-        tsx_lines.append("  // TODO: 구현")
+        tsx_lines.append("  // TODO: 구현 - 상단 주석에 따라 친근하게, 스케치 느낌으로 정성스럽게 구현하세요")
         tsx_lines.append("  return (")
         tsx_lines.append("    <AbsoluteFill>")
         tsx_lines.append("      <PaperTexture />")
         tsx_lines.append("      {/* 핵심 텍스트와 정보 요소는 하단 150px 자막 영역에 배치하지 마세요. */}")
         tsx_lines.append("      {/* 배경·장식·파티클은 전체 화면을 자유롭게 사용할 수 있습니다. */}")
+        tsx_lines.append("      {/* Scene이 끝날 때까지 지루하지 않도록 In-Scene 애니메이션을 적극 활용하세요 */}")
         tsx_lines.append("    </AbsoluteFill>")
         tsx_lines.append("  );")
         tsx_lines.append("};")

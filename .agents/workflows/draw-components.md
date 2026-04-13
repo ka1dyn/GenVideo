@@ -16,13 +16,13 @@ description: 기획서 기반으로 SVG/Canvas 그래픽 컴포넌트를 사전 
 
 > **`sequences.tsx`의 JSDoc 주석이 단일 진실 원천(Single Source of Truth)입니다.**
 >
-> - 이 워크플로우는 단순화 결정·컴포넌트 정보를 **즉시 해당 씬의 JSDoc에 반영**합니다.
-> - `/implement-scenes`는 오직 `sequences.tsx` 주석만 보고 구현합니다.
+> - 이 워크플로우는 단순화 결정·컴포넌트 정보를 구현 시 참고할 수 있도록 **즉시 해당 씬의 JSDoc에 반영**합니다.
+> - `/implement-scenes` 워크플로우는 오직 `sequences.tsx` 주석만 보고 구현합니다.
 
-## 사전 조건
+## 사전 준비
 
-- `python3 scripts/generate-sequences.py {project_id}` 실행 완료
-- `src/projects/{project_id}/` 하위에 섹션별 `sequences.tsx` 뼈대 존재
+터미널 명령어 `python3 scripts/generate-sequences.py {project_id}` 를 실행하여 스켈레톤 코드를 생성합니다.
+`src/projects/{project_id}/` 하위에 섹션별 `sequences.tsx` 뼈대가 생성되었는지 확인.
 
 ---
 

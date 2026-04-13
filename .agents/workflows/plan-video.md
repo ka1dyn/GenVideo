@@ -6,16 +6,11 @@ description: remotion 기반 영상을 작성하기 전 영상을 기획, 준비
 
 Remotion 영상 프로젝트 기획서와 스켈레톤 코드(뼈대 코드)를 작성하는 워크플로우 입니다.
 
-## 전체 흐름
-
-- **Phase 1: Plan** → 각 섹션별 애니메이션 기획서 작성
-- **Phase 2: Skeleton Code Generation** → 각 섹션별로 뼈대 코드 생성
-
 ## 사전 조건
 
 - `public/{project_id}/{section}/{section}_final_timeline.json` 파일이 존재해야 합니다.
 
-## Phase 1: Plan
+## Plan
 
 각 섹션별로 기획서를 작성하는 단계입니다.
 
@@ -48,9 +43,4 @@ Remotion 영상 프로젝트 기획서와 스켈레톤 코드(뼈대 코드)를 
    4. Scene을 최대 3개씩 Chunk로 묶어 `FILL_S{i}_VISUAL`과 `FILL_S{i}_COMPONENT` 채우기
    5. 다음 Chunk로 이동, 모든 FILL 마커가 채워질 때까지 반복
 
-**계획 승인 요청**: 모든 기획서 작성이 완료되면 사용자에게 최종 검토 및 승인을 요청하세요. <--- 반드시 멈춤
-
-## Phase 2: Skeleton Code Generation
-
-// turbo-all
-터미널 명령어 `python3 scripts/generate-sequences.py {project_id}` 를 실행합니다.
+**계획 승인 요청**: 모든 기획서 작성이 완료되면 사용자에게 최종 검토 및 승인을 요청하고, 확인이 완료되면 세션을 종료합니다.
