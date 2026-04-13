@@ -8,6 +8,7 @@ import { WebParadiam } from "./projects/web-paradiam/web-paradiam";
 import { Thumbnail, ThumbnailSchema } from "./projects/thumbnail/Thumbnail";
 
 import { VIDEO_FPS, VIDEO_WIDTH, VIDEO_HEIGHT } from "./constants/video-config";
+import { ComponentGallery } from './projects/aiwar/components/ComponentGallery';
 
 export const RemotionRoot: React.FC = () => {
   return (
@@ -38,6 +39,14 @@ export const RemotionRoot: React.FC = () => {
           fps={30}
           width={VIDEO_WIDTH}
           height={VIDEO_HEIGHT}
+        />
+        <Composition
+          id="aiwar-component-gallery"
+          component={ComponentGallery}
+          width={1920}
+          height={1080}
+          durationInFrames={300}
+          fps={30}
         />
 
         <></>

@@ -37,24 +37,13 @@ description: 기획서 기반으로 SVG/Canvas 그래픽 컴포넌트를 사전 
 
 ### 1-2. 난이도 분류
 
-| 등급 | 기준 |
-|------|------|
-| 🟢 Easy | 기하 도형, 3단 이하 SVG path (화살표, 스탬프, 버튼) |
-| 🟡 Medium | 단순 캐릭터, 건물 외형, 단순 지도 (스틱맨, 드론) |
-| 🔴 Hard | 파티클, 유기체, Canvas 애니메이션 (잉크 번짐, 물 오염, 폭발) |
+| 등급      | 기준                                                         |
+| --------- | ------------------------------------------------------------ |
+| 🟢 Easy   | 기하 도형, 3단 이하 SVG path (화살표, 스탬프, 버튼)          |
+| 🟡 Medium | 단순 캐릭터, 건물 외형, 단순 지도 (스틱맨, 드론)             |
+| 🔴 Hard   | 파티클, 유기체, Canvas 애니메이션 (잉크 번짐, 물 오염, 폭발) |
 
 > 🔴 Hard 판단 기준: **2초 미만 등장 또는 배경 역할** → 단순화 권장 / **씬 전체 주인공** → 완성도 있게 구현
-
-**🔴 Hard 기본 단순화 대안**:
-
-| 원본 요청 | 단순화 대안 |
-|----------|------------|
-| 잉크 번짐 이펙트 | `clip-path` 다각형/원 서서히 확장 |
-| 유기적 폭발/파편 | `<line>` 여러 개 방사형 분산 SVG |
-| 물 오염 Canvas | CSS 배경색 전환 + 반투명 레이어 |
-| 3D 지구본 | 타원 + 경위선 + 대륙 blob |
-| 복잡한 나뭇가지 경로 | 3~4개 fork 선만 SVG |
-| 매트릭스 코드 | `<tspan>` 컬럼 translateY 스크롤 |
 
 ### 1-3. 공통 컴포넌트 자동 추출
 
@@ -108,6 +97,7 @@ python3 scripts/update-gallery.py {project_id}
 ```
 
 이 스크립트가 자동으로 처리합니다:
+
 - `src/projects/{project_id}/components/` 디렉토리 생성
 - `ComponentGallery.tsx` 생성 (빈 상태)
 - `src/Root.tsx`에 `{project_id}-component-gallery` Still 등록
@@ -118,7 +108,16 @@ python3 scripts/update-gallery.py {project_id}
 
 **저장 경로**: `src/projects/{project_id}/components/`
 
+> **공유 인프라 컴포넌트**: `Wobble`, `DrawLine`, `PaperTexture`는 `src/shared-components/`에 이미 존재합니다.
+> 이 3가지는 프로젝트별로 새로 만들지 않고, `sequences.tsx` 스켈레톤에 자동 import됩니다.
+
 Phase 1-3에서 도출된 공통 컴포넌트를 먼저 구현합니다.
+
+### 🚫 컴포넌트 안티패턴
+
+- **나레이션 직역 일러스트 금지**: "폭발" → 폭발 SVG, "지도" → 세계지도 SVG 같은 1:1 변환. 대신 텍스트·도형·UI 레이아웃으로 추상화하세요.
+- **한 씬에 3개 이상의 신규 SVG 배치 금지**: 하나의 초점 일러스트 + 텍스트/UI로 구성하세요.
+- **Wobble 없는 정적 SVG 배치 금지**: 모든 SVG는 `<Wobble>`로 감싸거나 `progress` 기반 드로잉 애니메이션을 적용하세요.
 
 ### 구현 규칙
 
@@ -136,12 +135,15 @@ export const SketchArrow: React.FC<Props> = ({ progress, color, strokeWidth }) =
 
 ```tsx
 // ✅ 컴포넌트: progress prop을 받는다
-interface Props { progress: number; color?: string; }
+interface Props {
+  progress: number;
+  color?: string;
+}
 
 // ✅ 씬(sequences.tsx)에서: interpolate로 계산 후 전달
 const frame = useCurrentFrame();
-const p = interpolate(frame, [0, 20], [0, 1], { extrapolateRight: 'clamp' });
-<MyComponent progress={p} color={COLORS.PRIMARY} />
+const p = interpolate(frame, [0, 20], [0, 1], { extrapolateRight: "clamp" });
+<MyComponent progress={p} color={COLORS.PRIMARY} />;
 
 // ❌ 컴포넌트 내부에서 useCurrentFrame() 직접 호출 금지
 ```
@@ -211,7 +213,7 @@ python3 scripts/update-gallery.py {project_id}
 모든 섹션 완료 후 `src/projects/{project_id}/components/index.ts`를 생성합니다:
 
 ```ts
-export { SketchArrow } from './SketchArrow';
+export { SketchArrow } from "./SketchArrow";
 // ... 모든 컴포넌트
 ```
 
