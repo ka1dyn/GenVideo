@@ -269,13 +269,13 @@ export const SPACING = {
 } as const;
 
 export const ANIMATION = {
-  // Scaling based on 60fps (original design system was 30fps)
-  DUR_XS: 12, 
-  DUR_SM: 18,
-  DUR_MD: 30,
-  DUR_LG: 42,
-  DUR_XL: 60,
-  DUR_2XL: 90,
+  // Scaling based on 30fps
+  DUR_XS: 6, 
+  DUR_SM: 9,
+  DUR_MD: 15,
+  DUR_LG: 21,
+  DUR_XL: 30,
+  DUR_2XL: 45,
 
   SPRING_GENTLE: { damping: 14, stiffness: 120, mass: 1 },
   SPRING_BOUNCY: { damping: 10, stiffness: 160, mass: 0.9 },

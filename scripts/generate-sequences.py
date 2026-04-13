@@ -4,6 +4,41 @@ import json
 import argparse
 import re
 
+# ── plan-video 전용 문구 필터 ──────────────────────────────────────────────────
+# Global Context에서 implement-scenes AI에 불필요한 줄을 제거합니다.
+# plan-video 단계의 지시문(역할, 채널정보, 작성 안내)이 구현 AI에 혼란을 주는 것을 방지.
+GLOBAL_CONTEXT_FILTER_PATTERNS = [
+    # plan-video 전용 역할 지시
+    r'^\[역할\]',
+    r'^당신은.*입니다\.',
+    # 채널 정보 (구현에 불필요)
+    r'^\[유튜브 채널 정보\]',
+    r'^채널명:',
+    r'^채널설명:',
+    # plan-video 작성 안내 문구
+    r'^원본 대본\(.*\)을 읽고',
+    r'^- 타임라인 수치를 임의로 수정하지 않는다',
+    # 마크다운 헤더 번호 ("## 1. Section 주제..." → 내용만 남기기)
+    r'^##\s+1\.',
+    r'^##\s+시퀀스 별 애니메이션 기획',
+]
+GLOBAL_FILTER_RE = [re.compile(p) for p in GLOBAL_CONTEXT_FILTER_PATTERNS]
+
+
+def filter_global_context(text: str) -> str:
+    """Global Context에서 implement-scenes에 불필요한 줄을 제거"""
+    lines = text.split('\n')
+    filtered = []
+    for line in lines:
+        stripped = line.strip()
+        if any(pat.search(stripped) for pat in GLOBAL_FILTER_RE):
+            continue
+        filtered.append(line)
+    # 연속 빈 줄 정리 (3줄 이상 → 2줄)
+    result = '\n'.join(filtered)
+    result = re.sub(r'\n{3,}', '\n\n', result)
+    return result.strip()
+
 def generate_sequences_for_section(project_id, section, force=False):
     base_dir = f"public/{project_id}/{section}"
     json_path = os.path.join(base_dir, f"{section}_final_timeline.json")
@@ -17,6 +52,18 @@ def generate_sequences_for_section(project_id, section, force=False):
     if not os.path.exists(plan_path):
         print(f"Skipping {section}: {plan_path} not found.")
         return
+
+    # ── draw-components 작업물 보호 ──
+    if os.path.exists(out_path):
+        with open(out_path, 'r', encoding='utf-8') as f:
+            existing = f.read()
+        if 'SIMPLIFIED' in existing or 'COMPONENTS' in existing:
+            print(f"⚠️  [{section}] sequences.tsx에 SIMPLIFIED/COMPONENTS 블록이 존재합니다.")
+            print(f"   재생성하면 draw-components 작업물이 손실됩니다.")
+            if not force:
+                print(f"❌ [{section}] 건너뜁니다. --force로 강제 실행 가능.")
+                return
+            print(f"⚡ --force 플래그로 강제 덮어씁니다.")
 
     with open(json_path, 'r', encoding='utf-8') as f:
         data = json.load(f)
@@ -60,7 +107,7 @@ def generate_sequences_for_section(project_id, section, force=False):
             global_parts.append(summary_match.group(1).strip())
         if overview_match:
             global_parts.append(overview_match.group(1).strip())
-        global_context = '\n\n'.join(global_parts)
+        global_context = filter_global_context('\n\n'.join(global_parts))
     else:
         # 폴백: 레거시 텍스트 마커 (이전 포맷 호환)
         start_marker = "1. Section 주제 및 내용 요약"
@@ -96,10 +143,11 @@ def generate_sequences_for_section(project_id, section, force=False):
     tsx_lines.append("/**")
     tsx_lines.append(" * [Section Global Context]")
     for line in global_context.split('\n'):
-        tsx_lines.append(f" * {line.strip()}")
+        safe_line = line.strip().replace('*/', '* /')
+        tsx_lines.append(f" * {safe_line}")
     tsx_lines.append(" */")
     tsx_lines.append("import React from 'react';")
-    tsx_lines.append("import { AbsoluteFill, Sequence } from 'remotion';")
+    tsx_lines.append("import { AbsoluteFill, Sequence, useCurrentFrame, interpolate, spring, useVideoConfig } from 'remotion';")
     tsx_lines.append("import { BRAND, COLORS, EFFECTS, FONTS, SPACING, ANIMATION, Z } from '../../../constants/theme';")
     tsx_lines.append("")
 
@@ -116,13 +164,15 @@ def generate_sequences_for_section(project_id, section, force=False):
         tsx_lines.append("/**")
         tsx_lines.append(f" * [Scene {i}]")
         for line in scene_text.split('\n'):
-            tsx_lines.append(f" * {line}")
+            safe_line = line.replace('*/', '* /')
+            tsx_lines.append(f" * {safe_line}")
         tsx_lines.append(" */")
         tsx_lines.append(f"const Scene{i}: React.FC = () => {{")
         tsx_lines.append("  // TODO: 구현")
         tsx_lines.append("  return (")
         tsx_lines.append("    <AbsoluteFill>")
         tsx_lines.append("      {/* 현재 씬 작업 영역 */}")
+        tsx_lines.append("      {/* 하단 150px은 자막 영역으로, 핵심 요소 및 텍스트 배치 금지 */}")
         tsx_lines.append("    </AbsoluteFill>")
         tsx_lines.append("  );")
         tsx_lines.append("};")
