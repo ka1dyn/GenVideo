@@ -55,7 +55,7 @@ def generate_plan_for_section(project_id, section):
         scene_str += f"- 타임라인: {start_frame}f 부터 시작 (총 {duration_in_frames}f 지속)\n"
         scene_str += f"- [🔥 페르소나 리마인드]: Vercel 스타일의 미니멀한 구조 위에, 펜 스케치 질감을 '포인트'로만 제한적으로 얹습니다.\n"
         scene_str += f"- 비주얼 컨셉: {{FILL_S{i}_VISUAL: 정보량을 최소화하세요. 예술적인 그림 기획보다 텍스트(타이포그래피), 여백, 점, 선, 간단한 도형을 활용한 구조적 배치를 1순위로 기획합니다. }}\n"
-        scene_str += f"- SVG 컴포넌트: {{FILL_S{i}_SVG: SVG 스케치 그림은 특정 단어를 강조하거나 포인트를 줄 때만 제한적(최대 1~2개)으로 사용합니다. }}\n"
+        scene_str += f"- SVG 컴포넌트: {{FILL_S{i}_SVG: SVG 기획 시 내부에 텍스트(라벨, 이름 등)를 절대 포함하지 마세요. SVG는 오직 순수 그림 용도로만 기획하며 필요할 때만 제한적으로(최대 0~2개) 사용하세요. }}\n"
 
         scenes_content_list.append(scene_str)
 

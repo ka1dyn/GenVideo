@@ -211,6 +211,8 @@ export const FONTS = {
   HANDWRITING: "'Nanum Pen Script', cursive",
   MONO: "'JetBrains Mono', 'Fira Code', monospace",
 
+  // [절대 주의] 폰트 크기(fontSize)에는 오직 아래의 SIZE_* 토큰만 사용하세요.
+  // SPACING이나 다른 토큰을 폰트 크기에 섞어서 사용하지 마세요.
   SIZE_MD: 48,
   SIZE_LG: 64,
   SIZE_XL: 80,
@@ -218,6 +220,7 @@ export const FONTS = {
   SIZE_3XL: 140,
   SIZE_4XL: 180,
 
+  // 폰트 굵기에는 아래 5개만 사용하세요.
   WEIGHT_REGULAR: 400,
   WEIGHT_MEDIUM: 500,
   WEIGHT_SEMIBOLD: 600,
@@ -235,6 +238,8 @@ export const FONTS = {
   TRACKING_WIDER: 0.12,
 } as const;
 
+// [절대 주의] SPACING 값들은 margin, padding, gap, 폭/높이 등 공간 및 크기에만 사용하세요.
+// 폰트 크기(fontSize)에는 절대로 SPACING 토큰을 사용해서는 안 됩니다! (항상 FONTS.SIZE_* 사용)
 export const SPACING = {
   PX_2: 2,
   PX_4: 4,
