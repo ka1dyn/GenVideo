@@ -146,7 +146,7 @@ export async function generateTimestamps(
       console.log(`⚙️ Converting to 16kHz for Whisper [${doc.name}]...`);
       try {
         execSync(
-          `ffmpeg -i "${wavPath}" -ar 16000 "${processed16kWavPath}" -y`,
+          `conda run -n qwen3-tts ffmpeg -i "${wavPath}" -ar 16000 "${processed16kWavPath}" -y`,
           { stdio: "ignore" }
         );
       } catch (e) {
@@ -199,6 +199,17 @@ export async function generateTimestamps(
         `   → ${audioDurationMs}ms (${durationInFrames} frames @${FPS}fps)`
       );
     }
+
+    // 5. Write _meta.json — Single Source of Truth for duration
+    // Downstream scripts (generate-timeline.py 등) read this instead of calling ffprobe independently
+    const metaPath = path.join(publicDir, `${doc.name}_meta.json`);
+    const metaData = {
+      audioDurationMs,
+      durationInFrames,
+      fps: FPS,
+    };
+    fs.writeFileSync(metaPath, JSON.stringify(metaData, null, 2));
+    console.log(`   📋 Saved duration meta to ${metaPath}`);
 
     sectionMetas.push({
       ...doc,

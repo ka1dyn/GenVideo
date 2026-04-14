@@ -68,7 +68,7 @@ def generate_sequences_for_section(project_id, section):
         tsx_lines.append(f"const Scene{i}: React.FC = () => {{")
         tsx_lines.append("  const frame = useCurrentFrame();")
         tsx_lines.append("  const { fps } = useVideoConfig();")
-        tsx_lines.append("  {/* TODO: 구현 */}")
+        tsx_lines.append("  // TODO: 구현")
         tsx_lines.append("  return (")
         tsx_lines.append("    <AbsoluteFill>")
         tsx_lines.append("      <PaperTexture />")

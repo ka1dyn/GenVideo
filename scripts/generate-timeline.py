@@ -55,7 +55,7 @@ def parse_source_files(project_id: str, section: str):
         print(f"  ❌ 타임스탬프 파일 없음: {ts_path}")
         return 0, 0, script_lines, []
     
-    # 3. 오디오 duration (ffprobe 직접 호출)
+    # 3. 오디오 duration — _meta.json (Single Source of Truth) 우선 읽기
     total_duration_ms = 0
     total_frames = 0
     FPS = 30  # 기본값
@@ -69,22 +69,36 @@ def parse_source_files(project_id: str, section: str):
             if fps_match:
                 FPS = int(fps_match.group(1))
     
-    if os.path.exists(wav_path):
+    # (1순위) scaffold-media.ts가 생성한 _meta.json 읽기
+    meta_path = os.path.join(base_dir, f'{section}_meta.json')
+    if os.path.exists(meta_path):
+        with open(meta_path, 'r', encoding='utf-8') as f:
+            meta = json.load(f)
+        total_duration_ms = meta.get('audioDurationMs', 0)
+        total_frames = meta.get('durationInFrames', 0)
+        FPS = meta.get('fps', FPS)
+        print(f"  📋 _meta.json에서 duration 로드: {total_duration_ms}ms, {total_frames}f @{FPS}fps")
+    elif os.path.exists(wav_path):
+        # (2순위 Fallback) ffprobe 직접 호출
+        import subprocess
         try:
             result = subprocess.run(
-                ['ffprobe', '-v', 'error', '-show_entries', 'format=duration',
+                ['conda', 'run', '-n', 'qwen3-tts',
+                 'ffprobe', '-v', 'error', '-show_entries', 'format=duration',
                  '-of', 'csv=p=0', wav_path],
-                capture_output=True, text=True, timeout=10
+                capture_output=True, text=True, timeout=30
             )
             duration_sec = float(result.stdout.strip())
             total_duration_ms = round(duration_sec * 1000)
             total_frames = math.ceil(duration_sec * FPS)
+            print(f"  ⚠️ _meta.json 없음, ffprobe fallback 사용: {total_duration_ms}ms, {total_frames}f")
         except Exception as e:
             print(f"  ⚠️ ffprobe 실패: {e}")
-            # 타임스탬프의 마지막 endFrame으로 추정
+            # (3순위 Fallback) 타임스탬프의 마지막 endFrame으로 추정
             if timestamps:
                 total_frames = max(ts.get('endFrame', 0) for ts in timestamps)
                 total_duration_ms = round(total_frames / FPS * 1000)
+                print(f"  ⚠️ Whisper endFrame fallback 사용: {total_duration_ms}ms, {total_frames}f")
     else:
         print(f"  ⚠️ WAV 파일 없음: {wav_path}, 타임스탬프 기반으로 추정")
         if timestamps:
