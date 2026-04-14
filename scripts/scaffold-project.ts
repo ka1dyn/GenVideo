@@ -98,16 +98,37 @@ async function main() {
       );
     }
 
+    // Step 6: Automatically generate _plan.md skeletons
+    console.log("\n=== Phase 6: Generating Plan Skeletons ===");
+    try {
+      execSync(`python3 scripts/generate-plan.py ${projectId}`, {
+        stdio: "inherit",
+      });
+    } catch (e) {
+      console.error(
+        `\n❌ Plan generation failed. Please check the python script output.`
+      );
+    }
+
+    // Step 7: Automatically generate sequences.tsx boilerplate
+    console.log("\n=== Phase 7: Generating Sequences Boilerplate ===");
+    try {
+      execSync(`python3 scripts/generate-sequences.py ${projectId}`, {
+        stdio: "inherit",
+      });
+    } catch (e) {
+      console.error(
+        `\n❌ Sequences generation failed. Please check the python script output.`
+      );
+    }
+
     console.log(`\n✅ Scaffold complete for ${projectId}!`);
     console.log(`\n📌 Next steps:`);
     console.log(
       `   1. Review timeline_report.md in public/${projectId}/`
     );
     console.log(
-      `   2. Run /plan-animations ${projectId} to generate animation plans`
-    );
-    console.log(
-      `   3. Run /implement-scenes ${projectId} to implement scenes`
+      `   2. Run /implement-scenes ${projectId} <section> (예: intro, body1) to implement scenes`
     );
   }
 }
