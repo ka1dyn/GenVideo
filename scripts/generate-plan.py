@@ -43,17 +43,19 @@ def generate_plan_for_section(project_id, section):
         word_timings = []
         for word in sentence.get('words', []):
             w_text = word.get('text', '')
-            w_start = word.get('startFrame', 0)
-            word_timings.append(f'"{w_text}": {w_start}f')
+            w_start_global = word.get('startFrame', 0)
+            w_start_local = max(0, w_start_global - start_frame)
+            word_timings.append(f'"{w_text}": {w_start_local}f')
             
         word_timings_str = "{ " + ", ".join(word_timings) + " }"
 
         scene_str = f"### Scene {i}\n\n"
         scene_str += f"- 원본 텍스트: {text}\n"
-        scene_str += f"- 단어 등장 프레임: {word_timings_str}\n"
+        scene_str += f"- 단어 등장 프레임 (Local): {word_timings_str}\n"
         scene_str += f"- 타임라인: {start_frame}f 부터 시작 (총 {duration_in_frames}f 지속)\n"
-        scene_str += f"- 비주얼 컨셉: {{FILL_S{i}_VISUAL: 이 씬의 레이아웃,핵심 요소,연출 등을 간략하게 묘사한다. 정보량이 너무 많지 않도록 유의한다. }}\n"
-        scene_str += f"- SVG 컴포넌트: {{FILL_S{i}_SVG: 이 씬에서 포인트로 사용할 펜 드로잉 그림을 1개 이하로 작성한다. 필요하지 않다면 \"없음\"으로 작성}}\n"
+        scene_str += f"- [🔥 페르소나 리마인드]: Vercel 스타일의 미니멀한 구조 위에, 펜 스케치 질감을 '포인트'로만 제한적으로 얹습니다.\n"
+        scene_str += f"- 비주얼 컨셉: {{FILL_S{i}_VISUAL: 정보량을 최소화하세요. 예술적인 그림 기획보다 텍스트(타이포그래피), 여백, 점, 선, 간단한 도형을 활용한 구조적 배치를 1순위로 기획합니다. }}\n"
+        scene_str += f"- SVG 컴포넌트: {{FILL_S{i}_SVG: SVG 스케치 그림은 특정 단어를 강조하거나 포인트를 줄 때만 제한적(최대 1~2개)으로 사용합니다. }}\n"
 
         scenes_content_list.append(scene_str)
 
