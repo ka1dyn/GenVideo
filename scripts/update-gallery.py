@@ -162,16 +162,47 @@ def generate_gallery(svg_components: list[dict], ui_components: list[dict]) -> s
             lines.append(
                 f"  {{\n"
                 f"    label: '{c['name']}',\n"
-                f"    element: () => {{\n"
+                f"    element: (props) => {{\n"
                 f"      // eslint-disable-next-line @typescript-eslint/no-explicit-any\n"
                 f"      const Comp = {c['name']} as any;\n"
-                f"      return <Comp />;\n"
+                f"      return <Comp {{...props}} />;\n"
                 f"    }}\n"
                 f"  }},"
             )
         return lines
 
     result = GALLERY_TEMPLATE
+    
+    # Add imports and update props logic
+    result = result.replace(
+        "import { AbsoluteFill } from 'remotion';", 
+        "import { AbsoluteFill, useCurrentFrame, useVideoConfig, spring } from 'remotion';"
+    )
+    result = result.replace(
+        "element: () => React.ReactNode", 
+        "element: (props: any) => React.ReactNode"
+    )
+    
+    # Inject progress logic into ComponentGallery
+    progress_logic = """
+  const frame = useCurrentFrame();
+  const { fps } = useVideoConfig();
+  // 160프레임 주기로 반복되는 루프 (0->1->0 핑퐁)
+  const loopFrame = frame % 160;
+  const enter = spring({ frame: loopFrame - 20, fps, config: { damping: 14, stiffness: 120 } });
+  const exit = spring({ frame: loopFrame - 140, fps, config: { damping: 14, stiffness: 120 } });
+  const progress = enter - exit;
+"""
+    result = result.replace(
+        "export const ComponentGallery: React.FC = () => {",
+        "export const ComponentGallery: React.FC = () => {" + progress_logic
+    )
+    
+    result = result.replace(
+        "{element()}",
+        "{element({ progress, strikeProgress: progress, revealClaude: progress })}"
+    )
+    
     result = result.replace('__IMPORTS__', '\n'.join(imports_lines))
     result = result.replace('__SVG_ITEMS__', '\n'.join(make_items(svg_components)))
     result = result.replace('__UI_ITEMS__', '\n'.join(make_items(ui_components)))
