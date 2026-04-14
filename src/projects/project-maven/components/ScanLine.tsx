@@ -9,6 +9,8 @@ interface ScanLineProps {
   color?: string;
   opacity?: number;
   thickness?: number;
+  /** Alias for thickness to prevent AI errors */
+  strokeWidth?: number;
   /** If true, repeats the sweep */
   loop?: boolean;
 }
@@ -18,10 +20,13 @@ export const ScanLine: React.FC<ScanLineProps> = ({
   sweepDuration = 60,
   color = "#378ADD",
   opacity = 0.6,
-  thickness = 2,
+  thickness,
+  strokeWidth = 2,
   loop = false,
 }) => {
   const frame = useCurrentFrame();
+
+  const finalThickness = thickness ?? strokeWidth;
 
   const elapsed = Math.max(0, frame - startFrame);
   const progress = loop
@@ -45,7 +50,7 @@ export const ScanLine: React.FC<ScanLineProps> = ({
           top: `${yPercent}%`,
           left: 0,
           width: "100%",
-          height: thickness,
+          height: finalThickness,
           backgroundColor: color,
           opacity,
           boxShadow: `0 0 12px ${color}, 0 0 24px ${color}`,

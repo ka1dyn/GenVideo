@@ -72,7 +72,7 @@ def generate_sequences_for_section(project_id, section):
         tsx_lines.append("  return (")
         tsx_lines.append("    <AbsoluteFill>")
         tsx_lines.append("      <PaperTexture />")
-        tsx_lines.append("      {/* 핵심 텍스트와 정보 요소는 하단 150px 자막 영역에 배치하지 마세요. */}")
+        tsx_lines.append("      {/* 핵심 텍스트와 정보 요소는 하단 150px 자막 영역에 배치하지 마세요. 자막은 자동으로 삽입됩니다. */}")
         tsx_lines.append("      {/* 배경·장식·파티클은 전체 화면을 자유롭게 사용할 수 있습니다. */}")
         tsx_lines.append("      {/* 포함되는 텍스트는 고유 명사를 제외하고 전부 한국어로 작성합니다. */}")
         tsx_lines.append("      {/* `src/constants/theme.ts`에 명시된 디자인 토큰을 외에 다른 색상, 폰트를 사용하지 마세요. */}")

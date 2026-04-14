@@ -8,6 +8,8 @@ interface DrawLineProps {
   durationInFrames?: number;
   color?: string;
   thickness?: number;
+  /** Alias for thickness to prevent AI errors */
+  strokeWidth?: number;
   /** Total width of the line in pixels */
   width?: number | string;
   direction?: "ltr" | "rtl";
@@ -22,13 +24,16 @@ export const DrawLine: React.FC<DrawLineProps> = ({
   startFrame = 0,
   durationInFrames = 30,
   color = "#E8A87C",
-  thickness = 2,
+  thickness,
+  strokeWidth = 2,
   width = "100%",
   direction = "ltr",
   style,
 }) => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
+
+  const finalThickness = thickness ?? strokeWidth;
 
   const progress = spring({
     frame: Math.max(0, frame - startFrame),
@@ -42,7 +47,7 @@ export const DrawLine: React.FC<DrawLineProps> = ({
   return (
     <div
       style={{
-        height: thickness,
+        height: finalThickness,
         width,
         backgroundColor: color,
         transform: `scaleX(${scaleX})`,
