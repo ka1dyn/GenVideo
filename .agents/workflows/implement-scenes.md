@@ -78,8 +78,9 @@ description: 기획서를 바탕으로 Remotion 씬을 순차적으로 기획 �
 >
 > 프로젝트 루트, 다른 섹션 폴더, `scripts/`, `src/constants/`, `src/shared-components/` 등에 파일을 생성하거나 수정하지 마세요.
 
-- 필요한 SVG 파일을 `src/projects/{project_id}/components/svg/`에 `.tsx` 확장자로 작성하세요. **(주의: SVG 파일 내부에는 `<text>` 태그 등 글자를 직접 그리는 로직을 절대 포함하지 마세요. 모든 텍스트는 반드시 부모 씬 컴포넌트에서 기본 HTML 태그(`div`, `span` 등)와 `theme.ts`의 폰트 토큰을 사용하여 SVG 외부에 렌더링해야 합니다. SVG 컴포넌트는 순수 복잡한 그림이나 드로잉 아이콘 용도로만 제한하세요.)**
-- 만약 앞으로도 정말 많이 사용할, 광범위한 용도의 컴포넌트가 있다면(카드 레이아웃 등) 매우 신중하게 분리하여 `src/projects/{project_id}/components/ui/`에 구현하세요. 해당 씬에서만 사용한다면 내부적으로 구현하세요.
+- 필요한 SVG 파일을 `src/projects/{project_id}/components/svg/`에 `.tsx` 확장자로 작성하세요. **파일명은 반드시 `{section}_` 접두사**를 붙이세요. (예: `intro_Crosshair.tsx`, `body2_DataGrid.tsx`) **(주의: SVG 파일 내부에는 `<text>` 태그 등 글자를 직접 그리는 로직을 절대 포함하지 마세요. 모든 텍스트는 반드시 부모 씬 컴포넌트에서 기본 HTML 태그(`div`, `span` 등)와 `theme.ts`의 폰트 토큰을 사용하여 SVG 외부에 렌더링해야 합니다. SVG 컴포넌트는 순수 복잡한 그림이나 드로잉 아이콘 용도로만 제한하세요.)**
+- 만약 앞으로도 정말 많이 사용할, 광범위한 용도의 컴포넌트가 있다면(카드 레이아웃 등) 매우 신중하게 분리하여 `src/projects/{project_id}/components/ui/`에 구현하세요. **파일명은 `{section}_` 접두사 필수.** 해당 씬에서만 사용한다면 내부적으로 구현하세요.
+- **공유 컴포넌트 충돌 방지**: `components/svg/`, `components/ui/` 폴더 내 **기존 파일은 수정 금지**입니다. 신규 파일 생성만 허용됩니다. 기존 컴포넌트가 현재 씬의 요구에 맞지 않으면 수정 대신 새 컴포넌트를 만드세요.
 - **모든 props는 반드시 기본값**을 지정하여 아무 props를 지정하지 않아도 렌더링 크래시가 발생하지 않도록 방어 코드를 작성하세요.
 
 ### Step 3: 필수 검토 (task.md 작성)
