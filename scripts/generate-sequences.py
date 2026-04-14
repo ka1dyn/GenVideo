@@ -81,7 +81,8 @@ def generate_sequences_for_section(project_id, section):
         tsx_lines.append("};")
         tsx_lines.append("")
         
-        sequence_render_lines.append(f"      <Sequence from={{{start_frame}}} durationInFrames={{{duration}}}>")
+        from_prop = f"from={{{start_frame}}} " if start_frame != 0 else ""
+        sequence_render_lines.append(f"      <Sequence {from_prop}durationInFrames={{{duration}}}>")
         sequence_render_lines.append(f"        <Scene{i} />")
         sequence_render_lines.append(f"      </Sequence>")
 

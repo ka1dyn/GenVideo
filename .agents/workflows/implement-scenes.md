@@ -67,6 +67,7 @@ Remotion 구현 스킬이나 컨벤션(애니메이션, 시퀀싱, 에셋 등)�
 - Scene을 구현해 나가는 도중에 컴포넌트를 분리해야 한다면, **반드시 성격에 따라 폴더를 나누어 저장하세요.** (이 규칙은 `update-gallery.py` 스크립트가 갤러리를 구성하기 위해 엄격하게 의존합니다)
   - 순수 일러스트/도형 기하학 드로잉 SVG 컴포넌트: `src/projects/{project_id}/components/svg/`
   - 배경 패널, 컨테이너, 레이아웃 등 일반 UI 컴포넌트: `src/projects/{project_id}/components/ui/`
+- **🛡 Props 기본값 필수 (갤러리 대응)**: 분리한 컴포넌트는 `ComponentGallery`에서 속성 없이 렌더링될 수 있음을 반드시 고려하세요. `startFrame` 등 모든 props에는 구조 분해 할당 시 **반드시 안전한 기본값(예: `({ startFrame = 0 }) => ...`)**을 지정하여 `NaN`이나 렌더링 크래시가 발생하지 않도록 방어 코드를 작성하세요.
 
 ### 2-5. 직후 자체 코드 검토 (Self-Correction)
 
@@ -84,9 +85,12 @@ Remotion 구현 스킬이나 컨벤션(애니메이션, 시퀀싱, 에셋 등)�
 해당 `{section}`의 마지막 Scene 작업까지 완료되었다면, 만들어진 컴포넌트들을 한눈에 시각적으로 검증할 수 있도록 다음 스크립트를 실행합니다.
 
 // turbo
+
 ```bash
 python3 scripts/update-gallery.py {project_id}
 ```
 
-스크립트 실행이 완료되면 터미널 도구 등을 활용해 코드가 문법적 오류가 없는지, 빌드가 잘 되는지 자체 점검하세요. (필요시 `npm run lint` 수행)
-모음 작업이 완전히 끝났다면 사용자에게 작업 결과를 요약적으로 보고하고, 영상 결과물을 갤러리(`{project_id}-component-gallery`)로 직접 눈으로 검토해 달라고 요청하세요.
+스크립트 실행이 완료되면 터미널 도구 등을 활용해 코드가 문법적 오류가 없는지, 빌드가 잘 되는지 자체 점검하세요.
+
+- `export PATH=$PATH:/opt/homebrew/bin && npm run lint` 터미널 명령어 수행해서 에러가 없는지 확인
+- 모음 작업이 완전히 끝났다면 사용자에게 작업 결과를 요약적으로 보고하고, 영상 결과물을 갤러리(`{project_id}-component-gallery`)로 직접 눈으로 검토해 달라고 요청하세요.

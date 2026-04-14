@@ -26,6 +26,27 @@ __SVG_ITEMS__];
 const UI_ITEMS: Array<{ label: string; element: () => React.ReactNode }> = [
 __UI_ITEMS__];
 
+class ErrorBoundary extends React.Component<{children: React.ReactNode}, {hasError: boolean, error: Error | null}> {
+  constructor(props: {children: React.ReactNode}) {
+    super(props);
+    this.state = { hasError: false, error: null };
+  }
+  static getDerivedStateFromError(error: Error) {
+    return { hasError: true, error };
+  }
+  render() {
+    if (this.state.hasError) {
+      return (
+        <div style={{ color: '#D32F2F', textAlign: 'center', padding: 20 }}>
+          <h3 style={{ margin: '0 0 8px 0', fontSize: 16 }}>Rendering Error</h3>
+          <pre style={{ fontSize: 11, whiteSpace: 'pre-wrap', wordBreak: 'break-all', margin: 0 }}>{this.state.error?.message}</pre>
+        </div>
+      );
+    }
+    return this.props.children;
+  }
+}
+
 const CARD_H = 600;
 const LABEL_H = 36;
 
@@ -78,7 +99,9 @@ export const ComponentGallery: React.FC = () => {
                 position: 'relative',
                 overflow: 'auto',
               }}>
-                {element()}
+                <ErrorBoundary>
+                  {element()}
+                </ErrorBoundary>
               </div>
             </div>
           ))}
@@ -136,7 +159,16 @@ def generate_gallery(svg_components: list[dict], ui_components: list[dict]) -> s
     def make_items(comps):
         lines = []
         for c in comps:
-            lines.append(f"  {{ label: '{c['name']}', element: () => {{ /* @ts-ignore */ return <{c['name']} />; }} }},")
+            lines.append(
+                f"  {{\n"
+                f"    label: '{c['name']}',\n"
+                f"    element: () => {{\n"
+                f"      // eslint-disable-next-line @typescript-eslint/no-explicit-any\n"
+                f"      const Comp = {c['name']} as any;\n"
+                f"      return <Comp />;\n"
+                f"    }}\n"
+                f"  }},"
+            )
         return lines
 
     result = GALLERY_TEMPLATE

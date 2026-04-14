@@ -32,7 +32,7 @@
     "dev": "remotion studio",
     "build": "remotion bundle",
     "upgrade": "remotion upgrade",
-    "lint": "eslint src && tsc",
+    "lint": "eslint src ; tsc",
     "extract": "tsx scripts/scaffold-project.ts extract",
     "scaffold": "tsx scripts/scaffold-project.ts process"
   },
