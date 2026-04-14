@@ -2,6 +2,7 @@ import "./index.css";
 
 import React from "react";
 import { Folder, Composition, Still, staticFile } from "remotion";
+import { Aiwar } from "./projects/aiwar/aiwar";
 import { ProjectMaven } from "./projects/project-maven/project-maven";
 import { WebParadiam } from "./projects/web-paradiam/web-paradiam";
 import { Thumbnail, ThumbnailSchema } from "./projects/thumbnail/Thumbnail";
@@ -11,6 +12,15 @@ export const RemotionRoot: React.FC = () => {
   return (
     <>
       <Folder name="Projects">
+      <Composition
+        id="aiwar"
+        component={Aiwar}
+        durationInFrames={12462}
+        fps={VIDEO_FPS}
+        width={VIDEO_WIDTH}
+        height={VIDEO_HEIGHT}
+      />
+
         <Composition
           id="project-maven"
           component={ProjectMaven}

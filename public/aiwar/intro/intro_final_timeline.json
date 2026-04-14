@@ -1,0 +1,386 @@
+{
+  "totalDuration": 35023,
+  "totalFrames": 1051,
+  "sentences": [
+    {
+      "sentence": "올해 초, 미국이 이란을 공격했습니다.",
+      "startFrame": 0,
+      "words": [
+        {
+          "text": "올해",
+          "startFrame": 0,
+          "endFrame": 7
+        },
+        {
+          "text": "초,",
+          "startFrame": 7,
+          "endFrame": 11
+        },
+        {
+          "text": "미국이",
+          "startFrame": 11,
+          "endFrame": 23
+        },
+        {
+          "text": "이란을",
+          "startFrame": 23,
+          "endFrame": 33
+        },
+        {
+          "text": "공격했습니다.",
+          "startFrame": 33,
+          "endFrame": 61
+        }
+      ],
+      "endFrame": 61,
+      "durationInFrames": 61
+    },
+    {
+      "sentence": "작전 시작 첫 24시간 안에 1,000개가 넘는 표적이 타격됐는데, 사실 말이 안 되는 규모의 작전이죠.",
+      "startFrame": 61,
+      "words": [
+        {
+          "text": "작전",
+          "startFrame": 61,
+          "endFrame": 79
+        },
+        {
+          "text": "시작",
+          "startFrame": 79,
+          "endFrame": 87
+        },
+        {
+          "text": "첫",
+          "startFrame": 87,
+          "endFrame": 93
+        },
+        {
+          "text": "24시간",
+          "startFrame": 93,
+          "endFrame": 119
+        },
+        {
+          "text": "안에",
+          "startFrame": 119,
+          "endFrame": 133
+        },
+        {
+          "text": "1,000개가",
+          "startFrame": 142,
+          "endFrame": 146
+        },
+        {
+          "text": "넘는",
+          "startFrame": 146,
+          "endFrame": 155
+        },
+        {
+          "text": "표적이",
+          "startFrame": 155,
+          "endFrame": 168
+        },
+        {
+          "text": "타격됐는데,",
+          "startFrame": 168,
+          "endFrame": 194
+        },
+        {
+          "text": "사실",
+          "startFrame": 194,
+          "endFrame": 207
+        },
+        {
+          "text": "말이",
+          "startFrame": 207,
+          "endFrame": 211
+        },
+        {
+          "text": "안",
+          "startFrame": 211,
+          "endFrame": 215
+        },
+        {
+          "text": "되는",
+          "startFrame": 215,
+          "endFrame": 224
+        },
+        {
+          "text": "규모의",
+          "startFrame": 224,
+          "endFrame": 236
+        },
+        {
+          "text": "작전이죠.",
+          "startFrame": 236,
+          "endFrame": 259
+        }
+      ],
+      "endFrame": 259,
+      "durationInFrames": 198
+    },
+    {
+      "sentence": "역시나 이 작전의 중심에는 AI가 있었습니다. 그리고 그 AI 시스템 안에, 여러분이 매일 쓰는 클로드가 있었어요.",
+      "startFrame": 259,
+      "words": [
+        {
+          "text": "역시나",
+          "startFrame": 259,
+          "endFrame": 274
+        },
+        {
+          "text": "이",
+          "startFrame": 274,
+          "endFrame": 279
+        },
+        {
+          "text": "작전의",
+          "startFrame": 279,
+          "endFrame": 294
+        },
+        {
+          "text": "중심에는",
+          "startFrame": 294,
+          "endFrame": 317
+        },
+        {
+          "text": "AI가",
+          "startFrame": 317,
+          "endFrame": 330
+        },
+        {
+          "text": "있었습니다.",
+          "startFrame": 330,
+          "endFrame": 360
+        },
+        {
+          "text": "그리고",
+          "startFrame": 360,
+          "endFrame": 382
+        },
+        {
+          "text": "그",
+          "startFrame": 382,
+          "endFrame": 388
+        },
+        {
+          "text": "AI",
+          "startFrame": 388,
+          "endFrame": 393
+        },
+        {
+          "text": "시스템",
+          "startFrame": 393,
+          "endFrame": 413
+        },
+        {
+          "text": "안에,",
+          "startFrame": 413,
+          "endFrame": 429
+        },
+        {
+          "text": "여러분이",
+          "startFrame": 429,
+          "endFrame": 444
+        },
+        {
+          "text": "매일",
+          "startFrame": 444,
+          "endFrame": 451
+        },
+        {
+          "text": "쓰는",
+          "startFrame": 451,
+          "endFrame": 459
+        },
+        {
+          "text": "클로드가",
+          "startFrame": 459,
+          "endFrame": 473
+        },
+        {
+          "text": "있었어요.",
+          "startFrame": 473,
+          "endFrame": 494
+        }
+      ],
+      "endFrame": 494,
+      "durationInFrames": 235
+    },
+    {
+      "sentence": "오늘은 AI가 실제 전쟁에서 어떻게 사용되고 있는지, 어떤 위험성을 가지고 있는지 실제 사건을 통해 보여드릴게요.",
+      "startFrame": 494,
+      "words": [
+        {
+          "text": "오늘은",
+          "startFrame": 494,
+          "endFrame": 512
+        },
+        {
+          "text": "AI가",
+          "startFrame": 512,
+          "endFrame": 520
+        },
+        {
+          "text": "실제",
+          "startFrame": 520,
+          "endFrame": 531
+        },
+        {
+          "text": "전쟁에서",
+          "startFrame": 531,
+          "endFrame": 553
+        },
+        {
+          "text": "어떻게",
+          "startFrame": 553,
+          "endFrame": 570
+        },
+        {
+          "text": "사용되고",
+          "startFrame": 570,
+          "endFrame": 592
+        },
+        {
+          "text": "있는지,",
+          "startFrame": 592,
+          "endFrame": 611
+        },
+        {
+          "text": "어떤",
+          "startFrame": 611,
+          "endFrame": 626
+        },
+        {
+          "text": "위험성을",
+          "startFrame": 626,
+          "endFrame": 642
+        },
+        {
+          "text": "가지고",
+          "startFrame": 642,
+          "endFrame": 658
+        },
+        {
+          "text": "있는지",
+          "startFrame": 658,
+          "endFrame": 674
+        },
+        {
+          "text": "실제",
+          "startFrame": 674,
+          "endFrame": 688
+        },
+        {
+          "text": "사건을",
+          "startFrame": 688,
+          "endFrame": 695
+        },
+        {
+          "text": "통해",
+          "startFrame": 695,
+          "endFrame": 703
+        },
+        {
+          "text": "보여드릴게요.",
+          "startFrame": 703,
+          "endFrame": 733
+        }
+      ],
+      "endFrame": 733,
+      "durationInFrames": 239
+    },
+    {
+      "sentence": "그리고 마지막엔, GPT, GEMINI, 클로드에게 각각 전쟁 시뮬레이션을 시켰을 때 나온 충격적인 결과도 기다리고 있으니 끝까지 시청해주세요.",
+      "startFrame": 733,
+      "words": [
+        {
+          "text": "그리고",
+          "startFrame": 733,
+          "endFrame": 755
+        },
+        {
+          "text": "마지막엔,",
+          "startFrame": 755,
+          "endFrame": 783
+        },
+        {
+          "text": "GPT,",
+          "startFrame": 783,
+          "endFrame": 796
+        },
+        {
+          "text": "GEMINI,",
+          "startFrame": 796,
+          "endFrame": 827
+        },
+        {
+          "text": "클로드에게",
+          "startFrame": 827,
+          "endFrame": 851
+        },
+        {
+          "text": "각각",
+          "startFrame": 851,
+          "endFrame": 859
+        },
+        {
+          "text": "전쟁",
+          "startFrame": 859,
+          "endFrame": 870
+        },
+        {
+          "text": "시뮬레이션을",
+          "startFrame": 870,
+          "endFrame": 893
+        },
+        {
+          "text": "시켰을",
+          "startFrame": 893,
+          "endFrame": 905
+        },
+        {
+          "text": "때",
+          "startFrame": 905,
+          "endFrame": 911
+        },
+        {
+          "text": "나온",
+          "startFrame": 911,
+          "endFrame": 922
+        },
+        {
+          "text": "충격적인",
+          "startFrame": 922,
+          "endFrame": 942
+        },
+        {
+          "text": "결과도",
+          "startFrame": 942,
+          "endFrame": 957
+        },
+        {
+          "text": "기다리고",
+          "startFrame": 957,
+          "endFrame": 979
+        },
+        {
+          "text": "있으니",
+          "startFrame": 979,
+          "endFrame": 996
+        },
+        {
+          "text": "끝까지",
+          "startFrame": 996,
+          "endFrame": 1006
+        },
+        {
+          "text": "시청해주세요.",
+          "startFrame": 1006,
+          "endFrame": 1030
+        }
+      ],
+      "endFrame": 1051,
+      "durationInFrames": 318
+    }
+  ]
+}
