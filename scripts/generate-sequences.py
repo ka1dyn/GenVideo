@@ -81,12 +81,24 @@ def generate_sequences_for_section(project_id, section):
         tsx_lines.append("};")
         tsx_lines.append("")
         
-        from_prop = f"from={{{start_frame}}} " if start_frame != 0 else ""
-        sequence_render_lines.append(f"      <Sequence {from_prop}durationInFrames={{{duration}}}>")
+        next_key = f"SCENE{i+1}" if i < len(sentences) else "END"
+        from_prop = f"from={{CUTS.SCENE{i}}} " if i > 1 else "" # Optional: include from for scene 1 or omit
+        sequence_render_lines.append(f"      <Sequence from={{CUTS.SCENE{i}}} durationInFrames={{CUTS.{next_key} - CUTS.SCENE{i}}}>")
         sequence_render_lines.append(f"        <Scene{i} />")
         sequence_render_lines.append(f"      </Sequence>")
 
-    # 3. 최하단 통합 렌더링 컴포넌트 (절대 프레임 배치)
+    # 3. CUTS 상수 및 최하단 통합 렌더링 컴포넌트 생성
+    tsx_lines.append("export const CUTS = {")
+    for i, sentence in enumerate(sentences, 1):
+        s_frame = sentence.get('startFrame', 0)
+        tsx_lines.append(f"  SCENE{i}: {s_frame},")
+    if sentences:
+        last_s = sentences[-1]
+        end_f = last_s.get('startFrame', 0) + last_s.get('durationInFrames', 0)
+        tsx_lines.append(f"  END: {end_f}")
+    tsx_lines.append("};")
+    tsx_lines.append("")
+
     tsx_lines.append("export const Sequences: React.FC = () => {")
     tsx_lines.append("  return (")
     tsx_lines.append("    <AbsoluteFill>")

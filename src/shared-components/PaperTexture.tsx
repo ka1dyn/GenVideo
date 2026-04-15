@@ -3,6 +3,8 @@ import React from "react";
 interface PaperTextureProps {
   /** Texture opacity (default: 0.05) */
   opacity?: number;
+  /** Whether to adjust blending for dark mode backgrounds */
+  isDark?: boolean;
 }
 
 /**
@@ -11,9 +13,11 @@ interface PaperTextureProps {
  * Covers the FULL screen — does not respect caption safe areas.
  */
 export const PaperTexture: React.FC<PaperTextureProps> = ({
-  opacity = 0.05,
+  opacity,
+  isDark = false,
 }) => {
-  const finalOpacity = Math.min(opacity, 0.05);
+  const defaultOpacity = isDark ? 0.02 : 0.1;
+  const finalOpacity = Math.min(opacity ?? defaultOpacity, 0.1);
 
   return (
     <div
