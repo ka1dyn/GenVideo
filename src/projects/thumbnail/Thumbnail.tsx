@@ -32,6 +32,12 @@ export const ThumbnailSchema = z.object({
 
   /** 스타일 프리셋 */
   preset: z.enum(["drama", "info", "minimal"]).default("drama"),
+  /** 배경 이미지 위치 (CSS object-position 값: 'center', 'top', '0 20px' 등) */
+  imagePosition: z.string().optional(),
+  /** 배경 이미지 가로 오프셋 (px) */
+  offsetX: z.number().default(0),
+  /** 배경 이미지 세로 오프셋 (px) */
+  offsetY: z.number().default(0),
 });
 
 export type ThumbnailProps = z.infer<typeof ThumbnailSchema>;
@@ -49,6 +55,9 @@ export const Thumbnail: React.FC<ThumbnailProps> = ({
   highlightWords,
   subtitle,
   preset = "drama",
+  imagePosition,
+  offsetX = 0,
+  offsetY = 0,
 }) => {
   const p = PRESETS[preset as PresetName] ?? PRESETS.drama;
 
@@ -65,6 +74,9 @@ export const Thumbnail: React.FC<ThumbnailProps> = ({
         overlayColor={p.overlayColor}
         overlayOpacity={p.overlayOpacity}
         enableVignette={p.enableVignette}
+        imagePosition={imagePosition}
+        offsetX={offsetX}
+        offsetY={offsetY}
       />
 
       {/* ── Layer 2: 상단 뱃지 ── */}

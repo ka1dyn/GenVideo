@@ -19,6 +19,12 @@ export type BackgroundLayerProps = {
   brandTintOpacity?: number;
   /** 종이 노이즈 텍스처 투명도 (0~1) */
   paperNoiseOpacity?: number;
+  /** 배경 이미지 위치 (CSS object-position 값: 'center', 'top', '0 20px' 등) */
+  imagePosition?: string;
+  /** 자막/텍스트 영역을 고려한 가로 오프셋 (단위: px, 중앙 기준) */
+  offsetX?: number;
+  /** 자막/텍스트 영역을 고려한 세로 오프셋 (단위: px, 중앙 기준) */
+  offsetY?: number;
 };
 
 /**
@@ -36,7 +42,13 @@ export const BackgroundLayer: React.FC<BackgroundLayerProps> = ({
   brandTintColor = COLORS.SECONDARY_LIGHT,
   brandTintOpacity = 0.3,
   paperNoiseOpacity = 0.1,
+  imagePosition,
+  offsetX = 0,
+  offsetY = 0,
 }) => {
+  // 사용자가 명시적으로 imagePosition을 주지 않은 경우, offsetX/offsetY 기반으로 계산
+  const finalPosition = imagePosition ?? `calc(50% + ${offsetX}px) calc(50% + ${offsetY}px)`;
+
   return (
     <AbsoluteFill>
       {/* SVG 필터 정의 (종이 노이즈 텍스처용) */}
@@ -67,6 +79,7 @@ export const BackgroundLayer: React.FC<BackgroundLayerProps> = ({
           width: "100%",
           height: "100%",
           objectFit: "cover",
+          objectPosition: finalPosition,
         }}
       />
 

@@ -67,6 +67,8 @@ export const RemotionRoot: React.FC = () => {
             titleLine2: "표적 직접 추적한다",
             highlightWords: ["클로드 참전", "추적한다"],
             preset: "minimal" as const,
+            offsetX: 0,
+            offsetY: 100,
           }}
         />
       </Folder>
