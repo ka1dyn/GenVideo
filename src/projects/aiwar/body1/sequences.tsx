@@ -78,17 +78,7 @@ const Scene1: React.FC = () => {
             gap: SPACING.PX_16,
           }}
         >
-          프로젝트 메이븐
-          <Wobble>
-            <div
-              style={{
-                width: 16,
-                height: 16,
-                backgroundColor: COLORS.PRIMARY,
-                borderRadius: '50%',
-              }}
-            />
-          </Wobble>
+          PROJECT MAVEN
         </div>
       </div>
     </AbsoluteFill>
