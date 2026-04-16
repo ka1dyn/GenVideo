@@ -68,7 +68,7 @@ export const RemotionRoot: React.FC = () => {
             highlightWords: ["클로드 참전", "추적한다"],
             preset: "minimal" as const,
             offsetX: 0,
-            offsetY: 100,
+            offsetY: 60,
           }}
         />
       </Folder>
