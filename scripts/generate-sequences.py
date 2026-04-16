@@ -2,100 +2,84 @@ import os
 import sys
 import json
 import argparse
-import re
 
 def generate_sequences_for_section(project_id, section):
     base_dir = f"public/{project_id}/{section}"
     json_path = os.path.join(base_dir, f"{section}_final_timeline.json")
-    plan_path = os.path.join(base_dir, f"{section}_plan.md")
+    
     out_dir = f"src/projects/{project_id}/{section}"
+    scenes_dir = os.path.join(out_dir, "scenes")
     out_path = os.path.join(out_dir, "sequences.tsx")
 
     if not os.path.exists(json_path):
         print(f"Skipping {section}: {json_path} not found.")
         return
-    if not os.path.exists(plan_path):
-        print(f"Skipping {section}: {plan_path} not found.")
-        return
 
     with open(json_path, 'r', encoding='utf-8') as f:
         data = json.load(f)
 
-    with open(plan_path, 'r', encoding='utf-8') as f:
-        plan_text = f.read()
-
-    # ── 파트 분리: "### Scene 1" 등 마크다운 헤더 기준 ──
-    parts = re.split(r'(?m)^\s*#{1,4}\s*Scene\s+\d+\s*$', plan_text)
-    
-    scene_texts = parts[1:] if len(parts) > 1 else []
     sentences = data.get('sentences', [])
+    if not sentences:
+        print(f"No sentences found in {json_path}. Skipping.")
+        return
 
-    # ── Scene 수 검증 ──
-    if len(scene_texts) != len(sentences):
-        print(f"⚠️  [{section}] Scene 수 불일치: plan.md {len(scene_texts)}개 ≠ timeline.json {len(sentences)}개")
-        if len(scene_texts) < len(sentences):
-            print(f"   → 뒷쪽 {len(sentences) - len(scene_texts)}개 Scene은 기획 없이 빈 주석으로 생성됩니다.")
-    
-    os.makedirs(out_dir, exist_ok=True)
+    os.makedirs(scenes_dir, exist_ok=True)
 
-    tsx_lines = []
-    
-    # 1. 파일 헤더 (imports)
-    tsx_lines.append("import React from 'react';")
-    tsx_lines.append("import { AbsoluteFill, Sequence, useCurrentFrame, interpolate, spring, useVideoConfig } from 'remotion';")
-    tsx_lines.append("import { COLORS, EFFECTS, FONTS, SPACING, ANIMATION, Z } from '../../../constants/theme';")
-    tsx_lines.append("import { Wobble } from '../../../shared-components/Wobble';")
-    tsx_lines.append("import { DrawLine } from '../../../shared-components/DrawLine';")
-    tsx_lines.append("import { PaperTexture } from '../../../shared-components/PaperTexture';")
-    tsx_lines.append("")
-
-    # 2. Scene별 컴포넌트 자동 생성 (plan.md의 해당 씬 컨텍스트 복사 반영)
     sequence_render_lines = []
+    imports = []
+    
+    # 1. Generate SceneX.tsx files
     for i, sentence in enumerate(sentences, 1):
-        start_frame = sentence.get('startFrame', 0)
-        duration = sentence.get('durationInFrames', 0)
+        scene_tsx_path = os.path.join(scenes_dir, f"Scene{i}.tsx")
         
-        scene_text = ""
-        if i <= len(scene_texts):
-            scene_text = scene_texts[i-1].strip()
-
-        tsx_lines.append("/**")
-        tsx_lines.append(f" * [Scene {i}]")
-        for line in scene_text.split('\n'):
-            safe_line = line.replace('*/', '* /')
-            tsx_lines.append(f" * {safe_line}")
-        tsx_lines.append(" */")
-        tsx_lines.append(f"const Scene{i}: React.FC = () => {{")
-        tsx_lines.append("  const frame = useCurrentFrame();")
-        tsx_lines.append("  const { fps } = useVideoConfig();")
-        tsx_lines.append("  // TODO: 구현")
-        tsx_lines.append("  return (")
-        tsx_lines.append("    <AbsoluteFill>")
-        tsx_lines.append("      <PaperTexture />")
-        tsx_lines.append("      {/* 핵심 텍스트와 정보 요소는 하단 150px 자막 영역에 배치하지 마세요. 자막은 자동으로 삽입됩니다. */}")
-        tsx_lines.append("      {/* 배경·장식·파티클은 전체 화면을 자유롭게 사용할 수 있습니다. */}")
-        tsx_lines.append("      {/* (중요) 포함되는 텍스트는 고유 명사, 약어를 제외하고 전부 한국어로 작성합니다. */}")
-        tsx_lines.append("      {/* `src/constants/theme.ts`에 명시된 디자인 토큰을 외에 다른 색상, 폰트를 사용하지 마세요. */}")
-        tsx_lines.append("    </AbsoluteFill>")
-        tsx_lines.append("  );")
-        tsx_lines.append("};")
-        tsx_lines.append("")
+        # 뼈대 코드 생성
+        scene_lines = [
+            "import React from 'react';",
+            "import { AbsoluteFill, useCurrentFrame, interpolate, spring, useVideoConfig } from 'remotion';",
+            "import { COLORS, EFFECTS, FONTS, SPACING, ANIMATION, Z } from '../../../../constants/theme';",
+            "import { Wobble } from '../../../../shared-components/Wobble';",
+            "import { DrawLine } from '../../../../shared-components/DrawLine';",
+            "import { PaperTexture } from '../../../../shared-components/PaperTexture';",
+            "",
+            f"export const Scene{i}: React.FC = () => {{",
+            "  const frame = useCurrentFrame();",
+            "  const { fps } = useVideoConfig();",
+            "",
+            f"  // TODO: 구현 (../plans/Scene{i}.md 기획 바탕으로)",
+            "  return (",
+            "    <AbsoluteFill>",
+            "      <PaperTexture />",
+            "      {/* 여기에 요소들을 배치하세요 */}",
+            "    </AbsoluteFill>",
+            "  );",
+            "};",
+            ""
+        ]
+        with open(scene_tsx_path, 'w', encoding='utf-8') as f:
+            f.write('\n'.join(scene_lines))
+        
+        imports.append(f"import {{ Scene{i} }} from './scenes/Scene{i}';")
         
         next_key = f"SCENE{i+1}" if i < len(sentences) else "END"
-        from_prop = f"from={{CUTS.SCENE{i}}} " if i > 1 else "" # Optional: include from for scene 1 or omit
         sequence_render_lines.append(f"      <Sequence from={{CUTS.SCENE{i}}} durationInFrames={{CUTS.{next_key} - CUTS.SCENE{i}}}>")
         sequence_render_lines.append(f"        <Scene{i} />")
         sequence_render_lines.append(f"      </Sequence>")
 
-    # 3. CUTS 상수 및 최하단 통합 렌더링 컴포넌트 생성
+    # 2. Generate sequences.tsx
+    tsx_lines = []
+    tsx_lines.append("import React from 'react';")
+    tsx_lines.append("import { AbsoluteFill, Sequence } from 'remotion';")
+    tsx_lines.extend(imports)
+    tsx_lines.append("")
+
     tsx_lines.append("export const CUTS = {")
     for i, sentence in enumerate(sentences, 1):
         s_frame = sentence.get('startFrame', 0)
         tsx_lines.append(f"  SCENE{i}: {s_frame},")
-    if sentences:
-        last_s = sentences[-1]
-        end_f = last_s.get('startFrame', 0) + last_s.get('durationInFrames', 0)
-        tsx_lines.append(f"  END: {end_f}")
+    
+    last_s = sentences[-1]
+    end_f = last_s.get('startFrame', 0) + last_s.get('durationInFrames', 0)
+    tsx_lines.append(f"  END: {end_f}")
     tsx_lines.append("};")
     tsx_lines.append("")
 
@@ -110,10 +94,10 @@ def generate_sequences_for_section(project_id, section):
 
     with open(out_path, 'w', encoding='utf-8') as f:
         f.write('\n'.join(tsx_lines))
-    print(f"✅ Generated {out_path} with {len(sentences)} scenes mapped from timeline.")
+    print(f"✅ Generated {out_path} and {len(sentences)} scenes in {scenes_dir}")
 
 def main():
-    parser = argparse.ArgumentParser(description="Generate sequences.tsx skeleton mapped from plan.md and final_timeline.json")
+    parser = argparse.ArgumentParser(description="Generate scenes/SceneX.tsx skeletons and sequences.tsx mapping")
     parser.add_argument("project_id", help="The ID of the project")
     parser.add_argument("--section", help="Specific section to generate (optional)")
 

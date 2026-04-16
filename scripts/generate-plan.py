@@ -3,7 +3,7 @@ import sys
 import json
 import argparse
 
-TEMPLATE = """# {section} 애니메이션 기획서
+MAKE_PLAN_TEMPLATE = """# {section} 애니메이션 전역 기획서
 
 ## 1. 섹션 개요
 
@@ -13,13 +13,45 @@ TEMPLATE = """# {section} 애니메이션 기획서
 | 총 프레임 | {total_frames}f |
 | Scene 수  | {sentence_count} |
 
-{scenes_content}
+## 2. 디자인 페르소나 및 원칙 (필수 숙지)
+- **역할**: "뼈대는 Vercel처럼 정교하게, 질감은 펜 스케치처럼 따뜻하게." 최고 수준의 구조적 깔끔함과 미니멀리즘을 추구하면서도 친근함을 잃지 않는 수석 모션 디자이너이자 Remotion 개발자입니다.
+- **미니멀리즘과 구조적 레이아웃(정교한 뼈대와 배치)**: 뻔한 중앙 정렬이나 예술적인 기교보다는 타이포그래피, 넉넉한 여백, 정교한 Grid/Flexbox 정렬을 사용하여 세련된 정보 배치를 1순위로 두세요. 텍스트는 핵심 단어나 짧은 문구만 사용하세요.
+- **스케치 느낌의 질감(친근함, 따뜻함)**: 펜으로 그린듯한 드로잉 그림 위주로 그리며, Wobble과 같은 효과로 손그림 느낌을 살리세요.
+- **한국어 원칙**: 고유명사, 약어를 제외한 모든 단어를 한국어로 작성하세요.
+- **자막 영역 보호**: 화면 텍스트가 겹치지 않도록, 하단 150px 영역에는 핵심 요소를 배치하지 마세요.
+
+## 3. 워크플로우 가이드
+각 Scene을 작업할 때, 아래의 순서대로 진행해야 합니다:
+1. `plans/SceneX.md` 를 열어 기획을 작성합니다 (@narrative, @layout, @elements, @animation, @tokens).
+2. 작성된 기획을 바탕으로 `scenes/SceneX.tsx` 코드를 구현합니다.
+"""
+
+SCENE_PLAN_TEMPLATE = """# Scene {i} 기획서
+
+## 1. 타임라인 및 텍스트 데이터 (수정 금지)
+- 원본 텍스트: {text}
+- 타임라인: {start_frame}f 부터 시작 (총 {duration_in_frames}f 지속)
+- 단어별 등장 프레임 (Local): {word_timings_str}
+- [🔥 페르소나 리마인드]: Vercel 스타일의 미니멀한 구조 위에, 펜 스케치 질감을 '포인트'로만 제한적으로 얹습니다.
+- 비주얼 컨셉: {FILL_VISUAL}
+- SVG 컨셉: {FILL_SVG}
+
+## 2. 디자인 및 연출 기획 (이곳을 AI가 구현 전에 작성합니다)
+- [ ] @narrative: 
+- [ ] @layout: 
+- [ ] @elements: 
+- [ ] @animation: 
+- [ ] @tokens: 
 """
 
 def generate_plan_for_section(project_id, section):
-    base_dir = f"public/{project_id}/{section}"
-    json_path = os.path.join(base_dir, f"{section}_final_timeline.json")
-    out_path = os.path.join(base_dir, f"{section}_plan.md")
+    json_path = f"public/{project_id}/{section}/{section}_final_timeline.json"
+    
+    out_dir = f"src/projects/{project_id}/{section}"
+    plans_dir = os.path.join(out_dir, "plans")
+    scenes_dir = os.path.join(out_dir, "scenes")
+    
+    make_plan_path = os.path.join(out_dir, "make_video_plan.md")
 
     if not os.path.exists(json_path):
         print(f"Skipping {section}: {json_path} not found.")
@@ -28,13 +60,27 @@ def generate_plan_for_section(project_id, section):
     with open(json_path, 'r', encoding='utf-8') as f:
         data = json.load(f)
 
+    # 폴더 구조 보장
+    os.makedirs(plans_dir, exist_ok=True)
+    os.makedirs(scenes_dir, exist_ok=True)
+
     total_duration = data.get('totalDuration', 0)
     total_frames = data.get('totalFrames', 0)
     sentences = data.get('sentences', [])
     sentence_count = len(sentences)
 
-    scenes_content_list = []
-    
+    # 1. make_video_plan.md 작성
+    md_content = MAKE_PLAN_TEMPLATE.format(
+        section=section,
+        total_duration=total_duration,
+        total_frames=total_frames,
+        sentence_count=sentence_count
+    )
+    with open(make_plan_path, 'w', encoding='utf-8') as f:
+        f.write(md_content)
+    print(f"Generated {make_plan_path}")
+
+    # 2. plans/SceneX.md 작성
     for i, sentence in enumerate(sentences, 1):
         text = sentence.get('sentence', '')
         start_frame = sentence.get('startFrame', 0)
@@ -48,36 +94,28 @@ def generate_plan_for_section(project_id, section):
             word_timings.append(f'"{w_text}": {w_start_local}f')
             
         word_timings_str = "{ " + ", ".join(word_timings) + " }"
+        
+        fill_v = "정보량을 최소화하세요. 예술적인 그림 기획보다 텍스트(타이포그래피), 여백, 점, 선, 간단한 도형을 활용한 구조적 배치를 1순위로 기획합니다."
+        fill_svg = "SVG 기획 시 내부에 텍스트(라벨, 이름 등)를 절대 포함하지 마세요. SVG는 오직 순수 그림 용도로만 기획하며 필요할 때만 제한적으로(최대 0~2개) 사용하세요."
 
-        scene_str = f"### Scene {i}\n\n"
-        scene_str += f"- 원본 텍스트: {text}\n"
-        scene_str += f"- 단어 등장 프레임 (Local): {word_timings_str}\n"
-        scene_str += f"- 타임라인: {start_frame}f 부터 시작 (총 {duration_in_frames}f 지속)\n"
-        scene_str += f"- [🔥 페르소나 리마인드]: Vercel 스타일의 미니멀한 구조 위에, 펜 스케치 질감을 '포인트'로만 제한적으로 얹습니다.\n"
-        scene_str += f"- 비주얼 컨셉: {{FILL_S{i}_VISUAL: 정보량을 최소화하세요. 예술적인 그림 기획보다 텍스트(타이포그래피), 여백, 점, 선, 간단한 도형을 활용한 구조적 배치를 1순위로 기획합니다. }}\n"
-        scene_str += f"- SVG 컴포넌트: {{FILL_S{i}_SVG: SVG 기획 시 내부에 텍스트(라벨, 이름 등)를 절대 포함하지 마세요. SVG는 오직 순수 그림 용도로만 기획하며 필요할 때만 제한적으로(최대 0~2개) 사용하세요. }}\n"
+        scene_md_content = SCENE_PLAN_TEMPLATE.format(
+            i=i,
+            text=text,
+            start_frame=start_frame,
+            duration_in_frames=duration_in_frames,
+            word_timings_str=word_timings_str,
+            FILL_VISUAL=fill_v,
+            FILL_SVG=fill_svg
+        )
+        
+        scene_plan_path = os.path.join(plans_dir, f"Scene{i}.md")
+        with open(scene_plan_path, 'w', encoding='utf-8') as f:
+            f.write(scene_md_content)
 
-        scenes_content_list.append(scene_str)
-
-    scenes_content = "\n".join(scenes_content_list)
-
-    md_content = TEMPLATE.format(
-        project_id=project_id,
-        section=section,
-        total_duration=total_duration,
-        total_frames=total_frames,
-        sentence_count=sentence_count,
-        scenes_content=scenes_content
-    )
-
-    with open(out_path, 'w', encoding='utf-8') as f:
-        f.write(md_content)
-    
-    print(f"Generated {out_path}")
-
+    print(f"Generated {sentence_count} Scene plans in {plans_dir}")
 
 def main():
-    parser = argparse.ArgumentParser(description="Generate plan.md for sections")
+    parser = argparse.ArgumentParser(description="Generate make_video_plan.md and plans/SceneX.md for sections")
     parser.add_argument("project_id", help="The ID of the project")
     parser.add_argument("--section", help="Specific section to generate (optional, generates all if omitted)")
 

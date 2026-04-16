@@ -98,7 +98,7 @@ async function main() {
       );
     }
 
-    // Step 6: Automatically generate _plan.md skeletons
+    // Step 6: Automatically generate make_video_plan.md and plans/SceneX.md
     console.log("\n=== Phase 6: Generating Plan Skeletons ===");
     try {
       execSync(`python3 scripts/generate-plan.py ${projectId}`, {

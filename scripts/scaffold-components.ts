@@ -47,7 +47,7 @@ import { Sequences } from "./sequences";
  *   Audio:      staticFile('${audioStaticPath}')
  *   Timestamps: staticFile('${timestampStaticPath}')
  *
- * Plan: public/${projectId}/${meta.name}/${meta.name}_plan.md
+ * Plan: src/projects/${projectId}/${meta.name}/make_video_plan.md
  */
 export const ${compName}: React.FC = () => {
   return (
