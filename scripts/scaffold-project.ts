@@ -74,6 +74,31 @@ async function main() {
     generateComponents(projectId, sectionMetas);
 
 
+    // Step 3.5: Generate GEMINI.md rules file
+    const geminiMdPath = path.join(process.cwd(), `src/projects/${projectId}/GEMINI.md`);
+    if (!fs.existsSync(geminiMdPath)) {
+      const geminiMdContent = `# ${projectId} Project AI Guidelines
+
+## 1. Component Rules
+- ❌ DO NOT place components in a global \`components/\` folder.
+- ✅ ALWAYS place components in the specific section's folder (e.g., \`src/projects/${projectId}/intro/components/\`).
+- ❌ DO NOT separate SVG and UI components into different folders.
+- ✅ USE \`shared-components\` for globally shared generic components (like \`CaptionOverlay\`, \`Wobble\`, etc).
+
+## 2. Design Tokens (\`theme.ts\`)
+- ❌ NEVER modify \`src/constants/theme.ts\`. It is READ-ONLY.
+- ✅ STRICTLY use the design tokens exported from \`theme.ts\` (COLORS, EFFECTS, FONTS, SPACING, ANIMATION, Z).
+- ❌ DO NOT use hardcoded colors (e.g., \`#FFFFFF\`, \`rgba(0,0,0,0.5)\`).
+- ❌ DO NOT mix tokens (e.g., using \`SPACING.PX_16\` for font sizes). Use \`FONTS.SIZE_*\` for font sizes.
+
+## 3. Workflow Rules
+- Read your section's \`make_video_plan.md\` for the global narrative and layout rules.
+- Follow the plan exactly when implementing \`SceneX.tsx\`.
+`;
+      fs.writeFileSync(geminiMdPath, geminiMdContent);
+      console.log(`\n✅ Generated GEMINI.md rules file at src/projects/${projectId}/GEMINI.md`);
+    }
+
     // Step 4: Automatically generate the final timeline JSONs
     console.log("\n=== Phase 4: Generating Final Timelines ===");
     try {

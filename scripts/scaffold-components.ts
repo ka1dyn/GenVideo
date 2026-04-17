@@ -13,12 +13,7 @@ export function generateComponents(
   projectId: string,
   sectionMetas: SectionMeta[]
 ) {
-  // 1. Pre-create component directories for Gallery auto-collection
-  const componentsUiDir = path.join(process.cwd(), `src/projects/${projectId}/components/ui`);
-  const componentsSvgDir = path.join(process.cwd(), `src/projects/${projectId}/components/svg`);
-  fs.mkdirSync(componentsUiDir, { recursive: true });
-  fs.mkdirSync(componentsSvgDir, { recursive: true });
-  console.log(`\n📦 Initialized component directories: components/ui/ and components/svg/`);
+  console.log(`\n📦 Initializing component directories per section...`);
 
   for (const meta of sectionMetas) {
     console.log(`\n=== Generating Components for [${meta.name}] ===`);
@@ -26,7 +21,9 @@ export function generateComponents(
       process.cwd(),
       `src/projects/${projectId}/${meta.name}`
     );
+    const componentsDir = path.join(srcDir, "components");
     fs.mkdirSync(srcDir, { recursive: true });
+    fs.mkdirSync(componentsDir, { recursive: true });
 
     const compName = capitalize(meta.name);
     const audioStaticPath = `${projectId}/${meta.name}/${meta.name}.wav`;
