@@ -59,7 +59,7 @@ for scene_file in "${SCENE_FILES[@]}"; do
    # ── 최대 3회 재시도 ──
    SUCCESS=false
    for attempt in 1 2 3; do
-     gemini-$SECTION --yolo "/implement-scene $PROJECT_ID $SECTION $SCENE_NAME"
+     HOME=~/GeminiCLI/$SECTION gemini --yolo -p "/implement-scene $PROJECT_ID $SECTION $SCENE_NAME"
      if [ $? -eq 0 ]; then
        SUCCESS=true
        break

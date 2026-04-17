@@ -70,15 +70,18 @@ def generate_plan_for_section(project_id, section):
     sentence_count = len(sentences)
 
     # 1. make_video_plan.md 작성
-    md_content = MAKE_PLAN_TEMPLATE.format(
-        section=section,
-        total_duration=total_duration,
-        total_frames=total_frames,
-        sentence_count=sentence_count
-    )
-    with open(make_plan_path, 'w', encoding='utf-8') as f:
-        f.write(md_content)
-    print(f"Generated {make_plan_path}")
+    if os.path.exists(make_plan_path):
+        print(f"⏭️ {make_plan_path} already exists, skipping.")
+    else:
+        md_content = MAKE_PLAN_TEMPLATE.format(
+            section=section,
+            total_duration=total_duration,
+            total_frames=total_frames,
+            sentence_count=sentence_count
+        )
+        with open(make_plan_path, 'w', encoding='utf-8') as f:
+            f.write(md_content)
+        print(f"Generated {make_plan_path}")
 
     # 2. plans/SceneX.md 작성
     for i, sentence in enumerate(sentences, 1):
@@ -109,6 +112,10 @@ def generate_plan_for_section(project_id, section):
         )
         
         scene_plan_path = os.path.join(plans_dir, f"Scene{i}.md")
+        if os.path.exists(scene_plan_path):
+            print(f"   ⏭️ {scene_plan_path} already exists, skipping.")
+            continue
+
         with open(scene_plan_path, 'w', encoding='utf-8') as f:
             f.write(scene_md_content)
 

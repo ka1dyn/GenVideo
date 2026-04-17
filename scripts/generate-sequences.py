@@ -55,8 +55,11 @@ def generate_sequences_for_section(project_id, section):
             "};",
             ""
         ]
-        with open(scene_tsx_path, 'w', encoding='utf-8') as f:
-            f.write('\n'.join(scene_lines))
+        if os.path.exists(scene_tsx_path):
+            print(f"   ⏭️ {scene_tsx_path} already exists, skipping.")
+        else:
+            with open(scene_tsx_path, 'w', encoding='utf-8') as f:
+                f.write('\n'.join(scene_lines))
         
         imports.append(f"import {{ Scene{i} }} from './scenes/Scene{i}';")
         
@@ -92,9 +95,12 @@ def generate_sequences_for_section(project_id, section):
     tsx_lines.append("};")
     tsx_lines.append("")
 
-    with open(out_path, 'w', encoding='utf-8') as f:
-        f.write('\n'.join(tsx_lines))
-    print(f"✅ Generated {out_path} and {len(sentences)} scenes in {scenes_dir}")
+    if os.path.exists(out_path):
+        print(f"⏭️ {out_path} already exists, skipping.")
+    else:
+        with open(out_path, 'w', encoding='utf-8') as f:
+            f.write('\n'.join(tsx_lines))
+        print(f"✅ Generated {out_path} and {len(sentences)} scenes in {scenes_dir}")
 
 def main():
     parser = argparse.ArgumentParser(description="Generate scenes/SceneX.tsx skeletons and sequences.tsx mapping")
