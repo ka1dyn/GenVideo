@@ -1,0 +1,223 @@
+{
+  "totalDuration": 19962,
+  "totalFrames": 599,
+  "sentences": [
+    {
+      "sentence": "머릿속 복잡한 생각들을 정리하는 것만으로도 뇌의 부하가 줄어들죠.",
+      "startFrame": 0,
+      "words": [
+        {
+          "text": "머릿속",
+          "startFrame": 0,
+          "endFrame": 12
+        },
+        {
+          "text": "복잡한",
+          "startFrame": 12,
+          "endFrame": 24
+        },
+        {
+          "text": "생각들을",
+          "startFrame": 24,
+          "endFrame": 40
+        },
+        {
+          "text": "정리하는",
+          "startFrame": 40,
+          "endFrame": 56
+        },
+        {
+          "text": "것만으로도",
+          "startFrame": 56,
+          "endFrame": 80
+        },
+        {
+          "text": "뇌의",
+          "startFrame": 80,
+          "endFrame": 87
+        },
+        {
+          "text": "부하가",
+          "startFrame": 87,
+          "endFrame": 100
+        },
+        {
+          "text": "줄어들죠.",
+          "startFrame": 100,
+          "endFrame": 118
+        }
+      ],
+      "endFrame": 118,
+      "durationInFrames": 118
+    },
+    {
+      "sentence": "두 번째는 집중력을 극대화하는 '뽀모도로 타이머' 활용법이에요.",
+      "startFrame": 118,
+      "words": [
+        {
+          "text": "두",
+          "startFrame": 118,
+          "endFrame": 124
+        },
+        {
+          "text": "번째는",
+          "startFrame": 124,
+          "endFrame": 140
+        },
+        {
+          "text": "집중력을",
+          "startFrame": 140,
+          "endFrame": 162
+        },
+        {
+          "text": "극대화하는",
+          "startFrame": 162,
+          "endFrame": 189
+        },
+        {
+          "text": "'뽀모도로",
+          "startFrame": 189,
+          "endFrame": 211
+        },
+        {
+          "text": "타이머'",
+          "startFrame": 211,
+          "endFrame": 227
+        },
+        {
+          "text": "활용법이에요.",
+          "startFrame": 227,
+          "endFrame": 263
+        }
+      ],
+      "endFrame": 263,
+      "durationInFrames": 145
+    },
+    {
+      "sentence": "딱 25분만 몰입하고 5분 쉬는 규칙이 업무 속도를 두 배로 만듭니다.",
+      "startFrame": 263,
+      "words": [
+        {
+          "text": "딱",
+          "startFrame": 263,
+          "endFrame": 266
+        },
+        {
+          "text": "25분만",
+          "startFrame": 266,
+          "endFrame": 294
+        },
+        {
+          "text": "몰입하고",
+          "startFrame": 294,
+          "endFrame": 312
+        },
+        {
+          "text": "5분",
+          "startFrame": 312,
+          "endFrame": 323
+        },
+        {
+          "text": "쉬는",
+          "startFrame": 323,
+          "endFrame": 334
+        },
+        {
+          "text": "규칙이",
+          "startFrame": 334,
+          "endFrame": 350
+        },
+        {
+          "text": "업무",
+          "startFrame": 350,
+          "endFrame": 361
+        },
+        {
+          "text": "속도를",
+          "startFrame": 361,
+          "endFrame": 377
+        },
+        {
+          "text": "두",
+          "startFrame": 377,
+          "endFrame": 383
+        },
+        {
+          "text": "배로",
+          "startFrame": 383,
+          "endFrame": 395
+        },
+        {
+          "text": "만듭니다.",
+          "startFrame": 395,
+          "endFrame": 419
+        }
+      ],
+      "endFrame": 419,
+      "durationInFrames": 156
+    },
+    {
+      "sentence": "마지막 세 번째는 반복되는 단순 노동을 대신해 주는 AI 자동화 툴입니다.",
+      "startFrame": 419,
+      "words": [
+        {
+          "text": "마지막",
+          "startFrame": 419,
+          "endFrame": 436
+        },
+        {
+          "text": "세",
+          "startFrame": 436,
+          "endFrame": 455
+        },
+        {
+          "text": "번째는",
+          "startFrame": 455,
+          "endFrame": 460
+        },
+        {
+          "text": "반복되는",
+          "startFrame": 460,
+          "endFrame": 484
+        },
+        {
+          "text": "단순",
+          "startFrame": 484,
+          "endFrame": 495
+        },
+        {
+          "text": "노동을",
+          "startFrame": 495,
+          "endFrame": 512
+        },
+        {
+          "text": "대신해",
+          "startFrame": 512,
+          "endFrame": 544
+        },
+        {
+          "text": "주는",
+          "startFrame": 544,
+          "endFrame": 546
+        },
+        {
+          "text": "AI",
+          "startFrame": 546,
+          "endFrame": 548
+        },
+        {
+          "text": "자동화",
+          "startFrame": 548,
+          "endFrame": 569
+        },
+        {
+          "text": "툴입니다.",
+          "startFrame": 569,
+          "endFrame": 599
+        }
+      ],
+      "endFrame": 599,
+      "durationInFrames": 180
+    }
+  ]
+}

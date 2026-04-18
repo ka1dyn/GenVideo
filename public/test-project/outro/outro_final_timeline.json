@@ -1,0 +1,228 @@
+{
+  "totalDuration": 20743,
+  "totalFrames": 623,
+  "sentences": [
+    {
+      "sentence": "이제 귀찮은 자료 조사나 요약은 인공지능에게 맡기고 더 가치 있는 일을 하세요.",
+      "startFrame": 0,
+      "words": [
+        {
+          "text": "이제",
+          "startFrame": 0,
+          "endFrame": 14
+        },
+        {
+          "text": "귀찮은",
+          "startFrame": 14,
+          "endFrame": 29
+        },
+        {
+          "text": "자료",
+          "startFrame": 29,
+          "endFrame": 41
+        },
+        {
+          "text": "조사나",
+          "startFrame": 41,
+          "endFrame": 58
+        },
+        {
+          "text": "요약은",
+          "startFrame": 58,
+          "endFrame": 82
+        },
+        {
+          "text": "인공지능에게",
+          "startFrame": 82,
+          "endFrame": 106
+        },
+        {
+          "text": "맡기고",
+          "startFrame": 106,
+          "endFrame": 121
+        },
+        {
+          "text": "더",
+          "startFrame": 121,
+          "endFrame": 125
+        },
+        {
+          "text": "가치",
+          "startFrame": 125,
+          "endFrame": 132
+        },
+        {
+          "text": "있는",
+          "startFrame": 132,
+          "endFrame": 139
+        },
+        {
+          "text": "일을",
+          "startFrame": 139,
+          "endFrame": 146
+        },
+        {
+          "text": "하세요.",
+          "startFrame": 146,
+          "endFrame": 158
+        }
+      ],
+      "endFrame": 158,
+      "durationInFrames": 158
+    },
+    {
+      "sentence": "이 작은 변화들이 모여 당신의 하루에 2시간이라는 여유를 선물할 겁니다.",
+      "startFrame": 158,
+      "words": [
+        {
+          "text": "이",
+          "startFrame": 158,
+          "endFrame": 163
+        },
+        {
+          "text": "작은",
+          "startFrame": 163,
+          "endFrame": 171
+        },
+        {
+          "text": "변화들이",
+          "startFrame": 171,
+          "endFrame": 196
+        },
+        {
+          "text": "모여",
+          "startFrame": 196,
+          "endFrame": 201
+        },
+        {
+          "text": "당신의",
+          "startFrame": 201,
+          "endFrame": 216
+        },
+        {
+          "text": "하루에",
+          "startFrame": 216,
+          "endFrame": 231
+        },
+        {
+          "text": "2시간이라는",
+          "startFrame": 231,
+          "endFrame": 262
+        },
+        {
+          "text": "여유를",
+          "startFrame": 262,
+          "endFrame": 274
+        },
+        {
+          "text": "선물할",
+          "startFrame": 274,
+          "endFrame": 289
+        },
+        {
+          "text": "겁니다.",
+          "startFrame": 289,
+          "endFrame": 311
+        }
+      ],
+      "endFrame": 311,
+      "durationInFrames": 153
+    },
+    {
+      "sentence": "더 구체적인 활용법이 궁금하다면 고정 댓글의 링크를 확인해 보세요.",
+      "startFrame": 311,
+      "words": [
+        {
+          "text": "더",
+          "startFrame": 311,
+          "endFrame": 316
+        },
+        {
+          "text": "구체적인",
+          "startFrame": 316,
+          "endFrame": 337
+        },
+        {
+          "text": "활용법이",
+          "startFrame": 337,
+          "endFrame": 358
+        },
+        {
+          "text": "궁금하다면",
+          "startFrame": 358,
+          "endFrame": 383
+        },
+        {
+          "text": "고정",
+          "startFrame": 383,
+          "endFrame": 393
+        },
+        {
+          "text": "댓글의",
+          "startFrame": 393,
+          "endFrame": 410
+        },
+        {
+          "text": "링크를",
+          "startFrame": 410,
+          "endFrame": 423
+        },
+        {
+          "text": "확인해",
+          "startFrame": 423,
+          "endFrame": 461
+        },
+        {
+          "text": "보세요.",
+          "startFrame": 461,
+          "endFrame": 468
+        }
+      ],
+      "endFrame": 468,
+      "durationInFrames": 157
+    },
+    {
+      "sentence": "오늘 영상이 도움 되셨다면 구독과 좋아요 부탁드립니다!",
+      "startFrame": 468,
+      "words": [
+        {
+          "text": "오늘",
+          "startFrame": 468,
+          "endFrame": 472
+        },
+        {
+          "text": "영상이",
+          "startFrame": 472,
+          "endFrame": 489
+        },
+        {
+          "text": "도움",
+          "startFrame": 489,
+          "endFrame": 521
+        },
+        {
+          "text": "되셨다면",
+          "startFrame": 521,
+          "endFrame": 531
+        },
+        {
+          "text": "구독과",
+          "startFrame": 531,
+          "endFrame": 538
+        },
+        {
+          "text": "좋아요",
+          "startFrame": 538,
+          "endFrame": 554
+        },
+        {
+          "text": "부탁드립니다!",
+          "startFrame": 554,
+          "endFrame": 595
+        }
+      ],
+      "endFrame": 623,
+      "durationInFrames": 155
+    }
+  ]
+}
