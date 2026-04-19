@@ -5,22 +5,46 @@ description: Section 단위로 Remotion 씬을 순차적으로 기획 및 구현
 # /implement-section {project_id} {section}
 
 해당 섹션의 모든 Scene을 **1개씩 순차적으로** 기획→구현→QA하는 워크플로우입니다.
-이 워크플로우는 `scripts/run-section.sh`에 의해 section 단위로 1회 실행됩니다.
 
-## Phase 1: 컨텍스트 로드 (1회만 수행)
+## 프로젝트 구조
+
+```
+/src
+   /projects
+      /{project_id}
+         GEMINI.md               <--- 프로젝트에서 반드시 지켜야 할 규칙
+         /{section}
+            make_video_plan.md   <--- 해당 섹션 개요, 작업 워크플로우
+            Sequences.tsx        <--- 오디오, 자막 설정(미리 생성됨. 수정 금지)
+            sequences.tsx        <--- Scene들을 순서대로 배치 및 시간 설정(미리 생성됨. 수정 금지)
+            /plans
+               /Scene{N}.md      <--- 해당 섹션에 포함된 각 Scene의 기획 파일
+            /scenes
+               /Scene{N}.tsx     <--- 해당 섹션에 포함된 각 Scene의 구현 파일
+            /components          <--- 해당 섹션에서 사용되는 전용 컴포넌트(svg 파일, UI 컴포넌트)
+   /shared-components            <--- 프로젝트 전체가 공유하는 컴포넌트(수정 불가)
+   /constants                    <--- 프로젝트 전체가 공유하는 상수, 테마 등
+      theme.ts                   <--- 테마 상수, 색상, 폰트 정보 (수정 불가)
+```
+
+## 워크플로우 실행 순서
+
+### Phase 1: 컨텍스트 로드 (1회만 수행)
 
 아래 파일들을 순서대로 읽고 숙지하세요. 이후 Phase에서 반복하여 읽을 필요는 없습니다.
 
-1. **Remotion 지식**: `.agents/skills/remotion-best-practices/SKILL.md`를 읽습니다.
-2. **프로젝트 가이드라인**: `src/projects/{project_id}/GEMINI.md`를 읽습니다.
-3. **섹션 기획서**: `src/projects/{project_id}/{section}/make_video_plan.md`를 읽고 디자인 페르소나, 전체 흐름을 숙지합니다.
-4. **Scene 목록 파악**: `src/projects/{project_id}/{section}/plans/` 디렉토리를 스캔하여 Scene 수와 순서를 확인합니다.
+1. **Remotion 지식(필독)**
+   - 파일 열기 도구(`view_file`)를 사용해 **`.agents/skills/remotion-best-practices/SKILL.md`** 파일을 반드시 1회 미리 읽습니다.
+2. **대본 맥락 파악**
+   - `public/{project_id}/{section}/{section}.txt`(해당 섹션 원본 대본) 파일을 꼼꼼히 읽고, 해당 섹션의 전반적인 분위기와 대본의 맥락을 완벽히 파악하세요.
+3. **프로젝트 절대규칙**: `src/projects/{project_id}/GEMINI.md`를 읽습니다.
+4. **섹션 기획서**: `src/projects/{project_id}/{section}/make_video_plan.md`를 읽고 디자인 페르소나, 전체 흐름을 숙지합니다.
 
 ---
 
 ## Phase 2: Scene 단위 반복 (Scene1 → Scene2 → ... → SceneN)
 
-`plans/` 디렉토리의 Scene을 번호 순서대로 **1개씩** 아래 3 Step을 수행합니다.
+`plans/` 디렉토리의 Scene을 번호 순서대로 **1개씩** 아래 3 Step을 수행합니다. 모든 Scene의 구현이 끝날 때 까지 기획 -> 구현 -> QA 를 반복합니다. 사용자에게 따로 요청하지 않고 전부 진행합니다.
 
 > [!CAUTION]
 > **물리적 순서 엄수**
@@ -31,10 +55,9 @@ description: Section 단위로 Remotion 씬을 순차적으로 기획 및 구현
 ### Step A: 기획 작성
 
 1. `plans/SceneX.md`를 엽니다.
-2. Scene1이 아니라면, 직전 Scene 기획서(`plans/Scene{X-1}.md`)를 참고하여 연출 흐름의 연속성을 확보하세요.
-3. Section 2의 빈칸(@narrative, @layout, @elements, @animation, @tokens)을 **구체적으로** 채워 저장합니다.
-   - 각 항목에 1줄 이상 서술. 빈 값, "추후 결정" 등 모호한 기술은 금지입니다.
-4. 이 Step에서는 `plans/SceneX.md`**만** 수정합니다. 코드 파일은 손대지 마세요.
+2. 기획 맥락을 파악하고, 구현 기획을 **구체적으로** 채워 저장합니다. 절대로
+   - 각 항목에 빈 값, "추후 결정" 등 모호한 기술은 금지입니다.
+3. 이 Step에서는 `plans/SceneX.md`**만** 수정합니다. 코드 파일은 손대지 마세요.
 
 ### Step B: 코드 구현
 
@@ -50,10 +73,7 @@ description: Section 단위로 Remotion 씬을 순차적으로 기획 및 구현
 >
 > 프로젝트 루트, 다른 섹션, `scripts/`, `src/constants/`, `src/shared-components/` 등에 파일을 생성하거나 수정하지 마세요.
 
-- 필요시 `{section}/components/`에 SVG/UI 컴포넌트를 생성하세요.
 - **기존 컴포넌트 파일은 수정 금지** (신규 생성만 허용).
-- SVG 내부에 `<text>` 태그 등 글자를 직접 그리지 마세요. 텍스트는 부모 Scene에서 HTML + theme.ts 토큰으로 렌더링합니다.
-- **모든 props에 기본값을 지정**하여 크래시를 방어하세요.
 
 ### Step C: 구현 후 QA
 
@@ -72,10 +92,10 @@ description: Section 단위로 Remotion 씬을 순차적으로 기획 및 구현
 // turbo
 
 ```bash
-export PATH=$PATH:/opt/homebrew/bin && npm run lint
+export PATH=$PATH:/opt/homebrew/bin && npx eslint src/projects/{project_id}/{section}
 ```
 
-다른 프로젝트에서 발생한 에러는 수정하지 않습니다. 현재 프로젝트 내의 에러만 수정하세요.
+다른 프로젝트에서 발생한 에러는 신경쓰지 않고, 현재 섹션의 코드에서 발생한 린트 에러만 확인하여 수정하세요.
 
 // turbo
 

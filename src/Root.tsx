@@ -2,17 +2,27 @@ import "./index.css";
 
 import React from "react";
 import { Folder, Composition, Still, staticFile } from "remotion";
+import { TestProject } from "./projects/test-project/test-project";
 import { Aiwar } from "./projects/aiwar/aiwar";
 import { ProjectMaven } from "./projects/project-maven/project-maven";
 import { WebParadiam } from "./projects/web-paradiam/web-paradiam";
 import { Thumbnail, ThumbnailSchema } from "./projects/thumbnail/Thumbnail";
 
 import { VIDEO_FPS, VIDEO_WIDTH, VIDEO_HEIGHT } from "./constants/video-config";
-import { ComponentGallery } from './projects/aiwar/components/ComponentGallery';
+import { ComponentGallery } from './projects/test-project/components/ComponentGallery';
 export const RemotionRoot: React.FC = () => {
   return (
     <>
       <Folder name="Projects">
+      <Composition
+        id="test-project"
+        component={TestProject}
+        durationInFrames={1797}
+        fps={VIDEO_FPS}
+        width={VIDEO_WIDTH}
+        height={VIDEO_HEIGHT}
+      />
+
       <Composition
         id="aiwar"
         component={Aiwar}
@@ -41,7 +51,7 @@ export const RemotionRoot: React.FC = () => {
           height={VIDEO_HEIGHT}
         />
         <Composition
-          id="aiwar-component-gallery"
+          id="test-project-component-gallery"
           component={ComponentGallery}
           width={1920}
           height={1080}

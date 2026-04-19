@@ -96,7 +96,15 @@ def generate_sequences_for_section(project_id, section):
     tsx_lines.append("")
 
     if os.path.exists(out_path):
-        print(f"⏭️ {out_path} already exists, skipping.")
+        with open(out_path, 'r', encoding='utf-8') as f:
+            existing_content = f.read()
+        if 'CUTS' in existing_content:
+            print(f"⏭️ {out_path} already exists with CUTS, skipping.")
+        else:
+            print(f"♻️  {out_path} is a placeholder, overwriting with CUTS version.")
+            with open(out_path, 'w', encoding='utf-8') as f:
+                f.write('\n'.join(tsx_lines))
+            print(f"✅ Regenerated {out_path} with {len(sentences)} scene imports")
     else:
         with open(out_path, 'w', encoding='utf-8') as f:
             f.write('\n'.join(tsx_lines))

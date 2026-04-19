@@ -21,6 +21,7 @@ import React from 'react';
 import { AbsoluteFill, useCurrentFrame, useVideoConfig, spring } from 'remotion';
 __IMPORTS__
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const SECTIONS: Record<string, Array<{ label: string; element: (props: any) => React.ReactNode }>> = {
 __SECTION_DATA__
 };
@@ -58,6 +59,7 @@ export const ComponentGallery: React.FC = () => {
   const exit = spring({ frame: loopFrame - 140, fps, config: { damping: 14, stiffness: 120 } });
   const progress = enter - exit;
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const renderGrid = (title: string, items: Array<{ label: string; element: (props: any) => React.ReactNode }>) => (
     <div style={{ padding: '40px' }} key={title}>
       <h2 style={{ fontFamily: 'sans-serif', fontSize: 32, marginBottom: 20 }}>{title} ({items.length})</h2>
