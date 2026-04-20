@@ -20,11 +20,12 @@ MAKE_PLAN_TEMPLATE = """# {section} 전역 기획서
 - **핵심**: 단어별 타이밍(word_timings)을 적극 활용하여, 핵심 단어가 나올 때 관련 요소가 등장하도록 연출
 - 색상·폰트·크기·여백은 **반드시** 아래 토큰 레퍼런스에서만 사용. 하드코딩 절대 금지
 - 폰트 크기 48px(SIZE_MD) **미만 금지** (영상이므로 모바일 가독성 필수)
-- 고유명사·약어 외 모든 텍스트 **한국어**
+- 화면에 표시되는 모든 텍스트는 **한국어 필수**. 영어 라벨(REPORT, ENV, ACT, PERCEPTION 등) 절대 금지. 고유명사(Mythos, AI 등)만 영어 허용
 - 시스템 이모지(✅ 💡 등) **금지**
 - 자막은 자동 삽입됨. 대본 전문을 화면에 그대로 쓰지 말 것
 - 정보량 최소화. 핵심 요소 소수(1~3개)만 배치
 - 배경은 단색 기본. 강조 시에만 패턴/그라데이션 제한 사용
+- dark 배경(BG_DARK, BG_DARKEST) 사용 시: 텍스트는 TEXT_ON_DARK 위주, PRIMARY 색상은 밑줄·바 등 **작은 포인트에만** 절제 사용
 - 화면 요소는 **하단 150px 자막 영역에 절대 배치 금지**
 
 ### 절대 금지 패턴 (이런 코드를 작성하지 마세요)
@@ -33,6 +34,7 @@ MAKE_PLAN_TEMPLATE = """# {section} 전역 기획서
 - ❌ 네트워크/노드 다이어그램 (대본을 직역한 클리셰)
 - ❌ 3개 이상의 동시 애니메이션
 - ❌ 복잡한 SVG 일러스트레이션 (단순 도형만 사용)
+- ❌ rgba()로 그림자 직접 작성. 반드시 `EFFECTS.SHADOW_*` 토큰 사용
 
 ## 3. 토큰 레퍼런스 (이 목록에 없는 토큰 사용 금지)
 
@@ -53,6 +55,7 @@ MAKE_PLAN_TEMPLATE = """# {section} 전역 기획서
 ### EFFECTS
 틴트: TINT_WARM | TINT_PRIMARY | TINT_SECONDARY | TINT_DARK | TINT_WHITE
 그림자: SHADOW_SM | SHADOW_MD | SHADOW_LG | SHADOW_PRIMARY | SHADOW_SECONDARY
+→ 사용: `boxShadow: EFFECTS.SHADOW_MD`, `filter: \`drop-shadow(\${{EFFECTS.SHADOW_SM}})\``
 
 ### SPACING (여백·크기에만 사용, fontSize 금지)
 PX: 4 | 8 | 12 | 16 | 24 | 32 | 40 | 48 | 64 | 80 | 96 | 120
@@ -69,25 +72,30 @@ BG(0) | CONTENT(10) | OVERLAY(20) | UI(30) | CAPTION(40) | TOP(50)
 ## 4. 레이아웃 카탈로그 (SceneX.md에서 A~D로 선택)
 
 - **A: 중앙 집중** — 대형 텍스트 또는 핵심 요소 1개가 화면 중앙. 전체 씬의 30% 이하
-- **B: 좌우 분할** — 한쪽에 텍스트, 다른 쪽에 비주얼. 가장 범용적
+- **B: 좌우 분할** — `flex: 1` + `flex: 1` 대칭 배치. 좌우 padding 동일. 가장 범용적
 - **C: 카드 배치** — 2~3개 카드가 정렬. 비교·나열에 적합
 - **D: 풀스크린 이미지** — 이미지 전체화면 + 오버레이 텍스트
 
 ⚠️ 연속 2개 이상 같은 레이아웃 사용 금지. 반드시 교차 배치.
 
-## 5. 애니메이션 카탈로그 (SceneX.md에서 번호로 선택)
+## 5. 애니메이션 카탈로그 → 공유 컴포넌트 매핑
 
-모든 애니메이션은 **부드럽고 절제된** 움직임만 사용합니다.
+기획에서는 번호로 지정, 구현에서는 대응하는 공유 컴포넌트를 import하여 사용합니다.
+컴포넌트 상세 Props는 `shared-components/COMPONENTS.md` 참조.
 
-- **①fadeIn**: opacity 0→1 + translateY 약간 이동. spring(SPRING_GENTLE). **기본값**
-- **②scaleIn**: scale 0.92→1. spring(SPRING_GENTLE). 카드·이미지 등장에 적합
-- **③typing**: 글자 순차 등장. interpolate로 charCount 증가. 짧은 텍스트만
-- **④stagger**: 여러 요소가 순서대로 ①fadeIn. delay = index × STAGGER_MD
-- **⑤draw**: SVG strokeDashoffset로 선이 그려지는 효과. 단순 도형만
-- **⑥wipe**: 가로 마스크로 요소 등장/퇴장
-- **⑦counter**: 숫자 카운트업/다운. interpolate로 수치 변화
+- **①fadeIn** = `<Appear delay={{프레임}}>` — 기본값 fadeUp. **가장 자주 사용**
+- **②scaleIn** = `<Appear delay={{프레임}} type="scale">` — 핵심 강조 요소
+- **③typing** = `<TypeWriter text="..." startFrame={{프레임}}>` — 글자 순차 등장
+- **④stagger** = `<StepList items={{[...]}} startFrame={{프레임}}>` — 순차 목록
+- **⑤draw** = `<UnderLine startFrame={{프레임}}>` — 밑줄/선 그리기
+- **⑥wipe** = `<Appear delay={{프레임}} type="wipe">` — 마스크 등장
+- **⑦counter** = `<Counter to={{숫자}} startFrame={{프레임}}>` — 숫자 카운트
 
-⚠️ 한 Scene에 최대 2종류. 과도한 움직임 금지.
+추가 사용 가능: `<Card>`, `<QuoteCard>`, `<ProgressBar>`
+
+Appear 타입 사용 빈도: fadeUp(60%) > scale(15%) > fadeLeft/fadeRight(15%) > blur/wipe/fade/fadeDown(10%)
+
+⚠️ 한 Scene에 애니메이션 최대 2종류. 과도한 움직임 금지.
 
 ## 6. 이미지 활용 카탈로그 (이미지가 있는 Scene에서 선택)
 
