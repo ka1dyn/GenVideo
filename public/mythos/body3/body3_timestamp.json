@@ -1,0 +1,357 @@
+[
+  {
+    "text": "그렇다면",
+    "startFrame": 9,
+    "endFrame": 18
+  },
+  {
+    "text": "얼마나",
+    "startFrame": 18,
+    "endFrame": 32
+  },
+  {
+    "text": "능력이",
+    "startFrame": 32,
+    "endFrame": 45
+  },
+  {
+    "text": "뛰어나길래",
+    "startFrame": 45,
+    "endFrame": 69
+  },
+  {
+    "text": "위험하다고",
+    "startFrame": 69,
+    "endFrame": 84
+  },
+  {
+    "text": "판단했을까요?",
+    "startFrame": 84,
+    "endFrame": 108
+  },
+  {
+    "text": "세상에는",
+    "startFrame": 108,
+    "endFrame": 131
+  },
+  {
+    "text": "제로데이",
+    "startFrame": 131,
+    "endFrame": 155
+  },
+  {
+    "text": "취약점이라는",
+    "startFrame": 155,
+    "endFrame": 189
+  },
+  {
+    "text": "게",
+    "startFrame": 189,
+    "endFrame": 195
+  },
+  {
+    "text": "있습니다.",
+    "startFrame": 195,
+    "endFrame": 220
+  },
+  {
+    "text": "아직",
+    "startFrame": 220,
+    "endFrame": 230
+  },
+  {
+    "text": "공개되지",
+    "startFrame": 230,
+    "endFrame": 252
+  },
+  {
+    "text": "않은",
+    "startFrame": 252,
+    "endFrame": 263
+  },
+  {
+    "text": "아무도",
+    "startFrame": 263,
+    "endFrame": 279
+  },
+  {
+    "text": "모르는",
+    "startFrame": 279,
+    "endFrame": 296
+  },
+  {
+    "text": "보안",
+    "startFrame": 296,
+    "endFrame": 306
+  },
+  {
+    "text": "허점인데요.",
+    "startFrame": 306,
+    "endFrame": 339
+  },
+  {
+    "text": "미토스는",
+    "startFrame": 339,
+    "endFrame": 361
+  },
+  {
+    "text": "이런",
+    "startFrame": 361,
+    "endFrame": 372
+  },
+  {
+    "text": "취약점을",
+    "startFrame": 372,
+    "endFrame": 393
+  },
+  {
+    "text": "대량으로",
+    "startFrame": 393,
+    "endFrame": 415
+  },
+  {
+    "text": "찾아내고",
+    "startFrame": 415,
+    "endFrame": 439
+  },
+  {
+    "text": "공격할",
+    "startFrame": 439,
+    "endFrame": 449
+  },
+  {
+    "text": "수",
+    "startFrame": 449,
+    "endFrame": 453
+  },
+  {
+    "text": "있을",
+    "startFrame": 453,
+    "endFrame": 461
+  },
+  {
+    "text": "정도의",
+    "startFrame": 461,
+    "endFrame": 471
+  },
+  {
+    "text": "뛰어난",
+    "startFrame": 471,
+    "endFrame": 481
+  },
+  {
+    "text": "모습을",
+    "startFrame": 481,
+    "endFrame": 491
+  },
+  {
+    "text": "보였습니다.",
+    "startFrame": 491,
+    "endFrame": 515
+  },
+  {
+    "text": "대표적인",
+    "startFrame": 515,
+    "endFrame": 547
+  },
+  {
+    "text": "사례가",
+    "startFrame": 547,
+    "endFrame": 559
+  },
+  {
+    "text": "있는데",
+    "startFrame": 559,
+    "endFrame": 578
+  },
+  {
+    "text": "보안이",
+    "startFrame": 578,
+    "endFrame": 597
+  },
+  {
+    "text": "뛰어나다고",
+    "startFrame": 597,
+    "endFrame": 616
+  },
+  {
+    "text": "알려진",
+    "startFrame": 616,
+    "endFrame": 630
+  },
+  {
+    "text": "한",
+    "startFrame": 630,
+    "endFrame": 635
+  },
+  {
+    "text": "운영체제에서",
+    "startFrame": 635,
+    "endFrame": 665
+  },
+  {
+    "text": "27년간",
+    "startFrame": 665,
+    "endFrame": 685
+  },
+  {
+    "text": "아무도",
+    "startFrame": 685,
+    "endFrame": 694
+  },
+  {
+    "text": "발견하지",
+    "startFrame": 694,
+    "endFrame": 711
+  },
+  {
+    "text": "못했던",
+    "startFrame": 711,
+    "endFrame": 723
+  },
+  {
+    "text": "버그를",
+    "startFrame": 723,
+    "endFrame": 738
+  },
+  {
+    "text": "하루",
+    "startFrame": 738,
+    "endFrame": 744
+  },
+  {
+    "text": "만에",
+    "startFrame": 744,
+    "endFrame": 753
+  },
+  {
+    "text": "찾아냈습니다.",
+    "startFrame": 753,
+    "endFrame": 784
+  },
+  {
+    "text": "즉",
+    "startFrame": 803,
+    "endFrame": 811
+  },
+  {
+    "text": "비전문가도",
+    "startFrame": 811,
+    "endFrame": 828
+  },
+  {
+    "text": "딸깍",
+    "startFrame": 828,
+    "endFrame": 836
+  },
+  {
+    "text": "한",
+    "startFrame": 836,
+    "endFrame": 844
+  },
+  {
+    "text": "번으로",
+    "startFrame": 844,
+    "endFrame": 853
+  },
+  {
+    "text": "시스템을",
+    "startFrame": 853,
+    "endFrame": 869
+  },
+  {
+    "text": "해킹할",
+    "startFrame": 869,
+    "endFrame": 882
+  },
+  {
+    "text": "수",
+    "startFrame": 882,
+    "endFrame": 885
+  },
+  {
+    "text": "있는",
+    "startFrame": 885,
+    "endFrame": 894
+  },
+  {
+    "text": "능력을",
+    "startFrame": 894,
+    "endFrame": 906
+  },
+  {
+    "text": "갖게",
+    "startFrame": 906,
+    "endFrame": 914
+  },
+  {
+    "text": "된다는",
+    "startFrame": 914,
+    "endFrame": 928
+  },
+  {
+    "text": "거예요.",
+    "startFrame": 928,
+    "endFrame": 948
+  },
+  {
+    "text": "이런",
+    "startFrame": 948,
+    "endFrame": 958
+  },
+  {
+    "text": "AI를",
+    "startFrame": 958,
+    "endFrame": 968
+  },
+  {
+    "text": "세상에",
+    "startFrame": 968,
+    "endFrame": 981
+  },
+  {
+    "text": "공개한다면",
+    "startFrame": 981,
+    "endFrame": 1005
+  },
+  {
+    "text": "전",
+    "startFrame": 1005,
+    "endFrame": 1010
+  },
+  {
+    "text": "세계의",
+    "startFrame": 1010,
+    "endFrame": 1025
+  },
+  {
+    "text": "시스템이",
+    "startFrame": 1025,
+    "endFrame": 1045
+  },
+  {
+    "text": "공격받게",
+    "startFrame": 1045,
+    "endFrame": 1064
+  },
+  {
+    "text": "될",
+    "startFrame": 1064,
+    "endFrame": 1069
+  },
+  {
+    "text": "가능성이",
+    "startFrame": 1069,
+    "endFrame": 1089
+  },
+  {
+    "text": "있는",
+    "startFrame": 1089,
+    "endFrame": 1099
+  },
+  {
+    "text": "거죠.",
+    "startFrame": 1099,
+    "endFrame": 1120
+  }
+]

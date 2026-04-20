@@ -1,0 +1,286 @@
+{
+  "totalDuration": 27500,
+  "totalFrames": 825,
+  "sentences": [
+    {
+      "sentence": "2026년 3월 26일, Anthropic의 내부 문서가 유출되었는데, 거기엔 이렇게 적혀있었습니다.",
+      "startFrame": 0,
+      "words": [
+        {
+          "text": "2026년",
+          "startFrame": 0,
+          "endFrame": 32
+        },
+        {
+          "text": "3월",
+          "startFrame": 32,
+          "endFrame": 45
+        },
+        {
+          "text": "26일,",
+          "startFrame": 45,
+          "endFrame": 69
+        },
+        {
+          "text": "Anthropic의",
+          "startFrame": 69,
+          "endFrame": 89
+        },
+        {
+          "text": "내부",
+          "startFrame": 89,
+          "endFrame": 98
+        },
+        {
+          "text": "문서가",
+          "startFrame": 98,
+          "endFrame": 113
+        },
+        {
+          "text": "유출되었는데,",
+          "startFrame": 113,
+          "endFrame": 150
+        },
+        {
+          "text": "거기엔",
+          "startFrame": 150,
+          "endFrame": 159
+        },
+        {
+          "text": "이렇게",
+          "startFrame": 159,
+          "endFrame": 174
+        },
+        {
+          "text": "적혀있었습니다.",
+          "startFrame": 174,
+          "endFrame": 203
+        }
+      ],
+      "endFrame": 203,
+      "durationInFrames": 203
+    },
+    {
+      "sentence": "\"역대 어떤 AI보다 사이버 능력이 압도적으로 앞선다.\"",
+      "startFrame": 203,
+      "words": [
+        {
+          "text": "\"역대",
+          "startFrame": 203,
+          "endFrame": 217
+        },
+        {
+          "text": "어떤",
+          "startFrame": 217,
+          "endFrame": 226
+        },
+        {
+          "text": "AI보다",
+          "startFrame": 226,
+          "endFrame": 242
+        },
+        {
+          "text": "사이버",
+          "startFrame": 242,
+          "endFrame": 258
+        },
+        {
+          "text": "능력이",
+          "startFrame": 258,
+          "endFrame": 275
+        },
+        {
+          "text": "압도적으로",
+          "startFrame": 275,
+          "endFrame": 304
+        },
+        {
+          "text": "앞선다.\"",
+          "startFrame": 304,
+          "endFrame": 324
+        }
+      ],
+      "endFrame": 324,
+      "durationInFrames": 121
+    },
+    {
+      "sentence": "Mythos에 대한 정보가 세상에 공개되고 사이버보안 관련 주가는 전부 폭락했습니다.",
+      "startFrame": 324,
+      "words": [
+        {
+          "text": "Mythos에",
+          "startFrame": 324,
+          "endFrame": 343
+        },
+        {
+          "text": "대한",
+          "startFrame": 343,
+          "endFrame": 349
+        },
+        {
+          "text": "정보가",
+          "startFrame": 349,
+          "endFrame": 362
+        },
+        {
+          "text": "세상에",
+          "startFrame": 362,
+          "endFrame": 374
+        },
+        {
+          "text": "공개되고",
+          "startFrame": 374,
+          "endFrame": 391
+        },
+        {
+          "text": "사이버보안",
+          "startFrame": 391,
+          "endFrame": 404
+        },
+        {
+          "text": "관련",
+          "startFrame": 404,
+          "endFrame": 420
+        },
+        {
+          "text": "주가는",
+          "startFrame": 420,
+          "endFrame": 433
+        },
+        {
+          "text": "전부",
+          "startFrame": 433,
+          "endFrame": 441
+        },
+        {
+          "text": "폭락했습니다.",
+          "startFrame": 441,
+          "endFrame": 470
+        }
+      ],
+      "endFrame": 470,
+      "durationInFrames": 146
+    },
+    {
+      "sentence": "대체 어느 정도의 성능을 가졌길래 전 세계가 충격에 빠졌을까요?",
+      "startFrame": 470,
+      "words": [
+        {
+          "text": "대체",
+          "startFrame": 470,
+          "endFrame": 486
+        },
+        {
+          "text": "어느",
+          "startFrame": 486,
+          "endFrame": 487
+        },
+        {
+          "text": "정도의",
+          "startFrame": 487,
+          "endFrame": 499
+        },
+        {
+          "text": "성능을",
+          "startFrame": 499,
+          "endFrame": 511
+        },
+        {
+          "text": "가졌길래",
+          "startFrame": 511,
+          "endFrame": 528
+        },
+        {
+          "text": "전",
+          "startFrame": 528,
+          "endFrame": 532
+        },
+        {
+          "text": "세계가",
+          "startFrame": 532,
+          "endFrame": 543
+        },
+        {
+          "text": "충격에",
+          "startFrame": 543,
+          "endFrame": 557
+        },
+        {
+          "text": "빠졌을까요?",
+          "startFrame": 557,
+          "endFrame": 583
+        }
+      ],
+      "endFrame": 583,
+      "durationInFrames": 113
+    },
+    {
+      "sentence": "AI 탈출사건, 테스트 점수 조작, opus4.7의 성능을 낮춰야만 했던 이유까지 전부 파헤쳐보겠습니다.",
+      "startFrame": 583,
+      "words": [
+        {
+          "text": "AI",
+          "startFrame": 583,
+          "endFrame": 587
+        },
+        {
+          "text": "탈출사건,",
+          "startFrame": 587,
+          "endFrame": 598
+        },
+        {
+          "text": "테스트",
+          "startFrame": 598,
+          "endFrame": 630
+        },
+        {
+          "text": "점수",
+          "startFrame": 630,
+          "endFrame": 642
+        },
+        {
+          "text": "조작,",
+          "startFrame": 642,
+          "endFrame": 656
+        },
+        {
+          "text": "opus4.7의",
+          "startFrame": 674,
+          "endFrame": 699
+        },
+        {
+          "text": "성능을",
+          "startFrame": 699,
+          "endFrame": 713
+        },
+        {
+          "text": "낮춰야만",
+          "startFrame": 713,
+          "endFrame": 735
+        },
+        {
+          "text": "했던",
+          "startFrame": 735,
+          "endFrame": 747
+        },
+        {
+          "text": "이유까지",
+          "startFrame": 747,
+          "endFrame": 775
+        },
+        {
+          "text": "전부",
+          "startFrame": 775,
+          "endFrame": 785
+        },
+        {
+          "text": "파헤쳐보겠습니다.",
+          "startFrame": 785,
+          "endFrame": 800
+        }
+      ],
+      "endFrame": 825,
+      "durationInFrames": 242
+    }
+  ]
+}

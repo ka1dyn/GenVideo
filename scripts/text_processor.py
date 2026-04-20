@@ -132,6 +132,9 @@ def eng2txt(text):
         "GPS": "지피에스",
         "USA": "유에스에이",
         "GEMINI": "제미나이",
+        "ANTHROPIC": "앤트로픽",
+        "MYTHOS": "미토스",
+        "OPUS": "오푸스",
     }
     if text.upper() in acronyms:
         return acronyms[text.upper()]

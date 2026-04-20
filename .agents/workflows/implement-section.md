@@ -9,6 +9,13 @@ description: Section 단위로 Remotion 씬을 순차적으로 기획 및 구현
 ## 프로젝트 구조
 
 ```
+/public
+   /{project_id}
+      /{section}
+         /images                 <--- 해당 섹션에서 사용할 이미지 에셋 파일
+            image.png
+            image.jpg
+            ...
 /src
    /projects
       /{project_id}
@@ -35,6 +42,7 @@ description: Section 단위로 Remotion 씬을 순차적으로 기획 및 구현
 
 1. **Remotion 지식(필독)**
    - 파일 열기 도구(`view_file`)를 사용해 **`.agents/skills/remotion-best-practices/SKILL.md`** 파일을 반드시 1회 미리 읽습니다.
+   - 추가로 **`rules/animations.md`** 와 **`rules/timing.md`** 를 반드시 읽으세요.
 2. **대본 맥락 파악**
    - `public/{project_id}/{section}/{section}.txt`(해당 섹션 원본 대본) 파일을 꼼꼼히 읽고, 해당 섹션의 전반적인 분위기와 대본의 맥락을 완벽히 파악하세요.
 3. **프로젝트 절대규칙**: `src/projects/{project_id}/GEMINI.md`를 읽습니다.
@@ -55,8 +63,8 @@ description: Section 단위로 Remotion 씬을 순차적으로 기획 및 구현
 ### Step A: 기획 작성
 
 1. `plans/SceneX.md`를 엽니다.
-2. 기획 맥락을 파악하고, 구현 기획을 **구체적으로** 채워 저장합니다. 절대로
-   - 각 항목에 빈 값, "추후 결정" 등 모호한 기술은 금지입니다.
+2. `make_video_plan.md`의 카탈로그(레이아웃 A~D, 애니메이션 ①~⑦, 이미지 활용)에서
+   **선택**하여 기획 슬롯을 전부 채웁니다. 빈 값, "추후 결정" 등 모호한 기술은 금지입니다.
 3. 이 Step에서는 `plans/SceneX.md`**만** 수정합니다. 코드 파일은 손대지 마세요.
 
 ### Step B: 코드 구현
@@ -77,9 +85,14 @@ description: Section 단위로 Remotion 씬을 순차적으로 기획 및 구현
 
 ### Step C: 구현 후 QA
 
-구현 완료 후, `plans/SceneX.md` 하단의 **Section 3 (구현 후 QA)** 체크리스트를 채웁니다.
+구현 완료 후, `plans/SceneX.md` 하단의 **QA** 체크리스트를 채웁니다.
 
 - 단순 `[x]` 표기는 금지입니다. 괄호 안에 **구체적 결과를 한 줄**로 서술해야 합니다.
+- QA 항목:
+  1. 토큰 위반 (하드코딩 색상/사이즈/여백)
+  2. 자막 영역 (하단 150px 침범)
+  3. 애니메이션 2종 이상 사용 여부
+  4. 이전 Scene과 레이아웃 차별화 여부
 - 문제가 발견되면 즉시 코드를 수정한 후 QA를 다시 채우세요.
 - QA가 모두 통과되면 다음 Scene으로 진행합니다.
 

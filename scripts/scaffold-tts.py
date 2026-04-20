@@ -16,25 +16,36 @@ signal.signal(signal.SIGINT, force_exit)
 LANGUAGE = "Korean"
 GRADIO_URL = "http://localhost:8000"
 
-try:
-    print(f"🔌 TTS 서버({GRADIO_URL})에 연결 중...")
-    client = Client(GRADIO_URL)
-    print("✅ 서버 연결 성공!\n")
-except Exception as e:
-    print(f"❌ Gradio 서버에 연결할 수 없습니다. URL({GRADIO_URL})이 올바른지 확인하세요.\n에러: {e}")
-    sys.exit(1)
+client = None
 
-async def generate_tts(text: str, output_path: str, pronunciation_path: str = None):
+async def generate_tts(text: str, output_path: str, pronunciation_path: str, action: str):
+    global client
     clean_text = text.strip()
 
-    print(f"🔄 발음 전처리 중...")
-    phonetic_text = process_txt(clean_text, engtrans=True)
-    
-    if pronunciation_path:
-        with open(pronunciation_path, "w", encoding="utf-8") as f:
-            f.write(phonetic_text)
-        print(f"📄 변환된 발음 텍스트 저장 됨: {pronunciation_path}")
+    if action == "prepare":
+        print(f"🔄 발음 전처리 중...")
+        phonetic_text = process_txt(clean_text, engtrans=True)
+        if pronunciation_path:
+            with open(pronunciation_path, "w", encoding="utf-8") as f:
+                f.write(phonetic_text)
+            print(f"📄 변환된 발음 텍스트 저장 됨: {pronunciation_path}")
+        return
 
+    # action == "tts"
+    if client is None:
+        try:
+            print(f"🔌 TTS 서버({GRADIO_URL})에 연결 중...")
+            client = Client(GRADIO_URL)
+            print("✅ 서버 연결 성공!\n")
+        except Exception as e:
+            print(f"❌ Gradio 서버에 연결할 수 없습니다. URL({GRADIO_URL})이 올바른지 확인하세요.\n에러: {e}")
+            sys.exit(1)
+
+    if pronunciation_path and os.path.exists(pronunciation_path):
+        with open(pronunciation_path, "r", encoding="utf-8") as f:
+            phonetic_text = f.read().strip()
+    else:
+        phonetic_text = process_txt(clean_text, engtrans=True)
     valid_punctuations = ('.', '!', '?')
     if not phonetic_text.endswith(valid_punctuations):
         processed_text = phonetic_text + "."
@@ -75,6 +86,7 @@ async def main():
     import argparse
     
     parser = argparse.ArgumentParser(description="Generate TTS audio")
+    parser.add_argument("--action", choices=["prepare", "tts", "both"], default="both", help="Action to perform")
     parser.add_argument("--file", help="Read text from file instead of argument")
     parser.add_argument("args", nargs="*", help="[text] output_path [pronunciation_path]")
     
@@ -103,7 +115,7 @@ async def main():
     if pronunciation_path:
          os.makedirs(os.path.dirname(pronunciation_path), exist_ok=True)
     
-    await generate_tts(text, output_path, pronunciation_path)
+    await generate_tts(text, output_path, pronunciation_path, parsed.action)
 
 if __name__ == "__main__":
     asyncio.run(main())

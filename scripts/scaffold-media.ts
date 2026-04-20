@@ -7,6 +7,7 @@ import {
   transcribe,
 } from "@remotion/install-whisper-cpp";
 import { Section, SectionMeta, TimestampEntry } from "./scaffold-types";
+import * as readline from "readline/promises";
 
 import { VIDEO_FPS as FPS } from "../src/constants/video-config";
 
@@ -42,6 +43,11 @@ export async function extractMedia(
     if (!fs.existsSync(publicDir)) {
       fs.mkdirSync(publicDir, { recursive: true });
     }
+    const imagesDir = path.join(publicDir, "images");
+    if (!fs.existsSync(imagesDir)) {
+      fs.mkdirSync(imagesDir, { recursive: true });
+    }
+    
     if (!fs.existsSync(srcDir)) {
       fs.mkdirSync(srcDir, { recursive: true });
     }
@@ -58,7 +64,10 @@ export async function extractMedia(
   }
 
   // 2. Generate TTS (WAV) files
-  console.log("\n=== Phase 2: Generating TTS Audio ===");
+  console.log("\n=== Phase 2.1: Preparing Pronunciation Texts ===");
+  let needsTtsGeneration = false;
+  let newlyPreparedCount = 0;
+  
   for (const doc of sections) {
     const publicDir = path.join(
       process.cwd(),
@@ -68,23 +77,69 @@ export async function extractMedia(
     const pronunciationTxtPath = path.join(publicDir, `${doc.name}_pronunciation.txt`);
 
     if (fs.existsSync(wavPath)) {
-      console.log(`🎙️ Skipping TTS for [${doc.name}] (wav already exists)`);
+      continue;
+    }
+    needsTtsGeneration = true;
+
+    if (fs.existsSync(pronunciationTxtPath)) {
+      console.log(`📝 Skipping pronunciation preparation for [${doc.name}] (already exists)`);
       continue;
     }
 
-    console.log(`🎙️ Generating TTS for [${doc.name}]...`);
+    newlyPreparedCount++;
+    console.log(`📝 Preparing pronunciation text for [${doc.name}]...`);
     try {
-      // 쉘 특수문자 인젝션 방지를 위해 임시 파일로 텍스트 전달
       const tmpTextPath = path.join(publicDir, `${doc.name}_tts_input.tmp`);
       fs.writeFileSync(tmpTextPath, doc.text, "utf-8");
       execSync(
-        `python3 scripts/scaffold-tts.py --file "${tmpTextPath}" "${wavPath}" "${pronunciationTxtPath}"`,
+        `python3 scripts/scaffold-tts.py --action prepare --file "${tmpTextPath}" "${wavPath}" "${pronunciationTxtPath}"`,
         { stdio: "inherit" }
       );
-      // 임시 파일 정리
-      if (fs.existsSync(tmpTextPath)) fs.unlinkSync(tmpTextPath);
     } catch (e) {
-      console.error(`❌ TTS generation failed for ${doc.name}`, e);
+      console.error(`❌ Pronunciation preparation failed for ${doc.name}`, e);
+    }
+  }
+
+  if (needsTtsGeneration) {
+    if (newlyPreparedCount > 0) {
+      console.log(`\n⏸️  발음 텍스트 생성이 완료되었습니다.`);
+      console.log(`👉 public/${projectId}/ 각 폴더의 _pronunciation.txt 파일을 확인하고 필요한 경우 수정하세요.`);
+      
+      const rl = readline.createInterface({
+        input: process.stdin,
+        output: process.stdout,
+      });
+      await rl.question("📝 수정이 완료되면 터미널에서 [Enter] 키를 눌러 TTS 생성을 시작하세요...");
+      rl.close();
+    } else {
+      console.log(`\n🚀 모든 발음 텍스트가 이미 존재합니다. 바로 TTS 생성을 시작합니다!`);
+    }
+
+    console.log("\n=== Phase 2.2: Generating TTS Audio ===");
+    for (const doc of sections) {
+      const publicDir = path.join(
+        process.cwd(),
+        `public/${projectId}/${doc.name}`
+      );
+      const wavPath = path.join(publicDir, `${doc.name}.wav`);
+      const pronunciationTxtPath = path.join(publicDir, `${doc.name}_pronunciation.txt`);
+
+      if (fs.existsSync(wavPath)) {
+        console.log(`🎙️ Skipping TTS for [${doc.name}] (wav already exists)`);
+        continue;
+      }
+
+      console.log(`🎙️ Generating TTS for [${doc.name}]...`);
+      try {
+        const tmpTextPath = path.join(publicDir, `${doc.name}_tts_input.tmp`);
+        execSync(
+          `python3 scripts/scaffold-tts.py --action tts --file "${tmpTextPath}" "${wavPath}" "${pronunciationTxtPath}"`,
+          { stdio: "inherit" }
+        );
+        if (fs.existsSync(tmpTextPath)) fs.unlinkSync(tmpTextPath);
+      } catch (e) {
+        console.error(`❌ TTS generation failed for ${doc.name}`, e);
+      }
     }
   }
 }

@@ -3,91 +3,139 @@ import sys
 import json
 import argparse
 
-MAKE_PLAN_TEMPLATE = """# {section} 애니메이션 전역 기획서
+MAKE_PLAN_TEMPLATE = """# {section} 전역 기획서
 
 ## 1. 섹션 개요
 
-| 항목      | 값 |
-| --------- | --- |
-| 총 길이   | {total_duration}ms |
+| 항목 | 값 |
+|------|-----|
+| 총 길이 | {total_duration}ms |
 | 총 프레임 | {total_frames}f |
-| Scene 수  | {sentence_count} |
+| Scene 수 | {sentence_count} |
 
-## 2. 디자인 페르소나 및 원칙 (필수 숙지)
-- **역할**: 당신은 지금부터 Apple, Vercel, Toss와 같은 최고 수준의 IT 기업에서 일하는 수석 UI/UX 모션 디자이너이자 'React Remotion 개발자'입니다. 복잡하고 유치한 연출을 철저히 배제하고, 깔끔하고 구조적인 코드로 세련미를 극대화하세요.
-- **레이아웃(정교한 뼈대와 배치)**: 뻔한 중앙 정렬이나 예술적인 기교보다는 타이포그래피, 넉넉한 여백, 정교한 Grid/Flexbox 정렬을 사용하여 세련된 정보 배치를 1순위로 두세요.
-- **단순 ppt느낌 절대 금지**: 자막이 자동 삽입되므로, 영상은 시청 피로도를 낮추기 위해 정보량을 최소화하고, 원본 대본을 보조하는 내용으로 기획 및 연출하세요. 
-- **클리셰 메타포 절대 금지 & 이모지 사용 금지**: 가위, 전구, 돋보기 등 단어를 일차원적으로 표현하는 촌스러운 아이콘을 절대 사용하지 마세요. 또한 시스템 이모지(✅ 등) 사용을 엄격히 금지하며, 대신 순수 CSS나 SVG 패스를 활용해 직접 드로잉하세요.
-- **한국어 원칙**: 고유명사, 약어를 제외한 모든 단어를 한국어로 작성하세요.
+## 2. 디자인 규칙 (전 Scene 적용, 반드시 숙지)
 
-## 3. 워크플로우 가이드
-각 Scene을 작업할 때, **반드시 아래의 순서대로** 진행해야 합니다:
-1. `plans/SceneX.md` 를 열어 {{FILL: }}부분의 기획을 전부 작성합니다 <-- FILL부분을 채우지 않고 다음 단계로 진행은 엄격하게 금지됩니다.
-2. 작성된 기획을 바탕으로 `scenes/SceneX.tsx` 코드를 구현합니다.
+- **페르소나**: 유튜브 다큐멘터리 전문 에디토리얼 디자이너. 화려한 모션이 아닌 **타이포그래피, 여백, 내레이션 동기화**로 몰입감 형성
+- **스타일**: 깔끔하지만 살아있는 화면. PPT처럼 정적이면 안 됨. 요소가 **내레이션 타이밍에 맞춰** 등장·변화해야 시청 몰입도 유지
+- **핵심**: 단어별 타이밍(word_timings)을 적극 활용하여, 핵심 단어가 나올 때 관련 요소가 등장하도록 연출
+- 색상·폰트·크기·여백은 **반드시** 아래 토큰 레퍼런스에서만 사용. 하드코딩 절대 금지
+- 폰트 크기 48px(SIZE_MD) **미만 금지** (영상이므로 모바일 가독성 필수)
+- 고유명사·약어 외 모든 텍스트 **한국어**
+- 시스템 이모지(✅ 💡 등) **금지**
+- 자막은 자동 삽입됨. 대본 전문을 화면에 그대로 쓰지 말 것
+- 정보량 최소화. 핵심 요소 소수(1~3개)만 배치
+- 배경은 단색 기본. 강조 시에만 패턴/그라데이션 제한 사용
+- 화면 요소는 **하단 150px 자막 영역에 절대 배치 금지**
+
+### 절대 금지 패턴 (이런 코드를 작성하지 마세요)
+- ❌ 진동/떨림 효과 (Math.sin으로 position 흔들기)
+- ❌ glow/boxShadow 남발 (`0 0 30px` 같은 빛 번짐)
+- ❌ 네트워크/노드 다이어그램 (대본을 직역한 클리셰)
+- ❌ 3개 이상의 동시 애니메이션
+- ❌ 복잡한 SVG 일러스트레이션 (단순 도형만 사용)
+
+## 3. 토큰 레퍼런스 (이 목록에 없는 토큰 사용 금지)
+
+### COLORS
+배경: BG_BASE | BG_SURFACE | BG_MUTED | BG_EMPHASIS | BG_DARK | BG_DARKEST
+포인트: PRIMARY_LIGHT | PRIMARY_SOFT | PRIMARY_MID | PRIMARY | PRIMARY_DARK | PRIMARY_BOLD
+보조: SECONDARY_LIGHT | SECONDARY_SOFT | SECONDARY | SECONDARY_MID | SECONDARY_DARK | SECONDARY_BOLD
+텍스트: TEXT_MAIN | TEXT_BODY | TEXT_SUB | TEXT_DISABLED | TEXT_ON_DARK | TEXT_ON_PRIMARY | TEXT_ON_SECONDARY
+선: STROKE_SUBTLE | STROKE_DEFAULT | STROKE_STRONG | STROKE_PRIMARY | STROKE_INK
+오버레이: OVERLAY_LIGHT | OVERLAY_MED | OVERLAY_DARK | OVERLAY_PRIMARY | OVERLAY_SECONDARY
+상태: STATE_SUCCESS_BG/FG | STATE_WARN_BG/FG | STATE_ERROR_BG/FG
+
+### FONTS
+패밀리: DISPLAY | PRIMARY | HANDWRITING | MONO
+크기: SIZE_MD(48) | SIZE_LG(64) | SIZE_XL(80) | SIZE_2XL(100) | SIZE_3XL(140) | SIZE_4XL(180)
+굵기: WEIGHT_REGULAR(400) | WEIGHT_MEDIUM(500) | WEIGHT_SEMIBOLD(600) | WEIGHT_BOLD(700) | WEIGHT_EXTRABOLD(800)
+
+### EFFECTS
+틴트: TINT_WARM | TINT_PRIMARY | TINT_SECONDARY | TINT_DARK | TINT_WHITE
+그림자: SHADOW_SM | SHADOW_MD | SHADOW_LG | SHADOW_PRIMARY | SHADOW_SECONDARY
+
+### SPACING (여백·크기에만 사용, fontSize 금지)
+PX: 4 | 8 | 12 | 16 | 24 | 32 | 40 | 48 | 64 | 80 | 96 | 120
+RADIUS: SM(6) | MD(12) | LG(20) | XL(32) | PILL(9999)
+
+### ANIMATION
+스프링: SPRING_GENTLE | SPRING_BOUNCY | SPRING_SNAPPY | SPRING_HEAVY
+지속: DUR_XS(6f) | DUR_SM(9f) | DUR_MD(15f) | DUR_LG(21f) | DUR_XL(30f) | DUR_2XL(45f)
+스태거: STAGGER_SM(6) | STAGGER_MD(10) | STAGGER_LG(16)
+
+### Z (레이어 순서)
+BG(0) | CONTENT(10) | OVERLAY(20) | UI(30) | CAPTION(40) | TOP(50)
+
+## 4. 레이아웃 카탈로그 (SceneX.md에서 A~D로 선택)
+
+- **A: 중앙 집중** — 대형 텍스트 또는 핵심 요소 1개가 화면 중앙. 전체 씬의 30% 이하
+- **B: 좌우 분할** — 한쪽에 텍스트, 다른 쪽에 비주얼. 가장 범용적
+- **C: 카드 배치** — 2~3개 카드가 정렬. 비교·나열에 적합
+- **D: 풀스크린 이미지** — 이미지 전체화면 + 오버레이 텍스트
+
+⚠️ 연속 2개 이상 같은 레이아웃 사용 금지. 반드시 교차 배치.
+
+## 5. 애니메이션 카탈로그 (SceneX.md에서 번호로 선택)
+
+모든 애니메이션은 **부드럽고 절제된** 움직임만 사용합니다.
+
+- **①fadeIn**: opacity 0→1 + translateY 약간 이동. spring(SPRING_GENTLE). **기본값**
+- **②scaleIn**: scale 0.92→1. spring(SPRING_GENTLE). 카드·이미지 등장에 적합
+- **③typing**: 글자 순차 등장. interpolate로 charCount 증가. 짧은 텍스트만
+- **④stagger**: 여러 요소가 순서대로 ①fadeIn. delay = index × STAGGER_MD
+- **⑤draw**: SVG strokeDashoffset로 선이 그려지는 효과. 단순 도형만
+- **⑥wipe**: 가로 마스크로 요소 등장/퇴장
+- **⑦counter**: 숫자 카운트업/다운. interpolate로 수치 변화
+
+⚠️ 한 Scene에 최대 2종류. 과도한 움직임 금지.
+
+## 6. 이미지 활용 카탈로그 (이미지가 있는 Scene에서 선택)
+
+- **배경**: Img 풀스크린 (objectFit: cover) + TINT_DARK 오버레이 필수
+- **요소-대**: 600~900px 너비, 메인 비주얼로 배치. 레이아웃 B/D에 적합
+- **요소-소**: 200~400px 너비, 보조 썸네일/아이콘 역할. 레이아웃 B/C에 적합
+
+이미지가 있다면 **반드시 직접 파일을 열어** 내용을 확인한 뒤 활용 방식을 결정하세요.
+
+## 7. SVG 규칙
+
+- SVG는 **단순 기하학 도형만** 사용 (원, 사각형, 선, 진행률 바 등)
+- 복잡한 일러스트레이션, 아이콘, 캐릭터 **금지**
+- SVG 내부에 텍스트(text 태그) **금지**
+- 한 Scene에 SVG 컴포넌트 최대 1개
+- viewBox는 100×100 이하의 단순한 좌표계 사용
+
+## 8. 워크플로우
+각 Scene 작업 시 반드시 아래 순서로 진행:
+1. `plans/SceneX.md`를 열어 기획 슬롯을 **위 카탈로그에서 선택**하여 전부 채움
+2. 기획을 바탕으로 `scenes/SceneX.tsx` 코드 구현
 """
 
-SCENE_PLAN_TEMPLATE = """# Scene {i} 기획서
+SCENE_PLAN_TEMPLATE = """# Scene {i}
 
-아래 {{FILL}} 내용을 반드시 직접 채워넣으며 기획하세요. 절대 남는 부분 없이 **전부 채우세요**.
+## 데이터 (수정 금지)
+- 대본: {text}
+- 구간: {start_frame}f ~ (총 {duration_in_frames}f)
+- 타이밍: {word_timings_str}
+- 이미지: 0개
 
-## 필수 원칙 (매 Scene 리마인드)
-- **페르소나**: Apple, Vercel, Toss와 같은 최고 수준의 IT 기업에서 일하는 수석 UI/UX 모션 디자이너이자 'React Remotion 개발자'
-- **레이아웃**: 구조적 깔끔함을 우선시하되, 뻔하고 단조로운 레이아웃은 지양합니다.
-- **색상/폰트**: 임의 하드코딩 절대 금지. 반드시 theme.ts 토큰(COLORS.xx, FONTS.xx) 사용.
-- **폰트 크기**: **웹페이지가 아닌 영상**을 구현하는 것이므로, 모바일에서도 잘 보이도록 theme.ts에 명시된 48px(SIZE_MD) 미만의 크기는 엄격하게 금지합니다.
-- **한국어**: 고유명사·약어 외 모든 텍스트를 한국어로 작성.
-- **이모지 금지**: 시스템 이모지(✅ 💡 등), 유치한 아이콘 절대 금지.
+## 기획 (make_video_plan.md 카탈로그 참조)
 
-## 기획 (반드시 상세하고 신중하게 기획)
+컨셉: {{FILL: 대본을 보조할 비주얼 방향 1~2문장}}
+레이아웃: {{FILL: A|B|C|D 선택}}
+배경: {{FILL: COLORS.토큰명}} / 패턴: {{FILL: 유|무}} / 변화: {{FILL: 유|무}}
+이미지 활용: {{FILL: 없음 | 배경|요소-대|요소-소, 배치와 애니메이션 설명}}
 
-1번의 해당 씬에 나오는 원본 대본과, 단어의 타임라인을 파악한 뒤, 전체적인 비주얼 컨셉을 기획합니다.
-2번에서 씬의 대본과 어울리는 전체 화면을 채우는 배경을 기획합니다.(색상, 패턴, 변화 등)
-3번에서 배경 위에 배치될 화면 요소들(텍스트, svg 등)을 기획하고, 어떻게 배치할 지, 어떤 애니메이션을 사용할 지 기획합니다. 
+요소:
+1. {{FILL: 종류, 내용, 위치, 크기토큰, 색상토큰, 애니메이션번호}}
+2. {{FILL: ...}}
+3. {{FILL: ...}}
 
-### 1. 대본과 타임라인 파악, 전체적인 비주얼 컨셉 작성(수정 금지)
-- 원본 텍스트: {text}
-- 타임라인: {start_frame}f 부터 시작 (총 {duration_in_frames}f 지속)
-- 단어별 등장 프레임 (Local): {word_timings_str}
-
-위의 원본 자막에 어울리는 영상을 기획하세요. 일차원적인 해석이 아닌, 대본을 보조해서 사용자의 이해도를 높이는 창의적이고 트렌디한 연출을 생각하세요.
-원본 텍스트는 이미 자막이 자동으로 삽입되므로, 전체 텍스트를 그대로 영상에 붙여넣는건 엄격히 금지합니다.
-
-비주얼 컨셉: {FILL_VISUAL}
-
-### 2. 배경 기획
-
-- 텍스트 요소는 엄격히 금지됩니다.
-- 정보량을 거의 없도록 합니다.
-- 배경 위에 올라갈 요소들과 겹쳐도 이상하지 않도록 않도록 색상을 설정합니다.
-- 모든 씬에 패턴이나 그라데이션 이 들어가면 너무 복잡하기 때문에 기본적으로 라이트모드 단색을 사용하며, 강조할 때만 제한적으로 효과를 사용합니다.
-
-배경은 화면 전체를 채웁니다.(자막 영역 포함) 
-색상: {{FILL: 단색 / 그라데이션 등 원하는대로 기획, 전체 씬의 60%는 단색만 사용합니다.}} 
-패턴: {{FILL: 없음 / 점, 선, 도형등 원하는대로 기획, 강조할 때 제한적으로 사용합니다. 기본적으로 없음}}
-변화: {{FILL: 없음 / 진행도중 반전등 원하는대로 기획, 마찬가지로 강조할 때 제한적으로 사용합니다. 기본적으로 없음}}
-
-### 3. 화면 요소 기획
-
-- 2번에서 기획한 배경에 어울리는 화면 요소들을 배치합니다.
-- 절대 자잘하게 많이 넣지 말고, **핵심 요소들 위주로 배치합니다.**
-- [CAUTION!!]: 화면 요소는 절대 하단 150px 자막 영역에는 배치하지 않습니다.
-
-텍스트: {{FILL: 개수 작성, 예시: 3개}}
-    - {{FILL: 텍스트 내용, 텍스트 배치 방식, 크기, 색상, 애니메이션 등 등 원하는대로 기획. 텍스트는 단어나 짧은 문장만 사용합니다.}}
-    ...
-svg 이미지: {{FILL: 개수 작성, 예시: 1개}}
-    - {FILL_SVG}
-    ...
-이외 요소들: 
-    - {{FILL: 자유 작성 영역}}   
-    ...
-
-## 구현 후 QA (구현 완료 후 이 섹션을 **반드시 채우세요**)
-- [ ] 하드코딩 점검: 색상·폰트·사이즈에 theme.ts 토큰 대신 직접 값을 쓴 곳 → (없음 / 위치)
-- [ ] 자막 영역: 하단 150px 내에 핵심 요소 배치 여부 → (없음 / 요소명)
-- [ ] 한국어: 고유명사·약어 외 영어 텍스트 사용 여부 → (없음 / 해당 텍스트)
-- [ ] z-index: Z 토큰 사용 여부 → (사용한 레이어 목록)
-- [ ] props 기본값: 모든 컴포넌트 props에 기본값 지정 여부 → (완료 / 미지정 props)
+## QA
+- [ ] 토큰 위반(하드코딩 색상/사이즈) →
+- [ ] 자막 영역(하단 150px) 침범 →
+- [ ] 애니메이션 2종 이상 사용 →
+- [ ] 이전 Scene과 레이아웃 차별화 →
 """
 
 def generate_plan_for_section(project_id, section):
@@ -109,6 +157,10 @@ def generate_plan_for_section(project_id, section):
     # 폴더 구조 보장
     os.makedirs(plans_dir, exist_ok=True)
     os.makedirs(scenes_dir, exist_ok=True)
+    
+    images_dir = f"public/{project_id}/{section}/images"
+    os.makedirs(images_dir, exist_ok=True)
+    mapping_path = os.path.join(images_dir, "image_mapping.md")
 
     total_duration = data.get('totalDuration', 0)
     total_frames = data.get('totalFrames', 0)
@@ -129,11 +181,24 @@ def generate_plan_for_section(project_id, section):
             f.write(md_content)
         print(f"Generated {make_plan_path}")
 
-    # 2. plans/SceneX.md 작성
+    # 2. plans/SceneX.md 작성 및 3. image_mapping.md 작성 준비
+    mapping_lines = [
+        f"# {section} 이미지 매핑",
+        "이 폴더에 이미지를 넣고, 사용할 씬 아래에 이미지 파일명을 괄호 `[ ]` 안에 적어주세요.",
+        "하나의 씬에 여러 이미지를 쓰려면 쉼표로 구분하세요. (예: `[ chart.png, logo.png ]`)",
+        "이미지를 사용하지 않는 씬은 빈칸 `[ ]` 으로 두시면 됩니다.",
+        ""
+    ]
+
     for i, sentence in enumerate(sentences, 1):
         text = sentence.get('sentence', '')
         start_frame = sentence.get('startFrame', 0)
         duration_in_frames = sentence.get('durationInFrames', 0)
+        
+        # 맵핑 파일용 텍스트 요약
+        clean_text = text.replace('\n', ' ')
+        display_text = clean_text if len(clean_text) <= 50 else clean_text[:47] + "..."
+        mapping_lines.append(f"- Scene {i} (\"{display_text}\"): [ ]")
         
         word_timings = []
         for word in sentence.get('words', []):
@@ -144,17 +209,12 @@ def generate_plan_for_section(project_id, section):
             
         word_timings_str = "{ " + ", ".join(word_timings) + " }"
         
-        fill_v = "{FILL: 화면에 보이는 정보량은 너무 많지 않도록 하세요. 자막이 이미 자동으로 삽입됩니다. 핵심 요소 몇 개 위주로 배치하되 퀄리티를 극한으로 높이세요. 최대한 자세하게 대본에 어울리는 비주얼 컨셉을 3문장 이상으로 작성하세요}"
-        fill_svg = "{FILL: SVG 기획 시 내부에 텍스트(라벨, 이름 등)를 절대 포함하지 마세요. SVG는 오직 순수 그림 용도로만 기획하며 필요할 때만 제한적으로(최대 0~2개) 사용하세요.}"
-
         scene_md_content = SCENE_PLAN_TEMPLATE.format(
             i=i,
             text=text,
             start_frame=start_frame,
             duration_in_frames=duration_in_frames,
-            word_timings_str=word_timings_str,
-            FILL_VISUAL=fill_v,
-            FILL_SVG=fill_svg
+            word_timings_str=word_timings_str
         )
         
         scene_plan_path = os.path.join(plans_dir, f"Scene{i}.md")
@@ -166,6 +226,14 @@ def generate_plan_for_section(project_id, section):
             f.write(scene_md_content)
 
     print(f"Generated {sentence_count} Scene plans in {plans_dir}")
+    
+    # 3. image_mapping.md 작성
+    if not os.path.exists(mapping_path):
+        with open(mapping_path, 'w', encoding='utf-8') as f:
+            f.write("\n".join(mapping_lines))
+        print(f"Generated {mapping_path}")
+    else:
+        print(f"⏭️ {mapping_path} already exists, skipping.")
 
 def main():
     parser = argparse.ArgumentParser(description="Generate make_video_plan.md and plans/SceneX.md for sections")

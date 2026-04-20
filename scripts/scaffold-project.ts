@@ -33,8 +33,8 @@ async function main() {
   }
 
   const scriptContent = fs.readFileSync(refPath, "utf-8");
-  // Split by "---" on its own line
-  const chunks = scriptContent.split(/\n---\n|\r\n---\r\n/);
+  // Split by "---" on its own line (allowing trailing spaces)
+  const chunks = scriptContent.split(/\n---\s*\n|\r\n---\s*\r\n/);
 
   const sections: Section[] = [];
 
@@ -77,22 +77,16 @@ async function main() {
     // Step 3.5: Generate GEMINI.md rules file
     const geminiMdPath = path.join(process.cwd(), `src/projects/${projectId}/GEMINI.md`);
     if (!fs.existsSync(geminiMdPath)) {
-      const geminiMdContent = `# ${projectId} Project AI Guidelines
+      const geminiMdContent = `# ${projectId} AI Guidelines
 
-## 1. Component Rules
+## 파일 규칙
+- 컴포넌트는 반드시 \`src/projects/${projectId}/{section}/components/\`에 생성
+- \`shared-components/\`, \`src/constants/\`, 다른 섹션 파일 **수정 금지**
+- 기존 컴포넌트 파일 수정 금지 (신규 생성만 허용)
+- \`shared-components\`는 프로젝트 공유 자원 (\`CaptionOverlay\`, \`Wobble\` 등). 읽기만 허용
 
-- ❌ DO NOT place components in a global \`components/\` folder.
-- ✅ ALWAYS place components in the specific section's folder (e.g., \`src/projects/${projectId}/{section}/components/\`).
-- ❌ DO NOT fix \`shared-components\`. it is project shared resource.
-- ✅ USE \`shared-components\` for globally shared generic components (like \`CaptionOverlay\`, \`Wobble\`, etc).
-
-## 2. Design Tokens (\`theme.ts\`)
-
-- ❌ NEVER modify \`src/constants/theme.ts\`. It is READ-ONLY.
-- ✅ STRICTLY use the design tokens exported from \`theme.ts\` (COLORS, EFFECTS, FONTS, SPACING, ANIMATION, Z).
-- ❌ DO NOT use hardcoded colors (e.g., \`#FFFFFF\`, \`rgba(0,0,0,0.5)\`).
-- ❌ DO NOT mix tokens (e.g., using \`SPACING.PX_16\` for font sizes). Use \`FONTS.SIZE_*\` for font sizes.
-
+## 디자인 규칙
+각 섹션의 \`make_video_plan.md\`에 정의된 토큰 레퍼런스와 카탈로그를 따르세요.
 `;
       fs.writeFileSync(geminiMdPath, geminiMdContent);
       console.log(`\n✅ Generated GEMINI.md rules file at src/projects/${projectId}/GEMINI.md`);

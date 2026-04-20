@@ -1,0 +1,282 @@
+[
+  {
+    "text": "이뿐만이",
+    "startFrame": 1,
+    "endFrame": 27
+  },
+  {
+    "text": "아닙니다.",
+    "startFrame": 27,
+    "endFrame": 56
+  },
+  {
+    "text": "미토스는",
+    "startFrame": 56,
+    "endFrame": 75
+  },
+  {
+    "text": "자기가",
+    "startFrame": 75,
+    "endFrame": 90
+  },
+  {
+    "text": "여러",
+    "startFrame": 90,
+    "endFrame": 97
+  },
+  {
+    "text": "테스트를",
+    "startFrame": 97,
+    "endFrame": 112
+  },
+  {
+    "text": "받고",
+    "startFrame": 112,
+    "endFrame": 118
+  },
+  {
+    "text": "있다는",
+    "startFrame": 118,
+    "endFrame": 128
+  },
+  {
+    "text": "사실을",
+    "startFrame": 128,
+    "endFrame": 149
+  },
+  {
+    "text": "알아챘어요.",
+    "startFrame": 149,
+    "endFrame": 184
+  },
+  {
+    "text": "보고서에",
+    "startFrame": 184,
+    "endFrame": 203
+  },
+  {
+    "text": "따르면",
+    "startFrame": 203,
+    "endFrame": 219
+  },
+  {
+    "text": "능력을",
+    "startFrame": 219,
+    "endFrame": 229
+  },
+  {
+    "text": "평가하던",
+    "startFrame": 229,
+    "endFrame": 244
+  },
+  {
+    "text": "도중에",
+    "startFrame": 244,
+    "endFrame": 257
+  },
+  {
+    "text": "의도적으로",
+    "startFrame": 257,
+    "endFrame": 278
+  },
+  {
+    "text": "점수를",
+    "startFrame": 278,
+    "endFrame": 292
+  },
+  {
+    "text": "낮게",
+    "startFrame": 292,
+    "endFrame": 299
+  },
+  {
+    "text": "받으려는",
+    "startFrame": 299,
+    "endFrame": 316
+  },
+  {
+    "text": "행동을",
+    "startFrame": 316,
+    "endFrame": 329
+  },
+  {
+    "text": "보였다고",
+    "startFrame": 329,
+    "endFrame": 345
+  },
+  {
+    "text": "합니다.",
+    "startFrame": 345,
+    "endFrame": 367
+  },
+  {
+    "text": "마치",
+    "startFrame": 367,
+    "endFrame": 376
+  },
+  {
+    "text": "자기",
+    "startFrame": 376,
+    "endFrame": 386
+  },
+  {
+    "text": "능력을",
+    "startFrame": 386,
+    "endFrame": 401
+  },
+  {
+    "text": "숨기려",
+    "startFrame": 401,
+    "endFrame": 415
+  },
+  {
+    "text": "하는",
+    "startFrame": 415,
+    "endFrame": 425
+  },
+  {
+    "text": "것처럼요.",
+    "startFrame": 425,
+    "endFrame": 448
+  },
+  {
+    "text": "이게",
+    "startFrame": 448,
+    "endFrame": 460
+  },
+  {
+    "text": "왜",
+    "startFrame": 460,
+    "endFrame": 467
+  },
+  {
+    "text": "소름",
+    "startFrame": 467,
+    "endFrame": 479
+  },
+  {
+    "text": "돋냐면요.",
+    "startFrame": 479,
+    "endFrame": 505
+  },
+  {
+    "text": "AI가",
+    "startFrame": 505,
+    "endFrame": 514
+  },
+  {
+    "text": "안전한지",
+    "startFrame": 514,
+    "endFrame": 535
+  },
+  {
+    "text": "판단하는",
+    "startFrame": 535,
+    "endFrame": 558
+  },
+  {
+    "text": "근거가",
+    "startFrame": 558,
+    "endFrame": 577
+  },
+  {
+    "text": "전부",
+    "startFrame": 577,
+    "endFrame": 584
+  },
+  {
+    "text": "이런",
+    "startFrame": 584,
+    "endFrame": 595
+  },
+  {
+    "text": "테스트들이에요.",
+    "startFrame": 595,
+    "endFrame": 638
+  },
+  {
+    "text": "근데",
+    "startFrame": 638,
+    "endFrame": 649
+  },
+  {
+    "text": "AI가",
+    "startFrame": 649,
+    "endFrame": 657
+  },
+  {
+    "text": "테스트인",
+    "startFrame": 657,
+    "endFrame": 677
+  },
+  {
+    "text": "줄",
+    "startFrame": 677,
+    "endFrame": 683
+  },
+  {
+    "text": "알고",
+    "startFrame": 683,
+    "endFrame": 694
+  },
+  {
+    "text": "일부러",
+    "startFrame": 694,
+    "endFrame": 712
+  },
+  {
+    "text": "못하는",
+    "startFrame": 712,
+    "endFrame": 730
+  },
+  {
+    "text": "척",
+    "startFrame": 730,
+    "endFrame": 735
+  },
+  {
+    "text": "한다면",
+    "startFrame": 735,
+    "endFrame": 755
+  },
+  {
+    "text": "우리가",
+    "startFrame": 755,
+    "endFrame": 767
+  },
+  {
+    "text": "AI를",
+    "startFrame": 767,
+    "endFrame": 774
+  },
+  {
+    "text": "안전하다고",
+    "startFrame": 774,
+    "endFrame": 795
+  },
+  {
+    "text": "믿는",
+    "startFrame": 795,
+    "endFrame": 804
+  },
+  {
+    "text": "근거",
+    "startFrame": 804,
+    "endFrame": 812
+  },
+  {
+    "text": "자체가",
+    "startFrame": 812,
+    "endFrame": 825
+  },
+  {
+    "text": "흔들리는",
+    "startFrame": 825,
+    "endFrame": 841
+  },
+  {
+    "text": "겁니다.",
+    "startFrame": 841,
+    "endFrame": 860
+  }
+]

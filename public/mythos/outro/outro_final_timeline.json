@@ -1,0 +1,268 @@
+{
+  "totalDuration": 27920,
+  "totalFrames": 838,
+  "sentences": [
+    {
+      "sentence": "오늘 이렇게 mythos의 성능과 여러 사건들에 대해서 알아봤는데요. 어떠셨나요?",
+      "startFrame": 0,
+      "words": [
+        {
+          "text": "오늘",
+          "startFrame": 0,
+          "endFrame": 53
+        },
+        {
+          "text": "이렇게",
+          "startFrame": 53,
+          "endFrame": 64
+        },
+        {
+          "text": "mythos의",
+          "startFrame": 64,
+          "endFrame": 82
+        },
+        {
+          "text": "성능과",
+          "startFrame": 82,
+          "endFrame": 97
+        },
+        {
+          "text": "여러",
+          "startFrame": 97,
+          "endFrame": 103
+        },
+        {
+          "text": "사건들에",
+          "startFrame": 103,
+          "endFrame": 116
+        },
+        {
+          "text": "대해서",
+          "startFrame": 116,
+          "endFrame": 125
+        },
+        {
+          "text": "알아봤는데요.",
+          "startFrame": 125,
+          "endFrame": 169
+        },
+        {
+          "text": "어떠셨나요?",
+          "startFrame": 169,
+          "endFrame": 210
+        }
+      ],
+      "endFrame": 210,
+      "durationInFrames": 210
+    },
+    {
+      "sentence": "이미 많이 발전한 AI는 점점 더 무서운 속도로 발전하는 것 같습니다.",
+      "startFrame": 210,
+      "words": [
+        {
+          "text": "이미",
+          "startFrame": 210,
+          "endFrame": 221
+        },
+        {
+          "text": "많이",
+          "startFrame": 221,
+          "endFrame": 232
+        },
+        {
+          "text": "발전한",
+          "startFrame": 232,
+          "endFrame": 248
+        },
+        {
+          "text": "AI는",
+          "startFrame": 248,
+          "endFrame": 259
+        },
+        {
+          "text": "점점",
+          "startFrame": 259,
+          "endFrame": 268
+        },
+        {
+          "text": "더",
+          "startFrame": 268,
+          "endFrame": 273
+        },
+        {
+          "text": "무서운",
+          "startFrame": 273,
+          "endFrame": 283
+        },
+        {
+          "text": "속도로",
+          "startFrame": 283,
+          "endFrame": 293
+        },
+        {
+          "text": "발전하는",
+          "startFrame": 293,
+          "endFrame": 325
+        },
+        {
+          "text": "것",
+          "startFrame": 325,
+          "endFrame": 332
+        },
+        {
+          "text": "같습니다.",
+          "startFrame": 332,
+          "endFrame": 365
+        }
+      ],
+      "endFrame": 365,
+      "durationInFrames": 155
+    },
+    {
+      "sentence": "이제는 잘못 사용하면 실제 세상에 큰 위험을 초래할 수도 있는 수준까지 온 것 같은데요.",
+      "startFrame": 365,
+      "words": [
+        {
+          "text": "이제는",
+          "startFrame": 365,
+          "endFrame": 377
+        },
+        {
+          "text": "잘못",
+          "startFrame": 377,
+          "endFrame": 384
+        },
+        {
+          "text": "사용하면",
+          "startFrame": 384,
+          "endFrame": 404
+        },
+        {
+          "text": "실제",
+          "startFrame": 404,
+          "endFrame": 410
+        },
+        {
+          "text": "세상에",
+          "startFrame": 410,
+          "endFrame": 424
+        },
+        {
+          "text": "큰",
+          "startFrame": 424,
+          "endFrame": 428
+        },
+        {
+          "text": "위험을",
+          "startFrame": 428,
+          "endFrame": 445
+        },
+        {
+          "text": "초래할",
+          "startFrame": 445,
+          "endFrame": 451
+        },
+        {
+          "text": "수도",
+          "startFrame": 451,
+          "endFrame": 457
+        },
+        {
+          "text": "있는",
+          "startFrame": 457,
+          "endFrame": 464
+        },
+        {
+          "text": "수준까지",
+          "startFrame": 464,
+          "endFrame": 478
+        },
+        {
+          "text": "온",
+          "startFrame": 478,
+          "endFrame": 486
+        },
+        {
+          "text": "것",
+          "startFrame": 486,
+          "endFrame": 492
+        },
+        {
+          "text": "같은데요.",
+          "startFrame": 492,
+          "endFrame": 522
+        }
+      ],
+      "endFrame": 522,
+      "durationInFrames": 157
+    },
+    {
+      "sentence": "여러분은 어떻게 생각하시나요? 댓글에 생각을 공유해주시고, 오늘 이야기가 흥미로우셨다면 구독 한번 부탁드립니다!",
+      "startFrame": 522,
+      "words": [
+        {
+          "text": "여러분은",
+          "startFrame": 522,
+          "endFrame": 544
+        },
+        {
+          "text": "어떻게",
+          "startFrame": 544,
+          "endFrame": 560
+        },
+        {
+          "text": "생각하시나요?",
+          "startFrame": 560,
+          "endFrame": 593
+        },
+        {
+          "text": "댓글에",
+          "startFrame": 593,
+          "endFrame": 608
+        },
+        {
+          "text": "생각을",
+          "startFrame": 608,
+          "endFrame": 624
+        },
+        {
+          "text": "공유해주시고,",
+          "startFrame": 624,
+          "endFrame": 639
+        },
+        {
+          "text": "오늘",
+          "startFrame": 639,
+          "endFrame": 665
+        },
+        {
+          "text": "이야기가",
+          "startFrame": 665,
+          "endFrame": 683
+        },
+        {
+          "text": "흥미로우셨다면",
+          "startFrame": 683,
+          "endFrame": 717
+        },
+        {
+          "text": "구독",
+          "startFrame": 717,
+          "endFrame": 730
+        },
+        {
+          "text": "한번",
+          "startFrame": 730,
+          "endFrame": 746
+        },
+        {
+          "text": "부탁드립니다!",
+          "startFrame": 746,
+          "endFrame": 794
+        }
+      ],
+      "endFrame": 838,
+      "durationInFrames": 316
+    }
+  ]
+}
