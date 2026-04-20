@@ -8,19 +8,20 @@ import { WebParadiam } from "./projects/web-paradiam/web-paradiam";
 import { Thumbnail, ThumbnailSchema } from "./projects/thumbnail/Thumbnail";
 
 import { VIDEO_FPS, VIDEO_WIDTH, VIDEO_HEIGHT } from "./constants/video-config";
+import { SharedComponentsGallery } from "./shared-components/SharedComponentsGallery";
 export const RemotionRoot: React.FC = () => {
   return (
     <>
       <Folder name="Projects">
 
-      <Composition
-        id="aiwar"
-        component={Aiwar}
-        durationInFrames={12462}
-        fps={VIDEO_FPS}
-        width={VIDEO_WIDTH}
-        height={VIDEO_HEIGHT}
-      />
+        <Composition
+          id="aiwar"
+          component={Aiwar}
+          durationInFrames={12462}
+          fps={VIDEO_FPS}
+          width={VIDEO_WIDTH}
+          height={VIDEO_HEIGHT}
+        />
 
 
         <Composition
@@ -39,6 +40,15 @@ export const RemotionRoot: React.FC = () => {
           fps={30}
           width={VIDEO_WIDTH}
           height={VIDEO_HEIGHT}
+        />
+
+        <Composition
+          id="shared-components-gallery"
+          component={SharedComponentsGallery}
+          width={1920}
+          height={1080}
+          durationInFrames={300}
+          fps={30}
         />
 
         <></>

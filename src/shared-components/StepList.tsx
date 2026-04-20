@@ -55,6 +55,9 @@ export const StepList: React.FC<StepListProps> = ({
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
 
+  const hasLongText = items.some((item) => item.length >= 10);
+  const fontSize = hasLongText ? FONTS.SIZE_MD : FONTS.SIZE_LG;
+
   return (
     <div
       style={{
@@ -87,7 +90,7 @@ export const StepList: React.FC<StepListProps> = ({
             <span
               style={{
                 fontFamily: FONTS.DISPLAY,
-                fontSize: FONTS.SIZE_LG,
+                fontSize,
                 fontWeight: FONTS.WEIGHT_BOLD,
                 color: labelColor,
                 flexShrink: 0,
@@ -98,7 +101,7 @@ export const StepList: React.FC<StepListProps> = ({
             <span
               style={{
                 fontFamily: FONTS.PRIMARY,
-                fontSize: FONTS.SIZE_LG,
+                fontSize,
                 fontWeight: FONTS.WEIGHT_MEDIUM,
                 color,
               }}
