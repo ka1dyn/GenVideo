@@ -36,6 +36,14 @@ MAKE_PLAN_TEMPLATE = """# {section} 전역 기획서
 - ❌ 복잡한 SVG 일러스트레이션 (단순 도형만 사용)
 - ❌ rgba()로 그림자 직접 작성. 반드시 `EFFECTS.SHADOW_*` 토큰 사용
 
+### SVG 규칙
+
+- SVG는 **단순 기하학 도형만** 사용 (원, 사각형, 선, 진행률 바 등)
+- 복잡한 일러스트레이션, 아이콘, 캐릭터 **금지**
+- SVG 내부에 텍스트(text 태그) **금지**
+- 한 Scene에 SVG 컴포넌트 최대 1개
+- viewBox는 100×100 이하의 단순한 좌표계 사용
+
 ## 3. 토큰 레퍼런스 (이 목록에 없는 토큰 사용 금지)
 
 ### COLORS
@@ -81,22 +89,39 @@ BG(0) | CONTENT(10) | OVERLAY(20) | UI(30) | CAPTION(40) | TOP(50)
 
 ## 5. 애니메이션 카탈로그 → 공유 컴포넌트 매핑
 
-기획에서는 번호로 지정, 구현에서는 대응하는 공유 컴포넌트를 import하여 사용합니다.
+기획에서는 **카테고리.번호**로 지정, 구현에서는 대응하는 공유 컴포넌트를 import하여 사용합니다.
 컴포넌트 상세 Props는 `shared-components/COMPONENTS.md` 참조.
 
-- **①fadeIn** = `<Appear delay={{프레임}}>` — 기본값 fadeUp. **가장 자주 사용**
-- **②scaleIn** = `<Appear delay={{프레임}} type="scale">` — 핵심 강조 요소
-- **③typing** = `<TypeWriter text="..." startFrame={{프레임}}>` — 글자 순차 등장
-- **④stagger** = `<StepList items={{[...]}} startFrame={{프레임}}>` — 순차 목록
-- **⑤draw** = `<UnderLine startFrame={{프레임}}>` — 밑줄/선 그리기
-- **⑥wipe** = `<Appear delay={{프레임}} type="wipe">` — 마스크 등장
-- **⑦counter** = `<Counter to={{숫자}} startFrame={{프레임}}>` — 숫자 카운트
+### 등장/퇴장 (Appear 계열)
+- **등장.①페이드인** = `<Appear delay={{프레임}}>` — 기본값 fadeUp. **가장 자주 사용 (60%)**
+- **등장.②스케일인** = `<Appear delay={{프레임}} type="scale">` — 핵심 강조 요소 (15%)
+- **등장.③방향** = `<Appear delay={{프레임}} type={{fadeLeft|fadeRight}}>` — 좌우 분할 대비 (15%)
+- **등장.④기타** = `<Appear delay={{프레임}} type={{fade|fadeDown|wipe|blur}}>` — 변주 필요 시 (10%)
+- **등장.⑤퇴장→등장** = `<Appear delay={{0}} exitAt={{프레임}}>A</Appear> <Appear delay={{프레임}}>B</Appear>` — 요소 교체
 
-추가 사용 가능: `<Card>`, `<QuoteCard>`, `<ProgressBar>`
+### 텍스트 강조
+- **강조.①타이핑** = `<TypeWriter text="..." startFrame={{프레임}}>` — 글자 순차 등장
+- **강조.②밑줄** = `<UnderLine startFrame={{프레임}}>텍스트</UnderLine>` — 밑줄 그리기
+- **강조.③흔들림** = `<Wobble mode="smooth">텍스트</Wobble>` — 손그림 느낌 미세 흔들림
 
-Appear 타입 사용 빈도: fadeUp(60%) > scale(15%) > fadeLeft/fadeRight(15%) > blur/wipe/fade/fadeDown(10%)
+### 데이터/구조
+> 자체 애니메이션 내장. `<Appear>`로 감쌀 필요 없음.
 
-⚠️ 한 Scene에 애니메이션 최대 2종류. 과도한 움직임 금지.
+- **데이터.①순차목록** = `<StepList items={{[...]}} startFrame={{프레임}}>` — 순차 등장 목록
+- **데이터.②카운터** = `<Counter to={{숫자}} startFrame={{프레임}}>` — 숫자 카운트
+- **데이터.③진행바** = `<ProgressBar value={{0~1}} startFrame={{프레임}}>` — 수평 진행률
+
+⚠️ 한 Scene에 애니메이션 최대 3종류. 과도한 움직임 금지.
+
+## 5-2. 레이아웃 컴포넌트 (제한적 사용)
+
+> 애니메이션 없음 (순수 스타일 컨테이너). 남용 시 화면이 단조로워지므로 **꼭 필요한 경우에만** 사용.
+> 등장 효과가 필요하면 **Appear 계열만** 래핑 가능. (UnderLine, Wobble 등 텍스트 강조는 카드 내부에서 효과 없음)
+
+- **보조.①카드** = `<Card variant="surface|emphasis|outline">내용</Card>` — 데이터 카드
+- **보조.②인용** = `<QuoteCard>인용문</QuoteCard>` — 좌측 액센트 바 인용 카드
+
+⚠️ 한 섹션에서 Card/QuoteCard 사용은 전체 Scene의 30% 이하 권장.
 
 ## 6. 이미지 활용 카탈로그 (이미지가 있는 Scene에서 선택)
 
@@ -106,15 +131,7 @@ Appear 타입 사용 빈도: fadeUp(60%) > scale(15%) > fadeLeft/fadeRight(15%) 
 
 이미지가 있다면 **반드시 직접 파일을 열어** 내용을 확인한 뒤 활용 방식을 결정하세요.
 
-## 7. SVG 규칙
-
-- SVG는 **단순 기하학 도형만** 사용 (원, 사각형, 선, 진행률 바 등)
-- 복잡한 일러스트레이션, 아이콘, 캐릭터 **금지**
-- SVG 내부에 텍스트(text 태그) **금지**
-- 한 Scene에 SVG 컴포넌트 최대 1개
-- viewBox는 100×100 이하의 단순한 좌표계 사용
-
-## 8. 워크플로우
+## 7. 워크플로우
 각 Scene 작업 시 반드시 아래 순서로 진행:
 1. `plans/SceneX.md`를 열어 기획 슬롯을 **위 카탈로그에서 선택**하여 전부 채움
 2. 기획을 바탕으로 `scenes/SceneX.tsx` 코드 구현
@@ -135,13 +152,13 @@ SCENE_PLAN_TEMPLATE = """# Scene {i}
 이미지 활용: [없음 | 배경 | 요소-대 | 요소-소] / [배치,애니메이션 설명]
 
 요소:
-1. [종류] / [내용] / [크기토큰] / [색상토큰] / [애니메이션번호
+1. [컴포넌트] / [내용] / [크기토큰] / [색상토큰] / [등장: 카테고리.번호 delay=Xf]
 2. ...
 
 ## QA
 - [ ] 토큰 위반(하드코딩 색상/사이즈) →
 - [ ] 요소가 자막 영역(하단 150px) 침범 →
-- [ ] 애니메이션 최대 2개 →
+- [ ] 애니메이션 최대 3개 →
 - [ ] 이전 Scene과 레이아웃 차별화 →
 """
 

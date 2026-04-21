@@ -16,8 +16,8 @@ export const PaperTexture: React.FC<PaperTextureProps> = ({
   opacity,
   isDark = false,
 }) => {
-  const defaultOpacity = isDark ? 0.02 : 0.1;
-  const finalOpacity = Math.min(opacity ?? defaultOpacity, 0.1);
+  const defaultOpacity = isDark ? 0.02 : 0.02;
+  const finalOpacity = Math.min(opacity ?? defaultOpacity, 0.02);
 
   return (
     <div
