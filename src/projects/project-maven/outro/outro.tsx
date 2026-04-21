@@ -1,6 +1,6 @@
 import React from 'react';
 import { AbsoluteFill, Audio, staticFile } from 'remotion';
-import { CaptionOverlay } from '../../../shared-components/CaptionOverlay';
+import { CaptionOverlay } from '../../../core/CaptionOverlay';
 import outroTimeline from '../../../../public/project-maven/outro/outro_final_timeline.json';
 import { Sequences } from './sequences';
 import { COLORS } from '../theme';

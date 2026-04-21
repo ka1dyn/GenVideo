@@ -3,7 +3,7 @@ import { AbsoluteFill, Sequence, useCurrentFrame, interpolate, spring, useVideoC
 import { COLORS, EFFECTS, FONTS, SPACING, ANIMATION, Z } from '../../../constants/theme';
 import { Wobble } from '../../../shared-components/Wobble';
 import { DrawLine } from '../../../shared-components/DrawLine';
-import { PaperTexture } from '../../../shared-components/PaperTexture';
+import { PaperTexture } from '../../../core/PaperTexture';
 import { Body1_Pentagon } from '../components/svg/body1_Pentagon';
 import { Body1_Thinker } from '../components/svg/body1_Thinker';
 import { Body1_Drone } from '../components/svg/body1_Drone';

@@ -1,13 +1,13 @@
 import React from 'react';
 import { AbsoluteFill, useCurrentFrame, useVideoConfig } from 'remotion';
-import { Appear } from './Appear';
-import { Card } from './Card';
-import { QuoteCard } from './QuoteCard';
-import { StepList } from './StepList';
-import { Counter } from './Counter';
-import { ProgressBar } from './ProgressBar';
-import { UnderLine } from './UnderLine';
-import { TypeWriter } from './TypeWriter';
+import { Appear } from '../shared-components/Appear';
+import { Card } from '../shared-components/Card';
+import { QuoteCard } from '../shared-components/QuoteCard';
+import { StepList } from '../shared-components/StepList';
+import { Counter } from '../shared-components/Counter';
+import { ProgressBar } from '../shared-components/ProgressBar';
+import { UnderLine } from '../shared-components/UnderLine';
+import { TypeWriter } from '../shared-components/TypeWriter';
 import { COLORS, FONTS } from '../constants/theme';
 
 const CARD_H = 400;
@@ -211,10 +211,9 @@ export const SharedComponentsGallery: React.FC = () => {
         )}
         {renderGridItem(
           'UnderLine',
-          <div style={{ position: 'relative', display: 'inline-block' }}>
+          <UnderLine startFrame={loopStart + 15} offset={-10}>
             <span style={{ fontSize: 48, fontWeight: 'bold' }}>밑줄 하이라이트</span>
-            <UnderLine startFrame={loopStart + 15} style={{ position: 'absolute', bottom: -10, left: 0 }} />
-          </div>
+          </UnderLine>
         )}
       </div>
     </AbsoluteFill>

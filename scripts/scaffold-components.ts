@@ -32,7 +32,7 @@ export function generateComponents(
     const componentCode = `import React from 'react';
 import { AbsoluteFill, Audio, staticFile } from 'remotion';
 import { COLORS } from "../../../constants/theme";
-import { CaptionOverlay } from '../../../shared-components/CaptionOverlay';
+import { CaptionOverlay } from '../../../core/CaptionOverlay';
 import { captions } from './captions';
 import { Sequences } from "./sequences";
 

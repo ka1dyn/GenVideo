@@ -137,18 +137,21 @@
 
 ## UnderLine
 
-텍스트 밑줄 draw 애니메이션.
+텍스트를 감싸서 텍스트 길이에 딱 맞는 밑줄 애니메이션을 그립니다.
 
 | prop | 타입 | 필수 | 기본값 | 설명 |
 |------|------|:----:|--------|------|
+| children | ReactNode | ✅ | — | 감쌀 텍스트 노드 |
 | startFrame | number | ❌ | 0 | 시작 프레임 |
 | color | string | ❌ | PRIMARY | 밑줄 색상 |
 | height | number | ❌ | 4 | 두께(px) |
-| width | number/string | ❌ | '100%' | 너비 |
+| offset | number | ❌ | -4 | 밑줄 위치(bottom 오프셋) |
 | direction | string | ❌ | 'ltr' | ltr / rtl |
 
 ```tsx
-<UnderLine startFrame={15} color={COLORS.PRIMARY} width={300} />
+<UnderLine startFrame={15} color={COLORS.PRIMARY}>
+  <span>핵심 키워드</span>
+</UnderLine>
 ```
 
 ---
@@ -172,3 +175,25 @@
   style={{ fontFamily: FONTS.DISPLAY, fontSize: FONTS.SIZE_XL }}
 />
 ```
+
+---
+
+## Wobble
+
+손그림 느낌의 미세 흔들림(boiling) 효과. 요소를 감싸서 사용.
+
+| prop | 타입 | 필수 | 기본값 | 설명 |
+|------|------|:----:|--------|------|
+| children | ReactNode | ✅ | — | 감싸는 요소 |
+| mode | string | ❌ | 'smooth' | jumpy (보일링) / smooth (부드러운 흔들림) |
+| intensity | number | ❌ | 1.0 | 흔들림 강도(px) |
+| interval | number | ❌ | 4 | 프레임 간격 (jumpy) / 주파수 (smooth) |
+| rotationIntensity | number | ❌ | 0.3 | 회전 흔들림(도) |
+| style | CSSProperties | ❌ | — | 추가 스타일 |
+
+```tsx
+<Wobble mode="smooth" intensity={1.5}>
+  <span>핵심 키워드</span>
+</Wobble>
+```
+

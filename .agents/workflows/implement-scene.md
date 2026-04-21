@@ -10,7 +10,8 @@ description: 기획서를 바탕으로 Remotion 단일 씬(Scene)을 기획 및 
 ## 1. 지침 및 전역 가이드 확인 (읽기)
 
 1. 프로젝트 루트의 `GEMINI.md` 파일을 읽고 디자인 토큰, 컴포넌트 정책 등을 완벽히 숙지하세요.
-2. `src/projects/{project_id}/{section}/make_video_plan.md` 파일을 읽고 전체 섹션의 기획 의도를 파악하세요.
+2. `src/shared-components/COMPONENTS.md` 파일을 읽고 제공되는 공유 컴포넌트들의 정확한 Props(특히 `weight` 등 오타 금지)를 숙지하세요.
+3. `src/projects/{project_id}/{section}/make_video_plan.md` 파일을 읽고 전체 섹션의 기획 의도를 파악하세요.
 
 ## 1.5 이전 Scene 참고 (연속성 확보)
 

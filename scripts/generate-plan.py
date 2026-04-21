@@ -58,8 +58,9 @@ MAKE_PLAN_TEMPLATE = """# {section} 전역 기획서
 → 사용: `boxShadow: EFFECTS.SHADOW_MD`, `filter: \`drop-shadow(\${{EFFECTS.SHADOW_SM}})\``
 
 ### SPACING (여백·크기에만 사용, fontSize 금지)
-PX: 4 | 8 | 12 | 16 | 24 | 32 | 40 | 48 | 64 | 80 | 96 | 120
-RADIUS: SM(6) | MD(12) | LG(20) | XL(32) | PILL(9999)
+사용 예시: `SPACING.PX_16`, `SPACING.RADIUS_LG`
+PX: PX_4 | PX_8 | PX_12 | PX_16 | PX_24 | PX_32 | PX_40 | PX_48 | PX_64 | PX_80 | PX_96 | PX_120
+RADIUS: RADIUS_SM(6) | RADIUS_MD(12) | RADIUS_LG(20) | RADIUS_XL(32) | RADIUS_PILL(9999)
 
 ### ANIMATION
 스프링: SPRING_GENTLE | SPRING_BOUNCY | SPRING_SNAPPY | SPRING_HEAVY
@@ -71,9 +72,9 @@ BG(0) | CONTENT(10) | OVERLAY(20) | UI(30) | CAPTION(40) | TOP(50)
 
 ## 4. 레이아웃 카탈로그 (SceneX.md에서 A~D로 선택)
 
-- **A: 중앙 집중** — 대형 텍스트 또는 핵심 요소 1개가 화면 중앙. 전체 씬의 30% 이하
-- **B: 좌우 분할** — `flex: 1` + `flex: 1` 대칭 배치. 좌우 padding 동일. 가장 범용적
-- **C: 카드 배치** — 2~3개 카드가 정렬. 비교·나열에 적합
+- **A: 중앙 집중** — 대형 텍스트 또는 핵심 요소가 화면 중앙에 위치. 전체 씬의 30% 이하
+- **B: 좌우 분할** — 대칭 배치. 좌우 padding 동일.
+- **C: 카드 배치** — 2~4개 카드가 flex/grid 정렬. 비교·나열에 적합
 - **D: 풀스크린 이미지** — 이미지 전체화면 + 오버레이 텍스트
 
 ⚠️ 연속 2개 이상 같은 레이아웃 사용 금지. 반드시 교차 배치.
@@ -100,7 +101,7 @@ Appear 타입 사용 빈도: fadeUp(60%) > scale(15%) > fadeLeft/fadeRight(15%) 
 ## 6. 이미지 활용 카탈로그 (이미지가 있는 Scene에서 선택)
 
 - **배경**: Img 풀스크린 (objectFit: cover) + TINT_DARK 오버레이 필수
-- **요소-대**: 600~900px 너비, 메인 비주얼로 배치. 레이아웃 B/D에 적합
+- **요소-대**: 600~900px 너비, 메인 비주얼로 배치. 레이아웃 A/B/D에 적합
 - **요소-소**: 200~400px 너비, 보조 썸네일/아이콘 역할. 레이아웃 B/C에 적합
 
 이미지가 있다면 **반드시 직접 파일을 열어** 내용을 확인한 뒤 활용 방식을 결정하세요.
@@ -122,27 +123,25 @@ Appear 타입 사용 빈도: fadeUp(60%) > scale(15%) > fadeLeft/fadeRight(15%) 
 SCENE_PLAN_TEMPLATE = """# Scene {i}
 
 ## 데이터 (수정 금지)
-- 대본: {text}
-- 구간: {start_frame}f ~ (총 {duration_in_frames}f)
+- 대본: {text} (총 {duration_in_frames}f)
 - 타이밍: {word_timings_str}
 - 이미지: 0개
 
 ## 기획 (make_video_plan.md 카탈로그 참조)
 
-컨셉: {{FILL: 대본을 보조할 비주얼 방향 1~2문장}}
-레이아웃: {{FILL: A|B|C|D 선택}}
-배경: {{FILL: COLORS.토큰명}} / 패턴: {{FILL: 유|무}} / 변화: {{FILL: 유|무}}
-이미지 활용: {{FILL: 없음 | 배경|요소-대|요소-소, 배치와 애니메이션 설명}}
+컨셉: [대본을 보조할 비주얼 방향 1~2문장]
+레이아웃: [A|B|C|D]중 택1
+배경: 색상-[COLORS.토큰명] / 패턴-[유|무] / 변화-[유/무]
+이미지 활용: [없음 | 배경 | 요소-대 | 요소-소] / [배치,애니메이션 설명]
 
 요소:
-1. {{FILL: 종류, 내용, 위치, 크기토큰, 색상토큰, 애니메이션번호}}
-2. {{FILL: ...}}
-3. {{FILL: ...}}
+1. [종류] / [내용] / [크기토큰] / [색상토큰] / [애니메이션번호
+2. ...
 
 ## QA
 - [ ] 토큰 위반(하드코딩 색상/사이즈) →
-- [ ] 자막 영역(하단 150px) 침범 →
-- [ ] 애니메이션 2종 이상 사용 →
+- [ ] 요소가 자막 영역(하단 150px) 침범 →
+- [ ] 애니메이션 최대 2개 →
 - [ ] 이전 Scene과 레이아웃 차별화 →
 """
 
@@ -213,9 +212,9 @@ def generate_plan_for_section(project_id, section):
             w_text = word.get('text', '')
             w_start_global = word.get('startFrame', 0)
             w_start_local = max(0, w_start_global - start_frame)
-            word_timings.append(f'"{w_text}": {w_start_local}f')
+            word_timings.append(f'"{w_text}" {w_start_local}f')
             
-        word_timings_str = "{ " + ", ".join(word_timings) + " }"
+        word_timings_str = " | ".join(word_timings)
         
         scene_md_content = SCENE_PLAN_TEMPLATE.format(
             i=i,

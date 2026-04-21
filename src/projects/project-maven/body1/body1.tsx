@@ -1,6 +1,6 @@
 import React from 'react';
 import { AbsoluteFill, Audio, staticFile } from 'remotion';
-import { CaptionOverlay } from '../../../shared-components/CaptionOverlay';
+import { CaptionOverlay } from '../../../core/CaptionOverlay';
 import body1Timeline from '../../../../public/project-maven/body1/body1_final_timeline.json';
 import { Sequences } from './sequences';
 import { COLORS } from "../theme";

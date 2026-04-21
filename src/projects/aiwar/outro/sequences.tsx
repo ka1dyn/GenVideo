@@ -3,7 +3,7 @@ import { AbsoluteFill, Sequence, useCurrentFrame, interpolate, spring, useVideoC
 import { COLORS, EFFECTS, FONTS, SPACING, ANIMATION, Z } from '../../../constants/theme';
 import { DrawLine } from '../../../shared-components/DrawLine';
 import { Wobble } from '../../../shared-components/Wobble';
-import { PaperTexture } from '../../../shared-components/PaperTexture';
+import { PaperTexture } from '../../../core/PaperTexture';
 import { Outro_ScenarioIcons } from '../components/svg/outro_ScenarioIcons';
 import { Outro_NuclearImpact } from '../components/svg/outro_NuclearImpact';
 import { Outro_QuoteIcons } from '../components/svg/outro_QuoteIcons';

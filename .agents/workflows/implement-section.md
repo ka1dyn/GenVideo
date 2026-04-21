@@ -19,7 +19,6 @@ description: Section 단위로 Remotion 씬을 순차적으로 기획 및 구현
 /src
    /projects
       /{project_id}
-         GEMINI.md               <--- 프로젝트에서 반드시 지켜야 할 규칙
          /{section}
             make_video_plan.md   <--- 해당 섹션 개요, 작업 워크플로우
             Sequences.tsx        <--- 오디오, 자막 설정(미리 생성됨. 수정 금지)
@@ -43,9 +42,10 @@ description: Section 단위로 Remotion 씬을 순차적으로 기획 및 구현
 1. **Remotion 지식(필독)**
    - 파일 열기 도구(`view_file`)를 사용해 **`.agents/skills/remotion-best-practices/SKILL.md`** 파일을 반드시 1회 미리 읽습니다.
    - 추가로 **`rules/animations.md`** 와 **`rules/timing.md`** 를 반드시 읽으세요.
-2. **대본 맥락 파악**
+2. **공유 컴포넌트 레퍼런스(필독)**
+   - 파일 열기 도구(`view_file`)를 사용해 **`src/shared-components/COMPONENTS.md`** 파일을 반드시 1회 읽고, 제공되는 컴포넌트들의 정확한 Props(`weight` 등 오타 주의)를 숙지하세요.
+3. **대본 맥락 파악**
    - `public/{project_id}/{section}/{section}.txt`(해당 섹션 원본 대본) 파일을 꼼꼼히 읽고, 해당 섹션의 전반적인 분위기와 대본의 맥락을 완벽히 파악하세요.
-3. **프로젝트 절대규칙**: `src/projects/{project_id}/GEMINI.md`를 읽습니다.
 4. **섹션 기획서**: `src/projects/{project_id}/{section}/make_video_plan.md`를 읽고 디자인 페르소나, 전체 흐름을 숙지합니다.
 
 ---
@@ -109,11 +109,5 @@ export PATH=$PATH:/opt/homebrew/bin && npx eslint src/projects/{project_id}/{sec
 ```
 
 다른 프로젝트에서 발생한 에러는 신경쓰지 않고, 현재 섹션의 코드에서 발생한 린트 에러만 확인하여 수정하세요.
-
-// turbo
-
-```bash
-python3 scripts/update-gallery.py {project_id}
-```
 
 최종적으로 사용자에게 작업 결과를 요약 보고하고, 영상 결과물을 갤러리에서 검토해 달라고 요청하세요.

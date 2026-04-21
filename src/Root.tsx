@@ -8,11 +8,12 @@ import { WebParadiam } from "./projects/web-paradiam/web-paradiam";
 import { Thumbnail, ThumbnailSchema } from "./projects/thumbnail/Thumbnail";
 
 import { VIDEO_FPS, VIDEO_WIDTH, VIDEO_HEIGHT } from "./constants/video-config";
-import { SharedComponentsGallery } from "./shared-components/SharedComponentsGallery";
+import { SharedComponentsGallery } from "./core/SharedComponentsGallery";
 export const RemotionRoot: React.FC = () => {
   return (
     <>
       <Folder name="Projects">
+
 
         <Composition
           id="aiwar"

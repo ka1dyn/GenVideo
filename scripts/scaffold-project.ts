@@ -74,23 +74,6 @@ async function main() {
     generateComponents(projectId, sectionMetas);
 
 
-    // Step 3.5: Generate GEMINI.md rules file
-    const geminiMdPath = path.join(process.cwd(), `src/projects/${projectId}/GEMINI.md`);
-    if (!fs.existsSync(geminiMdPath)) {
-      const geminiMdContent = `# ${projectId} AI Guidelines
-
-## 파일 규칙
-- 컴포넌트는 반드시 \`src/projects/${projectId}/{section}/components/\`에 생성
-- \`shared-components/\`, \`src/constants/\`, 다른 섹션 파일 **수정 금지**
-- 기존 컴포넌트 파일 수정 금지 (신규 생성만 허용)
-- \`shared-components\`는 프로젝트 공유 자원 (\`CaptionOverlay\`, \`Wobble\` 등). 읽기만 허용
-
-## 디자인 규칙
-각 섹션의 \`make_video_plan.md\`에 정의된 토큰 레퍼런스와 카탈로그를 따르세요.
-`;
-      fs.writeFileSync(geminiMdPath, geminiMdContent);
-      console.log(`\n✅ Generated GEMINI.md rules file at src/projects/${projectId}/GEMINI.md`);
-    }
 
     // Step 4: Automatically generate the final timeline JSONs
     console.log("\n=== Phase 4: Generating Final Timelines ===");

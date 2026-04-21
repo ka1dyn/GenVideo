@@ -3,7 +3,7 @@ import { AbsoluteFill, Sequence, useCurrentFrame, interpolate, spring, useVideoC
 import { COLORS, EFFECTS, FONTS, SPACING, ANIMATION, Z } from '../../../constants/theme';
 import { Wobble } from '../../../shared-components/Wobble';
 import { DrawLine } from '../../../shared-components/DrawLine';
-import { PaperTexture } from '../../../shared-components/PaperTexture';
+import { PaperTexture } from '../../../core/PaperTexture';
 import { Body3MilitaryIcon } from '../components/svg/Body3MilitaryIcon';
 import { Body3WeaponIcon } from '../components/svg/Body3WeaponIcon';
 import { Body3SurveillanceIcon } from '../components/svg/Body3SurveillanceIcon';
