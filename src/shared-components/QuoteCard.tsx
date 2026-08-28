@@ -28,6 +28,7 @@ export const QuoteCard: React.FC<QuoteCardProps> = ({
     <div
       style={{
         backgroundColor: COLORS.BG_SURFACE,
+        color: COLORS.TEXT_MAIN,
         borderLeft: `4px solid ${accentColor}`,
         borderRadius: SPACING.RADIUS_LG,
         padding: `${SPACING.PX_24}px ${SPACING.PX_32}px`,

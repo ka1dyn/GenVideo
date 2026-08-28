@@ -16,21 +16,25 @@ interface CardProps {
 
 const VARIANT_STYLES: Record<CardVariant, {
   bg: string;
+  color: string;
   border: string;
   defaultShadow: string;
 }> = {
   surface: {
     bg: COLORS.BG_SURFACE,
+    color: COLORS.TEXT_MAIN,
     border: `${SPACING.BORDER_NORMAL}px solid ${COLORS.STROKE_SUBTLE}`,
     defaultShadow: EFFECTS.SHADOW_SM,
   },
   emphasis: {
     bg: COLORS.BG_EMPHASIS,
+    color: COLORS.TEXT_MAIN,
     border: `${SPACING.BORDER_NORMAL}px solid ${COLORS.STROKE_DEFAULT}`,
     defaultShadow: EFFECTS.SHADOW_MD,
   },
   outline: {
     bg: 'transparent',
+    color: 'inherit',
     border: `${SPACING.BORDER_THICK}px solid ${COLORS.STROKE_STRONG}`,
     defaultShadow: 'none',
   },
@@ -68,6 +72,7 @@ export const Card: React.FC<CardProps> = ({
     <div
       style={{
         backgroundColor: variantStyle.bg,
+        color: variantStyle.color,
         border: variantStyle.border,
         borderRadius: SPACING.RADIUS_LG,
         padding: SPACING.PX_32,

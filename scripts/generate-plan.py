@@ -86,7 +86,7 @@ BG(0) | CONTENT(10) | OVERLAY(20) | UI(30) | CAPTION(40) | TOP(50)
 - **D: 그리드/카드 배치** — 2~4개 요소가 flex 또는 grid 정렬. 비교·나열에 적합
 - **E: 풀스크린 이미지** — 이미지 전체화면 + 오버레이 텍스트
 
-⚠️ 연속 3개 이상 같은 레이아웃 사용 금지. 반드시 교차 배치.
+⚠️ 연속 2개 이상 같은 레이아웃 사용 금지. 반드시 교차 배치.
 
 ## 5. 애니메이션 카탈로그 → 공유 컴포넌트 매핑
 
@@ -94,11 +94,11 @@ BG(0) | CONTENT(10) | OVERLAY(20) | UI(30) | CAPTION(40) | TOP(50)
 컴포넌트 상세 Props는 `shared-components/COMPONENTS.md` 참조.
 
 ### 등장/퇴장 (Appear 계열)
-- **등장.①페이드인** = `<Appear delay={{프레임}}>` — 기본값 fadeUp. **가장 자주 사용 (60%)**
-- **등장.②스케일인** = `<Appear delay={{프레임}} type="scale">` — 핵심 강조 요소 (15%)
-- **등장.③방향** = `<Appear delay={{프레임}} type={{fadeLeft|fadeRight}}>` — 좌우 분할 대비 (15%)
-- **등장.④기타** = `<Appear delay={{프레임}} type={{fade|fadeDown|wipe|blur}}>` — 변주 필요 시 (10%)
-- **등장.⑤퇴장→등장** = `<Appear delay={{0}} exitAt={{프레임}}>A</Appear> <Appear delay={{프레임}}>B</Appear>` — 요소 교체
+- **등장.①페이드인** = `<Appear delay={{프레임}}>`, `<Appear delay={{프레임}} type="fade|fadeDown">` — 기본값 fadeUp.
+- **등장.②스케일인** = `<Appear delay={{프레임}} type="scale">`
+- **등장.③방향** = `<Appear delay={{프레임}} type={{fadeLeft|fadeRight}}>`
+- **등장.④특수** = `<Appear delay={{프레임}} type={{wipe|blur}}>`
+- **등장.⑤퇴장→등장** = `<Appear delay={{0}} exitAt={{프레임}}>A</Appear> <Appear delay={{프레임}}>B</Appear>`
 
 ### 텍스트 강조
 - **강조.①타이핑** = `<TypeWriter text="..." startFrame={{프레임}}>` — 글자 순차 등장
@@ -123,6 +123,7 @@ BG(0) | CONTENT(10) | OVERLAY(20) | UI(30) | CAPTION(40) | TOP(50)
 - **보조.②인용** = `<QuoteCard>인용문</QuoteCard>` — 좌측 액센트 바 인용 카드
 
 ⚠️ 한 섹션에서 Card/QuoteCard 사용은 전체 Scene의 30% 이하 권장.
+⚠️ Card/QuoteCard 내부 텍스트에 TEXT_ON_DARK, TEXT_ON_PRIMARY 사용 금지. 카드는 자체 밝은 배경(BG_SURFACE/BG_EMPHASIS)을 가지므로, 내부 텍스트는 TEXT_MAIN, TEXT_BODY, PRIMARY_BOLD, STATE_*_FG 등 **어두운 색상**만 사용.
 
 ## 6. 이미지 활용 카탈로그 (이미지가 있는 Scene에서 선택)
 
@@ -161,6 +162,7 @@ SCENE_PLAN_TEMPLATE = """# Scene {i}
 - [ ] 토큰 위반(하드코딩 색상/사이즈) →
 - [ ] 요소가 자막 영역(하단 150px) 침범 →
 - [ ] 애니메이션 최대 3개 →
+- [ ] 연속 2개 이상 같은 레이아웃 사용 금지 →
 """
 
 def generate_plan_for_section(project_id, section):

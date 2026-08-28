@@ -2,6 +2,7 @@ import "./index.css";
 
 import React from "react";
 import { Folder, Composition, Still, staticFile } from "remotion";
+import { Mythos } from "./projects/mythos/mythos";
 import { Aiwar } from "./projects/aiwar/aiwar";
 import { ProjectMaven } from "./projects/project-maven/project-maven";
 import { WebParadiam } from "./projects/web-paradiam/web-paradiam";
@@ -13,7 +14,14 @@ export const RemotionRoot: React.FC = () => {
   return (
     <>
       <Folder name="Projects">
-
+      <Composition
+        id="mythos"
+        component={Mythos}
+        durationInFrames={6916}
+        fps={VIDEO_FPS}
+        width={VIDEO_WIDTH}
+        height={VIDEO_HEIGHT}
+      />
 
         <Composition
           id="aiwar"
@@ -72,6 +80,24 @@ export const RemotionRoot: React.FC = () => {
             preset: "minimal" as const,
             offsetX: 0,
             offsetY: 60,
+          }}
+        />
+        <Still
+          id="mythos-thumbnail"
+          component={Thumbnail}
+          width={1280}
+          height={720}
+          schema={ThumbnailSchema}
+          defaultProps={{
+            backgroundImage: staticFile("thumbnail/mythos-bg.png"),
+            badgeText: "AI/IT 트렌드",
+            badgeIcon: "🏴",
+            titleLine1: "AI가 스스로 탈출했다",
+            titleLine2: "Mythos 쇼크",
+            highlightWords: ["탈출했다", "Mythos 쇼크"],
+            preset: "minimal" as const,
+            offsetX: 0,
+            offsetY: 0,
           }}
         />
       </Folder>

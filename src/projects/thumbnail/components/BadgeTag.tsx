@@ -42,7 +42,7 @@ export const BadgeTag: React.FC<BadgeTagProps> = ({
       {icon && (
         <span
           style={{
-            fontSize: 22,
+            fontSize: 32,
             lineHeight: 1,
           }}
         >
@@ -52,11 +52,12 @@ export const BadgeTag: React.FC<BadgeTagProps> = ({
       <span
         style={{
           fontFamily: FONTS.PRIMARY,
-          fontSize: 20,
+          fontSize: 32,
           fontWeight: FONTS.WEIGHT_BOLD,
           color: textColor,
-          lineHeight: FONTS.LEADING_TIGHT,
+          lineHeight: FONTS.LEADING_NORMAL,
           letterSpacing: FONTS.TRACKING_NORMAL,
+          translate: "0 2px",
         }}
       >
         {label}

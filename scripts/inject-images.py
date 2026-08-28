@@ -59,16 +59,8 @@ def process_section(project_id, section):
                     with Image.open(img_path) as img:
                         width, height = img.size
                         ratio = width / height
-                        
-                        layout_hint = ""
-                        if ratio >= 1.5:
-                            layout_hint = "배경 권장"
-                        elif ratio <= 0.8:
-                            layout_hint = "요소-소 권장"
-                        else:
-                            layout_hint = "요소-대 권장"
 
-                        line = f"  - `{public_path}` {width}×{height} ({ratio:.2f}, {layout_hint})"
+                        line = f"  - `{public_path}` {width}×{height} ({ratio:.2f})"
                         metadata_lines.append(line)
                 except Exception as e:
                     print(f"Error processing image {img_path}: {e}")
